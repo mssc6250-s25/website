@@ -1,45 +1,5 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "MSSC 6250 - Statistical Machine Learning (Spring 2025)",
-    "section": "",
-    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nTo Do\nSlides\nHomework\nProject\n\n\n\n\n1\nTue, Jan 14\nSyllabus/Overview of Statistical Learning\n📖\n🖥️🖥️\n\n\n\n\n\nThu, Jan 16\nBias-variance tradeoff\n\n🖥️\n\n\n\n\n2\nTue, Jan 21\nLinear Regression\n📖\n🖥️\n✍️\n\n\n\n\nThu, Jan 25\nGradient Descent\n\n\n\n\n\n\n3\nTue, Jan 28\nRidge Regression\n📖\n🖥️\n\n\n\n\n\nThu, Feb 1\nCross-Validation\n\n\n\n\n\n\n4\nTue, Feb 4\nLASSO and Feature Selection\n📖\n🖥️\n\n\n\n\n\nThu, Feb 8\nSplines\n\n\n✍️\n\n\n\n5\nTue, Feb 11\nGeneralized Additive Models\n📖\n🖥️\n\n\n\n\n\nThu, Feb 15\nBayesian Inference\n\n\n\n\n\n\n6\nTue, Feb 18\nBayesian Linear Regression\n📖\n🖥️\n\n\n\n\n\nThu, Feb 22\nBinary Logistic Regression\n\n\n\n\n\n\n7\nTue, Feb 25\nMultinomial Logistic Regression\n📖\n🖥️\n\n\n\n\n\nThu, Feb 29\nDiscriminant Analysis\n\n\n\n\n\n\n8\nTue, Mar 4\nNaive Bayes\n📖\n\n\n\n\n\n\nThu, Mar 7\nMidterm Presentation I\n\n\n✍️\n✅\n\n\n9\nTue, Mar 11\nNO CLASS: Spring break\n\n\n\n\n\n\n\nThu, Mar 14\nNO CLASS: Spring break\n\n\n\n\n\n\n10\nTue, Mar 18\nK-Nearest Neighbors Regression\n📖\n🖥️\n\n\n\n\n\nThu, Mar 21\nK-Nearest Neighbors Classification\n\n\n\n\n\n\n11\nTue, Mar 25\nGaussian Process Regression\n📖\n🖥️\n\n\n\n\n\nThu, Mar 28\nGaussian Process Classification\n\n\n\n\n\n\n12\nTue, Apr 1\nSupport Vector Machine\n📖\n\n\n\n\n\n\nThu, Apr 4\nSupport Vector Machine\n\n\n\n\n\n\n13\nTue, Apr 8\nCART and Bagging\n📖\n🖥️\n\n\n\n\n\nThu, Apr 11\nRandom Forests and Boosting\n\n\n✍️\n\n\n\n14\nTue, Apr 15\nMidterm Presentation II\n📖\n🖥️\n\n✅\n\n\n\nThu, Apr 17\nNO CLASS: Easter break\n\n\n\n\n\n\n15\nTue, Apr 22\nPrincipal Component Analysis\n📖\n🖥️\n\n\n\n\n\nThu, Apr 25\nK-Means Clustering\n\n\n\n\n\n\n16\nTue, Apr 29\nModel-based Clustering\n📖\n🖥️\n\n\n\n\n\nThu, May 1\nNeural Networks\n\n\n\n\n\n\n17\nThu, May 8\nFinal Project Submission\n\n\n\n✅\n\n\n\n\nI reserve the right to make changes to the schedule.",
-    "crumbs": [
-      "Course Information",
-      "Schedule"
-    ]
-  },
-  {
-    "objectID": "course-overview.html",
-    "href": "course-overview.html",
-    "title": "MSSC 6250 - Statistical Machine Learning (Spring 2025)",
-    "section": "",
-    "text": "The course discuss machine learning from statistical and modeling points of view, covering supervised learning and unsupervised learning models and algorithms. Supervised learning methods include various regression and classification methods, and unsupervised learning methods involves dimension reduction and clustering techniques. Topics include Bayesian linear regression, shrinkage and regularization, regression splines, Gaussian processes, logistic regression, discriminant analysis, nearest neighbors, tree-based methods, principal components, K-means, Gaussian mixture clustering, neural networks, etc.",
-    "crumbs": [
-      "Course Information",
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "course-news.html",
-    "href": "course-news.html",
-    "title": "News/Announcements",
-    "section": "",
-    "text": "Any announcement will be posted in this page. The latest news will also be put on top of the main page.",
-    "crumbs": [
-      "Course Information",
-      "News/Annoucements"
-    ]
-  },
-  {
     "objectID": "course-syllabus.html",
     "href": "course-syllabus.html",
     "title": "Syllabus",
@@ -128,22 +88,44 @@
     ]
   },
   {
-    "objectID": "course-syllabus.html#sharingreusing-code-policy",
-    "href": "course-syllabus.html#sharingreusing-code-policy",
+    "objectID": "course-syllabus.html#midterm-project-presentation",
+    "href": "course-syllabus.html#midterm-project-presentation",
     "title": "Syllabus",
-    "section": "Sharing/Reusing Code Policy",
-    "text": "Sharing/Reusing Code Policy\n\nUnless explicitly stated otherwise, you may make use of any online resources, but you must explicitly cite where you obtained any code you directly use or use as inspiration in your solutions.\nAny recycled code that is discovered and is not explicitly cited will be treated as plagiarism, regardless of source.",
+    "section": "Midterm Project Presentation",
+    "text": "Midterm Project Presentation\n\nThere will be 2 in-class mini project presentations\nStudents will learn from each other by presenting and discussing the assigned topics.\nMore details about the mini project presentation will be released later.",
     "crumbs": [
       "Course Information",
       "Syllabus"
     ]
   },
   {
-    "objectID": "course-syllabus.html#university-and-college-policies",
-    "href": "course-syllabus.html#university-and-college-policies",
+    "objectID": "course-syllabus.html#final-project",
+    "href": "course-syllabus.html#final-project",
     "title": "Syllabus",
-    "section": "University and college policies",
-    "text": "University and college policies\nAs a student in this course, you have agreed to comply with Marquette undergraduate policies and regulations.",
+    "section": "Final Project",
+    "text": "Final Project\n\nThe final project is submitted as a paper and some relevant work.\nThe project submission deadline is .\nMore details about the final project will be released in April.",
+    "crumbs": [
+      "Course Information",
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "course-syllabus.html#generative-ai-and-sharingreusing-code-policy",
+    "href": "course-syllabus.html#generative-ai-and-sharingreusing-code-policy",
+    "title": "Syllabus",
+    "section": "Generative AI and Sharing/Reusing Code Policy",
+    "text": "Generative AI and Sharing/Reusing Code Policy\n\nGenerative AI \n\nYou are responsible for the content of all work submitted for this course. You may use generative AI tools such as ChatGPT or DALL-E to generate a first draft of text for your assignments, provided that this use is appropriately documented and cited.\nRead the articles (MLA and APA) to learn how to cite and document the use of AI in your work. Learn more citing chatbots at https://libguides.marquette.edu/generative_technologies/citing\n\n\n\nSharing/Reusing Code\n\nUnless explicitly stated otherwise, you may make use of any online resources, but you must explicitly cite where you obtained any code you directly use or use as inspiration in your solutions.\nAny recycled code that is discovered and is not explicitly cited will be treated as plagiarism, regardless of source.",
+    "crumbs": [
+      "Course Information",
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "course-syllabus.html#academic-integrity",
+    "href": "course-syllabus.html#academic-integrity",
+    "title": "Syllabus",
+    "section": "Academic Integrity",
+    "text": "Academic Integrity\n\nThis course expects all students to follow University and College statements on academic integrity.\nHonor Pledge and Honor Code: I recognize the importance of personal integrity in all aspects of life and work. I commit myself to truthfulness, honor, and responsibility, by which I earn the respect of others. I support the development of good character, and commit myself to uphold the highest standards of academic integrity as an important aspect of personal integrity. My commitment obliges me to conduct myself according to the Marquette University Honor Code.",
     "crumbs": [
       "Course Information",
       "Syllabus"
@@ -172,47 +154,43 @@
     ]
   },
   {
-    "objectID": "course-syllabus.html#midterm-project-presentation",
-    "href": "course-syllabus.html#midterm-project-presentation",
-    "title": "Syllabus",
-    "section": "Midterm Project Presentation",
-    "text": "Midterm Project Presentation\n\nThere will be 2 in-class mini project presentations\nStudents will learn from each other by presenting and discussing the assigned topics.\nMore details about the mini project presentation will be released later.",
+    "objectID": "course-news.html",
+    "href": "course-news.html",
+    "title": "News/Announcements",
+    "section": "",
+    "text": "Any announcement will be posted in this page. The latest news will also be put on top of the main page.",
     "crumbs": [
       "Course Information",
-      "Syllabus"
+      "News/Annoucements"
     ]
   },
   {
-    "objectID": "course-syllabus.html#final-project",
-    "href": "course-syllabus.html#final-project",
-    "title": "Syllabus",
-    "section": "Final Project",
-    "text": "Final Project\n\nThe final project is submitted as a paper and some relevant work.\nThe project submission deadline is .\nMore details about the final project will be released in April.",
+    "objectID": "course-overview.html",
+    "href": "course-overview.html",
+    "title": "MSSC 6250 - Statistical Machine Learning (Spring 2025)",
+    "section": "",
+    "text": "The course discuss machine learning from statistical and modeling points of view, covering supervised learning and unsupervised learning models and algorithms. Supervised learning methods include various regression and classification methods, and unsupervised learning methods involves dimension reduction and clustering techniques. Topics include Bayesian linear regression, shrinkage and regularization, regression splines, Gaussian processes, logistic regression, discriminant analysis, nearest neighbors, tree-based methods, principal components, K-means, Gaussian mixture clustering, neural networks, etc.",
     "crumbs": [
       "Course Information",
-      "Syllabus"
+      "Overview"
     ]
   },
   {
-    "objectID": "course-syllabus.html#generative-ai-and-sharingreusing-code-policy",
-    "href": "course-syllabus.html#generative-ai-and-sharingreusing-code-policy",
-    "title": "Syllabus",
-    "section": "Generative AI and Sharing/Reusing Code Policy",
-    "text": "Generative AI and Sharing/Reusing Code Policy\n\nGenerative AI \n\nYou are responsible for the content of all work submitted for this course. You may use generative AI tools such as ChatGPT or DALL-E to generate a first draft of text for your assignments, provided that this use is appropriately documented and cited.\nRead the articles (MLA and APA) to learn how to cite and document the use of AI in your work.\n\n\n\nSharing/Reusing Code\n\nUnless explicitly stated otherwise, you may make use of any online resources, but you must explicitly cite where you obtained any code you directly use or use as inspiration in your solutions.\nAny recycled code that is discovered and is not explicitly cited will be treated as plagiarism, regardless of source.",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "MSSC 6250 - Statistical Machine Learning (Spring 2025)",
+    "section": "",
+    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nTo Do\nSlides\nHomework\nProject\n\n\n\n\n1\nTue, Jan 14\nSyllabus/Overview of Statistical Learning\n📖\n🖥️🖥️\n\n\n\n\n\nThu, Jan 16\nBias-variance tradeoff\n\n🖥️\n\n\n\n\n2\nTue, Jan 21\nLinear Regression\n📖\n🖥️\n✍️\n\n\n\n\nThu, Jan 25\nGradient Descent\n\n\n\n\n\n\n3\nTue, Jan 28\nRidge Regression\n📖\n🖥️\n\n\n\n\n\nThu, Feb 1\nCross-Validation\n\n\n\n\n\n\n4\nTue, Feb 4\nLASSO and Feature Selection\n📖\n🖥️\n\n\n\n\n\nThu, Feb 8\nSplines\n\n\n✍️\n\n\n\n5\nTue, Feb 11\nGeneralized Additive Models\n📖\n🖥️\n\n\n\n\n\nThu, Feb 15\nBayesian Inference\n\n\n\n\n\n\n6\nTue, Feb 18\nBayesian Linear Regression\n📖\n🖥️\n\n\n\n\n\nThu, Feb 22\nBinary Logistic Regression\n\n\n\n\n\n\n7\nTue, Feb 25\nMultinomial Logistic Regression\n📖\n🖥️\n\n\n\n\n\nThu, Feb 29\nDiscriminant Analysis\n\n\n\n\n\n\n8\nTue, Mar 4\nNaive Bayes\n📖\n\n\n\n\n\n\nThu, Mar 7\nMidterm Presentation I\n\n\n✍️\n✅\n\n\n9\nTue, Mar 11\nNO CLASS: Spring break\n\n\n\n\n\n\n\nThu, Mar 14\nNO CLASS: Spring break\n\n\n\n\n\n\n10\nTue, Mar 18\nK-Nearest Neighbors Regression\n📖\n🖥️\n\n\n\n\n\nThu, Mar 21\nK-Nearest Neighbors Classification\n\n\n\n\n\n\n11\nTue, Mar 25\nGaussian Process Regression\n📖\n🖥️\n\n\n\n\n\nThu, Mar 28\nGaussian Process Classification\n\n\n\n\n\n\n12\nTue, Apr 1\nSupport Vector Machine\n📖\n\n\n\n\n\n\nThu, Apr 4\nSupport Vector Machine\n\n\n\n\n\n\n13\nTue, Apr 8\nCART and Bagging\n📖\n🖥️\n\n\n\n\n\nThu, Apr 11\nRandom Forests and Boosting\n\n\n✍️\n\n\n\n14\nTue, Apr 15\nMidterm Presentation II\n📖\n🖥️\n\n✅\n\n\n\nThu, Apr 17\nNO CLASS: Easter break\n\n\n\n\n\n\n15\nTue, Apr 22\nPrincipal Component Analysis\n📖\n🖥️\n\n\n\n\n\nThu, Apr 25\nK-Means Clustering\n\n\n\n\n\n\n16\nTue, Apr 29\nModel-based Clustering\n📖\n🖥️\n\n\n\n\n\nThu, May 1\nNeural Networks\n\n\n\n\n\n\n17\nThu, May 8\nFinal Project Submission\n\n\n\n✅\n\n\n\n\nI reserve the right to make changes to the schedule.",
     "crumbs": [
       "Course Information",
-      "Syllabus"
+      "Schedule"
     ]
   },
   {
-    "objectID": "course-syllabus.html#academic-integrity",
-    "href": "course-syllabus.html#academic-integrity",
-    "title": "Syllabus",
-    "section": "Academic Integrity",
-    "text": "Academic Integrity\n\nThis course expects all students to follow University and College statements on academic integrity.\nHonor Pledge and Honor Code: I recognize the importance of personal integrity in all aspects of life and work. I commit myself to truthfulness, honor, and responsibility, by which I earn the respect of others. I support the development of good character, and commit myself to uphold the highest standards of academic integrity as an important aspect of personal integrity. My commitment obliges me to conduct myself according to the Marquette University Honor Code.",
-    "crumbs": [
-      "Course Information",
-      "Syllabus"
-    ]
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
   }
 ]
