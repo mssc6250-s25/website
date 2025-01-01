@@ -1,20 +1,167 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "course-syllabus.html",
+    "href": "course-syllabus.html",
+    "title": "Syllabus",
     "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "MSSC 6250 - Statistical Machine Learning (Spring 2025)",
-    "section": "",
-    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nTo Do\nSlides\nHomework\nProject\n\n\n\n\n1\nTue, Jan 14\nSyllabus/Overview of Statistical Learning\n📖\n🖥️🖥️\n\n\n\n\n\nThu, Jan 16\nBias-variance tradeoff\n\n🖥️\n\n\n\n\n2\nTue, Jan 21\nLinear Regression\n📖\n🖥️\n✍️\n\n\n\n\nThu, Jan 25\nGradient Descent\n\n\n\n\n\n\n3\nTue, Jan 28\nRidge Regression\n📖\n🖥️\n\n\n\n\n\nThu, Feb 1\nCross-Validation\n\n\n\n\n\n\n4\nTue, Feb 4\nLASSO and Feature Selection\n📖\n🖥️\n\n\n\n\n\nThu, Feb 8\nSplines\n\n\n✍️\n\n\n\n5\nTue, Feb 11\nGeneralized Additive Models\n📖\n🖥️\n\n\n\n\n\nThu, Feb 15\nBayesian Inference\n\n\n\n\n\n\n6\nTue, Feb 18\nBayesian Linear Regression\n📖\n🖥️\n\n\n\n\n\nThu, Feb 22\nBinary Logistic Regression\n\n\n\n\n\n\n7\nTue, Feb 25\nMultinomial Logistic Regression\n📖\n🖥️\n\n\n\n\n\nThu, Feb 29\nDiscriminant Analysis\n\n\n\n\n\n\n8\nTue, Mar 4\nNaive Bayes\n📖\n\n\n\n\n\n\nThu, Mar 7\nMidterm Presentation I\n\n\n✍️\n✅\n\n\n9\nTue, Mar 11\nNO CLASS: Spring break\n\n\n\n\n\n\n\nThu, Mar 14\nNO CLASS: Spring break\n\n\n\n\n\n\n10\nTue, Mar 18\nK-Nearest Neighbors Regression\n📖\n🖥️\n\n\n\n\n\nThu, Mar 21\nK-Nearest Neighbors Classification\n\n\n\n\n\n\n11\nTue, Mar 25\nGaussian Process Regression\n📖\n🖥️\n\n\n\n\n\nThu, Mar 28\nGaussian Process Classification\n\n\n\n\n\n\n12\nTue, Apr 1\nSupport Vector Machine\n📖\n\n\n\n\n\n\nThu, Apr 4\nSupport Vector Machine\n\n\n\n\n\n\n13\nTue, Apr 8\nCART and Bagging\n📖\n🖥️\n\n\n\n\n\nThu, Apr 11\nRandom Forests and Boosting\n\n\n✍️\n\n\n\n14\nTue, Apr 15\nMidterm Presentation II\n📖\n🖥️\n\n✅\n\n\n\nThu, Apr 17\nNO CLASS: Easter break\n\n\n\n\n\n\n15\nTue, Apr 22\nPrincipal Component Analysis\n📖\n🖥️\n\n\n\n\n\nThu, Apr 25\nK-Means Clustering\n\n\n\n\n\n\n16\nTue, Apr 29\nModel-based Clustering\n📖\n🖥️\n\n\n\n\n\nThu, May 1\nNeural Networks\n\n\n\n\n\n\n17\nThu, May 8\nFinal Project Submission\n\n\n\n✅\n\n\n\n\nI reserve the right to make changes to the schedule.",
+    "text": "Click here to download the syllabus.",
     "crumbs": [
       "Course Information",
-      "Schedule"
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "course-syllabus.html#time-and-location",
+    "href": "course-syllabus.html#time-and-location",
+    "title": "Syllabus",
+    "section": "Time and location",
+    "text": "Time and location\n\n\n\n\nDay\nTime\nLocation\n\n\n\n\nLectures\nTu & Th\n3:30 - 4:45 PM\nCuday Hall 120\n\n\nLab\nNone\nNone\nNone",
+    "crumbs": [
+      "Course Information",
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "course-syllabus.html#office-hours",
+    "href": "course-syllabus.html#office-hours",
+    "title": "Syllabus",
+    "section": "Office Hours",
+    "text": "Office Hours\n\nMy in-person office hours are TuTh 4:50 - 5:50 PM, and Wed 12 - 1 PM in Cudahy Hall room 353.\nYou are welcome to schedule an online meeting via Microsoft Teams if you need/prefer.",
+    "crumbs": [
+      "Course Information",
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "course-syllabus.html#prerequisites",
+    "href": "course-syllabus.html#prerequisites",
+    "title": "Syllabus",
+    "section": "Prerequisites",
+    "text": "Prerequisites\n\nMATH 4720 (Intro to Statistics), MATH 3100 (Linear Algebra) and MATH 4780 (Regression Analysis)\nHaving taken MATH 4700 (Probability) and MATH 4710 (Statistical Inference) or more advanced ones is strongly recommended.\nThis course is supposed to be taken in the last semester for the applied statistics (APST) master students. Talk to me if you are not sure whether or not this is the right course for you.",
+    "crumbs": [
+      "Course Information",
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "course-syllabus.html#e-mail-policy",
+    "href": "course-syllabus.html#e-mail-policy",
+    "title": "Syllabus",
+    "section": "E-mail Policy",
+    "text": "E-mail Policy\n\nI will attempt to reply your email quickly, at least within 24 hours.\nExpect a reply on Monday if you send a question during weekends. If you do not receive a response from me within two days, re-send your question/comment in case there was a “mix-up” with email communication (Hope this won’t happen!).\nPlease start your subject line with [mssc6250] followed by a clear description of your question. See an example below.\n\n\n\n\nEmail Subject Line Example\n\n\n\nEmail etiquette is important. Please read this article to learn more about email etiquette.\nI am more than happy to answer your questions about this course or data science/statistics in general. However, with tons of email messgaes everyday, I may choose NOT to respond to students’ e-mail if\n\nThe student could answer his/her own inquiry by reading the syllabus or information on the course website or D2L.\nThe student is asking for an extra credit opportunity. The answer is “no”.\nThe student is requesting an extension on homework. The answer is “no”.\nThe student is asking for a grade to be raised for no legitimate reason. The answer is “no”.\nThe student is sending an email with no etiquette.",
+    "crumbs": [
+      "Course Information",
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "course-syllabus.html#required-textbook",
+    "href": "course-syllabus.html#required-textbook",
+    "title": "Syllabus",
+    "section": "Required Textbook",
+    "text": "Required Textbook\n\n(ISL) An Introduction to Statistical Learning, by James et al. Publisher: Springer. (Undergraduate to master level, R and Python code)",
+    "crumbs": [
+      "Course Information",
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "course-syllabus.html#optional-references",
+    "href": "course-syllabus.html#optional-references",
+    "title": "Syllabus",
+    "section": "Optional References",
+    "text": "Optional References\n\n(PML) Probabilistic Machine Learning: An Introduction, by Kevin Murphy. Publisher: MIT Press. (Master to PhD level, lots of mathematics foundations, Python code)\n(PMLA) Probabilistic Machine Learning: Advanced Topics, by Kevin Murphy. Publisher: MIT Press. (PhD level, more probabilistic-based or Bayesian)\n(ESL) The Elements of Statistical Learning, 2nd edition, by Hastie et. al. Publisher: Springer. (PhD level, more frequentist-based)",
+    "crumbs": [
+      "Course Information",
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "course-syllabus.html#grading-policy",
+    "href": "course-syllabus.html#grading-policy",
+    "title": "Syllabus",
+    "section": "Grading Policy",
+    "text": "Grading Policy\n\nYour final grade is earned out of 1000 total points distributed as follows:\n\nHomework: 500 pts\nMidterm project presentation: 300 pts\nFinal project: 200 pts\n\n\nYou will NOT be allowed any extra credit projects/homework/exam to compensate for a poor average. Everyone must be given the same opportunity to do well in this class. Individual exam will NOT be curved. \nThe final grade is based on your percentage of points earned out of 1000 points and the grade-percentage conversion Table. \\([x, y)\\) means greater than or equal to \\(x\\) and less than \\(y\\). For example, 94.1 is in \\([93, 100]\\) and the grade is A and 92.8 is in \\([90, 94)\\) and the grade is A-.\n\n\n\n\nGrade-Percentage Conversion\n\n\nGrade\nPercentage\n\n\n\n\nA\n[94, 100]\n\n\nA-\n[90, 94)\n\n\nB+\n[87, 90)\n\n\nB\n[83, 87)\n\n\nB-\n[80, 83)\n\n\nC+\n[77, 80)\n\n\nC\n[70, 77)\n\n\nF\n[0, 70)\n\n\n\n\n\n\n\nYou may use your preferred programming language to do your homework and/or your project.\n\n\nHomework\n\n\nHomework will be assigned through the course website in weekly modules.\nTo submit your homework, please go to D2L &gt; Assessments &gt; Dropbox and upload your homework in PDF format.\nNo late or make-up homework for any reason.",
+    "crumbs": [
+      "Course Information",
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "course-syllabus.html#midterm-project-presentation",
+    "href": "course-syllabus.html#midterm-project-presentation",
+    "title": "Syllabus",
+    "section": "Midterm Project Presentation",
+    "text": "Midterm Project Presentation\n\nThere will be 2 in-class mini project presentations\nStudents will learn from each other by presenting and discussing the assigned topics.\nMore details about the mini project presentation will be released later.",
+    "crumbs": [
+      "Course Information",
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "course-syllabus.html#final-project",
+    "href": "course-syllabus.html#final-project",
+    "title": "Syllabus",
+    "section": "Final Project",
+    "text": "Final Project\n\nThe final project is submitted as a paper and some relevant work.\nThe project submission deadline is .\nMore details about the final project will be released in April.",
+    "crumbs": [
+      "Course Information",
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "course-syllabus.html#generative-ai-and-sharingreusing-code-policy",
+    "href": "course-syllabus.html#generative-ai-and-sharingreusing-code-policy",
+    "title": "Syllabus",
+    "section": "Generative AI and Sharing/Reusing Code Policy",
+    "text": "Generative AI and Sharing/Reusing Code Policy\n\nGenerative AI \n\nYou are responsible for the content of all work submitted for this course. You may use generative AI tools such as ChatGPT or DALL-E to generate a first draft of text for your assignments, provided that this use is appropriately documented and cited.\nRead the articles (MLA and APA) to learn how to cite and document the use of AI in your work.\n\n\n\nSharing/Reusing Code\n\nUnless explicitly stated otherwise, you may make use of any online resources, but you must explicitly cite where you obtained any code you directly use or use as inspiration in your solutions.\nAny recycled code that is discovered and is not explicitly cited will be treated as plagiarism, regardless of source.",
+    "crumbs": [
+      "Course Information",
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "course-syllabus.html#academic-integrity",
+    "href": "course-syllabus.html#academic-integrity",
+    "title": "Syllabus",
+    "section": "Academic Integrity",
+    "text": "Academic Integrity\n\nThis course expects all students to follow University and College statements on academic integrity.\nHonor Pledge and Honor Code: I recognize the importance of personal integrity in all aspects of life and work. I commit myself to truthfulness, honor, and responsibility, by which I earn the respect of others. I support the development of good character, and commit myself to uphold the highest standards of academic integrity as an important aspect of personal integrity. My commitment obliges me to conduct myself according to the Marquette University Honor Code.",
+    "crumbs": [
+      "Course Information",
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "course-syllabus.html#accommodation",
+    "href": "course-syllabus.html#accommodation",
+    "title": "Syllabus",
+    "section": "Accommodation",
+    "text": "Accommodation\nIf you need to request accommodations, or modify existing accommodations that address disability-related needs, please contact Disability Service.",
+    "crumbs": [
+      "Course Information",
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "course-syllabus.html#important-dates",
+    "href": "course-syllabus.html#important-dates",
+    "title": "Syllabus",
+    "section": "Important dates",
+    "text": "Important dates\n\nJan 21: Last day to add/swap/drop\nMar 10-16: Spring break\nMar 11: Midterm grade submission\nApr 11: Withdrawal deadline\nApr 17 - Apr 20: Easter break\nMay 3: Last day of class\nMay 8: Final project submission\nMay 13: Final grade submission\n\nClick here for the full Marquette academic calendar.",
+    "crumbs": [
+      "Course Information",
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "course-news.html",
+    "href": "course-news.html",
+    "title": "News/Announcements",
+    "section": "",
+    "text": "Any announcement will be posted in this page. The latest news will also be put on top of the main page.",
+    "crumbs": [
+      "Course Information",
+      "News/Annoucements"
     ]
   },
   {
@@ -29,14 +176,21 @@
     ]
   },
   {
-    "objectID": "course-news.html",
-    "href": "course-news.html",
-    "title": "News/Announcements",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "MSSC 6250 - Statistical Machine Learning (Spring 2025)",
     "section": "",
-    "text": "Any announcement will be posted in this page. The latest news will also be put on top of the main page.",
+    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nTo Do\nSlides\nHomework\nProject\n\n\n\n\n1\nTue, Jan 14\nSyllabus/Overview of Statistical Learning\n📖\n🖥️🖥️\n\n\n\n\n\nThu, Jan 16\nBias-variance tradeoff\n\n🖥️\n\n\n\n\n2\nTue, Jan 21\nLinear Regression\n📖\n🖥️\n✍️\n\n\n\n\nThu, Jan 25\nGradient Descent\n\n\n\n\n\n\n3\nTue, Jan 28\nRidge Regression\n📖\n🖥️\n\n\n\n\n\nThu, Feb 1\nCross-Validation\n\n\n\n\n\n\n4\nTue, Feb 4\nLASSO and Feature Selection\n📖\n🖥️\n\n\n\n\n\nThu, Feb 8\nSplines\n\n\n✍️\n\n\n\n5\nTue, Feb 11\nGeneralized Additive Models\n📖\n🖥️\n\n\n\n\n\nThu, Feb 15\nBayesian Inference\n\n\n\n\n\n\n6\nTue, Feb 18\nBayesian Linear Regression\n📖\n🖥️\n\n\n\n\n\nThu, Feb 22\nBinary Logistic Regression\n\n\n\n\n\n\n7\nTue, Feb 25\nMultinomial Logistic Regression\n📖\n🖥️\n\n\n\n\n\nThu, Feb 29\nDiscriminant Analysis\n\n\n\n\n\n\n8\nTue, Mar 4\nNaive Bayes\n📖\n\n\n\n\n\n\nThu, Mar 7\nMidterm Presentation I\n\n\n✍️\n✅\n\n\n9\nTue, Mar 11\nNO CLASS: Spring break\n\n\n\n\n\n\n\nThu, Mar 14\nNO CLASS: Spring break\n\n\n\n\n\n\n10\nTue, Mar 18\nK-Nearest Neighbors Regression\n📖\n🖥️\n\n\n\n\n\nThu, Mar 21\nK-Nearest Neighbors Classification\n\n\n\n\n\n\n11\nTue, Mar 25\nGaussian Process Regression\n📖\n🖥️\n\n\n\n\n\nThu, Mar 28\nGaussian Process Classification\n\n\n\n\n\n\n12\nTue, Apr 1\nSupport Vector Machine\n📖\n\n\n\n\n\n\nThu, Apr 4\nSupport Vector Machine\n\n\n\n\n\n\n13\nTue, Apr 8\nCART and Bagging\n📖\n🖥️\n\n\n\n\n\nThu, Apr 11\nRandom Forests and Boosting\n\n\n✍️\n\n\n\n14\nTue, Apr 15\nMidterm Presentation II\n📖\n🖥️\n\n✅\n\n\n\nThu, Apr 17\nNO CLASS: Easter break\n\n\n\n\n\n\n15\nTue, Apr 22\nPrincipal Component Analysis\n📖\n🖥️\n\n\n\n\n\nThu, Apr 25\nK-Means Clustering\n\n\n\n\n\n\n16\nTue, Apr 29\nModel-based Clustering\n📖\n🖥️\n\n\n\n\n\nThu, May 1\nNeural Networks\n\n\n\n\n\n\n17\nThu, May 8\nFinal Project Submission\n\n\n\n✅\n\n\n\n\nI reserve the right to make changes to the schedule.",
     "crumbs": [
       "Course Information",
-      "News/Annoucements"
+      "Schedule"
     ]
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
   }
 ]
