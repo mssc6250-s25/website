@@ -41,7 +41,7 @@ website:
     search: true
     collapse-level: 2
     contents:
-      - section: "Course information"
+      - section: "Course Information"
         contents:
           - href: course-news.qmd
             text: News/Annoucements
@@ -65,21 +65,23 @@ website:
       #       text: Access
       #     - href: computing-troubleshooting.qmd
       #       text: Troubleshooting
-      - section: "Project"
+
+      - section: "Midterm Project Presentation"
+        contents:
+          - href: present-description.qmd
+            text: Guideline and Policy
+          - href: present-work.qmd
+            text: Topics and Works
+      - section: "Final Project"
         contents:
           - href: project-description.qmd
             text: Guideline and Policy
           # - href: project-description-5780.qmd
           #   text: Guideline for MATH 5780
           - href: project-work.qmd
-            text: Project Group and Proposal
-      - section: "Class Activities"
-        contents:
-          - href: activity-description.qmd
-            text: Description
-          - href: activity-work.qmd
-            text: Activity work
-      - section: "Weekly materials"
+            text: Topics and Works
+
+      - section: "Weekly Materials"
         contents:
           - href: weeks/week-1.qmd
             text: "Week 1"
@@ -113,18 +115,6 @@ website:
             text: "Week 15"
           - href: weeks/week-16.qmd
             text: "Week 16"
-      # - section: "Supplementary materials for MSSC 5780"
-      #   contents:
-      #     # - href: supplemental/slr-derivations.qmd
-      #     #   text: SLR derivations
-      #     - href: supplemental/model-diagnostics-matrix.qmd
-      #       text: Model diagnostics
-      #     - href: supplemental/mlr-matrix.qmd
-      #       text: MLR matrix notation
-      #     - href: supplemental/log-transformations.qmd
-      #       text: Log transformations
-      #     - href: supplemental/model-selection-criteria.qmd
-      #       text: Model selection criteria
 
 format:
   html:
