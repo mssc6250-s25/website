@@ -7,7 +7,7 @@ This page contains an outline of the topics, content, and assignments for the se
 
 ::: column-screen-inset-right
 | Week | Date | Topic | To Do | Slides | Homework | Project |
-|:-------:|---------|---------|:-------:|:-------:|:-------:|:-------:|
+|:--:|----|----|:--:|:--:|:--:|:--:|
 | 1 | Tue, Jan 14 | Syllabus/Overview of Statistical Learning | [📖](/weeks/week-1.html "Week 1") | [🖥️](slides/01-syllabus.html "Syllabus")[🖥️](slides/02-overview.html "Overview") |  |  |
 |  | Thu, Jan 16 | Bias-variance tradeoff |  | [🖥️](slides/03-bias-var.html "bias-var-tradeoff") |  |  |
 | 2 | Tue, Jan 21 | Linear Regression | [📖](/weeks/week-2.html "Week 2") | [🖥️](slides/04-linear-reg.html "Linear regression") | [✍️](/hw/hw-1.html "Homework 1") |  |
@@ -50,5 +50,5 @@ knitr::knit_exit()
 ```
 
 |   |   |   | Prepare | Slides | AE | Labs | HW | Exam | Project |
-|--------|--------|--------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
+|----|----|----|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
 | Week | Date | Topic | 📖 | 🖥️ | 📋 | [💻](https://sakai.duke.edu/samigo-app/servlet/Login?id=6fa7ebf3-01af-42a6-91ba-3e813d3901221641094171786) | ✍️ | ✅ | 📂 |
