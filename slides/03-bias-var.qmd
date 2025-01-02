@@ -1,0 +1,855 @@
+---
+title: "Bias-Variance Tradeoff `r emo::ji('dart')`"
+subtitle: "MSSC 6250 Statistical Machine Learning"
+author: "Dr. Cheng-Han Yu <br> Department of Mathematical and Statistical Sciences <br> Marquette University"
+# date: "`r format(Sys.time(), '%B %d %Y')`"
+format: 
+  revealjs:
+    html-math-method: katex
+    highlight-style: github
+    code-block-bg: true
+    self-contained: false
+    slide-number: c/t
+    incremental: false
+    width: 1800
+    height: 1000
+    margin: 0.05
+    logo: "https://upload.wikimedia.org/wikipedia/commons/e/e8/Marquette_Golden_Eagles_logo.svg"
+    footer: "[mssc6250-s25.github.io/website](https://mssc6250-s25.github.io/website/)"
+    theme: ["simple", "styles.scss"]
+    echo: false
+    multiplex: true
+    code-link: true
+    fig-cap-location: bottom
+    fig-align: center
+    transition: none ## fade slide convex concave zoom
+    title-slide-attributes:
+      data-background-color: "#447099"
+      # data-background-image: images/paper-texture.jpg
+      # data-background-size: cover
+      # data-background-color: "#698ED5"
+editor: source
+execute:
+  freeze: true
+  echo: false
+---
+# {visibility="hidden"}
+
+
+\def\bx{\mathbf{x}}
+\def\bg{\mathbf{g}}
+\def\bw{\mathbf{w}}
+\def\bbeta{\boldsymbol \beta}
+\def\bX{\mathbf{X}}
+\def\by{\mathbf{y}}
+\def\bH{\mathbf{H}}
+\def\bI{\mathbf{I}}
+\def\bS{\mathbf{S}}
+\def\bW{\mathbf{W}}
+\def\T{\text{T}}
+\def\cov{\mathrm{Cov}}
+\def\cor{\mathrm{Corr}}
+\def\var{\mathrm{Var}}
+\def\E{\mathrm{E}}
+\def\bmu{\boldsymbol \mu}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\def\Trace{\text{Trace}}
+
+```{r}
+#| label: setup
+#| include: false
+#| eval: true
+# library(countdown)
+library(emo)
+library(knitr)
+# library(gt)
+# library(gtExtras)
+# library(ggplot2)
+# library(tidyverse)
+# library(tidymodels)
+# library(fontawesome)
+# library(ISLR2)
+# library(genridge)
+# library(glmnet)
+# library(gam)
+# library(splines)
+# library(MASS)
+
+# library(ElemStatLearn)
+knitr::opts_chunk$set(
+    fig.asp = 0.618,
+    fig.align = "center",
+    out.width = "100%",
+    fig.retina = 10,
+    fig.path = "images/03-bias-var/",
+    message = FALSE,
+    global.par = TRUE
+)
+options(
+  htmltools.dir.version = FALSE,
+  dplyr.print_min = 6, 
+  dplyr.print_max = 6,
+  tibble.width = 80,
+  width = 80,
+  digits = 3
+  )
+hook_output <- knitr::knit_hooks$get("output")
+knitr::knit_hooks$set(output = function(x, options) {
+  lines <- options$output.lines
+  if (is.null(lines)) {
+    return(hook_output(x, options))  # pass to default hook
+  }
+  x <- unlist(strsplit(x, "\n"))
+  more <- "..."
+  if (length(lines)==1) {        # first n lines
+    if (length(x) > lines) {
+      # truncate the output, but add ....
+      x <- c(head(x, lines), more)
+    }
+  } else {
+    x <- c(more, x[lines], more)
+  }
+  # paste these lines together
+  x <- paste(c(x, ""), collapse = "\n")
+  hook_output(x, options)
+})
+```
+
+
+# Supervised Learning {background-color="#A7D5E8"}
+
+## Supervised Learning
+
+[Supervised learning investigates and models the **relationships between responses and inputs**.]{.green}
+
+```{r}
+knitr::include_graphics("./images/03-bias-var/regression.png")
+```
+
+```{r}
+knitr::include_graphics("./images/03-bias-var/classification.png")
+```
+
+## Relationship as Functions
+
+-   Represent relationships between variables using **functions** $y = f(x)$.
+    -   Plug in the inputs and receive the output.
+    -   $y = f(x) = 3x + 7$ is a function with input $x$ and output $y$.
+    -   If $x = 5$, $y = 3 \times 5 + 7 = 22$.
+
+```{r}
+#| label: linear-fcn
+#| out-width: "50%"
+par(mar = c(4,4,0,0))
+x <- seq(-5, 10, len = 30)
+y <- 3 * x + 7
+plot(x, y, las = 1, pch = 19)
+lines(x, y, col = "red", lwd = 2)
+```
+
+::: notes
+- In mathematics, how do we describe a Relationship Between Variables? We use a function. Right.
+- The function $y = f(x)$ gives us the relationship between an output $Y$ and one or more inputs $x$. 
+    + You plug in the values of inputs and receive back the output value.
+    + For example, the formula $y = f(x) = 3x + 7$ is a function with input $x$ and output $y$. If $x = 5$, $y = 3 \times 5 + 7 = 22$. 
+- Because this is a linear function, we know that x and y are linearly related. 
+- With a value of $x$, I can give you 100% correct value of $y$, which is right on this straight line. right. In other words, their relationship is 100% deterministic.
+
+:::
+
+## Different Relationships
+
+```{r}
+#| label: diff-fcns
+#| out-width: "100%"
+#| fig-asp: 0.3
+par(mar = c(3.5,3.5,1.5,1))
+par(mgp = c(2.5,1, 0))
+par(mfrow = c(1, 3))
+x <- seq(-5, 10, len = 30)
+y_linear <- 3 * x + 7
+y_quad <- x ^ 2 
+y_cube <- x ^ 3 - 8 * x ^ 2 + x - 4
+plot(x, y_linear, las = 1, pch = 19, main = "linear", ylab = "y = f(x)")
+lines(x, y_linear, col = "red", lwd = 2)
+plot(x, y_quad, las = 1, pch = 19, main = "quadratic", ylab = "y = f(x)")
+lines(x, y_quad, col = "red", lwd = 2)
+plot(x, y_cube, las = 1, pch = 19, main = "cubic", ylab = "y = f(x)")
+lines(x, y_cube, col = "red", lwd = 2)
+```
+
+. . .
+
+::: question
+Can you come up with any real-world examples describing relationships between variables deterministically?
+:::
+
+
+::: notes
+- The relationship between x and y can be more than linear. 
+- The relationship can be also quadratic, cubic or any other possible relationship.
+:::
+
+
+## Different Relationships
+
+::: columns
+::: column
+```{r}
+#| label: temp-fcn
+#| out-width: "90%"
+par(mar = c(3, 3, 2, 1))
+par(mgp = c(2, 1, 0))
+cel <- seq(0, 100, length = 1000)
+fah <- cel * 1.8 + 32
+plot(cel, fah, las = 1, main = "F = 32 + 1.8 C", 
+     ylab = "Fahrenheit", cex.main = 2,
+     xlab = "Celsius", type = "l", col = 2, lwd = 3)
+```
+
+```{r}
+#| out-width: "50%"
+knitr::include_graphics("./images/03-bias-var/temparature.jpeg")
+```
+:::
+
+::: column
+```{r}
+#| label: disp-fcn
+#| out-width: "90%"
+par(mar = c(3, 3, 2, 1))
+par(mgp = c(2, 1, 0))
+v0 <- 5
+a <- 9.8
+time <- seq(0, 10, length = 1000)
+displ <- v0 * time + (0.5) * a * time ^ 2
+par(cex.main = 2.2)
+plot(time, displ, las = 1, 
+     main = expression(paste("s(t) = v0 * t + 0.5 * a * ", t^2)), 
+     ylab = "Displacement",
+     xlab = "Time", type = "l", col = 2, lwd = 3)
+```
+
+```{r}
+#| out-width: "30%"
+#| fig-cap: "Source: https://www.ck12.org/physics/acceleration-due-to-gravity/lesson/Acceleration-Due-to-Gravity-MS-PS/"
+knitr::include_graphics("./images/03-bias-var/ball_drop.png")
+```
+:::
+:::
+
+
+
+::: notes
+- Here I give your two examples. The first example is the conversion of F and C degrees. Their relationship is linear and F = 32 + 1.8 C. 
+- So you give me a C degree, I can tell you its corresponding F degree fro sure. Right.
+- The second example comes from physics. the displacement of an object is a quadratic function of time. 
+- So here s(t) = v0 * t + 0.5 * a * t^2. v0 is the initial velocity, and a is acceleration, and t is time.
+- Again the relationship between displacement and time is 100% deterministic. 
+- A value of time corresponds to an unique value of displacement given v0 and a. 
+:::
+
+
+## Relationship between Variables is Not Perfect
+
+```{r}
+#| label: not-perfect-rel
+#| fig-asp: 0.3
+par(mar = c(3.5, 3.5, 1.5, 1))
+par(mgp = c(2.5, 1, 0))
+par(mfrow = c(1, 3))
+x <- seq(-5, 10, len = 30)
+y_linear <- 3 * x + 7
+y_quad <- 0.5 * x ^ 2 
+y_cube <- x ^ 3 - 8 * x ^ 2 + x - 4
+plot(x, y_linear + rnorm(30, 0, 2), las = 1, pch = 19, 
+     main = "linear", ylab = "y", cex.main = 2)
+lines(x, y_linear, col = "red", lwd = 2)
+plot(x, y_quad + rnorm(30, 0, 5), las = 1, pch = 19, 
+     main = "quadratic", ylab = "y", cex.main = 2)
+lines(x, y_quad, col = "red", lwd = 2)
+plot(x, y_cube + rnorm(30, 0, 40), las = 1, pch = 19, 
+     main = "cubic", ylab = "y", cex.main = 2)
+lines(x, y_cube, col = "red", lwd = 2)
+```
+
+. . .
+
+::: question
+Can you provide some real examples that the variables are related each other, but not perfectly related?
+:::
+
+## Relationship between Variables is Not Perfect
+
+::: columns
+::: column
+`r emo::ji('dollar')` In general, one with more years of education earns more.\
+`r emo::ji('dollar')` Any two with the same years of education may have different annual income.
+
+```{r}
+knitr::include_graphics("./images/03-bias-var/graduation.jpeg")
+```
+:::
+
+::: column
+
+```{r}
+#| fig-asp: 1
+income_data <- read.csv("./data/Income1.csv")
+par(mar = c(4, 5, 0, 0))
+plot(income_data$Income~income_data$Education, 
+     col = "red", xlab = "Years of Education", cex.axis = 2,
+     ylab = "Income (1000 USD)", pch = 19, cex = 2, las = 1, cex.lab = 2)
+```
+
+:::
+:::
+
+::: notes
+- Here I give you a simple example: the relationship between income and years of education.
+- `r emo::ji('dollar')` In general, one with more years of education earns more.
+- `r emo::ji('dollar')` Any two with the same years of education may have different annual income.
+- Because your income level depends on so many other factors, not just years of education.
+- So when you plot the scatter plot of the two variables, you will find that there is some trend, but the data are sort of scattered or jittered or variated around some function that describes the relationship between income the years of education.
+- **<span style="color:red">Red</span>** dots are observed values or the years of education and income pairs.
+:::
+
+
+## Variation around the Function/Model
+
+<!-- *Statistics is the explanation of variation in the context of what remains unexplained.*   -->
+
+::: question
+What are the unexplained variation coming from?
+:::
+
+. . .
+
+::: columns
+::: {.column width="70%"}
+-   **Other factors** accounting for parts of variability of income.
+    -   Adding more explanatory variables to a model can reduce the variation size around the model.
+-   Pure **measurement error**.
+-   Just that **randomness** plays a big role. `r emo::ji('thinking')`
+:::
+
+::: {.column width="30%"}
+```{r}
+#| fig.asp: 1
+par(mar = c(4, 5, 0, 0))
+plot(income_data$Income~income_data$Education,
+     col = "red", xlab = "Years of Education", cex.axis = 2,
+     ylab = "Income (1000 USD)", pch = 19, cex = 2, las = 1, cex.lab = 2)
+```
+:::
+:::
+
+. . .
+
+::: question
+What other factors (variables) may affect a person's income?
+:::
+
+. . .
+
+`your income = f(years of education, major, GPA, college, parent's wealth, ...)`
+
+
+
+::: notes
+- And the data Variation around the Function, or in general the regression model
+is just as important as the model, if not more!  
+- Basically, what statistics does is explain variation in the context of what remains unexplained.
+- The scatter plot suggests that there might be **other factors** that account for large parts of variability. 
+- If that is the case, adding more explanatory variables ( $X$s ) to a model can sometimes usefully reduce the size of the scatter around the model. 
+- Perhaps just that randomness plays a big role.
+:::
+
+
+
+## Supervised Learning Mapping
+
+<!-- - $Y$: **response, outcome, label, dependent** variable, e.g., *`income`* -->
+
+<!-- - $X$: **predictor, covariate, feature, regressor, explanatory/ independent** variable, e.g., *`years of education`*, which is **known and fixed**. -->
+
+-   Explain the relationship between $X$ and $Y$ and make predictions through a model $$Y = f(X) + \epsilon$$
+-   $\epsilon$: **irreducible** random error [(Aleatoric Uncertainty)]{style="color:blue"}
+    -   independent of $X$
+    -   **mean zero** with some variance.
+-   $f(\cdot)$: **unknown** function^[$f(\cdot)$ is assumed fixed from frequentist point of view; $f(\cdot)$ is random in the Bayesian framework.] describing the relationship between $X$ and (the **mean of**) $Y$. [(Epistemic Uncertainty)]{style="color:blue"}
+
+<!-- - $f$ represents the systematic information that X provides about Y. -->
+
+. . .
+
+::: question
+In Intro Stats, what is the form of $f$ and what assumptions you made on the random error $\epsilon$ ?
+:::
+
+. . .
+
+-   $f(X) = \beta_0 + \beta_1X$ with unknown parameters $\beta_0$ and $\beta_1$.
+-   $\epsilon \sim N(0, \sigma^2)$.
+
+::: notes
+- OK. Now after collecting the data of the variables we are interested, we know their relationship, most of the time, is not perfect, and stochastic in some way and in some sense. 
+- And how do we model such stochastic relationship? Well the answer is a regression model.
+- Suppose we are interested in the relationship between two variables, call $X$ and $Y$. In particular, we like to know how changes of $X$ affect value of $Y$, or we want to use $X$ to predict $Y$. 
+- In this sense, $Y$ is called **response, outcome, label, dependent** variable, e.g., *`income`*
+- $X$ is called **predictor, covariate, feature, regressor, explanatory or independent** variable, e.g., *`years of education`*, which is **known and fixed**.
+- Explain the relationship between $X$ and $Y$ and make predictions through a model $Y = f(X) + \epsilon$. This is a very general regression model we can built to learn the relationship b/w x and y.
+- $f(\cdot)$ is **fixed** but **unknown** and describes the **true** relationship between $X$ and $Y$. 
+<!-- - $f$ represents the systematic information that X provides about Y. -->
+- $\epsilon$ is a **irreducible** random error which is assumed to be independent of $X$ and has mean zero with some variance.
+- $\epsilon$ is used to represent those measurement errors or the variation that cannot be explained or captured by the predictor X. 
+- Intro Stats: 
+  + $f(X) = \beta_0 + \beta_1X$ with unknown parameters $\beta_0$ and $\beta_1$.
+  + $\epsilon \sim N(0, \sigma^2)$.
+- $X$ and $Y$ are assumed to be **linearly** related, which may not be correct.
+- Next week, we will learn simple linear regression from the scratch and in much more detail. Here I just give you an overview.
+
+:::
+
+
+## 
+
+```{r}
+#| out-width: "100%"
+knitr::include_graphics("./images/03-bias-var/regression_line_data.png")
+```
+
+## True Unknown Function $f$ of the Model $Y = f(X) + \epsilon$
+
+<!-- - **<span style="color:red">Red</span>** dots: observed values -->
+
+-   [**Blue**]{style="color:blue"} curve: **true** underlying relationship between (the mean) `income` and `years of education`.
+-   **Black** lines: error associated with each observation
+
+::::{.fragment fragment-index=1}
+::: alert
+**Big problem**: *$f(x)$ is unknown and needs to be estimated.*
+:::
+::::
+
+::: columns
+::: column
+```{r}
+#| fig.asp: 1
+#| out-width: "70%"
+par(mar = c(4, 5, 0, 0))
+plot(income_data$Income~income_data$Education,
+     col = "red", xlab = "Years of Education", cex.axis = 2,
+     ylab = "Income (1000 USD)", pch = 19, cex = 2, las = 1, cex.lab = 2)
+```
+:::
+
+::: column
+```{r}
+#| fig.asp: 1
+#| out-width: "70%"
+par(mar = c(4, 5, 0, 0))
+plot(income_data$Income~income_data$Education,
+     col = "red", xlab = "Years of Education", cex.axis = 2,
+     ylab = "Income (1000 USD)", pch = 19, cex = 2, las = 1, cex.lab = 2)
+lo <- lowess(income_data$Income~income_data$Education, f = 0.4,
+             delta = 0.01)
+lines(lo, col = "blue", lwd = 4)
+for (i in 1:length(lo$x)) {
+    lines(rep(lo$x[i], 2), 
+          c(income_data$Income[i], lo$y[i]), 
+          col = 1, lwd = 3)
+}
+```
+:::
+:::
+
+
+::: notes
+- Let's go back to the income-education example. 
+**<span style="color:red">Red</span>** dots are observed values or the years of education and income pairs.
+Suppose we like to use a regression model $y = f(x) + \epsilon$ to describe the relationship between income and education. 
+- And the *<span style="color:navy">Blue</span>** curve on the right shows the true underlying relationship between income and years of education, which is the function $f$ in our regression model.
+- And each **Black** vertical line indicates an error associated with each observation.
+- So again, each red dot or observation is the value of the function $f(x)$ plus some random error with its magnitude shown in a black vertical line.
+- Again, in regression, we assume years of education is fixed. It is income level that varies around the function $f$.
+:::
+
+
+
+
+
+
+## Why Estimate $f$? Prediction for $Y$ {visibility="hidden"}
+
+-   **Prediction**: Inputs $X$ are available, but the output $Y$ cannot be easily obtained. We predict $Y$ using $$ \hat{Y} = \hat{f}(X), $$ where $\hat{f}$ is our estimate of $f$, and $\hat{Y}$ represents the resulting prediction for $Y$.
+
+. . .
+
+::: question
+In Intro Stats, what is our estimated regression function $\hat{f}$?
+:::
+
+. . .
+
+-   $\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1X$.
+
+. . .
+
+-   $\hat{f}$ is often treated as a *black box*.
+
+```{r}
+#| out-width: "60%"
+knitr::include_graphics("https://upload.wikimedia.org/wikipedia/commons/f/f6/Blackbox.svg")
+```
+
+## Why Estimate $f$? Inference for $f$ {visibility="hidden"}
+
+-   **Inference**: Understand how $Y$ is affected by $X$.
+-   $\hat{f}$ *cannot* be treated as a *black box*. We want to know the exact form of $f$.
+
+. . .
+
+We are interested in
+
+-   [ *Which covariates are associated with the response?* ]{style="color:green"}\
+    `r emo::ji("point_right")` Do `age`, `education level`, `gender`, etc affect `salary`?
+
+. . .
+
+-   [ *What is the relationship between the response and each covariate?* ]{style="color:green"}\
+    `r emo::ji("point_right")` How much `salary` increases/decreases as `age` increases one unit?
+
+. . .
+
+-   [ *Can the relationship be adequately summarized using any equation?* ]{style="color:green"}\
+    `r emo::ji("point_right")` The relationship between `salary` and `age` is linear, quadratic or more complicated?
+
+## How to Estimate $f$?
+
+-   Use **training data** $\mathcal{D} = \{ (x_i, y_i) \}_{i=1}^n$ ([*E*]{.red}) to *train* or teach our model to learn $f$ ([*T*]{.red}).
+-   Use **test data** $\mathcal{D}_{test} = \{ (x_j, y_j) \}_{j=1}^m$ ([*E*]{.red}) to *test* or evaluate how well the model makes inference or prediction ([*P*]{.red}).
+
+. . .
+
+-   Models are either **parametric** or **nonparametric**.
+
+. . .
+
+-   **Parametric** methods involve a two-step model-based approach:
+    -   `r emo::ji("one")` Make an assumption about the shape of $f$, e.g. linear regression $$ f(X) = \beta_0 + \beta_1X_1 + \beta_2X_2 + \dots + \beta_pX_p $$
+    -   `r emo::ji("two")` Use $\mathcal{D}$ to train the model, e.g., learn the parameters $\beta_j, j = 0, \dots, p$ using least squares.
+
+. . .
+
+-   **Nonparametric** methods *do not* make assumptions about the shape of $f$.
+    -   Seek an estimate of $f$ that gets close to the data points without being too rough or wiggly.
+
+## Parametric vs. Nonparametric Models
+
+::: columns
+::: column
+::: center
+**Parametric** (Linear regression)
+:::
+
+```{r}
+#| fig.asp: 1
+#| out-width: "100%"
+par(mar = c(4, 5, 0, 0))
+plot(income_data$Income~income_data$Education, 
+     col = "red", xlab = "Years of Education", cex.axis = 2,
+     ylab = "Income (1000 USD)", pch = 19, cex = 2, las = 1, cex.lab = 2)
+reg <- lm(income_data$Income~income_data$Education)
+abline(reg, col = "blue", lwd = 4)
+```
+:::
+
+::: column
+::: center
+**Nonparametric** (LOESS)
+:::
+
+```{r}
+#| fig.asp: 1
+#| out-width: "100%"
+par(mar = c(4, 5, 0, 0))
+plot(income_data$Income~income_data$Education, col = "red", 
+     xlab = "Years of Education", cex.axis = 2,
+     ylab = "Income (1000 USD)", pch = 19, cex = 2, las = 1, cex.lab = 2)
+lo <- lowess(income_data$Income~income_data$Education, delta = 0.01)
+lines(lo, col = 3, lwd = 4)
+```
+:::
+:::
+
+## Parametric Methods {visibility="hidden"}
+
+<!-- - The approach described is referred to as parametric.  -->
+
+-   *Pros:* It reduces the problem of estimating $f$ down to one of estimating a set of parameters.
+-   *Cons:* The model we choose will usually not match the true unknown form of $f$.
+-   We can choose *flexible* models that can fit many different possible functional forms flexible for $f$.
+-   In general, fitting a more flexible model requires estimating a greater number of parameters.
+
+## Nonparametric Methods {visibility="hidden"}
+
+-   Nonparametric methods do not make assumptions about the functional form of $f$.
+-   They seek an estimate of $f$ that gets close to the data points without being too rough or wiggly.
+-   Nonparametric approaches avoid the possibility that the functional form used to estimate $f$ is very different from the true $f$.
+-   Since they do not reduce the problem of estimating $f$ to a small number of parameters, a large number of observations is required in order to obtain an accurate estimate for $f$.
+-   Learn more in MATH 4780 Regression Analysis.
+
+# Model Accuracy {background-color="#A7D5E8"}
+
+## No Free Lunch
+
+-   [*There is no free lunch in machine learning*]{.green}: **no one method dominates all others over all possible data sets.**
+
+> All models are wrong, but some are useful. -- George Box (1919-2013)
+
+. . .
+
+-   For any given training data, decide which method (model \& algorithm) produces the best results.
+
+-   Selecting the best approach is one of the most challenging parts of machine learning.
+
+-   Need some way to measure how well its predictions actually match the training/test data.
+
+. . .
+
+-  For numeric $y$: mean square error (MSE) for $y$ with $\hat{f}$, the estimate of $f$: $$\text{MSE}_{\texttt{Tr}}(y) = \frac{1}{n} \sum_{i=1}^n (y_i - \hat{f}(x_i))^2, \quad \quad \text{MSE}_{\texttt{Te}}(y) = \frac{1}{m} \sum_{j=1}^m (y_j - \hat{f}(x_j))^2$$
+
+. . .
+
+::: question
+Are $\text{MSE}_{\texttt{Tr}}$ and $\text{MSE}_{\texttt{Te}}$ the same? When to use which?
+:::
+
+
+::: notes
+
+:::
+
+
+
+
+## Mean Square Error
+
+-   $\text{MSE}_{\texttt{Tr}}$ measures how much $\hat{f}(x_i)$ is close to the training data $y_i$ (**goodness of fit**). [However, most of the time]{.fragment}
+
+. . .
+
+-   We do not care how well the method works on the training data.
+
+. . .
+
+-   We are interested in *the __predictive accuracy__ when we apply our method to previously unseen test data*.
+
+<!-- - We are not interested in whether $\hat{f}(x_i)\approx y_i$. -->
+
+-   We want to know whether $\hat{f}(x_j)$ is (approximately) equal to $y_j$, where $(x_j, y_j)$ is previously unseen or a test data point not used in training our model.
+
+. . .
+
+::: question
+$\text{MSE}_{\texttt{Tr}}$ or $\text{MSE}_{\texttt{Te}}$ is smaller?
+:::
+
+. . .
+
+-   $\text{MSE}_{\texttt{Tr}} < \text{MSE}_{\texttt{Te}}$.
+
+::: notes
+- TO DO: Provide an EXAMPLE of why training error is smaller
+- Most statistical learning methods either directly or indirectly seek to minimize the training MSE.
+- Training data are the information we have and probably only have. Without other constraints or information about how we train the model, we tend to make use of all possible information in the training data to train our model.
+- We want to know whether $\hat{f}(x_j)$ is (approximately) equal to $y_j$, where $(x_j, y_j)$ is a **previously unseen test observation not used to train the model.**
+
+:::
+
+
+
+
+
+## Model Complexity/Flexibility
+
+-   A more complex model produces a more flexible or wiggly regression curve $\hat{f}(x)$ that matches the training data better.
+  + $y = \beta_0+ \beta_1x + \beta_2x^2 + \cdots + \beta_{10}x^{10} + \epsilon$ is more complex than $y = \beta_0+ \beta_1x + \epsilon$
+
+    <!-- + $\text{MSE}_{\texttt{Tr}}$ is decreasing with the model complexity. -->
+
+. . .
+
+>   **Overfitting**: A too complex model fits the training data *extremely well and too hard*, picking up some patterns and variations simply caused by random noises that are **not** the properties of the true $f$, and **not** existed in the any unseen test data. <!-- + $\text{MSE}_{\texttt{Tr}}$ is tiny. --> <!-- + $\text{MSE}_{\texttt{Te}}$ is big. -->
+
+. . .
+
+>   **Underfitting**: A model that is too simple to capture complex patterns or shapes of the true $f(x)$. The estimate $\hat{f}(x)$ is rigid and far away from data. <!-- + $\text{MSE}_{\texttt{Tr}}$ is big. --> <!-- + $\text{MSE}_{\texttt{Te}}$ is big.  -->
+
+
+
+##
+
+```{r}
+#| out-width: "100%"
+knitr::include_graphics("./images/03-bias-var/fitting.png")
+```
+
+. . .
+
+::: question
+How $\text{MSE}_{\texttt{Tr}}$ and $\text{MSE}_{\texttt{Te}}$ change with model complexity?
+:::
+
+
+
+
+::: notes
+- 
+:::
+
+
+
+
+## Model Complexity/Flexibility and MSE
+
+:::{.question} 
+It's common that no test data are available. Can we select a model that minimize $\text{MSE}_{\texttt{Tr}}$, since the training data and test data appear to be closed related? 
+:::
+
+. . .
+
+
+
+::: columns
+::: {.column width="30%"}
++ [**Orange:**]{style="color:brown"} Under fit
++ [**Green:**]{style="color:green"} Over fit
++ [**Blue:**]{style="color:blue"} Best fit
+
+-  $\color{darkgray}{\text{MSE}_{\texttt{Tr}}}$ is decreasing with the complexity.
+
+-  $\color{red}{\text{MSE}_{\texttt{Te}}}$ is **U-shaped**: goes down then up with the complexity.
+
+| MSE      | Overfit | Underfit |
+|----------|---------|----------|
+| Train    | tiny    |   big    |
+| Test     | big     |   big    |
+
+:::
+
+::: {.column width="70%"}
+```{r}
+knitr::include_graphics("./images/03-bias-var/2_9.png")
+```
+:::
+:::
+
+
+
+::: notes
+- *No! There is no guarantee that the method with the lowest $\text{MSE}_{\texttt{Tr}}$ will also have the lowest $\text{MSE}_{\texttt{Te}}$.*
+:::
+
+
+
+
+
+## [Bias-Variance Tradeoff](https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff)
+Given any new input $x_0$,
+
+::: {.midi}
+$$\text{MSE}_{\hat{f}} = E\left[\left(\hat{f}(x_0) - f(x_0)\right)^2\right] = \left[\text{Bias}\left(\hat{f}(x_0) \right)\right]^2 + \text{Var}\left(\hat{f}(x_0)\right)$$
+
+where $\text{Bias}\left(\hat{f}(x_0) \right) = E\left[ \hat{f}(x_0)\right] - f(x_0)$.
+:::
+
+
+:::{.callout-warning}
+$\hat{f}(x_0)$ is a random variable! Why?
+:::
+
+. . .
+
+::: {.midi}
+The **expected test MSE** of $y_0$ at $x_0$ is $$\text{MSE}_{y_0} = E\left[\left(y_0 - \hat{f}(x_0)\right)^2\right] = \text{MSE}_{\hat{f}} + \text{Var}(\epsilon)$$
+:::
+
+:::{.callout-note}
+:::{style="font-size: 1em;"}
+We never know the *true* expected test MSE, and prefer the model with the smallest expected test MSE estimate.
+:::
+:::
+
+
+
+::: notes
+- MSE can be decomposed into two effects/measures
+- MSE is a combination of two performance measures.
+:::
+
+## Bias-Variance Tradeoff and Model Complexity 
+
+$$\text{MSE}_{\hat{f}} = \left[\text{Bias}\left(\hat{f}(x_0) \right)\right]^2 + \text{Var}\left(\hat{f}(x_0)\right)$$
+
+
+::: {.center}
+
+[**Overfitting**: **Low bias and High variance**]{.r-fit-text style="color: blue;"}
+
+[**Underfitting**: **High bias and Low variance**]{.r-fit-text}
+
+:::
+
+# {background-color="#447099" background-image="images/03-bias-var/bias_var_dart.png" background-size="contain"}
+
+. . .
+
+```{r}
+#| out-width: "50%"
+knitr::include_graphics("./images/03-bias-var/bias_var_dart_good.png")
+```
+
+::: notes
+- Underfitting: On average, the estimate is far way from the truth. All estimates are close to each other.
+- Overfitting: On average, the estimate is close to the truth. But estimates are far away from each other, leading to unstable and imprecise result.
+- What we want is an estimate that balance the bias and variance, having the smallest test MSE.
+:::
+
+
+
+
+# {background-color="#FFFFFF" background-image="https://upload.wikimedia.org/wikipedia/commons/9/9f/Bias_and_variance_contributing_to_total_error.svg" background-size="contain"}
+
+
+::: notes
+Because bias and variance size change with model complexity or flexibility, choosing a model that balances bias and variance, or leads to the smallest MSE, is equivalent to choosing a model with just right complexity.
+:::
+
+
+## [Lab:]{.pink} Bias-Variance Tradeoff
+  + *Model 1*: Under-fitting $y = \beta_0+\beta_1x+\epsilon$
+  + [*Model 2*: Right-fitting]{.green} $y = \beta_0+\beta_1x+ \beta_2x^2 + \epsilon$
+  + [*Model 3*: Over-fitting]{.blue} $y = \beta_0+\beta_1x+ \beta_2x^2 + \cdots + \beta_9x^9 + \epsilon$
+  
+- To see expectation/bias and variance, we need replicates of training data.
+
+```{r}
+#| out-width: "100%"
+knitr::include_graphics("./images/03-bias-var/mse-data.png")
+```
+  
+# {background-color="#FFFFFF" background-image="images/03-bias-var/mse-var.png" background-size="contain"}
+
+
+# {background-color="#FFFFFF" background-image="images/03-bias-var/mse-bias.png" background-size="contain"}
+
+# {background-color="#FFFFFF" background-image="images/03-bias-var/mse.png" background-size="contain"}
+
+
+::: notes
+Mean test error rate
+:::
+
+

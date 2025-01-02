@@ -1,0 +1,44 @@
+---
+title: "Week 1"
+subtitle: "Overview of Machine Learning and Bias-variance tradeoff"
+editor: visual
+---
+
+## Prepare
+
+📖 Read the [syllabus](/course-syllabus.html).
+
+📖 Get your laptop and computing environment ready!
+
+📖 Refresh your probability/statistics and linear algebra.
+
+## Participate
+
+🖥️ [Slides - Welcome to MSSC 6250](/slides/01-syllabus.html)
+
+🖥️ [Slides - Overview of Machine Learning](/slides/02-overview.html)
+
+🖥️ [Slides - Bias-variance Tradeoff](/slides/03-bias-var.html)
+
+## Reading and Resources
+
+📖 [ISL Ch 1 and 2](https://www.statlearning.com/)
+
+📖 [Dr. Yu MSSC 5780 Probability and Statistics Review](https://math4780-f23.github.io/website/slides/03-prob-stat.html#/title-slide)
+
+📖 [Dr. Yu MSSC 5780 Linear Algebra Review](https://math4780-f23.github.io/website/slides/06-mat.html#/title-slide)
+
+## Perform
+
+📋 Decide whether this is the right course for you by the drop deadline 1/21.
+
+
+<!-- 📋 [Lab-00 Posit Cloud](/exercise/lab00-posit.html) -->
+
+<!-- 📋 [Lab-01 Running R Script](/exercise/lab01-rscript.html) -->
+
+<br><br>
+
+::: {style="font-size: 0.875em;"}
+Back to [course schedule](/ "Course schedule") ⏎
+:::
