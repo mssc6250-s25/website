@@ -2,7 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://mssc6250-s25.github.io/website/course-syllabus.html</loc>
-    <lastmod>2025-01-01T21:49:27.649Z</lastmod>
+    <lastmod>2025-01-02T02:37:40.697Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mssc6250-s25.github.io/website/slides/setup.html</loc>
+    <lastmod>2022-12-31T02:32:53.000Z</lastmod>
   </url>
   <url>
     <loc>https://mssc6250-s25.github.io/website/course-news.html</loc>
@@ -13,8 +17,16 @@
     <lastmod>2025-01-01T20:35:03.334Z</lastmod>
   </url>
   <url>
+    <loc>https://mssc6250-s25.github.io/website/LICENSE.html</loc>
+    <lastmod>2023-12-17T23:43:10.000Z</lastmod>
+  </url>
+  <url>
     <loc>https://mssc6250-s25.github.io/website/index.html</loc>
     <lastmod>2025-01-01T21:01:19.546Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mssc6250-s25.github.io/website/slides/01-syllabus.html</loc>
+    <lastmod>2025-01-02T02:48:55.924Z</lastmod>
   </url>
   <url>
     <loc>https://mssc6250-s25.github.io/website/about.html</loc>
