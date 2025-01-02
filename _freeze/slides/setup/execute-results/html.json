@@ -1,0 +1,19 @@
+{
+  "hash": "5f65338d3e7799a984f9e4117bbeec06",
+  "result": {
+    "engine": "knitr",
+    "markdown": "",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<link href=\"../site_libs/font-awesome/css/all.min.css\" rel=\"stylesheet\" />\n<link href=\"../site_libs/font-awesome/css/v4-shims.min.css\" rel=\"stylesheet\" />\n<link href=\"../site_libs/panelset/panelset.css\" rel=\"stylesheet\" />\n<script src=\"../site_libs/panelset/panelset.js\"></script>\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

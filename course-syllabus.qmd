@@ -109,7 +109,7 @@ knitr::kable(grade_dist, longtable = TRUE, caption = "Grade-Percentage Conversio
 
 -   The final project is submitted as a paper and some relevant work.
 
--   The project submission deadline is \textcolor{red}{Thursday, 5/8, 10 AM}.
+-   The project submission deadline is **Thursday, 5/8, 10 AM**.
 
 -   More details about the final project will be released in April.
 
