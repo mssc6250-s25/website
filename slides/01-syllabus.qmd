@@ -291,6 +291,27 @@ knitr::include_graphics("./images/01-syllabus/hmlr.png")
 
 ::: columns
 ::: column
+- [(**MML**) *Mathematics for Machine Learning*](https://mml-book.github.io/), by Marc Peter Deisenroth, A. Aldo Faisal, and Cheng Soon Ong. Publisher: Cambridge University Press. 
+
+- Focus on the mathematical concepts behind the models
+
+
+:::
+
+::: column
+```{r}
+#| out-width: 69%
+knitr::include_graphics("./images/01-syllabus/mml.png")
+```
+:::
+:::
+
+
+
+## Optional References
+
+::: columns
+::: column
 - [(**PMLI**) *Probabilistic Machine Learning: An Introduction*](https://probml.github.io/pml-book/book1.html), by Kevin Murphy. Publisher: MIT Press. 
 
 - Self-contained with lots of mathematics foundations

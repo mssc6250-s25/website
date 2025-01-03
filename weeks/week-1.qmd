@@ -22,11 +22,13 @@ editor: visual
 
 ## Reading and Resources
 
-📖 [ISL Ch 1 and 2](https://www.statlearning.com/)
+📖 [ISL Ch 1, 2](https://www.statlearning.com/)
 
 📖 [Dr. Yu MSSC 5780 Probability and Statistics Review](https://math4780-f23.github.io/website/slides/03-prob-stat.html#/title-slide)
 
 📖 [Dr. Yu MSSC 5780 Linear Algebra Review](https://math4780-f23.github.io/website/slides/06-mat.html#/title-slide)
+
+<!-- 📖 [MML Ch 7.1](https://mml-book.github.io/book/mml-book.pdf) -->
 
 ## Perform
 

@@ -1,0 +1,1517 @@
+---
+title: "Linear Regression `r emo::ji('chart_with_upwards_trend')`"
+subtitle: "MSSC 6250 Statistical Machine Learning"
+author: "Dr. Cheng-Han Yu <br> Department of Mathematical and Statistical Sciences <br> Marquette University"
+# date: "`r format(Sys.time(), '%B %d %Y')`"
+# macros: _macros.tex # import a list of TeX/LaTeX definitions
+format: 
+  revealjs:
+    html-math-method:
+      method: mathjax
+      url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    # include-in-header:
+    #     - "macros.tex"
+    highlight-style: github
+    code-block-bg: true
+    self-contained: false
+    slide-number: c/t
+    incremental: false
+    width: 1800
+    height: 1000
+    margin: 0.05
+    logo: "https://upload.wikimedia.org/wikipedia/commons/e/e8/Marquette_Golden_Eagles_logo.svg"
+    footer: "[mssc6250-s25.github.io/website](https://mssc6250-s25.github.io/website/)"
+    theme: ["simple", "styles.scss"]
+    echo: false
+    multiplex: true
+    code-link: true
+    fig-cap-location: bottom
+    fig-align: center
+    transition: none ## fade slide convex concave zoom
+    title-slide-attributes:
+      data-background-color: "#447099"
+      # data-background-image: images/paper-texture.jpg
+      # data-background-size: cover
+      # data-background-color: "#698ED5"
+editor: source
+execute:
+  freeze: true
+  echo: false
+---
+
+# {visibility="hidden"}
+
+
+\def\bx{\mathbf{x}}
+\def\bg{\mathbf{g}}
+\def\bw{\mathbf{w}}
+\def\bbeta{\boldsymbol \beta}
+\def\bX{\mathbf{X}}
+\def\by{\mathbf{y}}
+\def\bH{\mathbf{H}}
+\def\bI{\mathbf{I}}
+\def\bS{\mathbf{S}}
+\def\bW{\mathbf{W}}
+\def\T{\text{T}}
+\def\cov{\mathrm{Cov}}
+\def\cor{\mathrm{Corr}}
+\def\var{\mathrm{Var}}
+\def\E{\mathrm{E}}
+\def\bmu{\boldsymbol \mu}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\def\Trace{\text{Trace}}
+
+
+
+```{r}
+#| label: setup
+#| include: false
+#| eval: true
+library(countdown)
+library(knitr)
+library(gt)
+library(gtExtras)
+library(ggplot2)
+library(plotly)
+knitr::opts_chunk$set(
+    fig.asp = 0.618,
+    fig.align = "center",
+    out.width = "100%",
+    fig.retina = 10,
+    fig.path = "images/04-lin-reg/",
+    message = FALSE,
+    global.par = TRUE
+)
+```
+
+
+
+
+
+# Linear Regression (Review) {background-color="#A7D5E8"}
+
+
+## Linear Regression
+- Linear regression is an approach to supervised learning. 
+
+- It assumes that the dependence of $Y$ on $X_1, X_2, \dots, X_k$^[The textbook ISL uses $p$ instead of $k$ to denote the number of predictors in the model. We use $k$ here, but switch to $p$ starting next week.] is linear.
+
+- True regression functions $f(x)$ are never linear! 
+
+- Although it is overly simplistic, the **linear model** has distinct advantages in terms of its _interpretability_ and often shows good _predictive performance_.
+
+::: notes
+linear regression is extremely useful both conceptually and practically
+:::
+
+## Why Multiple Linear Regression (MLR) Model
+- Our target response may be affected by several factors.
+- Total `sales` $(Y)$ and amount of money spent on advertising on `YouTube` (YT) $(X_1)$, `Facebook` (FB) $(X_2)$, `Instagram` (IG) $(X_3)$.^[In ISL, the predictors are `TV`, `radio` and `newspaper`.]
+
+:::: columns
+::: {.column width="33%"}
+```{r}
+knitr::include_graphics("./images/04-lin-reg/yt.svg")
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+knitr::include_graphics("./images/04-lin-reg/fb.jpeg")
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+knitr::include_graphics("./images/04-lin-reg/ig.jpeg")
+```
+:::
+
+::::
+
+
+- Predict sales based on the three advertising expenditures and see which medium is more effective.
+
+
+## Fit Separate Simple Linear Regression (SLR) Models
+
+<!-- Fit three separate independent SLR models: -->
+
+```{r}
+#| fig-asp: 0.35
+#| out-width: "100%"
+#| cache: true
+advertising_data <- read.csv("./data/Advertising.csv")
+advertising_data <- advertising_data[, 2:5]
+colnames(advertising_data) <- c("youtube", "facebook", "instagram", "sales")
+par(mfrow = c(1, 3))
+par(mar = c(3, 3, 0, 1), mgp = c(2, 1, 0))
+plot(advertising_data$facebook, advertising_data$sales, xlab = "$ on YouTube ", ylab = "Sales", col = 4, pch = 16, las = 1)
+abline(lm(advertising_data$sales ~ advertising_data$facebook), col = "red", lwd = 2)
+plot(advertising_data$youtube, advertising_data$sales, xlab = "$ on Facebook", ylab = "Sales", col = 4, pch = 16, las = 1)
+abline(lm(advertising_data$sales ~ advertising_data$youtube), col = "red", lwd = 2)
+plot(advertising_data$instagram, advertising_data$sales, xlab = "$ on Instagram", ylab = "Sales", col = 4, pch = 16, las = 1)
+abline(lm(advertising_data$sales ~ advertising_data$instagram), col = "red", lwd = 2)
+```
+
+. . .
+
+`r emo::ji('x')` Fitting a separate SLR model for each predictor is not satisfactory. 
+
+
+## Don't Fit a Separate Simple Linear Regression
+
+- `r emo::ji('point_right')` How to make a *single* prediction of sales given levels of the 3 advertising media budgets?
+  + <span style="color:blue"> How to predict the sales when the amount spent on YT is 50, 100 on FB and 30 on IG? </span>
+  
+. . .
+
+- `r emo::ji('point_right')` Each regression equation ignores the other 2 media in forming coefficient estimates.
+  + <span style="color:blue"> The effect of FB advertising on sales may be increased or decreased when YT and IG advertising are in the model. </span>
+  + <span style="color:blue"> IG advertising may have no impact on sales when YT and FB advertising are in the model. </span>
+
+. . .
+
+- `r emo::ji('thumbsup')``r emo::ji('thumbsup')` Better approach: *extend the SLR model so that it can __directly accommodate multiple predictors__.*
+
+
+## {visibility="hidden"}
+
+**I hope you don't feel...**
+
+```{r}
+#| out-width: "55%"
+#| fig.cap: "https://memegenerator.net/instance/62248186/first-world-problems-multiple-regression-more-like-multiple-depression"
+knitr::include_graphics("./images/04-lin-reg/mlr_depress.jpeg")
+```
+
+
+## Multiple Linear Regression Model
+- The population MLR model:
+$$Y_i= \beta_0 + \beta_1X_{i1} + \beta_2X_{i2} + \dots + \beta_kX_{ik} + \epsilon_i$$
+<!-- - $X_{ij}$: $j$-th regressor value on $i$-th measurement, $j = 1, \dots, k$. -->
+<!-- - $\beta_j$: $j$-th coefficient quantifying the association between $X_j$ and $Y$. -->
+- In the advertising example, $k = 3$ and
+$$\texttt{sales} = \beta_0 + \beta_1 \times \texttt{YouTube} + \beta_2 \times  \texttt{Facebook} + \beta_3 \times \texttt{Instagram} + \epsilon$$
+- Model assumptions:
+  + $\epsilon_i \stackrel{iid}{\sim} N(0, \sigma^2)$
+
+<!-- - When $k = 1$, MLR is reduced to SLR. -->
+
+. . .
+
+:::{.question}
+How many parameters are there in the model?
+:::
+
+## Sample MLR Model
+- Given the training sample $(x_{11}, \dots, x_{1k}, y_1), (x_{21}, \dots, x_{2k}, y_2), \dots, (x_{n1}, \dots, x_{nk}, y_n),$
+- The sample MLR model to be trained:
+$$\begin{align*}
+y_i &= \beta_0 + \beta_1x_{i1} + \beta_2x_{i2} + \dots + \beta_k x_{ik} + \epsilon_i \\
+&= \beta_0 + \sum_{j=1}^k\beta_j x_{ij} + \epsilon_i, \quad i = 1, 2, \dots, n
+\end{align*}$$
+
+## Regression Hyperplane
+- **SLR**: regression line
+- **MLR: regression hyperplane or response surface**
+- $y = \beta_0 + \beta_1x_1 + \beta_{2}x_2 + \epsilon$
+- $E(y \mid x_1, x_2) = 50 + 10x_1 + 7x_2$
+
+```{r}
+#| out-width: "100%"
+x1 <- runif(50, 0, 10)
+x2 <- runif(50, 0, 10)
+x1x2 <- x1 * x2
+x1_2 <- x1 ^ 2
+x2_2 <- x2 ^ 2
+mu <- 50 + 10 * x1 + 7 * x2 
+mu_interact <- 50 + 10 * x1 + 7 * x2 + 5 * x1x2
+mu_order2_interact <- 800 + 10 * x1 + 7 * x2 - 8.5 * x1_2 - 5 * x2_2 + 4 * x1x2
+df <- data.frame("x1" = x1, "x2" = x2, "y" = mu)
+# df_interact <- data.frame("x1" = x1, "x2" = x2, "x1x2" = x1x2, "y" = mu_interact)
+# df_order2_interact <- data.frame("x1" = x1, "x2" = x2, "x1_sq" = x1_2,
+#                                  "x2_sq" = x2_2, "x1x2" = x1x2,
+#                                  "y" = mu_order2_interact)
+my_lm <- lm(mu ~ x1 + x2, data = df)
+my_lm_interact <- lm(mu_interact ~ x1*x2, data = df)
+# my_lm_interact <- lm(mu_interact ~ x1*x2, data = df)
+# my_lm_order2_interact <- lm(mu_order2_interact ~ x1 + x2 + x1_sq + x2_sq + x1x2, data = df_order2_interact)
+my_lm_order2_interact <- lm(mu_order2_interact ~ poly(x1, x2, degree = 2, 
+                                                      raw = TRUE), 
+                            data = df)
+```
+
+:::: columns
+::: column
+```{r}
+#| out-width: "100%"
+par(mar = c(0, 0, 0, 0))
+surf <- rsm::persp.lm(my_lm, x2 ~ x1, zlab = "E(y)", xlim = c(0, 10), ylim = c(0, 10), zlim = c(0, 250), theta = 30, phi = 15, 
+                      col = grDevices::adjustcolor( "lightblue", alpha.f = 0.8))
+points(trans3d(x1, x2, mu + rnorm(50, sd = 20), 
+               pmat = surf$`x1 ~ x2`$transf), col = 2, pch = 16)
+```
+:::
+
+::: column
+```{r}
+#| cache: false
+#| out-width: "100%"
+#| warning: false
+par(mar = c(4, 4, 0.5, 0.5))
+rsm::contour.lm(my_lm, x2 ~ x1, image = TRUE, img.col = cm.colors(50),
+                labcex = 1.4, lwd = 2, cex.axis = 1.5, las = 1)
+```
+:::
+::::
+
+## Response Surface
+- $y = \beta_0 + \beta_1x_1 + \beta_{2}x_2 + \beta_{11}x_1^2 + \beta_{22}x_2^2 + \beta_{12}x_1x_2 + \epsilon$
+- $E(y \mid x_1, x_2) = 800+10x_1+7x_2 -8.5x_1^2-5x_2^2- 4x_1x_2$
+- `r emo::ji('sunglasses')` `r emo::ji('nerd_face')` A **linear** regression model can describe a **complex nonlinear relationship** between the response and predictors!
+
+:::: columns
+::: column
+```{r}
+#| cache: false
+#| out-width: "100%"
+par(mar = c(0, 0, 0, 0))
+surf_order2_interact <- rsm::persp.lm(my_lm_order2_interact, x2 ~ x1, zlab = "E(y)", xlim = c(0, 10), ylim = c(0, 10), zlim = c(0, 1000), theta = 30, phi = 15, col = grDevices::adjustcolor( "lightblue", alpha.f = 0.8))
+points(trans3d(x1, x2, mu_order2_interact + rnorm(50, sd = 50), 
+               pmat = surf_order2_interact$`x1 ~ x2`$transf), col = 2, pch = 16)
+```
+:::
+
+
+::: column
+```{r}
+#| cache: false
+#| out-width: "100%"
+#| warning: false
+par(mar = c(4, 4, 0.5, 0.5))
+rsm::contour.lm(my_lm_order2_interact, x2 ~ x1, image = TRUE, 
+                img.col = cm.colors(50), las = 1,
+                labcex = 1.4, lwd = 2, cex.axis = 1.5)
+```
+:::
+::::
+
+## Ordinary Least Squares Estimation of the Coefficients
+$$\begin{align*}
+y_i &= \beta_0 + \beta_1x_{i1} + \beta_2x_{i2} + \dots + \beta_k x_{ik} + \epsilon_i \\
+&= \beta_0 + \sum_{j=1}^k\beta_j x_{ij} + \epsilon_i, \quad i = 1, 2, \dots, n
+\end{align*}$$
+
+- The least-squares function Sum of Squared Residuals ($SS_{res}$)^[In ISL, RSS is used for Residual Sum of Squares.] is
+$$SS_{res}(\alpha_0, \alpha_1, \dots, \alpha_k) = \sum_{i=1}^n\left(y_i - \alpha_0 - \sum_{j=1}^k\alpha_j x_{ij}\right)^2$$
+- $SS_{res}$ must be minimized with respect to the coefficients, i.e.,
+$$(b_0, b_1, \dots, b_k) = \underset{{\alpha_0, \alpha_1, \dots, \alpha_k}}{\mathrm{arg \, min}}  SS_{res}(\alpha_0, \alpha_1, \dots, \alpha_k)$$
+
+## Geometry of Least Squares Estimation
+
+```{r}
+# scatter plot
+advertising_data <- read.csv("./data/Advertising.csv")
+x <- advertising_data$TV
+y <- advertising_data$radio
+z <- advertising_data$sales
+par(mgp = c(2, 0.8, 0), las = 1)
+plot3d <- scatterplot3d::scatterplot3d(advertising_data$TV,
+                                       advertising_data$radio,
+                                       advertising_data$sales,
+              xlab = "X1", ylab = "X2", zlab = "Y",
+              color = rgb(0, 0, 1, 0.4), mar = c(3, 3, 0, 2),
+              angle = 30, pch = 16, box = FALSE, cex.symbols = 0.8)
+# regression plane
+adv_lm <- lm(sales ~ TV + radio, data = advertising_data)
+plot3d$plane3d(adv_lm, lty.box = "solid", draw_lines = TRUE,
+               draw_polygon = TRUE, lwd = 0.1,
+               polygon_args = list(border = "green", col = rgb(0, 1, 0, 0.2)))
+
+# overlay positive residuals
+res_pos <- resid(adv_lm) > 0
+plot3d$points3d(x[res_pos], y[res_pos], z[res_pos], pch = 16, col = "blue", cex = 0.8)
+
+# compute locations of segments
+orig     <- plot3d$xyz.convert(x, y, z)
+plane    <- plot3d$xyz.convert(x, y, fitted(adv_lm))
+i.negpos <- 1 + (resid(adv_lm) > 0) # which residuals are above the plane?
+
+# draw residual distances to regression plane
+segments(orig$x, orig$y, plane$x, plane$y, col = 1, lty = c(2, 1)[i.negpos],
+         lwd = 0.8)
+```
+
+## Least-squares Normal Equations
+$$\begin{align*}
+\left.\frac{\partial SS_{res}}{\partial\alpha_0}\right\vert_{b_0, b_1, \dots, b_k} &= -2 \sum_{i=1}^n\left(y_i - \alpha_0 - \sum_{j=1}^k \alpha_j x_{ij}\right) = 0\\
+\left.\frac{\partial SS_{res}}{\partial\alpha_j}\right\vert_{b_0, b_1, \dots, b_k} &= -2 \sum_{i=1}^n\left(y_i - \alpha_0 - \sum_{j=1}^k \alpha_j x_{ij}\right)x_{ij} = 0, \quad j = 1, 2, \dots, k
+\end{align*}$$
+
+- $k + 1$ equations with $k + 1$ unknown parameters.
+
+- The ordinary least squares estimators are the solutions to the **normal equations**.
+
+. . .
+
+:::{.question}
+`r emo::ji("tropical_drink")` `r emo::ji("beer")` `r emo::ji("cocktail")`  `r emo::ji("clinking_glasses")`  I buy you a drink if you solve the equations by hand without using matrix notations or operations!
+:::
+
+
+## Interpreting Coefficients
+
+:::{style="font-size: 1.1em; text-align: center"}
+```{r}
+#| label: fit
+advertising_data <- read.csv("./data/Advertising.csv")
+advertising_data <- advertising_data[, 2:5]
+colnames(advertising_data) <- c("youtube", "facebook", "instagram", "sales")
+lm_out <- lm(advertising_data$sales ~ ., data = advertising_data)
+round(summary(lm_out)$coef, 3)
+# as.data.frame(round(summary(lm_out)$coef, 3)) |> gt() |> 
+#     tab_options(rowname_col = rownames(round(summary(lm_out)$coef, 3)))
+```
+:::
+
+$$\hat{y} = b_0 + b_1 x_1 + \cdots + b_kx_k$$
+
+
+$$\widehat{\texttt{sales}} = 2.939 + 0.046 \times \texttt{YouTube} + 0.189 \times  \texttt{Facebook} - 0.001 \times \texttt{Instagram}$$
+
+- $b_1$: **Holding all other predictors fixed**, for one unit increase of `Youtube`, the `sales` is expected to be increased, *on average*, by 0.046 units.
+- $b_2$: **All else held constant**, one unit increase of `Facebook` leads to, *on average*, 0.189 unit increase of `sales`.
+- $b_0$: The `sales` with no expenditures on `Youtube`, `Facebook`, and `Instagram` is expected to be 2.939. (Make sense?!)
+
+
+## Inference on Coefficients
+<!-- :::{style="font-size: 1em; text-align: center;"} -->
+<!-- ```{r, ref.label="fit"} -->
+<!-- ``` -->
+<!-- ::: -->
+
+
+- The $(1-\alpha)100\%$ Wald confidence interval (CI) for $\beta_j$, $j = 0, 1, \dots, k$ is
+
+$$\left(b_j- t_{\alpha/2, n-p}~se(b_j), \quad b_j + t_{\alpha/2, n-p}~ se(b_j)\right)$$
+
+:::{style="font-size: 1em; text-align: center;"}
+
+```{r}
+round(confint(lm_out), 2)
+```
+
+:::
+
+. . .
+
+
+:::{.callout-important}
+
+:::{style="font-size: 1.2em;"}
+
+- These are *marginal* CIs seperately for each $b_j$.
+
+- Individual CI ignores the correlation between $b_j$s.
+
+- Better to consider elliptically-shaped regions.
+:::
+:::
+
+## Collinearity
+
+- Interpretation makes sense when predictors are not highly correlated.
+
+- Correlations amongst predictors cause problems (**Collinearity**).
+  + *Large variance* of coefficients.
+  + *Large magnitude* of coefficients.
+  + *Instable* and *wrong signed* coefficients.
+
+
+::::{.callout-note}
+
+:::{style="font-size: 1.3em;"}
+Think about the standard error size. Do we tend to conclude $\beta_j = 0$ or not?
+:::
+
+::::
+
+## Extrapolation
+- Regression models are intended as **interpolation** equations over *the range of the regressors* used to fit the model.
+
+:::: columns
+::: column
+```{r}
+#| out-width: "100%"
+set.seed(9274)
+x <- seq(-3, 4, 0.05)
+y_s <-  -0.5 * x ^ 3 + x ^ 2 + x + rnorm(length(x), mean = 0, sd = 2)
+par(mar = c(0, 0, 0, 0))
+plot(y_s[1:40] ~ x[1:40], xlab = "", ylab = "", ylim = range(y_s), xlim = range(x),
+     yaxt = "n", xaxt = "n", pch = 19, col = "lightblue")
+abline(lm(y_s[1:40] ~ x[1:40]), col = "blue", lwd = 2)
+# abline(v = x[40], lty = 2, col = "red")
+segments(x0 = -3, y0 = min(y_s)-0.5, x1 = x[40], y1 = min(y_s)-0.5, col = 2, 
+         lwd = 3)
+text(x = -2, y = min(y_s)+0.2, "range of x", cex = 1.5)
+```
+:::
+
+::: column
+```{r}
+#| out-width: "100%"
+set.seed(9274)
+x <- seq(-3, 4, 0.05)
+y_s <-  -0.5 * x ^ 3 + x ^ 2 + x + rnorm(length(x), mean = 0, sd = 2)
+y_s_1 <- x ^ 2 + x + rnorm(length(x), mean = 0, sd = 2)
+par(mar = c(0, 0, 0, 0))
+plot(y_s ~ x, xlab = "", ylab = "",
+     yaxt = "n", xaxt = "n", pch = 19, col = "lightblue")
+points(y_s[41:length(x)] ~ x[41:length(x)], pch = 19, col = 1)
+points(y_s_1[41:length(x)] ~ x[41:length(x)], pch = 19, col = 2)
+abline(lm(y_s[1:40] ~ x[1:40]), col = "blue", lwd = 2)
+abline(v = x[40], lty = 2, col = "red")
+# segments(x0 = -3, y0 = min(y_s)-0.5, x1 = x[40], y1 = min(y_s)-0.5, col = 2, 
+#          lwd = 3)
+# text(x = -2, y = min(y_s), "range of x")
+```
+:::
+::::
+
+. . .
+
+:::{.callout-note}
+:::{style="font-size: 1.2em;"}
+Do not use regression for time series forecasting!
+:::
+:::
+
+## Regression is Not for Causal Inference
+
+:::: columns
+::: column
+```{r}
+#| out-width: "60%"
+knitr::include_graphics("./images/04-lin-reg/icecream.jpeg")
+```
+
+```{r}
+#| out-width: "90%"
+par(mar = c(3, 3, 0, 0), mgp = c(2, 0.5, 0))
+drowning <- c(2, 3, 7, 9, 14, 27, 33, 38, 28, 13, 7, 2)
+ice_cream <- drowning + rnorm(12, 0, 3)
+plot(1:12, drowning, axes = F, xlab = "", type = "l", col = "red", lwd = 3, ylab = "")
+axis(1, at = 1:12, labels = month.abb, cex.axis = 0.8)
+axis(2, tick = FALSE, labels = FALSE)
+lines(ice_cream, col = "blue", lwd = 3)
+legend("topleft", c("Ice Cream Sales", "Drownings"), col = c("blue", "red"), lwd = c(3, 3), bty = "n")
+```
+:::
+
+::: column
+```{r}
+#| out-width: "60%"
+knitr::include_graphics("./images/04-lin-reg/drowning.jpeg")
+```
+
+```{r}
+#| out-width: "90%"
+par(mar = c(3, 3, 0.1, 0.1), mgp = c(2, 0.5, 0))
+drowning <- sort(as.integer(runif(40, 0, 40)))
+ice_cream_sale <- sort(as.integer(runif(40, 10, 35)))
+plot(ice_cream_sale, drowning, las = 1,
+     xlab = "Drownings", ylab = "Ice Cream Sales (thousands $)")
+abline(lm(drowning~ice_cream_sale)$coef, col = "red", lwd  = 2)
+```
+:::
+::::
+
+::: notes
+- *Claims of causality* should be avoided for observational data.
+:::
+
+
+
+## Practical Significance vs. Statisical Significance
+:::{.callout-important}
+
+:::{style="font-size: 1.2em;"}
+- $H_0:\beta_j = 0$ will *always be rejected as long as the sample size is large enough*, even $x_j$ has a very small effect on $y$.
+  + Consider the **practical significance** of the result, not just the statistical significance.
+  + Use confidence intervals to draw conclusions instead of relying only on p-values.
+:::
+
+:::
+
+. . .
+
+:::{.callout-important}
+
+:::{style="font-size: 1.2em;"}
+- If the sample size is small, there may not be enough evidence to reject $H_0:\beta_j = 0$.
+  + *Do Not* immediately conclude that the variable has **no** association with the response.
+  + There may be a linear association that is just not strong enough to detect given your data, or there may be a non-linear association.
+:::
+:::
+
+
+::: notes
+p-value is a dichotomous approach
+:::
+
+
+## Some important questions {visibility="hidden"}
+
+1. *Is at least one of the predictors $X_1, X_2, \dots, X_k$ useful in predicting the response?*
+
+2. *Do all the predictors help to explain $Y$, or is only a subset of the predictors useful?*
+
+3. *How well does the model fit the data?*
+
+4. *Given a set of predictor values, what response value should we predict, and how accurate is our prediction?*
+
+
+
+## Test for significance
+- **Test for significance**: Determine if there is a *linear* relationship between the response and *any* of the regressor variables.
+
+- <span style="color:blue">
+$H_0: \beta_1 = \beta_2 = \cdots = \beta_k = 0 \quad H_1: \beta_j \ne 0 \text{ for at least one } j$ </span>
+
+```{r}
+#| out-width: "100%"
+knitr::include_graphics("./images/04-lin-reg/anova_mlr.png")
+```
+
+- $\sum_{i=1}^n(y_i - \overline{y})^2 = \sum_{i=1}^n(\hat{y}_i - \overline{y})^2 + \sum_{i=1}^n(y_i - \hat{y}_i)^2$
+
+- Reject $H_0$ if $F_{test} > F_{\alpha, k, n - k - 1}$.
+
+. . .
+
+:::{.question}
+What is the sample statistic we use to accesses how well the model fits the data?
+:::
+
+## Reduced Model vs. Full Model {visibility="hidden"}
+
+- Overall test of significance: *all* predictors vs. Marginal $t$-test: *one single* predictor
+- How to test **any subset** of predictors?
+
+. . .
+
+- **Full Model**: $y = \beta_0 + \beta_1x_1+\beta_2x_2 + \beta_3x_3 + \beta_4x_4 + \epsilon$
+- $H_0: \beta_{2} = \beta_{4} = 0$
+
+. . .
+
+- **Reduced Model** (under $H_0$): $y = \beta_0 + \beta_1x_1 + \beta_3x_3 + \epsilon$
+- Like to see if $x_2$ and $x_4$ can contribute significantly to the regression model when $x_1$ and $x_3$ are in the model.
+  + If yes, $\beta_{2} \ne 0$ and/or $\beta_{4} \ne 0$. (Reject $H_0$)
+  + Otherwise, $\beta_{2} = \beta_{4} = 0$. (Do not reject $H_0$)
+  
+
+:::{.alert}
+Given $x_1$ and $x_3$ in the model, we examine **how much extra $SS_R$ is increased ($SS_{res}$ is reduced) if $x_2$ and $x_4$ are added to the model**.
+:::
+
+## Extra-sum-of-squares and Partial $F$-test {visibility="hidden"}
+
+- $F_{test} = \frac{SS_R(\beta_2, \beta_4 \mid \beta_1, \beta_3)/r}{SS_{res}/(n-k-1)} = \frac{MS_R(\beta_2, \beta_4 \mid \beta_1, \beta_3)}{MS_{res}}$ where $r$ is the number of coefficients being tested.
+
+- Under $H_0$ that $\beta_{2} = \beta_{4} = 0$, $F_{test} \sim F_{r, n-k-1}$.
+
+- Reject $H_0$ if $F_{test} > F_{\alpha, r, n-k-1}$.
+
+. . .
+
+:::{.alert}
+Given the regressors of $x_1, x_3$ are in the model,
+
+- If the regressors of $x_2$ and $x_4$ contribute much, $SS_R(\beta_2, \beta_4 \mid \beta_1, \beta_3)$ will be large.
+
+- A large $SS_R(\beta_2, \beta_4 \mid \beta_1, \beta_3)$ implies a large $F_{test}$.
+
+- A large $F_{test}$ tends to reject $H_0$, and conclude that  $\beta_{2} \ne 0$ and/or $\beta_{4} \ne 0$.
+
+- The regressors of $(x_2, x_4)$ provide additional explanatory and prediction power that $(x_1, x_3)$ cannot provide.
+:::
+
+
+## Variable Selection Methods {visibility="hidden"}
+- Choose the *best* model based on some criterion that balances *training error* with *model complexity*.
+
+. . .
+
+- [All possible selection]{.green}
+  + Consider all possible subsets of regressors.
+  
+- [Best subset]{.green}
+  + Identify the best model of each model size.
+  
+- [Forward selection]{.green}
+  + Begins with no regressors, and insert regressors into the model one at a time.
+  
+- [Backward elimination]{.green}
+  + Begin with the full model with all possible regressors, then remove regressors from the model one at a time.
+  
+- [Stepwise regression]{.green}
+  + Do forward selection, but refit the model when a new predictor is inserted. Remove a predictor that becomes redundant from the refit model.
+  
+
+
+## Variable Selection Criteria {visibility="hidden"}
+- An evaluation metric should consider **Goodness of Fit** and **Model Complexity**:
+
+> **Goodness of Fit**: The more regressors, the better
+
+> **Complexity Penalty**: The less regressors, the better
+
+- Mallow's $C_p$ $\downarrow$
+
+- Akaike Information Criterion (AIC) $\downarrow$
+
+- Bayesian Information Criterion (BIC) $\downarrow$
+
+- PREdiction Sum of Squares residual (PRESS) or Leave-one-out Cross Validation $\downarrow$
+
+- Adjusted $R^2$  $\uparrow$
+  
+::: notes
+- Cross-validation (CV)
+:::
+
+
+## Regression Model in Matrix Form
+
+$$y_i= \beta_0 + \beta_1x_{i1} + \beta_2x_{i2} + \dots + \beta_kx_{ik} + \epsilon_i, \quad \epsilon_i \stackrel{iid}{\sim} N(0, \sigma^2), \quad i = 1, 2, \dots, n$$
+
+<!-- - $\epsilon_i \stackrel{iid}{\sim} N(0, \sigma^2)$ -->
+
+. . .
+
+$$\bf y = \bf X \boldsymbol{\beta} + \boldsymbol{\epsilon}$$ where
+
+$$\begin{align}
+\bf y = \begin{bmatrix}
+y_1 \\
+y_2 \\
+\vdots \\
+y_n \end{bmatrix},\quad
+\bf X = \begin{bmatrix}
+  1 & x_{11} & x_{12} & \cdots & x_{1k} \\
+  1 & x_{21} & x_{22} & \cdots & x_{2k} \\
+  \vdots & \vdots  & \vdots  & \ddots & \vdots  \\
+  1 & x_{n1} & x_{n2} & \cdots & x_{nk} \end{bmatrix}, \quad
+\boldsymbol{\beta} = \begin{bmatrix}
+\beta_0 \\
+\beta_1 \\
+\vdots \\
+\beta_k \end{bmatrix} , \quad
+\boldsymbol{\epsilon} = \begin{bmatrix}
+\epsilon_1 \\
+\epsilon_2 \\
+\vdots \\
+\epsilon_n\end{bmatrix}
+\end{align}$$
+
+- ${\bf X}_{n \times p}$: Design matrix
+- $\boldsymbol{\epsilon} \sim MVN_n({\bf 0}, \sigma^2 {\bf I}_n)$^[For simplicity and convenience, $N({\bf a}, {\bf B})$ represents a multivariate normal distribution with mean vector ${\bf a}$ and covariance matrix ${\bf B}$.]
+
+
+## Least Squares Estimation in Matrix Form
+
+$$\begin{align}
+S(\boldsymbol{\beta}) = \sum_{i=1}^n\epsilon_i^2 = \boldsymbol{\epsilon}'\boldsymbol{\epsilon} &= (\bf y - \bf X \boldsymbol{\beta})'(\bf y - \bf X \boldsymbol{\beta}) \\
+&= \bf y'\bf y - \boldsymbol{\beta}'\bf X'\bf y - \bf y'\bf X \boldsymbol{\beta} + \boldsymbol{\beta}' \bf X' \bf X \boldsymbol{\beta} \\
+&={\bf y}'{\bf y} - 2\boldsymbol{\beta}'{\bf X}'{\bf y} + \boldsymbol{\beta}' {\bf X}' {\bf X} \boldsymbol{\beta}
+\end{align}$$
+
+:::{.fact}
+Let ${\bf t}$ and ${\bf a}$ be $n \times 1$ column vectors, and ${\bf A}_{n \times n}$ is a symmetric matrix.
+
+- $\frac{\partial {\bf t}'{\bf a} }{\partial {\bf t}} = \frac{\partial {\bf a}'{\bf t} }{\partial {\bf t}} = {\bf a}$
+
+- $\frac{\partial {\bf t}'{\bf A} {\bf t}}{\partial {\bf t}} = 2{\bf A} {\bf t}$
+:::
+
+
+- Normal equations:
+$\begin{align} \left.\frac{\partial S}{\partial \boldsymbol{\beta}}\right \vert_{\bf b} = -2 {\bf X}' {\bf y} + 2 {\bf X}' {\bf X} {\bf b} = \boldsymbol{0} \end{align}$
+
+. . .
+
+- LSE for $\boldsymbol{\beta}$: <span style="color:blue"> $\begin{align} \boxed{{\bf b} = \arg \min _{\boldsymbol{\beta}} (\bf y - \bf X \boldsymbol{\beta})'(\bf y - \bf X \boldsymbol{\beta}) = ({\bf X}' {\bf X}) ^{-1} {\bf X}' \bf y} \end{align}$ </span> provided that ${\bf X}' {\bf X}$ is full rank.
+
+## Normal Equations
+
+$(\bf X' \bf X) \bf b = \bf X' \bf y$
+
+```{r}
+#| out-width: "100%"
+knitr::include_graphics("./images/04-lin-reg/normal_eqn.png")
+```
+
+## Hat Matrix
+
+$$\hat{\bf y} = {\bf X} {\bf b} = {\bf X} ({\bf X}' {\bf X}) ^{-1} \bf X' \bf y = \bf H \bf y$$
+
+- The **hat matrix** ${\bf H}_{n \times n} = {\bf X} ({\bf X}' {\bf X}) ^{-1} \bf X'$
+
+- The vector of residuals $e_i = y_i - \hat{y}_i$ is
+$$\bf e = \bf y - \hat{\bf y} = \bf y - \bf X \bf b = \bf y -\bf H \bf y = (\bf I - \bf H) \bf y$$
+
+. . .
+
+:::{.alert}
+- Both $\bf H$ and $\bf I-H$ are *symmetric* and *idempotent*. They are **projection** matrices.
+
+- $\bf H$ projects $\bf y$ to $\hat{\bf y}$ on the $(k+1)$-dimensional space spanned by columns of $\bf X$, or the column space of $\bf X$, $Col(\bf X)$.
+
+- $\bf I - H$ projects $\bf y$ to $\bf e$ on the space **perpendicular** to $Col(\bf X)$, or $Col(\bf X)^{\bot}$.
+:::
+
+
+## Geometrical Interpretation of Least Squares
+
+:::: columns
+::: {.column width="30%"}
+
+- $Col({\bf X}) = \{ {\bf Xb}: {\bf b} \in {\bf R}^{k+1} \}$, ${\bf y} \notin Col({\bf X})$
+
+- $\hat{{\bf y}} = {\bf Xb} = {\bf H} {\bf y} \in Col({\bf X})$
+
+- $\small {\bf e} = ({\bf y - \hat{\bf y}}) = ({\bf y - X b}) = ({\bf I} - {\bf H}) {\bf y} \perp Col({\bf X})$
+
+- ${\bf X}'{\bf e} = 0$
+
+:::{.alert}
+Searching for $\bf b$ that minimizes $SS_{res}$ is equivalent to locating the point ${\bf Xb} \in Col({\bf X})$ $(C)$ that is as close to $\bf y$ $(A)$ as possible!
+:::
+
+:::
+
+::: {.column width="70%"}
+```{r}
+#| fig-cap: "https://commons.wikimedia.org/wiki/File:OLS_geometric_interpretation.svg"
+#| out-width: "100%"
+knitr::include_graphics("./images/04-lin-reg/ols_geom.png")
+```
+:::
+::::
+
+
+::: notes
+- Minimize the distance of $\color{red}{A}$ to $Col(\bf X)$: Find the point in $Col(\bf X)$ that is closest to $A$.
+The distance is minimized when the point in the space is the foot of the line from $A$ **normal** to the space. This is point $C$.
+:::
+
+## Multivariate Gaussian/Normal Distribution
+
+- ${\bf y} \sim N_n(\bmu, {\bf \Sigma})$
+  + $\bmu$: $n \times 1$ mean vector
+  * ${\bf \Sigma}$: $n \times n$ covariance matrix
+  
+- $\bmu = (2, 1)'$; ${\bf \Sigma} = \begin{pmatrix} 2 & -1 \\ -1 & 2\end{pmatrix}$
+  
+```{r}
+#| out-width: "100%"
+    library(plotly)
+    mu1 = c(2, 1)
+    Sigma <- matrix(c(2, -1, -1, 2), nrow = 2)
+    # generate two densities 
+    x1 = seq(-3+2, 3+2, 0.1) 
+    x2 = seq(-3+1, 3+1, 0.1)
+    data = expand.grid(x1, x2)
+    
+    # the density function after removing some constants
+    sigma_inv = solve(Sigma)
+    d1 = apply(data, 1, function(x) exp(-0.5 * t(x - mu1) %*% sigma_inv %*% (x - mu1)))
+    # d2 = apply(data, 1, function(x) exp(-0.5 * t(x - mu2) %*% sigma_inv %*% (x - mu2))*p2 )
+    
+    # plot the densities
+    par(mar = c(4, 4, 0, 0))
+    plot_ly(x = x1, y = x2) |>  
+            add_surface(z = matrix(d1, length(x1), length(x2))) |>  
+            layout(paper_bgcolor='transparent') |>  
+            layout(scene = list(xaxis = list(title = "X1"), 
+                                yaxis = list(title = "X2"),
+                                zaxis = list(title = "Gaussian Densities")))
+```
+
+
+
+::: notes
+
+:::
+
+
+## Sampling Distribution of ${\bf b}$
+
+:::{.fact}
+${\bf y} \sim N(\bmu, {\bf \Sigma})$, and ${\bf Z = By + c}$ with a constant matrix ${\bf B}$ and vector $\bf c$, then $${\bf Z} \sim N({\bf B\bmu}, {\bf B \Sigma B}')$$
+:::
+
+
+${\bf b} = ({\bf X}' {\bf X}) ^{-1} \bf X' \bf y$
+
+$$\textbf{b} \sim N\left(\bbeta, \sigma^2 {\bf (X'X)}^{-1} \right)$$
+$$E(\textbf{b}) = E\left[ {\bf (X'X)}^{-1} {\bf X}' {\bf y}\right] = \bbeta$$
+$$\var(\textbf{b}) = \var\left[{\bf (X'X)}^{-1} {\bf X}' {\bf y} \right] = \sigma^2 {\bf (X'X)}^{-1}$$
+
+- The unknown $\sigma^2$ is estimated by $\hat{\sigma}^2 = MS_{res} = \frac{SS_{res}}{n - k - 1}$.
+
+- $\textbf{b}$ is **B**est **L**inear **U**nbiased **E**stimator (BLUE) (Gauss-Markov Theorem).
+
+
+::: notes
+The standard error of $b_j$ is ${\sqrt{s^2C_{jj}}}$, where $C_{jj}$ is the diagonal element of $({\bf X'X})^{-1}$ corresponding to $b_j$.
+:::
+
+
+## What This Review is Not Covered
+- Detailed statistical inference
+
+- Regression Diagnostics (Usual Data: Outliers, leverage points, influential points; Non-normality; Non-constant variance; Non-linearity)
+
+- Categorical variables
+
+- Model/Variable Selection
+
+- Code for doing regression (`lm()` in R and `linear_model.LinearRegression()` in `sklearn` of Python)
+
+- Maximum likelihood estimation
+
+. . .
+
+Where to learn these stuff?
+
+- Dr. Yu's MSSC 5780 slides <https://math4780-f23.github.io/website/>
+
+- [ISL](https://hastie.su.domains/ISLR2/ISLRv2_website.pdf) Ch 3, 6.1.
+
+
+
+## Generalizations of the Linear Model
+
+- [*Classification*]{.green}: logistic regression, support vector machines
+
+- [*Non-linearity*]{.green}: kernel smoothing, splines and generalized additive models, nearest neighbor methods.
+
+- [*Interactions*]{.green}: Tree-based methods, bagging, random forests and boosting
+
+- [*Shrinkage and Regularization*]{.green}: Ridge regression and LASSO
+
+
+
+
+
+
+
+
+# Numerical Optimization for Linear Regression {background-color="#447099"}
+
+## Basic Concepts
+- Although we have the closed form for ${\bf b} = ({\bf X}' {\bf X}) ^ {-1} {\bf X}' {\bf y}$, we can solve for $\bf b$ numerically.
+
+$$\begin{align}
+\underset{\bbeta}{\text{min}} \quad \ell(\bbeta) = \frac{1}{n} \sum_i (y_i - \beta_0 - x_i\beta_1)^2 \\
+\end{align}$$
+
+- $\ell(\bbeta)$, the $\text{MSE}_{\texttt{Tr}}$, is called the (squared) **loss function**.
+
+
+
+
+```{r}
+#| echo: true
+# generate data from a simple linear regression beta0 = 0.5, beta1 = 1
+set.seed(2025)
+n <- 1000
+x <- rnorm(n)
+y <- 0.5 + x + rnorm(n)
+```
+
+
+- Start with an initial value of $\bbeta$, say $\widehat{\bbeta} = (0.3, 1.5)$, we compute the $\text{MSE}_{\texttt{Tr}}$
+
+$$\begin{align}
+\frac{1}{n}\sum_i \left( y_i - 0.3 - 1.5 x_i \right)^2 \\
+\end{align}$$
+
+
+
+::: notes
+Let's first generate a set of data. We have two parameters, an intercept $\beta_= 0.5$ and a slope $\beta_1 = 1$. 
+:::
+
+## Basic Concepts
+
+```{r}
+#| echo: true
+# calculate the residual sum of squares for a grid of beta values
+mse <- function(b, trainx, trainy) mean((trainy - b[1] - trainx * b[2]) ^ 2)
+mse(b = c(0.3, 1.5), trainx = x, trainy = y)
+```
+
+- The initial point $(0.3, 1.5)$ is not at the bottom of the surface. 
+
+```{r}
+#| out-width: "100%"
+  # create a grid of beta values and the corresponding RSS
+  b0 <- b1 <- seq(0, 2, length = 20)
+  z <- matrix(apply(expand.grid(b0, b1), 1, mse, x, y), 20, 20)
+  onepoint <- data.frame("x" = 0.3, "y" = 1.5, "z" = mse(c(0.3, 1.5), x, y))
+  
+  # 3d plot of RSS using `plotly`
+  plot_ly(x = b0, y = b1) |> 
+      layout(plot_bgcolor='rgb(254, 247, 234)') |> 
+      layout(paper_bgcolor='transparent') |>  
+      add_surface(z = t(z), 
+                  colorscale = 'Viridis',
+                  opacity = 0.6) |>  
+      layout(scene = list(xaxis = list(title = "beta0"), 
+             yaxis = list(title = "beta1"),
+             zaxis = list(title = "MSE"))) |>  
+      add_markers(data = onepoint, 
+                x = ~x, y = ~y, z = ~z, 
+                marker = list(size = 6, color = "red", symbol = 104))
+```
+
+
+
+::: notes
+Doing this on all such β values would allow us to create a surface of the RSS, as a function of the parameters.
+- Our goal is to minimize the $RR_{res}$, knowing the corresponding $\bbeta$ values. 
+Numerical optimization is a research field that investigates such problems and their properties. 
+:::
+
+
+## `optim()`^[[`scipy.optimize`](https://docs.scipy.org/doc/scipy/tutorial/optimize.html) for Python.]
+
+```{r}
+#| echo: true
+#| class-output: "my_class600"
+(lm_optim <- optim(par = c(0.3, 1.5), fn = mse, trainx = x, trainy = y))
+```
+
+. . .
+
+```{r}
+#| echo: true
+#| class-output: "my_class200"
+lm(y ~ x)$coef
+```
+
+::: notes
+  * The `par` argument specifies an initial value. In this case, it is $\beta_0 = \beta_1 = 2$. 
+  * The `fn` argument specifies the name of a function (`mse` in this case) that can calculate the objective function. This function may have multiple arguments. However, the first argument has to be the parameter(s) that is being optimized. In addition, the parameters need to be supplied to the function as a vector, but not matrix, list or other formats. 
+  * The arguments `trainx = x`, `trainy = y` specifies any additional arguments that the objective function `fn` (`mse`) needs. It behaves the same as if you are supplying this to the function `mse` it self.
+:::
+
+
+## Basic Principles 
+For a general function $f(\bx)$ to be minimized with respect to (w.r.t.) $\bx \in \mathbf{R}^{p}$, we have
+
+- __First-Order *Necessary* Condition__: 
+
+> If $f$ is continuously differentiable in an open neighborhood of local minimum $\bx^\ast$, then $\nabla f(\bx^\ast) = \mathbf{0}$. 
+
+
+```{r, fig.dim = c(12, 4)}
+#| label: fcnplot
+#| out-width: 70%
+  par(mfrow = c(1,2))
+  par(mar = c(2,2,2,2))
+  
+  # a convex case 
+  x = seq(-2, 2, 0.01)
+  plot(x, x^2, type = "l", col = "deepskyblue", lwd = 1.5,
+       main = expression(paste("convex function ", f[1](x) == x^2)))
+  points(0, 0, col = "red", pch = 19, cex = 2.5)
+  
+  # non-convex case
+  x = seq(-4, 2, 0.01)
+  plot(x, x^4 + 2*x^3 - 5*x^2, type = "l", col = "deepskyblue", lwd = 1.5,
+       main = expression(paste("nonconvex function ", f[2](x) == x^4 + 2*x^3 - 5*x^2)))
+  points(-2.5, (-2.5)^4 + 2*(-2.5)^3 - 5 *(-2.5)^2, col = "red", pch = 19, cex = 2.5)
+  points(0, 0, col = "darkorange", pch = 19, cex = 1.5)
+  points(1, -2, col = "red", pch = 19, cex = 1.5)
+```
+
+
+## Taylor Expansion
+
+$$f(\bx^\text{new}) \approx f(\bx) + \nabla f(\bx)' (\bx^\text{new} - \bx)$$
+
+- Whether $\nabla f(\bx)$ is positive or negative, we can always find a new point $\bx^\text{new}$ that makes $\nabla f(\bx)' (\bx^\text{new} - \bx)$ less than 0, so that $f(\bx^\text{new}) < f(\bx)$. 
+
+```{r, ref.label="fcnplot"}
+#| out-width: "70%"
+#| fig-align: 'center'
+#| fig-asp: 0.3
+```
+
+<!-- - For the nonconvex function, $x = 0$ is a maximizer rather than a minimizer.  -->
+
+- $\nabla f(\bx^\ast) = \mathbf{0}$ is __only a necessary condition, not a sufficient condition__. 
+
+- $x = 1$ is a **local minimizer**, not a global one. 
+
+::: notes
+On the left hand side, we have a __convex function__, which looks like a bowl. The intuition is that, if $f(\bx)$ is a function that is smooth enough, and $\bx$ is a point with $\nabla f(\bx^\ast) \neq 0$, then by the Taylor expansion, we have, for any new point $\bx^{new}$ in the neighborhood of $\bx$, we can approximate its function value 
+- Since we only checked if the slope if "flat" but didn't care if its facing upward or downward, our condition cannot tell the difference.
+:::
+
+
+## Second-order Property
+
+__Second-order *Sufficient* Condition__: 
+
+> $f$ is twice continuously differentiable in an open neighborhood of $\bx^\ast$. If $\nabla f(\bx^\ast) = \mathbf{0}$ and $\nabla^2 f(\bx^\ast)$ , the __Hessian matrix__, is [*positive definite*]{.green}, i.e.,
+$$
+\nabla^2 f(\bx) = \left(\frac{\partial^2 f(\bx)}{\partial x_i \partial x_j}\right) = \bH(\bx) \succeq 0
+$$
+then $\bx^\ast$ is a [*strict local minimizer*]{.green} of $f$. 
+
+<!-- - $\bH(\bx)$ is called the __Hessian matrix__ -->
+. . .
+
+\begin{align}
+\text{Left:}& f_1(x) = x ^ 2; \qquad \nabla^2 f_1(x) = 2 \\
+\text{Right:}& f_2(x) = x ^ 4 + 2 x ^ 3 - 5 x ^ 2; \qquad \nabla^2 f_2(x) = 12x^2 + 12 x - 10\\
+\end{align}
+
+- For $f_1$, $\bH(\bx) \succeq 0$, and the solution is a minimizer. 
+- For $f_2$, $\nabla^2 f_2(-2.5) = 35$, $\nabla^2 f_2(0) = -10$ and $\nabla^2 f_2(1) = 14$. So $x = -2.5$ and $1$ are local minimizers and $0$ is a local maximizer. 
+
+
+::: notes
+- $\bH(\bx)$ is called the __Hessian matrix__, which will be frequently used in second-order methods. We can easily check this property for our examples: 
+These conditions are sufficient, but again, they only discuss local properties, not global properties. 
+
+:::
+
+## Optimization Algorithm
+
+:::{.algo}
+\
+1. Start with $\bx^{(0)}$
+
+2. For $i = 1, 2, \dots$ until convergence, find $\bx^{(i)}$ s.t. $f(\bx^{(i)}) < f(\bx^{(i-1)})$
+
+:::
+
+. . .
+
+- Stopping criterion:
+  - Gradient of the objective function: $\lVert \nabla f(\bx^{(i)}) \rVert < \epsilon$
+  - (Relative) change of distance: $\frac{\lVert \bx^{(i)} - \bx^{(i-1)} \rVert} {\lVert \bx^{(i-1)}\rVert}< \epsilon$ or $\lVert \bx^{(i)} - \bx^{(i-1)} \rVert < \epsilon$
+  - (Relative) change of functional value: $\frac{| f(\bx^{(i)}) - f(\bx^{(i-1)})|}{|f(\bx^{(i)})|} < \epsilon$ or $| f(\bx^{(i)}) - f(\bx^{(i-1)})| < \epsilon$
+  - Stop at a pre-specified number of iterations
+
+. . .
+
+```r
+optim(par, fn, gr = NULL, ..., 
+      method = c("Nelder-Mead", "BFGS", "CG", "L-BFGS-B", "SANN", "Brent"),
+      lower = -Inf, upper = Inf, control = list(), hessian = FALSE)
+
+```
+
+
+::: notes
+Most optimization algorithms follow the same idea: starting from a point x(0) (which is usually specified by the user) and move to a new point x(1) that improves the objective function value. Repeatedly performing this to get a sequence of points x(0),x(1),x(2),x(3),… until the certain stopping criterion is reached.
+Most algorithms differ in terms of how to move from the current point x(k) to the next, better target point x(k+1). This may depend on the smoothness or structure of f, constrains on the domain, computational complexity, memory limitation, and many others.
+:::
+
+
+## [BFGS](https://en.wikipedia.org/wiki/Broyden%E2%80%93Fletcher%E2%80%93Goldfarb%E2%80%93Shanno_algorithm) Demo
+
+:::: columns
+::: column
+```{r}
+#| echo: true
+#| class-output: "my_class500"
+f1 <- function(x) x ^ 2
+f2 <- function(x) {
+    x ^ 4 + 2 * x ^ 3 - 5 * x ^ 2
+}
+optim(par = 3, fn = f1, method = "BFGS")
+```
+:::
+
+::: column
+```{r}
+#| echo: true
+#| class-output: "my_class500"
+optim(par = 10, fn = f2, method = "BFGS")
+```
+```{r}
+#| echo: true
+optim(par = 3, fn = f2, method = "BFGS")$par
+```
+
+:::
+::::
+
+
+## Second-order [Newton's Method](https://en.wikipedia.org/wiki/Newton%27s_method_in_optimization)
+- Second order Taylor expansion at a current point $\bx$:
+
+$$f(\bx^\ast) \approx f(\bx) + \nabla f(\bx)' (\bx^\ast - \bx) + \frac{1}{2} (\bx^\ast - \bx)' \bH(\bx) (\bx^\ast - \bx)$$
+
+- Take derivative w.r.t $\bx^\ast$ on both sides:
+$$0 = \nabla f(\bx^\ast) = 0 + \nabla f(\bx) + \bH(\bx) (\bx^\ast - \bx)$$
+$$\boxed{\bx^{(i+1)} = \bx^{(i)} -  \bH(\bx^{(i)})^{-1} \nabla f(\bx^{(i)})}$$
+
+- For numerical stability, introduce a step size $\delta \in (0, 1)$:
+  $$\bx^{(i+1)} = \bx^{(i)} -  {\color{red}{\delta}} \, \bH(\bx^{(i)})^{-1} \nabla f(\bx^{(i)})$$
+
+
+
+::: notes
+If $\bH$ is difficult to compute, we may use some matrix to substitute it. For example, if we simplify use the identity matrix $\bI$, then this reduces to a first-order method to be introduced later. However, if we can get a good approximation, we can still solve this linear system and get to a better point. Then the question is how to obtain such matrix in a computationally inexpensive way. The Broyden–Fletcher–Goldfarb–Shanno (BFSG) algorithm is such an approach by iteratively updating its (inverse) estimation. For details, please see the [SMLR book](https://teazrq.github.io/SMLR/optimization-basics.html#quasi-newton-methods). We have already used the BFGS method previously in the `optim()` example. 
+- when x(k+1) is not too far away from x(k), the
+quadratic approximation is fairly accurate.
+:::
+
+## First-Order [Gradient Descent](https://en.wikipedia.org/wiki/Gradient_descent)
+
+:::{.callout-note}
+
+:::{style="font-size: 1.3em;"}
+When $\bH$ or $\bH^{-1}$ is difficult to compute (usually in deep learning)
+
+1. Get an approximate one in a computationally inexpensive way. The BFGS algorithm is such an approach by iteratively updating its (inverse) estimation.
+
+2. Use first-order methods
+:::
+
+:::
+
+
+- When using $\bH = \bI$, we update 
+$$\bx^{(i+1)} = \bx^{(i)} - \delta \nabla f(\bx^{(i)}).$$ 
+- It is crucial to figure out the step size $\delta$. 
+  + A too large $\delta$ may not converge.
+  + A too small $\delta$ takes too many iterations. 
+
+
+::: notes
+Alternatively, line search could be used. 
+:::
+
+## [Demo]{.pink} $SS_{res}$ Contour
+
+The objective function is $\ell(\boldsymbol \beta) = \frac{1}{2n}||\mathbf{y} - \mathbf{X} \boldsymbol \beta ||^2$ with solution ${\bf b} = \left(\mathbf{X}'\mathbf{X}\right)^{-1} \mathbf{X}'\mathbf{y}$.
+
+
+```{r fig.dim = c(4, 4), echo=-c(1, 2)}
+#| out-width: "45%"
+#| fig-align: "center"
+#| warning: false
+#| code-fold: true
+
+par(bg="transparent")
+par(mar = c(2, 1.5, 0, 0))
+set.seed(2025)
+n <- 200
+
+# create some data with linear model
+X <- MASS::mvrnorm(n, c(0, 0), matrix(c(1, 0.7, 0.7, 1), 2, 2))
+y <- rnorm(n, mean = 2 * X[, 1] + X[, 2])
+  
+beta1 <- seq(-1, 4, 0.005)
+beta2 <- seq(-1, 4, 0.005)
+allbeta <- data.matrix(expand.grid(beta1, beta2))
+rss <- matrix(apply(allbeta, 1, 
+                    function(b, X, y) sum((y - X %*% b) ^ 2), X, y),
+              length(beta1), length(beta2))
+  
+# quantile levels for drawing contour
+quanlvl = c(0.01, 0.025, 0.05, 0.2, 0.5, 0.75)
+  
+# plot the contour
+contour(beta1, beta2, rss, levels = quantile(rss, quanlvl), las = 1)
+box()
+  
+# the truth
+b <- solve(t(X) %*% X) %*% t(X) %*% y
+points(b[1], b[2], pch = 19, col = "blue", cex = 2)
+```
+
+
+
+## [Demo]{.pink} Gradient Descent
+
+$$
+\begin{align}
+\frac{\partial \ell(\boldsymbol \beta)}{\partial \boldsymbol \beta} = -\frac{1}{n} \sum_{i=1}^n (y_i - x_i' \boldsymbol \beta) x_i = \frac{1}{n} \sum_{i=1}^n \frac{\partial \ell_i(\boldsymbol \beta)}{\partial \boldsymbol \beta}.
+\end{align}
+$$
+where $\ell_i(\boldsymbol \beta) = \frac{1}{2}(y_i - x_i' \boldsymbol \beta)^2$.
+
+First set an initial beta value, say $\boldsymbol \beta = \mathbf{0}$ for all entries, then proceed with the update
+
+$$\begin{align}
+\boldsymbol \beta^\text{new} =& \boldsymbol \beta^\text{old} - \delta \frac{\partial \ell(\boldsymbol \beta)}{\partial \boldsymbol \beta}\\
+=&\boldsymbol \beta^\text{old} + \delta \frac{1}{n} \sum_{i=1}^n (y_i - x_i' \boldsymbol \beta) x_i.\\
+\end{align}$$
+
+
+
+
+## [Demo]{.pink} Gradient Descent
+
+- Set $\boldsymbol{\beta}^{(0)} = \mathbf{0}$, $\delta = 0.2$
+
+```{r}
+mylm_g <- function(x, y, 
+                   b0 = rep(0, ncol(x)),
+                   delta = 0.2,
+                   epsilon = 1e-6,
+                   maxitr = 5000) {
+    if (!is.matrix(x)) stop("x must be a matrix")
+    if (!is.vector(y)) stop("y must be a vector")
+    if (nrow(x) != length(y)) stop("number of observations different")
+       
+    # initialize beta values
+    allb <- matrix(b0, 1, length(b0))       
+    # iterative update
+    for (k in 1:maxitr) {
+        # the new beta value
+        b1 <- b0 + t(x) %*% (y - x %*% b0) * delta / length(y)  
+        
+        # record the new beta
+        allb <- rbind(allb, as.vector(b1))
+        
+        # stopping rule
+        if (max(abs(b0 - b1)) < epsilon)
+            break;
+        
+        # reset beta0
+        b0 <- b1
+    }
+
+    # if (k == maxitr) cat("maximum iteration reached\n")
+    
+    return(list("allb" = allb, "beta" = b1))
+}
+```
+
+```{r fig.dim = c(6, 6)}
+#| fig-align: "center"
+#| out-width: "100%"
+#| fig-asp: 1
+
+par(mfrow = c(1, 1))
+par(mar = c(2, 2, 0, 0))
+par(bg="transparent")
+
+mybeta <- mylm_g(X, y, b0 = c(0, 1))
+
+contour(beta1, beta2, rss, levels = quantile(rss, quanlvl), las = 1)
+points(mybeta$allb[, 1], mybeta$allb[, 2], type = "b", col = "red", pch = 19)
+points(b[1], b[2], pch = 19, col = "blue", cex = 1.5)
+box()
+```
+
+## [Demo]{.pink} Effect of $\delta$
+
+```{r fig.dim = c(12, 6)}
+#| out-width: "100%"
+#| fig-align: "center"
+#| fig-asp: 0.5
+
+par(mfrow = c(1, 2))
+par(mar = c(2, 2, 2, 2))
+par(bg="transparent")
+
+# fit the model with a larger step size
+mybeta <- mylm_g(X, y, b0 = c(0, 1), delta = 1)
+
+contour(beta1, beta2, rss, levels = quantile(rss, quanlvl), 
+          main = "delta = 1", las = 1)
+points(mybeta$allb[,1], mybeta$allb[,2], type = "b", col = "red", pch = 19)
+points(b[1], b[2], pch = 19, col = "blue", cex = 1.5)
+box()
+
+mybeta <- mylm_g(X, y, b0 = c(0, 1), delta = 1.5, maxitr = 6)
+contour(beta1, beta2, rss, levels = quantile(rss, quanlvl),
+          main = "delta = 1.5", las = 1)
+points(mybeta$allb[,1], mybeta$allb[,2], type = "b", col = "red", pch = 19)
+points(b[1], b[2], pch = 19, col = "blue", cex = 1.5)
+box()
+```
+
+
+::: notes
+The descent path is very smooth because we choose a very small step size. However, if the step size is too large, we may observe unstable results or even unable to converge. For example, if We set $\delta = 1$ or $\delta = 1.5$.
+:::
+
+
+
+## Revisit `optim()`  {visibility="hidden"}
+
+```r
+optim(par, fn, gr = NULL, ...,
+      method = c("Nelder-Mead", "BFGS", "CG", "L-BFGS-B", "SANN", "Brent"),
+      lower = -Inf, upper = Inf,
+      control = list(), hessian = FALSE)
+```
+
+- If gradient is known, we provide this information in the argument `gr = ` to avoid numerically approximating the gradient.    
+  + faster convergence
+  + more precise
+
+
+```{r}
+#| echo: false
+#| eval: false
+set.seed(2025)
+n <- 1000
+X <- cbind(1, rnorm(n))
+y <- X %*% c(0.5, 1) + rnorm(n)
+rss <- function(b, trainx, trainy) {
+    mean((trainy - trainx %*% b) ^ 2)
+}
+# the gradient formula is already provided
+rss_g <- function(b, trainx, trainy) {
+    -2 * t(trainx) %*% (trainy - trainx %*% b) / nrow(trainx)
+}
+
+lm_optim <- optim(par = c(0.3, 1.5), fn = rss,
+                  method = "BFGS", trainx = X, trainy = y)
+# The solution can be solved by any optimization algorithm
+lm_optim_g <- optim(par = c(0.3, 1.5), fn = rss, gr = rss_g,
+                    method = "BFGS", trainx = X, trainy = y)
+```
+
+
+::: notes
+When we only supply the `optim()` function the objective function definition `fn =`, it will internally numerically approximate the gradient. Sometimes this is not preferred due to computational reasons. And when you do have the theoretical gradient, it is likely to be more accurate than numerically approximated values. Hence, as long as the gradient itself does not cost too much compute, we may take advantage of it. We could supply the `optim()` function using the gradient `gr = `. This is the example we used previously:
+:::
+
+
+## Mini-batch Stochastic Gradient Descent (SGD)
+In deep learning,
+
+- Calculating the gradient using entire data can be costly (memory limit).
+
+- Consider update the parameter using *a subset of data* of size $m \ll n$, called **minibatch**: $\mathcal{D}_B = \{x_j, y_j \}_{j = 1}^m \subset \mathcal{D}$
+
+. . .
+
+$$
+\begin{align}
+\frac{\partial \ell_B(\boldsymbol \beta)}{\partial \boldsymbol \beta} = -\frac{1}{m} \sum_{j=1}^m (y_j - x_j' \boldsymbol \beta) x_j = \frac{1}{m} \sum_{j=1}^m \frac{\partial \ell_j(\boldsymbol \beta)}{\partial \boldsymbol \beta}
+\end{align}
+$$
+where $\ell_j(\boldsymbol \beta) = \frac{1}{2}(y_j - x_j' \boldsymbol \beta)^2$.
+
+
+$$\begin{align}
+\boldsymbol \beta^\text{new} =& \boldsymbol \beta^\text{old} - \delta \frac{\partial \ell_B(\boldsymbol \beta)}{\partial \boldsymbol \beta}\\
+=&\boldsymbol \beta^\text{old} + \delta \frac{1}{m} \sum_{j=1}^m (y_j - x_j' \boldsymbol \beta) x_j.\\
+\end{align}$$
+
+
+## SGD
+
+- $\nabla_{\boldsymbol \beta} \ell_B(\boldsymbol \beta)$ approximates  $\nabla_{\boldsymbol \beta} \ell(\boldsymbol \beta)$ with *stochasticity* due to random sampling.
+
+- Different samples give us a different gradient value, making it [*stochastic*]{.red}!
+
+- Suppose we have $n=1000$ training points, and batch size is $m=100$, it needs $n/m = 10$ updates (iterations can be parallelized) to pass all data into the algorithm, which completes one **epoch**.
+
+- To gaurantee convergence, the learning rate $\delta$ should
+    + be decreasing (with epochs or iterations)
+    + have $\sum_{k=1}^{\infty}\delta_k = \infty$ and $\sum_{k=1}^{\infty}\delta_k^2 < \infty$
+
+<!-- - On average, $\nabla_{\boldsymbol \beta} \ell(\boldsymbol \beta)$ -->
+
+::: notes
+
+Iterations: Decay happens more frequently (every batch). This is more precise and often used for large datasets.
+Epochs: Decay happens less frequently (after all batches of one epoch). This is simpler and often used for smaller datasets or in step-based schedules.
+:::
+
+## [Demo]{.pink} SGD
+
+```{r}
+mylm_sgd_mb <- function(x, y, b0 = rep(0, ncol(x)), delta = 0.1, maxepoch = 20,
+                        batchsize = 10, scaling = FALSE, decay = FALSE) {
+    if (!is.matrix(x)) stop("x must be a matrix")
+    if (!is.vector(y)) stop("y must be a vector")
+    if (nrow(x) != length(y)) stop("number of observations different")
+    
+    # initiate batches with 10 observations each
+    batch <- sample(rep(1:floor(nrow(x)/batchsize), length.out = nrow(x)))
+    learning_rate <- delta
+    # sample(1:nrow(x), size = batchsize, replace = TRUE)
+    # initialize beta values
+    allb <- matrix(b0, 1, length(b0))
+    
+    # iterative update
+    for (k in 1:maxepoch) {
+        # loop through batches
+        for (i in 1:max(batch)) {
+            m <- sum(batch==i)
+            # update based on the gradient of a single subject
+            A <- t(x[batch==i, ]) %*% (y[batch==i] - x[batch==i, ] %*% b0) * 
+                learning_rate / m
+            if (scaling) {
+                A <- A * ncol(x)/m
+            } 
+            b1 <- b0 + A
+            
+            # record the update
+            allb <- rbind(allb, as.vector(b1))
+            
+            # learning rate decay
+            if (decay) {
+                learning_rate <- delta * (0.5) ^ (k %/% 10)
+            }
+            # reset beta0
+            b0 <- b1
+        }
+    }
+    return(list("allb" = allb, "beta" = b1))
+}
+
+```
+
+
+```{r fig.dim = c(12, 6)}
+#| out-width: "100%"
+#| fig-align: "center"
+#| fig-asp: 0.5
+
+par(mfrow = c(1, 2))
+par(mar = c(2, 2, 2, 2))
+par(bg="transparent")
+
+mybeta <- mylm_sgd_mb(X, y, b0 = c(0, 1), batchsize = 20,
+                      delta = 0.2, maxepoch = 3)
+
+contour(beta1, beta2, rss, levels = quantile(rss, quanlvl), 
+          main = "batch_size = 20; delta = 0.2", las = 1)
+mm <- length(mybeta$allb[,1])
+points(mybeta$allb[,1], mybeta$allb[,2], type = "b", 
+       col = alpha("red", (mm:1)/mm), pch = 19)
+points(b[1], b[2], pch = 19, col = "blue", cex = 1.5)
+box()
+
+mybeta <- mylm_sgd_mb(X, y, b0 = c(0, 1), batchsize = 5,
+                      delta = 0.2, maxepoch = 3)
+contour(beta1, beta2, rss, levels = quantile(rss, quanlvl),
+          main = "batch_size = 5; delta = 0.2", las = 1)
+points(mybeta$allb[,1], mybeta$allb[,2], type = "b", col = "red", pch = 19)
+points(b[1], b[2], pch = 19, col = "blue", cex = 1.5)
+box()
+```
+
+
+

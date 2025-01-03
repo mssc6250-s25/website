@@ -70,7 +70,7 @@
     "href": "course-syllabus.html#optional-references",
     "title": "Syllabus",
     "section": "Optional References",
-    "text": "Optional References\n\n(PML) Probabilistic Machine Learning: An Introduction, by Kevin Murphy. Publisher: MIT Press. (Master to PhD level, lots of mathematics foundations, Python code)\n(PMLA) Probabilistic Machine Learning: Advanced Topics, by Kevin Murphy. Publisher: MIT Press. (PhD level, more probabilistic-based or Bayesian)\n(ESL) The Elements of Statistical Learning, 2nd edition, by Hastie et. al. Publisher: Springer. (PhD level, more frequentist-based)",
+    "text": "Optional References\n\n(MML) Mathematics for Machine Learning, by Marc Peter Deisenroth, A. Aldo Faisal, and Cheng Soon Ong. Publisher: Cambridge University Press. (College level mathematics for machine learning)\n(PML) Probabilistic Machine Learning: An Introduction, by Kevin Murphy. Publisher: MIT Press. (Master to PhD level, lots of mathematics foundations, Python code)\n(PMLA) Probabilistic Machine Learning: Advanced Topics, by Kevin Murphy. Publisher: MIT Press. (PhD level, more probabilistic-based or Bayesian)\n(ESL) The Elements of Statistical Learning, 2nd edition, by Hastie et. al. Publisher: Springer. (PhD level, more frequentist-based)",
     "crumbs": [
       "Course Information",
       "Syllabus"
@@ -361,18 +361,25 @@
     "href": "slides/01-syllabus.html#optional-references-1",
     "title": "Welcome Aboard 🙌",
     "section": "Optional References",
-    "text": "Optional References\n\n\n\n(PMLI) Probabilistic Machine Learning: An Introduction, by Kevin Murphy. Publisher: MIT Press.\nSelf-contained with lots of mathematics foundations\nPython code"
+    "text": "Optional References\n\n\n\n(MML) Mathematics for Machine Learning, by Marc Peter Deisenroth, A. Aldo Faisal, and Cheng Soon Ong. Publisher: Cambridge University Press.\nFocus on the mathematical concepts behind the models"
   },
   {
     "objectID": "slides/01-syllabus.html#optional-references-2",
     "href": "slides/01-syllabus.html#optional-references-2",
     "title": "Welcome Aboard 🙌",
     "section": "Optional References",
-    "text": "Optional References\n\n\n\n(PMLA) Probabilistic Machine Learning: Advanced Topics, by Kevin Murphy. Publisher: MIT Press.\nPhD level\nProbabilistic or distributional-based"
+    "text": "Optional References\n\n\n\n(PMLI) Probabilistic Machine Learning: An Introduction, by Kevin Murphy. Publisher: MIT Press.\nSelf-contained with lots of mathematics foundations\nPython code"
   },
   {
     "objectID": "slides/01-syllabus.html#optional-references-3",
     "href": "slides/01-syllabus.html#optional-references-3",
+    "title": "Welcome Aboard 🙌",
+    "section": "Optional References",
+    "text": "Optional References\n\n\n\n(PMLA) Probabilistic Machine Learning: Advanced Topics, by Kevin Murphy. Publisher: MIT Press.\nPhD level\nProbabilistic or distributional-based"
+  },
+  {
+    "objectID": "slides/01-syllabus.html#optional-references-4",
+    "href": "slides/01-syllabus.html#optional-references-4",
     "title": "Welcome Aboard 🙌",
     "section": "Optional References",
     "text": "Optional References\n\n\n\n(ESL) The Elements of Statistical Learning, 2nd edition, by Hastie et. al. Publisher: Springer.\nFor PhD students or researchers in mathematical sciences\nFrequentist-based"
@@ -441,26 +448,330 @@
     "text": "Generative AI and Sharing/Reusing Code Policy\n\n\n\nYou are responsible for the content of all work submitted for this course.\nYou may use generative AI tools such as ChatGPT or DALL-E to generate a first draft of text for your assignments, provided that this use is appropriately documented and cited.\nLearn how to cite the use of AI in MLA and APA format, and more\n\n\n\n\n\n\n\n\n\n\n\n\n\nSharing/Reusing Code\n\nUnless explicitly stated otherwise, you may make use of any online resources, but you must explicitly cite where you obtained any code you directly use or use as inspiration in your solutions.\nAny recycled code that is discovered and is not explicitly cited will be treated as plagiarism, regardless of source.\n\n\n\n\n\nmssc6250-s25.github.io/website"
   },
   {
-    "objectID": "course-news.html",
-    "href": "course-news.html",
-    "title": "News/Announcements",
+    "objectID": "slides/04-lin-reg.html#linear-regression",
+    "href": "slides/04-lin-reg.html#linear-regression",
+    "title": "Linear Regression 📈",
+    "section": "Linear Regression",
+    "text": "Linear Regression\n\nLinear regression is an approach to supervised learning.\nIt assumes that the dependence of \\(Y\\) on \\(X_1, X_2, \\dots, X_k\\)1 is linear.\nTrue regression functions \\(f(x)\\) are never linear!\nAlthough it is overly simplistic, the linear model has distinct advantages in terms of its interpretability and often shows good predictive performance.\n\nlinear regression is extremely useful both conceptually and practically\nThe textbook ISL uses \\(p\\) instead of \\(k\\) to denote the number of predictors in the model. We use \\(k\\) here, but switch to \\(p\\) starting next week."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#why-multiple-linear-regression-mlr-model",
+    "href": "slides/04-lin-reg.html#why-multiple-linear-regression-mlr-model",
+    "title": "Linear Regression 📈",
+    "section": "Why Multiple Linear Regression (MLR) Model",
+    "text": "Why Multiple Linear Regression (MLR) Model\n\nOur target response may be affected by several factors.\nTotal sales \\((Y)\\) and amount of money spent on advertising on YouTube (YT) \\((X_1)\\), Facebook (FB) \\((X_2)\\), Instagram (IG) \\((X_3)\\).1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPredict sales based on the three advertising expenditures and see which medium is more effective.\nIn ISL, the predictors are TV, radio and newspaper."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#fit-separate-simple-linear-regression-slr-models",
+    "href": "slides/04-lin-reg.html#fit-separate-simple-linear-regression-slr-models",
+    "title": "Linear Regression 📈",
+    "section": "Fit Separate Simple Linear Regression (SLR) Models",
+    "text": "Fit Separate Simple Linear Regression (SLR) Models\n\n\n\n❌ Fitting a separate SLR model for each predictor is not satisfactory."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#dont-fit-a-separate-simple-linear-regression",
+    "href": "slides/04-lin-reg.html#dont-fit-a-separate-simple-linear-regression",
+    "title": "Linear Regression 📈",
+    "section": "Don’t Fit a Separate Simple Linear Regression",
+    "text": "Don’t Fit a Separate Simple Linear Regression\n\n👉 How to make a single prediction of sales given levels of the 3 advertising media budgets?\n\n How to predict the sales when the amount spent on YT is 50, 100 on FB and 30 on IG? \n\n\n\n\n\n👉 Each regression equation ignores the other 2 media in forming coefficient estimates.\n\n The effect of FB advertising on sales may be increased or decreased when YT and IG advertising are in the model. \n IG advertising may have no impact on sales when YT and FB advertising are in the model. \n\n\n\n\n\n\n👍👍 Better approach: extend the SLR model so that it can directly accommodate multiple predictors."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#multiple-linear-regression-model",
+    "href": "slides/04-lin-reg.html#multiple-linear-regression-model",
+    "title": "Linear Regression 📈",
+    "section": "Multiple Linear Regression Model",
+    "text": "Multiple Linear Regression Model\n\nThe population MLR model: \\[Y_i= \\beta_0 + \\beta_1X_{i1} + \\beta_2X_{i2} + \\dots + \\beta_kX_{ik} + \\epsilon_i\\]  \n\nIn the advertising example, \\(k = 3\\) and \\[\\texttt{sales} = \\beta_0 + \\beta_1 \\times \\texttt{YouTube} + \\beta_2 \\times  \\texttt{Facebook} + \\beta_3 \\times \\texttt{Instagram} + \\epsilon\\]\n\nModel assumptions:\n\n\\(\\epsilon_i \\stackrel{iid}{\\sim} N(0, \\sigma^2)\\)\n\n\n\n\n\nHow many parameters are there in the model?"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#sample-mlr-model",
+    "href": "slides/04-lin-reg.html#sample-mlr-model",
+    "title": "Linear Regression 📈",
+    "section": "Sample MLR Model",
+    "text": "Sample MLR Model\n\nGiven the training sample \\((x_{11}, \\dots, x_{1k}, y_1), (x_{21}, \\dots, x_{2k}, y_2), \\dots, (x_{n1}, \\dots, x_{nk}, y_n),\\)\n\nThe sample MLR model to be trained: \\[\\begin{align*}\ny_i &= \\beta_0 + \\beta_1x_{i1} + \\beta_2x_{i2} + \\dots + \\beta_k x_{ik} + \\epsilon_i \\\\\n&= \\beta_0 + \\sum_{j=1}^k\\beta_j x_{ij} + \\epsilon_i, \\quad i = 1, 2, \\dots, n\n\\end{align*}\\]"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#regression-hyperplane",
+    "href": "slides/04-lin-reg.html#regression-hyperplane",
+    "title": "Linear Regression 📈",
+    "section": "Regression Hyperplane",
+    "text": "Regression Hyperplane\n\n\nSLR: regression line\nMLR: regression hyperplane or response surface\n\\(y = \\beta_0 + \\beta_1x_1 + \\beta_{2}x_2 + \\epsilon\\)\n\\(E(y \\mid x_1, x_2) = 50 + 10x_1 + 7x_2\\)"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#response-surface",
+    "href": "slides/04-lin-reg.html#response-surface",
+    "title": "Linear Regression 📈",
+    "section": "Response Surface",
+    "text": "Response Surface\n\n\\(y = \\beta_0 + \\beta_1x_1 + \\beta_{2}x_2 + \\beta_{11}x_1^2 + \\beta_{22}x_2^2 + \\beta_{12}x_1x_2 + \\epsilon\\)\n\\(E(y \\mid x_1, x_2) = 800+10x_1+7x_2 -8.5x_1^2-5x_2^2- 4x_1x_2\\)\n😎 🤓 A linear regression model can describe a complex nonlinear relationship between the response and predictors!"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#ordinary-least-squares-estimation-of-the-coefficients",
+    "href": "slides/04-lin-reg.html#ordinary-least-squares-estimation-of-the-coefficients",
+    "title": "Linear Regression 📈",
+    "section": "Ordinary Least Squares Estimation of the Coefficients",
+    "text": "Ordinary Least Squares Estimation of the Coefficients\n\\[\\begin{align*}\ny_i &= \\beta_0 + \\beta_1x_{i1} + \\beta_2x_{i2} + \\dots + \\beta_k x_{ik} + \\epsilon_i \\\\\n&= \\beta_0 + \\sum_{j=1}^k\\beta_j x_{ij} + \\epsilon_i, \\quad i = 1, 2, \\dots, n\n\\end{align*}\\]\n\nThe least-squares function Sum of Squared Residuals (\\(SS_{res}\\))1 is \\[SS_{res}(\\alpha_0, \\alpha_1, \\dots, \\alpha_k) = \\sum_{i=1}^n\\left(y_i - \\alpha_0 - \\sum_{j=1}^k\\alpha_j x_{ij}\\right)^2\\]\n\n\n\\(SS_{res}\\) must be minimized with respect to the coefficients, i.e., \\[(b_0, b_1, \\dots, b_k) = \\underset{{\\alpha_0, \\alpha_1, \\dots, \\alpha_k}}{\\mathrm{arg \\, min}}  SS_{res}(\\alpha_0, \\alpha_1, \\dots, \\alpha_k)\\]\n\nIn ISL, RSS is used for Residual Sum of Squares."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#geometry-of-least-squares-estimation",
+    "href": "slides/04-lin-reg.html#geometry-of-least-squares-estimation",
+    "title": "Linear Regression 📈",
+    "section": "Geometry of Least Squares Estimation",
+    "text": "Geometry of Least Squares Estimation"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#least-squares-normal-equations",
+    "href": "slides/04-lin-reg.html#least-squares-normal-equations",
+    "title": "Linear Regression 📈",
+    "section": "Least-squares Normal Equations",
+    "text": "Least-squares Normal Equations\n\\[\\begin{align*}\n\\left.\\frac{\\partial SS_{res}}{\\partial\\alpha_0}\\right\\vert_{b_0, b_1, \\dots, b_k} &= -2 \\sum_{i=1}^n\\left(y_i - \\alpha_0 - \\sum_{j=1}^k \\alpha_j x_{ij}\\right) = 0\\\\\n\\left.\\frac{\\partial SS_{res}}{\\partial\\alpha_j}\\right\\vert_{b_0, b_1, \\dots, b_k} &= -2 \\sum_{i=1}^n\\left(y_i - \\alpha_0 - \\sum_{j=1}^k \\alpha_j x_{ij}\\right)x_{ij} = 0, \\quad j = 1, 2, \\dots, k\n\\end{align*}\\]\n\n\\(k + 1\\) equations with \\(k + 1\\) unknown parameters.\nThe ordinary least squares estimators are the solutions to the normal equations.\n\n\n\n🍹 🍺 🍸 🥂 I buy you a drink if you solve the equations by hand without using matrix notations or operations!"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#interpreting-coefficients",
+    "href": "slides/04-lin-reg.html#interpreting-coefficients",
+    "title": "Linear Regression 📈",
+    "section": "Interpreting Coefficients",
+    "text": "Interpreting Coefficients\n\n\n\n            Estimate Std. Error t value Pr(&gt;|t|)\n(Intercept)    2.939      0.312   9.422     0.00\nyoutube        0.046      0.001  32.809     0.00\nfacebook       0.189      0.009  21.893     0.00\ninstagram     -0.001      0.006  -0.177     0.86\n\n\n\n\\[\\hat{y} = b_0 + b_1 x_1 + \\cdots + b_kx_k\\]\n\\[\\widehat{\\texttt{sales}} = 2.939 + 0.046 \\times \\texttt{YouTube} + 0.189 \\times  \\texttt{Facebook} - 0.001 \\times \\texttt{Instagram}\\]\n\n\n\\(b_1\\): Holding all other predictors fixed, for one unit increase of Youtube, the sales is expected to be increased, on average, by 0.046 units.\n\n\\(b_2\\): All else held constant, one unit increase of Facebook leads to, on average, 0.189 unit increase of sales.\n\n\\(b_0\\): The sales with no expenditures on Youtube, Facebook, and Instagram is expected to be 2.939. (Make sense?!)"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#inference-on-coefficients",
+    "href": "slides/04-lin-reg.html#inference-on-coefficients",
+    "title": "Linear Regression 📈",
+    "section": "Inference on Coefficients",
+    "text": "Inference on Coefficients\n\n\n\n\n\nThe \\((1-\\alpha)100\\%\\) Wald confidence interval (CI) for \\(\\beta_j\\), \\(j = 0, 1, \\dots, k\\) is\n\n\\[\\left(b_j- t_{\\alpha/2, n-p}~se(b_j), \\quad b_j + t_{\\alpha/2, n-p}~ se(b_j)\\right)\\]\n\n\n\n            2.5 % 97.5 %\n(Intercept)  2.32   3.55\nyoutube      0.04   0.05\nfacebook     0.17   0.21\ninstagram   -0.01   0.01\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\n\nThese are marginal CIs seperately for each \\(b_j\\).\nIndividual CI ignores the correlation between \\(b_j\\)s.\nBetter to consider elliptically-shaped regions."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#collinearity",
+    "href": "slides/04-lin-reg.html#collinearity",
+    "title": "Linear Regression 📈",
+    "section": "Collinearity",
+    "text": "Collinearity\n\nInterpretation makes sense when predictors are not highly correlated.\n\nCorrelations amongst predictors cause problems (Collinearity).\n\n\nLarge variance of coefficients.\n\nLarge magnitude of coefficients.\n\nInstable and wrong signed coefficients.\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nThink about the standard error size. Do we tend to conclude \\(\\beta_j = 0\\) or not?"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#extrapolation",
+    "href": "slides/04-lin-reg.html#extrapolation",
+    "title": "Linear Regression 📈",
+    "section": "Extrapolation",
+    "text": "Extrapolation\n\nRegression models are intended as interpolation equations over the range of the regressors used to fit the model.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nDo not use regression for time series forecasting!"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#regression-is-not-for-causal-inference",
+    "href": "slides/04-lin-reg.html#regression-is-not-for-causal-inference",
+    "title": "Linear Regression 📈",
+    "section": "Regression is Not for Causal Inference",
+    "text": "Regression is Not for Causal Inference\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClaims of causality should be avoided for observational data."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#practical-significance-vs.-statisical-significance",
+    "href": "slides/04-lin-reg.html#practical-significance-vs.-statisical-significance",
+    "title": "Linear Regression 📈",
+    "section": "Practical Significance vs. Statisical Significance",
+    "text": "Practical Significance vs. Statisical Significance\n\n\n\n\n\n\nImportant\n\n\n\n\n\n\\(H_0:\\beta_j = 0\\) will always be rejected as long as the sample size is large enough, even \\(x_j\\) has a very small effect on \\(y\\).\n\nConsider the practical significance of the result, not just the statistical significance.\nUse confidence intervals to draw conclusions instead of relying only on p-values.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\n\nIf the sample size is small, there may not be enough evidence to reject \\(H_0:\\beta_j = 0\\).\n\n\nDo Not immediately conclude that the variable has no association with the response.\nThere may be a linear association that is just not strong enough to detect given your data, or there may be a non-linear association.\n\n\n\n\n\n\n\np-value is a dichotomous approach"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#test-for-significance",
+    "href": "slides/04-lin-reg.html#test-for-significance",
+    "title": "Linear Regression 📈",
+    "section": "Test for significance",
+    "text": "Test for significance\n\nTest for significance: Determine if there is a linear relationship between the response and any of the regressor variables.\n \\(H_0: \\beta_1 = \\beta_2 = \\cdots = \\beta_k = 0 \\quad H_1: \\beta_j \\ne 0 \\text{ for at least one } j\\) \n\n\n\n\\(\\sum_{i=1}^n(y_i - \\overline{y})^2 = \\sum_{i=1}^n(\\hat{y}_i - \\overline{y})^2 + \\sum_{i=1}^n(y_i - \\hat{y}_i)^2\\)\nReject \\(H_0\\) if \\(F_{test} &gt; F_{\\alpha, k, n - k - 1}\\).\n\n\n\nWhat is the sample statistic we use to accesses how well the model fits the data?"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#regression-model-in-matrix-form",
+    "href": "slides/04-lin-reg.html#regression-model-in-matrix-form",
+    "title": "Linear Regression 📈",
+    "section": "Regression Model in Matrix Form",
+    "text": "Regression Model in Matrix Form\n\\[y_i= \\beta_0 + \\beta_1x_{i1} + \\beta_2x_{i2} + \\dots + \\beta_kx_{ik} + \\epsilon_i, \\quad \\epsilon_i \\stackrel{iid}{\\sim} N(0, \\sigma^2), \\quad i = 1, 2, \\dots, n\\]\n\n\n\\[\\bf y = \\bf X \\boldsymbol{\\beta} + \\boldsymbol{\\epsilon}\\] where\n\\[\\begin{align}\n\\bf y = \\begin{bmatrix}\ny_1 \\\\\ny_2 \\\\\n\\vdots \\\\\ny_n \\end{bmatrix},\\quad\n\\bf X = \\begin{bmatrix}\n  1 & x_{11} & x_{12} & \\cdots & x_{1k} \\\\\n  1 & x_{21} & x_{22} & \\cdots & x_{2k} \\\\\n  \\vdots & \\vdots  & \\vdots  & \\ddots & \\vdots  \\\\\n  1 & x_{n1} & x_{n2} & \\cdots & x_{nk} \\end{bmatrix}, \\quad\n\\boldsymbol{\\beta} = \\begin{bmatrix}\n\\beta_0 \\\\\n\\beta_1 \\\\\n\\vdots \\\\\n\\beta_k \\end{bmatrix} , \\quad\n\\boldsymbol{\\epsilon} = \\begin{bmatrix}\n\\epsilon_1 \\\\\n\\epsilon_2 \\\\\n\\vdots \\\\\n\\epsilon_n\\end{bmatrix}\n\\end{align}\\]\n\n\n\\({\\bf X}_{n \\times p}\\): Design matrix\n\n\\(\\boldsymbol{\\epsilon} \\sim MVN_n({\\bf 0}, \\sigma^2 {\\bf I}_n)\\)1\n\n\n\nFor simplicity and convenience, \\(N({\\bf a}, {\\bf B})\\) represents a multivariate normal distribution with mean vector \\({\\bf a}\\) and covariance matrix \\({\\bf B}\\)."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#least-squares-estimation-in-matrix-form",
+    "href": "slides/04-lin-reg.html#least-squares-estimation-in-matrix-form",
+    "title": "Linear Regression 📈",
+    "section": "Least Squares Estimation in Matrix Form",
+    "text": "Least Squares Estimation in Matrix Form\n\\[\\begin{align}\nS(\\boldsymbol{\\beta}) = \\sum_{i=1}^n\\epsilon_i^2 = \\boldsymbol{\\epsilon}'\\boldsymbol{\\epsilon} &= (\\bf y - \\bf X \\boldsymbol{\\beta})'(\\bf y - \\bf X \\boldsymbol{\\beta}) \\\\\n&= \\bf y'\\bf y - \\boldsymbol{\\beta}'\\bf X'\\bf y - \\bf y'\\bf X \\boldsymbol{\\beta} + \\boldsymbol{\\beta}' \\bf X' \\bf X \\boldsymbol{\\beta} \\\\\n&={\\bf y}'{\\bf y} - 2\\boldsymbol{\\beta}'{\\bf X}'{\\bf y} + \\boldsymbol{\\beta}' {\\bf X}' {\\bf X} \\boldsymbol{\\beta}\n\\end{align}\\]\n\nLet \\({\\bf t}\\) and \\({\\bf a}\\) be \\(n \\times 1\\) column vectors, and \\({\\bf A}_{n \\times n}\\) is a symmetric matrix.\n\n\\(\\frac{\\partial {\\bf t}'{\\bf a} }{\\partial {\\bf t}} = \\frac{\\partial {\\bf a}'{\\bf t} }{\\partial {\\bf t}} = {\\bf a}\\)\n\\(\\frac{\\partial {\\bf t}'{\\bf A} {\\bf t}}{\\partial {\\bf t}} = 2{\\bf A} {\\bf t}\\)\n\n\n\nNormal equations: \\(\\begin{align} \\left.\\frac{\\partial S}{\\partial \\boldsymbol{\\beta}}\\right \\vert_{\\bf b} = -2 {\\bf X}' {\\bf y} + 2 {\\bf X}' {\\bf X} {\\bf b} = \\boldsymbol{0} \\end{align}\\)\n\n\n\n\nLSE for \\(\\boldsymbol{\\beta}\\):  \\(\\begin{align} \\boxed{{\\bf b} = \\arg \\min _{\\boldsymbol{\\beta}} (\\bf y - \\bf X \\boldsymbol{\\beta})'(\\bf y - \\bf X \\boldsymbol{\\beta}) = ({\\bf X}' {\\bf X}) ^{-1} {\\bf X}' \\bf y} \\end{align}\\)  provided that \\({\\bf X}' {\\bf X}\\) is full rank."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#normal-equations",
+    "href": "slides/04-lin-reg.html#normal-equations",
+    "title": "Linear Regression 📈",
+    "section": "Normal Equations",
+    "text": "Normal Equations\n\\((\\bf X' \\bf X) \\bf b = \\bf X' \\bf y\\)"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#hat-matrix",
+    "href": "slides/04-lin-reg.html#hat-matrix",
+    "title": "Linear Regression 📈",
+    "section": "Hat Matrix",
+    "text": "Hat Matrix\n\\[\\hat{\\bf y} = {\\bf X} {\\bf b} = {\\bf X} ({\\bf X}' {\\bf X}) ^{-1} \\bf X' \\bf y = \\bf H \\bf y\\]\n\nThe hat matrix \\({\\bf H}_{n \\times n} = {\\bf X} ({\\bf X}' {\\bf X}) ^{-1} \\bf X'\\)\nThe vector of residuals \\(e_i = y_i - \\hat{y}_i\\) is \\[\\bf e = \\bf y - \\hat{\\bf y} = \\bf y - \\bf X \\bf b = \\bf y -\\bf H \\bf y = (\\bf I - \\bf H) \\bf y\\]\n\n\n\n\nBoth \\(\\bf H\\) and \\(\\bf I-H\\) are symmetric and idempotent. They are projection matrices.\n\\(\\bf H\\) projects \\(\\bf y\\) to \\(\\hat{\\bf y}\\) on the \\((k+1)\\)-dimensional space spanned by columns of \\(\\bf X\\), or the column space of \\(\\bf X\\), \\(Col(\\bf X)\\).\n\\(\\bf I - H\\) projects \\(\\bf y\\) to \\(\\bf e\\) on the space perpendicular to \\(Col(\\bf X)\\), or \\(Col(\\bf X)^{\\bot}\\)."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#geometrical-interpretation-of-least-squares",
+    "href": "slides/04-lin-reg.html#geometrical-interpretation-of-least-squares",
+    "title": "Linear Regression 📈",
+    "section": "Geometrical Interpretation of Least Squares",
+    "text": "Geometrical Interpretation of Least Squares\n\n\n\n\\(Col({\\bf X}) = \\{ {\\bf Xb}: {\\bf b} \\in {\\bf R}^{k+1} \\}\\), \\({\\bf y} \\notin Col({\\bf X})\\)\n\\(\\hat{{\\bf y}} = {\\bf Xb} = {\\bf H} {\\bf y} \\in Col({\\bf X})\\)\n\\(\\small {\\bf e} = ({\\bf y - \\hat{\\bf y}}) = ({\\bf y - X b}) = ({\\bf I} - {\\bf H}) {\\bf y} \\perp Col({\\bf X})\\)\n\\({\\bf X}'{\\bf e} = 0\\)\n\n\nSearching for \\(\\bf b\\) that minimizes \\(SS_{res}\\) is equivalent to locating the point \\({\\bf Xb} \\in Col({\\bf X})\\) \\((C)\\) that is as close to \\(\\bf y\\) \\((A)\\) as possible!\n\n\n\n\n\n\nhttps://commons.wikimedia.org/wiki/File:OLS_geometric_interpretation.svg\n\n\n\n\n\nMinimize the distance of \\(\\color{red}{A}\\) to \\(Col(\\bf X)\\): Find the point in \\(Col(\\bf X)\\) that is closest to \\(A\\). The distance is minimized when the point in the space is the foot of the line from \\(A\\) normal to the space. This is point \\(C\\)."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#multivariate-gaussiannormal-distribution",
+    "href": "slides/04-lin-reg.html#multivariate-gaussiannormal-distribution",
+    "title": "Linear Regression 📈",
+    "section": "Multivariate Gaussian/Normal Distribution",
+    "text": "Multivariate Gaussian/Normal Distribution\n\n\n\\({\\bf y} \\sim N_n(\\boldsymbol \\mu, {\\bf \\Sigma})\\)\n\n\n\\(\\boldsymbol \\mu\\): \\(n \\times 1\\) mean vector\n\n\\({\\bf \\Sigma}\\): \\(n \\times n\\) covariance matrix\n\n\n\n\\(\\boldsymbol \\mu= (2, 1)'\\); \\({\\bf \\Sigma} = \\begin{pmatrix} 2 & -1 \\\\ -1 & 2\\end{pmatrix}\\)"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#sampling-distribution-of-bf-b",
+    "href": "slides/04-lin-reg.html#sampling-distribution-of-bf-b",
+    "title": "Linear Regression 📈",
+    "section": "Sampling Distribution of \\({\\bf b}\\)\n",
+    "text": "Sampling Distribution of \\({\\bf b}\\)\n\n\n\\({\\bf y} \\sim N(\\boldsymbol \\mu, {\\bf \\Sigma})\\), and \\({\\bf Z = By + c}\\) with a constant matrix \\({\\bf B}\\) and vector \\(\\bf c\\), then \\[{\\bf Z} \\sim N({\\bf B\\boldsymbol \\mu}, {\\bf B \\Sigma B}')\\]\n\n\\({\\bf b} = ({\\bf X}' {\\bf X}) ^{-1} \\bf X' \\bf y\\)\n\\[\\textbf{b} \\sim N\\left(\\boldsymbol \\beta, \\sigma^2 {\\bf (X'X)}^{-1} \\right)\\] \\[E(\\textbf{b}) = E\\left[ {\\bf (X'X)}^{-1} {\\bf X}' {\\bf y}\\right] = \\boldsymbol \\beta\\] \\[\\mathrm{Var}(\\textbf{b}) = \\mathrm{Var}\\left[{\\bf (X'X)}^{-1} {\\bf X}' {\\bf y} \\right] = \\sigma^2 {\\bf (X'X)}^{-1}\\]\n\nThe unknown \\(\\sigma^2\\) is estimated by \\(\\hat{\\sigma}^2 = MS_{res} = \\frac{SS_{res}}{n - k - 1}\\).\n\\(\\textbf{b}\\) is Best Linear Unbiased Estimator (BLUE) (Gauss-Markov Theorem).\n\nThe standard error of \\(b_j\\) is \\({\\sqrt{s^2C_{jj}}}\\), where \\(C_{jj}\\) is the diagonal element of \\(({\\bf X'X})^{-1}\\) corresponding to \\(b_j\\)."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#what-this-review-is-not-covered",
+    "href": "slides/04-lin-reg.html#what-this-review-is-not-covered",
+    "title": "Linear Regression 📈",
+    "section": "What This Review is Not Covered",
+    "text": "What This Review is Not Covered\n\nDetailed statistical inference\nRegression Diagnostics (Usual Data: Outliers, leverage points, influential points; Non-normality; Non-constant variance; Non-linearity)\nCategorical variables\nModel/Variable Selection\nCode for doing regression (lm() in R and linear_model.LinearRegression() in sklearn of Python)\nMaximum likelihood estimation\n\n\nWhere to learn these stuff?\n\nDr. Yu’s MSSC 5780 slides https://math4780-f23.github.io/website/\nISL Ch 3, 6.1."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#generalizations-of-the-linear-model",
+    "href": "slides/04-lin-reg.html#generalizations-of-the-linear-model",
+    "title": "Linear Regression 📈",
+    "section": "Generalizations of the Linear Model",
+    "text": "Generalizations of the Linear Model\n\nClassification: logistic regression, support vector machines\nNon-linearity: kernel smoothing, splines and generalized additive models, nearest neighbor methods.\nInteractions: Tree-based methods, bagging, random forests and boosting\nShrinkage and Regularization: Ridge regression and LASSO"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#basic-concepts",
+    "href": "slides/04-lin-reg.html#basic-concepts",
+    "title": "Linear Regression 📈",
+    "section": "Basic Concepts",
+    "text": "Basic Concepts\n\nAlthough we have the closed form for \\({\\bf b} = ({\\bf X}' {\\bf X}) ^ {-1} {\\bf X}' {\\bf y}\\), we can solve for \\(\\bf b\\) numerically.\n\n\\[\\begin{align}\n\\underset{\\boldsymbol \\beta}{\\text{min}} \\quad \\ell(\\boldsymbol \\beta) = \\frac{1}{n} \\sum_i (y_i - \\beta_0 - x_i\\beta_1)^2 \\\\\n\\end{align}\\]\n\n\n\\(\\ell(\\boldsymbol \\beta)\\), the \\(\\text{MSE}_{\\texttt{Tr}}\\), is called the (squared) loss function.\n\n\n# generate data from a simple linear regression beta0 = 0.5, beta1 = 1\nset.seed(2025)\nn &lt;- 1000\nx &lt;- rnorm(n)\ny &lt;- 0.5 + x + rnorm(n)\n\n\nStart with an initial value of \\(\\boldsymbol \\beta\\), say \\(\\widehat{\\boldsymbol \\beta} = (0.3, 1.5)\\), we compute the \\(\\text{MSE}_{\\texttt{Tr}}\\)\n\n\n\\[\\begin{align}\n\\frac{1}{n}\\sum_i \\left( y_i - 0.3 - 1.5 x_i \\right)^2 \\\\\n\\end{align}\\]\nLet’s first generate a set of data. We have two parameters, an intercept \\(\\beta_= 0.5\\) and a slope \\(\\beta_1 = 1\\)."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#basic-concepts-1",
+    "href": "slides/04-lin-reg.html#basic-concepts-1",
+    "title": "Linear Regression 📈",
+    "section": "Basic Concepts",
+    "text": "Basic Concepts\n\n# calculate the residual sum of squares for a grid of beta values\nmse &lt;- function(b, trainx, trainy) mean((trainy - b[1] - trainx * b[2]) ^ 2)\nmse(b = c(0.3, 1.5), trainx = x, trainy = y)\n\n[1] 1.354548\n\n\n\nThe initial point \\((0.3, 1.5)\\) is not at the bottom of the surface.\n\n\n\n\n\n\n\nDoing this on all such β values would allow us to create a surface of the RSS, as a function of the parameters. - Our goal is to minimize the \\(RR_{res}\\), knowing the corresponding \\(\\boldsymbol \\beta\\) values. Numerical optimization is a research field that investigates such problems and their properties."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#optim",
+    "href": "slides/04-lin-reg.html#optim",
+    "title": "Linear Regression 📈",
+    "section": "\noptim()1\n",
+    "text": "optim()1\n\n\n(lm_optim &lt;- optim(par = c(0.3, 1.5), fn = mse, trainx = x, trainy = y))\n\n$par\n[1] 0.4571491 0.9723691\n\n$value\n[1] 1.055419\n\n$counts\nfunction gradient \n      53       NA \n\n$convergence\n[1] 0\n\n$message\nNULL\n\n\n\n\nlm(y ~ x)$coef\n\n(Intercept)           x \n  0.4572794   0.9723262 \n\n\n\nThe par argument specifies an initial value. In this case, it is \\(\\beta_0 = \\beta_1 = 2\\).\nThe fn argument specifies the name of a function (mse in this case) that can calculate the objective function. This function may have multiple arguments. However, the first argument has to be the parameter(s) that is being optimized. In addition, the parameters need to be supplied to the function as a vector, but not matrix, list or other formats.\nThe arguments trainx = x, trainy = y specifies any additional arguments that the objective function fn (mse) needs. It behaves the same as if you are supplying this to the function mse it self.\n\n\nscipy.optimize for Python."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#basic-principles",
+    "href": "slides/04-lin-reg.html#basic-principles",
+    "title": "Linear Regression 📈",
+    "section": "Basic Principles",
+    "text": "Basic Principles\nFor a general function \\(f(\\mathbf{x})\\) to be minimized with respect to (w.r.t.) \\(\\mathbf{x}\\in \\mathbf{R}^{p}\\), we have\n\n\nFirst-Order Necessary Condition:\n\n\nIf \\(f\\) is continuously differentiable in an open neighborhood of local minimum \\(\\mathbf{x}^\\ast\\), then \\(\\nabla f(\\mathbf{x}^\\ast) = \\mathbf{0}\\)."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#taylor-expansion",
+    "href": "slides/04-lin-reg.html#taylor-expansion",
+    "title": "Linear Regression 📈",
+    "section": "Taylor Expansion",
+    "text": "Taylor Expansion\n\\[f(\\mathbf{x}^\\text{new}) \\approx f(\\mathbf{x}) + \\nabla f(\\mathbf{x})' (\\mathbf{x}^\\text{new} - \\mathbf{x})\\]\n\nWhether \\(\\nabla f(\\mathbf{x})\\) is positive or negative, we can always find a new point \\(\\mathbf{x}^\\text{new}\\) that makes \\(\\nabla f(\\mathbf{x})' (\\mathbf{x}^\\text{new} - \\mathbf{x})\\) less than 0, so that \\(f(\\mathbf{x}^\\text{new}) &lt; f(\\mathbf{x})\\).\n\n\n\n\n\\(\\nabla f(\\mathbf{x}^\\ast) = \\mathbf{0}\\) is only a necessary condition, not a sufficient condition.\n\\(x = 1\\) is a local minimizer, not a global one.\n\nOn the left hand side, we have a convex function, which looks like a bowl. The intuition is that, if \\(f(\\mathbf{x})\\) is a function that is smooth enough, and \\(\\mathbf{x}\\) is a point with \\(\\nabla f(\\mathbf{x}^\\ast) \\neq 0\\), then by the Taylor expansion, we have, for any new point \\(\\mathbf{x}^{new}\\) in the neighborhood of \\(\\mathbf{x}\\), we can approximate its function value - Since we only checked if the slope if “flat” but didn’t care if its facing upward or downward, our condition cannot tell the difference."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#second-order-property",
+    "href": "slides/04-lin-reg.html#second-order-property",
+    "title": "Linear Regression 📈",
+    "section": "Second-order Property",
+    "text": "Second-order Property\nSecond-order Sufficient Condition:\n\n\\(f\\) is twice continuously differentiable in an open neighborhood of \\(\\mathbf{x}^\\ast\\). If \\(\\nabla f(\\mathbf{x}^\\ast) = \\mathbf{0}\\) and \\(\\nabla^2 f(\\mathbf{x}^\\ast)\\) , the Hessian matrix, is positive definite, i.e., \\[\n\\nabla^2 f(\\mathbf{x}) = \\left(\\frac{\\partial^2 f(\\mathbf{x})}{\\partial x_i \\partial x_j}\\right) = \\mathbf{H}(\\mathbf{x}) \\succeq 0\n\\] then \\(\\mathbf{x}^\\ast\\) is a strict local minimizer of \\(f\\).\n\n\n\n\\[\\begin{align}\n\\text{Left:}& f_1(x) = x ^ 2; \\qquad \\nabla^2 f_1(x) = 2 \\\\\n\\text{Right:}& f_2(x) = x ^ 4 + 2 x ^ 3 - 5 x ^ 2; \\qquad \\nabla^2 f_2(x) = 12x^2 + 12 x - 10\\\\\n\\end{align}\\]\n\nFor \\(f_1\\), \\(\\mathbf{H}(\\mathbf{x}) \\succeq 0\\), and the solution is a minimizer.\nFor \\(f_2\\), \\(\\nabla^2 f_2(-2.5) = 35\\), \\(\\nabla^2 f_2(0) = -10\\) and \\(\\nabla^2 f_2(1) = 14\\). So \\(x = -2.5\\) and \\(1\\) are local minimizers and \\(0\\) is a local maximizer.\n\n\n\n\\(\\mathbf{H}(\\mathbf{x})\\) is called the Hessian matrix, which will be frequently used in second-order methods. We can easily check this property for our examples: These conditions are sufficient, but again, they only discuss local properties, not global properties."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#optimization-algorithm",
+    "href": "slides/04-lin-reg.html#optimization-algorithm",
+    "title": "Linear Regression 📈",
+    "section": "Optimization Algorithm",
+    "text": "Optimization Algorithm\n\n\n1. Start with \\(\\mathbf{x}^{(0)}\\)\n\nFor \\(i = 1, 2, \\dots\\) until convergence, find \\(\\mathbf{x}^{(i)}\\) s.t. \\(f(\\mathbf{x}^{(i)}) &lt; f(\\mathbf{x}^{(i-1)})\\)\n\n\n\n\n\nStopping criterion:\n\nGradient of the objective function: \\(\\lVert \\nabla f(\\mathbf{x}^{(i)}) \\rVert &lt; \\epsilon\\)\n\n(Relative) change of distance: \\(\\frac{\\lVert \\mathbf{x}^{(i)} - \\mathbf{x}^{(i-1)} \\rVert} {\\lVert \\mathbf{x}^{(i-1)}\\rVert}&lt; \\epsilon\\) or \\(\\lVert \\mathbf{x}^{(i)} - \\mathbf{x}^{(i-1)} \\rVert &lt; \\epsilon\\)\n\n(Relative) change of functional value: \\(\\frac{| f(\\mathbf{x}^{(i)}) - f(\\mathbf{x}^{(i-1)})|}{|f(\\mathbf{x}^{(i)})|} &lt; \\epsilon\\) or \\(| f(\\mathbf{x}^{(i)}) - f(\\mathbf{x}^{(i-1)})| &lt; \\epsilon\\)\n\nStop at a pre-specified number of iterations\n\n\n\n\n\noptim(par, fn, gr = NULL, ..., \n      method = c(\"Nelder-Mead\", \"BFGS\", \"CG\", \"L-BFGS-B\", \"SANN\", \"Brent\"),\n      lower = -Inf, upper = Inf, control = list(), hessian = FALSE)\nMost optimization algorithms follow the same idea: starting from a point x(0) (which is usually specified by the user) and move to a new point x(1) that improves the objective function value. Repeatedly performing this to get a sequence of points x(0),x(1),x(2),x(3),… until the certain stopping criterion is reached. Most algorithms differ in terms of how to move from the current point x(k) to the next, better target point x(k+1). This may depend on the smoothness or structure of f, constrains on the domain, computational complexity, memory limitation, and many others."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#bfgs-demo",
+    "href": "slides/04-lin-reg.html#bfgs-demo",
+    "title": "Linear Regression 📈",
+    "section": "\nBFGS Demo",
+    "text": "BFGS Demo\n\n\n\nf1 &lt;- function(x) x ^ 2\nf2 &lt;- function(x) {\n    x ^ 4 + 2 * x ^ 3 - 5 * x ^ 2\n}\noptim(par = 3, fn = f1, method = \"BFGS\")\n\n$par\n[1] -8.384004e-16\n\n$value\n[1] 1.75742e-29\n\n$counts\nfunction gradient \n       8        3 \n\n$convergence\n[1] 0\n\n$message\nNULL\n\n\n\n\noptim(par = 10, fn = f2, method = \"BFGS\")\n\n$par\n[1] 0.9999996\n\n$value\n[1] -2\n\n$counts\nfunction gradient \n      37       12 \n\n$convergence\n[1] 0\n\n$message\nNULL\n\n\n\noptim(par = 3, fn = f2, method = \"BFGS\")$par\n\n[1] -2.5"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#second-order-newtons-method",
+    "href": "slides/04-lin-reg.html#second-order-newtons-method",
+    "title": "Linear Regression 📈",
+    "section": "Second-order Newton’s Method\n",
+    "text": "Second-order Newton’s Method\n\n\nSecond order Taylor expansion at a current point \\(\\mathbf{x}\\):\n\n\\[f(\\mathbf{x}^\\ast) \\approx f(\\mathbf{x}) + \\nabla f(\\mathbf{x})' (\\mathbf{x}^\\ast - \\mathbf{x}) + \\frac{1}{2} (\\mathbf{x}^\\ast - \\mathbf{x})' \\mathbf{H}(\\mathbf{x}) (\\mathbf{x}^\\ast - \\mathbf{x})\\]\n\nTake derivative w.r.t \\(\\mathbf{x}^\\ast\\) on both sides: \\[0 = \\nabla f(\\mathbf{x}^\\ast) = 0 + \\nabla f(\\mathbf{x}) + \\mathbf{H}(\\mathbf{x}) (\\mathbf{x}^\\ast - \\mathbf{x})\\] \\[\\boxed{\\mathbf{x}^{(i+1)} = \\mathbf{x}^{(i)} -  \\mathbf{H}(\\mathbf{x}^{(i)})^{-1} \\nabla f(\\mathbf{x}^{(i)})}\\]\nFor numerical stability, introduce a step size \\(\\delta \\in (0, 1)\\): \\[\\mathbf{x}^{(i+1)} = \\mathbf{x}^{(i)} -  {\\color{red}{\\delta}} \\, \\mathbf{H}(\\mathbf{x}^{(i)})^{-1} \\nabla f(\\mathbf{x}^{(i)})\\]\n\nIf \\(\\mathbf{H}\\) is difficult to compute, we may use some matrix to substitute it. For example, if we simplify use the identity matrix \\(\\mathbf{I}\\), then this reduces to a first-order method to be introduced later. However, if we can get a good approximation, we can still solve this linear system and get to a better point. Then the question is how to obtain such matrix in a computationally inexpensive way. The Broyden–Fletcher–Goldfarb–Shanno (BFSG) algorithm is such an approach by iteratively updating its (inverse) estimation. For details, please see the SMLR book. We have already used the BFGS method previously in the optim() example. - when x(k+1) is not too far away from x(k), the quadratic approximation is fairly accurate."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#first-order-gradient-descent",
+    "href": "slides/04-lin-reg.html#first-order-gradient-descent",
+    "title": "Linear Regression 📈",
+    "section": "First-Order Gradient Descent\n",
+    "text": "First-Order Gradient Descent\n\n\n\n\n\n\n\nNote\n\n\n\nWhen \\(\\mathbf{H}\\) or \\(\\mathbf{H}^{-1}\\) is difficult to compute (usually in deep learning)\n\nGet an approximate one in a computationally inexpensive way. The BFGS algorithm is such an approach by iteratively updating its (inverse) estimation.\nUse first-order methods\n\n\n\n\n\n\nWhen using \\(\\mathbf{H}= \\mathbf{I}\\), we update \\[\\mathbf{x}^{(i+1)} = \\mathbf{x}^{(i)} - \\delta \\nabla f(\\mathbf{x}^{(i)}).\\]\n\nIt is crucial to figure out the step size \\(\\delta\\).\n\nA too large \\(\\delta\\) may not converge.\nA too small \\(\\delta\\) takes too many iterations.\n\n\n\nAlternatively, line search could be used."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#demo-ss_res-contour",
+    "href": "slides/04-lin-reg.html#demo-ss_res-contour",
+    "title": "Linear Regression 📈",
+    "section": "\nDemo \\(SS_{res}\\) Contour",
+    "text": "Demo \\(SS_{res}\\) Contour\nThe objective function is \\(\\ell(\\boldsymbol \\beta) = \\frac{1}{2n}||\\mathbf{y} - \\mathbf{X} \\boldsymbol \\beta ||^2\\) with solution \\({\\bf b} = \\left(\\mathbf{X}'\\mathbf{X}\\right)^{-1} \\mathbf{X}'\\mathbf{y}\\).\n\nCodeset.seed(2025)\nn &lt;- 200\n\n# create some data with linear model\nX &lt;- MASS::mvrnorm(n, c(0, 0), matrix(c(1, 0.7, 0.7, 1), 2, 2))\ny &lt;- rnorm(n, mean = 2 * X[, 1] + X[, 2])\n  \nbeta1 &lt;- seq(-1, 4, 0.005)\nbeta2 &lt;- seq(-1, 4, 0.005)\nallbeta &lt;- data.matrix(expand.grid(beta1, beta2))\nrss &lt;- matrix(apply(allbeta, 1, \n                    function(b, X, y) sum((y - X %*% b) ^ 2), X, y),\n              length(beta1), length(beta2))\n  \n# quantile levels for drawing contour\nquanlvl = c(0.01, 0.025, 0.05, 0.2, 0.5, 0.75)\n  \n# plot the contour\ncontour(beta1, beta2, rss, levels = quantile(rss, quanlvl), las = 1)\nbox()\n  \n# the truth\nb &lt;- solve(t(X) %*% X) %*% t(X) %*% y\npoints(b[1], b[2], pch = 19, col = \"blue\", cex = 2)"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#demo-gradient-descent",
+    "href": "slides/04-lin-reg.html#demo-gradient-descent",
+    "title": "Linear Regression 📈",
+    "section": "\nDemo Gradient Descent",
+    "text": "Demo Gradient Descent\n\\[\n\\begin{align}\n\\frac{\\partial \\ell(\\boldsymbol \\beta)}{\\partial \\boldsymbol \\beta} = -\\frac{1}{n} \\sum_{i=1}^n (y_i - x_i' \\boldsymbol \\beta) x_i = \\frac{1}{n} \\sum_{i=1}^n \\frac{\\partial \\ell_i(\\boldsymbol \\beta)}{\\partial \\boldsymbol \\beta}.\n\\end{align}\n\\] where \\(\\ell_i(\\boldsymbol \\beta) = \\frac{1}{2}(y_i - x_i' \\boldsymbol \\beta)^2\\).\nFirst set an initial beta value, say \\(\\boldsymbol \\beta = \\mathbf{0}\\) for all entries, then proceed with the update\n\\[\\begin{align}\n\\boldsymbol \\beta^\\text{new} =& \\boldsymbol \\beta^\\text{old} - \\delta \\frac{\\partial \\ell(\\boldsymbol \\beta)}{\\partial \\boldsymbol \\beta}\\\\\n=&\\boldsymbol \\beta^\\text{old} + \\delta \\frac{1}{n} \\sum_{i=1}^n (y_i - x_i' \\boldsymbol \\beta) x_i.\\\\\n\\end{align}\\]"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#demo-gradient-descent-1",
+    "href": "slides/04-lin-reg.html#demo-gradient-descent-1",
+    "title": "Linear Regression 📈",
+    "section": "\nDemo Gradient Descent",
+    "text": "Demo Gradient Descent\n\nSet \\(\\boldsymbol{\\beta}^{(0)} = \\mathbf{0}\\), \\(\\delta = 0.2\\)"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#demo-effect-of-delta",
+    "href": "slides/04-lin-reg.html#demo-effect-of-delta",
+    "title": "Linear Regression 📈",
+    "section": "\nDemo Effect of \\(\\delta\\)\n",
+    "text": "Demo Effect of \\(\\delta\\)\n\n\nThe descent path is very smooth because we choose a very small step size. However, if the step size is too large, we may observe unstable results or even unable to converge. For example, if We set \\(\\delta = 1\\) or \\(\\delta = 1.5\\)."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#mini-batch-stochastic-gradient-descent-sgd",
+    "href": "slides/04-lin-reg.html#mini-batch-stochastic-gradient-descent-sgd",
+    "title": "Linear Regression 📈",
+    "section": "Mini-batch Stochastic Gradient Descent (SGD)",
+    "text": "Mini-batch Stochastic Gradient Descent (SGD)\nIn deep learning,\n\nCalculating the gradient using entire data can be costly (memory limit).\nConsider update the parameter using a subset of data of size \\(m \\ll n\\), called minibatch: \\(\\mathcal{D}_B = \\{x_j, y_j \\}_{j = 1}^m \\subset \\mathcal{D}\\)\n\n\n\\[\n\\begin{align}\n\\frac{\\partial \\ell_B(\\boldsymbol \\beta)}{\\partial \\boldsymbol \\beta} = -\\frac{1}{m} \\sum_{j=1}^m (y_j - x_j' \\boldsymbol \\beta) x_j = \\frac{1}{m} \\sum_{j=1}^m \\frac{\\partial \\ell_j(\\boldsymbol \\beta)}{\\partial \\boldsymbol \\beta}\n\\end{align}\n\\] where \\(\\ell_j(\\boldsymbol \\beta) = \\frac{1}{2}(y_j - x_j' \\boldsymbol \\beta)^2\\).\n\\[\\begin{align}\n\\boldsymbol \\beta^\\text{new} =& \\boldsymbol \\beta^\\text{old} - \\delta \\frac{\\partial \\ell_B(\\boldsymbol \\beta)}{\\partial \\boldsymbol \\beta}\\\\\n=&\\boldsymbol \\beta^\\text{old} + \\delta \\frac{1}{m} \\sum_{j=1}^m (y_j - x_j' \\boldsymbol \\beta) x_j.\\\\\n\\end{align}\\]"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#sgd",
+    "href": "slides/04-lin-reg.html#sgd",
+    "title": "Linear Regression 📈",
+    "section": "SGD",
+    "text": "SGD\n\n\\(\\nabla_{\\boldsymbol \\beta} \\ell_B(\\boldsymbol \\beta)\\) approximates \\(\\nabla_{\\boldsymbol \\beta} \\ell(\\boldsymbol \\beta)\\) with stochasticity due to random sampling.\nDifferent samples give us a different gradient value, making it stochastic!\nSuppose we have \\(n=1000\\) training points, and batch size is \\(m=100\\), it needs \\(n/m = 10\\) updates (iterations can be parallelized) to pass all data into the algorithm, which completes one epoch.\n\nTo gaurantee convergence, the learning rate \\(\\delta\\) should\n\nbe decreasing (with epochs or iterations)\nhave \\(\\sum_{k=1}^{\\infty}\\delta_k = \\infty\\) and \\(\\sum_{k=1}^{\\infty}\\delta_k^2 &lt; \\infty\\)\n\n\n\n\nIterations: Decay happens more frequently (every batch). This is more precise and often used for large datasets. Epochs: Decay happens less frequently (after all batches of one epoch). This is simpler and often used for smaller datasets or in step-based schedules."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#demo-sgd",
+    "href": "slides/04-lin-reg.html#demo-sgd",
+    "title": "Linear Regression 📈",
+    "section": "\nDemo SGD",
+    "text": "Demo SGD"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "MSSC 6250 - Statistical Machine Learning (Spring 2025)",
     "section": "",
-    "text": "Any announcement will be posted in this page. The latest news will also be put on top of the main page.",
+    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nTo Do\nSlides\nHomework\nProject\n\n\n\n\n1\nTue, Jan 14\nSyllabus/Overview of Statistical Learning\n📖\n🖥️🖥️\n\n\n\n\n\nThu, Jan 16\nBias-variance tradeoff\n\n🖥️\n\n\n\n\n2\nTue, Jan 21\nLinear Regression\n📖\n🖥️\n✍️\n\n\n\n\nThu, Jan 25\nNumerical Optimization for Regression\n\n\n\n\n\n\n3\nTue, Jan 28\nRidge Regression\n📖\n🖥️\n\n\n\n\n\nThu, Feb 1\nCross-Validation\n\n\n\n\n\n\n4\nTue, Feb 4\nLASSO and Feature Selection\n📖\n🖥️\n\n\n\n\n\nThu, Feb 8\nSplines\n\n\n✍️\n\n\n\n5\nTue, Feb 11\nGeneralized Additive Models\n📖\n🖥️\n\n\n\n\n\nThu, Feb 15\nBayesian Inference\n\n\n\n\n\n\n6\nTue, Feb 18\nBayesian Linear Regression\n📖\n🖥️\n\n\n\n\n\nThu, Feb 22\nBinary Logistic Regression\n\n\n\n\n\n\n7\nTue, Feb 25\nMultinomial Logistic Regression\n📖\n🖥️\n\n\n\n\n\nThu, Feb 29\nDiscriminant Analysis\n\n\n\n\n\n\n8\nTue, Mar 4\nNaive Bayes\n📖\n\n\n\n\n\n\nThu, Mar 7\nMidterm Presentation I\n\n\n✍️\n✅\n\n\n9\nTue, Mar 11\nNO CLASS: Spring break\n\n\n\n\n\n\n\nThu, Mar 14\nNO CLASS: Spring break\n\n\n\n\n\n\n10\nTue, Mar 18\nK-Nearest Neighbors Regression\n📖\n🖥️\n\n\n\n\n\nThu, Mar 21\nK-Nearest Neighbors Classification\n\n\n\n\n\n\n11\nTue, Mar 25\nGaussian Process Regression\n📖\n🖥️\n\n\n\n\n\nThu, Mar 28\nGaussian Process Classification\n\n\n\n\n\n\n12\nTue, Apr 1\nSupport Vector Machine\n📖\n\n\n\n\n\n\nThu, Apr 4\nSupport Vector Machine\n\n\n\n\n\n\n13\nTue, Apr 8\nCART and Bagging\n📖\n🖥️\n\n\n\n\n\nThu, Apr 11\nRandom Forests and Boosting\n\n\n✍️\n\n\n\n14\nTue, Apr 15\nMidterm Presentation II\n📖\n🖥️\n\n✅\n\n\n\nThu, Apr 17\nNO CLASS: Easter break\n\n\n\n\n\n\n15\nTue, Apr 22\nPrincipal Component Analysis\n📖\n🖥️\n\n\n\n\n\nThu, Apr 25\nK-Means Clustering\n\n\n\n\n\n\n16\nTue, Apr 29\nModel-based Clustering\n📖\n🖥️\n\n\n\n\n\nThu, May 1\nNeural Networks\n\n\n\n\n\n\n17\nThu, May 8\nFinal Project Submission\n\n\n\n✅\n\n\n\n\nI reserve the right to make changes to the schedule.",
     "crumbs": [
       "Course Information",
-      "News/Annoucements"
+      "Schedule"
     ]
   },
   {
-    "objectID": "course-overview.html",
-    "href": "course-overview.html",
-    "title": "MSSC 6250 - Statistical Machine Learning (Spring 2025)",
-    "section": "",
-    "text": "The course discuss machine learning from statistical and modeling points of view, covering supervised learning and unsupervised learning models and algorithms. Supervised learning methods include various regression and classification methods, and unsupervised learning methods involves dimension reduction and clustering techniques. Topics include Bayesian linear regression, shrinkage and regularization, regression splines, Gaussian processes, logistic regression, discriminant analysis, nearest neighbors, tree-based methods, principal components, K-means, Gaussian mixture clustering, neural networks, etc.",
-    "crumbs": [
-      "Course Information",
-      "Overview"
-    ]
+    "objectID": "LICENSE.html#creative-commons-attribution-sharealike-4.0-international-public-license",
+    "href": "LICENSE.html#creative-commons-attribution-sharealike-4.0-international-public-license",
+    "title": "Attribution-ShareAlike 4.0 International",
+    "section": "Creative Commons Attribution-ShareAlike 4.0 International Public License",
+    "text": "Creative Commons Attribution-ShareAlike 4.0 International Public License\nBy exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution-ShareAlike 4.0 International Public License (“Public License”). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.\n\nSection 1 – Definitions.\n\nAdapted Material means material subject to Copyright and Similar Rights that is derived from or based upon the Licensed Material and in which the Licensed Material is translated, altered, arranged, transformed, or otherwise modified in a manner requiring permission under the Copyright and Similar Rights held by the Licensor. For purposes of this Public License, where the Licensed Material is a musical work, performance, or sound recording, Adapted Material is always produced where the Licensed Material is synched in timed relation with a moving image.\nAdapter’s License means the license You apply to Your Copyright and Similar Rights in Your contributions to Adapted Material in accordance with the terms and conditions of this Public License.\nBY-SA Compatible License means a license listed at creativecommons.org/compatiblelicenses, approved by Creative Commons as essentially the equivalent of this Public License.\nCopyright and Similar Rights means copyright and/or similar rights closely related to copyright including, without limitation, performance, broadcast, sound recording, and Sui Generis Database Rights, without regard to how the rights are labeled or categorized. For purposes of this Public License, the rights specified in Section 2(b)(1)-(2) are not Copyright and Similar Rights.\nEffective Technological Measures means those measures that, in the absence of proper authority, may not be circumvented under laws fulfilling obligations under Article 11 of the WIPO Copyright Treaty adopted on December 20, 1996, and/or similar international agreements.\nExceptions and Limitations means fair use, fair dealing, and/or any other exception or limitation to Copyright and Similar Rights that applies to Your use of the Licensed Material.\nLicense Elements means the license attributes listed in the name of a Creative Commons Public License. The License Elements of this Public License are Attribution and ShareAlike.\nLicensed Material means the artistic or literary work, database, or other material to which the Licensor applied this Public License.\nLicensed Rights means the rights granted to You subject to the terms and conditions of this Public License, which are limited to all Copyright and Similar Rights that apply to Your use of the Licensed Material and that the Licensor has authority to license.\nLicensor means the individual(s) or entity(ies) granting rights under this Public License.\nShare means to provide material to the public by any means or process that requires permission under the Licensed Rights, such as reproduction, public display, public performance, distribution, dissemination, communication, or importation, and to make material available to the public including in ways that members of the public may access the material from a place and at a time individually chosen by them.\nSui Generis Database Rights means rights other than copyright resulting from Directive 96/9/EC of the European Parliament and of the Council of 11 March 1996 on the legal protection of databases, as amended and/or succeeded, as well as other essentially equivalent rights anywhere in the world.\nYou means the individual or entity exercising the Licensed Rights under this Public License. Your has a corresponding meaning.\n\n\n\nSection 2 – Scope.\n\nLicense grant.\n\nSubject to the terms and conditions of this Public License, the Licensor hereby grants You a worldwide, royalty-free, non-sublicensable, non-exclusive, irrevocable license to exercise the Licensed Rights in the Licensed Material to:\nA. reproduce and Share the Licensed Material, in whole or in part; and\nB. produce, reproduce, and Share Adapted Material.\nExceptions and Limitations. For the avoidance of doubt, where Exceptions and Limitations apply to Your use, this Public License does not apply, and You do not need to comply with its terms and conditions.\nTerm. The term of this Public License is specified in Section 6(a).\nMedia and formats; technical modifications allowed. The Licensor authorizes You to exercise the Licensed Rights in all media and formats whether now known or hereafter created, and to make technical modifications necessary to do so. The Licensor waives and/or agrees not to assert any right or authority to forbid You from making technical modifications necessary to exercise the Licensed Rights, including technical modifications necessary to circumvent Effective Technological Measures. For purposes of this Public License, simply making modifications authorized by this Section 2(a)(4) never produces Adapted Material.\nDownstream recipients.\nA. Offer from the Licensor – Licensed Material. Every recipient of the Licensed Material automatically receives an offer from the Licensor to exercise the Licensed Rights under the terms and conditions of this Public License.\nB. Additional offer from the Licensor – Adapted Material. Every recipient of Adapted Material from You automatically receives an offer from the Licensor to exercise the Licensed Rights in the Adapted Material under the conditions of the Adapter’s License You apply.\nC. No downstream restrictions. You may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, the Licensed Material if doing so restricts exercise of the Licensed Rights by any recipient of the Licensed Material.\nNo endorsement. Nothing in this Public License constitutes or may be construed as permission to assert or imply that You are, or that Your use of the Licensed Material is, connected with, or sponsored, endorsed, or granted official status by, the Licensor or others designated to receive attribution as provided in Section 3(a)(1)(A)(i).\n\nOther rights.\n\nMoral rights, such as the right of integrity, are not licensed under this Public License, nor are publicity, privacy, and/or other similar personality rights; however, to the extent possible, the Licensor waives and/or agrees not to assert any such rights held by the Licensor to the limited extent necessary to allow You to exercise the Licensed Rights, but not otherwise.\nPatent and trademark rights are not licensed under this Public License.\nTo the extent possible, the Licensor waives any right to collect royalties from You for the exercise of the Licensed Rights, whether directly or through a collecting society under any voluntary or waivable statutory or compulsory licensing scheme. In all other cases the Licensor expressly reserves any right to collect such royalties.\n\n\n\n\nSection 3 – License Conditions.\nYour exercise of the Licensed Rights is expressly made subject to the following conditions.\n\nAttribution.\n\nIf You Share the Licensed Material (including in modified form), You must:\nA. retain the following if it is supplied by the Licensor with the Licensed Material:\n\nidentification of the creator(s) of the Licensed Material and any others designated to receive attribution, in any reasonable manner requested by the Licensor (including by pseudonym if designated);\na copyright notice;\na notice that refers to this Public License;\na notice that refers to the disclaimer of warranties;\na URI or hyperlink to the Licensed Material to the extent reasonably practicable;\n\nB. indicate if You modified the Licensed Material and retain an indication of any previous modifications; and\nC. indicate the Licensed Material is licensed under this Public License, and include the text of, or the URI or hyperlink to, this Public License.\nYou may satisfy the conditions in Section 3(a)(1) in any reasonable manner based on the medium, means, and context in which You Share the Licensed Material. For example, it may be reasonable to satisfy the conditions by providing a URI or hyperlink to a resource that includes the required information.\nIf requested by the Licensor, You must remove any of the information required by Section 3(a)(1)(A) to the extent reasonably practicable.\n\nShareAlike.\n\nIn addition to the conditions in Section 3(a), if You Share Adapted Material You produce, the following conditions also apply.\n\nThe Adapter’s License You apply must be a Creative Commons license with the same License Elements, this version or later, or a BY-SA Compatible License.\nYou must include the text of, or the URI or hyperlink to, the Adapter’s License You apply. You may satisfy this condition in any reasonable manner based on the medium, means, and context in which You Share Adapted Material.\nYou may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, Adapted Material that restrict exercise of the rights granted under the Adapter’s License You apply.\n\n\n\nSection 4 – Sui Generis Database Rights.\nWhere the Licensed Rights include Sui Generis Database Rights that apply to Your use of the Licensed Material:\n\nfor the avoidance of doubt, Section 2(a)(1) grants You the right to extract, reuse, reproduce, and Share all or a substantial portion of the contents of the database;\nif You include all or a substantial portion of the database contents in a database in which You have Sui Generis Database Rights, then the database in which You have Sui Generis Database Rights (but not its individual contents) is Adapted Material, including for purposes of Section 3(b); and\nYou must comply with the conditions in Section 3(a) if You Share all or a substantial portion of the contents of the database.\n\nFor the avoidance of doubt, this Section 4 supplements and does not replace Your obligations under this Public License where the Licensed Rights include other Copyright and Similar Rights.\n\n\nSection 5 – Disclaimer of Warranties and Limitation of Liability.\n\nUnless otherwise separately undertaken by the Licensor, to the extent possible, the Licensor offers the Licensed Material as-is and as-available, and makes no representations or warranties of any kind concerning the Licensed Material, whether express, implied, statutory, or other. This includes, without limitation, warranties of title, merchantability, fitness for a particular purpose, non-infringement, absence of latent or other defects, accuracy, or the presence or absence of errors, whether or not known or discoverable. Where disclaimers of warranties are not allowed in full or in part, this disclaimer may not apply to You.\nTo the extent possible, in no event will the Licensor be liable to You on any legal theory (including, without limitation, negligence) or otherwise for any direct, special, indirect, incidental, consequential, punitive, exemplary, or other losses, costs, expenses, or damages arising out of this Public License or use of the Licensed Material, even if the Licensor has been advised of the possibility of such losses, costs, expenses, or damages. Where a limitation of liability is not allowed in full or in part, this limitation may not apply to You.\nThe disclaimer of warranties and limitation of liability provided above shall be interpreted in a manner that, to the extent possible, most closely approximates an absolute disclaimer and waiver of all liability.\n\n\n\nSection 6 – Term and Termination.\n\nThis Public License applies for the term of the Copyright and Similar Rights licensed here. However, if You fail to comply with this Public License, then Your rights under this Public License terminate automatically.\nWhere Your right to use the Licensed Material has terminated under Section 6(a), it reinstates:\n\nautomatically as of the date the violation is cured, provided it is cured within 30 days of Your discovery of the violation; or\nupon express reinstatement by the Licensor.\n\nFor the avoidance of doubt, this Section 6(b) does not affect any right the Licensor may have to seek remedies for Your violations of this Public License.\nFor the avoidance of doubt, the Licensor may also offer the Licensed Material under separate terms or conditions or stop distributing the Licensed Material at any time; however, doing so will not terminate this Public License.\nSections 1, 5, 6, 7, and 8 survive termination of this Public License.\n\n\n\nSection 7 – Other Terms and Conditions.\n\nThe Licensor shall not be bound by any additional or different terms or conditions communicated by You unless expressly agreed.\nAny arrangements, understandings, or agreements regarding the Licensed Material not stated herein are separate from and independent of the terms and conditions of this Public License.\n\n\n\nSection 8 – Interpretation.\n\nFor the avoidance of doubt, this Public License does not, and shall not be interpreted to, reduce, limit, restrict, or impose conditions on any use of the Licensed Material that could lawfully be made without permission under this Public License.\nTo the extent possible, if any provision of this Public License is deemed unenforceable, it shall be automatically reformed to the minimum extent necessary to make it enforceable. If the provision cannot be reformed, it shall be severed from this Public License without affecting the enforceability of the remaining terms and conditions.\nNo term or condition of this Public License will be waived and no failure to comply consented to unless expressly agreed to by the Licensor.\nNothing in this Public License constitutes or may be interpreted as a limitation upon, or waiver of, any privileges and immunities that apply to the Licensor or You, including from the legal processes of any jurisdiction or authority.\n\n\nCreative Commons is not a party to its public licenses. Notwithstanding, Creative Commons may elect to apply one of its public licenses to material it publishes and in those instances will be considered the “Licensor.” The text of the Creative Commons public licenses is dedicated to the public domain under the CC0 Public Domain Dedication. Except for the limited purpose of indicating that material is shared under a Creative Commons public license or as otherwise permitted by the Creative Commons policies published at creativecommons.org/policies, Creative Commons does not authorize the use of the trademark “Creative Commons” or any other trademark or logo of Creative Commons without its prior written consent including, without limitation, in connection with any unauthorized modifications to any of its public licenses or any other arrangements, understandings, or agreements concerning use of licensed material. For the avoidance of doubt, this paragraph does not form part of the public licenses.\nCreative Commons may be contacted at creativecommons.org."
   },
   {
     "objectID": "weeks/week-1.html",
@@ -500,7 +811,7 @@
     "href": "weeks/week-1.html#reading-and-resources",
     "title": "Week 1",
     "section": "Reading and Resources",
-    "text": "Reading and Resources\n📖 ISL Ch 1 and 2\n📖 Dr. Yu MSSC 5780 Probability and Statistics Review\n📖 Dr. Yu MSSC 5780 Linear Algebra Review",
+    "text": "Reading and Resources\n📖 ISL Ch 1, 2\n📖 Dr. Yu MSSC 5780 Probability and Statistics Review\n📖 Dr. Yu MSSC 5780 Linear Algebra Review",
     "crumbs": [
       "Weekly Materials",
       "Week 1"
@@ -518,21 +829,25 @@
     ]
   },
   {
-    "objectID": "LICENSE.html#creative-commons-attribution-sharealike-4.0-international-public-license",
-    "href": "LICENSE.html#creative-commons-attribution-sharealike-4.0-international-public-license",
-    "title": "Attribution-ShareAlike 4.0 International",
-    "section": "Creative Commons Attribution-ShareAlike 4.0 International Public License",
-    "text": "Creative Commons Attribution-ShareAlike 4.0 International Public License\nBy exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution-ShareAlike 4.0 International Public License (“Public License”). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.\n\nSection 1 – Definitions.\n\nAdapted Material means material subject to Copyright and Similar Rights that is derived from or based upon the Licensed Material and in which the Licensed Material is translated, altered, arranged, transformed, or otherwise modified in a manner requiring permission under the Copyright and Similar Rights held by the Licensor. For purposes of this Public License, where the Licensed Material is a musical work, performance, or sound recording, Adapted Material is always produced where the Licensed Material is synched in timed relation with a moving image.\nAdapter’s License means the license You apply to Your Copyright and Similar Rights in Your contributions to Adapted Material in accordance with the terms and conditions of this Public License.\nBY-SA Compatible License means a license listed at creativecommons.org/compatiblelicenses, approved by Creative Commons as essentially the equivalent of this Public License.\nCopyright and Similar Rights means copyright and/or similar rights closely related to copyright including, without limitation, performance, broadcast, sound recording, and Sui Generis Database Rights, without regard to how the rights are labeled or categorized. For purposes of this Public License, the rights specified in Section 2(b)(1)-(2) are not Copyright and Similar Rights.\nEffective Technological Measures means those measures that, in the absence of proper authority, may not be circumvented under laws fulfilling obligations under Article 11 of the WIPO Copyright Treaty adopted on December 20, 1996, and/or similar international agreements.\nExceptions and Limitations means fair use, fair dealing, and/or any other exception or limitation to Copyright and Similar Rights that applies to Your use of the Licensed Material.\nLicense Elements means the license attributes listed in the name of a Creative Commons Public License. The License Elements of this Public License are Attribution and ShareAlike.\nLicensed Material means the artistic or literary work, database, or other material to which the Licensor applied this Public License.\nLicensed Rights means the rights granted to You subject to the terms and conditions of this Public License, which are limited to all Copyright and Similar Rights that apply to Your use of the Licensed Material and that the Licensor has authority to license.\nLicensor means the individual(s) or entity(ies) granting rights under this Public License.\nShare means to provide material to the public by any means or process that requires permission under the Licensed Rights, such as reproduction, public display, public performance, distribution, dissemination, communication, or importation, and to make material available to the public including in ways that members of the public may access the material from a place and at a time individually chosen by them.\nSui Generis Database Rights means rights other than copyright resulting from Directive 96/9/EC of the European Parliament and of the Council of 11 March 1996 on the legal protection of databases, as amended and/or succeeded, as well as other essentially equivalent rights anywhere in the world.\nYou means the individual or entity exercising the Licensed Rights under this Public License. Your has a corresponding meaning.\n\n\n\nSection 2 – Scope.\n\nLicense grant.\n\nSubject to the terms and conditions of this Public License, the Licensor hereby grants You a worldwide, royalty-free, non-sublicensable, non-exclusive, irrevocable license to exercise the Licensed Rights in the Licensed Material to:\nA. reproduce and Share the Licensed Material, in whole or in part; and\nB. produce, reproduce, and Share Adapted Material.\nExceptions and Limitations. For the avoidance of doubt, where Exceptions and Limitations apply to Your use, this Public License does not apply, and You do not need to comply with its terms and conditions.\nTerm. The term of this Public License is specified in Section 6(a).\nMedia and formats; technical modifications allowed. The Licensor authorizes You to exercise the Licensed Rights in all media and formats whether now known or hereafter created, and to make technical modifications necessary to do so. The Licensor waives and/or agrees not to assert any right or authority to forbid You from making technical modifications necessary to exercise the Licensed Rights, including technical modifications necessary to circumvent Effective Technological Measures. For purposes of this Public License, simply making modifications authorized by this Section 2(a)(4) never produces Adapted Material.\nDownstream recipients.\nA. Offer from the Licensor – Licensed Material. Every recipient of the Licensed Material automatically receives an offer from the Licensor to exercise the Licensed Rights under the terms and conditions of this Public License.\nB. Additional offer from the Licensor – Adapted Material. Every recipient of Adapted Material from You automatically receives an offer from the Licensor to exercise the Licensed Rights in the Adapted Material under the conditions of the Adapter’s License You apply.\nC. No downstream restrictions. You may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, the Licensed Material if doing so restricts exercise of the Licensed Rights by any recipient of the Licensed Material.\nNo endorsement. Nothing in this Public License constitutes or may be construed as permission to assert or imply that You are, or that Your use of the Licensed Material is, connected with, or sponsored, endorsed, or granted official status by, the Licensor or others designated to receive attribution as provided in Section 3(a)(1)(A)(i).\n\nOther rights.\n\nMoral rights, such as the right of integrity, are not licensed under this Public License, nor are publicity, privacy, and/or other similar personality rights; however, to the extent possible, the Licensor waives and/or agrees not to assert any such rights held by the Licensor to the limited extent necessary to allow You to exercise the Licensed Rights, but not otherwise.\nPatent and trademark rights are not licensed under this Public License.\nTo the extent possible, the Licensor waives any right to collect royalties from You for the exercise of the Licensed Rights, whether directly or through a collecting society under any voluntary or waivable statutory or compulsory licensing scheme. In all other cases the Licensor expressly reserves any right to collect such royalties.\n\n\n\n\nSection 3 – License Conditions.\nYour exercise of the Licensed Rights is expressly made subject to the following conditions.\n\nAttribution.\n\nIf You Share the Licensed Material (including in modified form), You must:\nA. retain the following if it is supplied by the Licensor with the Licensed Material:\n\nidentification of the creator(s) of the Licensed Material and any others designated to receive attribution, in any reasonable manner requested by the Licensor (including by pseudonym if designated);\na copyright notice;\na notice that refers to this Public License;\na notice that refers to the disclaimer of warranties;\na URI or hyperlink to the Licensed Material to the extent reasonably practicable;\n\nB. indicate if You modified the Licensed Material and retain an indication of any previous modifications; and\nC. indicate the Licensed Material is licensed under this Public License, and include the text of, or the URI or hyperlink to, this Public License.\nYou may satisfy the conditions in Section 3(a)(1) in any reasonable manner based on the medium, means, and context in which You Share the Licensed Material. For example, it may be reasonable to satisfy the conditions by providing a URI or hyperlink to a resource that includes the required information.\nIf requested by the Licensor, You must remove any of the information required by Section 3(a)(1)(A) to the extent reasonably practicable.\n\nShareAlike.\n\nIn addition to the conditions in Section 3(a), if You Share Adapted Material You produce, the following conditions also apply.\n\nThe Adapter’s License You apply must be a Creative Commons license with the same License Elements, this version or later, or a BY-SA Compatible License.\nYou must include the text of, or the URI or hyperlink to, the Adapter’s License You apply. You may satisfy this condition in any reasonable manner based on the medium, means, and context in which You Share Adapted Material.\nYou may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, Adapted Material that restrict exercise of the rights granted under the Adapter’s License You apply.\n\n\n\nSection 4 – Sui Generis Database Rights.\nWhere the Licensed Rights include Sui Generis Database Rights that apply to Your use of the Licensed Material:\n\nfor the avoidance of doubt, Section 2(a)(1) grants You the right to extract, reuse, reproduce, and Share all or a substantial portion of the contents of the database;\nif You include all or a substantial portion of the database contents in a database in which You have Sui Generis Database Rights, then the database in which You have Sui Generis Database Rights (but not its individual contents) is Adapted Material, including for purposes of Section 3(b); and\nYou must comply with the conditions in Section 3(a) if You Share all or a substantial portion of the contents of the database.\n\nFor the avoidance of doubt, this Section 4 supplements and does not replace Your obligations under this Public License where the Licensed Rights include other Copyright and Similar Rights.\n\n\nSection 5 – Disclaimer of Warranties and Limitation of Liability.\n\nUnless otherwise separately undertaken by the Licensor, to the extent possible, the Licensor offers the Licensed Material as-is and as-available, and makes no representations or warranties of any kind concerning the Licensed Material, whether express, implied, statutory, or other. This includes, without limitation, warranties of title, merchantability, fitness for a particular purpose, non-infringement, absence of latent or other defects, accuracy, or the presence or absence of errors, whether or not known or discoverable. Where disclaimers of warranties are not allowed in full or in part, this disclaimer may not apply to You.\nTo the extent possible, in no event will the Licensor be liable to You on any legal theory (including, without limitation, negligence) or otherwise for any direct, special, indirect, incidental, consequential, punitive, exemplary, or other losses, costs, expenses, or damages arising out of this Public License or use of the Licensed Material, even if the Licensor has been advised of the possibility of such losses, costs, expenses, or damages. Where a limitation of liability is not allowed in full or in part, this limitation may not apply to You.\nThe disclaimer of warranties and limitation of liability provided above shall be interpreted in a manner that, to the extent possible, most closely approximates an absolute disclaimer and waiver of all liability.\n\n\n\nSection 6 – Term and Termination.\n\nThis Public License applies for the term of the Copyright and Similar Rights licensed here. However, if You fail to comply with this Public License, then Your rights under this Public License terminate automatically.\nWhere Your right to use the Licensed Material has terminated under Section 6(a), it reinstates:\n\nautomatically as of the date the violation is cured, provided it is cured within 30 days of Your discovery of the violation; or\nupon express reinstatement by the Licensor.\n\nFor the avoidance of doubt, this Section 6(b) does not affect any right the Licensor may have to seek remedies for Your violations of this Public License.\nFor the avoidance of doubt, the Licensor may also offer the Licensed Material under separate terms or conditions or stop distributing the Licensed Material at any time; however, doing so will not terminate this Public License.\nSections 1, 5, 6, 7, and 8 survive termination of this Public License.\n\n\n\nSection 7 – Other Terms and Conditions.\n\nThe Licensor shall not be bound by any additional or different terms or conditions communicated by You unless expressly agreed.\nAny arrangements, understandings, or agreements regarding the Licensed Material not stated herein are separate from and independent of the terms and conditions of this Public License.\n\n\n\nSection 8 – Interpretation.\n\nFor the avoidance of doubt, this Public License does not, and shall not be interpreted to, reduce, limit, restrict, or impose conditions on any use of the Licensed Material that could lawfully be made without permission under this Public License.\nTo the extent possible, if any provision of this Public License is deemed unenforceable, it shall be automatically reformed to the minimum extent necessary to make it enforceable. If the provision cannot be reformed, it shall be severed from this Public License without affecting the enforceability of the remaining terms and conditions.\nNo term or condition of this Public License will be waived and no failure to comply consented to unless expressly agreed to by the Licensor.\nNothing in this Public License constitutes or may be interpreted as a limitation upon, or waiver of, any privileges and immunities that apply to the Licensor or You, including from the legal processes of any jurisdiction or authority.\n\n\nCreative Commons is not a party to its public licenses. Notwithstanding, Creative Commons may elect to apply one of its public licenses to material it publishes and in those instances will be considered the “Licensor.” The text of the Creative Commons public licenses is dedicated to the public domain under the CC0 Public Domain Dedication. Except for the limited purpose of indicating that material is shared under a Creative Commons public license or as otherwise permitted by the Creative Commons policies published at creativecommons.org/policies, Creative Commons does not authorize the use of the trademark “Creative Commons” or any other trademark or logo of Creative Commons without its prior written consent including, without limitation, in connection with any unauthorized modifications to any of its public licenses or any other arrangements, understandings, or agreements concerning use of licensed material. For the avoidance of doubt, this paragraph does not form part of the public licenses.\nCreative Commons may be contacted at creativecommons.org."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
+    "objectID": "course-overview.html",
+    "href": "course-overview.html",
     "title": "MSSC 6250 - Statistical Machine Learning (Spring 2025)",
     "section": "",
-    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nTo Do\nSlides\nHomework\nProject\n\n\n\n\n1\nTue, Jan 14\nSyllabus/Overview of Statistical Learning\n📖\n🖥️🖥️\n\n\n\n\n\nThu, Jan 16\nBias-variance tradeoff\n\n🖥️\n\n\n\n\n2\nTue, Jan 21\nLinear Regression\n📖\n🖥️\n✍️\n\n\n\n\nThu, Jan 25\nGradient Descent\n\n\n\n\n\n\n3\nTue, Jan 28\nRidge Regression\n📖\n🖥️\n\n\n\n\n\nThu, Feb 1\nCross-Validation\n\n\n\n\n\n\n4\nTue, Feb 4\nLASSO and Feature Selection\n📖\n🖥️\n\n\n\n\n\nThu, Feb 8\nSplines\n\n\n✍️\n\n\n\n5\nTue, Feb 11\nGeneralized Additive Models\n📖\n🖥️\n\n\n\n\n\nThu, Feb 15\nBayesian Inference\n\n\n\n\n\n\n6\nTue, Feb 18\nBayesian Linear Regression\n📖\n🖥️\n\n\n\n\n\nThu, Feb 22\nBinary Logistic Regression\n\n\n\n\n\n\n7\nTue, Feb 25\nMultinomial Logistic Regression\n📖\n🖥️\n\n\n\n\n\nThu, Feb 29\nDiscriminant Analysis\n\n\n\n\n\n\n8\nTue, Mar 4\nNaive Bayes\n📖\n\n\n\n\n\n\nThu, Mar 7\nMidterm Presentation I\n\n\n✍️\n✅\n\n\n9\nTue, Mar 11\nNO CLASS: Spring break\n\n\n\n\n\n\n\nThu, Mar 14\nNO CLASS: Spring break\n\n\n\n\n\n\n10\nTue, Mar 18\nK-Nearest Neighbors Regression\n📖\n🖥️\n\n\n\n\n\nThu, Mar 21\nK-Nearest Neighbors Classification\n\n\n\n\n\n\n11\nTue, Mar 25\nGaussian Process Regression\n📖\n🖥️\n\n\n\n\n\nThu, Mar 28\nGaussian Process Classification\n\n\n\n\n\n\n12\nTue, Apr 1\nSupport Vector Machine\n📖\n\n\n\n\n\n\nThu, Apr 4\nSupport Vector Machine\n\n\n\n\n\n\n13\nTue, Apr 8\nCART and Bagging\n📖\n🖥️\n\n\n\n\n\nThu, Apr 11\nRandom Forests and Boosting\n\n\n✍️\n\n\n\n14\nTue, Apr 15\nMidterm Presentation II\n📖\n🖥️\n\n✅\n\n\n\nThu, Apr 17\nNO CLASS: Easter break\n\n\n\n\n\n\n15\nTue, Apr 22\nPrincipal Component Analysis\n📖\n🖥️\n\n\n\n\n\nThu, Apr 25\nK-Means Clustering\n\n\n\n\n\n\n16\nTue, Apr 29\nModel-based Clustering\n📖\n🖥️\n\n\n\n\n\nThu, May 1\nNeural Networks\n\n\n\n\n\n\n17\nThu, May 8\nFinal Project Submission\n\n\n\n✅\n\n\n\n\nI reserve the right to make changes to the schedule.",
+    "text": "The course discuss machine learning from statistical and modeling points of view, covering supervised learning and unsupervised learning models and algorithms. Supervised learning methods include various regression and classification methods, and unsupervised learning methods involves dimension reduction and clustering techniques. Topics include Bayesian linear regression, shrinkage and regularization, regression splines, Gaussian processes, logistic regression, discriminant analysis, nearest neighbors, tree-based methods, principal components, K-means, Gaussian mixture clustering, neural networks, etc.",
     "crumbs": [
       "Course Information",
-      "Schedule"
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "course-news.html",
+    "href": "course-news.html",
+    "title": "News/Announcements",
+    "section": "",
+    "text": "Any announcement will be posted in this page. The latest news will also be put on top of the main page.",
+    "crumbs": [
+      "Course Information",
+      "News/Annoucements"
     ]
   },
   {
