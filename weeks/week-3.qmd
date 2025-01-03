@@ -1,0 +1,33 @@
+---
+title: "Week 3"
+subtitle: "Ridge Regression and Cross-Validation"
+editor: visual
+---
+
+::: callout-important
+**Homework 1 due Friday, Feb 7, 11:59 PM**
+:::
+
+## Participate
+
+🖥️ [Slides - Ridge Regression and Cross Validation](/slides/05-ridge-cv.html)
+
+## Reading and Resources
+
+📖 [ISL Ch 5.1, 6.2.1](https://www.statlearning.com/)
+
+<!-- 📖 [matplotlib](https://matplotlib.org/stable/plot_types/index.html) -->
+
+## Exercise
+
+<!-- 📋 [Lab-05 R Data Summary](/exercise/lab05-rtype.html) -->
+
+<!-- 📋 [Lab-06 Python Data Structure](/exercise/lab06-py.html) -->
+
+<!-- 📋 [Lab-07 Plotting](/exercise/lab07-plot.html) (Present) -->
+
+<br><br>
+
+::: {style="font-size: 0.875em;"}
+Back to [course schedule](/ "Course schedule") ⏎
+:::
