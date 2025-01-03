@@ -1,0 +1,43 @@
+---
+title: "Week 2"
+subtitle: "Linear Regression"
+editor: visual
+---
+
+::: callout-important
+Homework 1 released.
+:::
+
+## Participate
+
+🖥️ [Slides - Linear Regression](/slides/04-lin-reg.html)
+
+`r fontawesome::fa("table")` [Data Set - Advertising.csv](/slides/data/advertising.csv)
+
+## Reading and Resources
+
+📖 [ISL Ch 3.1 - 3.4](https://www.statlearning.com/)
+
+📖 [Dr. Yu MSSC 5780 Regression Analysis Week 1 to 6](https://math4780-f23.github.io/website/)
+
+📖 [MML Ch 7.1](https://mml-book.github.io/)
+
+
+
+<!-- 📖 [Nocedal, Jorge, and Stephen Wright. 2006. *Numerical Optimization*](https://www.math.uci.edu/~qnie/Publications/NumericalOptimization.pdf) -->
+
+## Perform
+
+📋 [Homework 1](/hw/hw-1.html)
+
+<!-- 📋 [Lab-02 Quarto File](/exercise/lab02-quarto.html) -->
+
+<!-- 📋 [Lab-03 Markdown](/exercise/lab03-markdown.html) -->
+
+<!-- 📋 [Lab-04 Code Chunk](/exercise/lab04-chunk.html) -->
+
+<br><br>
+
+::: {style="font-size: 0.875em;"}
+Back to [course schedule](/ "Course schedule") ⏎
+:::

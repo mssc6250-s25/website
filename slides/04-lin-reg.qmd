@@ -1166,7 +1166,7 @@ $$f(\bx^\ast) \approx f(\bx) + \nabla f(\bx)' (\bx^\ast - \bx) + \frac{1}{2} (\b
 $$0 = \nabla f(\bx^\ast) = 0 + \nabla f(\bx) + \bH(\bx) (\bx^\ast - \bx)$$
 $$\boxed{\bx^{(i+1)} = \bx^{(i)} -  \bH(\bx^{(i)})^{-1} \nabla f(\bx^{(i)})}$$
 
-- For numerical stability, introduce a step size $\delta \in (0, 1)$:
+- For numerical stability, introduce a step size $\delta > 0$:
   $$\bx^{(i+1)} = \bx^{(i)} -  {\color{red}{\delta}} \, \bH(\bx^{(i)})^{-1} \nabla f(\bx^{(i)})$$
 
 
@@ -1194,7 +1194,7 @@ When $\bH$ or $\bH^{-1}$ is difficult to compute (usually in deep learning)
 
 - When using $\bH = \bI$, we update 
 $$\bx^{(i+1)} = \bx^{(i)} - \delta \nabla f(\bx^{(i)}).$$ 
-- It is crucial to figure out the step size $\delta$. 
+- It is crucial to figure out a good step size $\delta$, usually $< 1$. 
   + A too large $\delta$ may not converge.
   + A too small $\delta$ takes too many iterations. 
 
