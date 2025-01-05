@@ -12,9 +12,14 @@ editor: visual
 
 🖥️ [Slides - Ridge Regression and Cross Validation](/slides/05-ridge-cv.html)
 
+`r fontawesome::fa("table")` [Data Set - mtcars.csv](/slides/data/mtcars.csv)
+
+
 ## Reading and Resources
 
 📖 [ISL Ch 5.1, 6.2.1](https://www.statlearning.com/)
+
+📖 [MML Ch 8.2.3 - 8.2.4](https://mml-book.github.io/book/mml-book.pdf)
 
 <!-- 📖 [matplotlib](https://matplotlib.org/stable/plot_types/index.html) -->
 

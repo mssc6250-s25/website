@@ -1,0 +1,35 @@
+---
+title: "Week 4"
+subtitle: "LASSO and Elastic Net"
+editor: visual
+---
+
+::: callout-important
+**Homework 1 due Friday, Feb 9, 11:59 PM**
+:::
+
+## Participate
+
+🖥️ [Slides - Lasso](/slides/06-lasso-cv.html)
+
+<!-- `r fontawesome::fa("table")` [Data set - Prostate](https://hastie.su.domains/ElemStatLearn/) -->
+
+`r fontawesome::fa("table")` [Data Set - Prostate.csv](/slides/data/prostate.csv)
+
+
+
+## Reading and Resources
+
+📖 [ISL Ch 6.1, 6.2](https://www.statlearning.com/)
+
+## Perform
+
+<!-- 📋 [Lab-08 Tibbles and Pipes](/exercise/lab08-tibble.html) -->
+
+<!-- 📋 [Lab-09 NumPy and pandas](/exercise/lab09-numpy.html) -->
+
+<br><br>
+
+::: {style="font-size: 0.875em;"}
+Back to [course schedule](/ "Course schedule") ⏎
+:::

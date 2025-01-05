@@ -28,6 +28,11 @@ editor: visual
 
 📖 [Dr. Yu MSSC 5780 Linear Algebra Review](https://math4780-f23.github.io/website/slides/06-mat.html#/title-slide)
 
+📖 Check any math you need from [MML Ch 2 - 6](https://mml-book.github.io/)
+
+
+
+
 <!-- 📖 [MML Ch 7.1](https://mml-book.github.io/book/mml-book.pdf) -->
 
 ## Perform

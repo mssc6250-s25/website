@@ -3,44 +3,44 @@ title: "MSSC 6250 - Statistical Machine Learning (Spring 2025)"
 tbl-colwidths: [5,10,20,6,6,6,6]
 ---
 
-This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.
+This page contains an outline of the topics, content, and assignments for the semester. Note that *this schedule will be updated as the semester progresses, with all changes documented here.*
 
 ::: column-screen-inset-right
-| Week | Date | Topic | To Do | Slides | Homework | Project |
-|:---------:|-----------|-----------|:---------:|:---------:|:---------:|:---------:|
-| 1 | Tue, Jan 14 | Syllabus/Overview of Statistical Learning | [📖](/weeks/week-1.html "Week 1") | [🖥️](slides/01-syllabus.html "Syllabus")[🖥️](slides/02-overview.html "Overview") |  |  |
-|  | Thu, Jan 16 | Bias-variance tradeoff |  | [🖥️](slides/03-bias-var.html "bias-var-tradeoff") |  |  |
-| 2 | Tue, Jan 21 | Linear Regression | [📖](/weeks/week-2.html "Week 2") | [🖥️](slides/04-lin-reg.html "Linear regression") | [✍️](/hw/hw-1.html "Homework 1") |  |
-|  | Thu, Jan 25 | Numerical Optimization for Regression |  |  |  |  |
-| 3 | Tue, Jan 28 | Ridge Regression | [📖](/weeks/week-3.html "Week 3") | [🖥️](slides/05-ridge-cv.html "Ridge regression and cross validation") |  |  |
-|  | Thu, Feb 1 | Cross-Validation |  |  |  |  |
-| 4 | Tue, Feb 4 | LASSO and Feature Selection | [📖](/weeks/week-4.html "Week 4") | [🖥️](slides/06-lasso-vs.html "06-lasso-vs") |  |  |
-|  | Thu, Feb 8 | Splines |  |  | [✍️](/hw/hw-2.html "Homework 2") |  |
-| 5 | Tue, Feb 11 | Generalized Additive Models | [📖](/weeks/week-5.html "Week 5") | [🖥️](slides/07-splines.html "07-splines") |  |  |
-|  | Thu, Feb 15 | Bayesian Inference |  |  |  |  |
-| 6 | Tue, Feb 18 | Bayesian Linear Regression | [📖](/weeks/week-6.html "Week 6") | [🖥️](slides/08-bayes.html "08-bayes") |  |  |
-|  | Thu, Feb 22 | Binary Logistic Regression |  |  |  |  |
-| 7 | Tue, Feb 25 | Multinomial Logistic Regression | [📖](/weeks/week-7.html "Week 7") | [🖥️](slides/09-class-glm.html "09-class-glm") |  |  |
-|  | Thu, Feb 29 | Discriminant Analysis |  |  |  |  |
-| 8 | Tue, Mar 4 | Naive Bayes | [📖](/weeks/week-8.html "Week 8") |  |  |  |
-|  | Thu, Mar 7 | **Midterm Presentation I** |  |  | [✍️](/hw/hw-3.html "Homework 3") | ✅ |
-| 9 | Tue, Mar 11 | ***NO CLASS: Spring break*** |  |  |  |  |
-|  | Thu, Mar 14 | ***NO CLASS: Spring break*** |  |  |  |  |
-| 10 | Tue, Mar 18 | K-Nearest Neighbors Regression | [📖](/weeks/week-10.html "Week 10") | [🖥️](slides/10-generative.html "10-generative") |  |  |
-|  | Thu, Mar 21 | K-Nearest Neighbors Classification |  |  |  |  |
-| 11 | Tue, Mar 25 | Gaussian Process Regression | [📖](/weeks/week-11.html "Week 11") | [🖥️](slides/11-knn.html "11-knn") |  |  |
-|  | Thu, Mar 28 | Gaussian Process Classification |  |  |  |  |
-| 12 | Tue, Apr 1 | Support Vector Machine | [📖](/weeks/week-12.html "Week 11") |  |  |  |
-|  | Thu, Apr 4 | Support Vector Machine |  |  |  |  |
-| 13 | Tue, Apr 8 | CART and Bagging | [📖](/weeks/week-13.html "Week 13") | [🖥️](slides/13-svm.html "13-svm") |  |  |
-|  | Thu, Apr 11 | Random Forests and Boosting |  |  | [✍️](/hw/hw-4.html "hw-4") |  |
-| 14 | Tue, Apr 15 | **Midterm Presentation II** | [📖](/weeks/week-14.html "Week 14") | [🖥️](slides/14-tree.html "14-tree") |  | ✅ |
-|  | Thu, Apr 17 | ***NO CLASS: Easter break*** |  |  |  |  |
-| 15 | Tue, Apr 22 | Principal Component Analysis | [📖](/weeks/week-15.html "Week 15") | [🖥️](slides/15-pca.html "15-pca") |  |  |
-|  | Thu, Apr 25 | K-Means Clustering |  |  |  |  |
-| 16 | Tue, Apr 29 | Model-based Clustering | [📖](/weeks/week-16.html "Week 16") | [🖥️](slides/16-clustering.html "16-clustering") |  |  |
-|  | Thu, May 1 | Neural Networks |  |  |  |  |
-| 17 | Thu, May 8 | **Final Project Submission** |  |  |  | ✅ |
+| Week | Date | Topic | To Do | Slides | Code | Homework | Project |
+|:-------:|---------|---------|:-------:|:-------:|:-------:|:-------:|:-------:|
+| 1 | Tue, Jan 14 | Syllabus/Overview of Statistical Learning | [📖](/weeks/week-1.html "Week 1") | [🖥️](slides/01-syllabus.html "Syllabus")[🖥️](slides/02-overview.html "Overview") | [`r fontawesome::fa("file-code")`](slides/02-overview.html "Overview") |  |  |
+|  | Thu, Jan 16 | Bias-variance tradeoff |  | [🖥️](slides/03-bias-var.html "bias-var-tradeoff") |  |  |  |
+| 2 | Tue, Jan 21 | Linear Regression | [📖](/weeks/week-2.html "Week 2") | [🖥️](slides/04-lin-reg.html "Linear regression") |  | [✍️](/hw/hw-1.html "Homework 1") |  |
+|  | Thu, Jan 25 | Numerical Optimization for Regression |  |  | [`r fontawesome::fa("file-code")`](slides/02-overview.html "Overview") |  |  |
+| 3 | Tue, Jan 28 | Ridge Regression | [📖](/weeks/week-3.html "Week 3") | [🖥️](slides/05-ridge-cv.html "Ridge regression and cross validation") |  |  |  |
+|  | Thu, Feb 1 | Cross-Validation |  |  |  |  |  |
+| 4 | Tue, Feb 4 | LASSO and Elastic Net | [📖](/weeks/week-4.html "Week 4") | [🖥️](slides/06-lasso-vs.html "06-lasso-vs") |  |  |  |
+|  | Thu, Feb 8 | Polynomial Regression and Regression Splines |  |  |  | [✍️](/hw/hw-2.html "Homework 2") |  |
+| 5 | Tue, Feb 11 | Smoothing Splines and Generalized Additive Models | [📖](/weeks/week-5.html "Week 5") | [🖥️](slides/07-splines.html "07-splines") |  |  |  |
+|  | Thu, Feb 15 | Bayesian Inference |  |  |  |  |  |
+| 6 | Tue, Feb 18 | Bayesian Linear Regression | [📖](/weeks/week-6.html "Week 6") | [🖥️](slides/08-bayes.html "08-bayes") |  |  |  |
+|  | Thu, Feb 22 | Binary Logistic Regression |  |  |  |  |  |
+| 7 | Tue, Feb 25 | Multinomial Logistic Regression | [📖](/weeks/week-7.html "Week 7") | [🖥️](slides/09-class-glm.html "09-class-glm") |  |  |  |
+|  | Thu, Feb 29 | Discriminant Analysis |  |  |  |  |  |
+| 8 | Tue, Mar 4 | Naive Bayes | [📖](/weeks/week-8.html "Week 8") |  |  |  |  |
+|  | Thu, Mar 7 | **Midterm Presentation I** |  |  |  | [✍️](/hw/hw-3.html "Homework 3") | ✅ |
+| 9 | Tue, Mar 11 | ***NO CLASS: Spring break*** |  |  |  |  |  |
+|  | Thu, Mar 14 | ***NO CLASS: Spring break*** |  |  |  |  |  |
+| 10 | Tue, Mar 18 | K-Nearest Neighbors Regression | [📖](/weeks/week-10.html "Week 10") | [🖥️](slides/10-generative.html "10-generative") |  |  |  |
+|  | Thu, Mar 21 | K-Nearest Neighbors Classification |  |  |  |  |  |
+| 11 | Tue, Mar 25 | Gaussian Process Regression | [📖](/weeks/week-11.html "Week 11") | [🖥️](slides/11-knn.html "11-knn") |  |  |  |
+|  | Thu, Mar 28 | Gaussian Process Classification |  |  |  |  |  |
+| 12 | Tue, Apr 1 | Support Vector Machine | [📖](/weeks/week-12.html "Week 11") |  |  |  |  |
+|  | Thu, Apr 4 | Support Vector Machine |  |  |  |  |  |
+| 13 | Tue, Apr 8 | CART and Bagging | [📖](/weeks/week-13.html "Week 13") | [🖥️](slides/13-svm.html "13-svm") |  |  |  |
+|  | Thu, Apr 11 | Random Forests and Boosting |  |  |  | [✍️](/hw/hw-4.html "hw-4") |  |
+| 14 | Tue, Apr 15 | **Midterm Presentation II** | [📖](/weeks/week-14.html "Week 14") | [🖥️](slides/14-tree.html "14-tree") |  |  | ✅ |
+|  | Thu, Apr 17 | ***NO CLASS: Easter break*** |  |  |  |  |  |
+| 15 | Tue, Apr 22 | Principal Component Analysis | [📖](/weeks/week-15.html "Week 15") | [🖥️](slides/15-pca.html "15-pca") |  |  |  |
+|  | Thu, Apr 25 | K-Means Clustering |  |  |  |  |  |
+| 16 | Tue, Apr 29 | Model-based Clustering | [📖](/weeks/week-16.html "Week 16") | [🖥️](slides/16-clustering.html "16-clustering") |  |  |  |
+|  | Thu, May 1 | Neural Networks |  |  |  |  |  |
+| 17 | Thu, May 8 | **Final Project Submission** |  |  |  |  | ✅ |
 :::
 
 I reserve the right to make changes to the schedule.
