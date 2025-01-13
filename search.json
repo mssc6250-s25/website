@@ -347,7 +347,7 @@
     "href": "slides/01-syllabus.html#my-research",
     "title": "Welcome Aboard 🙌",
     "section": "My Research",
-    "text": "My Research\n\nBayesian spatio-temporal modeling and machine learning algorithms in neuroimaging\nBayesian deep learning for image classification\nEfficient MCMC for high dimensional regression\nData science education\n\n\n\nfMRI\n\n\n\n\n\n\n\n\n\nEEG"
+    "text": "My Research\n\nBayesian spatio-temporal modeling and computation in neuroimaging/epidemiology\nBayesian deep learning for image classification\nEfficient MCMC for high dimensional regression\nData science education\n\n\n\nfMRI\n\n\n\n\n\n\n\n\n\nEEG"
   },
   {
     "objectID": "slides/01-syllabus.html#how-to-reach-me",
@@ -375,7 +375,7 @@
     "href": "slides/01-syllabus.html#optional-references-1",
     "title": "Welcome Aboard 🙌",
     "section": "Optional References",
-    "text": "Optional References\n\n\n\n(MML) Mathematics for Machine Learning, by Marc Peter Deisenroth, A. Aldo Faisal, and Cheng Soon Ong. Publisher: Cambridge University Press.\nFocus on the mathematical concepts behind the models"
+    "text": "Optional References\n\n\n\n(MML) Mathematics for Machine Learning, by Marc Peter Deisenroth, A. Aldo Faisal, and Cheng Soon Ong. Publisher: Cambridge University Press.\nCollege level mathematics for machine learning\nMathematical concepts behind models and algorithms"
   },
   {
     "objectID": "slides/01-syllabus.html#optional-references-2",
@@ -410,7 +410,7 @@
     "href": "slides/01-syllabus.html#learning-management-system-d2l",
     "title": "Welcome Aboard 🙌",
     "section": "Learning Management System (D2L)",
-    "text": "Learning Management System (D2L)\n\n\n\n\n\nNews\nSubmit your homework Assessments &gt; Dropbox.\nCheck your grade Assessments &gt; Grades."
+    "text": "Learning Management System (D2L)\n\n\n\n\n\n\nSubmit your homework Assessments &gt; Dropbox.\nCheck your grade Assessments &gt; Grades."
   },
   {
     "objectID": "slides/01-syllabus.html#grading-policy",
