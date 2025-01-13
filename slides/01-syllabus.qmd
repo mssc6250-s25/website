@@ -381,7 +381,7 @@ knitr::include_graphics("./images/01-syllabus/esl.png")
 knitr::include_graphics("./images/01-syllabus/website_s25.png")
 ```
 
-  
+
 
 
 ## Learning Management System ([D2L](https://d2l.mu.edu/d2l/home/589421))
