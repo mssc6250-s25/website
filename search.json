@@ -154,532 +154,312 @@
     ]
   },
   {
-    "objectID": "slides/02-overview.html#imageobject-recognition",
-    "href": "slides/02-overview.html#imageobject-recognition",
-    "title": "Overview of Statistical Machine Learning 💻",
-    "section": "Image/Object Recognition",
-    "text": "Image/Object Recognition\n\n\n\n\n\n\n\n\n\nMachine learning is everywhere.\nCan we train a machine to have an ability to recognize dogs and cats?\nhundreds of thousands of objects?"
+    "objectID": "slides/05-ridge-cv.html#when-ordinary-least-squares-ols-doesnt-work-well-collinearity",
+    "href": "slides/05-ridge-cv.html#when-ordinary-least-squares-ols-doesnt-work-well-collinearity",
+    "title": "Ridge Regression and Cross Validation \n",
+    "section": "When Ordinary Least Squares (OLS) Doesn’t Work Well: Collinearity",
+    "text": "When Ordinary Least Squares (OLS) Doesn’t Work Well: Collinearity\n\nWhen predictors are highly correlated, \\(\\mathrm{Var}(b_j)\\) is much inflated.1\n\nA tiny change in the training set causes a large change in \\(b_j\\), leading to unreliable estimation and possibly prediction.\n\n\n\n\n\n\\({\\bf X'X} = \\begin{bmatrix} 1 & 0.99 \\\\ 0.99 & 1 \\end{bmatrix}\\) \\(\\quad ({\\bf X'X})^{-1} = \\begin{bmatrix}  50.3 & -49.7 \\\\ -49.7 & 50.3 \\end{bmatrix}\\)\n\n\\(\\mathrm{Var}(b_j) = 50.3\\sigma^2\\)\n\nAn increase in 50-fold over the ideal case when the two regressors are orthogonal.\n\n\n\n\nsolve(matrix(c(1, 0.99, 0.99, 1), 2, 2))\n\n      [,1]  [,2]\n[1,]  50.3 -49.7\n[2,] -49.7  50.3\n\n\nthe eigen vector direction with the smallest eigen value https://online.stat.psu.edu/stat857/node/155/ https://robjhyndman.com/hyndsight/loocv-linear-models/\n\n\nAlthough \\(\\mathrm{Var}(b_j)\\) is still the smallest among all linear unbiased estimators."
   },
   {
-    "objectID": "slides/02-overview.html#recommender-system",
-    "href": "slides/02-overview.html#recommender-system",
-    "title": "Overview of Statistical Machine Learning 💻",
-    "section": "Recommender System",
-    "text": "Recommender System\n\n\nwatch one video on YouTube, then lots of other videos that never show up pop up.\nCheck some items on Amazon, then it recommends some other items saying “you may also like XXX”\nThis kind of recommendation relies on machine learning.\nHow does the model know you may also like those items. Well the model learn this from other customer surfing and purchasing history."
+    "objectID": "slides/05-ridge-cv.html#when-ols-doesnt-work-well-optimization-perspective",
+    "href": "slides/05-ridge-cv.html#when-ols-doesnt-work-well-optimization-perspective",
+    "title": "Ridge Regression and Cross Validation \n",
+    "section": "When OLS Doesn’t Work Well: Optimization Perspective",
+    "text": "When OLS Doesn’t Work Well: Optimization Perspective\n\n\\(\\beta_1 = \\beta_2 = 1\\) and \\(\\mathrm{Corr}(x_1, x_2) = 0.99\\)\nThe relatively “flat” valley in the objective function walks along the eigen-vector of \\({\\bf X}'{\\bf X}\\) having the smallest eigen-value.\n\n\n\n\n\n\n\n\n\n\n\n\n\neigen(\n    matrix(c(1, 0.99, 0.99, 1), \n             2, 2)\n    )\n\neigen() decomposition\n$values\n[1] 1.99 0.01\n\n$vectors\n      [,1]   [,2]\n[1,] 0.707 -0.707\n[2,] 0.707  0.707\n\n\n\n\n\nFrom optimization point of view, the objective function (\\(\\ell_2\\) loss) is “flat” along certain directions in the parameter domain.\na small eigen-value in XTX makes the corresponding eigen-value large in the inverse."
   },
   {
-    "objectID": "slides/02-overview.html#covid-detection",
-    "href": "slides/02-overview.html#covid-detection",
-    "title": "Overview of Statistical Machine Learning 💻",
-    "section": "COVID Detection",
-    "text": "COVID Detection"
+    "objectID": "slides/05-ridge-cv.html#when-ols-doesnt-work-well-optimization-perspective-1",
+    "href": "slides/05-ridge-cv.html#when-ols-doesnt-work-well-optimization-perspective-1",
+    "title": "Ridge Regression and Cross Validation \n",
+    "section": "When OLS Doesn’t Work Well: Optimization Perspective",
+    "text": "When OLS Doesn’t Work Well: Optimization Perspective\n\nA little change in the training set perturbs the objective function. The LSEs lie on a valley centered around the truth."
   },
   {
-    "objectID": "slides/02-overview.html#stock-price-forecasting",
-    "href": "slides/02-overview.html#stock-price-forecasting",
-    "title": "Overview of Statistical Machine Learning 💻",
-    "section": "Stock Price Forecasting",
-    "text": "Stock Price Forecasting"
+    "objectID": "slides/05-ridge-cv.html#when-ols-doesnt-work-well-high-variance",
+    "href": "slides/05-ridge-cv.html#when-ols-doesnt-work-well-high-variance",
+    "title": "Ridge Regression and Cross Validation \n",
+    "section": "When OLS Doesn’t Work Well: High Variance",
+    "text": "When OLS Doesn’t Work Well: High Variance\n\nThe optimizer could land anywhere along the valley, leading to large variance of the LSE.\nOver many simulation runs, the LSE lies around the line of \\(\\beta_1 + \\beta_2 = 2\\), the direction of the eigen-vector of the smallest eigen-value."
   },
   {
-    "objectID": "slides/02-overview.html#risk-factors-for-cancer",
-    "href": "slides/02-overview.html#risk-factors-for-cancer",
-    "title": "Overview of Statistical Machine Learning 💻",
-    "section": "Risk Factors for Cancer",
-    "text": "Risk Factors for Cancer"
+    "objectID": "slides/05-ridge-cv.html#when-ols-doesnt-work-well-large-p-small-n-high-dimensional-data",
+    "href": "slides/05-ridge-cv.html#when-ols-doesnt-work-well-large-p-small-n-high-dimensional-data",
+    "title": "Ridge Regression and Cross Validation \n",
+    "section": "When OLS Doesn’t Work Well: Large-\\(p\\)-small-\\(n\\) (High Dimensional Data)",
+    "text": "When OLS Doesn’t Work Well: Large-\\(p\\)-small-\\(n\\) (High Dimensional Data)\n\nOLS stays well in the world of “large-\\(n\\)-small-\\(p\\)”.\nWhen \\(p &gt; n\\), \\({\\bf X}'{\\bf X}\\) is not invertible.\nThere is no unique \\(\\boldsymbol \\beta\\) estimate.\n\n\nIntuition: Too many degrees of freedom (\\(p\\)) to specify a model, but not enough information (\\(n\\)) to decide which one is the one.\n\nToo flexible and ends up with overfitting"
   },
   {
-    "objectID": "slides/02-overview.html#how-we-solve-real-life-problems",
-    "href": "slides/02-overview.html#how-we-solve-real-life-problems",
-    "title": "Overview of Statistical Machine Learning 💻",
-    "section": "How We Solve Real-Life Problems?",
-    "text": "How We Solve Real-Life Problems?\n\nWe describe and formulate our problems/questions by models.\n\n\n\nSolve problems/Answer questions by doing inference and/or predictions from the built model using the information from the data and computer algorithms.\n\n\n\n\nSo what is (Statistical) Machine Learning?\n\n\nMathematical/statistical or machine learning models.\nwe know the eating habits from a data of 100 american people. How do we know the the eating habits of all the people in the united states.\nIf we know someone’s GPA and major, how can we predict his salary after graduation?"
+    "objectID": "slides/05-ridge-cv.html#remedy-for-large-variance-and-large-p-small-n",
+    "href": "slides/05-ridge-cv.html#remedy-for-large-variance-and-large-p-small-n",
+    "title": "Ridge Regression and Cross Validation \n",
+    "section": "Remedy for Large Variance and Large-\\(p\\)-small-\\(n\\)\n",
+    "text": "Remedy for Large Variance and Large-\\(p\\)-small-\\(n\\)\n\n\nMake \\({\\bf X}'{\\bf X}\\) invertible when \\(p &gt; n\\) by regularizing coefficient behavior!\nA good estimator balances bias and variance well, or minimizes the mean square error \\[\\text{MSE}(\\hat{\\beta}) = E[(\\hat{\\beta} - \\beta)^2] = \\mathrm{Var}(\\hat{\\beta}) + \\text{Bias}(\\hat{\\beta})^2\\]\nA slightly biased estimator \\(\\hat{\\boldsymbol \\beta}\\) that has much smaller variance and MSE than the LSE \\({\\bf b}\\)."
   },
   {
-    "objectID": "slides/02-overview.html#machine-learning-vs.-statistical-learning",
-    "href": "slides/02-overview.html#machine-learning-vs.-statistical-learning",
-    "title": "Overview of Statistical Machine Learning 💻",
-    "section": "Machine Learning vs. Statistical Learning",
-    "text": "Machine Learning vs. Statistical Learning\n\n\nMachine learning (ML) is a field in Computer Science (CS).\n\n\n“A computer program is said to learn from experience (E) with respect to some class of tasks (T) and performance measure (P) if its performance at tasks in T, as measured by P, improves with experience E.” – Tom Mitchell, Professor of ML at Carnegie Mellon University\n\n\ncomputer programs = learning software and system\nexperience = data\ntasks = problems\n\n\n\nThe ML algorithms are mainly for predictive modeling problems, and many have been borrowed from Statistics, for example, linear regression.\nML is a CS perspective on modeling data with a focus on algorithmic methods.\n\n\n\n\nWait, I am a statistical modeler (computational statistician), and this is exactly what I am doing!\n\nMachine Learning is the study of computer algorithms that improve automatically through experience."
+    "objectID": "slides/05-ridge-cv.html#ridge-regression-1",
+    "href": "slides/05-ridge-cv.html#ridge-regression-1",
+    "title": "Ridge Regression and Cross Validation \n",
+    "section": "Ridge Regression",
+    "text": "Ridge Regression\n\nIdea: Add a ridge (diagonal matrix) to \\({\\bf X} ' {\\bf X}\\).1 \\[\\widehat{\\boldsymbol \\beta}^\\text{r} = (\\mathbf{X}' \\mathbf{X}+ n \\lambda \\mathbf{I})^{-1} \\mathbf{X}' \\mathbf{y},\\]\n\n\n\n\nTo regularize coefficients, add an \\(\\ell_2\\) penalty to the residual sum of squares, for some tuning parameter \\(\\lambda &gt; 0\\).\n\n\\[\n\\begin{align}\n\\widehat{\\boldsymbol \\beta}^\\text{r} =& \\, \\mathop{\\mathrm{arg\\,min}}_{\\boldsymbol \\beta} \\underbrace{\\lVert \\mathbf{y}- \\mathbf{X}\\boldsymbol \\beta\\rVert_2^2}_{SS_{res}} + n \\lambda \\lVert\\boldsymbol \\beta\\rVert_2^2\\\\\n=& \\, \\mathop{\\mathrm{arg\\,min}}_{\\boldsymbol \\beta} \\underbrace{\\frac{1}{n} \\sum_{i=1}^n (y_i - x_i'\\boldsymbol \\beta)^2}_{\\text{MSE}_{\\texttt{Tr}}} + \\lambda \\sum_{j=1}^p \\beta_j^2\\\\\n=& \\, \\mathop{\\mathrm{arg\\,min}}_{\\boldsymbol \\beta} \\color{green} - \\text{ goodness of fit } + \\text{ model complexity/flexibility}\n\\end{align}\n\\]\n\nThis is a special case of the Tikhonov regularization."
   },
   {
-    "objectID": "slides/02-overview.html#machine-learning-vs.-statistical-learning-1",
-    "href": "slides/02-overview.html#machine-learning-vs.-statistical-learning-1",
-    "title": "Overview of Statistical Machine Learning 💻",
-    "section": "Machine Learning vs. Statistical Learning",
-    "text": "Machine Learning vs. Statistical Learning\n\n\nStatistical learning, used to be called Applied Statistics (what a “fancy” name, 🤣), arose as a subfield of Statistics.\n\n\n\nStatistical learning refers to a set of tools for modeling and understanding complex datasets. – An Introduction to Statistical Learning\n\n\n…to extract important patterns and trends, and understand “what the data says.” We call this learning from data. – The Elements of Statistical Learning\n\n\ntools = mathematics, computing hardware/software/architecture, programming languages, algorithms, etc.\nStatistical learning is a mathematical perspective on modeling data with a focus on goodness of fit.\n\nhttps://machinelearningmastery.com/relationship-between-applied-statistics-and-machine-learning/"
+    "objectID": "slides/05-ridge-cv.html#properties-of-ridge-regression",
+    "href": "slides/05-ridge-cv.html#properties-of-ridge-regression",
+    "title": "Ridge Regression and Cross Validation \n",
+    "section": "Properties of Ridge Regression",
+    "text": "Properties of Ridge Regression\n\\[\n\\begin{align}\n\\widehat{\\boldsymbol \\beta}^\\text{r} =& \\mathop{\\mathrm{arg\\,min}}_{\\boldsymbol \\beta} \\frac{1}{n} \\sum_{i=1}^n (y_i - x_i'\\boldsymbol \\beta)^2 + \\lambda \\sum_{j=1}^p \\beta_j^2,\n\\end{align}\n\\]\nProperties of ridge regression:\n\nHas less degrees of freedom in the sense that the cost gets higher when larger coefficients are used.\n\n\n\nFavors small-magnitude coefficient estimates (Shrinkage) to avoid cost penalty.\n\n\n\n\nThe shrinkage parameter \\(\\lambda\\) controls the degree of penalty.\n\n\n\\(\\lambda \\rightarrow 0\\): No penalty, and \\(\\widehat{\\boldsymbol \\beta}^\\text{r} = \\bf b\\).\n\n\\(\\lambda \\rightarrow \\infty\\): Unbearable penalty, and \\(\\widehat{\\boldsymbol \\beta}^\\text{r} \\rightarrow \\mathbf{0}\\)"
   },
   {
-    "objectID": "slides/02-overview.html#machine-learning-vs.-statistical-learning-2",
-    "href": "slides/02-overview.html#machine-learning-vs.-statistical-learning-2",
-    "title": "Overview of Statistical Machine Learning 💻",
-    "section": "Machine Learning vs. Statistical Learning",
-    "text": "Machine Learning vs. Statistical Learning\n\nMachine learning emphasizes algorithms and automation.\nStatistical learning emphasizes modeling, interpretability, and uncertainty.\n\n\n\nThe distinction is blur:\n\nA machine learner needs a well-built statistical model that quantifies uncertainty about prediction\nA statistical learner needs a computationally efficient algorithm to deal with large complex data.\n\n\n\n\n\n\nBUT, one thing for sure. Machine learning has the upper hand in marketing!"
+    "objectID": "slides/05-ridge-cv.html#ridge-penalty",
+    "href": "slides/05-ridge-cv.html#ridge-penalty",
+    "title": "Ridge Regression and Cross Validation \n",
+    "section": "Ridge Penalty",
+    "text": "Ridge Penalty\n\n\n\\[\\lambda \\lVert \\boldsymbol \\beta\\rVert^2_2 = \\lambda \\boldsymbol \\beta' \\mathbf{I}\\boldsymbol \\beta\\]\n\nThe penalty contour is circle-shaped\nForce the objective function to be more convex\nA more stable or less varying solution"
   },
   {
-    "objectID": "slides/02-overview.html#fancy-terms-and-larger-grant",
-    "href": "slides/02-overview.html#fancy-terms-and-larger-grant",
-    "title": "Overview of Statistical Machine Learning 💻",
-    "section": "Fancy Terms and Larger Grant!",
-    "text": "Fancy Terms and Larger Grant!\n\nSource: http://statweb.stanford.edu/~tibs/stat315a/glossary.pdf"
+    "objectID": "slides/05-ridge-cv.html#geometrical-meaning-of-ridge-regression",
+    "href": "slides/05-ridge-cv.html#geometrical-meaning-of-ridge-regression",
+    "title": "Ridge Regression and Cross Validation \n",
+    "section": "Geometrical Meaning of Ridge Regression",
+    "text": "Geometrical Meaning of Ridge Regression\n\nSource: https://online.stat.psu.edu/stat508/lessons/Lesson06\nPerform PCA of X\nProject y onto the PCs\nShrinks the projection\nReassemble the PCs using all the shrunken length"
   },
   {
-    "objectID": "slides/02-overview.html#section-1",
-    "href": "slides/02-overview.html#section-1",
-    "title": "Overview of Statistical Machine Learning 💻",
+    "objectID": "slides/05-ridge-cv.html#more-convex-loss-function",
+    "href": "slides/05-ridge-cv.html#more-convex-loss-function",
+    "title": "Ridge Regression and Cross Validation \n",
+    "section": "More Convex Loss Function",
+    "text": "More Convex Loss Function\n\nAdding a ridge penalty forces the objective to be more convex due to the added eigenvalues.\n\n\neigen(matrix(c(1, 0.99, 0.99, 1), 2, 2) + diag(2))[1]\n\n$values\n[1] 2.99 1.01\n\n\n\nHence, by adding this to the OLS objective function, the solution is more stable, in the sense that each time we observe a new set of data, this contour looks pretty much the same. This may be interpreted in several different ways such as: 1) the objective function is more convex and less affected by the random samples; 2) the variance of the estimator is smaller because the eigenvalues of \\(\\mathbf{X}^\\text{T}\\mathbf{X}+ n \\lambda \\mathbf{I}\\) are large."
+  },
+  {
+    "objectID": "slides/05-ridge-cv.html#the-bias-variance-tradeoff",
+    "href": "slides/05-ridge-cv.html#the-bias-variance-tradeoff",
+    "title": "Ridge Regression and Cross Validation \n",
+    "section": "The Bias-variance Tradeoff",
+    "text": "The Bias-variance Tradeoff\n\nAs \\(\\lambda \\downarrow\\), bias \\(\\downarrow\\) and variance \\(\\uparrow\\)\n\nAs \\(\\lambda \\uparrow\\), bias \\(\\uparrow\\) and variance \\(\\downarrow\\)\n\n\n\nThis effect is gradually changing as we increase the penalty level. The following simulation shows how the variation of \\(\\boldsymbol \\beta\\) changes. We show this with two penalty values, and see how the estimated parameters are away from the truth.\nNow, we may ask the question: is it worth it? In fact, this bias and variance will be then carried to the predicted values \\(x^\\text{T}\\widehat{\\boldsymbol \\beta}^\\text{ridge}\\). Hence, we can judge if this is beneficial from the prediction accuracy. And we need some procedure to do this.\nRemark: The bias-variance trade-off will appear frequently in this course. And the way to evaluate the benefit of this is to see if it eventually reduces the prediction error (\\(\\text{Bias}^2 + \\text{Variance}\\) plus a term called irreducible error, which will be introduced in later chapter)."
+  },
+  {
+    "objectID": "slides/05-ridge-cv.html#lower-test-mse",
+    "href": "slides/05-ridge-cv.html#lower-test-mse",
+    "title": "Ridge Regression and Cross Validation \n",
+    "section": "Lower Test MSE",
+    "text": "Lower Test MSE\n\n\n\nWhen \\(b_j\\) has large variance or \\(p &gt; n\\), ridge regression could have lower test MSE and better predictive performance.\n\\(\\text{MSE}_{\\texttt{Tr}}\\) (purple)\nSquared bias (black)\nVariance (green)\n\n\n\n\n\n\n\nSource: ISL Figure 6.5"
+  },
+  {
+    "objectID": "slides/05-ridge-cv.html#masslm.ridge",
+    "href": "slides/05-ridge-cv.html#masslm.ridge",
+    "title": "Ridge Regression and Cross Validation \n",
+    "section": "MASS::lm.ridge()",
+    "text": "MASS::lm.ridge()\n\nThe lambda parameter in lm.ridge() specifies the \\(n\\lambda\\) in our notation.\nOLS is scale equivalent: \\(X_jb_j\\) remains the same regardless of how \\(X_j\\) is scaled.\nRidge coefficient estimates can change substantially when multiplying a given predictor by a constant, i.e., \\(X_j\\hat{\\beta}^{r}_{j, \\lambda}\\) depends on \\(\\lambda\\), the scaling of \\(X_j\\), and even the scaling of other predictors.\nStandardize all predictors!1\n\n\n\nhead(mtcars, 3)\n\n               mpg cyl disp  hp drat   wt qsec vs am gear carb\nMazda RX4     21.0   6  160 110 3.90 2.62 16.5  0  1    4    4\nMazda RX4 Wag 21.0   6  160 110 3.90 2.88 17.0  0  1    4    4\nDatsun 710    22.8   4  108  93 3.85 2.32 18.6  1  1    4    1\n\n(fit &lt;- MASS::lm.ridge(mpg ~ ., data = mtcars, lambda = 1)) ## ridge fit\n\n              cyl     disp       hp     drat       wt     qsec       vs \n16.53766 -0.16240  0.00233 -0.01493  0.92463 -2.46115  0.49259  0.37465 \n      am     gear     carb \n 2.30838  0.68572 -0.57579 \n\n\n\n\nIn practice, if the intercept is not our interest, we also standardize the response."
+  },
+  {
+    "objectID": "slides/05-ridge-cv.html#scaling-issues-of-lm.ridge",
+    "href": "slides/05-ridge-cv.html#scaling-issues-of-lm.ridge",
+    "title": "Ridge Regression and Cross Validation \n",
+    "section": "Scaling Issues of lm.ridge()\n",
+    "text": "Scaling Issues of lm.ridge()\n\n\ncoef(fit) transforms these back to the original scale.\nfit$coef shows the coefficients of the standardized predictors.\n\n\ncoef(fit)\n\n              cyl     disp       hp     drat       wt     qsec       vs \n16.53766 -0.16240  0.00233 -0.01493  0.92463 -2.46115  0.49259  0.37465 \n      am     gear     carb \n 2.30838  0.68572 -0.57579 \n\nfit$coef\n\n   cyl   disp     hp   drat     wt   qsec     vs     am   gear   carb \n-0.285  0.285 -1.008  0.487 -2.370  0.866  0.186  1.134  0.498 -0.915"
+  },
+  {
+    "objectID": "slides/05-ridge-cv.html#scaling-issues-of-lm.ridge-1",
+    "href": "slides/05-ridge-cv.html#scaling-issues-of-lm.ridge-1",
+    "title": "Ridge Regression and Cross Validation \n",
+    "section": "Scaling Issues of lm.ridge()\n",
+    "text": "Scaling Issues of lm.ridge()\n\n\nfit$coef\n\n   cyl   disp     hp   drat     wt   qsec     vs     am   gear   carb \n-0.285  0.285 -1.008  0.487 -2.370  0.866  0.186  1.134  0.498 -0.915 \n\n\n\n\nlm.ridge() uses \\(n\\) instead of \\(n-1\\) when calculating the standard deviation.\n\n\n# each column has mean 0 and var 1\nX &lt;- scale(data.matrix(mtcars[, -1]), center = TRUE, scale = TRUE)\n\n# center y but not scaling\ny &lt;- scale(mtcars$mpg, center = TRUE, scale = FALSE)\n\n\n\n# lambda = 1\nmy_ridge_coef &lt;- solve(t(X) %*% X + diag(ncol(X))) %*% t(X) %*% y\nt(my_ridge_coef)\n\n        cyl disp    hp  drat    wt qsec   vs   am  gear   carb\n[1,] -0.294 0.27 -1.02 0.495 -2.39 0.87 0.19 1.15 0.505 -0.937"
+  },
+  {
+    "objectID": "slides/05-ridge-cv.html#scaling-issues-of-lm.ridge-2",
+    "href": "slides/05-ridge-cv.html#scaling-issues-of-lm.ridge-2",
+    "title": "Ridge Regression and Cross Validation \n",
+    "section": "Scaling Issues of lm.ridge()\n",
+    "text": "Scaling Issues of lm.ridge()\n\n\nfit$coef\n\n   cyl   disp     hp   drat     wt   qsec     vs     am   gear   carb \n-0.285  0.285 -1.008  0.487 -2.370  0.866  0.186  1.134  0.498 -0.915 \n\n\n\n\n# use n instead of (n-1) for standardization\nn &lt;- nrow(X); X &lt;- X * sqrt(n / (n - 1))\n\n\n\n        cyl  disp    hp  drat    wt  qsec    vs   am  gear   carb\n[1,] -0.285 0.285 -1.01 0.487 -2.37 0.866 0.186 1.13 0.498 -0.915\n\n\nMore discussion at https://stats.stackexchange.com/questions/288754/lm-ridge-returns-different-results-that-are-from-manual-calculation"
+  },
+  {
+    "objectID": "slides/05-ridge-cv.html#ridge-trace",
+    "href": "slides/05-ridge-cv.html#ridge-trace",
+    "title": "Ridge Regression and Cross Validation \n",
+    "section": "Ridge Trace",
+    "text": "Ridge Trace\n\nridge_fit &lt;- lm.ridge(mpg ~ ., data = mtcars, lambda = 0:40)\nmatplot(coef(ridge_fit)[, -1], type = \"l\", xlab = \"Lambda\", ylab = \"Coefficients\")\ntext(rep(1, 10), coef(ridge_fit)[1,-1], colnames(mtcars)[2:11])\n\n\n\nSelect a value of \\(\\lambda\\) at which the ridge estimates are stable."
+  },
+  {
+    "objectID": "slides/05-ridge-cv.html#methods-for-choosing-lambda",
+    "href": "slides/05-ridge-cv.html#methods-for-choosing-lambda",
+    "title": "Ridge Regression and Cross Validation \n",
+    "section": "Methods for Choosing \\(\\lambda\\)\n",
+    "text": "Methods for Choosing \\(\\lambda\\)\n\n\nMASS::select(ridge_fit)\n\nmodified HKB estimator is 2.59 \nmodified L-W estimator is 1.84 \nsmallest value of GCV  at 15 \n\n\n\nHoerl, Kennard, and Baldwin (1975): \\(\\lambda \\approx \\frac{p \\hat{\\sigma}^2}{{\\bf b}'{\\bf b}}\\)\nLawless and Wang (1976): \\(\\lambda \\approx \\frac{np \\hat{\\sigma}^2}{{\\bf b'X}'{\\bf Xb}}\\)\nGolub, Health, and Wahba (1979): Generalized Cross Validation"
+  },
+  {
+    "objectID": "slides/05-ridge-cv.html#cross-validation",
+    "href": "slides/05-ridge-cv.html#cross-validation",
+    "title": "Ridge Regression and Cross Validation \n",
+    "section": "Cross Validation",
+    "text": "Cross Validation\n\nCross Validation (CV) is a resampling method.\nResampling methods refit a model of interest to data sampled from the training set.\n\nCV can be used to\n\nestimate the test error when there is no test data. (Model assessment)\n\nselect the tuning parameters that controls the model complexity/flexibility. (Model selection)\n\n\n\n\nHence, by adding this to the OLS objective function, the solution is more stable, in the sense that each time we observe a new set of data, this contour looks pretty much the same. This may be interpreted in several different ways such as: 1) the objective function is more convex and less affected by the random samples; 2) the variance of the estimator is smaller because the eigenvalues of \\(\\mathbf{X}^\\text{T}\\mathbf{X}+ n \\lambda \\mathbf{I}\\) are large."
+  },
+  {
+    "objectID": "slides/05-ridge-cv.html#section-1",
+    "href": "slides/05-ridge-cv.html#section-1",
+    "title": "Ridge Regression and Cross Validation \n",
     "section": "",
-    "text": "Source: All of Statistics"
+    "text": "\\(k\\)-Fold Cross Validation\n\nRandomly divide the training set into \\(k\\) folds, of approximately equal size.\nUse 1 fold for validation to compute MSE, and the remaining \\(k - 1\\) partitions for training.\nRepeat \\(k\\) times. Each time a different fold is treated as a validation set.\nAverage \\(k\\) metrics, \\(\\text{MSE}_{CV} = \\frac{1}{k}\\sum_{i=1}^k\\text{MSE}_i\\).\nUse the CV estimate \\(\\text{MSE}_{CV}\\) to select the “best” tuning parameter.\n\n\n\n\n\n\n\nFive-fold cross validation. Source: Data science in a box\n\n\n\n\nCan compute other performance measures."
   },
   {
-    "objectID": "slides/02-overview.html#types-of-learning",
-    "href": "slides/02-overview.html#types-of-learning",
-    "title": "Overview of Statistical Machine Learning 💻",
-    "section": "Types of Learning",
-    "text": "Types of Learning\n\nSource: https://towardsdatascience.com/machine-learning-algorithms-in-laymans-terms-part-1-d0368d769a7b"
+    "objectID": "slides/05-ridge-cv.html#glmnet-package",
+    "href": "slides/05-ridge-cv.html#glmnet-package",
+    "title": "Ridge Regression and Cross Validation \n",
+    "section": "\nglmnet package \n",
+    "text": "glmnet package \n\n\nThe parameter alpha controls the ridge (alpha = 0) and lasso (alpha = 1) penalties.\nSupply a decreasing sequence of lambda values.\nlm.ridge() use \\(SS_{res}\\) and \\(n\\lambda\\), while glmnet() use \\(\\text{MSE}_{\\texttt{Tr}}\\) and \\(\\lambda\\).\nArgument x should be a matrix.\n\n\n\n\nglmnet(x = data.matrix(mtcars[, -1]), \n       y = mtcars$mpg, \n       alpha = 0, \n       lambda = 5:0/nrow(mtcars))\n\n\n\nlm.ridge(formula = mpg ~ ., \n         data = mtcars, \n         lambda = 5:0/nrow(mtcars))\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n\nlm.ridge() and glmnet() coefficients do not match exactly, specially when transforming back to original scale.\nNo need to worry too much as we focus on predictive performance.\n\n\n\n\n\n\nhttps://stats.stackexchange.com/questions/74206/ridge-regression-results-different-in-using-lm-ridge-and-glmnet"
   },
   {
-    "objectID": "slides/02-overview.html#supervised-learning",
-    "href": "slides/02-overview.html#supervised-learning",
-    "title": "Overview of Statistical Machine Learning 💻",
-    "section": "Supervised Learning",
-    "text": "Supervised Learning\n\nResponse Y (output, outcome, target, label, dependent/endogenous variable)\nVector of p predictors X = (X_1, X_2, \\dots, X_p) (inputs, features, regressors, covariates, explanatory/exogenous/independent variable).\n\n\n\nRegression: Y is numeric (e.g price, blood pressure). (if p = 1, simple regression; if p &gt; 1, multiple regression)\nClassification: Y is categorical (e.g survived/died, digit 0-9 (MNIST), cancer class of tissue sample).\n\n\n\n\nTraining data \\mathcal{D} = \\{(x_1, y_1), \\dots ,(x_n , y_n)\\} =\\{(x_i, y_i)\\}_{i=1}^n, x_i \\in \\mathbf{R}^p, y_i \\in \\mathbf{R}^d.\n\n\n\nGoal: Use training data (E) to train our model for better (w.r.t. P) inference/prediction (T) on the response.\n\nLearn a mapping from inputs to outputs Y = f(X)."
+    "objectID": "slides/05-ridge-cv.html#k-fold-cross-validation-using-cv.glmnet",
+    "href": "slides/05-ridge-cv.html#k-fold-cross-validation-using-cv.glmnet",
+    "title": "Ridge Regression and Cross Validation \n",
+    "section": "\n\\(k\\)-Fold Cross Validation using cv.glmnet()1\n",
+    "text": "\\(k\\)-Fold Cross Validation using cv.glmnet()1\n\n\nThe \\(\\lambda\\) values are automatically selected, on the \\(\\log_{e}\\) scale.\n\n\nridge_cv_fit &lt;- cv.glmnet(x = data.matrix(mtcars[, -1]), y = mtcars$mpg, alpha = 0,\n                          nfolds = 10, type.measure = \"mse\")\nplot(ridge_cv_fit$glmnet.fit, \"lambda\")\n\n\n\n\n\n\n\n\nWhy s and not lambda? In case we want to allow one to specify the model size in other ways in the future. s: Value(s) of the penalty parameter lambda at which predictions are required. Default is the entire sequence used to create the model.\nThere are other ways to do CV for ridge regression in R, for example, the caret (Classification And REgression Training) package and the rsample package in tidymodels ecosystem."
   },
   {
-    "objectID": "slides/02-overview.html#regression-example",
-    "href": "slides/02-overview.html#regression-example",
-    "title": "Overview of Statistical Machine Learning 💻",
-    "section": "Regression Example",
-    "text": "Regression Example\n\nGoal: Establish the relationship between salary and demographic variables.\n\n\nSource: ISL Fig. 1.1"
+    "objectID": "slides/05-ridge-cv.html#determine-lambda",
+    "href": "slides/05-ridge-cv.html#determine-lambda",
+    "title": "Ridge Regression and Cross Validation \n",
+    "section": "Determine \\(\\lambda\\)\n",
+    "text": "Determine \\(\\lambda\\)\n\n\n\n\nplot(ridge_cv_fit)\n\n\n\n\n\n\n\n\n\nridge_cv_fit$lambda.min\n\n[1] 2.75\n\n# largest lambda s.t. error is within 1 s.e of the min\nridge_cv_fit$lambda.1se \n\n[1] 16.1\n\ncoef(ridge_cv_fit, s = \"lambda.min\")\n\n11 x 1 sparse Matrix of class \"dgCMatrix\"\n                  s1\n(Intercept) 21.11734\ncyl         -0.37134\ndisp        -0.00525\nhp          -0.01161\ndrat         1.05477\nwt          -1.23420\nqsec         0.16245\nvs           0.77196\nam           1.62381\ngear         0.54417\ncarb        -0.54742\n\n\n\n\ncoef(fit2, s = “lambda.1se”) This plots the cross-validation curve (red dotted line) along with upper and lower standard deviation curves along the 𝜆 sequence (error bars). Two special values along the 𝜆 sequence are indicated by the vertical dotted lines. lambda.min is the value of 𝜆 that gives minimum mean cross-validated error, while lambda.1se is the value of 𝜆 that gives the most regularized model such that the cross-validated error is within one standard error of the minimum."
   },
   {
-    "objectID": "slides/02-overview.html#statistics-nah-machine-learning-neat",
-    "href": "slides/02-overview.html#statistics-nah-machine-learning-neat",
-    "title": "Overview of Statistical Machine Learning 💻",
-    "section": "Statistics Nah… Machine Learning Neat!",
-    "text": "Statistics Nah… Machine Learning Neat!\n\nSource: https://towardsdatascience.com/the-actual-difference-between-statistics-and-machine-learning-64b49f07ea3"
+    "objectID": "slides/05-ridge-cv.html#generalized-cross-validation",
+    "href": "slides/05-ridge-cv.html#generalized-cross-validation",
+    "title": "Ridge Regression and Cross Validation \n",
+    "section": "Generalized Cross-Validation",
+    "text": "Generalized Cross-Validation\n\nThe generalized cross-validation (GCV) is a modified version of the leave-one-out CV (\\(n\\)-fold CV).\nThe GCV criterion is given by \\[\\text{GCV}(\\lambda) = \\frac{1}{n}\\sum_{i=1}^n \\left[ \\frac{y_i - x_i' \\widehat{\\boldsymbol \\beta}^\\text{r}_\\lambda}{1 - \\frac{\\text{Trace}(\\mathbf{S}_\\lambda)}{n}} \\right]^2\\]\n\nwhere \\(\\mathbf{S}_\\lambda\\) is the hat matrix corresponding to the ridge regression:\n\\[\\mathbf{S}_\\lambda = \\mathbf{X}(\\mathbf{X}' \\mathbf{X}+ n\\lambda \\mathbf{I})^{-1} \\mathbf{X}'\\]\nThe interesting fact about leave-one-out CV in the linear regression setting is that we do not need to explicitly fit all leave-one-out models.\n\nESL p. 244\nlm.ridge code"
   },
   {
-    "objectID": "slides/02-overview.html#statistics-nah-machine-learning-neat-1",
-    "href": "slides/02-overview.html#statistics-nah-machine-learning-neat-1",
-    "title": "Overview of Statistical Machine Learning 💻",
-    "section": "Statistics Nah… Machine Learning Neat!",
-    "text": "Statistics Nah… Machine Learning Neat!"
+    "objectID": "slides/05-ridge-cv.html#generalized-cross-validation-1",
+    "href": "slides/05-ridge-cv.html#generalized-cross-validation-1",
+    "title": "Ridge Regression and Cross Validation \n",
+    "section": "Generalized Cross-Validation",
+    "text": "Generalized Cross-Validation\n\n\n\nplot(ridge_fit$lambda, \n     ridge_fit$GCV, \n     type = \"l\", col = \"darkgreen\", \n     ylab = \"GCV\", xlab = \"Lambda\", \n     lwd = 3)\n\n\n\n\n\n\n\n\n\nidx &lt;- which.min(ridge_fit$GCV)\nridge_fit$lambda[idx]\n\n[1] 15\n\nround(coef(ridge_fit)[idx, ], 2)\n\n        cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb \n21.13 -0.37 -0.01 -0.01  1.05 -1.23  0.16  0.77  1.62  0.54 -0.55 \n\n\n\n\nSelect the best \\(\\lambda\\) that produces the smallest GCV.\nYou can clearly see that the GCV decreases initially, as \\(\\lambda\\) increases, this is because the reduced variance is more beneficial than the increased bias. However, as \\(\\lambda\\) increases further, the bias term will eventually dominate and causing the overall prediction error to increase. The fitted MSE under this model is\n\n\n\n\nmssc6250-s25.github.io/website"
   },
   {
-    "objectID": "slides/02-overview.html#classification-example",
-    "href": "slides/02-overview.html#classification-example",
-    "title": "Overview of Statistical Machine Learning 💻",
-    "section": "Classification Example",
-    "text": "Classification Example\n\nGoal: Build a customized spam filtering system\n\n\nSource: http://penplusbytes.org/strategies-for-dealing-with-e-mail-spam/"
+    "objectID": "slides/01-syllabus.html#my-journey",
+    "href": "slides/01-syllabus.html#my-journey",
+    "title": "Welcome Aboard 🙌",
+    "section": "My Journey",
+    "text": "My Journey\n\nAssistant Professor (2020/08 - )\n\n\n\n\n\n\n\n\n\n\nPostdoctoral Fellow\n\n\n\n\n\n\n\n\n\n\nPhD in Statistics and Applied Mathematics\n\n\n\n\n\n\n\n\n\n\nMA in Economics/PhD program in Statistics\n\n\n\n\n\n\n\n\n\nAfter college, working and doing military service for several years, I came to the US for my PhD degree. Originally I would like to study economics, but then I switched my major to statistics.\n\nI got my master degree in economics from Indiana University Bloomington, then I transferred to UC Santa Cruz to finish my PhD studies.\nThen I spent two years doing my postdoctoral research at Rice University in Houston, Texas.\nFinally, in fall 2020, I came to Marquette as an assistant professor.\nMidwest/Indiana-West/California-South/Texas-Midwest/Wisconsin\nBeen to any one of these universities/cities?\nThe most beautiful campus.\nWho are international students? I can totally understand how hard studying and living in another country. Feel free to share your stories or difficulties, and I am more than happy to help you if you have any questions.\nPoor listening and speaking skills. I was shy.\nOK so, this is my background. How about you introducing yourself as well. You can share anything, your major, hobbies, your favorite food, what do you want to do after graduation, anything,\nI have the class list. I’d like to learn your face and remember your name. You know, you all wear a mask. It’s hard to recognize you and connect your name and your face.\nWhen I call your name, you can say something about yourself. No need to be long, couple of seconds are good."
   },
   {
-    "objectID": "slides/02-overview.html#classification-example-1",
-    "href": "slides/02-overview.html#classification-example-1",
-    "title": "Overview of Statistical Machine Learning 💻",
-    "section": "Classification Example",
-    "text": "Classification Example\n\n\n\n\nSource: https://www.yesware.com/blog/email-spam/\n\n\n\n\nData: 4601 emails sent to George at HP, before 2000. Each is labeled as spam or email.\nInputs: relative frequencies of 57 of the commonly occurring words and punctuation marks.\n\n\n\n\n\nSource: ESL Tbl. 1.1"
+    "objectID": "slides/01-syllabus.html#my-research",
+    "href": "slides/01-syllabus.html#my-research",
+    "title": "Welcome Aboard 🙌",
+    "section": "My Research",
+    "text": "My Research\n\nBayesian spatio-temporal modeling and machine learning algorithms in neuroimaging\nBayesian deep learning for image classification\nEfficient MCMC for high dimensional regression\nData science education\n\n\n\nfMRI\n\n\n\n\n\n\n\n\n\nEEG"
   },
   {
-    "objectID": "slides/02-overview.html#objectives-of-supervised-learning",
-    "href": "slides/02-overview.html#objectives-of-supervised-learning",
-    "title": "Overview of Statistical Machine Learning 💻",
-    "section": "Objectives of Supervised Learning",
-    "text": "Objectives of Supervised Learning\nBased on the training data (E) we’d like to :\n\n(T) Prediction: Accurately predict unseen test cases.\n\nGiven a new test input (age, year, education), what is predicted salary level?\nGiven a new bunch of words in the email, the email is a spam or normal message?\n\n\n\n\n\n(T) Inference Understand which inputs affect the outcome, and how.\n\nIf education is up one level, how much salary will increase on average?\nIf “!” increases one more time, how much percentage does the probability of being labeled as spam go up?\n\n\n\n\n\n\n(P) Assess the quality of our predictions and inferences.\n\nUse evalution metrics to assess the performance of a machine learning model/algorithm."
+    "objectID": "slides/01-syllabus.html#how-to-reach-me",
+    "href": "slides/01-syllabus.html#how-to-reach-me",
+    "title": "Welcome Aboard 🙌",
+    "section": "How to Reach Me",
+    "text": "How to Reach Me\n\nOffice hours TuTh 4:50 - 5:50 PM and Wed 12 - 1 PM in Cudahy Hall 353.\n📧 cheng-han.yu@marquette.edu\n\nAnswer your question within 24 hours.\nExpect a reply on Monday if shoot me a message on weekends.\nStart your subject line with [mssc6250] followed by a clear description of your question.\n\n\n\n\n\nI will NOT reply your e-mail if … Check the email policy in the syllabus!"
   },
   {
-    "objectID": "slides/02-overview.html#unsupervised-learning",
-    "href": "slides/02-overview.html#unsupervised-learning",
-    "title": "Overview of Statistical Machine Learning 💻",
-    "section": "Unsupervised Learning",
-    "text": "Unsupervised Learning\n\nNo outcome variable, just a set of features measured on a set of samples.\nOur training sample is \\mathcal{D} = \\{x_1, \\dots, x_n\\}, x_i \\in \\mathbf{R}^p.\n\n\n\nObjective is more fuzzy\n\nfind groups of samples or features that behave similarly (Clustering)\n\nfind linear combinations of features with the most variation (Dimension Reduction).\n\n\n\n\n\n\nDifficult to know how well you are doing.\nCan be useful as a pre-processing step for supervised learning."
+    "objectID": "slides/01-syllabus.html#prerequisites",
+    "href": "slides/01-syllabus.html#prerequisites",
+    "title": "Welcome Aboard 🙌",
+    "section": "Prerequisites",
+    "text": "Prerequisites\n\nOn bulletin: MATH 4720 (Intro to Statistics), MATH 3100 (Linear Algebra) and/or MSSC 5780 (Regression Analysis)\nProgramming experience (Who does machine learning without coding?)\n\n\n\nHaving taken MSSC 5700 (Probability) and MSSC 5710 (Stats Inference) or other math and statistics courses (Stats Computing, etc) is recommended."
   },
   {
-    "objectID": "slides/02-overview.html#clustering-example",
-    "href": "slides/02-overview.html#clustering-example",
-    "title": "Overview of Statistical Machine Learning 💻",
-    "section": "Clustering Example",
-    "text": "Clustering Example\n\nCustomer Segmentation: dividing customers into groups or clusters on the basis of common characteristics.\n\n\nSource: https://www.datacamp.com/community/tutorials/introduction-customer-segmentation-python"
+    "objectID": "slides/01-syllabus.html#textbook",
+    "href": "slides/01-syllabus.html#textbook",
+    "title": "Welcome Aboard 🙌",
+    "section": "Textbook",
+    "text": "Textbook\n\n\n\n\n(ISL) An Introduction to Statistical Learning, by James et al. Publisher: Springer. \n\nDiscuss all chapters except Chapter 11 (survival analysis) and 13 (multiple testing).\nR and Python code\n\nIn the Preface,\n\n… for advanced undergraduates or master’s students in Statistics or related quantitative fields,\n\n\n… concentrate more on the applications of the methods and less on the mathematical details."
   },
   {
-    "objectID": "slides/02-overview.html#deep-learning",
-    "href": "slides/02-overview.html#deep-learning",
-    "title": "Overview of Statistical Machine Learning 💻",
-    "section": "Deep Learning",
-    "text": "Deep Learning\n\nAn (artifical) neural network is a machine learning model inspired by the biological neural networks that constitute animal brains.\n\n\n\n\n\nSource: Wiki"
+    "objectID": "slides/01-syllabus.html#optional-references-1",
+    "href": "slides/01-syllabus.html#optional-references-1",
+    "title": "Welcome Aboard 🙌",
+    "section": "Optional References",
+    "text": "Optional References\n\n\n\n(MML) Mathematics for Machine Learning, by Marc Peter Deisenroth, A. Aldo Faisal, and Cheng Soon Ong. Publisher: Cambridge University Press.\nFocus on the mathematical concepts behind the models"
   },
   {
-    "objectID": "slides/02-overview.html#section-2",
-    "href": "slides/02-overview.html#section-2",
-    "title": "Overview of Statistical Machine Learning 💻",
-    "section": "",
-    "text": "A neural network with several hidden layers is called a deep neural network, or deep learning.\n\nSource: ISL Ch 10"
+    "objectID": "slides/01-syllabus.html#optional-references-2",
+    "href": "slides/01-syllabus.html#optional-references-2",
+    "title": "Welcome Aboard 🙌",
+    "section": "Optional References",
+    "text": "Optional References\n\n\n\n(PMLI) Probabilistic Machine Learning: An Introduction, by Kevin Murphy. Publisher: MIT Press.\nSelf-contained with lots of mathematics foundations\nPython code"
   },
   {
-    "objectID": "slides/02-overview.html#accuracy-and-interpretability-trade-off",
-    "href": "slides/02-overview.html#accuracy-and-interpretability-trade-off",
-    "title": "Overview of Statistical Machine Learning 💻",
-    "section": "Accuracy and Interpretability Trade-Off",
-    "text": "Accuracy and Interpretability Trade-Off\n\n\n\n\nSource: ISL Fig. 2.7\n\n\n\n\n\nmssc6250-s25.github.io/website"
+    "objectID": "slides/01-syllabus.html#optional-references-3",
+    "href": "slides/01-syllabus.html#optional-references-3",
+    "title": "Welcome Aboard 🙌",
+    "section": "Optional References",
+    "text": "Optional References\n\n\n\n(PMLA) Probabilistic Machine Learning: Advanced Topics, by Kevin Murphy. Publisher: MIT Press.\nPhD level\nProbabilistic or distributional-based"
   },
   {
-    "objectID": "slides/03-bias-var.html#supervised-learning-1",
-    "href": "slides/03-bias-var.html#supervised-learning-1",
-    "title": "Bias-Variance Tradeoff 🎯",
-    "section": "Supervised Learning",
-    "text": "Supervised Learning\nSupervised learning investigates and models the relationships between responses and inputs."
+    "objectID": "slides/01-syllabus.html#optional-references-4",
+    "href": "slides/01-syllabus.html#optional-references-4",
+    "title": "Welcome Aboard 🙌",
+    "section": "Optional References",
+    "text": "Optional References\n\n\n\n(ESL) The Elements of Statistical Learning, 2nd edition, by Hastie et. al. Publisher: Springer.\nFor PhD students or researchers in mathematical sciences\nFrequentist-based"
   },
   {
-    "objectID": "slides/03-bias-var.html#relationship-as-functions",
-    "href": "slides/03-bias-var.html#relationship-as-functions",
-    "title": "Bias-Variance Tradeoff 🎯",
-    "section": "Relationship as Functions",
-    "text": "Relationship as Functions\n\nRepresent relationships between variables using functions y = f(x).\n\nPlug in the inputs and receive the output.\n\ny = f(x) = 3x + 7 is a function with input x and output y.\nIf x = 5, y = 3 \\times 5 + 7 = 22.\n\n\n\n\n\nIn mathematics, how do we describe a Relationship Between Variables? We use a function. Right.\nThe function y = f(x) gives us the relationship between an output Y and one or more inputs x.\n\nYou plug in the values of inputs and receive back the output value.\nFor example, the formula y = f(x) = 3x + 7 is a function with input x and output y. If x = 5, y = 3 \\times 5 + 7 = 22.\n\n\nBecause this is a linear function, we know that x and y are linearly related.\nWith a value of x, I can give you 100% correct value of y, which is right on this straight line. right. In other words, their relationship is 100% deterministic."
+    "objectID": "slides/01-syllabus.html#course-website---httpsmssc6250-s25.github.iowebsite",
+    "href": "slides/01-syllabus.html#course-website---httpsmssc6250-s25.github.iowebsite",
+    "title": "Welcome Aboard 🙌",
+    "section": "Course Website - https://mssc6250-s25.github.io/website/\n",
+    "text": "Course Website - https://mssc6250-s25.github.io/website/"
   },
   {
-    "objectID": "slides/03-bias-var.html#different-relationships",
-    "href": "slides/03-bias-var.html#different-relationships",
-    "title": "Bias-Variance Tradeoff 🎯",
-    "section": "Different Relationships",
-    "text": "Different Relationships\n\n\n\nCan you come up with any real-world examples describing relationships between variables deterministically?\n\n\nThe relationship between x and y can be more than linear.\nThe relationship can be also quadratic, cubic or any other possible relationship."
+    "objectID": "slides/01-syllabus.html#learning-management-system-d2l",
+    "href": "slides/01-syllabus.html#learning-management-system-d2l",
+    "title": "Welcome Aboard 🙌",
+    "section": "Learning Management System (D2L)",
+    "text": "Learning Management System (D2L)\n\n\n\n\n\nNews\nSubmit your homework Assessments &gt; Dropbox.\nCheck your grade Assessments &gt; Grades."
   },
   {
-    "objectID": "slides/03-bias-var.html#different-relationships-1",
-    "href": "slides/03-bias-var.html#different-relationships-1",
-    "title": "Bias-Variance Tradeoff 🎯",
-    "section": "Different Relationships",
-    "text": "Different Relationships\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSource: https://www.ck12.org/physics/acceleration-due-to-gravity/lesson/Acceleration-Due-to-Gravity-MS-PS/\n\n\n\n\n\n\nHere I give your two examples. The first example is the conversion of F and C degrees. Their relationship is linear and F = 32 + 1.8 C.\nSo you give me a C degree, I can tell you its corresponding F degree fro sure. Right.\nThe second example comes from physics. the displacement of an object is a quadratic function of time.\nSo here s(t) = v0 * t + 0.5 * a * t^2. v0 is the initial velocity, and a is acceleration, and t is time.\nAgain the relationship between displacement and time is 100% deterministic.\nA value of time corresponds to an unique value of displacement given v0 and a."
+    "objectID": "slides/01-syllabus.html#grading-policy",
+    "href": "slides/01-syllabus.html#grading-policy",
+    "title": "Welcome Aboard 🙌",
+    "section": "Grading Policy ✨",
+    "text": "Grading Policy ✨\n\nThe grade is earned out of 1000 total points distributed as follows:\n\nHomework: 500 pts\nMidterm mini-project presentations: 300 pts\nFinal project: 200 pts\n\n\n\n❌ No extra credit projects/homework/exam to compensate for a poor grade."
   },
   {
-    "objectID": "slides/03-bias-var.html#relationship-between-variables-is-not-perfect",
-    "href": "slides/03-bias-var.html#relationship-between-variables-is-not-perfect",
-    "title": "Bias-Variance Tradeoff 🎯",
-    "section": "Relationship between Variables is Not Perfect",
-    "text": "Relationship between Variables is Not Perfect\n\n\n\nCan you provide some real examples that the variables are related each other, but not perfectly related?"
+    "objectID": "slides/01-syllabus.html#grade-percentage-conversion",
+    "href": "slides/01-syllabus.html#grade-percentage-conversion",
+    "title": "Welcome Aboard 🙌",
+    "section": "Grade-Percentage Conversion",
+    "text": "Grade-Percentage Conversion\n\nYour final grade is based on your percentage of pts earned out of 1000 pts.\n\n[x, y) means greater than or equal to x and less than y.\n\n\n\n\n\n\nGrade\nPercentage\n\n\n\nA\n[94, 100]\n\n\nA-\n[90, 94)\n\n\nB+\n[87, 90)\n\n\nB\n[83, 87)\n\n\nB-\n[80, 83)\n\n\nC+\n[77, 80)\n\n\nC\n[70, 77)\n\n\nF\n[0, 70)"
   },
   {
-    "objectID": "slides/03-bias-var.html#relationship-between-variables-is-not-perfect-1",
-    "href": "slides/03-bias-var.html#relationship-between-variables-is-not-perfect-1",
-    "title": "Bias-Variance Tradeoff 🎯",
-    "section": "Relationship between Variables is Not Perfect",
-    "text": "Relationship between Variables is Not Perfect\n\n\n💵 In general, one with more years of education earns more.\n💵 Any two with the same years of education may have different annual income.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHere I give you a simple example: the relationship between income and years of education.\n💵 In general, one with more years of education earns more.\n💵 Any two with the same years of education may have different annual income.\nBecause your income level depends on so many other factors, not just years of education.\nSo when you plot the scatter plot of the two variables, you will find that there is some trend, but the data are sort of scattered or jittered or variated around some function that describes the relationship between income the years of education.\n\nRed dots are observed values or the years of education and income pairs."
+    "objectID": "slides/01-syllabus.html#homework-500-pts",
+    "href": "slides/01-syllabus.html#homework-500-pts",
+    "title": "Welcome Aboard 🙌",
+    "section": "Homework (500 pts)",
+    "text": "Homework (500 pts)\n\n\nAssessments &gt; Dropbox and upload your homework in PDF format.\n❌ No make-up homework.\nDue Friday 11:59 PM  (Hard deadline and no late submission).\nYou have at least one week to finish your homework."
   },
   {
-    "objectID": "slides/03-bias-var.html#variation-around-the-functionmodel",
-    "href": "slides/03-bias-var.html#variation-around-the-functionmodel",
-    "title": "Bias-Variance Tradeoff 🎯",
-    "section": "Variation around the Function/Model",
-    "text": "Variation around the Function/Model\n\n\nWhat are the unexplained variation coming from?\n\n\n\n\n\n\nOther factors accounting for parts of variability of income.\n\nAdding more explanatory variables to a model can reduce the variation size around the model.\n\n\nPure measurement error.\nJust that randomness plays a big role. 🤔\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhat other factors (variables) may affect a person’s income?\n\n\n\nyour income = f(years of education, major, GPA, college, parent's wealth, ...)\n\nAnd the data Variation around the Function, or in general the regression model is just as important as the model, if not more!\n\nBasically, what statistics does is explain variation in the context of what remains unexplained.\nThe scatter plot suggests that there might be other factors that account for large parts of variability.\nIf that is the case, adding more explanatory variables ( Xs ) to a model can sometimes usefully reduce the size of the scatter around the model.\nPerhaps just that randomness plays a big role."
+    "objectID": "slides/01-syllabus.html#mini-project-presentation-300-pts",
+    "href": "slides/01-syllabus.html#mini-project-presentation-300-pts",
+    "title": "Welcome Aboard 🙌",
+    "section": "Mini-Project Presentation (300 pts)",
+    "text": "Mini-Project Presentation (300 pts)\n\nThere will be 2 in-class mini-project presentations (150 pts each).\nLearn from each other by presenting and discussing the assigned topics.\nMore details about the activity will be released later."
   },
   {
-    "objectID": "slides/03-bias-var.html#supervised-learning-mapping",
-    "href": "slides/03-bias-var.html#supervised-learning-mapping",
-    "title": "Bias-Variance Tradeoff 🎯",
-    "section": "Supervised Learning Mapping",
-    "text": "Supervised Learning Mapping\n\n\n\nExplain the relationship between X and Y and make predictions through a model Y = f(X) + \\epsilon\n\n\n\\epsilon: irreducible random error (Aleatoric Uncertainty)\n\nindependent of X\n\n\nmean zero with some variance.\n\n\n\nf(\\cdot): unknown function1 describing the relationship between X and (the mean of) Y. (Epistemic Uncertainty)\n\n\n\n\nIn Intro Stats, what is the form of f and what assumptions you made on the random error \\epsilon ?\n\n\n\n\n\nf(X) = \\beta_0 + \\beta_1X with unknown parameters \\beta_0 and \\beta_1.\n\n\\epsilon \\sim N(0, \\sigma^2).\n\n\nOK. Now after collecting the data of the variables we are interested, we know their relationship, most of the time, is not perfect, and stochastic in some way and in some sense.\nAnd how do we model such stochastic relationship? Well the answer is a regression model.\nSuppose we are interested in the relationship between two variables, call X and Y. In particular, we like to know how changes of X affect value of Y, or we want to use X to predict Y.\nIn this sense, Y is called response, outcome, label, dependent variable, e.g., income\n\n\nX is called predictor, covariate, feature, regressor, explanatory or independent variable, e.g., years of education, which is known and fixed.\nExplain the relationship between X and Y and make predictions through a model Y = f(X) + \\epsilon. This is a very general regression model we can built to learn the relationship b/w x and y.\n\nf(\\cdot) is fixed but unknown and describes the true relationship between X and Y. \n\n\n\\epsilon is a irreducible random error which is assumed to be independent of X and has mean zero with some variance.\n\n\\epsilon is used to represent those measurement errors or the variation that cannot be explained or captured by the predictor X.\nIntro Stats:\n\n\nf(X) = \\beta_0 + \\beta_1X with unknown parameters \\beta_0 and \\beta_1.\n\n\\epsilon \\sim N(0, \\sigma^2).\n\n\n\nX and Y are assumed to be linearly related, which may not be correct.\nNext week, we will learn simple linear regression from the scratch and in much more detail. Here I just give you an overview.\n\n\nf(\\cdot) is assumed fixed from frequentist point of view; f(\\cdot) is random in the Bayesian framework."
+    "objectID": "slides/01-syllabus.html#final-project-200-pts",
+    "href": "slides/01-syllabus.html#final-project-200-pts",
+    "title": "Welcome Aboard 🙌",
+    "section": "Final Project (200 pts)",
+    "text": "Final Project (200 pts)\n\nThe final project is submitted as a paper (and some relevant work?)\nThe project submission deadline is Thursday, 5/8, 10 AM.\nMore details about the project will be released later."
   },
   {
-    "objectID": "slides/03-bias-var.html#true-unknown-function-f-of-the-model-y-fx-epsilon",
-    "href": "slides/03-bias-var.html#true-unknown-function-f-of-the-model-y-fx-epsilon",
-    "title": "Bias-Variance Tradeoff 🎯",
-    "section": "True Unknown Function f of the Model Y = f(X) + \\epsilon\n",
-    "text": "True Unknown Function f of the Model Y = f(X) + \\epsilon\n\n\n\n\nBlue curve: true underlying relationship between (the mean) income and years of education.\n\nBlack lines: error associated with each observation\n\n\n\nBig problem: f(x) is unknown and needs to be estimated.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLet’s go back to the income-education example. Red dots are observed values or the years of education and income pairs. Suppose we like to use a regression model y = f(x) + \\epsilon to describe the relationship between income and education.\nAnd the *Blue** curve on the right shows the true underlying relationship between income and years of education, which is the function f in our regression model.\nAnd each Black vertical line indicates an error associated with each observation.\nSo again, each red dot or observation is the value of the function f(x) plus some random error with its magnitude shown in a black vertical line.\nAgain, in regression, we assume years of education is fixed. It is income level that varies around the function f."
+    "objectID": "slides/01-syllabus.html#which-programming-language",
+    "href": "slides/01-syllabus.html#which-programming-language",
+    "title": "Welcome Aboard 🙌",
+    "section": "Which Programming Language?",
+    "text": "Which Programming Language?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUse any language you prefer!"
   },
   {
-    "objectID": "slides/03-bias-var.html#how-to-estimate-f",
-    "href": "slides/03-bias-var.html#how-to-estimate-f",
-    "title": "Bias-Variance Tradeoff 🎯",
-    "section": "How to Estimate f?",
-    "text": "How to Estimate f?\n\nUse training data \\mathcal{D} = \\{ (x_i, y_i) \\}_{i=1}^n (E) to train or teach our model to learn f (T).\nUse test data \\mathcal{D}_{test} = \\{ (x_j, y_j) \\}_{j=1}^m (E) to test or evaluate how well the model makes inference or prediction (P).\n\n\n\nModels are either parametric or nonparametric.\n\n\n\n\n\nParametric methods involve a two-step model-based approach:\n\n1️⃣ Make an assumption about the shape of f, e.g. linear regression  f(X) = \\beta_0 + \\beta_1X_1 + \\beta_2X_2 + \\dots + \\beta_pX_p \n\n2️⃣ Use \\mathcal{D} to train the model, e.g., learn the parameters \\beta_j, j = 0, \\dots, p using least squares.\n\n\n\n\n\n\n\nNonparametric methods do not make assumptions about the shape of f.\n\nSeek an estimate of f that gets close to the data points without being too rough or wiggly."
-  },
-  {
-    "objectID": "slides/03-bias-var.html#parametric-vs.-nonparametric-models",
-    "href": "slides/03-bias-var.html#parametric-vs.-nonparametric-models",
-    "title": "Bias-Variance Tradeoff 🎯",
-    "section": "Parametric vs. Nonparametric Models",
-    "text": "Parametric vs. Nonparametric Models\n\n\n\nParametric (Linear regression)\n\n\n\n\n\n\n\n\n\n\n\nNonparametric (LOESS)"
-  },
-  {
-    "objectID": "slides/03-bias-var.html#no-free-lunch",
-    "href": "slides/03-bias-var.html#no-free-lunch",
-    "title": "Bias-Variance Tradeoff 🎯",
-    "section": "No Free Lunch",
-    "text": "No Free Lunch\n\n\nThere is no free lunch in machine learning: no one method dominates all others over all possible data sets.\n\n\n\nAll models are wrong, but some are useful. – George Box (1919-2013)\n\n\n\nFor any given training data, decide which method (model & algorithm) produces the best results.\nSelecting the best approach is one of the most challenging parts of machine learning.\nNeed some way to measure how well its predictions actually match the training/test data.\n\n\n\n\nFor numeric y: mean square error (MSE) for y with \\hat{f}, the estimate of f: \\text{MSE}_{\\texttt{Tr}}(y) = \\frac{1}{n} \\sum_{i=1}^n (y_i - \\hat{f}(x_i))^2, \\quad \\quad \\text{MSE}_{\\texttt{Te}}(y) = \\frac{1}{m} \\sum_{j=1}^m (y_j - \\hat{f}(x_j))^2\n\n\n\n\n\nAre \\text{MSE}_{\\texttt{Tr}} and \\text{MSE}_{\\texttt{Te}} the same? When to use which?"
-  },
-  {
-    "objectID": "slides/03-bias-var.html#mean-square-error",
-    "href": "slides/03-bias-var.html#mean-square-error",
-    "title": "Bias-Variance Tradeoff 🎯",
-    "section": "Mean Square Error",
-    "text": "Mean Square Error\n\n\n\\text{MSE}_{\\texttt{Tr}} measures how much \\hat{f}(x_i) is close to the training data y_i (goodness of fit). However, most of the time\n\n\n\n\nWe do not care how well the method works on the training data.\n\n\n\n\nWe are interested in the predictive accuracy when we apply our method to previously unseen test data.\n\n\nWe want to know whether \\hat{f}(x_j) is (approximately) equal to y_j, where (x_j, y_j) is previously unseen or a test data point not used in training our model.\n\n\n\n\n\\text{MSE}_{\\texttt{Tr}} or \\text{MSE}_{\\texttt{Te}} is smaller?\n\n\n\n\n\n\\text{MSE}_{\\texttt{Tr}} &lt; \\text{MSE}_{\\texttt{Te}}.\n\n\nTO DO: Provide an EXAMPLE of why training error is smaller\nMost statistical learning methods either directly or indirectly seek to minimize the training MSE.\nTraining data are the information we have and probably only have. Without other constraints or information about how we train the model, we tend to make use of all possible information in the training data to train our model.\nWe want to know whether \\hat{f}(x_j) is (approximately) equal to y_j, where (x_j, y_j) is a previously unseen test observation not used to train the model."
-  },
-  {
-    "objectID": "slides/03-bias-var.html#model-complexityflexibility",
-    "href": "slides/03-bias-var.html#model-complexityflexibility",
-    "title": "Bias-Variance Tradeoff 🎯",
-    "section": "Model Complexity/Flexibility",
-    "text": "Model Complexity/Flexibility\n\nA more complex model produces a more flexible or wiggly regression curve \\hat{f}(x) that matches the training data better.\n\ny = \\beta_0+ \\beta_1x + \\beta_2x^2 + \\cdots + \\beta_{10}x^{10} + \\epsilon is more complex than y = \\beta_0+ \\beta_1x + \\epsilon\n\n\n\n\n\nOverfitting: A too complex model fits the training data extremely well and too hard, picking up some patterns and variations simply caused by random noises that are not the properties of the true f, and not existed in the any unseen test data.  \n\n\n\n\nUnderfitting: A model that is too simple to capture complex patterns or shapes of the true f(x). The estimate \\hat{f}(x) is rigid and far away from data."
-  },
-  {
-    "objectID": "slides/03-bias-var.html#section-2",
-    "href": "slides/03-bias-var.html#section-2",
-    "title": "Bias-Variance Tradeoff 🎯",
-    "section": "",
-    "text": "How \\text{MSE}_{\\texttt{Tr}} and \\text{MSE}_{\\texttt{Te}} change with model complexity?"
-  },
-  {
-    "objectID": "slides/03-bias-var.html#model-complexityflexibility-and-mse",
-    "href": "slides/03-bias-var.html#model-complexityflexibility-and-mse",
-    "title": "Bias-Variance Tradeoff 🎯",
-    "section": "Model Complexity/Flexibility and MSE",
-    "text": "Model Complexity/Flexibility and MSE\n\nIt’s common that no test data are available. Can we select a model that minimize \\text{MSE}_{\\texttt{Tr}}, since the training data and test data appear to be closed related?\n\n\n\n\n\nOrange: Under fit\nGreen: Over fit\nBlue: Best fit\n\\color{darkgray}{\\text{MSE}_{\\texttt{Tr}}} is decreasing with the complexity.\n\\color{red}{\\text{MSE}_{\\texttt{Te}}} is U-shaped: goes down then up with the complexity.\n\n\n\nMSE\nOverfit\nUnderfit\n\n\n\nTrain\ntiny\nbig\n\n\nTest\nbig\nbig\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo! There is no guarantee that the method with the lowest \\text{MSE}_{\\texttt{Tr}} will also have the lowest \\text{MSE}_{\\texttt{Te}}."
-  },
-  {
-    "objectID": "slides/03-bias-var.html#bias-variance-tradeoff",
-    "href": "slides/03-bias-var.html#bias-variance-tradeoff",
-    "title": "Bias-Variance Tradeoff 🎯",
-    "section": "Bias-Variance Tradeoff",
-    "text": "Bias-Variance Tradeoff\nGiven any new input x_0,\n\n\\text{MSE}_{\\hat{f}} = E\\left[\\left(\\hat{f}(x_0) - f(x_0)\\right)^2\\right] = \\left[\\text{Bias}\\left(\\hat{f}(x_0) \\right)\\right]^2 + \\text{Var}\\left(\\hat{f}(x_0)\\right)\nwhere \\text{Bias}\\left(\\hat{f}(x_0) \\right) = E\\left[ \\hat{f}(x_0)\\right] - f(x_0).\n\n\n\n\n\n\n\nWarning\n\n\n\\hat{f}(x_0) is a random variable! Why?\n\n\n\n\n\nThe expected test MSE of y_0 at x_0 is \\text{MSE}_{y_0} = E\\left[\\left(y_0 - \\hat{f}(x_0)\\right)^2\\right] = \\text{MSE}_{\\hat{f}} + \\text{Var}(\\epsilon)\n\n\n\n\n\n\n\nNote\n\n\n\nWe never know the true expected test MSE, and prefer the model with the smallest expected test MSE estimate.\n\n\n\n\n\nMSE can be decomposed into two effects/measures\nMSE is a combination of two performance measures."
-  },
-  {
-    "objectID": "slides/03-bias-var.html#bias-variance-tradeoff-and-model-complexity",
-    "href": "slides/03-bias-var.html#bias-variance-tradeoff-and-model-complexity",
-    "title": "Bias-Variance Tradeoff 🎯",
-    "section": "Bias-Variance Tradeoff and Model Complexity",
-    "text": "Bias-Variance Tradeoff and Model Complexity\n\\text{MSE}_{\\hat{f}} = \\left[\\text{Bias}\\left(\\hat{f}(x_0) \\right)\\right]^2 + \\text{Var}\\left(\\hat{f}(x_0)\\right)\n\nOverfitting: Low bias and High variance\nUnderfitting: High bias and Low variance"
-  },
-  {
-    "objectID": "slides/03-bias-var.html#lab-bias-variance-tradeoff",
-    "href": "slides/03-bias-var.html#lab-bias-variance-tradeoff",
-    "title": "Bias-Variance Tradeoff 🎯",
-    "section": "\nLab: Bias-Variance Tradeoff",
-    "text": "Lab: Bias-Variance Tradeoff\n\nModel 1: Under-fitting y = \\beta_0+\\beta_1x+\\epsilon\nModel 2: Right-fitting y = \\beta_0+\\beta_1x+ \\beta_2x^2 + \\epsilon\nModel 3: Over-fitting y = \\beta_0+\\beta_1x+ \\beta_2x^2 + \\cdots + \\beta_9x^9 + \\epsilon\nTo see expectation/bias and variance, we need replicates of training data."
-  },
-  {
-    "objectID": "course-news.html",
-    "href": "course-news.html",
-    "title": "News/Announcements",
-    "section": "",
-    "text": "Any announcement will be posted in this page. The latest news will also be put on top of the main page.",
-    "crumbs": [
-      "Course Information",
-      "News/Annoucements"
-    ]
-  },
-  {
-    "objectID": "course-overview.html",
-    "href": "course-overview.html",
-    "title": "MSSC 6250 - Statistical Machine Learning (Spring 2025)",
-    "section": "",
-    "text": "The course discuss machine learning from statistical and modeling points of view, covering supervised learning and unsupervised learning models and algorithms. Supervised learning methods include various regression and classification methods, and unsupervised learning methods involves dimension reduction and clustering techniques. Topics include Bayesian linear regression, shrinkage and regularization, regression splines, Gaussian processes, logistic regression, discriminant analysis, nearest neighbors, tree-based methods, principal components, K-means, Gaussian mixture clustering, neural networks, etc.",
-    "crumbs": [
-      "Course Information",
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "weeks/week-2.html",
-    "href": "weeks/week-2.html",
-    "title": "Week 2",
-    "section": "",
-    "text": "Important\n\n\n\nHomework 1 released.",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week-2.html#participate",
-    "href": "weeks/week-2.html#participate",
-    "title": "Week 2",
-    "section": "Participate",
-    "text": "Participate\n🖥️ Slides - Linear Regression\nr fontawesome::fa(\"table\") Data Set - Advertising.csv",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week-2.html#reading-and-resources",
-    "href": "weeks/week-2.html#reading-and-resources",
-    "title": "Week 2",
-    "section": "Reading and Resources",
-    "text": "Reading and Resources\n📖 ISL Ch 3.1 - 3.4\n📖 Dr. Yu MSSC 5780 Regression Analysis Week 1 to 6\n📖 MML Ch 7.1, 8.1, 8.2.1, 8.2.2",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week-2.html#perform",
-    "href": "weeks/week-2.html#perform",
-    "title": "Week 2",
-    "section": "Perform",
-    "text": "Perform\n📋 Homework 1\n\n\n\n\n\nBack to course schedule ⏎",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week-1.html",
-    "href": "weeks/week-1.html",
-    "title": "Week 1",
-    "section": "",
-    "text": "📖 Read the syllabus.\n📖 Get your laptop and computing environment ready!\n📖 Refresh your probability/statistics and linear algebra.",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week-1.html#prepare",
-    "href": "weeks/week-1.html#prepare",
-    "title": "Week 1",
-    "section": "",
-    "text": "📖 Read the syllabus.\n📖 Get your laptop and computing environment ready!\n📖 Refresh your probability/statistics and linear algebra.",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week-1.html#participate",
-    "href": "weeks/week-1.html#participate",
-    "title": "Week 1",
-    "section": "Participate",
-    "text": "Participate\n🖥️ Slides - Welcome to MSSC 6250\n🖥️ Slides - Overview of Machine Learning\n🖥️ Slides - Bias-variance Tradeoff",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week-1.html#reading-and-resources",
-    "href": "weeks/week-1.html#reading-and-resources",
-    "title": "Week 1",
-    "section": "Reading and Resources",
-    "text": "Reading and Resources\n📖 ISL Ch 1, 2\n📖 Dr. Yu MSSC 5780 Probability and Statistics Review\n📖 Dr. Yu MSSC 5780 Linear Algebra Review\n📖 Check any math you need from MML Ch 2 - 6",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week-1.html#perform",
-    "href": "weeks/week-1.html#perform",
-    "title": "Week 1",
-    "section": "Perform",
-    "text": "Perform\n📋 Decide whether this is the right course for you by the drop deadline 1/21.\n\n\n\n\nBack to course schedule ⏎",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "LICENSE.html#creative-commons-attribution-sharealike-4.0-international-public-license",
-    "href": "LICENSE.html#creative-commons-attribution-sharealike-4.0-international-public-license",
-    "title": "Attribution-ShareAlike 4.0 International",
-    "section": "Creative Commons Attribution-ShareAlike 4.0 International Public License",
-    "text": "Creative Commons Attribution-ShareAlike 4.0 International Public License\nBy exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution-ShareAlike 4.0 International Public License (“Public License”). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.\n\nSection 1 – Definitions.\n\nAdapted Material means material subject to Copyright and Similar Rights that is derived from or based upon the Licensed Material and in which the Licensed Material is translated, altered, arranged, transformed, or otherwise modified in a manner requiring permission under the Copyright and Similar Rights held by the Licensor. For purposes of this Public License, where the Licensed Material is a musical work, performance, or sound recording, Adapted Material is always produced where the Licensed Material is synched in timed relation with a moving image.\nAdapter’s License means the license You apply to Your Copyright and Similar Rights in Your contributions to Adapted Material in accordance with the terms and conditions of this Public License.\nBY-SA Compatible License means a license listed at creativecommons.org/compatiblelicenses, approved by Creative Commons as essentially the equivalent of this Public License.\nCopyright and Similar Rights means copyright and/or similar rights closely related to copyright including, without limitation, performance, broadcast, sound recording, and Sui Generis Database Rights, without regard to how the rights are labeled or categorized. For purposes of this Public License, the rights specified in Section 2(b)(1)-(2) are not Copyright and Similar Rights.\nEffective Technological Measures means those measures that, in the absence of proper authority, may not be circumvented under laws fulfilling obligations under Article 11 of the WIPO Copyright Treaty adopted on December 20, 1996, and/or similar international agreements.\nExceptions and Limitations means fair use, fair dealing, and/or any other exception or limitation to Copyright and Similar Rights that applies to Your use of the Licensed Material.\nLicense Elements means the license attributes listed in the name of a Creative Commons Public License. The License Elements of this Public License are Attribution and ShareAlike.\nLicensed Material means the artistic or literary work, database, or other material to which the Licensor applied this Public License.\nLicensed Rights means the rights granted to You subject to the terms and conditions of this Public License, which are limited to all Copyright and Similar Rights that apply to Your use of the Licensed Material and that the Licensor has authority to license.\nLicensor means the individual(s) or entity(ies) granting rights under this Public License.\nShare means to provide material to the public by any means or process that requires permission under the Licensed Rights, such as reproduction, public display, public performance, distribution, dissemination, communication, or importation, and to make material available to the public including in ways that members of the public may access the material from a place and at a time individually chosen by them.\nSui Generis Database Rights means rights other than copyright resulting from Directive 96/9/EC of the European Parliament and of the Council of 11 March 1996 on the legal protection of databases, as amended and/or succeeded, as well as other essentially equivalent rights anywhere in the world.\nYou means the individual or entity exercising the Licensed Rights under this Public License. Your has a corresponding meaning.\n\n\n\nSection 2 – Scope.\n\nLicense grant.\n\nSubject to the terms and conditions of this Public License, the Licensor hereby grants You a worldwide, royalty-free, non-sublicensable, non-exclusive, irrevocable license to exercise the Licensed Rights in the Licensed Material to:\nA. reproduce and Share the Licensed Material, in whole or in part; and\nB. produce, reproduce, and Share Adapted Material.\nExceptions and Limitations. For the avoidance of doubt, where Exceptions and Limitations apply to Your use, this Public License does not apply, and You do not need to comply with its terms and conditions.\nTerm. The term of this Public License is specified in Section 6(a).\nMedia and formats; technical modifications allowed. The Licensor authorizes You to exercise the Licensed Rights in all media and formats whether now known or hereafter created, and to make technical modifications necessary to do so. The Licensor waives and/or agrees not to assert any right or authority to forbid You from making technical modifications necessary to exercise the Licensed Rights, including technical modifications necessary to circumvent Effective Technological Measures. For purposes of this Public License, simply making modifications authorized by this Section 2(a)(4) never produces Adapted Material.\nDownstream recipients.\nA. Offer from the Licensor – Licensed Material. Every recipient of the Licensed Material automatically receives an offer from the Licensor to exercise the Licensed Rights under the terms and conditions of this Public License.\nB. Additional offer from the Licensor – Adapted Material. Every recipient of Adapted Material from You automatically receives an offer from the Licensor to exercise the Licensed Rights in the Adapted Material under the conditions of the Adapter’s License You apply.\nC. No downstream restrictions. You may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, the Licensed Material if doing so restricts exercise of the Licensed Rights by any recipient of the Licensed Material.\nNo endorsement. Nothing in this Public License constitutes or may be construed as permission to assert or imply that You are, or that Your use of the Licensed Material is, connected with, or sponsored, endorsed, or granted official status by, the Licensor or others designated to receive attribution as provided in Section 3(a)(1)(A)(i).\n\nOther rights.\n\nMoral rights, such as the right of integrity, are not licensed under this Public License, nor are publicity, privacy, and/or other similar personality rights; however, to the extent possible, the Licensor waives and/or agrees not to assert any such rights held by the Licensor to the limited extent necessary to allow You to exercise the Licensed Rights, but not otherwise.\nPatent and trademark rights are not licensed under this Public License.\nTo the extent possible, the Licensor waives any right to collect royalties from You for the exercise of the Licensed Rights, whether directly or through a collecting society under any voluntary or waivable statutory or compulsory licensing scheme. In all other cases the Licensor expressly reserves any right to collect such royalties.\n\n\n\n\nSection 3 – License Conditions.\nYour exercise of the Licensed Rights is expressly made subject to the following conditions.\n\nAttribution.\n\nIf You Share the Licensed Material (including in modified form), You must:\nA. retain the following if it is supplied by the Licensor with the Licensed Material:\n\nidentification of the creator(s) of the Licensed Material and any others designated to receive attribution, in any reasonable manner requested by the Licensor (including by pseudonym if designated);\na copyright notice;\na notice that refers to this Public License;\na notice that refers to the disclaimer of warranties;\na URI or hyperlink to the Licensed Material to the extent reasonably practicable;\n\nB. indicate if You modified the Licensed Material and retain an indication of any previous modifications; and\nC. indicate the Licensed Material is licensed under this Public License, and include the text of, or the URI or hyperlink to, this Public License.\nYou may satisfy the conditions in Section 3(a)(1) in any reasonable manner based on the medium, means, and context in which You Share the Licensed Material. For example, it may be reasonable to satisfy the conditions by providing a URI or hyperlink to a resource that includes the required information.\nIf requested by the Licensor, You must remove any of the information required by Section 3(a)(1)(A) to the extent reasonably practicable.\n\nShareAlike.\n\nIn addition to the conditions in Section 3(a), if You Share Adapted Material You produce, the following conditions also apply.\n\nThe Adapter’s License You apply must be a Creative Commons license with the same License Elements, this version or later, or a BY-SA Compatible License.\nYou must include the text of, or the URI or hyperlink to, the Adapter’s License You apply. You may satisfy this condition in any reasonable manner based on the medium, means, and context in which You Share Adapted Material.\nYou may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, Adapted Material that restrict exercise of the rights granted under the Adapter’s License You apply.\n\n\n\nSection 4 – Sui Generis Database Rights.\nWhere the Licensed Rights include Sui Generis Database Rights that apply to Your use of the Licensed Material:\n\nfor the avoidance of doubt, Section 2(a)(1) grants You the right to extract, reuse, reproduce, and Share all or a substantial portion of the contents of the database;\nif You include all or a substantial portion of the database contents in a database in which You have Sui Generis Database Rights, then the database in which You have Sui Generis Database Rights (but not its individual contents) is Adapted Material, including for purposes of Section 3(b); and\nYou must comply with the conditions in Section 3(a) if You Share all or a substantial portion of the contents of the database.\n\nFor the avoidance of doubt, this Section 4 supplements and does not replace Your obligations under this Public License where the Licensed Rights include other Copyright and Similar Rights.\n\n\nSection 5 – Disclaimer of Warranties and Limitation of Liability.\n\nUnless otherwise separately undertaken by the Licensor, to the extent possible, the Licensor offers the Licensed Material as-is and as-available, and makes no representations or warranties of any kind concerning the Licensed Material, whether express, implied, statutory, or other. This includes, without limitation, warranties of title, merchantability, fitness for a particular purpose, non-infringement, absence of latent or other defects, accuracy, or the presence or absence of errors, whether or not known or discoverable. Where disclaimers of warranties are not allowed in full or in part, this disclaimer may not apply to You.\nTo the extent possible, in no event will the Licensor be liable to You on any legal theory (including, without limitation, negligence) or otherwise for any direct, special, indirect, incidental, consequential, punitive, exemplary, or other losses, costs, expenses, or damages arising out of this Public License or use of the Licensed Material, even if the Licensor has been advised of the possibility of such losses, costs, expenses, or damages. Where a limitation of liability is not allowed in full or in part, this limitation may not apply to You.\nThe disclaimer of warranties and limitation of liability provided above shall be interpreted in a manner that, to the extent possible, most closely approximates an absolute disclaimer and waiver of all liability.\n\n\n\nSection 6 – Term and Termination.\n\nThis Public License applies for the term of the Copyright and Similar Rights licensed here. However, if You fail to comply with this Public License, then Your rights under this Public License terminate automatically.\nWhere Your right to use the Licensed Material has terminated under Section 6(a), it reinstates:\n\nautomatically as of the date the violation is cured, provided it is cured within 30 days of Your discovery of the violation; or\nupon express reinstatement by the Licensor.\n\nFor the avoidance of doubt, this Section 6(b) does not affect any right the Licensor may have to seek remedies for Your violations of this Public License.\nFor the avoidance of doubt, the Licensor may also offer the Licensed Material under separate terms or conditions or stop distributing the Licensed Material at any time; however, doing so will not terminate this Public License.\nSections 1, 5, 6, 7, and 8 survive termination of this Public License.\n\n\n\nSection 7 – Other Terms and Conditions.\n\nThe Licensor shall not be bound by any additional or different terms or conditions communicated by You unless expressly agreed.\nAny arrangements, understandings, or agreements regarding the Licensed Material not stated herein are separate from and independent of the terms and conditions of this Public License.\n\n\n\nSection 8 – Interpretation.\n\nFor the avoidance of doubt, this Public License does not, and shall not be interpreted to, reduce, limit, restrict, or impose conditions on any use of the Licensed Material that could lawfully be made without permission under this Public License.\nTo the extent possible, if any provision of this Public License is deemed unenforceable, it shall be automatically reformed to the minimum extent necessary to make it enforceable. If the provision cannot be reformed, it shall be severed from this Public License without affecting the enforceability of the remaining terms and conditions.\nNo term or condition of this Public License will be waived and no failure to comply consented to unless expressly agreed to by the Licensor.\nNothing in this Public License constitutes or may be interpreted as a limitation upon, or waiver of, any privileges and immunities that apply to the Licensor or You, including from the legal processes of any jurisdiction or authority.\n\n\nCreative Commons is not a party to its public licenses. Notwithstanding, Creative Commons may elect to apply one of its public licenses to material it publishes and in those instances will be considered the “Licensor.” The text of the Creative Commons public licenses is dedicated to the public domain under the CC0 Public Domain Dedication. Except for the limited purpose of indicating that material is shared under a Creative Commons public license or as otherwise permitted by the Creative Commons policies published at creativecommons.org/policies, Creative Commons does not authorize the use of the trademark “Creative Commons” or any other trademark or logo of Creative Commons without its prior written consent including, without limitation, in connection with any unauthorized modifications to any of its public licenses or any other arrangements, understandings, or agreements concerning use of licensed material. For the avoidance of doubt, this paragraph does not form part of the public licenses.\nCreative Commons may be contacted at creativecommons.org."
-  },
-  {
-    "objectID": "weeks/week-4.html",
-    "href": "weeks/week-4.html",
-    "title": "Week 4",
-    "section": "",
-    "text": "Important\n\n\n\nHomework 1 due Friday, Feb 9, 11:59 PM",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 4"
-    ]
-  },
-  {
-    "objectID": "weeks/week-4.html#participate",
-    "href": "weeks/week-4.html#participate",
-    "title": "Week 4",
-    "section": "Participate",
-    "text": "Participate\n🖥️ Slides - Lasso\n\nr fontawesome::fa(\"table\") Data Set - Prostate.csv",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 4"
-    ]
-  },
-  {
-    "objectID": "weeks/week-4.html#reading-and-resources",
-    "href": "weeks/week-4.html#reading-and-resources",
-    "title": "Week 4",
-    "section": "Reading and Resources",
-    "text": "Reading and Resources\n📖 ISL Ch 6.1, 6.2",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 4"
-    ]
-  },
-  {
-    "objectID": "weeks/week-4.html#perform",
-    "href": "weeks/week-4.html#perform",
-    "title": "Week 4",
-    "section": "Perform",
-    "text": "Perform\n\n\n\n\nBack to course schedule ⏎",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 4"
-    ]
-  },
-  {
-    "objectID": "weeks/week-3.html",
-    "href": "weeks/week-3.html",
-    "title": "Week 3",
-    "section": "",
-    "text": "Important\n\n\n\nHomework 1 due Friday, Feb 7, 11:59 PM",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 3"
-    ]
-  },
-  {
-    "objectID": "weeks/week-3.html#participate",
-    "href": "weeks/week-3.html#participate",
-    "title": "Week 3",
-    "section": "Participate",
-    "text": "Participate\n🖥️ Slides - Ridge Regression and Cross Validation\nr fontawesome::fa(\"table\") Data Set - mtcars.csv",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 3"
-    ]
-  },
-  {
-    "objectID": "weeks/week-3.html#reading-and-resources",
-    "href": "weeks/week-3.html#reading-and-resources",
-    "title": "Week 3",
-    "section": "Reading and Resources",
-    "text": "Reading and Resources\n📖 ISL Ch 5.1, 6.2.1\n📖 MML Ch 8.2.3 - 8.2.4",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 3"
-    ]
-  },
-  {
-    "objectID": "weeks/week-3.html#exercise",
-    "href": "weeks/week-3.html#exercise",
-    "title": "Week 3",
-    "section": "Exercise",
-    "text": "Exercise\n\n\n\n\n\nBack to course schedule ⏎",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 3"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "MSSC 6250 - Statistical Machine Learning (Spring 2025)",
-    "section": "",
-    "text": "This page contains an outline of the topics, content, and assignments for the semester. Note that this schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nTo Do\nSlides\nCode\nHomework\nProject\n\n\n\n\n1\nTue, Jan 14\nSyllabus/Overview of Statistical Learning\n📖\n🖥️🖥️\n\n\n\n\n\n\nThu, Jan 16\nBias-variance tradeoff\n\n🖥️\n\n\n\n\n\n2\nTue, Jan 21\nLinear Regression\n📖\n🖥️\n\n✍️\n\n\n\n\nThu, Jan 25\nNumerical Optimization for Regression\n\n\n\n\n\n\n\n3\nTue, Jan 28\nRidge Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 1\nCross-Validation\n\n\n\n\n\n\n\n4\nTue, Feb 4\nLASSO and Elastic Net\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 8\nPolynomial Regression and Regression Splines\n\n\n\n✍️\n\n\n\n5\nTue, Feb 11\nSmoothing Splines and Generalized Additive Models\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 15\nBayesian Inference\n\n\n\n\n\n\n\n6\nTue, Feb 18\nBayesian Linear Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 22\nBinary Logistic Regression\n\n\n\n\n\n\n\n7\nTue, Feb 25\nMultinomial Logistic Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 29\nDiscriminant Analysis\n\n\n\n\n\n\n\n8\nTue, Mar 4\nNaive Bayes\n📖\n\n\n\n\n\n\n\nThu, Mar 7\nMidterm Presentation I\n\n\n\n✍️\n✅\n\n\n9\nTue, Mar 11\nNO CLASS: Spring break\n\n\n\n\n\n\n\n\nThu, Mar 14\nNO CLASS: Spring break\n\n\n\n\n\n\n\n10\nTue, Mar 18\nK-Nearest Neighbors Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 21\nK-Nearest Neighbors Classification\n\n\n\n\n\n\n\n11\nTue, Mar 25\nGaussian Process Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 28\nGaussian Process Classification\n\n\n\n\n\n\n\n12\nTue, Apr 1\nSupport Vector Machine\n📖\n\n\n\n\n\n\n\nThu, Apr 4\nSupport Vector Machine\n\n\n\n\n\n\n\n13\nTue, Apr 8\nCART and Bagging\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 11\nRandom Forests and Boosting\n\n\n\n✍️\n\n\n\n14\nTue, Apr 15\nMidterm Presentation II\n📖\n🖥️\n\n\n✅\n\n\n\nThu, Apr 17\nNO CLASS: Easter break\n\n\n\n\n\n\n\n15\nTue, Apr 22\nPrincipal Component Analysis\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 25\nK-Means Clustering\n\n\n\n\n\n\n\n16\nTue, Apr 29\nModel-based Clustering\n📖\n🖥️\n\n\n\n\n\n\nThu, May 1\nNeural Networks\n\n\n\n\n\n\n\n17\nThu, May 8\nFinal Project Submission\n\n\n\n\n✅\n\n\n\n\nI reserve the right to make changes to the schedule.",
-    "crumbs": [
-      "Course Information",
-      "Schedule"
-    ]
+    "objectID": "slides/01-syllabus.html#generative-ai-and-sharingreusing-code-policy",
+    "href": "slides/01-syllabus.html#generative-ai-and-sharingreusing-code-policy",
+    "title": "Welcome Aboard 🙌",
+    "section": "Generative AI and Sharing/Reusing Code Policy",
+    "text": "Generative AI and Sharing/Reusing Code Policy\n\n\n\nYou are responsible for the content of all work submitted for this course.\nYou may use generative AI tools such as ChatGPT or DALL-E to generate a first draft of text for your assignments, provided that this use is appropriately documented and cited.\nLearn how to cite the use of AI in MLA and APA format, and more\n\n\n\n\n\n\n\n\n\n\n\n\n\nSharing/Reusing Code\n\nUnless explicitly stated otherwise, you may make use of any online resources, but you must explicitly cite where you obtained any code you directly use or use as inspiration in your solutions.\nAny recycled code that is discovered and is not explicitly cited will be treated as plagiarism, regardless of source.\n\n\n\n\n\nmssc6250-s25.github.io/website"
   },
   {
     "objectID": "slides/04-lin-reg.html#linear-regression",
@@ -990,318 +770,542 @@
     "text": "Demo SGD\n\n\n\n\n\n\n\n\n\n\n\n\nmssc6250-s25.github.io/website"
   },
   {
-    "objectID": "slides/01-syllabus.html#my-journey",
-    "href": "slides/01-syllabus.html#my-journey",
-    "title": "Welcome Aboard 🙌",
-    "section": "My Journey",
-    "text": "My Journey\n\nAssistant Professor (2020/08 - )\n\n\n\n\n\n\n\n\n\n\nPostdoctoral Fellow\n\n\n\n\n\n\n\n\n\n\nPhD in Statistics and Applied Mathematics\n\n\n\n\n\n\n\n\n\n\nMA in Economics/PhD program in Statistics\n\n\n\n\n\n\n\n\n\nAfter college, working and doing military service for several years, I came to the US for my PhD degree. Originally I would like to study economics, but then I switched my major to statistics.\n\nI got my master degree in economics from Indiana University Bloomington, then I transferred to UC Santa Cruz to finish my PhD studies.\nThen I spent two years doing my postdoctoral research at Rice University in Houston, Texas.\nFinally, in fall 2020, I came to Marquette as an assistant professor.\nMidwest/Indiana-West/California-South/Texas-Midwest/Wisconsin\nBeen to any one of these universities/cities?\nThe most beautiful campus.\nWho are international students? I can totally understand how hard studying and living in another country. Feel free to share your stories or difficulties, and I am more than happy to help you if you have any questions.\nPoor listening and speaking skills. I was shy.\nOK so, this is my background. How about you introducing yourself as well. You can share anything, your major, hobbies, your favorite food, what do you want to do after graduation, anything,\nI have the class list. I’d like to learn your face and remember your name. You know, you all wear a mask. It’s hard to recognize you and connect your name and your face.\nWhen I call your name, you can say something about yourself. No need to be long, couple of seconds are good."
-  },
-  {
-    "objectID": "slides/01-syllabus.html#my-research",
-    "href": "slides/01-syllabus.html#my-research",
-    "title": "Welcome Aboard 🙌",
-    "section": "My Research",
-    "text": "My Research\n\nBayesian spatio-temporal modeling and machine learning algorithms in neuroimaging\nBayesian deep learning for image classification\nEfficient MCMC for high dimensional regression\nData science education\n\n\n\nfMRI\n\n\n\n\n\n\n\n\n\nEEG"
-  },
-  {
-    "objectID": "slides/01-syllabus.html#how-to-reach-me",
-    "href": "slides/01-syllabus.html#how-to-reach-me",
-    "title": "Welcome Aboard 🙌",
-    "section": "How to Reach Me",
-    "text": "How to Reach Me\n\nOffice hours TuTh 4:50 - 5:50 PM and Wed 12 - 1 PM in Cudahy Hall 353.\n📧 cheng-han.yu@marquette.edu\n\nAnswer your question within 24 hours.\nExpect a reply on Monday if shoot me a message on weekends.\nStart your subject line with [mssc6250] followed by a clear description of your question.\n\n\n\n\n\nI will NOT reply your e-mail if … Check the email policy in the syllabus!"
-  },
-  {
-    "objectID": "slides/01-syllabus.html#prerequisites",
-    "href": "slides/01-syllabus.html#prerequisites",
-    "title": "Welcome Aboard 🙌",
-    "section": "Prerequisites",
-    "text": "Prerequisites\n\nOn bulletin: MATH 4720 (Intro to Statistics), MATH 3100 (Linear Algebra) and/or MSSC 5780 (Regression Analysis)\nProgramming experience (Who does machine learning without coding?)\n\n\n\nHaving taken MSSC 5700 (Probability) and MSSC 5710 (Stats Inference) or other math and statistics courses (Stats Computing, etc) is recommended."
-  },
-  {
-    "objectID": "slides/01-syllabus.html#textbook",
-    "href": "slides/01-syllabus.html#textbook",
-    "title": "Welcome Aboard 🙌",
-    "section": "Textbook",
-    "text": "Textbook\n\n\n\n\n(ISL) An Introduction to Statistical Learning, by James et al. Publisher: Springer. \n\nDiscuss all chapters except Chapter 11 (survival analysis) and 13 (multiple testing).\nR and Python code\n\nIn the Preface,\n\n… for advanced undergraduates or master’s students in Statistics or related quantitative fields,\n\n\n… concentrate more on the applications of the methods and less on the mathematical details."
-  },
-  {
-    "objectID": "slides/01-syllabus.html#optional-references-1",
-    "href": "slides/01-syllabus.html#optional-references-1",
-    "title": "Welcome Aboard 🙌",
-    "section": "Optional References",
-    "text": "Optional References\n\n\n\n(MML) Mathematics for Machine Learning, by Marc Peter Deisenroth, A. Aldo Faisal, and Cheng Soon Ong. Publisher: Cambridge University Press.\nFocus on the mathematical concepts behind the models"
-  },
-  {
-    "objectID": "slides/01-syllabus.html#optional-references-2",
-    "href": "slides/01-syllabus.html#optional-references-2",
-    "title": "Welcome Aboard 🙌",
-    "section": "Optional References",
-    "text": "Optional References\n\n\n\n(PMLI) Probabilistic Machine Learning: An Introduction, by Kevin Murphy. Publisher: MIT Press.\nSelf-contained with lots of mathematics foundations\nPython code"
-  },
-  {
-    "objectID": "slides/01-syllabus.html#optional-references-3",
-    "href": "slides/01-syllabus.html#optional-references-3",
-    "title": "Welcome Aboard 🙌",
-    "section": "Optional References",
-    "text": "Optional References\n\n\n\n(PMLA) Probabilistic Machine Learning: Advanced Topics, by Kevin Murphy. Publisher: MIT Press.\nPhD level\nProbabilistic or distributional-based"
-  },
-  {
-    "objectID": "slides/01-syllabus.html#optional-references-4",
-    "href": "slides/01-syllabus.html#optional-references-4",
-    "title": "Welcome Aboard 🙌",
-    "section": "Optional References",
-    "text": "Optional References\n\n\n\n(ESL) The Elements of Statistical Learning, 2nd edition, by Hastie et. al. Publisher: Springer.\nFor PhD students or researchers in mathematical sciences\nFrequentist-based"
-  },
-  {
-    "objectID": "slides/01-syllabus.html#course-website---httpsmssc6250-s25.github.iowebsite",
-    "href": "slides/01-syllabus.html#course-website---httpsmssc6250-s25.github.iowebsite",
-    "title": "Welcome Aboard 🙌",
-    "section": "Course Website - https://mssc6250-s25.github.io/website/\n",
-    "text": "Course Website - https://mssc6250-s25.github.io/website/"
-  },
-  {
-    "objectID": "slides/01-syllabus.html#learning-management-system-d2l",
-    "href": "slides/01-syllabus.html#learning-management-system-d2l",
-    "title": "Welcome Aboard 🙌",
-    "section": "Learning Management System (D2L)",
-    "text": "Learning Management System (D2L)\n\n\n\n\n\nNews\nSubmit your homework Assessments &gt; Dropbox.\nCheck your grade Assessments &gt; Grades."
-  },
-  {
-    "objectID": "slides/01-syllabus.html#grading-policy",
-    "href": "slides/01-syllabus.html#grading-policy",
-    "title": "Welcome Aboard 🙌",
-    "section": "Grading Policy ✨",
-    "text": "Grading Policy ✨\n\nThe grade is earned out of 1000 total points distributed as follows:\n\nHomework: 500 pts\nMidterm mini-project presentations: 300 pts\nFinal project: 200 pts\n\n\n\n❌ No extra credit projects/homework/exam to compensate for a poor grade."
-  },
-  {
-    "objectID": "slides/01-syllabus.html#grade-percentage-conversion",
-    "href": "slides/01-syllabus.html#grade-percentage-conversion",
-    "title": "Welcome Aboard 🙌",
-    "section": "Grade-Percentage Conversion",
-    "text": "Grade-Percentage Conversion\n\nYour final grade is based on your percentage of pts earned out of 1000 pts.\n\n[x, y) means greater than or equal to x and less than y.\n\n\n\n\n\n\nGrade\nPercentage\n\n\n\nA\n[94, 100]\n\n\nA-\n[90, 94)\n\n\nB+\n[87, 90)\n\n\nB\n[83, 87)\n\n\nB-\n[80, 83)\n\n\nC+\n[77, 80)\n\n\nC\n[70, 77)\n\n\nF\n[0, 70)"
-  },
-  {
-    "objectID": "slides/01-syllabus.html#homework-500-pts",
-    "href": "slides/01-syllabus.html#homework-500-pts",
-    "title": "Welcome Aboard 🙌",
-    "section": "Homework (500 pts)",
-    "text": "Homework (500 pts)\n\n\nAssessments &gt; Dropbox and upload your homework in PDF format.\n❌ No make-up homework.\nDue Friday 11:59 PM  (Hard deadline and no late submission).\nYou have at least one week to finish your homework."
-  },
-  {
-    "objectID": "slides/01-syllabus.html#mini-project-presentation-300-pts",
-    "href": "slides/01-syllabus.html#mini-project-presentation-300-pts",
-    "title": "Welcome Aboard 🙌",
-    "section": "Mini-Project Presentation (300 pts)",
-    "text": "Mini-Project Presentation (300 pts)\n\nThere will be 2 in-class mini-project presentations (150 pts each).\nLearn from each other by presenting and discussing the assigned topics.\nMore details about the activity will be released later."
-  },
-  {
-    "objectID": "slides/01-syllabus.html#final-project-200-pts",
-    "href": "slides/01-syllabus.html#final-project-200-pts",
-    "title": "Welcome Aboard 🙌",
-    "section": "Final Project (200 pts)",
-    "text": "Final Project (200 pts)\n\nThe final project is submitted as a paper (and some relevant work?)\nThe project submission deadline is Thursday, 5/8, 10 AM.\nMore details about the project will be released later."
-  },
-  {
-    "objectID": "slides/01-syllabus.html#which-programming-language",
-    "href": "slides/01-syllabus.html#which-programming-language",
-    "title": "Welcome Aboard 🙌",
-    "section": "Which Programming Language?",
-    "text": "Which Programming Language?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUse any language you prefer!"
-  },
-  {
-    "objectID": "slides/01-syllabus.html#generative-ai-and-sharingreusing-code-policy",
-    "href": "slides/01-syllabus.html#generative-ai-and-sharingreusing-code-policy",
-    "title": "Welcome Aboard 🙌",
-    "section": "Generative AI and Sharing/Reusing Code Policy",
-    "text": "Generative AI and Sharing/Reusing Code Policy\n\n\n\nYou are responsible for the content of all work submitted for this course.\nYou may use generative AI tools such as ChatGPT or DALL-E to generate a first draft of text for your assignments, provided that this use is appropriately documented and cited.\nLearn how to cite the use of AI in MLA and APA format, and more\n\n\n\n\n\n\n\n\n\n\n\n\n\nSharing/Reusing Code\n\nUnless explicitly stated otherwise, you may make use of any online resources, but you must explicitly cite where you obtained any code you directly use or use as inspiration in your solutions.\nAny recycled code that is discovered and is not explicitly cited will be treated as plagiarism, regardless of source.\n\n\n\n\n\nmssc6250-s25.github.io/website"
-  },
-  {
-    "objectID": "slides/05-ridge-cv.html#when-ordinary-least-squares-ols-doesnt-work-well-collinearity",
-    "href": "slides/05-ridge-cv.html#when-ordinary-least-squares-ols-doesnt-work-well-collinearity",
-    "title": "Ridge Regression and Cross Validation \n",
-    "section": "When Ordinary Least Squares (OLS) Doesn’t Work Well: Collinearity",
-    "text": "When Ordinary Least Squares (OLS) Doesn’t Work Well: Collinearity\n\nWhen predictors are highly correlated, \\(\\mathrm{Var}(b_j)\\) is much inflated.1\n\nA tiny change in the training set causes a large change in \\(b_j\\), leading to unreliable estimation and possibly prediction.\n\n\n\n\n\n\\({\\bf X'X} = \\begin{bmatrix} 1 & 0.99 \\\\ 0.99 & 1 \\end{bmatrix}\\) \\(\\quad ({\\bf X'X})^{-1} = \\begin{bmatrix}  50.3 & -49.7 \\\\ -49.7 & 50.3 \\end{bmatrix}\\)\n\n\\(\\mathrm{Var}(b_j) = 50.3\\sigma^2\\)\n\nAn increase in 50-fold over the ideal case when the two regressors are orthogonal.\n\n\n\n\nsolve(matrix(c(1, 0.99, 0.99, 1), 2, 2))\n\n      [,1]  [,2]\n[1,]  50.3 -49.7\n[2,] -49.7  50.3\n\n\nthe eigen vector direction with the smallest eigen value https://online.stat.psu.edu/stat857/node/155/ https://robjhyndman.com/hyndsight/loocv-linear-models/\n\n\nAlthough \\(\\mathrm{Var}(b_j)\\) is still the smallest among all linear unbiased estimators."
-  },
-  {
-    "objectID": "slides/05-ridge-cv.html#when-ols-doesnt-work-well-optimization-perspective",
-    "href": "slides/05-ridge-cv.html#when-ols-doesnt-work-well-optimization-perspective",
-    "title": "Ridge Regression and Cross Validation \n",
-    "section": "When OLS Doesn’t Work Well: Optimization Perspective",
-    "text": "When OLS Doesn’t Work Well: Optimization Perspective\n\n\\(\\beta_1 = \\beta_2 = 1\\) and \\(\\mathrm{Corr}(x_1, x_2) = 0.99\\)\nThe relatively “flat” valley in the objective function walks along the eigen-vector of \\({\\bf X}'{\\bf X}\\) having the smallest eigen-value.\n\n\n\n\n\n\n\n\n\n\n\n\n\neigen(\n    matrix(c(1, 0.99, 0.99, 1), \n             2, 2)\n    )\n\neigen() decomposition\n$values\n[1] 1.99 0.01\n\n$vectors\n      [,1]   [,2]\n[1,] 0.707 -0.707\n[2,] 0.707  0.707\n\n\n\n\n\nFrom optimization point of view, the objective function (\\(\\ell_2\\) loss) is “flat” along certain directions in the parameter domain.\na small eigen-value in XTX makes the corresponding eigen-value large in the inverse."
-  },
-  {
-    "objectID": "slides/05-ridge-cv.html#when-ols-doesnt-work-well-optimization-perspective-1",
-    "href": "slides/05-ridge-cv.html#when-ols-doesnt-work-well-optimization-perspective-1",
-    "title": "Ridge Regression and Cross Validation \n",
-    "section": "When OLS Doesn’t Work Well: Optimization Perspective",
-    "text": "When OLS Doesn’t Work Well: Optimization Perspective\n\nA little change in the training set perturbs the objective function. The LSEs lie on a valley centered around the truth."
-  },
-  {
-    "objectID": "slides/05-ridge-cv.html#when-ols-doesnt-work-well-high-variance",
-    "href": "slides/05-ridge-cv.html#when-ols-doesnt-work-well-high-variance",
-    "title": "Ridge Regression and Cross Validation \n",
-    "section": "When OLS Doesn’t Work Well: High Variance",
-    "text": "When OLS Doesn’t Work Well: High Variance\n\nThe optimizer could land anywhere along the valley, leading to large variance of the LSE.\nOver many simulation runs, the LSE lies around the line of \\(\\beta_1 + \\beta_2 = 2\\), the direction of the eigen-vector of the smallest eigen-value."
-  },
-  {
-    "objectID": "slides/05-ridge-cv.html#when-ols-doesnt-work-well-large-p-small-n-high-dimensional-data",
-    "href": "slides/05-ridge-cv.html#when-ols-doesnt-work-well-large-p-small-n-high-dimensional-data",
-    "title": "Ridge Regression and Cross Validation \n",
-    "section": "When OLS Doesn’t Work Well: Large-\\(p\\)-small-\\(n\\) (High Dimensional Data)",
-    "text": "When OLS Doesn’t Work Well: Large-\\(p\\)-small-\\(n\\) (High Dimensional Data)\n\nOLS stays well in the world of “large-\\(n\\)-small-\\(p\\)”.\nWhen \\(p &gt; n\\), \\({\\bf X}'{\\bf X}\\) is not invertible.\nThere is no unique \\(\\boldsymbol \\beta\\) estimate.\n\n\nIntuition: Too many degrees of freedom (\\(p\\)) to specify a model, but not enough information (\\(n\\)) to decide which one is the one.\n\nToo flexible and ends up with overfitting"
-  },
-  {
-    "objectID": "slides/05-ridge-cv.html#remedy-for-large-variance-and-large-p-small-n",
-    "href": "slides/05-ridge-cv.html#remedy-for-large-variance-and-large-p-small-n",
-    "title": "Ridge Regression and Cross Validation \n",
-    "section": "Remedy for Large Variance and Large-\\(p\\)-small-\\(n\\)\n",
-    "text": "Remedy for Large Variance and Large-\\(p\\)-small-\\(n\\)\n\n\nMake \\({\\bf X}'{\\bf X}\\) invertible when \\(p &gt; n\\) by regularizing coefficient behavior!\nA good estimator balances bias and variance well, or minimizes the mean square error \\[\\text{MSE}(\\hat{\\beta}) = E[(\\hat{\\beta} - \\beta)^2] = \\mathrm{Var}(\\hat{\\beta}) + \\text{Bias}(\\hat{\\beta})^2\\]\nA slightly biased estimator \\(\\hat{\\boldsymbol \\beta}\\) that has much smaller variance and MSE than the LSE \\({\\bf b}\\)."
-  },
-  {
-    "objectID": "slides/05-ridge-cv.html#ridge-regression-1",
-    "href": "slides/05-ridge-cv.html#ridge-regression-1",
-    "title": "Ridge Regression and Cross Validation \n",
-    "section": "Ridge Regression",
-    "text": "Ridge Regression\n\nIdea: Add a ridge (diagonal matrix) to \\({\\bf X} ' {\\bf X}\\).1 \\[\\widehat{\\boldsymbol \\beta}^\\text{r} = (\\mathbf{X}' \\mathbf{X}+ n \\lambda \\mathbf{I})^{-1} \\mathbf{X}' \\mathbf{y},\\]\n\n\n\n\nTo regularize coefficients, add an \\(\\ell_2\\) penalty to the residual sum of squares, for some tuning parameter \\(\\lambda &gt; 0\\).\n\n\\[\n\\begin{align}\n\\widehat{\\boldsymbol \\beta}^\\text{r} =& \\, \\mathop{\\mathrm{arg\\,min}}_{\\boldsymbol \\beta} \\underbrace{\\lVert \\mathbf{y}- \\mathbf{X}\\boldsymbol \\beta\\rVert_2^2}_{SS_{res}} + n \\lambda \\lVert\\boldsymbol \\beta\\rVert_2^2\\\\\n=& \\, \\mathop{\\mathrm{arg\\,min}}_{\\boldsymbol \\beta} \\underbrace{\\frac{1}{n} \\sum_{i=1}^n (y_i - x_i'\\boldsymbol \\beta)^2}_{\\text{MSE}_{\\texttt{Tr}}} + \\lambda \\sum_{j=1}^p \\beta_j^2\\\\\n=& \\, \\mathop{\\mathrm{arg\\,min}}_{\\boldsymbol \\beta} \\color{green} - \\text{ goodness of fit } + \\text{ model complexity/flexibility}\n\\end{align}\n\\]\n\nThis is a special case of the Tikhonov regularization."
-  },
-  {
-    "objectID": "slides/05-ridge-cv.html#properties-of-ridge-regression",
-    "href": "slides/05-ridge-cv.html#properties-of-ridge-regression",
-    "title": "Ridge Regression and Cross Validation \n",
-    "section": "Properties of Ridge Regression",
-    "text": "Properties of Ridge Regression\n\\[\n\\begin{align}\n\\widehat{\\boldsymbol \\beta}^\\text{r} =& \\mathop{\\mathrm{arg\\,min}}_{\\boldsymbol \\beta} \\frac{1}{n} \\sum_{i=1}^n (y_i - x_i'\\boldsymbol \\beta)^2 + \\lambda \\sum_{j=1}^p \\beta_j^2,\n\\end{align}\n\\]\nProperties of ridge regression:\n\nHas less degrees of freedom in the sense that the cost gets higher when larger coefficients are used.\n\n\n\nFavors small-magnitude coefficient estimates (Shrinkage) to avoid cost penalty.\n\n\n\n\nThe shrinkage parameter \\(\\lambda\\) controls the degree of penalty.\n\n\n\\(\\lambda \\rightarrow 0\\): No penalty, and \\(\\widehat{\\boldsymbol \\beta}^\\text{r} = \\bf b\\).\n\n\\(\\lambda \\rightarrow \\infty\\): Unbearable penalty, and \\(\\widehat{\\boldsymbol \\beta}^\\text{r} \\rightarrow \\mathbf{0}\\)"
-  },
-  {
-    "objectID": "slides/05-ridge-cv.html#ridge-penalty",
-    "href": "slides/05-ridge-cv.html#ridge-penalty",
-    "title": "Ridge Regression and Cross Validation \n",
-    "section": "Ridge Penalty",
-    "text": "Ridge Penalty\n\n\n\\[\\lambda \\lVert \\boldsymbol \\beta\\rVert^2_2 = \\lambda \\boldsymbol \\beta' \\mathbf{I}\\boldsymbol \\beta\\]\n\nThe penalty contour is circle-shaped\nForce the objective function to be more convex\nA more stable or less varying solution"
-  },
-  {
-    "objectID": "slides/05-ridge-cv.html#geometrical-meaning-of-ridge-regression",
-    "href": "slides/05-ridge-cv.html#geometrical-meaning-of-ridge-regression",
-    "title": "Ridge Regression and Cross Validation \n",
-    "section": "Geometrical Meaning of Ridge Regression",
-    "text": "Geometrical Meaning of Ridge Regression\n\nSource: https://online.stat.psu.edu/stat508/lessons/Lesson06\nPerform PCA of X\nProject y onto the PCs\nShrinks the projection\nReassemble the PCs using all the shrunken length"
-  },
-  {
-    "objectID": "slides/05-ridge-cv.html#more-convex-loss-function",
-    "href": "slides/05-ridge-cv.html#more-convex-loss-function",
-    "title": "Ridge Regression and Cross Validation \n",
-    "section": "More Convex Loss Function",
-    "text": "More Convex Loss Function\n\nAdding a ridge penalty forces the objective to be more convex due to the added eigenvalues.\n\n\neigen(matrix(c(1, 0.99, 0.99, 1), 2, 2) + diag(2))[1]\n\n$values\n[1] 2.99 1.01\n\n\n\nHence, by adding this to the OLS objective function, the solution is more stable, in the sense that each time we observe a new set of data, this contour looks pretty much the same. This may be interpreted in several different ways such as: 1) the objective function is more convex and less affected by the random samples; 2) the variance of the estimator is smaller because the eigenvalues of \\(\\mathbf{X}^\\text{T}\\mathbf{X}+ n \\lambda \\mathbf{I}\\) are large."
-  },
-  {
-    "objectID": "slides/05-ridge-cv.html#the-bias-variance-tradeoff",
-    "href": "slides/05-ridge-cv.html#the-bias-variance-tradeoff",
-    "title": "Ridge Regression and Cross Validation \n",
-    "section": "The Bias-variance Tradeoff",
-    "text": "The Bias-variance Tradeoff\n\nAs \\(\\lambda \\downarrow\\), bias \\(\\downarrow\\) and variance \\(\\uparrow\\)\n\nAs \\(\\lambda \\uparrow\\), bias \\(\\uparrow\\) and variance \\(\\downarrow\\)\n\n\n\nThis effect is gradually changing as we increase the penalty level. The following simulation shows how the variation of \\(\\boldsymbol \\beta\\) changes. We show this with two penalty values, and see how the estimated parameters are away from the truth.\nNow, we may ask the question: is it worth it? In fact, this bias and variance will be then carried to the predicted values \\(x^\\text{T}\\widehat{\\boldsymbol \\beta}^\\text{ridge}\\). Hence, we can judge if this is beneficial from the prediction accuracy. And we need some procedure to do this.\nRemark: The bias-variance trade-off will appear frequently in this course. And the way to evaluate the benefit of this is to see if it eventually reduces the prediction error (\\(\\text{Bias}^2 + \\text{Variance}\\) plus a term called irreducible error, which will be introduced in later chapter)."
-  },
-  {
-    "objectID": "slides/05-ridge-cv.html#lower-test-mse",
-    "href": "slides/05-ridge-cv.html#lower-test-mse",
-    "title": "Ridge Regression and Cross Validation \n",
-    "section": "Lower Test MSE",
-    "text": "Lower Test MSE\n\n\n\nWhen \\(b_j\\) has large variance or \\(p &gt; n\\), ridge regression could have lower test MSE and better predictive performance.\n\\(\\text{MSE}_{\\texttt{Tr}}\\) (purple)\nSquared bias (black)\nVariance (green)\n\n\n\n\n\n\n\nSource: ISL Figure 6.5"
-  },
-  {
-    "objectID": "slides/05-ridge-cv.html#masslm.ridge",
-    "href": "slides/05-ridge-cv.html#masslm.ridge",
-    "title": "Ridge Regression and Cross Validation \n",
-    "section": "MASS::lm.ridge()",
-    "text": "MASS::lm.ridge()\n\nThe lambda parameter in lm.ridge() specifies the \\(n\\lambda\\) in our notation.\nOLS is scale equivalent: \\(X_jb_j\\) remains the same regardless of how \\(X_j\\) is scaled.\nRidge coefficient estimates can change substantially when multiplying a given predictor by a constant, i.e., \\(X_j\\hat{\\beta}^{r}_{j, \\lambda}\\) depends on \\(\\lambda\\), the scaling of \\(X_j\\), and even the scaling of other predictors.\nStandardize all predictors!1\n\n\n\nhead(mtcars, 3)\n\n               mpg cyl disp  hp drat   wt qsec vs am gear carb\nMazda RX4     21.0   6  160 110 3.90 2.62 16.5  0  1    4    4\nMazda RX4 Wag 21.0   6  160 110 3.90 2.88 17.0  0  1    4    4\nDatsun 710    22.8   4  108  93 3.85 2.32 18.6  1  1    4    1\n\n(fit &lt;- MASS::lm.ridge(mpg ~ ., data = mtcars, lambda = 1)) ## ridge fit\n\n              cyl     disp       hp     drat       wt     qsec       vs \n16.53766 -0.16240  0.00233 -0.01493  0.92463 -2.46115  0.49259  0.37465 \n      am     gear     carb \n 2.30838  0.68572 -0.57579 \n\n\n\n\nIn practice, if the intercept is not our interest, we also standardize the response."
-  },
-  {
-    "objectID": "slides/05-ridge-cv.html#scaling-issues-of-lm.ridge",
-    "href": "slides/05-ridge-cv.html#scaling-issues-of-lm.ridge",
-    "title": "Ridge Regression and Cross Validation \n",
-    "section": "Scaling Issues of lm.ridge()\n",
-    "text": "Scaling Issues of lm.ridge()\n\n\ncoef(fit) transforms these back to the original scale.\nfit$coef shows the coefficients of the standardized predictors.\n\n\ncoef(fit)\n\n              cyl     disp       hp     drat       wt     qsec       vs \n16.53766 -0.16240  0.00233 -0.01493  0.92463 -2.46115  0.49259  0.37465 \n      am     gear     carb \n 2.30838  0.68572 -0.57579 \n\nfit$coef\n\n   cyl   disp     hp   drat     wt   qsec     vs     am   gear   carb \n-0.285  0.285 -1.008  0.487 -2.370  0.866  0.186  1.134  0.498 -0.915"
-  },
-  {
-    "objectID": "slides/05-ridge-cv.html#scaling-issues-of-lm.ridge-1",
-    "href": "slides/05-ridge-cv.html#scaling-issues-of-lm.ridge-1",
-    "title": "Ridge Regression and Cross Validation \n",
-    "section": "Scaling Issues of lm.ridge()\n",
-    "text": "Scaling Issues of lm.ridge()\n\n\nfit$coef\n\n   cyl   disp     hp   drat     wt   qsec     vs     am   gear   carb \n-0.285  0.285 -1.008  0.487 -2.370  0.866  0.186  1.134  0.498 -0.915 \n\n\n\n\nlm.ridge() uses \\(n\\) instead of \\(n-1\\) when calculating the standard deviation.\n\n\n# each column has mean 0 and var 1\nX &lt;- scale(data.matrix(mtcars[, -1]), center = TRUE, scale = TRUE)\n\n# center y but not scaling\ny &lt;- scale(mtcars$mpg, center = TRUE, scale = FALSE)\n\n\n\n# lambda = 1\nmy_ridge_coef &lt;- solve(t(X) %*% X + diag(ncol(X))) %*% t(X) %*% y\nt(my_ridge_coef)\n\n        cyl disp    hp  drat    wt qsec   vs   am  gear   carb\n[1,] -0.294 0.27 -1.02 0.495 -2.39 0.87 0.19 1.15 0.505 -0.937"
-  },
-  {
-    "objectID": "slides/05-ridge-cv.html#scaling-issues-of-lm.ridge-2",
-    "href": "slides/05-ridge-cv.html#scaling-issues-of-lm.ridge-2",
-    "title": "Ridge Regression and Cross Validation \n",
-    "section": "Scaling Issues of lm.ridge()\n",
-    "text": "Scaling Issues of lm.ridge()\n\n\nfit$coef\n\n   cyl   disp     hp   drat     wt   qsec     vs     am   gear   carb \n-0.285  0.285 -1.008  0.487 -2.370  0.866  0.186  1.134  0.498 -0.915 \n\n\n\n\n# use n instead of (n-1) for standardization\nn &lt;- nrow(X); X &lt;- X * sqrt(n / (n - 1))\n\n\n\n        cyl  disp    hp  drat    wt  qsec    vs   am  gear   carb\n[1,] -0.285 0.285 -1.01 0.487 -2.37 0.866 0.186 1.13 0.498 -0.915\n\n\nMore discussion at https://stats.stackexchange.com/questions/288754/lm-ridge-returns-different-results-that-are-from-manual-calculation"
-  },
-  {
-    "objectID": "slides/05-ridge-cv.html#ridge-trace",
-    "href": "slides/05-ridge-cv.html#ridge-trace",
-    "title": "Ridge Regression and Cross Validation \n",
-    "section": "Ridge Trace",
-    "text": "Ridge Trace\n\nridge_fit &lt;- lm.ridge(mpg ~ ., data = mtcars, lambda = 0:40)\nmatplot(coef(ridge_fit)[, -1], type = \"l\", xlab = \"Lambda\", ylab = \"Coefficients\")\ntext(rep(1, 10), coef(ridge_fit)[1,-1], colnames(mtcars)[2:11])\n\n\n\nSelect a value of \\(\\lambda\\) at which the ridge estimates are stable."
-  },
-  {
-    "objectID": "slides/05-ridge-cv.html#methods-for-choosing-lambda",
-    "href": "slides/05-ridge-cv.html#methods-for-choosing-lambda",
-    "title": "Ridge Regression and Cross Validation \n",
-    "section": "Methods for Choosing \\(\\lambda\\)\n",
-    "text": "Methods for Choosing \\(\\lambda\\)\n\n\nMASS::select(ridge_fit)\n\nmodified HKB estimator is 2.59 \nmodified L-W estimator is 1.84 \nsmallest value of GCV  at 15 \n\n\n\nHoerl, Kennard, and Baldwin (1975): \\(\\lambda \\approx \\frac{p \\hat{\\sigma}^2}{{\\bf b}'{\\bf b}}\\)\nLawless and Wang (1976): \\(\\lambda \\approx \\frac{np \\hat{\\sigma}^2}{{\\bf b'X}'{\\bf Xb}}\\)\nGolub, Health, and Wahba (1979): Generalized Cross Validation"
-  },
-  {
-    "objectID": "slides/05-ridge-cv.html#cross-validation",
-    "href": "slides/05-ridge-cv.html#cross-validation",
-    "title": "Ridge Regression and Cross Validation \n",
-    "section": "Cross Validation",
-    "text": "Cross Validation\n\nCross Validation (CV) is a resampling method.\nResampling methods refit a model of interest to data sampled from the training set.\n\nCV can be used to\n\nestimate the test error when there is no test data. (Model assessment)\n\nselect the tuning parameters that controls the model complexity/flexibility. (Model selection)\n\n\n\n\nHence, by adding this to the OLS objective function, the solution is more stable, in the sense that each time we observe a new set of data, this contour looks pretty much the same. This may be interpreted in several different ways such as: 1) the objective function is more convex and less affected by the random samples; 2) the variance of the estimator is smaller because the eigenvalues of \\(\\mathbf{X}^\\text{T}\\mathbf{X}+ n \\lambda \\mathbf{I}\\) are large."
-  },
-  {
-    "objectID": "slides/05-ridge-cv.html#section-1",
-    "href": "slides/05-ridge-cv.html#section-1",
-    "title": "Ridge Regression and Cross Validation \n",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "MSSC 6250 - Statistical Machine Learning (Spring 2025)",
     "section": "",
-    "text": "\\(k\\)-Fold Cross Validation\n\nRandomly divide the training set into \\(k\\) folds, of approximately equal size.\nUse 1 fold for validation to compute MSE, and the remaining \\(k - 1\\) partitions for training.\nRepeat \\(k\\) times. Each time a different fold is treated as a validation set.\nAverage \\(k\\) metrics, \\(\\text{MSE}_{CV} = \\frac{1}{k}\\sum_{i=1}^k\\text{MSE}_i\\).\nUse the CV estimate \\(\\text{MSE}_{CV}\\) to select the “best” tuning parameter.\n\n\n\n\n\n\n\nFive-fold cross validation. Source: Data science in a box\n\n\n\n\nCan compute other performance measures."
+    "text": "Announcement:\n\nNo office hours first week.\n\n\nThis schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nTo Do\nSlides\nCode\nHomework\nProject\n\n\n\n\n1\nTue, Jan 14\nSyllabus/Overview of Statistical Learning\n📖\n🖥️🖥️\n\n\n\n\n\n\nThu, Jan 16\nBias-variance tradeoff\n\n🖥️\n\n\n\n\n\n2\nTue, Jan 21\nLinear Regression\n📖\n🖥️\n\n✍️\n\n\n\n\nThu, Jan 25\nNumerical Optimization for Regression\n\n\n\n\n\n\n\n3\nTue, Jan 28\nRidge Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 1\nCross-Validation\n\n\n\n\n\n\n\n4\nTue, Feb 4\nLASSO and Elastic Net\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 8\nPolynomial Regression and Regression Splines\n\n\n\n✍️\n\n\n\n5\nTue, Feb 11\nSmoothing Splines and Generalized Additive Models\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 15\nBayesian Inference\n\n\n\n\n\n\n\n6\nTue, Feb 18\nBayesian Linear Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 22\nBinary Logistic Regression\n\n\n\n\n\n\n\n7\nTue, Feb 25\nMultinomial Logistic Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 29\nDiscriminant Analysis\n\n\n\n\n\n\n\n8\nTue, Mar 4\nNaive Bayes\n📖\n\n\n\n\n\n\n\nThu, Mar 7\nMidterm Presentation I\n\n\n\n✍️\n✅\n\n\n9\nTue, Mar 11\nNO CLASS: Spring break\n\n\n\n\n\n\n\n\nThu, Mar 14\nNO CLASS: Spring break\n\n\n\n\n\n\n\n10\nTue, Mar 18\nK-Nearest Neighbors Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 21\nK-Nearest Neighbors Classification\n\n\n\n\n\n\n\n11\nTue, Mar 25\nGaussian Process Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 28\nGaussian Process Classification\n\n\n\n\n\n\n\n12\nTue, Apr 1\nSupport Vector Machine\n📖\n\n\n\n\n\n\n\nThu, Apr 4\nSupport Vector Machine\n\n\n\n\n\n\n\n13\nTue, Apr 8\nCART and Bagging\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 11\nRandom Forests and Boosting\n\n\n\n✍️\n\n\n\n14\nTue, Apr 15\nMidterm Presentation II\n📖\n🖥️\n\n\n✅\n\n\n\nThu, Apr 17\nNO CLASS: Easter break\n\n\n\n\n\n\n\n15\nTue, Apr 22\nPrincipal Component Analysis\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 25\nK-Means Clustering\n\n\n\n\n\n\n\n16\nTue, Apr 29\nModel-based Clustering\n📖\n🖥️\n\n\n\n\n\n\nThu, May 1\nNeural Networks\n\n\n\n\n\n\n\n17\nThu, May 8\nFinal Project Submission\n\n\n\n\n✅\n\n\n\n\nI reserve the right to make changes to the schedule.",
+    "crumbs": [
+      "Course Information",
+      "Schedule"
+    ]
   },
   {
-    "objectID": "slides/05-ridge-cv.html#glmnet-package",
-    "href": "slides/05-ridge-cv.html#glmnet-package",
-    "title": "Ridge Regression and Cross Validation \n",
-    "section": "\nglmnet package \n",
-    "text": "glmnet package \n\n\nThe parameter alpha controls the ridge (alpha = 0) and lasso (alpha = 1) penalties.\nSupply a decreasing sequence of lambda values.\nlm.ridge() use \\(SS_{res}\\) and \\(n\\lambda\\), while glmnet() use \\(\\text{MSE}_{\\texttt{Tr}}\\) and \\(\\lambda\\).\nArgument x should be a matrix.\n\n\n\n\nglmnet(x = data.matrix(mtcars[, -1]), \n       y = mtcars$mpg, \n       alpha = 0, \n       lambda = 5:0/nrow(mtcars))\n\n\n\nlm.ridge(formula = mpg ~ ., \n         data = mtcars, \n         lambda = 5:0/nrow(mtcars))\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n\nlm.ridge() and glmnet() coefficients do not match exactly, specially when transforming back to original scale.\nNo need to worry too much as we focus on predictive performance.\n\n\n\n\n\n\nhttps://stats.stackexchange.com/questions/74206/ridge-regression-results-different-in-using-lm-ridge-and-glmnet"
-  },
-  {
-    "objectID": "slides/05-ridge-cv.html#k-fold-cross-validation-using-cv.glmnet",
-    "href": "slides/05-ridge-cv.html#k-fold-cross-validation-using-cv.glmnet",
-    "title": "Ridge Regression and Cross Validation \n",
-    "section": "\n\\(k\\)-Fold Cross Validation using cv.glmnet()1\n",
-    "text": "\\(k\\)-Fold Cross Validation using cv.glmnet()1\n\n\nThe \\(\\lambda\\) values are automatically selected, on the \\(\\log_{e}\\) scale.\n\n\nridge_cv_fit &lt;- cv.glmnet(x = data.matrix(mtcars[, -1]), y = mtcars$mpg, alpha = 0,\n                          nfolds = 10, type.measure = \"mse\")\nplot(ridge_cv_fit$glmnet.fit, \"lambda\")\n\n\n\n\n\n\n\n\nWhy s and not lambda? In case we want to allow one to specify the model size in other ways in the future. s: Value(s) of the penalty parameter lambda at which predictions are required. Default is the entire sequence used to create the model.\nThere are other ways to do CV for ridge regression in R, for example, the caret (Classification And REgression Training) package and the rsample package in tidymodels ecosystem."
-  },
-  {
-    "objectID": "slides/05-ridge-cv.html#determine-lambda",
-    "href": "slides/05-ridge-cv.html#determine-lambda",
-    "title": "Ridge Regression and Cross Validation \n",
-    "section": "Determine \\(\\lambda\\)\n",
-    "text": "Determine \\(\\lambda\\)\n\n\n\n\nplot(ridge_cv_fit)\n\n\n\n\n\n\n\n\n\nridge_cv_fit$lambda.min\n\n[1] 2.75\n\n# largest lambda s.t. error is within 1 s.e of the min\nridge_cv_fit$lambda.1se \n\n[1] 16.1\n\ncoef(ridge_cv_fit, s = \"lambda.min\")\n\n11 x 1 sparse Matrix of class \"dgCMatrix\"\n                  s1\n(Intercept) 21.11734\ncyl         -0.37134\ndisp        -0.00525\nhp          -0.01161\ndrat         1.05477\nwt          -1.23420\nqsec         0.16245\nvs           0.77196\nam           1.62381\ngear         0.54417\ncarb        -0.54742\n\n\n\n\ncoef(fit2, s = “lambda.1se”) This plots the cross-validation curve (red dotted line) along with upper and lower standard deviation curves along the 𝜆 sequence (error bars). Two special values along the 𝜆 sequence are indicated by the vertical dotted lines. lambda.min is the value of 𝜆 that gives minimum mean cross-validated error, while lambda.1se is the value of 𝜆 that gives the most regularized model such that the cross-validated error is within one standard error of the minimum."
-  },
-  {
-    "objectID": "slides/05-ridge-cv.html#generalized-cross-validation",
-    "href": "slides/05-ridge-cv.html#generalized-cross-validation",
-    "title": "Ridge Regression and Cross Validation \n",
-    "section": "Generalized Cross-Validation",
-    "text": "Generalized Cross-Validation\n\nThe generalized cross-validation (GCV) is a modified version of the leave-one-out CV (\\(n\\)-fold CV).\nThe GCV criterion is given by \\[\\text{GCV}(\\lambda) = \\frac{1}{n}\\sum_{i=1}^n \\left[ \\frac{y_i - x_i' \\widehat{\\boldsymbol \\beta}^\\text{r}_\\lambda}{1 - \\frac{\\text{Trace}(\\mathbf{S}_\\lambda)}{n}} \\right]^2\\]\n\nwhere \\(\\mathbf{S}_\\lambda\\) is the hat matrix corresponding to the ridge regression:\n\\[\\mathbf{S}_\\lambda = \\mathbf{X}(\\mathbf{X}' \\mathbf{X}+ n\\lambda \\mathbf{I})^{-1} \\mathbf{X}'\\]\nThe interesting fact about leave-one-out CV in the linear regression setting is that we do not need to explicitly fit all leave-one-out models.\n\nESL p. 244\nlm.ridge code"
-  },
-  {
-    "objectID": "slides/05-ridge-cv.html#generalized-cross-validation-1",
-    "href": "slides/05-ridge-cv.html#generalized-cross-validation-1",
-    "title": "Ridge Regression and Cross Validation \n",
-    "section": "Generalized Cross-Validation",
-    "text": "Generalized Cross-Validation\n\n\n\nplot(ridge_fit$lambda, \n     ridge_fit$GCV, \n     type = \"l\", col = \"darkgreen\", \n     ylab = \"GCV\", xlab = \"Lambda\", \n     lwd = 3)\n\n\n\n\n\n\n\n\n\nidx &lt;- which.min(ridge_fit$GCV)\nridge_fit$lambda[idx]\n\n[1] 15\n\nround(coef(ridge_fit)[idx, ], 2)\n\n        cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb \n21.13 -0.37 -0.01 -0.01  1.05 -1.23  0.16  0.77  1.62  0.54 -0.55 \n\n\n\n\nSelect the best \\(\\lambda\\) that produces the smallest GCV.\nYou can clearly see that the GCV decreases initially, as \\(\\lambda\\) increases, this is because the reduced variance is more beneficial than the increased bias. However, as \\(\\lambda\\) increases further, the bias term will eventually dominate and causing the overall prediction error to increase. The fitted MSE under this model is\n\n\n\n\nmssc6250-s25.github.io/website"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "weeks/week-3.html",
+    "href": "weeks/week-3.html",
+    "title": "Week 3",
     "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
+    "text": "Important\n\n\n\nHomework 1 due Friday, Feb 7, 11:59 PM",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 3"
+    ]
+  },
+  {
+    "objectID": "weeks/week-3.html#participate",
+    "href": "weeks/week-3.html#participate",
+    "title": "Week 3",
+    "section": "Participate",
+    "text": "Participate\n🖥️ Slides - Ridge Regression and Cross Validation\nr fontawesome::fa(\"table\") Data Set - mtcars.csv",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 3"
+    ]
+  },
+  {
+    "objectID": "weeks/week-3.html#reading-and-resources",
+    "href": "weeks/week-3.html#reading-and-resources",
+    "title": "Week 3",
+    "section": "Reading and Resources",
+    "text": "Reading and Resources\n📖 ISL Ch 5.1, 6.2.1\n📖 MML Ch 8.2.3 - 8.2.4",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 3"
+    ]
+  },
+  {
+    "objectID": "weeks/week-3.html#exercise",
+    "href": "weeks/week-3.html#exercise",
+    "title": "Week 3",
+    "section": "Exercise",
+    "text": "Exercise\n\n\n\n\n\nBack to course schedule ⏎",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 3"
+    ]
+  },
+  {
+    "objectID": "weeks/week-4.html",
+    "href": "weeks/week-4.html",
+    "title": "Week 4",
+    "section": "",
+    "text": "Important\n\n\n\nHomework 1 due Friday, Feb 9, 11:59 PM",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 4"
+    ]
+  },
+  {
+    "objectID": "weeks/week-4.html#participate",
+    "href": "weeks/week-4.html#participate",
+    "title": "Week 4",
+    "section": "Participate",
+    "text": "Participate\n🖥️ Slides - Lasso\n\nr fontawesome::fa(\"table\") Data Set - Prostate.csv",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 4"
+    ]
+  },
+  {
+    "objectID": "weeks/week-4.html#reading-and-resources",
+    "href": "weeks/week-4.html#reading-and-resources",
+    "title": "Week 4",
+    "section": "Reading and Resources",
+    "text": "Reading and Resources\n📖 ISL Ch 6.1, 6.2",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 4"
+    ]
+  },
+  {
+    "objectID": "weeks/week-4.html#perform",
+    "href": "weeks/week-4.html#perform",
+    "title": "Week 4",
+    "section": "Perform",
+    "text": "Perform\n\n\n\n\nBack to course schedule ⏎",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 4"
+    ]
+  },
+  {
+    "objectID": "LICENSE.html#creative-commons-attribution-sharealike-4.0-international-public-license",
+    "href": "LICENSE.html#creative-commons-attribution-sharealike-4.0-international-public-license",
+    "title": "Attribution-ShareAlike 4.0 International",
+    "section": "Creative Commons Attribution-ShareAlike 4.0 International Public License",
+    "text": "Creative Commons Attribution-ShareAlike 4.0 International Public License\nBy exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution-ShareAlike 4.0 International Public License (“Public License”). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.\n\nSection 1 – Definitions.\n\nAdapted Material means material subject to Copyright and Similar Rights that is derived from or based upon the Licensed Material and in which the Licensed Material is translated, altered, arranged, transformed, or otherwise modified in a manner requiring permission under the Copyright and Similar Rights held by the Licensor. For purposes of this Public License, where the Licensed Material is a musical work, performance, or sound recording, Adapted Material is always produced where the Licensed Material is synched in timed relation with a moving image.\nAdapter’s License means the license You apply to Your Copyright and Similar Rights in Your contributions to Adapted Material in accordance with the terms and conditions of this Public License.\nBY-SA Compatible License means a license listed at creativecommons.org/compatiblelicenses, approved by Creative Commons as essentially the equivalent of this Public License.\nCopyright and Similar Rights means copyright and/or similar rights closely related to copyright including, without limitation, performance, broadcast, sound recording, and Sui Generis Database Rights, without regard to how the rights are labeled or categorized. For purposes of this Public License, the rights specified in Section 2(b)(1)-(2) are not Copyright and Similar Rights.\nEffective Technological Measures means those measures that, in the absence of proper authority, may not be circumvented under laws fulfilling obligations under Article 11 of the WIPO Copyright Treaty adopted on December 20, 1996, and/or similar international agreements.\nExceptions and Limitations means fair use, fair dealing, and/or any other exception or limitation to Copyright and Similar Rights that applies to Your use of the Licensed Material.\nLicense Elements means the license attributes listed in the name of a Creative Commons Public License. The License Elements of this Public License are Attribution and ShareAlike.\nLicensed Material means the artistic or literary work, database, or other material to which the Licensor applied this Public License.\nLicensed Rights means the rights granted to You subject to the terms and conditions of this Public License, which are limited to all Copyright and Similar Rights that apply to Your use of the Licensed Material and that the Licensor has authority to license.\nLicensor means the individual(s) or entity(ies) granting rights under this Public License.\nShare means to provide material to the public by any means or process that requires permission under the Licensed Rights, such as reproduction, public display, public performance, distribution, dissemination, communication, or importation, and to make material available to the public including in ways that members of the public may access the material from a place and at a time individually chosen by them.\nSui Generis Database Rights means rights other than copyright resulting from Directive 96/9/EC of the European Parliament and of the Council of 11 March 1996 on the legal protection of databases, as amended and/or succeeded, as well as other essentially equivalent rights anywhere in the world.\nYou means the individual or entity exercising the Licensed Rights under this Public License. Your has a corresponding meaning.\n\n\n\nSection 2 – Scope.\n\nLicense grant.\n\nSubject to the terms and conditions of this Public License, the Licensor hereby grants You a worldwide, royalty-free, non-sublicensable, non-exclusive, irrevocable license to exercise the Licensed Rights in the Licensed Material to:\nA. reproduce and Share the Licensed Material, in whole or in part; and\nB. produce, reproduce, and Share Adapted Material.\nExceptions and Limitations. For the avoidance of doubt, where Exceptions and Limitations apply to Your use, this Public License does not apply, and You do not need to comply with its terms and conditions.\nTerm. The term of this Public License is specified in Section 6(a).\nMedia and formats; technical modifications allowed. The Licensor authorizes You to exercise the Licensed Rights in all media and formats whether now known or hereafter created, and to make technical modifications necessary to do so. The Licensor waives and/or agrees not to assert any right or authority to forbid You from making technical modifications necessary to exercise the Licensed Rights, including technical modifications necessary to circumvent Effective Technological Measures. For purposes of this Public License, simply making modifications authorized by this Section 2(a)(4) never produces Adapted Material.\nDownstream recipients.\nA. Offer from the Licensor – Licensed Material. Every recipient of the Licensed Material automatically receives an offer from the Licensor to exercise the Licensed Rights under the terms and conditions of this Public License.\nB. Additional offer from the Licensor – Adapted Material. Every recipient of Adapted Material from You automatically receives an offer from the Licensor to exercise the Licensed Rights in the Adapted Material under the conditions of the Adapter’s License You apply.\nC. No downstream restrictions. You may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, the Licensed Material if doing so restricts exercise of the Licensed Rights by any recipient of the Licensed Material.\nNo endorsement. Nothing in this Public License constitutes or may be construed as permission to assert or imply that You are, or that Your use of the Licensed Material is, connected with, or sponsored, endorsed, or granted official status by, the Licensor or others designated to receive attribution as provided in Section 3(a)(1)(A)(i).\n\nOther rights.\n\nMoral rights, such as the right of integrity, are not licensed under this Public License, nor are publicity, privacy, and/or other similar personality rights; however, to the extent possible, the Licensor waives and/or agrees not to assert any such rights held by the Licensor to the limited extent necessary to allow You to exercise the Licensed Rights, but not otherwise.\nPatent and trademark rights are not licensed under this Public License.\nTo the extent possible, the Licensor waives any right to collect royalties from You for the exercise of the Licensed Rights, whether directly or through a collecting society under any voluntary or waivable statutory or compulsory licensing scheme. In all other cases the Licensor expressly reserves any right to collect such royalties.\n\n\n\n\nSection 3 – License Conditions.\nYour exercise of the Licensed Rights is expressly made subject to the following conditions.\n\nAttribution.\n\nIf You Share the Licensed Material (including in modified form), You must:\nA. retain the following if it is supplied by the Licensor with the Licensed Material:\n\nidentification of the creator(s) of the Licensed Material and any others designated to receive attribution, in any reasonable manner requested by the Licensor (including by pseudonym if designated);\na copyright notice;\na notice that refers to this Public License;\na notice that refers to the disclaimer of warranties;\na URI or hyperlink to the Licensed Material to the extent reasonably practicable;\n\nB. indicate if You modified the Licensed Material and retain an indication of any previous modifications; and\nC. indicate the Licensed Material is licensed under this Public License, and include the text of, or the URI or hyperlink to, this Public License.\nYou may satisfy the conditions in Section 3(a)(1) in any reasonable manner based on the medium, means, and context in which You Share the Licensed Material. For example, it may be reasonable to satisfy the conditions by providing a URI or hyperlink to a resource that includes the required information.\nIf requested by the Licensor, You must remove any of the information required by Section 3(a)(1)(A) to the extent reasonably practicable.\n\nShareAlike.\n\nIn addition to the conditions in Section 3(a), if You Share Adapted Material You produce, the following conditions also apply.\n\nThe Adapter’s License You apply must be a Creative Commons license with the same License Elements, this version or later, or a BY-SA Compatible License.\nYou must include the text of, or the URI or hyperlink to, the Adapter’s License You apply. You may satisfy this condition in any reasonable manner based on the medium, means, and context in which You Share Adapted Material.\nYou may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, Adapted Material that restrict exercise of the rights granted under the Adapter’s License You apply.\n\n\n\nSection 4 – Sui Generis Database Rights.\nWhere the Licensed Rights include Sui Generis Database Rights that apply to Your use of the Licensed Material:\n\nfor the avoidance of doubt, Section 2(a)(1) grants You the right to extract, reuse, reproduce, and Share all or a substantial portion of the contents of the database;\nif You include all or a substantial portion of the database contents in a database in which You have Sui Generis Database Rights, then the database in which You have Sui Generis Database Rights (but not its individual contents) is Adapted Material, including for purposes of Section 3(b); and\nYou must comply with the conditions in Section 3(a) if You Share all or a substantial portion of the contents of the database.\n\nFor the avoidance of doubt, this Section 4 supplements and does not replace Your obligations under this Public License where the Licensed Rights include other Copyright and Similar Rights.\n\n\nSection 5 – Disclaimer of Warranties and Limitation of Liability.\n\nUnless otherwise separately undertaken by the Licensor, to the extent possible, the Licensor offers the Licensed Material as-is and as-available, and makes no representations or warranties of any kind concerning the Licensed Material, whether express, implied, statutory, or other. This includes, without limitation, warranties of title, merchantability, fitness for a particular purpose, non-infringement, absence of latent or other defects, accuracy, or the presence or absence of errors, whether or not known or discoverable. Where disclaimers of warranties are not allowed in full or in part, this disclaimer may not apply to You.\nTo the extent possible, in no event will the Licensor be liable to You on any legal theory (including, without limitation, negligence) or otherwise for any direct, special, indirect, incidental, consequential, punitive, exemplary, or other losses, costs, expenses, or damages arising out of this Public License or use of the Licensed Material, even if the Licensor has been advised of the possibility of such losses, costs, expenses, or damages. Where a limitation of liability is not allowed in full or in part, this limitation may not apply to You.\nThe disclaimer of warranties and limitation of liability provided above shall be interpreted in a manner that, to the extent possible, most closely approximates an absolute disclaimer and waiver of all liability.\n\n\n\nSection 6 – Term and Termination.\n\nThis Public License applies for the term of the Copyright and Similar Rights licensed here. However, if You fail to comply with this Public License, then Your rights under this Public License terminate automatically.\nWhere Your right to use the Licensed Material has terminated under Section 6(a), it reinstates:\n\nautomatically as of the date the violation is cured, provided it is cured within 30 days of Your discovery of the violation; or\nupon express reinstatement by the Licensor.\n\nFor the avoidance of doubt, this Section 6(b) does not affect any right the Licensor may have to seek remedies for Your violations of this Public License.\nFor the avoidance of doubt, the Licensor may also offer the Licensed Material under separate terms or conditions or stop distributing the Licensed Material at any time; however, doing so will not terminate this Public License.\nSections 1, 5, 6, 7, and 8 survive termination of this Public License.\n\n\n\nSection 7 – Other Terms and Conditions.\n\nThe Licensor shall not be bound by any additional or different terms or conditions communicated by You unless expressly agreed.\nAny arrangements, understandings, or agreements regarding the Licensed Material not stated herein are separate from and independent of the terms and conditions of this Public License.\n\n\n\nSection 8 – Interpretation.\n\nFor the avoidance of doubt, this Public License does not, and shall not be interpreted to, reduce, limit, restrict, or impose conditions on any use of the Licensed Material that could lawfully be made without permission under this Public License.\nTo the extent possible, if any provision of this Public License is deemed unenforceable, it shall be automatically reformed to the minimum extent necessary to make it enforceable. If the provision cannot be reformed, it shall be severed from this Public License without affecting the enforceability of the remaining terms and conditions.\nNo term or condition of this Public License will be waived and no failure to comply consented to unless expressly agreed to by the Licensor.\nNothing in this Public License constitutes or may be interpreted as a limitation upon, or waiver of, any privileges and immunities that apply to the Licensor or You, including from the legal processes of any jurisdiction or authority.\n\n\nCreative Commons is not a party to its public licenses. Notwithstanding, Creative Commons may elect to apply one of its public licenses to material it publishes and in those instances will be considered the “Licensor.” The text of the Creative Commons public licenses is dedicated to the public domain under the CC0 Public Domain Dedication. Except for the limited purpose of indicating that material is shared under a Creative Commons public license or as otherwise permitted by the Creative Commons policies published at creativecommons.org/policies, Creative Commons does not authorize the use of the trademark “Creative Commons” or any other trademark or logo of Creative Commons without its prior written consent including, without limitation, in connection with any unauthorized modifications to any of its public licenses or any other arrangements, understandings, or agreements concerning use of licensed material. For the avoidance of doubt, this paragraph does not form part of the public licenses.\nCreative Commons may be contacted at creativecommons.org."
+  },
+  {
+    "objectID": "weeks/week-1.html",
+    "href": "weeks/week-1.html",
+    "title": "Week 1",
+    "section": "",
+    "text": "📖 Read the syllabus.\n📖 Get your laptop and computing environment ready!\n📖 Refresh your probability/statistics and linear algebra.",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week-1.html#prepare",
+    "href": "weeks/week-1.html#prepare",
+    "title": "Week 1",
+    "section": "",
+    "text": "📖 Read the syllabus.\n📖 Get your laptop and computing environment ready!\n📖 Refresh your probability/statistics and linear algebra.",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week-1.html#participate",
+    "href": "weeks/week-1.html#participate",
+    "title": "Week 1",
+    "section": "Participate",
+    "text": "Participate\n🖥️ Slides - Welcome to MSSC 6250\n🖥️ Slides - Overview of Machine Learning\n🖥️ Slides - Bias-variance Tradeoff",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week-1.html#reading-and-resources",
+    "href": "weeks/week-1.html#reading-and-resources",
+    "title": "Week 1",
+    "section": "Reading and Resources",
+    "text": "Reading and Resources\n📖 ISL Ch 1, 2\n📖 Dr. Yu MSSC 5780 Probability and Statistics Review\n📖 Dr. Yu MSSC 5780 Linear Algebra Review\n📖 Check any math you need from MML Ch 2 - 6",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week-1.html#perform",
+    "href": "weeks/week-1.html#perform",
+    "title": "Week 1",
+    "section": "Perform",
+    "text": "Perform\n📋 Decide whether this is the right course for you by the drop deadline 1/21.\n\n\n\n\nBack to course schedule ⏎",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week-2.html",
+    "href": "weeks/week-2.html",
+    "title": "Week 2",
+    "section": "",
+    "text": "Important\n\n\n\nHomework 1 released.",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week-2.html#participate",
+    "href": "weeks/week-2.html#participate",
+    "title": "Week 2",
+    "section": "Participate",
+    "text": "Participate\n🖥️ Slides - Linear Regression\nr fontawesome::fa(\"table\") Data Set - Advertising.csv",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week-2.html#reading-and-resources",
+    "href": "weeks/week-2.html#reading-and-resources",
+    "title": "Week 2",
+    "section": "Reading and Resources",
+    "text": "Reading and Resources\n📖 ISL Ch 3.1 - 3.4\n📖 Dr. Yu MSSC 5780 Regression Analysis Week 1 to 6\n📖 MML Ch 7.1, 8.1, 8.2.1, 8.2.2",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week-2.html#perform",
+    "href": "weeks/week-2.html#perform",
+    "title": "Week 2",
+    "section": "Perform",
+    "text": "Perform\n📋 Homework 1\n\n\n\n\n\nBack to course schedule ⏎",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "course-overview.html",
+    "href": "course-overview.html",
+    "title": "MSSC 6250 - Statistical Machine Learning (Spring 2025)",
+    "section": "",
+    "text": "The course discuss machine learning from statistical and modeling points of view, covering supervised learning and unsupervised learning models and algorithms. Supervised learning methods include various regression and classification methods, and unsupervised learning methods involves dimension reduction and clustering techniques. Topics include Bayesian linear regression, shrinkage and regularization, regression splines, Gaussian processes, logistic regression, discriminant analysis, nearest neighbors, tree-based methods, principal components, K-means, Gaussian mixture clustering, neural networks, etc.",
+    "crumbs": [
+      "Course Information",
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "course-news.html",
+    "href": "course-news.html",
+    "title": "News/Announcements",
+    "section": "",
+    "text": "Any announcement will be posted in this page. The latest news will also be put on top of the main page.",
+    "crumbs": [
+      "Course Information",
+      "News/Annoucements"
+    ]
+  },
+  {
+    "objectID": "course-news.html#jan-14-2025",
+    "href": "course-news.html#jan-14-2025",
+    "title": "News/Announcements",
+    "section": "Jan 14, 2025",
+    "text": "Jan 14, 2025\n\nNo office hours first week.",
+    "crumbs": [
+      "Course Information",
+      "News/Annoucements"
+    ]
+  },
+  {
+    "objectID": "slides/03-bias-var.html#supervised-learning-1",
+    "href": "slides/03-bias-var.html#supervised-learning-1",
+    "title": "Bias-Variance Tradeoff 🎯",
+    "section": "Supervised Learning",
+    "text": "Supervised Learning\nSupervised learning investigates and models the relationships between responses and inputs."
+  },
+  {
+    "objectID": "slides/03-bias-var.html#relationship-as-functions",
+    "href": "slides/03-bias-var.html#relationship-as-functions",
+    "title": "Bias-Variance Tradeoff 🎯",
+    "section": "Relationship as Functions",
+    "text": "Relationship as Functions\n\nRepresent relationships between variables using functions y = f(x).\n\nPlug in the inputs and receive the output.\n\ny = f(x) = 3x + 7 is a function with input x and output y.\nIf x = 5, y = 3 \\times 5 + 7 = 22.\n\n\n\n\n\nIn mathematics, how do we describe a Relationship Between Variables? We use a function. Right.\nThe function y = f(x) gives us the relationship between an output Y and one or more inputs x.\n\nYou plug in the values of inputs and receive back the output value.\nFor example, the formula y = f(x) = 3x + 7 is a function with input x and output y. If x = 5, y = 3 \\times 5 + 7 = 22.\n\n\nBecause this is a linear function, we know that x and y are linearly related.\nWith a value of x, I can give you 100% correct value of y, which is right on this straight line. right. In other words, their relationship is 100% deterministic."
+  },
+  {
+    "objectID": "slides/03-bias-var.html#different-relationships",
+    "href": "slides/03-bias-var.html#different-relationships",
+    "title": "Bias-Variance Tradeoff 🎯",
+    "section": "Different Relationships",
+    "text": "Different Relationships\n\n\n\nCan you come up with any real-world examples describing relationships between variables deterministically?\n\n\nThe relationship between x and y can be more than linear.\nThe relationship can be also quadratic, cubic or any other possible relationship."
+  },
+  {
+    "objectID": "slides/03-bias-var.html#different-relationships-1",
+    "href": "slides/03-bias-var.html#different-relationships-1",
+    "title": "Bias-Variance Tradeoff 🎯",
+    "section": "Different Relationships",
+    "text": "Different Relationships\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSource: https://www.ck12.org/physics/acceleration-due-to-gravity/lesson/Acceleration-Due-to-Gravity-MS-PS/\n\n\n\n\n\n\nHere I give your two examples. The first example is the conversion of F and C degrees. Their relationship is linear and F = 32 + 1.8 C.\nSo you give me a C degree, I can tell you its corresponding F degree fro sure. Right.\nThe second example comes from physics. the displacement of an object is a quadratic function of time.\nSo here s(t) = v0 * t + 0.5 * a * t^2. v0 is the initial velocity, and a is acceleration, and t is time.\nAgain the relationship between displacement and time is 100% deterministic.\nA value of time corresponds to an unique value of displacement given v0 and a."
+  },
+  {
+    "objectID": "slides/03-bias-var.html#relationship-between-variables-is-not-perfect",
+    "href": "slides/03-bias-var.html#relationship-between-variables-is-not-perfect",
+    "title": "Bias-Variance Tradeoff 🎯",
+    "section": "Relationship between Variables is Not Perfect",
+    "text": "Relationship between Variables is Not Perfect\n\n\n\nCan you provide some real examples that the variables are related each other, but not perfectly related?"
+  },
+  {
+    "objectID": "slides/03-bias-var.html#relationship-between-variables-is-not-perfect-1",
+    "href": "slides/03-bias-var.html#relationship-between-variables-is-not-perfect-1",
+    "title": "Bias-Variance Tradeoff 🎯",
+    "section": "Relationship between Variables is Not Perfect",
+    "text": "Relationship between Variables is Not Perfect\n\n\n💵 In general, one with more years of education earns more.\n💵 Any two with the same years of education may have different annual income.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHere I give you a simple example: the relationship between income and years of education.\n💵 In general, one with more years of education earns more.\n💵 Any two with the same years of education may have different annual income.\nBecause your income level depends on so many other factors, not just years of education.\nSo when you plot the scatter plot of the two variables, you will find that there is some trend, but the data are sort of scattered or jittered or variated around some function that describes the relationship between income the years of education.\n\nRed dots are observed values or the years of education and income pairs."
+  },
+  {
+    "objectID": "slides/03-bias-var.html#variation-around-the-functionmodel",
+    "href": "slides/03-bias-var.html#variation-around-the-functionmodel",
+    "title": "Bias-Variance Tradeoff 🎯",
+    "section": "Variation around the Function/Model",
+    "text": "Variation around the Function/Model\n\n\nWhat are the unexplained variation coming from?\n\n\n\n\n\n\nOther factors accounting for parts of variability of income.\n\nAdding more explanatory variables to a model can reduce the variation size around the model.\n\n\nPure measurement error.\nJust that randomness plays a big role. 🤔\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhat other factors (variables) may affect a person’s income?\n\n\n\nyour income = f(years of education, major, GPA, college, parent's wealth, ...)\n\nAnd the data Variation around the Function, or in general the regression model is just as important as the model, if not more!\n\nBasically, what statistics does is explain variation in the context of what remains unexplained.\nThe scatter plot suggests that there might be other factors that account for large parts of variability.\nIf that is the case, adding more explanatory variables ( Xs ) to a model can sometimes usefully reduce the size of the scatter around the model.\nPerhaps just that randomness plays a big role."
+  },
+  {
+    "objectID": "slides/03-bias-var.html#supervised-learning-mapping",
+    "href": "slides/03-bias-var.html#supervised-learning-mapping",
+    "title": "Bias-Variance Tradeoff 🎯",
+    "section": "Supervised Learning Mapping",
+    "text": "Supervised Learning Mapping\n\n\n\nExplain the relationship between X and Y and make predictions through a model Y = f(X) + \\epsilon\n\n\n\\epsilon: irreducible random error (Aleatoric Uncertainty)\n\nindependent of X\n\n\nmean zero with some variance.\n\n\n\nf(\\cdot): unknown function1 describing the relationship between X and (the mean of) Y. (Epistemic Uncertainty)\n\n\n\n\nIn Intro Stats, what is the form of f and what assumptions you made on the random error \\epsilon ?\n\n\n\n\n\nf(X) = \\beta_0 + \\beta_1X with unknown parameters \\beta_0 and \\beta_1.\n\n\\epsilon \\sim N(0, \\sigma^2).\n\n\nOK. Now after collecting the data of the variables we are interested, we know their relationship, most of the time, is not perfect, and stochastic in some way and in some sense.\nAnd how do we model such stochastic relationship? Well the answer is a regression model.\nSuppose we are interested in the relationship between two variables, call X and Y. In particular, we like to know how changes of X affect value of Y, or we want to use X to predict Y.\nIn this sense, Y is called response, outcome, label, dependent variable, e.g., income\n\n\nX is called predictor, covariate, feature, regressor, explanatory or independent variable, e.g., years of education, which is known and fixed.\nExplain the relationship between X and Y and make predictions through a model Y = f(X) + \\epsilon. This is a very general regression model we can built to learn the relationship b/w x and y.\n\nf(\\cdot) is fixed but unknown and describes the true relationship between X and Y. \n\n\n\\epsilon is a irreducible random error which is assumed to be independent of X and has mean zero with some variance.\n\n\\epsilon is used to represent those measurement errors or the variation that cannot be explained or captured by the predictor X.\nIntro Stats:\n\n\nf(X) = \\beta_0 + \\beta_1X with unknown parameters \\beta_0 and \\beta_1.\n\n\\epsilon \\sim N(0, \\sigma^2).\n\n\n\nX and Y are assumed to be linearly related, which may not be correct.\nNext week, we will learn simple linear regression from the scratch and in much more detail. Here I just give you an overview.\n\n\nf(\\cdot) is assumed fixed from frequentist point of view; f(\\cdot) is random in the Bayesian framework."
+  },
+  {
+    "objectID": "slides/03-bias-var.html#true-unknown-function-f-of-the-model-y-fx-epsilon",
+    "href": "slides/03-bias-var.html#true-unknown-function-f-of-the-model-y-fx-epsilon",
+    "title": "Bias-Variance Tradeoff 🎯",
+    "section": "True Unknown Function f of the Model Y = f(X) + \\epsilon\n",
+    "text": "True Unknown Function f of the Model Y = f(X) + \\epsilon\n\n\n\n\nBlue curve: true underlying relationship between (the mean) income and years of education.\n\nBlack lines: error associated with each observation\n\n\n\nBig problem: f(x) is unknown and needs to be estimated.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLet’s go back to the income-education example. Red dots are observed values or the years of education and income pairs. Suppose we like to use a regression model y = f(x) + \\epsilon to describe the relationship between income and education.\nAnd the *Blue** curve on the right shows the true underlying relationship between income and years of education, which is the function f in our regression model.\nAnd each Black vertical line indicates an error associated with each observation.\nSo again, each red dot or observation is the value of the function f(x) plus some random error with its magnitude shown in a black vertical line.\nAgain, in regression, we assume years of education is fixed. It is income level that varies around the function f."
+  },
+  {
+    "objectID": "slides/03-bias-var.html#how-to-estimate-f",
+    "href": "slides/03-bias-var.html#how-to-estimate-f",
+    "title": "Bias-Variance Tradeoff 🎯",
+    "section": "How to Estimate f?",
+    "text": "How to Estimate f?\n\nUse training data \\mathcal{D} = \\{ (x_i, y_i) \\}_{i=1}^n (E) to train or teach our model to learn f (T).\nUse test data \\mathcal{D}_{test} = \\{ (x_j, y_j) \\}_{j=1}^m (E) to test or evaluate how well the model makes inference or prediction (P).\n\n\n\nModels are either parametric or nonparametric.\n\n\n\n\n\nParametric methods involve a two-step model-based approach:\n\n1️⃣ Make an assumption about the shape of f, e.g. linear regression  f(X) = \\beta_0 + \\beta_1X_1 + \\beta_2X_2 + \\dots + \\beta_pX_p \n\n2️⃣ Use \\mathcal{D} to train the model, e.g., learn the parameters \\beta_j, j = 0, \\dots, p using least squares.\n\n\n\n\n\n\n\nNonparametric methods do not make assumptions about the shape of f.\n\nSeek an estimate of f that gets close to the data points without being too rough or wiggly."
+  },
+  {
+    "objectID": "slides/03-bias-var.html#parametric-vs.-nonparametric-models",
+    "href": "slides/03-bias-var.html#parametric-vs.-nonparametric-models",
+    "title": "Bias-Variance Tradeoff 🎯",
+    "section": "Parametric vs. Nonparametric Models",
+    "text": "Parametric vs. Nonparametric Models\n\n\n\nParametric (Linear regression)\n\n\n\n\n\n\n\n\n\n\n\nNonparametric (LOESS)"
+  },
+  {
+    "objectID": "slides/03-bias-var.html#no-free-lunch",
+    "href": "slides/03-bias-var.html#no-free-lunch",
+    "title": "Bias-Variance Tradeoff 🎯",
+    "section": "No Free Lunch",
+    "text": "No Free Lunch\n\n\nThere is no free lunch in machine learning: no one method dominates all others over all possible data sets.\n\n\n\nAll models are wrong, but some are useful. – George Box (1919-2013)\n\n\n\nFor any given training data, decide which method (model & algorithm) produces the best results.\nSelecting the best approach is one of the most challenging parts of machine learning.\nNeed some way to measure how well its predictions actually match the training/test data.\n\n\n\n\nFor numeric y: mean square error (MSE) for y with \\hat{f}, the estimate of f: \\text{MSE}_{\\texttt{Tr}}(y) = \\frac{1}{n} \\sum_{i=1}^n (y_i - \\hat{f}(x_i))^2, \\quad \\quad \\text{MSE}_{\\texttt{Te}}(y) = \\frac{1}{m} \\sum_{j=1}^m (y_j - \\hat{f}(x_j))^2\n\n\n\n\n\nAre \\text{MSE}_{\\texttt{Tr}} and \\text{MSE}_{\\texttt{Te}} the same? When to use which?"
+  },
+  {
+    "objectID": "slides/03-bias-var.html#mean-square-error",
+    "href": "slides/03-bias-var.html#mean-square-error",
+    "title": "Bias-Variance Tradeoff 🎯",
+    "section": "Mean Square Error",
+    "text": "Mean Square Error\n\n\n\\text{MSE}_{\\texttt{Tr}} measures how much \\hat{f}(x_i) is close to the training data y_i (goodness of fit). However, most of the time\n\n\n\n\nWe do not care how well the method works on the training data.\n\n\n\n\nWe are interested in the predictive accuracy when we apply our method to previously unseen test data.\n\n\nWe want to know whether \\hat{f}(x_j) is (approximately) equal to y_j, where (x_j, y_j) is previously unseen or a test data point not used in training our model.\n\n\n\n\n\\text{MSE}_{\\texttt{Tr}} or \\text{MSE}_{\\texttt{Te}} is smaller?\n\n\n\n\n\n\\text{MSE}_{\\texttt{Tr}} &lt; \\text{MSE}_{\\texttt{Te}}.\n\n\nTO DO: Provide an EXAMPLE of why training error is smaller\nMost statistical learning methods either directly or indirectly seek to minimize the training MSE.\nTraining data are the information we have and probably only have. Without other constraints or information about how we train the model, we tend to make use of all possible information in the training data to train our model.\nWe want to know whether \\hat{f}(x_j) is (approximately) equal to y_j, where (x_j, y_j) is a previously unseen test observation not used to train the model."
+  },
+  {
+    "objectID": "slides/03-bias-var.html#model-complexityflexibility",
+    "href": "slides/03-bias-var.html#model-complexityflexibility",
+    "title": "Bias-Variance Tradeoff 🎯",
+    "section": "Model Complexity/Flexibility",
+    "text": "Model Complexity/Flexibility\n\nA more complex model produces a more flexible or wiggly regression curve \\hat{f}(x) that matches the training data better.\n\ny = \\beta_0+ \\beta_1x + \\beta_2x^2 + \\cdots + \\beta_{10}x^{10} + \\epsilon is more complex than y = \\beta_0+ \\beta_1x + \\epsilon\n\n\n\n\n\nOverfitting: A too complex model fits the training data extremely well and too hard, picking up some patterns and variations simply caused by random noises that are not the properties of the true f, and not existed in the any unseen test data.  \n\n\n\n\nUnderfitting: A model that is too simple to capture complex patterns or shapes of the true f(x). The estimate \\hat{f}(x) is rigid and far away from data."
+  },
+  {
+    "objectID": "slides/03-bias-var.html#section-2",
+    "href": "slides/03-bias-var.html#section-2",
+    "title": "Bias-Variance Tradeoff 🎯",
+    "section": "",
+    "text": "How \\text{MSE}_{\\texttt{Tr}} and \\text{MSE}_{\\texttt{Te}} change with model complexity?"
+  },
+  {
+    "objectID": "slides/03-bias-var.html#model-complexityflexibility-and-mse",
+    "href": "slides/03-bias-var.html#model-complexityflexibility-and-mse",
+    "title": "Bias-Variance Tradeoff 🎯",
+    "section": "Model Complexity/Flexibility and MSE",
+    "text": "Model Complexity/Flexibility and MSE\n\nIt’s common that no test data are available. Can we select a model that minimize \\text{MSE}_{\\texttt{Tr}}, since the training data and test data appear to be closed related?\n\n\n\n\n\nOrange: Under fit\nGreen: Over fit\nBlue: Best fit\n\\color{darkgray}{\\text{MSE}_{\\texttt{Tr}}} is decreasing with the complexity.\n\\color{red}{\\text{MSE}_{\\texttt{Te}}} is U-shaped: goes down then up with the complexity.\n\n\n\nMSE\nOverfit\nUnderfit\n\n\n\nTrain\ntiny\nbig\n\n\nTest\nbig\nbig\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo! There is no guarantee that the method with the lowest \\text{MSE}_{\\texttt{Tr}} will also have the lowest \\text{MSE}_{\\texttt{Te}}."
+  },
+  {
+    "objectID": "slides/03-bias-var.html#bias-variance-tradeoff",
+    "href": "slides/03-bias-var.html#bias-variance-tradeoff",
+    "title": "Bias-Variance Tradeoff 🎯",
+    "section": "Bias-Variance Tradeoff",
+    "text": "Bias-Variance Tradeoff\nGiven any new input x_0,\n\n\\text{MSE}_{\\hat{f}} = E\\left[\\left(\\hat{f}(x_0) - f(x_0)\\right)^2\\right] = \\left[\\text{Bias}\\left(\\hat{f}(x_0) \\right)\\right]^2 + \\text{Var}\\left(\\hat{f}(x_0)\\right)\nwhere \\text{Bias}\\left(\\hat{f}(x_0) \\right) = E\\left[ \\hat{f}(x_0)\\right] - f(x_0).\n\n\n\n\n\n\n\nWarning\n\n\n\\hat{f}(x_0) is a random variable! Why?\n\n\n\n\n\nThe expected test MSE of y_0 at x_0 is \\text{MSE}_{y_0} = E\\left[\\left(y_0 - \\hat{f}(x_0)\\right)^2\\right] = \\text{MSE}_{\\hat{f}} + \\text{Var}(\\epsilon)\n\n\n\n\n\n\n\nNote\n\n\n\nWe never know the true expected test MSE, and prefer the model with the smallest expected test MSE estimate.\n\n\n\n\n\nMSE can be decomposed into two effects/measures\nMSE is a combination of two performance measures."
+  },
+  {
+    "objectID": "slides/03-bias-var.html#bias-variance-tradeoff-and-model-complexity",
+    "href": "slides/03-bias-var.html#bias-variance-tradeoff-and-model-complexity",
+    "title": "Bias-Variance Tradeoff 🎯",
+    "section": "Bias-Variance Tradeoff and Model Complexity",
+    "text": "Bias-Variance Tradeoff and Model Complexity\n\\text{MSE}_{\\hat{f}} = \\left[\\text{Bias}\\left(\\hat{f}(x_0) \\right)\\right]^2 + \\text{Var}\\left(\\hat{f}(x_0)\\right)\n\nOverfitting: Low bias and High variance\nUnderfitting: High bias and Low variance"
+  },
+  {
+    "objectID": "slides/03-bias-var.html#lab-bias-variance-tradeoff",
+    "href": "slides/03-bias-var.html#lab-bias-variance-tradeoff",
+    "title": "Bias-Variance Tradeoff 🎯",
+    "section": "\nLab: Bias-Variance Tradeoff",
+    "text": "Lab: Bias-Variance Tradeoff\n\nModel 1: Under-fitting y = \\beta_0+\\beta_1x+\\epsilon\nModel 2: Right-fitting y = \\beta_0+\\beta_1x+ \\beta_2x^2 + \\epsilon\nModel 3: Over-fitting y = \\beta_0+\\beta_1x+ \\beta_2x^2 + \\cdots + \\beta_9x^9 + \\epsilon\nTo see expectation/bias and variance, we need replicates of training data."
+  },
+  {
+    "objectID": "slides/02-overview.html#imageobject-recognition",
+    "href": "slides/02-overview.html#imageobject-recognition",
+    "title": "Overview of Statistical Machine Learning 💻",
+    "section": "Image/Object Recognition",
+    "text": "Image/Object Recognition\n\n\n\n\n\n\n\n\n\nMachine learning is everywhere.\nCan we train a machine to have an ability to recognize dogs and cats?\nhundreds of thousands of objects?"
+  },
+  {
+    "objectID": "slides/02-overview.html#recommender-system",
+    "href": "slides/02-overview.html#recommender-system",
+    "title": "Overview of Statistical Machine Learning 💻",
+    "section": "Recommender System",
+    "text": "Recommender System\n\n\nwatch one video on YouTube, then lots of other videos that never show up pop up.\nCheck some items on Amazon, then it recommends some other items saying “you may also like XXX”\nThis kind of recommendation relies on machine learning.\nHow does the model know you may also like those items. Well the model learn this from other customer surfing and purchasing history."
+  },
+  {
+    "objectID": "slides/02-overview.html#covid-detection",
+    "href": "slides/02-overview.html#covid-detection",
+    "title": "Overview of Statistical Machine Learning 💻",
+    "section": "COVID Detection",
+    "text": "COVID Detection"
+  },
+  {
+    "objectID": "slides/02-overview.html#stock-price-forecasting",
+    "href": "slides/02-overview.html#stock-price-forecasting",
+    "title": "Overview of Statistical Machine Learning 💻",
+    "section": "Stock Price Forecasting",
+    "text": "Stock Price Forecasting"
+  },
+  {
+    "objectID": "slides/02-overview.html#risk-factors-for-cancer",
+    "href": "slides/02-overview.html#risk-factors-for-cancer",
+    "title": "Overview of Statistical Machine Learning 💻",
+    "section": "Risk Factors for Cancer",
+    "text": "Risk Factors for Cancer"
+  },
+  {
+    "objectID": "slides/02-overview.html#how-we-solve-real-life-problems",
+    "href": "slides/02-overview.html#how-we-solve-real-life-problems",
+    "title": "Overview of Statistical Machine Learning 💻",
+    "section": "How We Solve Real-Life Problems?",
+    "text": "How We Solve Real-Life Problems?\n\nWe describe and formulate our problems/questions by models.\n\n\n\nSolve problems/Answer questions by doing inference and/or predictions from the built model using the information from the data and computer algorithms.\n\n\n\n\nSo what is (Statistical) Machine Learning?\n\n\nMathematical/statistical or machine learning models.\nwe know the eating habits from a data of 100 american people. How do we know the the eating habits of all the people in the united states.\nIf we know someone’s GPA and major, how can we predict his salary after graduation?"
+  },
+  {
+    "objectID": "slides/02-overview.html#machine-learning-vs.-statistical-learning",
+    "href": "slides/02-overview.html#machine-learning-vs.-statistical-learning",
+    "title": "Overview of Statistical Machine Learning 💻",
+    "section": "Machine Learning vs. Statistical Learning",
+    "text": "Machine Learning vs. Statistical Learning\n\n\nMachine learning (ML) is a field in Computer Science (CS).\n\n\n“A computer program is said to learn from experience (E) with respect to some class of tasks (T) and performance measure (P) if its performance at tasks in T, as measured by P, improves with experience E.” – Tom Mitchell, Professor of ML at Carnegie Mellon University\n\n\ncomputer programs = learning software and system\nexperience = data\ntasks = problems\n\n\n\nThe ML algorithms are mainly for predictive modeling problems, and many have been borrowed from Statistics, for example, linear regression.\nML is a CS perspective on modeling data with a focus on algorithmic methods.\n\n\n\n\nWait, I am a statistical modeler (computational statistician), and this is exactly what I am doing!\n\nMachine Learning is the study of computer algorithms that improve automatically through experience."
+  },
+  {
+    "objectID": "slides/02-overview.html#machine-learning-vs.-statistical-learning-1",
+    "href": "slides/02-overview.html#machine-learning-vs.-statistical-learning-1",
+    "title": "Overview of Statistical Machine Learning 💻",
+    "section": "Machine Learning vs. Statistical Learning",
+    "text": "Machine Learning vs. Statistical Learning\n\n\nStatistical learning, used to be called Applied Statistics (what a “fancy” name, 🤣), arose as a subfield of Statistics.\n\n\n\nStatistical learning refers to a set of tools for modeling and understanding complex datasets. – An Introduction to Statistical Learning\n\n\n…to extract important patterns and trends, and understand “what the data says.” We call this learning from data. – The Elements of Statistical Learning\n\n\ntools = mathematics, computing hardware/software/architecture, programming languages, algorithms, etc.\nStatistical learning is a mathematical perspective on modeling data with a focus on goodness of fit.\n\nhttps://machinelearningmastery.com/relationship-between-applied-statistics-and-machine-learning/"
+  },
+  {
+    "objectID": "slides/02-overview.html#machine-learning-vs.-statistical-learning-2",
+    "href": "slides/02-overview.html#machine-learning-vs.-statistical-learning-2",
+    "title": "Overview of Statistical Machine Learning 💻",
+    "section": "Machine Learning vs. Statistical Learning",
+    "text": "Machine Learning vs. Statistical Learning\n\nMachine learning emphasizes algorithms and automation.\nStatistical learning emphasizes modeling, interpretability, and uncertainty.\n\n\n\nThe distinction is blur:\n\nA machine learner needs a well-built statistical model that quantifies uncertainty about prediction\nA statistical learner needs a computationally efficient algorithm to deal with large complex data.\n\n\n\n\n\n\nBUT, one thing for sure. Machine learning has the upper hand in marketing!"
+  },
+  {
+    "objectID": "slides/02-overview.html#fancy-terms-and-larger-grant",
+    "href": "slides/02-overview.html#fancy-terms-and-larger-grant",
+    "title": "Overview of Statistical Machine Learning 💻",
+    "section": "Fancy Terms and Larger Grant!",
+    "text": "Fancy Terms and Larger Grant!\n\nSource: http://statweb.stanford.edu/~tibs/stat315a/glossary.pdf"
+  },
+  {
+    "objectID": "slides/02-overview.html#section-1",
+    "href": "slides/02-overview.html#section-1",
+    "title": "Overview of Statistical Machine Learning 💻",
+    "section": "",
+    "text": "Source: All of Statistics"
+  },
+  {
+    "objectID": "slides/02-overview.html#types-of-learning",
+    "href": "slides/02-overview.html#types-of-learning",
+    "title": "Overview of Statistical Machine Learning 💻",
+    "section": "Types of Learning",
+    "text": "Types of Learning\n\nSource: https://towardsdatascience.com/machine-learning-algorithms-in-laymans-terms-part-1-d0368d769a7b"
+  },
+  {
+    "objectID": "slides/02-overview.html#supervised-learning",
+    "href": "slides/02-overview.html#supervised-learning",
+    "title": "Overview of Statistical Machine Learning 💻",
+    "section": "Supervised Learning",
+    "text": "Supervised Learning\n\nResponse Y (output, outcome, target, label, dependent/endogenous variable)\nVector of p predictors X = (X_1, X_2, \\dots, X_p) (inputs, features, regressors, covariates, explanatory/exogenous/independent variable).\n\n\n\nRegression: Y is numeric (e.g price, blood pressure). (if p = 1, simple regression; if p &gt; 1, multiple regression)\nClassification: Y is categorical (e.g survived/died, digit 0-9 (MNIST), cancer class of tissue sample).\n\n\n\n\nTraining data \\mathcal{D} = \\{(x_1, y_1), \\dots ,(x_n , y_n)\\} =\\{(x_i, y_i)\\}_{i=1}^n, x_i \\in \\mathbf{R}^p, y_i \\in \\mathbf{R}^d.\n\n\n\nGoal: Use training data (E) to train our model for better (w.r.t. P) inference/prediction (T) on the response.\n\nLearn a mapping from inputs to outputs Y = f(X)."
+  },
+  {
+    "objectID": "slides/02-overview.html#regression-example",
+    "href": "slides/02-overview.html#regression-example",
+    "title": "Overview of Statistical Machine Learning 💻",
+    "section": "Regression Example",
+    "text": "Regression Example\n\nGoal: Establish the relationship between salary and demographic variables.\n\n\nSource: ISL Fig. 1.1"
+  },
+  {
+    "objectID": "slides/02-overview.html#statistics-nah-machine-learning-neat",
+    "href": "slides/02-overview.html#statistics-nah-machine-learning-neat",
+    "title": "Overview of Statistical Machine Learning 💻",
+    "section": "Statistics Nah… Machine Learning Neat!",
+    "text": "Statistics Nah… Machine Learning Neat!\n\nSource: https://towardsdatascience.com/the-actual-difference-between-statistics-and-machine-learning-64b49f07ea3"
+  },
+  {
+    "objectID": "slides/02-overview.html#statistics-nah-machine-learning-neat-1",
+    "href": "slides/02-overview.html#statistics-nah-machine-learning-neat-1",
+    "title": "Overview of Statistical Machine Learning 💻",
+    "section": "Statistics Nah… Machine Learning Neat!",
+    "text": "Statistics Nah… Machine Learning Neat!"
+  },
+  {
+    "objectID": "slides/02-overview.html#classification-example",
+    "href": "slides/02-overview.html#classification-example",
+    "title": "Overview of Statistical Machine Learning 💻",
+    "section": "Classification Example",
+    "text": "Classification Example\n\nGoal: Build a customized spam filtering system\n\n\nSource: http://penplusbytes.org/strategies-for-dealing-with-e-mail-spam/"
+  },
+  {
+    "objectID": "slides/02-overview.html#classification-example-1",
+    "href": "slides/02-overview.html#classification-example-1",
+    "title": "Overview of Statistical Machine Learning 💻",
+    "section": "Classification Example",
+    "text": "Classification Example\n\n\n\n\nSource: https://www.yesware.com/blog/email-spam/\n\n\n\n\nData: 4601 emails sent to George at HP, before 2000. Each is labeled as spam or email.\nInputs: relative frequencies of 57 of the commonly occurring words and punctuation marks.\n\n\n\n\n\nSource: ESL Tbl. 1.1"
+  },
+  {
+    "objectID": "slides/02-overview.html#objectives-of-supervised-learning",
+    "href": "slides/02-overview.html#objectives-of-supervised-learning",
+    "title": "Overview of Statistical Machine Learning 💻",
+    "section": "Objectives of Supervised Learning",
+    "text": "Objectives of Supervised Learning\nBased on the training data (E) we’d like to :\n\n(T) Prediction: Accurately predict unseen test cases.\n\nGiven a new test input (age, year, education), what is predicted salary level?\nGiven a new bunch of words in the email, the email is a spam or normal message?\n\n\n\n\n\n(T) Inference Understand which inputs affect the outcome, and how.\n\nIf education is up one level, how much salary will increase on average?\nIf “!” increases one more time, how much percentage does the probability of being labeled as spam go up?\n\n\n\n\n\n\n(P) Assess the quality of our predictions and inferences.\n\nUse evalution metrics to assess the performance of a machine learning model/algorithm."
+  },
+  {
+    "objectID": "slides/02-overview.html#unsupervised-learning",
+    "href": "slides/02-overview.html#unsupervised-learning",
+    "title": "Overview of Statistical Machine Learning 💻",
+    "section": "Unsupervised Learning",
+    "text": "Unsupervised Learning\n\nNo outcome variable, just a set of features measured on a set of samples.\nOur training sample is \\mathcal{D} = \\{x_1, \\dots, x_n\\}, x_i \\in \\mathbf{R}^p.\n\n\n\nObjective is more fuzzy\n\nfind groups of samples or features that behave similarly (Clustering)\n\nfind linear combinations of features with the most variation (Dimension Reduction).\n\n\n\n\n\n\nDifficult to know how well you are doing.\nCan be useful as a pre-processing step for supervised learning."
+  },
+  {
+    "objectID": "slides/02-overview.html#clustering-example",
+    "href": "slides/02-overview.html#clustering-example",
+    "title": "Overview of Statistical Machine Learning 💻",
+    "section": "Clustering Example",
+    "text": "Clustering Example\n\nCustomer Segmentation: dividing customers into groups or clusters on the basis of common characteristics.\n\n\nSource: https://www.datacamp.com/community/tutorials/introduction-customer-segmentation-python"
+  },
+  {
+    "objectID": "slides/02-overview.html#deep-learning",
+    "href": "slides/02-overview.html#deep-learning",
+    "title": "Overview of Statistical Machine Learning 💻",
+    "section": "Deep Learning",
+    "text": "Deep Learning\n\nAn (artifical) neural network is a machine learning model inspired by the biological neural networks that constitute animal brains.\n\n\n\n\n\nSource: Wiki"
+  },
+  {
+    "objectID": "slides/02-overview.html#section-2",
+    "href": "slides/02-overview.html#section-2",
+    "title": "Overview of Statistical Machine Learning 💻",
+    "section": "",
+    "text": "A neural network with several hidden layers is called a deep neural network, or deep learning.\n\nSource: ISL Ch 10"
+  },
+  {
+    "objectID": "slides/02-overview.html#accuracy-and-interpretability-trade-off",
+    "href": "slides/02-overview.html#accuracy-and-interpretability-trade-off",
+    "title": "Overview of Statistical Machine Learning 💻",
+    "section": "Accuracy and Interpretability Trade-Off",
+    "text": "Accuracy and Interpretability Trade-Off\n\n\n\n\nSource: ISL Fig. 2.7\n\n\n\n\n\nmssc6250-s25.github.io/website"
   }
 ]
