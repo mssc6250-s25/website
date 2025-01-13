@@ -187,7 +187,7 @@ After college, working and doing military service for several years, I came to t
 
 ## My Research
 
--   Bayesian spatio-temporal modeling and machine learning algorithms in neuroimaging
+-   Bayesian spatio-temporal modeling and computation in neuroimaging/epidemiology
 -   Bayesian deep learning for image classification
 -   Efficient MCMC for high dimensional regression
 -   Data science education
@@ -198,7 +198,7 @@ After college, working and doing military service for several years, I came to t
 
 ```{r}
 #| echo: false
-#| out-width: 100%
+#| out-width: 90%
 #| fig-align: center
 knitr::include_graphics("./images/01-syllabus/activate.png")
 ```
@@ -209,25 +209,27 @@ knitr::include_graphics("./images/01-syllabus/activate.png")
 
 ```{r}
 #| echo: false
-#| out-width: 100%
+#| out-width: 90%
 #| fig-align: center
 knitr::include_graphics("./images/01-syllabus/eeg.png")
 ```
 :::
 :::
 
+
 ## How to Reach Me
 
 - Office hours **TuTh 4:50 - 5:50 PM** and **Wed 12 - 1 PM** in **Cudahy Hall 353**.
 - `r emo::ji('e-mail')`  <cheng-han.yu@marquette.edu> 
-  + Answer your question within 24 hours. 
+  + Answer your question *within 24 hours*. 
   + Expect a reply on **Monday** if shoot me a message **on weekends**.
   + Start your subject line with **[mssc6250]** followed by a **clear description of your question**. 
   
 
+<!-- out-width: 5% doesnot work -->
 ```{r}
 #| echo: false
-#| out-width: 45%
+#| out-width: 5%
 #| fig-align: center
 knitr::include_graphics("./images/01-syllabus/email6250.png")
 ```
@@ -287,20 +289,23 @@ knitr::include_graphics("./images/01-syllabus/hmlr.png")
 :::
 :::
 
+
 ## Optional References
 
 ::: columns
+
 ::: column
-- [(**MML**) *Mathematics for Machine Learning*](https://mml-book.github.io/), by Marc Peter Deisenroth, A. Aldo Faisal, and Cheng Soon Ong. Publisher: Cambridge University Press. 
+-   [(**MML**) *Mathematics for Machine Learning*](https://mml-book.github.io/), by Marc Peter Deisenroth, A. Aldo Faisal, and Cheng Soon Ong. Publisher: Cambridge University Press.
 
-- Focus on the mathematical concepts behind the models
+- College level mathematics for machine learning
 
+- Mathematical concepts behind models and algorithms
 
 :::
 
 ::: column
 ```{r}
-#| out-width: 69%
+#| out-width: 67%
 knitr::include_graphics("./images/01-syllabus/mml.png")
 ```
 :::
@@ -359,7 +364,8 @@ knitr::include_graphics("./images/01-syllabus/pmla.png")
 
 
 ::: column
-```{r, echo=FALSE, out.width="65%", fig.align='center'}
+```{r}
+#| out-width: 60%
 knitr::include_graphics("./images/01-syllabus/esl.png")
 ```
 :::
@@ -389,7 +395,7 @@ knitr::include_graphics("./images/01-syllabus/d2l_s25.png")
 <!-- - Week modules (**Content > Week 1 to Week 15**) include course materials. -->
 
 
-- **News**
+<!-- - **News** -->
 
 - Submit your homework **Assessments > Dropbox**.
 
@@ -542,40 +548,4 @@ knitr::include_graphics("./images/01-syllabus/genai.png")
 <!--   + Students are responsible for contacting instructors prior to the missed class session to indicate absence and the need to make up classwork/assignments.   -->
 <!--   + Students requesting make up classwork/assignments are required to provide the COVID Cheq "stop sign" to confirm inability to attend class. -->
   
-
-<!-- ## Comments and Questions from the Background Survey -->
-<!-- `r emo::ji("question")` **... I hope to start with a refresher on basics of the math required in this subject.**   -->
-<!-- `r emo::ji("point_right")` We will review probability, statistics, and matrix algebra before we need them. -->
-
-<!-- <br> -->
-
-<!-- `r emo::ji("question")` **... any way to receive assignments and projects with as much lead time as possible to allow for adequate planning would be most appreciated.**   -->
-<!-- `r emo::ji("point_right")` You have at least one week to do your homework. I'll try to release assignments as early as possible. -->
-
-<!-- <br> -->
-
-<!-- `r emo::ji("question")` **I am hoping course material/lectures may be available online as well as in person.**   -->
-<!-- `r emo::ji("point_right")` All course materials will be put on D2L. I am not planning to record lectures because of low watching rate and solving time-consuming technical issues during classes. -->
-
-
-<!-- <br> -->
-
-<!-- `r emo::ji("question")` **I like when topics such as these are related back to the real world.**   -->
-<!-- `r emo::ji("point_right")` We will deal with some real data sets. But the data sets are much smaller and more organized than the real-world data. We focus on methodology, not data cleaning, tidying or wrangling. -->
-
-
-<!-- ## Code {background-color="black"} -->
-
-<!-- - Let try some `code` and see what `happened` -->
-
-
-<!-- ## Code -->
-
-<!-- ```{r} -->
-<!-- #| echo: true -->
-<!-- library(ggplot2) -->
-<!-- ggplot(airquality, aes(Ozone, Temp)) +  -->
-<!--         geom_point() +  -->
-<!--         geom_smooth(method = "loess", se = FALSE) -->
-<!-- ``` -->
 

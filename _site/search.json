@@ -347,7 +347,7 @@
     "href": "slides/01-syllabus.html#my-research",
     "title": "Welcome Aboard 🙌",
     "section": "My Research",
-    "text": "My Research\n\nBayesian spatio-temporal modeling and machine learning algorithms in neuroimaging\nBayesian deep learning for image classification\nEfficient MCMC for high dimensional regression\nData science education\n\n\n\nfMRI\n\n\n\n\n\n\n\n\n\nEEG"
+    "text": "My Research\n\nBayesian spatio-temporal modeling and computation in neuroimaging/epidemiology\nBayesian deep learning for image classification\nEfficient MCMC for high dimensional regression\nData science education\n\n\n\nfMRI\n\n\n\n\n\n\n\n\n\nEEG"
   },
   {
     "objectID": "slides/01-syllabus.html#how-to-reach-me",
@@ -375,7 +375,7 @@
     "href": "slides/01-syllabus.html#optional-references-1",
     "title": "Welcome Aboard 🙌",
     "section": "Optional References",
-    "text": "Optional References\n\n\n\n(MML) Mathematics for Machine Learning, by Marc Peter Deisenroth, A. Aldo Faisal, and Cheng Soon Ong. Publisher: Cambridge University Press.\nFocus on the mathematical concepts behind the models"
+    "text": "Optional References\n\n\n\n(MML) Mathematics for Machine Learning, by Marc Peter Deisenroth, A. Aldo Faisal, and Cheng Soon Ong. Publisher: Cambridge University Press.\nCollege level mathematics for machine learning\nMathematical concepts behind models and algorithms"
   },
   {
     "objectID": "slides/01-syllabus.html#optional-references-2",
@@ -410,7 +410,7 @@
     "href": "slides/01-syllabus.html#learning-management-system-d2l",
     "title": "Welcome Aboard 🙌",
     "section": "Learning Management System (D2L)",
-    "text": "Learning Management System (D2L)\n\n\n\n\n\nNews\nSubmit your homework Assessments &gt; Dropbox.\nCheck your grade Assessments &gt; Grades."
+    "text": "Learning Management System (D2L)\n\n\n\n\n\n\nSubmit your homework Assessments &gt; Dropbox.\nCheck your grade Assessments &gt; Grades."
   },
   {
     "objectID": "slides/01-syllabus.html#grading-policy",
@@ -424,7 +424,7 @@
     "href": "slides/01-syllabus.html#grade-percentage-conversion",
     "title": "Welcome Aboard 🙌",
     "section": "Grade-Percentage Conversion",
-    "text": "Grade-Percentage Conversion\n\nYour final grade is based on your percentage of pts earned out of 1000 pts.\n\n[x, y) means greater than or equal to x and less than y.\n\n\n\n\n\n\nGrade\nPercentage\n\n\n\nA\n[94, 100]\n\n\nA-\n[90, 94)\n\n\nB+\n[87, 90)\n\n\nB\n[83, 87)\n\n\nB-\n[80, 83)\n\n\nC+\n[77, 80)\n\n\nC\n[70, 77)\n\n\nF\n[0, 70)"
+    "text": "Grade-Percentage Conversion\n\nYour final grade is based on your percentage of pts earned out of 1000 pts.\n\n[x, y) means greater than or equal to x and less than y.\n\n\n\n\n\nGrade\nPercentage\n\n\n\nA\n[94, 100]\n\n\nA-\n[90, 94)\n\n\nB+\n[87, 90)\n\n\nB\n[83, 87)\n\n\nB-\n[80, 83)\n\n\nC+\n[77, 80)\n\n\nC\n[70, 77)\n\n\nF\n[0, 70)"
   },
   {
     "objectID": "slides/01-syllabus.html#homework-500-pts",
@@ -781,99 +781,69 @@
     ]
   },
   {
-    "objectID": "weeks/week-3.html",
-    "href": "weeks/week-3.html",
-    "title": "Week 3",
+    "objectID": "code/04-linear-reg-code.html",
+    "href": "code/04-linear-reg-code.html",
+    "title": "04-Linear Regression Code Demo",
     "section": "",
-    "text": "Important\n\n\n\nHomework 1 due Friday, Feb 7, 11:59 PM",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 3"
-    ]
+    "text": "Show/Hideadvertising_data &lt;- read.csv(\"../data/Advertising.csv\")\nadvertising_data &lt;- advertising_data[, 2:5]\nhead(advertising_data)\n\n     TV radio newspaper sales\n1 230.1  37.8      69.2  22.1\n2  44.5  39.3      45.1  10.4\n3  17.2  45.9      69.3   9.3\n4 151.5  41.3      58.5  18.5\n5 180.8  10.8      58.4  12.9\n6   8.7  48.9      75.0   7.2\n\nShow/Hidelm_out &lt;- lm(advertising_data$sales ~ ., data = advertising_data)\nsummary(lm_out)\n\n\nCall:\nlm(formula = advertising_data$sales ~ ., data = advertising_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-8.8277 -0.8908  0.2418  1.1893  2.8292 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  2.938889   0.311908   9.422   &lt;2e-16 ***\nTV           0.045765   0.001395  32.809   &lt;2e-16 ***\nradio        0.188530   0.008611  21.893   &lt;2e-16 ***\nnewspaper   -0.001037   0.005871  -0.177     0.86    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.686 on 196 degrees of freedom\nMultiple R-squared:  0.8972,    Adjusted R-squared:  0.8956 \nF-statistic: 570.3 on 3 and 196 DF,  p-value: &lt; 2.2e-16\n\nShow/Hideconfint(lm_out)\n\n                  2.5 %     97.5 %\n(Intercept)  2.32376228 3.55401646\nTV           0.04301371 0.04851558\nradio        0.17154745 0.20551259\nnewspaper   -0.01261595 0.01054097"
   },
   {
-    "objectID": "weeks/week-3.html#participate",
-    "href": "weeks/week-3.html#participate",
-    "title": "Week 3",
-    "section": "Participate",
-    "text": "Participate\n🖥️ Slides - Ridge Regression and Cross Validation\nr fontawesome::fa(\"table\") Data Set - mtcars.csv",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 3"
-    ]
-  },
-  {
-    "objectID": "weeks/week-3.html#reading-and-resources",
-    "href": "weeks/week-3.html#reading-and-resources",
-    "title": "Week 3",
-    "section": "Reading and Resources",
-    "text": "Reading and Resources\n📖 ISL Ch 5.1, 6.2.1\n📖 MML Ch 8.2.3 - 8.2.4",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 3"
-    ]
-  },
-  {
-    "objectID": "weeks/week-3.html#exercise",
-    "href": "weeks/week-3.html#exercise",
-    "title": "Week 3",
-    "section": "Exercise",
-    "text": "Exercise\n\n\n\n\n\nBack to course schedule ⏎",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 3"
-    ]
-  },
-  {
-    "objectID": "weeks/week-4.html",
-    "href": "weeks/week-4.html",
-    "title": "Week 4",
+    "objectID": "code/04-linear-reg-code.html#r-implementation",
+    "href": "code/04-linear-reg-code.html#r-implementation",
+    "title": "04-Linear Regression Code Demo",
     "section": "",
-    "text": "Important\n\n\n\nHomework 1 due Friday, Feb 9, 11:59 PM",
+    "text": "Show/Hideadvertising_data &lt;- read.csv(\"../data/Advertising.csv\")\nadvertising_data &lt;- advertising_data[, 2:5]\nhead(advertising_data)\n\n     TV radio newspaper sales\n1 230.1  37.8      69.2  22.1\n2  44.5  39.3      45.1  10.4\n3  17.2  45.9      69.3   9.3\n4 151.5  41.3      58.5  18.5\n5 180.8  10.8      58.4  12.9\n6   8.7  48.9      75.0   7.2\n\nShow/Hidelm_out &lt;- lm(advertising_data$sales ~ ., data = advertising_data)\nsummary(lm_out)\n\n\nCall:\nlm(formula = advertising_data$sales ~ ., data = advertising_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-8.8277 -0.8908  0.2418  1.1893  2.8292 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  2.938889   0.311908   9.422   &lt;2e-16 ***\nTV           0.045765   0.001395  32.809   &lt;2e-16 ***\nradio        0.188530   0.008611  21.893   &lt;2e-16 ***\nnewspaper   -0.001037   0.005871  -0.177     0.86    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.686 on 196 degrees of freedom\nMultiple R-squared:  0.8972,    Adjusted R-squared:  0.8956 \nF-statistic: 570.3 on 3 and 196 DF,  p-value: &lt; 2.2e-16\n\nShow/Hideconfint(lm_out)\n\n                  2.5 %     97.5 %\n(Intercept)  2.32376228 3.55401646\nTV           0.04301371 0.04851558\nradio        0.17154745 0.20551259\nnewspaper   -0.01261595 0.01054097"
+  },
+  {
+    "objectID": "code/04-linear-reg-code.html#python-implementation",
+    "href": "code/04-linear-reg-code.html#python-implementation",
+    "title": "04-Linear Regression Code Demo",
+    "section": "Python implementation",
+    "text": "Python implementation\n\nShow/Hideimport pandas as pd\nimport numpy as np\n\n\n\nShow/Hideadvertising_data = pd.read_csv(\"../data/Advertising.csv\")\nadvertising_data = advertising_data.iloc[:, 1:5]\nX = advertising_data.drop(columns=[\"sales\"])\ny = advertising_data[\"sales\"]\n\n\nscikit-learn\n\nShow/Hidefrom sklearn.linear_model import LinearRegression\nreg = LinearRegression().fit(X, y)\nreg.intercept_\n\n2.9388893694594014\n\nShow/Hidereg.coef_\n\narray([ 0.04576465,  0.18853002, -0.00103749])\n\n\nstatsmodels\n\nShow/Hidefrom statsmodels.formula.api import ols\nols_out = ols(formula='sales ~ TV + radio + newspaper', data=advertising_data).fit()\nols_out.params\n\nIntercept    2.938889\nTV           0.045765\nradio        0.188530\nnewspaper   -0.001037\ndtype: float64\n\nShow/Hideprint(ols_out.summary())\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                  sales   R-squared:                       0.897\nModel:                            OLS   Adj. R-squared:                  0.896\nMethod:                 Least Squares   F-statistic:                     570.3\nDate:                Mon, 13 Jan 2025   Prob (F-statistic):           1.58e-96\nTime:                        11:56:31   Log-Likelihood:                -386.18\nNo. Observations:                 200   AIC:                             780.4\nDf Residuals:                     196   BIC:                             793.6\nDf Model:                           3                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nIntercept      2.9389      0.312      9.422      0.000       2.324       3.554\nTV             0.0458      0.001     32.809      0.000       0.043       0.049\nradio          0.1885      0.009     21.893      0.000       0.172       0.206\nnewspaper     -0.0010      0.006     -0.177      0.860      -0.013       0.011\n==============================================================================\nOmnibus:                       60.414   Durbin-Watson:                   2.084\nProb(Omnibus):                  0.000   Jarque-Bera (JB):              151.241\nSkew:                          -1.327   Prob(JB):                     1.44e-33\nKurtosis:                       6.332   Cond. No.                         454.\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n\nShow/Hidecoef_summary = ols_out.summary2().tables[1]  # Get the coefficients table\nprint(coef_summary)\n\n              Coef.  Std.Err.          t         P&gt;|t|    [0.025    0.975]\nIntercept  2.938889  0.311908   9.422288  1.267295e-17  2.323762  3.554016\nTV         0.045765  0.001395  32.808624  1.509960e-81  0.043014  0.048516\nradio      0.188530  0.008611  21.893496  1.505339e-54  0.171547  0.205513\nnewspaper -0.001037  0.005871  -0.176715  8.599151e-01 -0.012616  0.010541\n\nShow/Hideconf_intervals = ols_out.conf_int()\nprint(conf_intervals)\n\n                  0         1\nIntercept  2.323762  3.554016\nTV         0.043014  0.048516\nradio      0.171547  0.205513\nnewspaper -0.012616  0.010541"
+  },
+  {
+    "objectID": "weeks/week-2.html",
+    "href": "weeks/week-2.html",
+    "title": "Week 2",
+    "section": "",
+    "text": "Important\n\n\n\nHomework 1 released.",
     "crumbs": [
       "Weekly Materials",
-      "Week 4"
+      "Week 2"
     ]
   },
   {
-    "objectID": "weeks/week-4.html#participate",
-    "href": "weeks/week-4.html#participate",
-    "title": "Week 4",
+    "objectID": "weeks/week-2.html#participate",
+    "href": "weeks/week-2.html#participate",
+    "title": "Week 2",
     "section": "Participate",
-    "text": "Participate\n🖥️ Slides - Lasso\n\nr fontawesome::fa(\"table\") Data Set - Prostate.csv",
+    "text": "Participate\n🖥️ Slides - Linear Regression\nr fontawesome::fa(\"table\") Data Set - Advertising.csv",
     "crumbs": [
       "Weekly Materials",
-      "Week 4"
+      "Week 2"
     ]
   },
   {
-    "objectID": "weeks/week-4.html#reading-and-resources",
-    "href": "weeks/week-4.html#reading-and-resources",
-    "title": "Week 4",
+    "objectID": "weeks/week-2.html#reading-and-resources",
+    "href": "weeks/week-2.html#reading-and-resources",
+    "title": "Week 2",
     "section": "Reading and Resources",
-    "text": "Reading and Resources\n📖 ISL Ch 6.1, 6.2",
+    "text": "Reading and Resources\n📖 ISL Ch 3.1 - 3.4\n📖 Dr. Yu MSSC 5780 Regression Analysis Week 1 to 6\n📖 MML Ch 7.1, 8.1, 8.2.1, 8.2.2",
     "crumbs": [
       "Weekly Materials",
-      "Week 4"
+      "Week 2"
     ]
   },
   {
-    "objectID": "weeks/week-4.html#perform",
-    "href": "weeks/week-4.html#perform",
-    "title": "Week 4",
+    "objectID": "weeks/week-2.html#perform",
+    "href": "weeks/week-2.html#perform",
+    "title": "Week 2",
     "section": "Perform",
-    "text": "Perform\n\n\n\n\nBack to course schedule ⏎",
+    "text": "Perform\n📋 Homework 1\n\n\n\n\n\nBack to course schedule ⏎",
     "crumbs": [
       "Weekly Materials",
-      "Week 4"
+      "Week 2"
     ]
-  },
-  {
-    "objectID": "LICENSE.html#creative-commons-attribution-sharealike-4.0-international-public-license",
-    "href": "LICENSE.html#creative-commons-attribution-sharealike-4.0-international-public-license",
-    "title": "Attribution-ShareAlike 4.0 International",
-    "section": "Creative Commons Attribution-ShareAlike 4.0 International Public License",
-    "text": "Creative Commons Attribution-ShareAlike 4.0 International Public License\nBy exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution-ShareAlike 4.0 International Public License (“Public License”). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.\n\nSection 1 – Definitions.\n\nAdapted Material means material subject to Copyright and Similar Rights that is derived from or based upon the Licensed Material and in which the Licensed Material is translated, altered, arranged, transformed, or otherwise modified in a manner requiring permission under the Copyright and Similar Rights held by the Licensor. For purposes of this Public License, where the Licensed Material is a musical work, performance, or sound recording, Adapted Material is always produced where the Licensed Material is synched in timed relation with a moving image.\nAdapter’s License means the license You apply to Your Copyright and Similar Rights in Your contributions to Adapted Material in accordance with the terms and conditions of this Public License.\nBY-SA Compatible License means a license listed at creativecommons.org/compatiblelicenses, approved by Creative Commons as essentially the equivalent of this Public License.\nCopyright and Similar Rights means copyright and/or similar rights closely related to copyright including, without limitation, performance, broadcast, sound recording, and Sui Generis Database Rights, without regard to how the rights are labeled or categorized. For purposes of this Public License, the rights specified in Section 2(b)(1)-(2) are not Copyright and Similar Rights.\nEffective Technological Measures means those measures that, in the absence of proper authority, may not be circumvented under laws fulfilling obligations under Article 11 of the WIPO Copyright Treaty adopted on December 20, 1996, and/or similar international agreements.\nExceptions and Limitations means fair use, fair dealing, and/or any other exception or limitation to Copyright and Similar Rights that applies to Your use of the Licensed Material.\nLicense Elements means the license attributes listed in the name of a Creative Commons Public License. The License Elements of this Public License are Attribution and ShareAlike.\nLicensed Material means the artistic or literary work, database, or other material to which the Licensor applied this Public License.\nLicensed Rights means the rights granted to You subject to the terms and conditions of this Public License, which are limited to all Copyright and Similar Rights that apply to Your use of the Licensed Material and that the Licensor has authority to license.\nLicensor means the individual(s) or entity(ies) granting rights under this Public License.\nShare means to provide material to the public by any means or process that requires permission under the Licensed Rights, such as reproduction, public display, public performance, distribution, dissemination, communication, or importation, and to make material available to the public including in ways that members of the public may access the material from a place and at a time individually chosen by them.\nSui Generis Database Rights means rights other than copyright resulting from Directive 96/9/EC of the European Parliament and of the Council of 11 March 1996 on the legal protection of databases, as amended and/or succeeded, as well as other essentially equivalent rights anywhere in the world.\nYou means the individual or entity exercising the Licensed Rights under this Public License. Your has a corresponding meaning.\n\n\n\nSection 2 – Scope.\n\nLicense grant.\n\nSubject to the terms and conditions of this Public License, the Licensor hereby grants You a worldwide, royalty-free, non-sublicensable, non-exclusive, irrevocable license to exercise the Licensed Rights in the Licensed Material to:\nA. reproduce and Share the Licensed Material, in whole or in part; and\nB. produce, reproduce, and Share Adapted Material.\nExceptions and Limitations. For the avoidance of doubt, where Exceptions and Limitations apply to Your use, this Public License does not apply, and You do not need to comply with its terms and conditions.\nTerm. The term of this Public License is specified in Section 6(a).\nMedia and formats; technical modifications allowed. The Licensor authorizes You to exercise the Licensed Rights in all media and formats whether now known or hereafter created, and to make technical modifications necessary to do so. The Licensor waives and/or agrees not to assert any right or authority to forbid You from making technical modifications necessary to exercise the Licensed Rights, including technical modifications necessary to circumvent Effective Technological Measures. For purposes of this Public License, simply making modifications authorized by this Section 2(a)(4) never produces Adapted Material.\nDownstream recipients.\nA. Offer from the Licensor – Licensed Material. Every recipient of the Licensed Material automatically receives an offer from the Licensor to exercise the Licensed Rights under the terms and conditions of this Public License.\nB. Additional offer from the Licensor – Adapted Material. Every recipient of Adapted Material from You automatically receives an offer from the Licensor to exercise the Licensed Rights in the Adapted Material under the conditions of the Adapter’s License You apply.\nC. No downstream restrictions. You may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, the Licensed Material if doing so restricts exercise of the Licensed Rights by any recipient of the Licensed Material.\nNo endorsement. Nothing in this Public License constitutes or may be construed as permission to assert or imply that You are, or that Your use of the Licensed Material is, connected with, or sponsored, endorsed, or granted official status by, the Licensor or others designated to receive attribution as provided in Section 3(a)(1)(A)(i).\n\nOther rights.\n\nMoral rights, such as the right of integrity, are not licensed under this Public License, nor are publicity, privacy, and/or other similar personality rights; however, to the extent possible, the Licensor waives and/or agrees not to assert any such rights held by the Licensor to the limited extent necessary to allow You to exercise the Licensed Rights, but not otherwise.\nPatent and trademark rights are not licensed under this Public License.\nTo the extent possible, the Licensor waives any right to collect royalties from You for the exercise of the Licensed Rights, whether directly or through a collecting society under any voluntary or waivable statutory or compulsory licensing scheme. In all other cases the Licensor expressly reserves any right to collect such royalties.\n\n\n\n\nSection 3 – License Conditions.\nYour exercise of the Licensed Rights is expressly made subject to the following conditions.\n\nAttribution.\n\nIf You Share the Licensed Material (including in modified form), You must:\nA. retain the following if it is supplied by the Licensor with the Licensed Material:\n\nidentification of the creator(s) of the Licensed Material and any others designated to receive attribution, in any reasonable manner requested by the Licensor (including by pseudonym if designated);\na copyright notice;\na notice that refers to this Public License;\na notice that refers to the disclaimer of warranties;\na URI or hyperlink to the Licensed Material to the extent reasonably practicable;\n\nB. indicate if You modified the Licensed Material and retain an indication of any previous modifications; and\nC. indicate the Licensed Material is licensed under this Public License, and include the text of, or the URI or hyperlink to, this Public License.\nYou may satisfy the conditions in Section 3(a)(1) in any reasonable manner based on the medium, means, and context in which You Share the Licensed Material. For example, it may be reasonable to satisfy the conditions by providing a URI or hyperlink to a resource that includes the required information.\nIf requested by the Licensor, You must remove any of the information required by Section 3(a)(1)(A) to the extent reasonably practicable.\n\nShareAlike.\n\nIn addition to the conditions in Section 3(a), if You Share Adapted Material You produce, the following conditions also apply.\n\nThe Adapter’s License You apply must be a Creative Commons license with the same License Elements, this version or later, or a BY-SA Compatible License.\nYou must include the text of, or the URI or hyperlink to, the Adapter’s License You apply. You may satisfy this condition in any reasonable manner based on the medium, means, and context in which You Share Adapted Material.\nYou may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, Adapted Material that restrict exercise of the rights granted under the Adapter’s License You apply.\n\n\n\nSection 4 – Sui Generis Database Rights.\nWhere the Licensed Rights include Sui Generis Database Rights that apply to Your use of the Licensed Material:\n\nfor the avoidance of doubt, Section 2(a)(1) grants You the right to extract, reuse, reproduce, and Share all or a substantial portion of the contents of the database;\nif You include all or a substantial portion of the database contents in a database in which You have Sui Generis Database Rights, then the database in which You have Sui Generis Database Rights (but not its individual contents) is Adapted Material, including for purposes of Section 3(b); and\nYou must comply with the conditions in Section 3(a) if You Share all or a substantial portion of the contents of the database.\n\nFor the avoidance of doubt, this Section 4 supplements and does not replace Your obligations under this Public License where the Licensed Rights include other Copyright and Similar Rights.\n\n\nSection 5 – Disclaimer of Warranties and Limitation of Liability.\n\nUnless otherwise separately undertaken by the Licensor, to the extent possible, the Licensor offers the Licensed Material as-is and as-available, and makes no representations or warranties of any kind concerning the Licensed Material, whether express, implied, statutory, or other. This includes, without limitation, warranties of title, merchantability, fitness for a particular purpose, non-infringement, absence of latent or other defects, accuracy, or the presence or absence of errors, whether or not known or discoverable. Where disclaimers of warranties are not allowed in full or in part, this disclaimer may not apply to You.\nTo the extent possible, in no event will the Licensor be liable to You on any legal theory (including, without limitation, negligence) or otherwise for any direct, special, indirect, incidental, consequential, punitive, exemplary, or other losses, costs, expenses, or damages arising out of this Public License or use of the Licensed Material, even if the Licensor has been advised of the possibility of such losses, costs, expenses, or damages. Where a limitation of liability is not allowed in full or in part, this limitation may not apply to You.\nThe disclaimer of warranties and limitation of liability provided above shall be interpreted in a manner that, to the extent possible, most closely approximates an absolute disclaimer and waiver of all liability.\n\n\n\nSection 6 – Term and Termination.\n\nThis Public License applies for the term of the Copyright and Similar Rights licensed here. However, if You fail to comply with this Public License, then Your rights under this Public License terminate automatically.\nWhere Your right to use the Licensed Material has terminated under Section 6(a), it reinstates:\n\nautomatically as of the date the violation is cured, provided it is cured within 30 days of Your discovery of the violation; or\nupon express reinstatement by the Licensor.\n\nFor the avoidance of doubt, this Section 6(b) does not affect any right the Licensor may have to seek remedies for Your violations of this Public License.\nFor the avoidance of doubt, the Licensor may also offer the Licensed Material under separate terms or conditions or stop distributing the Licensed Material at any time; however, doing so will not terminate this Public License.\nSections 1, 5, 6, 7, and 8 survive termination of this Public License.\n\n\n\nSection 7 – Other Terms and Conditions.\n\nThe Licensor shall not be bound by any additional or different terms or conditions communicated by You unless expressly agreed.\nAny arrangements, understandings, or agreements regarding the Licensed Material not stated herein are separate from and independent of the terms and conditions of this Public License.\n\n\n\nSection 8 – Interpretation.\n\nFor the avoidance of doubt, this Public License does not, and shall not be interpreted to, reduce, limit, restrict, or impose conditions on any use of the Licensed Material that could lawfully be made without permission under this Public License.\nTo the extent possible, if any provision of this Public License is deemed unenforceable, it shall be automatically reformed to the minimum extent necessary to make it enforceable. If the provision cannot be reformed, it shall be severed from this Public License without affecting the enforceability of the remaining terms and conditions.\nNo term or condition of this Public License will be waived and no failure to comply consented to unless expressly agreed to by the Licensor.\nNothing in this Public License constitutes or may be interpreted as a limitation upon, or waiver of, any privileges and immunities that apply to the Licensor or You, including from the legal processes of any jurisdiction or authority.\n\n\nCreative Commons is not a party to its public licenses. Notwithstanding, Creative Commons may elect to apply one of its public licenses to material it publishes and in those instances will be considered the “Licensor.” The text of the Creative Commons public licenses is dedicated to the public domain under the CC0 Public Domain Dedication. Except for the limited purpose of indicating that material is shared under a Creative Commons public license or as otherwise permitted by the Creative Commons policies published at creativecommons.org/policies, Creative Commons does not authorize the use of the trademark “Creative Commons” or any other trademark or logo of Creative Commons without its prior written consent including, without limitation, in connection with any unauthorized modifications to any of its public licenses or any other arrangements, understandings, or agreements concerning use of licensed material. For the avoidance of doubt, this paragraph does not form part of the public licenses.\nCreative Commons may be contacted at creativecommons.org."
   },
   {
     "objectID": "weeks/week-1.html",
@@ -931,47 +901,98 @@
     ]
   },
   {
-    "objectID": "weeks/week-2.html",
-    "href": "weeks/week-2.html",
-    "title": "Week 2",
+    "objectID": "LICENSE.html#creative-commons-attribution-sharealike-4.0-international-public-license",
+    "href": "LICENSE.html#creative-commons-attribution-sharealike-4.0-international-public-license",
+    "title": "Attribution-ShareAlike 4.0 International",
+    "section": "Creative Commons Attribution-ShareAlike 4.0 International Public License",
+    "text": "Creative Commons Attribution-ShareAlike 4.0 International Public License\nBy exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution-ShareAlike 4.0 International Public License (“Public License”). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.\n\nSection 1 – Definitions.\n\nAdapted Material means material subject to Copyright and Similar Rights that is derived from or based upon the Licensed Material and in which the Licensed Material is translated, altered, arranged, transformed, or otherwise modified in a manner requiring permission under the Copyright and Similar Rights held by the Licensor. For purposes of this Public License, where the Licensed Material is a musical work, performance, or sound recording, Adapted Material is always produced where the Licensed Material is synched in timed relation with a moving image.\nAdapter’s License means the license You apply to Your Copyright and Similar Rights in Your contributions to Adapted Material in accordance with the terms and conditions of this Public License.\nBY-SA Compatible License means a license listed at creativecommons.org/compatiblelicenses, approved by Creative Commons as essentially the equivalent of this Public License.\nCopyright and Similar Rights means copyright and/or similar rights closely related to copyright including, without limitation, performance, broadcast, sound recording, and Sui Generis Database Rights, without regard to how the rights are labeled or categorized. For purposes of this Public License, the rights specified in Section 2(b)(1)-(2) are not Copyright and Similar Rights.\nEffective Technological Measures means those measures that, in the absence of proper authority, may not be circumvented under laws fulfilling obligations under Article 11 of the WIPO Copyright Treaty adopted on December 20, 1996, and/or similar international agreements.\nExceptions and Limitations means fair use, fair dealing, and/or any other exception or limitation to Copyright and Similar Rights that applies to Your use of the Licensed Material.\nLicense Elements means the license attributes listed in the name of a Creative Commons Public License. The License Elements of this Public License are Attribution and ShareAlike.\nLicensed Material means the artistic or literary work, database, or other material to which the Licensor applied this Public License.\nLicensed Rights means the rights granted to You subject to the terms and conditions of this Public License, which are limited to all Copyright and Similar Rights that apply to Your use of the Licensed Material and that the Licensor has authority to license.\nLicensor means the individual(s) or entity(ies) granting rights under this Public License.\nShare means to provide material to the public by any means or process that requires permission under the Licensed Rights, such as reproduction, public display, public performance, distribution, dissemination, communication, or importation, and to make material available to the public including in ways that members of the public may access the material from a place and at a time individually chosen by them.\nSui Generis Database Rights means rights other than copyright resulting from Directive 96/9/EC of the European Parliament and of the Council of 11 March 1996 on the legal protection of databases, as amended and/or succeeded, as well as other essentially equivalent rights anywhere in the world.\nYou means the individual or entity exercising the Licensed Rights under this Public License. Your has a corresponding meaning.\n\n\n\nSection 2 – Scope.\n\nLicense grant.\n\nSubject to the terms and conditions of this Public License, the Licensor hereby grants You a worldwide, royalty-free, non-sublicensable, non-exclusive, irrevocable license to exercise the Licensed Rights in the Licensed Material to:\nA. reproduce and Share the Licensed Material, in whole or in part; and\nB. produce, reproduce, and Share Adapted Material.\nExceptions and Limitations. For the avoidance of doubt, where Exceptions and Limitations apply to Your use, this Public License does not apply, and You do not need to comply with its terms and conditions.\nTerm. The term of this Public License is specified in Section 6(a).\nMedia and formats; technical modifications allowed. The Licensor authorizes You to exercise the Licensed Rights in all media and formats whether now known or hereafter created, and to make technical modifications necessary to do so. The Licensor waives and/or agrees not to assert any right or authority to forbid You from making technical modifications necessary to exercise the Licensed Rights, including technical modifications necessary to circumvent Effective Technological Measures. For purposes of this Public License, simply making modifications authorized by this Section 2(a)(4) never produces Adapted Material.\nDownstream recipients.\nA. Offer from the Licensor – Licensed Material. Every recipient of the Licensed Material automatically receives an offer from the Licensor to exercise the Licensed Rights under the terms and conditions of this Public License.\nB. Additional offer from the Licensor – Adapted Material. Every recipient of Adapted Material from You automatically receives an offer from the Licensor to exercise the Licensed Rights in the Adapted Material under the conditions of the Adapter’s License You apply.\nC. No downstream restrictions. You may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, the Licensed Material if doing so restricts exercise of the Licensed Rights by any recipient of the Licensed Material.\nNo endorsement. Nothing in this Public License constitutes or may be construed as permission to assert or imply that You are, or that Your use of the Licensed Material is, connected with, or sponsored, endorsed, or granted official status by, the Licensor or others designated to receive attribution as provided in Section 3(a)(1)(A)(i).\n\nOther rights.\n\nMoral rights, such as the right of integrity, are not licensed under this Public License, nor are publicity, privacy, and/or other similar personality rights; however, to the extent possible, the Licensor waives and/or agrees not to assert any such rights held by the Licensor to the limited extent necessary to allow You to exercise the Licensed Rights, but not otherwise.\nPatent and trademark rights are not licensed under this Public License.\nTo the extent possible, the Licensor waives any right to collect royalties from You for the exercise of the Licensed Rights, whether directly or through a collecting society under any voluntary or waivable statutory or compulsory licensing scheme. In all other cases the Licensor expressly reserves any right to collect such royalties.\n\n\n\n\nSection 3 – License Conditions.\nYour exercise of the Licensed Rights is expressly made subject to the following conditions.\n\nAttribution.\n\nIf You Share the Licensed Material (including in modified form), You must:\nA. retain the following if it is supplied by the Licensor with the Licensed Material:\n\nidentification of the creator(s) of the Licensed Material and any others designated to receive attribution, in any reasonable manner requested by the Licensor (including by pseudonym if designated);\na copyright notice;\na notice that refers to this Public License;\na notice that refers to the disclaimer of warranties;\na URI or hyperlink to the Licensed Material to the extent reasonably practicable;\n\nB. indicate if You modified the Licensed Material and retain an indication of any previous modifications; and\nC. indicate the Licensed Material is licensed under this Public License, and include the text of, or the URI or hyperlink to, this Public License.\nYou may satisfy the conditions in Section 3(a)(1) in any reasonable manner based on the medium, means, and context in which You Share the Licensed Material. For example, it may be reasonable to satisfy the conditions by providing a URI or hyperlink to a resource that includes the required information.\nIf requested by the Licensor, You must remove any of the information required by Section 3(a)(1)(A) to the extent reasonably practicable.\n\nShareAlike.\n\nIn addition to the conditions in Section 3(a), if You Share Adapted Material You produce, the following conditions also apply.\n\nThe Adapter’s License You apply must be a Creative Commons license with the same License Elements, this version or later, or a BY-SA Compatible License.\nYou must include the text of, or the URI or hyperlink to, the Adapter’s License You apply. You may satisfy this condition in any reasonable manner based on the medium, means, and context in which You Share Adapted Material.\nYou may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, Adapted Material that restrict exercise of the rights granted under the Adapter’s License You apply.\n\n\n\nSection 4 – Sui Generis Database Rights.\nWhere the Licensed Rights include Sui Generis Database Rights that apply to Your use of the Licensed Material:\n\nfor the avoidance of doubt, Section 2(a)(1) grants You the right to extract, reuse, reproduce, and Share all or a substantial portion of the contents of the database;\nif You include all or a substantial portion of the database contents in a database in which You have Sui Generis Database Rights, then the database in which You have Sui Generis Database Rights (but not its individual contents) is Adapted Material, including for purposes of Section 3(b); and\nYou must comply with the conditions in Section 3(a) if You Share all or a substantial portion of the contents of the database.\n\nFor the avoidance of doubt, this Section 4 supplements and does not replace Your obligations under this Public License where the Licensed Rights include other Copyright and Similar Rights.\n\n\nSection 5 – Disclaimer of Warranties and Limitation of Liability.\n\nUnless otherwise separately undertaken by the Licensor, to the extent possible, the Licensor offers the Licensed Material as-is and as-available, and makes no representations or warranties of any kind concerning the Licensed Material, whether express, implied, statutory, or other. This includes, without limitation, warranties of title, merchantability, fitness for a particular purpose, non-infringement, absence of latent or other defects, accuracy, or the presence or absence of errors, whether or not known or discoverable. Where disclaimers of warranties are not allowed in full or in part, this disclaimer may not apply to You.\nTo the extent possible, in no event will the Licensor be liable to You on any legal theory (including, without limitation, negligence) or otherwise for any direct, special, indirect, incidental, consequential, punitive, exemplary, or other losses, costs, expenses, or damages arising out of this Public License or use of the Licensed Material, even if the Licensor has been advised of the possibility of such losses, costs, expenses, or damages. Where a limitation of liability is not allowed in full or in part, this limitation may not apply to You.\nThe disclaimer of warranties and limitation of liability provided above shall be interpreted in a manner that, to the extent possible, most closely approximates an absolute disclaimer and waiver of all liability.\n\n\n\nSection 6 – Term and Termination.\n\nThis Public License applies for the term of the Copyright and Similar Rights licensed here. However, if You fail to comply with this Public License, then Your rights under this Public License terminate automatically.\nWhere Your right to use the Licensed Material has terminated under Section 6(a), it reinstates:\n\nautomatically as of the date the violation is cured, provided it is cured within 30 days of Your discovery of the violation; or\nupon express reinstatement by the Licensor.\n\nFor the avoidance of doubt, this Section 6(b) does not affect any right the Licensor may have to seek remedies for Your violations of this Public License.\nFor the avoidance of doubt, the Licensor may also offer the Licensed Material under separate terms or conditions or stop distributing the Licensed Material at any time; however, doing so will not terminate this Public License.\nSections 1, 5, 6, 7, and 8 survive termination of this Public License.\n\n\n\nSection 7 – Other Terms and Conditions.\n\nThe Licensor shall not be bound by any additional or different terms or conditions communicated by You unless expressly agreed.\nAny arrangements, understandings, or agreements regarding the Licensed Material not stated herein are separate from and independent of the terms and conditions of this Public License.\n\n\n\nSection 8 – Interpretation.\n\nFor the avoidance of doubt, this Public License does not, and shall not be interpreted to, reduce, limit, restrict, or impose conditions on any use of the Licensed Material that could lawfully be made without permission under this Public License.\nTo the extent possible, if any provision of this Public License is deemed unenforceable, it shall be automatically reformed to the minimum extent necessary to make it enforceable. If the provision cannot be reformed, it shall be severed from this Public License without affecting the enforceability of the remaining terms and conditions.\nNo term or condition of this Public License will be waived and no failure to comply consented to unless expressly agreed to by the Licensor.\nNothing in this Public License constitutes or may be interpreted as a limitation upon, or waiver of, any privileges and immunities that apply to the Licensor or You, including from the legal processes of any jurisdiction or authority.\n\n\nCreative Commons is not a party to its public licenses. Notwithstanding, Creative Commons may elect to apply one of its public licenses to material it publishes and in those instances will be considered the “Licensor.” The text of the Creative Commons public licenses is dedicated to the public domain under the CC0 Public Domain Dedication. Except for the limited purpose of indicating that material is shared under a Creative Commons public license or as otherwise permitted by the Creative Commons policies published at creativecommons.org/policies, Creative Commons does not authorize the use of the trademark “Creative Commons” or any other trademark or logo of Creative Commons without its prior written consent including, without limitation, in connection with any unauthorized modifications to any of its public licenses or any other arrangements, understandings, or agreements concerning use of licensed material. For the avoidance of doubt, this paragraph does not form part of the public licenses.\nCreative Commons may be contacted at creativecommons.org."
+  },
+  {
+    "objectID": "weeks/week-4.html",
+    "href": "weeks/week-4.html",
+    "title": "Week 4",
     "section": "",
-    "text": "Important\n\n\n\nHomework 1 released.",
+    "text": "Important\n\n\n\nHomework 1 due Friday, Feb 9, 11:59 PM",
     "crumbs": [
       "Weekly Materials",
-      "Week 2"
+      "Week 4"
     ]
   },
   {
-    "objectID": "weeks/week-2.html#participate",
-    "href": "weeks/week-2.html#participate",
-    "title": "Week 2",
+    "objectID": "weeks/week-4.html#participate",
+    "href": "weeks/week-4.html#participate",
+    "title": "Week 4",
     "section": "Participate",
-    "text": "Participate\n🖥️ Slides - Linear Regression\nr fontawesome::fa(\"table\") Data Set - Advertising.csv",
+    "text": "Participate\n🖥️ Slides - Lasso\n\nr fontawesome::fa(\"table\") Data Set - Prostate.csv",
     "crumbs": [
       "Weekly Materials",
-      "Week 2"
+      "Week 4"
     ]
   },
   {
-    "objectID": "weeks/week-2.html#reading-and-resources",
-    "href": "weeks/week-2.html#reading-and-resources",
-    "title": "Week 2",
+    "objectID": "weeks/week-4.html#reading-and-resources",
+    "href": "weeks/week-4.html#reading-and-resources",
+    "title": "Week 4",
     "section": "Reading and Resources",
-    "text": "Reading and Resources\n📖 ISL Ch 3.1 - 3.4\n📖 Dr. Yu MSSC 5780 Regression Analysis Week 1 to 6\n📖 MML Ch 7.1, 8.1, 8.2.1, 8.2.2",
+    "text": "Reading and Resources\n📖 ISL Ch 6.1, 6.2",
     "crumbs": [
       "Weekly Materials",
-      "Week 2"
+      "Week 4"
     ]
   },
   {
-    "objectID": "weeks/week-2.html#perform",
-    "href": "weeks/week-2.html#perform",
-    "title": "Week 2",
+    "objectID": "weeks/week-4.html#perform",
+    "href": "weeks/week-4.html#perform",
+    "title": "Week 4",
     "section": "Perform",
-    "text": "Perform\n📋 Homework 1\n\n\n\n\n\nBack to course schedule ⏎",
+    "text": "Perform\n\n\n\n\nBack to course schedule ⏎",
     "crumbs": [
       "Weekly Materials",
-      "Week 2"
+      "Week 4"
+    ]
+  },
+  {
+    "objectID": "weeks/week-3.html",
+    "href": "weeks/week-3.html",
+    "title": "Week 3",
+    "section": "",
+    "text": "Important\n\n\n\nHomework 1 due Friday, Feb 7, 11:59 PM",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 3"
+    ]
+  },
+  {
+    "objectID": "weeks/week-3.html#participate",
+    "href": "weeks/week-3.html#participate",
+    "title": "Week 3",
+    "section": "Participate",
+    "text": "Participate\n🖥️ Slides - Ridge Regression and Cross Validation\nr fontawesome::fa(\"table\") Data Set - mtcars.csv",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 3"
+    ]
+  },
+  {
+    "objectID": "weeks/week-3.html#reading-and-resources",
+    "href": "weeks/week-3.html#reading-and-resources",
+    "title": "Week 3",
+    "section": "Reading and Resources",
+    "text": "Reading and Resources\n📖 ISL Ch 5.1, 6.2.1\n📖 MML Ch 8.2.3 - 8.2.4",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 3"
+    ]
+  },
+  {
+    "objectID": "weeks/week-3.html#exercise",
+    "href": "weeks/week-3.html#exercise",
+    "title": "Week 3",
+    "section": "Exercise",
+    "text": "Exercise\n\n\n\n\n\nBack to course schedule ⏎",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 3"
     ]
   },
   {
@@ -1306,27 +1327,6 @@
     "href": "slides/02-overview.html#accuracy-and-interpretability-trade-off",
     "title": "Overview of Statistical Machine Learning 💻",
     "section": "Accuracy and Interpretability Trade-Off",
-    "text": "Accuracy and Interpretability Trade-Off\n\n\n\n\n\nSource: ISL Fig. 2.7"
-  },
-  {
-    "objectID": "code/04-linear-reg-code.html",
-    "href": "code/04-linear-reg-code.html",
-    "title": "04-Linear Regression Code Demo",
-    "section": "",
-    "text": "Show/Hideadvertising_data &lt;- read.csv(\"../data/Advertising.csv\")\nadvertising_data &lt;- advertising_data[, 2:5]\nhead(advertising_data)\n\n     TV radio newspaper sales\n1 230.1  37.8      69.2  22.1\n2  44.5  39.3      45.1  10.4\n3  17.2  45.9      69.3   9.3\n4 151.5  41.3      58.5  18.5\n5 180.8  10.8      58.4  12.9\n6   8.7  48.9      75.0   7.2\n\nShow/Hidelm_out &lt;- lm(advertising_data$sales ~ ., data = advertising_data)\nsummary(lm_out)\n\n\nCall:\nlm(formula = advertising_data$sales ~ ., data = advertising_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-8.8277 -0.8908  0.2418  1.1893  2.8292 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  2.938889   0.311908   9.422   &lt;2e-16 ***\nTV           0.045765   0.001395  32.809   &lt;2e-16 ***\nradio        0.188530   0.008611  21.893   &lt;2e-16 ***\nnewspaper   -0.001037   0.005871  -0.177     0.86    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.686 on 196 degrees of freedom\nMultiple R-squared:  0.8972,    Adjusted R-squared:  0.8956 \nF-statistic: 570.3 on 3 and 196 DF,  p-value: &lt; 2.2e-16\n\nShow/Hideconfint(lm_out)\n\n                  2.5 %     97.5 %\n(Intercept)  2.32376228 3.55401646\nTV           0.04301371 0.04851558\nradio        0.17154745 0.20551259\nnewspaper   -0.01261595 0.01054097"
-  },
-  {
-    "objectID": "code/04-linear-reg-code.html#r-implementation",
-    "href": "code/04-linear-reg-code.html#r-implementation",
-    "title": "04-Linear Regression Code Demo",
-    "section": "",
-    "text": "Show/Hideadvertising_data &lt;- read.csv(\"../data/Advertising.csv\")\nadvertising_data &lt;- advertising_data[, 2:5]\nhead(advertising_data)\n\n     TV radio newspaper sales\n1 230.1  37.8      69.2  22.1\n2  44.5  39.3      45.1  10.4\n3  17.2  45.9      69.3   9.3\n4 151.5  41.3      58.5  18.5\n5 180.8  10.8      58.4  12.9\n6   8.7  48.9      75.0   7.2\n\nShow/Hidelm_out &lt;- lm(advertising_data$sales ~ ., data = advertising_data)\nsummary(lm_out)\n\n\nCall:\nlm(formula = advertising_data$sales ~ ., data = advertising_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-8.8277 -0.8908  0.2418  1.1893  2.8292 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  2.938889   0.311908   9.422   &lt;2e-16 ***\nTV           0.045765   0.001395  32.809   &lt;2e-16 ***\nradio        0.188530   0.008611  21.893   &lt;2e-16 ***\nnewspaper   -0.001037   0.005871  -0.177     0.86    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.686 on 196 degrees of freedom\nMultiple R-squared:  0.8972,    Adjusted R-squared:  0.8956 \nF-statistic: 570.3 on 3 and 196 DF,  p-value: &lt; 2.2e-16\n\nShow/Hideconfint(lm_out)\n\n                  2.5 %     97.5 %\n(Intercept)  2.32376228 3.55401646\nTV           0.04301371 0.04851558\nradio        0.17154745 0.20551259\nnewspaper   -0.01261595 0.01054097"
-  },
-  {
-    "objectID": "code/04-linear-reg-code.html#python-implementation",
-    "href": "code/04-linear-reg-code.html#python-implementation",
-    "title": "04-Linear Regression Code Demo",
-    "section": "Python implementation",
-    "text": "Python implementation\n\nShow/Hideimport pandas as pd\nimport numpy as np\n\n\n\nShow/Hideadvertising_data = pd.read_csv(\"../data/Advertising.csv\")\nadvertising_data = advertising_data.iloc[:, 1:5]\nX = advertising_data.drop(columns=[\"sales\"])\ny = advertising_data[\"sales\"]\n\n\nscikit-learn\n\nShow/Hidefrom sklearn.linear_model import LinearRegression\nreg = LinearRegression().fit(X, y)\nreg.intercept_\n\n2.9388893694594014\n\nShow/Hidereg.coef_\n\narray([ 0.04576465,  0.18853002, -0.00103749])\n\n\nstatsmodels\n\nShow/Hidefrom statsmodels.formula.api import ols\nols_out = ols(formula='sales ~ TV + radio + newspaper', data=advertising_data).fit()\nols_out.params\n\nIntercept    2.938889\nTV           0.045765\nradio        0.188530\nnewspaper   -0.001037\ndtype: float64\n\nShow/Hideprint(ols_out.summary())\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                  sales   R-squared:                       0.897\nModel:                            OLS   Adj. R-squared:                  0.896\nMethod:                 Least Squares   F-statistic:                     570.3\nDate:                Mon, 13 Jan 2025   Prob (F-statistic):           1.58e-96\nTime:                        11:56:31   Log-Likelihood:                -386.18\nNo. Observations:                 200   AIC:                             780.4\nDf Residuals:                     196   BIC:                             793.6\nDf Model:                           3                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nIntercept      2.9389      0.312      9.422      0.000       2.324       3.554\nTV             0.0458      0.001     32.809      0.000       0.043       0.049\nradio          0.1885      0.009     21.893      0.000       0.172       0.206\nnewspaper     -0.0010      0.006     -0.177      0.860      -0.013       0.011\n==============================================================================\nOmnibus:                       60.414   Durbin-Watson:                   2.084\nProb(Omnibus):                  0.000   Jarque-Bera (JB):              151.241\nSkew:                          -1.327   Prob(JB):                     1.44e-33\nKurtosis:                       6.332   Cond. No.                         454.\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n\nShow/Hidecoef_summary = ols_out.summary2().tables[1]  # Get the coefficients table\nprint(coef_summary)\n\n              Coef.  Std.Err.          t         P&gt;|t|    [0.025    0.975]\nIntercept  2.938889  0.311908   9.422288  1.267295e-17  2.323762  3.554016\nTV         0.045765  0.001395  32.808624  1.509960e-81  0.043014  0.048516\nradio      0.188530  0.008611  21.893496  1.505339e-54  0.171547  0.205513\nnewspaper -0.001037  0.005871  -0.176715  8.599151e-01 -0.012616  0.010541\n\nShow/Hideconf_intervals = ols_out.conf_int()\nprint(conf_intervals)\n\n                  0         1\nIntercept  2.323762  3.554016\nTV         0.043014  0.048516\nradio      0.171547  0.205513\nnewspaper -0.012616  0.010541"
+    "text": "Accuracy and Interpretability Trade-Off\n\n\n\n\nSource: ISL Fig. 2.7\n\n\n\n\n\nmssc6250-s25.github.io/website"
   }
 ]
