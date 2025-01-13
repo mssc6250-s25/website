@@ -444,5 +444,5 @@ A neural network with several hidden layers is called a deep neural network, or 
 <!-- </iframe> -->
 
 
-![Source: ISL Fig. 2.7](./images/02-overview/2_7.png){fig-align="center" width="1500"}
+![Source: ISL Fig. 2.7](./images/02-overview/2_7.png){fig-align="center" width="1000"}
 

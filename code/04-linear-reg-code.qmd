@@ -1,0 +1,61 @@
+---
+title: "04-Linear Regression Code Demo"
+author: 'Dr. Cheng-Han Yu'
+format: 
+  html:
+    toc: true
+    code-link: true
+    code-fold: show
+    code-summary: "Show/Hide"
+    code-tools: true
+editor: source
+---
+
+## R implementation
+
+```{r}
+advertising_data <- read.csv("../data/Advertising.csv")
+advertising_data <- advertising_data[, 2:5]
+head(advertising_data)
+lm_out <- lm(advertising_data$sales ~ ., data = advertising_data)
+summary(lm_out)
+confint(lm_out)
+```
+
+## Python implementation
+
+```{python}
+import pandas as pd
+import numpy as np
+```
+
+```{python}
+advertising_data = pd.read_csv("../data/Advertising.csv")
+advertising_data = advertising_data.iloc[:, 1:5]
+X = advertising_data.drop(columns=["sales"])
+y = advertising_data["sales"]
+```
+
+### `scikit-learn`
+
+```{python}
+from sklearn.linear_model import LinearRegression
+reg = LinearRegression().fit(X, y)
+reg.intercept_
+reg.coef_
+```
+
+### `statsmodels`
+
+```{python}
+from statsmodels.formula.api import ols
+ols_out = ols(formula='sales ~ TV + radio + newspaper', data=advertising_data).fit()
+ols_out.params
+print(ols_out.summary())
+coef_summary = ols_out.summary2().tables[1]  # Get the coefficients table
+print(coef_summary)
+conf_intervals = ols_out.conf_int()
+print(conf_intervals)
+```
+
+<!-- https://stackoverflow.com/questions/22388498/statsmodels-linear-regression-patsy-formula-to-include-all-predictors-in-model -->
