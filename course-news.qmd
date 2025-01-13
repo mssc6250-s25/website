@@ -4,18 +4,16 @@ title: "News/Announcements"
 
 Any announcement will be posted in this page. The latest news will also be put on top of the main page.
 
+## Jan 14, 2025
+
+-   No office hours first week.
+
 <!-- ## Jan 30, 2024 -->
 
 <!-- Homework 1 is now due **Feb 9, Friday, 11:59 PM**. -->
-
-
 
 <!-- ## Feb 27, 2024 -->
 
 <!-- - Homework 2 is now due **Mar 1, Friday, 11:59 PM**. -->
 
 <!-- - [Deep learning workshop](https://web.cvent.com/event/f07d37c8-0972-4577-93b0-2ade9b142c65/summary) -->
-
-
-
-
