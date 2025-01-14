@@ -424,7 +424,7 @@
     "href": "slides/01-syllabus.html#grade-percentage-conversion",
     "title": "Welcome Aboard 🙌",
     "section": "Grade-Percentage Conversion",
-    "text": "Grade-Percentage Conversion\n\nYour final grade is based on your percentage of pts earned out of 1000 pts.\n\n[x, y) means greater than or equal to x and less than y.\n\n\n\n\n\nGrade\nPercentage\n\n\n\nA\n[94, 100]\n\n\nA-\n[90, 94)\n\n\nB+\n[87, 90)\n\n\nB\n[83, 87)\n\n\nB-\n[80, 83)\n\n\nC+\n[77, 80)\n\n\nC\n[70, 77)\n\n\nF\n[0, 70)"
+    "text": "Grade-Percentage Conversion\n\nYour final grade is based on your percentage of pts earned out of 1000 pts.\n\n[x, y) means greater than or equal to x and less than y.\n\n\n\n\n\n\nGrade\nPercentage\n\n\n\nA\n[94, 100]\n\n\nA-\n[90, 94)\n\n\nB+\n[87, 90)\n\n\nB\n[83, 87)\n\n\nB-\n[80, 83)\n\n\nC+\n[77, 80)\n\n\nC\n[70, 77)\n\n\nF\n[0, 70)"
   },
   {
     "objectID": "slides/01-syllabus.html#homework-500-pts",
@@ -1166,7 +1166,7 @@
     "href": "slides/02-overview.html#imageobject-recognition",
     "title": "Overview of Statistical Machine Learning 💻",
     "section": "Image/Object Recognition",
-    "text": "Image/Object Recognition\n\n\n\n\n\n\n\n\n\nMachine learning is everywhere.\nCan we train a machine to have an ability to recognize dogs and cats?\nhundreds of thousands of objects?"
+    "text": "Image/Object Recognition\n\n\n\n\n\n\nMachine learning is everywhere.\nCan we train a machine to have an ability to recognize dogs and cats?\nhundreds of thousands of objects?"
   },
   {
     "objectID": "slides/02-overview.html#recommender-system",
@@ -1200,15 +1200,15 @@
     "objectID": "slides/02-overview.html#how-we-solve-real-life-problems",
     "href": "slides/02-overview.html#how-we-solve-real-life-problems",
     "title": "Overview of Statistical Machine Learning 💻",
-    "section": "How We Solve Real-Life Problems?",
-    "text": "How We Solve Real-Life Problems?\n\nWe describe and formulate our problems/questions by models.\n\n\n\nSolve problems/Answer questions by doing inference and/or predictions from the built model using the information from the data and computer algorithms.\n\n\n\n\nSo what is (Statistical) Machine Learning?\n\n\nMathematical/statistical or machine learning models.\nwe know the eating habits from a data of 100 american people. How do we know the the eating habits of all the people in the united states.\nIf we know someone’s GPA and major, how can we predict his salary after graduation?"
+    "section": "How We Solve Real-Life Problems",
+    "text": "How We Solve Real-Life Problems\n\nWe describe and formulate our problems/questions by models.\n\n\n\nSolve problems/Answer questions by doing inference and/or predictions from the built model using the information from the data and computer algorithms.\n\n\n\n\nSo what is (Statistical) Machine Learning?\n\n\nMathematical/statistical or machine learning models.\nwe know the eating habits from a data of 100 american people. How do we know the the eating habits of all the people in the united states.\nIf we know someone’s GPA and major, how can we predict his salary after graduation?"
   },
   {
     "objectID": "slides/02-overview.html#machine-learning-vs.-statistical-learning",
     "href": "slides/02-overview.html#machine-learning-vs.-statistical-learning",
     "title": "Overview of Statistical Machine Learning 💻",
     "section": "Machine Learning vs. Statistical Learning",
-    "text": "Machine Learning vs. Statistical Learning\n\n\nMachine learning (ML) is a field in Computer Science (CS).\n\n\n“A computer program is said to learn from experience (E) with respect to some class of tasks (T) and performance measure (P) if its performance at tasks in T, as measured by P, improves with experience E.” – Tom Mitchell, Professor of ML at Carnegie Mellon University\n\n\ncomputer programs = learning software and system\nexperience = data\ntasks = problems\n\n\n\nThe ML algorithms are mainly for predictive modeling problems, and many have been borrowed from Statistics, for example, linear regression.\nML is a CS perspective on modeling data with a focus on algorithmic methods.\n\n\n\n\nWait, I am a statistical modeler (computational statistician), and this is exactly what I am doing!\n\nMachine Learning is the study of computer algorithms that improve automatically through experience."
+    "text": "Machine Learning vs. Statistical Learning\n\n\nMachine learning (ML) is a field in Computer Science (CS).\n\n\n“A computer program is said to learn from experience (E) with respect to some class of tasks (T) and performance measure (P) if its performance at tasks in T, as measured by P, improves with experience E.” – Tom Mitchell, Professor of ML at Carnegie Mellon University\n\n\ncomputer programs = computing software and system\nexperience = data (objective and/or subjective)\ntasks = problems being solved by the computing system\n\n\n\nThe ML algorithms are mainly for predictive modeling problems, and many have been borrowed from Statistics, for example, linear regression.\nML is a CS perspective on modeling data with a focus on algorithmic methods.\n\n\n\n\nWait, I am a statistical modeler (computational statistician), and this is exactly what I am doing!\n\nMachine Learning is the study of computer algorithms that improve automatically through experience."
   },
   {
     "objectID": "slides/02-overview.html#machine-learning-vs.-statistical-learning-1",
@@ -1327,6 +1327,6 @@
     "href": "slides/02-overview.html#accuracy-and-interpretability-trade-off",
     "title": "Overview of Statistical Machine Learning 💻",
     "section": "Accuracy and Interpretability Trade-Off",
-    "text": "Accuracy and Interpretability Trade-Off\n\n\n\n\nSource: ISL Fig. 2.7\n\n\n\n\n\nmssc6250-s25.github.io/website"
+    "text": "Accuracy and Interpretability Trade-Off\n\n\n\n\nSource: ISL Fig. 2.7\n\nflexibility: a model is flexible if the model performs quite good for various types of data.\n\n\n\n\nmssc6250-s25.github.io/website"
   }
 ]
