@@ -79,13 +79,13 @@ library(kableExtra)
 
 # library(ElemStatLearn)
 knitr::opts_chunk$set(
-    fig.asp = 0.618,
+    # fig.asp = 0.618,
     fig.align = "center",
-    out.width = "100%",
-    fig.retina = 10,
+    # out.width = "100%",
+    # fig.retina = 10,
     fig.path = "images/02-overview/",
-    message = FALSE,
-    global.par = TRUE
+    message = FALSE
+    # global.par = TRUE
 )
 options(
   htmltools.dir.version = FALSE,
@@ -125,13 +125,9 @@ knitr::knit_hooks$set(output = function(x, options) {
 ![](./images/02-overview/fatty2.JPG){.absolute top="100" left="550" width="500"}
 ![](./images/02-overview/fatty3.JPG){.absolute top="100" left="1150" width="500"}
 ![](./images/02-overview/maru5.JPG){.absolute bottom="50" right="50" width="500"}
-
 ![](./images/02-overview/maru2.JPG){.absolute bottom="10" right="650" width="500"}
-
 ![](./images/02-overview/fatty1.JPG){.absolute bottom="10" right="1550" height="400"}
-
 ![](./images/02-overview/maru4.JPG){.absolute bottom="10" right="1250" height="400"}
-
 
 ![](./images/02-overview/cifar.png){.fragment width="1600"}
 
@@ -160,16 +156,24 @@ knitr::knit_hooks$set(output = function(x, options) {
 
 
 ## COVID Detection
-![](./images/02-overview/covid_lung.jpeg){fig-align="center" width="1600"}
+
+```{r}
+#| out-width: 50%
+knitr::include_graphics("./images/02-overview/covid_lung.jpeg")
+```
 
 
 ## Stock Price Forecasting
-![](./images/02-overview/stock.jpeg){fig-align="center" width="1600"}
+
+```{r}
+#| fig-width: 2
+knitr::include_graphics("./images/02-overview/stock.jpeg")
+```
 
 ## Risk Factors for Cancer
 
 ```{r}
-#| out-width: 100%
+#| out-width: 70%
 #| fig-link: https://www.verywellhealth.com/cancer-causes-513773
 knitr::include_graphics("./images/02-overview/cancer-risk.webp")
 ```
@@ -179,7 +183,7 @@ knitr::include_graphics("./images/02-overview/cancer-risk.webp")
 
 <!-- ## Credit Card Fraud Detection -->
 
-## How We Solve Real-Life Problems?
+## How We Solve Real-Life Problems
 - We describe and formulate our problems/questions by **models**.
 
 . . .
@@ -205,14 +209,14 @@ knitr::include_graphics("./images/02-overview/cancer-risk.webp")
 ## Machine Learning vs. Statistical Learning
 - **Machine learning** (ML) is a field in Computer Science (CS).
 
-> _"A **computer program** is said to learn from **experience** [(*E*)]{.red} with respect to some class of tasks [(*T*)]{.red} and performance measure [(*P*)]{.red} if its performance at tasks in *T*, as measured by *P*, [improves with experience]{style="color: red;"} *E*."_
+> _"A **computer program** is said to learn from **experience** [(*E*)]{.red} with respect to some class of **tasks** [(*T*)]{.red} and performance measure [(*P*)]{.red} if its performance at tasks in *T*, as measured by *P*, [improves with experience]{style="color: red;"} *E*."_
 -- [Tom Mitchell](http://www.cs.cmu.edu/~tom/mlbook.html), Professor of ML at Carnegie Mellon University
 
-- *computer programs = learning software and system*
+- *computer programs = computing software and system*
 
-- *experience = data*
+- *experience = data (objective and/or subjective)*
 
-- *tasks = problems*
+- *tasks = problems being solved by the computing system*
 
 . . .
 
@@ -277,7 +281,7 @@ https://machinelearningmastery.com/relationship-between-applied-statistics-and-m
 ##
 
 ```{r}
-#| out-width: "100%"
+#| out-width: 100%
 #| fig-cap: "Source: All of Statistics"
 #| cap-location: top
 knitr::include_graphics("./images/02-overview/dictionary.png")
@@ -287,7 +291,7 @@ knitr::include_graphics("./images/02-overview/dictionary.png")
 ## Types of Learning 
 
 ```{r}
-#| out-width: 82%
+#| out-width: 78%
 #| fig-cap: "Source: https://towardsdatascience.com/machine-learning-algorithms-in-laymans-terms-part-1-d0368d769a7b"
 #| fig-align: center
 knitr::include_graphics("./images/02-overview/ml_type.png")
@@ -319,6 +323,7 @@ Goal: Use training data ([*E*]{.red}) to *train* our model for better (w.r.t. [*
 
 
 ## Regression Example
+
 - Goal: Establish the relationship between salary and demographic variables.
 
 ```{r}
@@ -328,15 +333,16 @@ knitr::include_graphics("./images/02-overview/regression_wage.png")
 
 
 ## Statistics Nah... Machine Learning Neat!
+
 ```{r}
-#| out-width: "78%"
+#| out-width: 78%
 #| fig-cap: "Source: https://towardsdatascience.com/the-actual-difference-between-statistics-and-machine-learning-64b49f07ea3"
 knitr::include_graphics("./images/02-overview/regression2019.jpeg")
 ```
 
 ## Statistics Nah... Machine Learning Neat!
 ```{r}
-#| out-width: "80%"
+#| out-width: 80%
 knitr::include_graphics("./images/02-overview/regression_tweet.png")
 ```
 
@@ -345,7 +351,7 @@ knitr::include_graphics("./images/02-overview/regression_tweet.png")
 - Goal: Build a customized spam filtering system
 
 ```{r}
-#| out-width: "55%"
+#| out-width: 55%
 #| fig-cap: "Source: http://penplusbytes.org/strategies-for-dealing-with-e-mail-spam/"
 knitr::include_graphics("./images/02-overview/spam_filter.jpg")
 ```
@@ -353,7 +359,7 @@ knitr::include_graphics("./images/02-overview/spam_filter.jpg")
 
 ## Classification Example
 ```{r}
-#| out-width: "50%"
+#| out-width: 50%
 #| fig-cap: "Source: https://www.yesware.com/blog/email-spam/"
 knitr::include_graphics("./images/02-overview/spam.png")
 ```
@@ -363,7 +369,7 @@ knitr::include_graphics("./images/02-overview/spam.png")
 
 
 ```{r}
-#| out-width: "50%"
+#| out-width: 50%
 #| fig-cap: "Source: ESL Tbl. 1.1"
 knitr::include_graphics("./images/02-overview/spam_data.png")
 ```
@@ -412,7 +418,7 @@ Based on the training data ([*E*]{.red}) we'd like to :
 - Customer Segmentation: dividing customers into groups or clusters on the basis of common characteristics. 
 
 ```{r}
-#| out-width: "56%"
+#| out-width: 56%
 #| fig-cap: "Source: https://www.datacamp.com/community/tutorials/introduction-customer-segmentation-python"
 
 knitr::include_graphics("./images/02-overview/clustering.png")
@@ -444,5 +450,11 @@ A neural network with several hidden layers is called a deep neural network, or 
 <!-- </iframe> -->
 
 
-![Source: ISL Fig. 2.7](./images/02-overview/2_7.png){fig-align="center" width="1000"}
+![Source: ISL Fig. 2.7](./images/02-overview/2_7.png){fig-align="center" width="1400"}
+
+
+
+::: notes
+flexibility: a model is flexible if the model performs quite good for various types of data.
+:::
 
