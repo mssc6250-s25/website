@@ -9,7 +9,7 @@
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.4.551">
 <meta name="author" content="Dr.&nbsp;Cheng-Han Yu   Department of Mathematical and Statistical Sciences   Marquette University">
 <title>MSSC 6250 - Spring 2025 - Ridge Regression and Cross Validation r fontawesome::fa("wave-square")</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -631,7 +631,7 @@ $vectors
 </div>
 </section><section id="geometrical-meaning-of-ridge-regression" class="slide level2"><h2>Geometrical Meaning of Ridge Regression</h2>
 
-<img data-src="./images/05-ridge-cv/ridge_pc.png" class="quarto-figure quarto-figure-center r-stretch" style="width:52.0%"><p class="caption">Source: https://online.stat.psu.edu/stat508/lessons/Lesson06</p><aside class="notes"><ul>
+<img data-src="./images/05-ridge-cv/ridge_pc.png" style="width:52.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: https://online.stat.psu.edu/stat508/lessons/Lesson06</p><aside class="notes"><ul>
 <li>Perform PCA of X</li>
 <li>Project y onto the PCs</li>
 <li>Shrinks the projection</li>
@@ -704,7 +704,7 @@ $vectors
 <div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-left">
-<figure><p><img data-src="./images/05-ridge-cv/6_5.png" class="quarto-figure quarto-figure-left" style="width:100.0%"></p>
+<figure><p><img data-src="./images/05-ridge-cv/6_5.png" style="width:100.0%"></p>
 <figcaption>Source: ISL Figure 6.5</figcaption></figure>
 </div>
 </div>
@@ -903,7 +903,7 @@ smallest value of GCV  at 15 </code></pre>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure><p><img data-src="./images/05-ridge-cv/cross-validation.png" class="quarto-figure quarto-figure-center" style="width:45.0%"></p>
+<figure><p><img data-src="./images/05-ridge-cv/cross-validation.png" style="width:45.0%"></p>
 <figcaption>Five-fold cross validation. Source: Data science in a box</figcaption></figure>
 </div>
 </div>
@@ -1439,6 +1439,24 @@ carb        -0.54742</code></pre>
         // clear code selection
         e.clearSelection();
       });
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp("https:\/\/mssc6250-s25\.github\.io\/website\/");
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
       function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
@@ -1475,7 +1493,11 @@ carb        -0.54742</code></pre>
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {
