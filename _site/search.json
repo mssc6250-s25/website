@@ -165,7 +165,7 @@
     "href": "slides/05-ridge-cv.html#when-ols-doesnt-work-well-optimization-perspective",
     "title": "Ridge Regression and Cross Validation \n",
     "section": "When OLS Doesn’t Work Well: Optimization Perspective",
-    "text": "When OLS Doesn’t Work Well: Optimization Perspective\n\n\\(\\beta_1 = \\beta_2 = 1\\) and \\(\\mathrm{Corr}(x_1, x_2) = 0.99\\)\nThe relatively “flat” valley in the objective function walks along the eigen-vector of \\({\\bf X}'{\\bf X}\\) having the smallest eigen-value.\n\n\n\n\n\n\n\n\n\n\n\n\n\neigen(\n    matrix(c(1, 0.99, 0.99, 1), \n             2, 2)\n    )\n\neigen() decomposition\n$values\n[1] 1.99 0.01\n\n$vectors\n      [,1]   [,2]\n[1,] 0.707 -0.707\n[2,] 0.707  0.707\n\n\n\n\n\nFrom optimization point of view, the objective function (\\(\\ell_2\\) loss) is “flat” along certain directions in the parameter domain.\na small eigen-value in XTX makes the corresponding eigen-value large in the inverse."
+    "text": "When OLS Doesn’t Work Well: Optimization Perspective\n\n\\(\\beta_1 = \\beta_2 = 1\\) and \\(\\mathrm{Corr}(x_1, x_2) = 0.99\\)\nThe relatively “flat” valley in the objective function walks along the eigen-vector of \\({\\bf X}'{\\bf X}\\) having the smallest eigen-value.\n\n\n\n\n\n\n\n\n\n\n\n\n\neigen(\n    matrix(c(1, 0.99, 0.99, 1), \n             2, 2)\n    )\n\neigen() decomposition\n$values\n[1] 1.99 0.01\n\n$vectors\n      [,1]   [,2]\n[1,] 0.707 -0.707\n[2,] 0.707  0.707\n\n\n\n\nFrom optimization point of view, the objective function (\\(\\ell_2\\) loss) is “flat” along certain directions in the parameter domain.\na small eigen-value in XTX makes the corresponding eigen-value large in the inverse."
   },
   {
     "objectID": "slides/05-ridge-cv.html#when-ols-doesnt-work-well-optimization-perspective-1",
@@ -305,7 +305,7 @@
     "href": "slides/05-ridge-cv.html#glmnet-package",
     "title": "Ridge Regression and Cross Validation \n",
     "section": "\nglmnet package \n",
-    "text": "glmnet package \n\n\nThe parameter alpha controls the ridge (alpha = 0) and lasso (alpha = 1) penalties.\nSupply a decreasing sequence of lambda values.\nlm.ridge() use \\(SS_{res}\\) and \\(n\\lambda\\), while glmnet() use \\(\\text{MSE}_{\\texttt{Tr}}\\) and \\(\\lambda\\).\nArgument x should be a matrix.\n\n\n\n\nglmnet(x = data.matrix(mtcars[, -1]), \n       y = mtcars$mpg, \n       alpha = 0, \n       lambda = 5:0/nrow(mtcars))\n\n\n\nlm.ridge(formula = mpg ~ ., \n         data = mtcars, \n         lambda = 5:0/nrow(mtcars))\n\n\n\n\n\n\n\n\n\nNote\n\n\n\n\nlm.ridge() and glmnet() coefficients do not match exactly, specially when transforming back to original scale.\nNo need to worry too much as we focus on predictive performance.\n\n\n\n\n\n\nhttps://stats.stackexchange.com/questions/74206/ridge-regression-results-different-in-using-lm-ridge-and-glmnet"
+    "text": "glmnet package \n\n\nThe parameter alpha controls the ridge (alpha = 0) and lasso (alpha = 1) penalties.\nSupply a decreasing sequence of lambda values.\nlm.ridge() use \\(SS_{res}\\) and \\(n\\lambda\\), while glmnet() use \\(\\text{MSE}_{\\texttt{Tr}}\\) and \\(\\lambda\\).\nArgument x should be a matrix.\n\n\n\n\nglmnet(x = data.matrix(mtcars[, -1]), \n       y = mtcars$mpg, \n       alpha = 0, \n       lambda = 5:0/nrow(mtcars))\n\n\n\nlm.ridge(formula = mpg ~ ., \n         data = mtcars, \n         lambda = 5:0/nrow(mtcars))\n\n\n\n\n\n\n\n\nNote\n\n\n\n\nlm.ridge() and glmnet() coefficients do not match exactly, specially when transforming back to original scale.\nNo need to worry too much as we focus on predictive performance.\n\n\n\n\n\n\nhttps://stats.stackexchange.com/questions/74206/ridge-regression-results-different-in-using-lm-ridge-and-glmnet"
   },
   {
     "objectID": "slides/05-ridge-cv.html#k-fold-cross-validation-using-cv.glmnet",
@@ -319,7 +319,7 @@
     "href": "slides/05-ridge-cv.html#determine-lambda",
     "title": "Ridge Regression and Cross Validation \n",
     "section": "Determine \\(\\lambda\\)\n",
-    "text": "Determine \\(\\lambda\\)\n\n\n\n\nplot(ridge_cv_fit)\n\n\n\n\n\n\n\n\n\nridge_cv_fit$lambda.min\n\n[1] 2.75\n\n# largest lambda s.t. error is within 1 s.e of the min\nridge_cv_fit$lambda.1se \n\n[1] 16.1\n\ncoef(ridge_cv_fit, s = \"lambda.min\")\n\n11 x 1 sparse Matrix of class \"dgCMatrix\"\n                  s1\n(Intercept) 21.11734\ncyl         -0.37134\ndisp        -0.00525\nhp          -0.01161\ndrat         1.05477\nwt          -1.23420\nqsec         0.16245\nvs           0.77196\nam           1.62381\ngear         0.54417\ncarb        -0.54742\n\n\n\n\ncoef(fit2, s = “lambda.1se”) This plots the cross-validation curve (red dotted line) along with upper and lower standard deviation curves along the 𝜆 sequence (error bars). Two special values along the 𝜆 sequence are indicated by the vertical dotted lines. lambda.min is the value of 𝜆 that gives minimum mean cross-validated error, while lambda.1se is the value of 𝜆 that gives the most regularized model such that the cross-validated error is within one standard error of the minimum."
+    "text": "Determine \\(\\lambda\\)\n\n\n\n\nplot(ridge_cv_fit)\n\n\n\n\n\n\n\n\n\nridge_cv_fit$lambda.min\n\n[1] 2.75\n\n# largest lambda s.t. error is within 1 s.e of the min\nridge_cv_fit$lambda.1se \n\n[1] 16.1\n\ncoef(ridge_cv_fit, s = \"lambda.min\")\n\n11 x 1 sparse Matrix of class \"dgCMatrix\"\n                  s1\n(Intercept) 21.11734\ncyl         -0.37134\ndisp        -0.00525\nhp          -0.01161\ndrat         1.05477\nwt          -1.23420\nqsec         0.16245\nvs           0.77196\nam           1.62381\ngear         0.54417\ncarb        -0.54742\n\n\n\ncoef(fit2, s = “lambda.1se”) This plots the cross-validation curve (red dotted line) along with upper and lower standard deviation curves along the 𝜆 sequence (error bars). Two special values along the 𝜆 sequence are indicated by the vertical dotted lines. lambda.min is the value of 𝜆 that gives minimum mean cross-validated error, while lambda.1se is the value of 𝜆 that gives the most regularized model such that the cross-validated error is within one standard error of the minimum."
   },
   {
     "objectID": "slides/05-ridge-cv.html#generalized-cross-validation",
@@ -333,7 +333,7 @@
     "href": "slides/05-ridge-cv.html#generalized-cross-validation-1",
     "title": "Ridge Regression and Cross Validation \n",
     "section": "Generalized Cross-Validation",
-    "text": "Generalized Cross-Validation\n\n\n\nplot(ridge_fit$lambda, \n     ridge_fit$GCV, \n     type = \"l\", col = \"darkgreen\", \n     ylab = \"GCV\", xlab = \"Lambda\", \n     lwd = 3)\n\n\n\n\n\n\n\n\n\nidx &lt;- which.min(ridge_fit$GCV)\nridge_fit$lambda[idx]\n\n[1] 15\n\nround(coef(ridge_fit)[idx, ], 2)\n\n        cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb \n21.13 -0.37 -0.01 -0.01  1.05 -1.23  0.16  0.77  1.62  0.54 -0.55 \n\n\n\n\nSelect the best \\(\\lambda\\) that produces the smallest GCV.\nYou can clearly see that the GCV decreases initially, as \\(\\lambda\\) increases, this is because the reduced variance is more beneficial than the increased bias. However, as \\(\\lambda\\) increases further, the bias term will eventually dominate and causing the overall prediction error to increase. The fitted MSE under this model is\n\n\n\n\nmssc6250-s25.github.io/website"
+    "text": "Generalized Cross-Validation\n\n\n\nplot(ridge_fit$lambda, \n     ridge_fit$GCV, \n     type = \"l\", col = \"darkgreen\", \n     ylab = \"GCV\", xlab = \"Lambda\", \n     lwd = 3)\n\n\n\n\n\n\n\n\n\nidx &lt;- which.min(ridge_fit$GCV)\nridge_fit$lambda[idx]\n\n[1] 15\n\nround(coef(ridge_fit)[idx, ], 2)\n\n        cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb \n21.13 -0.37 -0.01 -0.01  1.05 -1.23  0.16  0.77  1.62  0.54 -0.55 \n\n\n\nSelect the best \\(\\lambda\\) that produces the smallest GCV.\nYou can clearly see that the GCV decreases initially, as \\(\\lambda\\) increases, this is because the reduced variance is more beneficial than the increased bias. However, as \\(\\lambda\\) increases further, the bias term will eventually dominate and causing the overall prediction error to increase. The fitted MSE under this model is"
   },
   {
     "objectID": "slides/01-syllabus.html#my-journey",
@@ -473,7 +473,7 @@
     "href": "slides/04-lin-reg.html#why-multiple-linear-regression-mlr-model",
     "title": "Linear Regression 📈",
     "section": "Why Multiple Linear Regression (MLR) Model",
-    "text": "Why Multiple Linear Regression (MLR) Model\n\nOur target response may be affected by several factors.\nTotal sales \\((Y)\\) and amount of money spent on advertising on YouTube (YT) \\((X_1)\\), Facebook (FB) \\((X_2)\\), Instagram (IG) \\((X_3)\\).1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPredict sales based on the three advertising expenditures and see which medium is more effective.\nIn ISL, the predictors are TV, radio and newspaper."
+    "text": "Why Multiple Linear Regression (MLR) Model\n\nOur target response may be affected by several factors.\nTotal sales \\((Y)\\) and amount of money spent on advertising on YouTube (YT) \\((X_1)\\), Facebook (FB) \\((X_2)\\), Instagram (IG) \\((X_3)\\).1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPredict sales based on the three advertising expenditures and see which medium is more effective.\nIn ISL, the predictors are TV, radio and newspaper."
   },
   {
     "objectID": "slides/04-lin-reg.html#fit-separate-simple-linear-regression-slr-models",
@@ -564,14 +564,14 @@
     "href": "slides/04-lin-reg.html#extrapolation",
     "title": "Linear Regression 📈",
     "section": "Extrapolation",
-    "text": "Extrapolation\n\nRegression models are intended as interpolation equations over the range of the regressors used to fit the model.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nDo not use regression for time series forecasting!"
+    "text": "Extrapolation\n\nRegression models are intended as interpolation equations over the range of the regressors used to fit the model.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nDo not use regression for time series forecasting!"
   },
   {
     "objectID": "slides/04-lin-reg.html#regression-is-not-for-causal-inference",
     "href": "slides/04-lin-reg.html#regression-is-not-for-causal-inference",
     "title": "Linear Regression 📈",
     "section": "Regression is Not for Causal Inference",
-    "text": "Regression is Not for Causal Inference\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClaims of causality should be avoided for observational data."
+    "text": "Regression is Not for Causal Inference\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClaims of causality should be avoided for observational data."
   },
   {
     "objectID": "slides/04-lin-reg.html#practical-significance-vs.-statisical-significance",
@@ -579,13 +579,6 @@
     "title": "Linear Regression 📈",
     "section": "Practical Significance vs. Statisical Significance",
     "text": "Practical Significance vs. Statisical Significance\n\n\n\n\n\n\nImportant\n\n\n\n\n\n\\(H_0:\\beta_j = 0\\) will always be rejected as long as the sample size is large enough, even \\(x_j\\) has a very small effect on \\(y\\).\n\nConsider the practical significance of the result, not just the statistical significance.\nUse confidence intervals to draw conclusions instead of relying only on p-values.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\n\nIf the sample size is small, there may not be enough evidence to reject \\(H_0:\\beta_j = 0\\).\n\n\nDo Not immediately conclude that the variable has no association with the response.\nThere may be a linear association that is just not strong enough to detect given your data, or there may be a non-linear association.\n\n\n\n\n\n\n\np-value is a dichotomous approach"
-  },
-  {
-    "objectID": "slides/04-lin-reg.html#test-for-significance",
-    "href": "slides/04-lin-reg.html#test-for-significance",
-    "title": "Linear Regression 📈",
-    "section": "Test for significance",
-    "text": "Test for significance\n\nTest for significance: Determine if there is a linear relationship between the response and any of the regressor variables.\n \\(H_0: \\beta_1 = \\beta_2 = \\cdots = \\beta_k = 0 \\quad H_1: \\beta_j \\ne 0 \\text{ for at least one } j\\) \n\n\n\n\\(\\sum_{i=1}^n(y_i - \\overline{y})^2 = \\sum_{i=1}^n(\\hat{y}_i - \\overline{y})^2 + \\sum_{i=1}^n(y_i - \\hat{y}_i)^2\\)\nReject \\(H_0\\) if \\(F_{test} &gt; F_{\\alpha, k, n - k - 1}\\).\n\n\n\nWhat is the sample statistic we use to accesses how well the model fits the data?"
   },
   {
     "objectID": "slides/04-lin-reg.html#regression-model-in-matrix-form",
@@ -620,7 +613,7 @@
     "href": "slides/04-lin-reg.html#geometrical-interpretation-of-least-squares",
     "title": "Linear Regression 📈",
     "section": "Geometrical Interpretation of Least Squares",
-    "text": "Geometrical Interpretation of Least Squares\n\n\n\n\\(Col({\\bf X}) = \\{ {\\bf Xb}: {\\bf b} \\in {\\bf R}^{k+1} \\}\\)\n\\({\\bf y} \\notin Col({\\bf X})\\)\n\\(\\hat{{\\bf y}} = {\\bf Xb} = {\\bf H} {\\bf y} \\in Col({\\bf X})\\)\n\\(\\small {\\bf e} = ({\\bf y} - \\hat{{\\bf y}}) = ({\\bf y} - {\\bf X b}) = ({\\bf I} - {\\bf H}) {\\bf y} \\perp Col({\\bf X})\\)\n\\({\\bf X}'{\\bf e} = 0\\)\n\n\nSearching for \\(\\bf b\\) that minimizes \\(SS_{res}\\) is equivalent to locating the point \\({\\bf Xb} \\in Col({\\bf X})\\) (C) that is as close to \\(\\bf y\\) (A) as possible!\n\n\n\n\n\n\nhttps://commons.wikimedia.org/wiki/File:OLS_geometric_interpretation.svg\n\n\n\n\n\nMinimize the distance of \\(\\color{red}{A}\\) to \\(Col(\\bf X)\\): Find the point in \\(Col(\\bf X)\\) that is closest to \\(A\\). The distance is minimized when the point in the space is the foot of the line from \\(A\\) normal to the space. This is point \\(C\\)."
+    "text": "Geometrical Interpretation of Least Squares\n\n\n\n\\(Col({\\bf X}) = \\{ {\\bf Xb}: {\\bf b} \\in {\\bf R}^{k+1} \\}\\)\n\\({\\bf y} \\notin Col({\\bf X})\\)\n\\(\\hat{{\\bf y}} = {\\bf Xb} = {\\bf H} {\\bf y} \\in Col({\\bf X})\\)\n\\(\\small {\\bf e} = ({\\bf y} - \\hat{{\\bf y}}) = ({\\bf y} - {\\bf X b}) = ({\\bf I} - {\\bf H}) {\\bf y} \\perp Col({\\bf X})\\)\n\\({\\bf X}'{\\bf e} = 0\\)\n\n\nSearching for \\(\\bf b\\) that minimizes \\(SS_{res}\\) is equivalent to locating the point \\({\\bf Xb} \\in Col({\\bf X})\\) (C) that is as close to \\(\\bf y\\) (A) as possible!\n\n\n\n\n\n\nhttps://commons.wikimedia.org/wiki/File:OLS_geometric_interpretation.svg\n\n\n\n\n\n\nMinimize the distance of \\(\\color{red}{A}\\) to \\(Col(\\bf X)\\): Find the point in \\(Col(\\bf X)\\) that is closest to \\(A\\). The distance is minimized when the point in the space is the foot of the line from \\(A\\) normal to the space. This is point \\(C\\)."
   },
   {
     "objectID": "slides/04-lin-reg.html#multivariate-gaussiannormal-distribution",
@@ -767,14 +760,14 @@
     "href": "slides/04-lin-reg.html#demo-sgd",
     "title": "Linear Regression 📈",
     "section": "\nDemo SGD",
-    "text": "Demo SGD"
+    "text": "Demo SGD\n\n\n\n\n\n\n\n\n\n\n\n\nmssc6250-s25.github.io/website"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "MSSC 6250 - Statistical Machine Learning (Spring 2025)",
     "section": "",
-    "text": "Announcement:\n\nNo office hours first week.\n\n\nThis schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nTo Do\nSlides\nCode\nHomework\nProject\n\n\n\n\n1\nTue, Jan 14\nSyllabus/Overview of Statistical Learning\n📖\n🖥️🖥️\n\n\n\n\n\n\nThu, Jan 16\nBias-variance tradeoff\n\n🖥️\n\n\n\n\n\n2\nTue, Jan 21\nLinear Regression\n📖\n🖥️\n\n✍️\n\n\n\n\nThu, Jan 25\nNumerical Optimization for Regression\n\n\n\n\n\n\n\n3\nTue, Jan 28\nRidge Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 1\nCross-Validation\n\n\n\n\n\n\n\n4\nTue, Feb 4\nLASSO and Elastic Net\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 8\nPolynomial Regression and Regression Splines\n\n\n\n✍️\n\n\n\n5\nTue, Feb 11\nSmoothing Splines and Generalized Additive Models\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 15\nBayesian Inference\n\n\n\n\n\n\n\n6\nTue, Feb 18\nBayesian Linear Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 22\nBinary Logistic Regression\n\n\n\n\n\n\n\n7\nTue, Feb 25\nMultinomial Logistic Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 29\nDiscriminant Analysis\n\n\n\n\n\n\n\n8\nTue, Mar 4\nNaive Bayes\n📖\n\n\n\n\n\n\n\nThu, Mar 7\nMidterm Presentation I\n\n\n\n✍️\n✅\n\n\n9\nTue, Mar 11\nNO CLASS: Spring break\n\n\n\n\n\n\n\n\nThu, Mar 14\nNO CLASS: Spring break\n\n\n\n\n\n\n\n10\nTue, Mar 18\nK-Nearest Neighbors Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 21\nK-Nearest Neighbors Classification\n\n\n\n\n\n\n\n11\nTue, Mar 25\nGaussian Process Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 28\nGaussian Process Classification\n\n\n\n\n\n\n\n12\nTue, Apr 1\nSupport Vector Machine\n📖\n\n\n\n\n\n\n\nThu, Apr 4\nSupport Vector Machine\n\n\n\n\n\n\n\n13\nTue, Apr 8\nCART and Bagging\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 11\nRandom Forests and Boosting\n\n\n\n✍️\n\n\n\n14\nTue, Apr 15\nMidterm Presentation II\n📖\n🖥️\n\n\n✅\n\n\n\nThu, Apr 17\nNO CLASS: Easter break\n\n\n\n\n\n\n\n15\nTue, Apr 22\nPrincipal Component Analysis\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 25\nK-Means Clustering\n\n\n\n\n\n\n\n16\nTue, Apr 29\nModel-based Clustering\n📖\n🖥️\n\n\n\n\n\n\nThu, May 1\nNeural Networks\n\n\n\n\n\n\n\n17\nThu, May 8\nFinal Project Submission\n\n\n\n\n✅\n\n\n\n\nI reserve the right to make changes to the schedule.",
+    "text": "Announcement:\n\nNo office hours first week.\n\n\nThis schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nTo Do\nSlides\nCode\nHomework\nProject\n\n\n\n\n1\nTue, Jan 14\nSyllabus/Overview of Statistical Learning\n📖\n🖥️🖥️\n\n\n\n\n\n\nThu, Jan 16\nBias-variance tradeoff\n\n🖥️\n\n\n\n\n\n2\nTue, Jan 21\nNO CLASS: Cold Weather\n📖\n🖥️\n\n\n\n\n\n\nThu, Jan 25\nLinear Regression and Numerical Optimization\n\n\n\n\n\n\n\n3\nTue, Jan 28\nStochastic Gradient Descent; Ridge Regression\n📖\n🖥️\n\n✍️\n\n\n\n\nThu, Feb 1\nCross-Validation\n\n\n\n\n\n\n\n4\nTue, Feb 4\nLASSO and Elastic Net\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 8\nPolynomial Regression and Regression Splines\n\n\n\n✍️\n\n\n\n5\nTue, Feb 11\nSmoothing Splines and Generalized Additive Models\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 15\nBayesian Inference\n\n\n\n\n\n\n\n6\nTue, Feb 18\nBayesian Linear Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 22\nBinary Logistic Regression\n\n\n\n\n\n\n\n7\nTue, Feb 25\nMultinomial Logistic Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 29\nDiscriminant Analysis\n\n\n\n\n\n\n\n8\nTue, Mar 4\nNaive Bayes\n📖\n\n\n\n\n\n\n\nThu, Mar 7\nMidterm Presentation I\n\n\n\n✍️\n✅\n\n\n9\nTue, Mar 11\nNO CLASS: Spring break\n\n\n\n\n\n\n\n\nThu, Mar 14\nNO CLASS: Spring break\n\n\n\n\n\n\n\n10\nTue, Mar 18\nK-Nearest Neighbors Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 21\nK-Nearest Neighbors Classification\n\n\n\n\n\n\n\n11\nTue, Mar 25\nGaussian Process Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 28\nGaussian Process Classification\n\n\n\n\n\n\n\n12\nTue, Apr 1\nSupport Vector Machine\n📖\n\n\n\n\n\n\n\nThu, Apr 4\nSupport Vector Machine\n\n\n\n\n\n\n\n13\nTue, Apr 8\nCART and Bagging\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 11\nRandom Forests and Boosting\n\n\n\n✍️\n\n\n\n14\nTue, Apr 15\nMidterm Presentation II\n📖\n🖥️\n\n\n✅\n\n\n\nThu, Apr 17\nNO CLASS: Easter break\n\n\n\n\n\n\n\n15\nTue, Apr 22\nPrincipal Component Analysis\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 25\nK-Means Clustering\n\n\n\n\n\n\n\n16\nTue, Apr 29\nModel-based Clustering\n📖\n🖥️\n\n\n\n\n\n\nThu, May 1\nNeural Networks\n\n\n\n\n\n\n\n17\nThu, May 8\nFinal Project Submission\n\n\n\n\n✅\n\n\n\n\nI reserve the right to make changes to the schedule.",
     "crumbs": [
       "Course Information",
       "Schedule"

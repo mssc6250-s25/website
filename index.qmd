@@ -13,9 +13,9 @@ tbl-colwidths: [5,8,20,6,6,6,6]
 |:-------:|---------|---------|:-------:|:-------:|:-------:|:-------:|:-------:|
 | 1 | Tue, Jan 14 | Syllabus/Overview of Statistical Learning | [📖](/weeks/week-1.html "Week 1") | [🖥️](slides/01-syllabus.html "Syllabus")[🖥️](slides/02-overview.html "Overview") |  |  |  |
 |  | Thu, Jan 16 | Bias-variance tradeoff |  | [🖥️](slides/03-bias-var.html "bias-var-tradeoff") |  |  |  |
-| 2 | Tue, Jan 21 | Linear Regression | [📖](/weeks/week-2.html "Week 2") | [🖥️](slides/04-lin-reg.html "Linear regression") |  | [✍️](/hw/hw-1.html "Homework 1") |  |
-|  | Thu, Jan 25 | Numerical Optimization for Regression |  |  | [`r fontawesome::fa("file-code")`](code/04-linear-reg-code.html "04-linear-reg-code") |  |  |
-| 3 | Tue, Jan 28 | Ridge Regression | [📖](/weeks/week-3.html "Week 3") | [🖥️](slides/05-ridge-cv.html "Ridge regression and cross validation") |  |  |  |
+| 2 | Tue, Jan 21 | ***NO CLASS: Cold Weather*** | [📖](/weeks/week-2.html "Week 2") | [🖥️](slides/04-lin-reg.html "Linear regression") |  |  |  |
+|  | Thu, Jan 25 | Linear Regression and Numerical Optimization |  |  | [`r fontawesome::fa("file-code")`](code/04-linear-reg-code.html "04-linear-reg-code") |  |  |
+| 3 | Tue, Jan 28 | Stochastic Gradient Descent; Ridge Regression | [📖](/weeks/week-3.html "Week 3") | [🖥️](slides/05-ridge-cv.html "Ridge regression and cross validation") |  | [✍️](/hw/hw-1.html "Homework 1") |  |
 |  | Thu, Feb 1 | Cross-Validation |  |  | `r fontawesome::fa("file-code")` |  |  |
 | 4 | Tue, Feb 4 | LASSO and Elastic Net | [📖](/weeks/week-4.html "Week 4") | [🖥️](slides/06-lasso-vs.html "06-lasso-vs") | `r fontawesome::fa("file-code")` |  |  |
 |  | Thu, Feb 8 | Polynomial Regression and Regression Splines |  |  |  | [✍️](/hw/hw-2.html "Homework 2") |  |
