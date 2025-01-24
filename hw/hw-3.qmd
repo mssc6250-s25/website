@@ -1,0 +1,103 @@
+---
+title: "Homework 3 - Bayesian Statistics, Logistic Regression, Generative Models, and K-Nearest Neighbors"
+subtitle: "Due Friday, April 12 11:59 PM"
+editor: source
+# date-modified: today
+format: 
+  html:
+    toc: true
+---
+
+
+::: {.hidden}
+\def\bx{\mathbf{x}}
+\def\bg{\mathbf{g}}
+\def\bw{\mathbf{w}}
+\def\bb{\mathbf{b}}
+\def\bu{\mathbf{u}}
+\def\bbeta{\boldsymbol \beta}
+\def\bgamma{\boldsymbol \gamma}
+\def\bep{\boldsymbol \epsilon}
+\def\bH{\mathbf{H}}
+\def\bX{\mathbf{X}}
+\def\by{\mathbf{y}}
+\def\bH{\mathbf{H}}
+\def\bI{\mathbf{I}}
+\def\bS{\mathbf{S}}
+\def\bU{\mathbf{U}}
+\def\bV{\mathbf{V}}
+\def\bW{\mathbf{W}}
+\def\bD{\mathbf{D}}
+\def\T{\text{T}}
+\def\cov{\mathrm{Cov}}
+\def\cor{\mathrm{Corr}}
+\def\var{\mathrm{Var}}
+\def\E{\mathrm{E}}
+\def\bmu{\boldsymbol \mu}
+<!-- \DeclareMathOperator*{\argmin}{arg\,min} -->
+\def\Trace{\text{Trace}}
+:::
+
+- Please submit your work in **one** **PDF** file to **D2L \> Assessments \> Dropbox**. *Multiple files or a file that is not in pdf format are not allowed.*
+
+- Any relevant code should be attached.
+
+- Read **ISL** Chapter 4.
+
+
+
+## Homework Questions
+
+### Required 
+
+(@) **ISL** Sec. 4.8: 2
+
+(@) **ISL** Sec. 4.8: 3
+
+(@) **ISL** Sec. 4.8: 5
+
+(@) **ISL** Sec. 4.8: 13
+
+(@) **[KNN Curse of Dimensionality]**
+  
+    (a) Generate Generate the covariates $x_1, x_2, \dots, x_5$ of $n = 1000$ training data from independent standard normal distribution. Then, generate $Y$ from 
+    $$Y = X_1 + 0.5 X_2 - X_3 + \epsilon,$$ where $\epsilon \sim N(0, 1).$
+    
+    (b) Use the first 500 observations as the training data and the rest as the test data. Fit KNN regression, and report the test MSE of $y$ with the optimal $K$.
+    
+    (c) Add additional 95 noisy predictors as follows.
+        + **Case 1**: $x_6, x_7, \dots, x_{100} \overset{\mathrm{iid}}{\sim} N(0, 1)$
+        
+        + **Case 2**: $XA$ where $X_{1000 \times 5} = [x_1 \cdots x_5]$ and $A_{5 \times 95}$ having entries from iid uniform(0, 1).
+        
+    (d) Fit KNN regression in both cases (with the total of 100 covariates) and select the best $K$ value.
+    
+    (e) For both cases, what is the best K and the best mean squared error for prediction? Discuss the effect of adding 95 (unnecessary) covariates.
+    
+    
+(@) **[MNIST Handwritten Digits Image]**
+
+    (a) Load the prepared MNIST data [`mnist.csv`](./mnist.csv). Print some images.
+    
+    (b) Use the first 1000 observations as the training data and the second half as the test data.
+    
+    (c) Training with KNN and predicting on the test data with the best $K$ selected from the training.
+    
+        * Calculate the test error rate.
+        * Generate the confusion matrix.
+
+    (d) Training with multinomial logistic regression and predicting on the test data.
+    
+        * Calculate the test error rate.
+        * Generate the confusion matrix.
+
+
+### Do one of the followings
+
+You are encouraged to do both, but to complete the homework, you only need to do one of the two assignments.
+
+(@) Watch the talk [All About that Bayes: Probability, Statistics, and the Quest to Quantify Uncertainty](https://www.youtube.com/watch?v=eDMGDhyDxuY) by Dr. Kristin Lennox. In 250 words, summarize your thoughts and what you learn from the talk.
+
+<!-- {{< video https://shorturl.at/agqtM >}} -->
+
+(@) In 250 words, summarize your thoughts and what you learned from the [deep learning workshop](https://web.cvent.com/event/f07d37c8-0972-4577-93b0-2ade9b142c65/summary).

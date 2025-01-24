@@ -1,0 +1,124 @@
+---
+title: "Homework 2 - Ridge, Lasso, and Splines"
+subtitle: "Due Friday, Mar 1 11:59 PM"
+editor: source
+# bibliography: references.bib
+---
+
+::: {.hidden}
+\def\bx{\mathbf{x}}
+\def\bg{\mathbf{g}}
+\def\bw{\mathbf{w}}
+\def\bb{\mathbf{b}}
+\def\bu{\mathbf{u}}
+\def\bbeta{\boldsymbol \beta}
+\def\bgamma{\boldsymbol \gamma}
+\def\bep{\boldsymbol \epsilon}
+\def\bH{\mathbf{H}}
+\def\bX{\mathbf{X}}
+\def\by{\mathbf{y}}
+\def\bH{\mathbf{H}}
+\def\bI{\mathbf{I}}
+\def\bS{\mathbf{S}}
+\def\bU{\mathbf{U}}
+\def\bV{\mathbf{V}}
+\def\bW{\mathbf{W}}
+\def\bD{\mathbf{D}}
+\def\T{\text{T}}
+\def\cov{\mathrm{Cov}}
+\def\cor{\mathrm{Corr}}
+\def\var{\mathrm{Var}}
+\def\E{\mathrm{E}}
+\def\bmu{\boldsymbol \mu}
+<!-- \DeclareMathOperator*{\argmin}{arg\,min} -->
+\def\Trace{\text{Trace}}
+:::
+
+- Please submit your work in **one** **PDF** file to **D2L \> Assessments \> Dropbox**. *Multiple files or a file that is not in pdf format are not allowed.*
+
+- Any relevant code should be attached.
+
+- Read **ISL** Chapter 5.1, 6.2, and 7.
+
+
+
+## Homework Questions
+
+<!-- (@) **ISL** Sec. 5.4: 3 -->
+
+(@) **ISL** Sec. 6.6: 4
+
+(@) **ISL** Sec. 6.6: 6
+
+(@) **ISL** Sec. 6.6: 9 (a)-(d)
+
+(@) **ISL** Sec. 7.9: 9
+
+(@) **[Special Case for Ridge and Lasso]** Suppose for a linear regression problem with $n = p$, ${\bf X} = {\bf I}$ and no intercept. Show that
+
+    (a) The least squares problem can be simplified to finding $\beta_1,     \dots, \beta_p$ that minimize $\sum_{j=1}^p\left(y_j - \beta_j\right)^2$. What is least squares estimator $b_j$?
+    
+    (b) The ridge estimator is $\hat{\beta}_j^r = \frac{y_j}{1+\lambda} = \underset{\beta_j}{\arg\min} \sum_{j=1}^p\left(y_j - \beta_j\right)^2 + \lambda \sum_{j=1}^p \beta_j^2$.
+    
+    (c) The lasso solution of $\sum_{j=1}^p\left(y_j - \beta_j\right)^2 + \lambda \sum_{j=1}^p | \beta_j |$ is 
+$$\hat{\beta}_j^l = 
+  \begin{cases}
+    y_j - \lambda/2       & \quad \text{if } y_j > \lambda/2\\
+    y_j + \lambda/2       & \quad \text{if } y_j < -\lambda/2 \\
+    0  & \quad \text{if } |y_j| \le \lambda/2
+  \end{cases}$$
+  
+    (d) Describe the ridge and lasso shrinkage behavior.
+
+(@) **[Lasso with Correlated Variables]**
+
+
+    Consider the linear regression
+
+    $$ \by = \bX \bbeta + \bep $$
+    
+    where $\bbeta = (\beta_1, \beta_2, \ldots, \beta_{20})'$ with $\beta_1 = \beta_{2} = \beta_{3} = 0.5$ and all other $\beta_j = 0, j = 4, \dots, 20$. No intercept $\beta_0$. The input vector $\bx = (x_1, x_2, \dots, x_{20})'$ follows a multivariate Gaussian distribution
+
+    $$\bx \sim N\left(\mathbf{0}, \Sigma_{20 \times 20}\right)$$
+
+      In $\Sigma$, all diagonal elements are 1, and all off-diagonal elements are $\rho$ which measures the correlation between any two predictors.
+
+    (a) Generate training data of size 400 and test data of size 100 independently from the above model with $\rho = 0.1$ and $\epsilon_i \stackrel{iid} \sim N(0, 1)$.
+    
+    (b) Fit a Lasso model on the training data with 10-fold cross-validation (CV).
+    
+    (c) Compute test MSE with the optimal $\lambda$ selected by CV in (b). Does Lasso select the correct variables?
+    
+    (d) Repeat (a)-(c) 100 times. That is, generate 100 different training and test data sets. For each run, record the test MSE and whether or not the true model is correctly selected. Then compute the average test MSE and the proportion of runs where the correct model was selected.
+    
+    (e) Redo (a)-(d) with $\rho = 0.6$. Compare the two average test MSEs and the proportions. Comment the result.
+
+
+<!-- ## Exercises required for MSSC PhD students -->
+
+<!-- 1. **ISL** Sec. 6.6: 5 -->
+
+<!-- 2. **ISL** Sec. 7.9: 11 -->
+
+<!-- 3. Define the objective of the **elastic net** problem $J_1(\bbeta) = \|\by - \bX\bbeta \| ^2 + \lambda_2 \|\bbeta\|_2^2  + \lambda_1 \|\bbeta\|_1$ and the objective of Lasso $J_2(\bbeta) = \|\tilde{\by} - \tilde{\bX}\bbeta \| ^2 + c\lambda_1 \|\bbeta\|_1$ where $c = (1+\lambda_2)^{-1/2}$, and $$\tilde{\bX} = c \begin{pmatrix} \bX \\ -->
+<!-- \sqrt{\lambda_2}\bI_p \end{pmatrix}, \quad \tilde{\by} = \begin{pmatrix} \by \\ \mathbf{0}_{p\times 1} \end{pmatrix}.$$ Show that $J_1(c\bbeta) = J_2(\bbeta)$. Therefore the elastic net problem can be solved using algorithms for Lasso on modified data. -->
+
+
+
+
+
+<!-- ## Optional Exercises -->
+
+<!-- Let the ridge estimator be $\hat{\bbeta}^r = (\bX'\bX + \lambda \bI)^{-1}\bX' \by$. Show that  -->
+
+<!-- 1. $\hat{\bbeta}^r = (\bX'\bX + \lambda \bI)^{-1}(\bX'\bX)\bb$, and hence $\hat{\beta}_j^r = \frac{b_j}{1+\lambda}$ is a special case when $\bX'\bX = \bI$.  -->
+
+<!-- 2. The bias $\E\left( \hat{\bbeta}^r \right) - \bbeta = \left[ (\bX'\bX + \lambda \bI)^{-1}(\bX'\bX) - \bI\right]\bbeta$, and hence $\text{Bias}(\hat{\beta}_j^r) = \frac{-\lambda}{1+\lambda}\beta_j$ when $\bX'\bX = \bI$.  -->
+
+<!-- 3. $\sum_{j=1}^p \left( \hat{\beta}_j^r - \beta_j\right)^2 = \lambda^2 \bbeta' \left( \bX'\bX + \lambda \bI \right)^{-2}\bbeta = \sum_{j=1}^p \frac{\lambda^2}{(d_j^2 + \lambda)^2}\beta_j^2$. -->
+
+<!-- 4. $\var\left( \hat{\beta}_j^r \right) = \sigma^2\frac{d_j^2}{\left(d_j^2+\lambda\right)^2}$ where $d_j$ is the $j$-th singular value of $\bX$. Hence $\var\left( \hat{\beta}_j^r \right) = \sigma^2\frac{1}{\left(1+\lambda\right)^2}$ when $\bX'\bX = \bI$.  -->
+
+<!-- 5. $\hat{\by}^r = \bX \hat{\bbeta}^r = \bX (\bX'\bX + \lambda \bI)^{-1}\bX' \by = \sum_{j=1}^p \bu_j \left( \frac{d_j^2}{d_j^2+\lambda}\bu_j'\by\right)$ where $\bu_j$ is the $j$-th column of the SVD of $\bX = \bU\bD\bV'$. Hence, a greater amount of shrinkage is applied to the coordinates of basis vectors with smaller $d_j^2$. -->
+
+<!-- 6. The trace of the projection matrix $\bH_{\lambda} = \bX (\bX'\bX + \lambda \bI)^{-1}\bX'$ defines the **effective degrees of freedom**. In general, $\text{tr}(H) = \sum_{j=1}^p \frac{d_j^2}{d_j^2+\lambda}$. For linear regression where $\lambda = 0$, $\text{tr}(H) = p$.  -->
