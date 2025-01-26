@@ -795,6 +795,20 @@
     "text": "Python implementation\n\nShow/Hideimport pandas as pd\nimport numpy as np\n\n\n\nShow/Hideadvertising_data = pd.read_csv(\"../data/Advertising.csv\")\nadvertising_data = advertising_data.iloc[:, 1:5]\nX = advertising_data.drop(columns=[\"sales\"])\ny = advertising_data[\"sales\"]\n\n\nscikit-learn\n\nShow/Hidefrom sklearn.linear_model import LinearRegression\nreg = LinearRegression().fit(X, y)\nreg.intercept_\n\n2.9388893694594014\n\nShow/Hidereg.coef_\n\narray([ 0.04576465,  0.18853002, -0.00103749])\n\n\nstatsmodels\n\nShow/Hidefrom statsmodels.formula.api import ols\nols_out = ols(formula='sales ~ TV + radio + newspaper', data=advertising_data).fit()\nols_out.params\n\nIntercept    2.938889\nTV           0.045765\nradio        0.188530\nnewspaper   -0.001037\ndtype: float64\n\nShow/Hideprint(ols_out.summary())\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                  sales   R-squared:                       0.897\nModel:                            OLS   Adj. R-squared:                  0.896\nMethod:                 Least Squares   F-statistic:                     570.3\nDate:                Mon, 13 Jan 2025   Prob (F-statistic):           1.58e-96\nTime:                        11:56:31   Log-Likelihood:                -386.18\nNo. Observations:                 200   AIC:                             780.4\nDf Residuals:                     196   BIC:                             793.6\nDf Model:                           3                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nIntercept      2.9389      0.312      9.422      0.000       2.324       3.554\nTV             0.0458      0.001     32.809      0.000       0.043       0.049\nradio          0.1885      0.009     21.893      0.000       0.172       0.206\nnewspaper     -0.0010      0.006     -0.177      0.860      -0.013       0.011\n==============================================================================\nOmnibus:                       60.414   Durbin-Watson:                   2.084\nProb(Omnibus):                  0.000   Jarque-Bera (JB):              151.241\nSkew:                          -1.327   Prob(JB):                     1.44e-33\nKurtosis:                       6.332   Cond. No.                         454.\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n\nShow/Hidecoef_summary = ols_out.summary2().tables[1]  # Get the coefficients table\nprint(coef_summary)\n\n              Coef.  Std.Err.          t         P&gt;|t|    [0.025    0.975]\nIntercept  2.938889  0.311908   9.422288  1.267295e-17  2.323762  3.554016\nTV         0.045765  0.001395  32.808624  1.509960e-81  0.043014  0.048516\nradio      0.188530  0.008611  21.893496  1.505339e-54  0.171547  0.205513\nnewspaper -0.001037  0.005871  -0.176715  8.599151e-01 -0.012616  0.010541\n\nShow/Hideconf_intervals = ols_out.conf_int()\nprint(conf_intervals)\n\n                  0         1\nIntercept  2.323762  3.554016\nTV         0.043014  0.048516\nradio      0.171547  0.205513\nnewspaper -0.012616  0.010541"
   },
   {
+    "objectID": "hw/hw-1.html#homework-questions",
+    "href": "hw/hw-1.html#homework-questions",
+    "title": "Homework 1 - Bias-Variance Tradeoff and Linear Regression",
+    "section": "Homework Questions",
+    "text": "Homework Questions\n\nISL Sec. 2.4: 1\nISL Sec. 2.4: 3\nISL Sec. 2.4: 5\nISL Sec. 3.7: 4\nISL Sec. 3.7: 6\nISL Sec. 3.7: 14\nSimulation of simple linear regression. Consider the model \\(y_i = \\beta_0 + \\beta_1x_i + \\epsilon_i, ~~ \\epsilon_i \\stackrel{iid} \\sim N(0, \\sigma^2), ~~ i = 1, \\dots, n,\\) or equivalently, \\(p(y_i \\mid x, \\beta_0, \\beta_1) = N\\left(\\beta_0 + \\beta_1x_i, \\sigma^2 \\right).\\) Set \\(\\beta_0 = 2, \\beta_1 = -1.5, \\sigma = 1, n = 100, x_i = i.\\) Generate 1000 simulated data sets and fit the model to each data set.  The sampling distribution of the least-squares estimator \\(b_1\\) is \\[b_1 \\sim N\\left(\\beta_1, \\frac{\\sigma^2}{\\sum_{i=1}^n (x_i - \\bar{x})^2}\\right).\\]\n\nFind the average of the 1000 estimates \\(b_1\\). Is it close to its true expected value?\nFind the variance of 1000 estimates \\(b_1\\). Is it close to its true value?\nDraw the histogram of \\(b_1\\). Comment on your graph.\nObtain 1000 95% confidence interval for \\(\\beta_1\\). What is your pertentage of coverage for \\(\\beta_1\\)? Comment your result.\n\nSimulation of bias-variance tradeoff. Let \\(f(x) = x ^ 2\\) be the true regression function. Simulate the data using \\(y_i = f(x_i) + \\epsilon_i, i = 1, \\dots, 100\\), where \\(x_i = 0.01i\\) and \\(\\epsilon_i \\stackrel{iid} \\sim N(0, 0.3^2).\\)\n\nGenerate 250 training data sets.\nFor each data set, fit the following three models:\n\n\nModel 1: \\(y = \\beta_0+\\beta_1x+\\epsilon\\)\nModel 2: \\(y = \\beta_0+\\beta_1x+ \\beta_2x^2 + \\epsilon\\)\nModel 3: \\(y = \\beta_0+\\beta_1x+ \\beta_2x^2 + \\cdots + \\beta_9x^9 + \\epsilon\\)\n\n\nCalculate empirical MSE of \\(\\hat{f}\\), bias of \\(\\hat{f}\\) and variance of \\(\\hat{f}\\). Then show that \\[\\text{MSE}_{\\hat{f}} \\approx \\text{Bias}^2(\\hat{f}) + \\mathrm{Var}(\\hat{f}).\\] Specifically, for each value of \\(x_i\\), \\(i = 1, \\dots, 100\\),\n\n\\[\\text{MSE}_{\\hat{f}} =  \\frac{1}{250}\\sum_{k=1}^{250} \\left(\\hat{f}_k(x_i) - f(x_i) \\right) ^2,\\] \\[\\text{Bias}(\\hat{f}) = \\overline{\\hat{f}}(x_i) - f(x_i),\\] where \\(\\overline{\\hat{f}}(x_i) = \\frac{1}{250}\\sum_{k = 1}^{250}\\hat{f}_k(x_i)\\) is the sample mean of \\(\\hat{f}(x_i)\\) that approximates \\(\\mathrm{E}_{\\hat{f}}\\left(\\hat{f}(x_i)\\right).\\) \\[ \\mathrm{Var}(\\hat{f}) =  \\frac{1}{250}\\sum_{k=1}^{250} \\left(\\hat{f}_k(x_i) - \\overline{\\hat{f}}(x_i) \\right) ^2.\\] [Note:] If you calculate the variance using the built-in function such as var() in R, the identity holds only approximately because of the \\(250 - 1\\) term in the denominator in the sample variance formula. If instead \\(250\\) is used in the denominator, the identity holds exactly.\n\nFor each model, plot first ten estimated \\(f\\), \\(\\hat{f}_{1}(x), \\dots, \\hat{f}_{10}(x)\\), and the average of \\(\\hat{f}\\), \\(\\frac{1}{250}\\sum_{k=1}^{250}\\hat{f}_{k}(x)\\) in one figure, as Figure 1 below. What’s your finding?\nGenerate one more data set and use it as the test data. Calculate the overall training MSE (for training \\(y\\)) and overall test MSE (for test \\(y\\)) for each model. \\[MSE_\\texttt{Tr} =  \\frac{1}{250} \\sum_{k = 1}^{250} \\frac{1}{100} \\sum_{i=1}^{100} \\left(\\hat{f}_{k}(x_i) - y_{i}^k\\right)^2\\] \\[MSE_\\texttt{Te} =  \\frac{1}{250} \\sum_{k = 1}^{250} \\frac{1}{100} \\sum_{i=1}^{100} \\left(\\hat{f}_{k}(x_i) - y_{i}^{\\texttt{Test}}\\right)^2\\]\n\n\n\n\n\n\n\n\n\n\nFigure 1: Trained \\(f\\)\n\n\n\n\n\n\n\n(MSSC PhD) Stochastic gradient descent. Write your own stochastic gradient descent algorithm for linear regression. Implement it and compare with the built-in function such as optim() of R or scipy.optimize() of python to make sure that it converges correctly."
+  },
+  {
+    "objectID": "hw/hw-3.html#homework-questions",
+    "href": "hw/hw-3.html#homework-questions",
+    "title": "Homework 3 - Bayesian Statistics, Logistic Regression, Generative Models, and K-Nearest Neighbors",
+    "section": "Homework Questions",
+    "text": "Homework Questions\n\nRequired\n\nISL Sec. 4.8: 2\nISL Sec. 4.8: 3\nISL Sec. 4.8: 5\nISL Sec. 4.8: 13\n[KNN Curse of Dimensionality]\n\nGenerate Generate the covariates \\(x_1, x_2, \\dots, x_5\\) of \\(n = 1000\\) training data from independent standard normal distribution. Then, generate \\(Y\\) from \\[Y = X_1 + 0.5 X_2 - X_3 + \\epsilon,\\] where \\(\\epsilon \\sim N(0, 1).\\)\nUse the first 500 observations as the training data and the rest as the test data. Fit KNN regression, and report the test MSE of \\(y\\) with the optimal \\(K\\).\nAdd additional 95 noisy predictors as follows.\n\nCase 1: \\(x_6, x_7, \\dots, x_{100} \\overset{\\mathrm{iid}}{\\sim} N(0, 1)\\)\nCase 2: \\(XA\\) where \\(X_{1000 \\times 5} = [x_1 \\cdots x_5]\\) and \\(A_{5 \\times 95}\\) having entries from iid uniform(0, 1).\n\nFit KNN regression in both cases (with the total of 100 covariates) and select the best \\(K\\) value.\nFor both cases, what is the best K and the best mean squared error for prediction? Discuss the effect of adding 95 (unnecessary) covariates.\n\n[MNIST Handwritten Digits Image]\n\nLoad the prepared MNIST data mnist.csv. Print some images.\nUse the first 1000 observations as the training data and the second half as the test data.\nTraining with KNN and predicting on the test data with the best \\(K\\) selected from the training.\n\nCalculate the test error rate.\nGenerate the confusion matrix.\n\nTraining with multinomial logistic regression and predicting on the test data.\n\nCalculate the test error rate.\nGenerate the confusion matrix.\n\n\n\n\n\nDo one of the followings\nYou are encouraged to do both, but to complete the homework, you only need to do one of the two assignments.\n\nWatch the talk All About that Bayes: Probability, Statistics, and the Quest to Quantify Uncertainty by Dr. Kristin Lennox. In 250 words, summarize your thoughts and what you learn from the talk.\n\n\n\nIn 250 words, summarize your thoughts and what you learned from the deep learning workshop."
+  },
+  {
     "objectID": "weeks/week-2.html",
     "href": "weeks/week-2.html",
     "title": "Week 2",
@@ -949,7 +963,7 @@
     "href": "weeks/week-3.html",
     "title": "Week 3",
     "section": "",
-    "text": "Important\n\n\n\nHomework 1 due Friday, Feb 7, 11:59 PM",
+    "text": "Important\n\n\n\nHomework 1 due Friday, Feb 14, 11:59 PM",
     "crumbs": [
       "Weekly Materials",
       "Week 3"
@@ -987,6 +1001,20 @@
       "Weekly Materials",
       "Week 3"
     ]
+  },
+  {
+    "objectID": "hw/hw-4.html#homework-questions",
+    "href": "hw/hw-4.html#homework-questions",
+    "title": "Homework 4 - Support Vector Machines, Tree Methods, Unsupervised Learning",
+    "section": "Homework Questions",
+    "text": "Homework Questions\n\nISL Sec. 8.4: 12 (Don’t do BART)\nISL Sec. 9.7: 3\nISL Sec. 9.7: 5\nISL Sec. 12.6: 10"
+  },
+  {
+    "objectID": "hw/hw-2.html#homework-questions",
+    "href": "hw/hw-2.html#homework-questions",
+    "title": "Homework 2 - Ridge, Lasso, and Splines",
+    "section": "Homework Questions",
+    "text": "Homework Questions\n\n\nISL Sec. 6.6: 4\nISL Sec. 6.6: 6\nISL Sec. 6.6: 9 (a)-(d)\nISL Sec. 7.9: 9\n[Special Case for Ridge and Lasso] Suppose for a linear regression problem with \\(n = p\\), \\({\\bf X} = {\\bf I}\\) and no intercept. Show that\n\nThe least squares problem can be simplified to finding \\(\\beta_1,     \\dots, \\beta_p\\) that minimize \\(\\sum_{j=1}^p\\left(y_j - \\beta_j\\right)^2\\). What is least squares estimator \\(b_j\\)?\nThe ridge estimator is \\(\\hat{\\beta}_j^r = \\frac{y_j}{1+\\lambda} = \\underset{\\beta_j}{\\arg\\min} \\sum_{j=1}^p\\left(y_j - \\beta_j\\right)^2 + \\lambda \\sum_{j=1}^p \\beta_j^2\\).\nThe lasso solution of \\(\\sum_{j=1}^p\\left(y_j - \\beta_j\\right)^2 + \\lambda \\sum_{j=1}^p | \\beta_j |\\) is \\[\\hat{\\beta}_j^l =\n  \\begin{cases}\ny_j - \\lambda/2       & \\quad \\text{if } y_j &gt; \\lambda/2\\\\\ny_j + \\lambda/2       & \\quad \\text{if } y_j &lt; -\\lambda/2 \\\\\n0  & \\quad \\text{if } |y_j| \\le \\lambda/2\n  \\end{cases}\\]\nDescribe the ridge and lasso shrinkage behavior.\n\n[Lasso with Correlated Variables]\nConsider the linear regression\n\\[ \\mathbf{y}= \\mathbf{X}\\boldsymbol \\beta+ \\boldsymbol \\epsilon\\]\nwhere \\(\\boldsymbol \\beta= (\\beta_1, \\beta_2, \\ldots, \\beta_{20})'\\) with \\(\\beta_1 = \\beta_{2} = \\beta_{3} = 0.5\\) and all other \\(\\beta_j = 0, j = 4, \\dots, 20\\). No intercept \\(\\beta_0\\). The input vector \\(\\mathbf{x}= (x_1, x_2, \\dots, x_{20})'\\) follows a multivariate Gaussian distribution\n\\[\\mathbf{x}\\sim N\\left(\\mathbf{0}, \\Sigma_{20 \\times 20}\\right)\\]\nIn \\(\\Sigma\\), all diagonal elements are 1, and all off-diagonal elements are \\(\\rho\\) which measures the correlation between any two predictors.\n\nGenerate training data of size 400 and test data of size 100 independently from the above model with \\(\\rho = 0.1\\) and \\(\\epsilon_i \\stackrel{iid} \\sim N(0, 1)\\).\nFit a Lasso model on the training data with 10-fold cross-validation (CV).\nCompute test MSE with the optimal \\(\\lambda\\) selected by CV in (b). Does Lasso select the correct variables?\nRepeat (a)-(c) 100 times. That is, generate 100 different training and test data sets. For each run, record the test MSE and whether or not the true model is correctly selected. Then compute the average test MSE and the proportion of runs where the correct model was selected.\nRedo (a)-(d) with \\(\\rho = 0.6\\). Compare the two average test MSEs and the proportions. Comment the result."
   },
   {
     "objectID": "course-overview.html",
@@ -1047,7 +1075,7 @@
     "href": "slides/03-bias-var.html#different-relationships-1",
     "title": "Bias-Variance Tradeoff 🎯",
     "section": "Different Relationships",
-    "text": "Different Relationships\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSource: https://www.ck12.org/physics/acceleration-due-to-gravity/lesson/Acceleration-Due-to-Gravity-MS-PS/\n\n\n\n\n\nHere I give your two examples. The first example is the conversion of F and C degrees. Their relationship is linear and F = 32 + 1.8 C.\nSo you give me a C degree, I can tell you its corresponding F degree fro sure. Right.\nThe second example comes from physics. the displacement of an object is a quadratic function of time.\nSo here s(t) = v0 * t + 0.5 * a * t^2. v0 is the initial velocity, and a is acceleration, and t is time.\nAgain the relationship between displacement and time is 100% deterministic.\nA value of time corresponds to an unique value of displacement given v0 and a."
+    "text": "Different Relationships\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSource: https://www.ck12.org/physics/acceleration-due-to-gravity/lesson/Acceleration-Due-to-Gravity-MS-PS/\n\n\n\n\n\n\nHere I give your two examples. The first example is the conversion of F and C degrees. Their relationship is linear and F = 32 + 1.8 C.\nSo you give me a C degree, I can tell you its corresponding F degree fro sure. Right.\nThe second example comes from physics. the displacement of an object is a quadratic function of time.\nSo here s(t) = v0 * t + 0.5 * a * t^2. v0 is the initial velocity, and a is acceleration, and t is time.\nAgain the relationship between displacement and time is 100% deterministic.\nA value of time corresponds to an unique value of displacement given v0 and a."
   },
   {
     "objectID": "slides/03-bias-var.html#relationship-between-variables-is-not-perfect",
@@ -1061,14 +1089,14 @@
     "href": "slides/03-bias-var.html#relationship-between-variables-is-not-perfect-1",
     "title": "Bias-Variance Tradeoff 🎯",
     "section": "Relationship between Variables is Not Perfect",
-    "text": "Relationship between Variables is Not Perfect\n\n\n💵 In general, one with more years of education earns more.\n💵 Any two with the same years of education may have different annual income.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHere I give you a simple example: the relationship between income and years of education.\n💵 In general, one with more years of education earns more.\n💵 Any two with the same years of education may have different annual income.\nBecause your income level depends on so many other factors, not just years of education.\nSo when you plot the scatter plot of the two variables, you will find that there is some trend, but the data are sort of scattered or jittered or variated around some function that describes the relationship between income the years of education.\n\nRed dots are observed values or the years of education and income pairs."
+    "text": "Relationship between Variables is Not Perfect\n\n\n💵 In general, one with more years of education earns more.\n💵 Any two with the same years of education may have different annual income.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHere I give you a simple example: the relationship between income and years of education.\n💵 In general, one with more years of education earns more.\n💵 Any two with the same years of education may have different annual income.\nBecause your income level depends on so many other factors, not just years of education.\nSo when you plot the scatter plot of the two variables, you will find that there is some trend, but the data are sort of scattered or jittered or variated around some function that describes the relationship between income the years of education.\n\nRed dots are observed values or the years of education and income pairs."
   },
   {
     "objectID": "slides/03-bias-var.html#variation-around-the-functionmodel",
     "href": "slides/03-bias-var.html#variation-around-the-functionmodel",
     "title": "Bias-Variance Tradeoff 🎯",
     "section": "Variation around the Function/Model",
-    "text": "Variation around the Function/Model\n\n\nWhat are the unexplained variation coming from?\n\n\n\n\n\n\nOther factors accounting for parts of variability of income.\n\nAdding more explanatory variables to a model can reduce the variation size around the model.\n\n\nPure measurement error.\nJust that randomness plays a big role. 🤔\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhat other factors (variables) may affect a person’s income?\n\n\n\nyour income = f(years of education, major, GPA, college, parent's wealth, ...)\n\nAnd the data Variation around the Function, or in general the regression model is just as important as the model, if not more!\n\nBasically, what statistics does is explain variation in the context of what remains unexplained.\nThe scatter plot suggests that there might be other factors that account for large parts of variability.\nIf that is the case, adding more explanatory variables ( Xs ) to a model can sometimes usefully reduce the size of the scatter around the model.\nPerhaps just that randomness plays a big role."
+    "text": "Variation around the Function/Model\n\n\nWhat are the unexplained variation coming from?\n\n\n\n\n\n\nOther factors accounting for parts of variability of income.\n\nAdding more explanatory variables to a model can reduce the variation size around the model.\n\n\nPure measurement error.\nJust that randomness plays a big role. 🤔\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhat other factors (variables) may affect a person’s income?\n\n\n\nyour income = f(years of education, major, GPA, college, parent's wealth, ...)\n\nAnd the data Variation around the Function, or in general the regression model is just as important as the model, if not more!\n\nBasically, what statistics does is explain variation in the context of what remains unexplained.\nThe scatter plot suggests that there might be other factors that account for large parts of variability.\nIf that is the case, adding more explanatory variables ( Xs ) to a model can sometimes usefully reduce the size of the scatter around the model.\nPerhaps just that randomness plays a big role."
   },
   {
     "objectID": "slides/03-bias-var.html#supervised-learning-mapping",
@@ -1082,7 +1110,7 @@
     "href": "slides/03-bias-var.html#true-unknown-function-f-of-the-model-y-fx-epsilon",
     "title": "Bias-Variance Tradeoff 🎯",
     "section": "True Unknown Function f of the Model Y = f(X) + \\epsilon\n",
-    "text": "True Unknown Function f of the Model Y = f(X) + \\epsilon\n\n\n\n\nBlue curve: true underlying relationship between (the mean) income and years of education.\n\nBlack lines: error associated with each observation\n\n\n\nBig problem: f(x) is unknown and needs to be estimated.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLet’s go back to the income-education example. Red dots are observed values or the years of education and income pairs. Suppose we like to use a regression model y = f(x) + \\epsilon to describe the relationship between income and education.\nAnd the *Blue** curve on the right shows the true underlying relationship between income and years of education, which is the function f in our regression model.\nAnd each Black vertical line indicates an error associated with each observation.\nSo again, each red dot or observation is the value of the function f(x) plus some random error with its magnitude shown in a black vertical line.\nAgain, in regression, we assume years of education is fixed. It is income level that varies around the function f."
+    "text": "True Unknown Function f of the Model Y = f(X) + \\epsilon\n\n\n\n\nBlue curve: true underlying relationship between (the mean) income and years of education.\n\nBlack lines: error associated with each observation\n\n\n\nBig problem: f(x) is unknown and needs to be estimated.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLet’s go back to the income-education example. Red dots are observed values or the years of education and income pairs. Suppose we like to use a regression model y = f(x) + \\epsilon to describe the relationship between income and education.\nAnd the *Blue** curve on the right shows the true underlying relationship between income and years of education, which is the function f in our regression model.\nAnd each Black vertical line indicates an error associated with each observation.\nSo again, each red dot or observation is the value of the function f(x) plus some random error with its magnitude shown in a black vertical line.\nAgain, in regression, we assume years of education is fixed. It is income level that varies around the function f."
   },
   {
     "objectID": "slides/03-bias-var.html#how-to-estimate-f",
@@ -1131,7 +1159,7 @@
     "href": "slides/03-bias-var.html#model-complexityflexibility-and-mse",
     "title": "Bias-Variance Tradeoff 🎯",
     "section": "Model Complexity/Flexibility and MSE",
-    "text": "Model Complexity/Flexibility and MSE\n\nIt’s common that no test data are available. Can we select a model that minimize \\text{MSE}_{\\texttt{Tr}}, since the training data and test data appear to be closed related?\n\n\n\n\n\nOrange: Under fit\nGreen: Over fit\nBlue: Best fit\n\\color{darkgray}{\\text{MSE}_{\\texttt{Tr}}} is decreasing with the complexity.\n\\color{red}{\\text{MSE}_{\\texttt{Te}}} is U-shaped: goes down then up with the complexity.\n\n\n\nMSE\nOverfit\nUnderfit\n\n\n\nTrain\ntiny\nbig\n\n\nTest\nbig\nbig\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo! There is no guarantee that the method with the lowest \\text{MSE}_{\\texttt{Tr}} will also have the lowest \\text{MSE}_{\\texttt{Te}}."
+    "text": "Model Complexity/Flexibility and MSE\n\nIt’s common that no test data are available. Can we select a model that minimize \\text{MSE}_{\\texttt{Tr}}, since the training data and test data appear to be closed related?\n\n\n\n\n\nOrange: Under fit\nGreen: Over fit\nBlue: Best fit\n\\color{darkgray}{\\text{MSE}_{\\texttt{Tr}}} is decreasing with the complexity.\n\\color{red}{\\text{MSE}_{\\texttt{Te}}} is U-shaped: goes down then up with the complexity.\n\n\n\nMSE\nOverfit\nUnderfit\n\n\n\nTrain\ntiny\nbig\n\n\nTest\nbig\nbig\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo! There is no guarantee that the method with the lowest \\text{MSE}_{\\texttt{Tr}} will also have the lowest \\text{MSE}_{\\texttt{Te}}."
   },
   {
     "objectID": "slides/03-bias-var.html#bias-variance-tradeoff",
@@ -1323,31 +1351,146 @@
     "text": "Accuracy and Interpretability Trade-Off\n\n\n\n\nSource: ISL Fig. 2.7\n\nflexibility: a model is flexible if the model performs quite good for various types of data.\n\n\n\n\nmssc6250-s25.github.io/website"
   },
   {
-    "objectID": "hw/hw-1.html#homework-questions",
-    "href": "hw/hw-1.html#homework-questions",
-    "title": "Homework 1 - Bias-Variance Tradeoff and Linear Regression",
-    "section": "Homework Questions",
-    "text": "Homework Questions\n\nISL Sec. 2.4: 1\nISL Sec. 2.4: 3\nISL Sec. 2.4: 5\nISL Sec. 3.7: 4\nISL Sec. 3.7: 6\nISL Sec. 3.7: 14\nSimulation of simple linear regression. Consider the model \\(y_i = \\beta_0 + \\beta_1x_i + \\epsilon_i, ~~ \\epsilon_i \\stackrel{iid} \\sim N(0, \\sigma^2), ~~ i = 1, \\dots, n,\\) or equivalently, \\(p(y_i \\mid x, \\beta_0, \\beta_1) = N\\left(\\beta_0 + \\beta_1x_i, \\sigma^2 \\right).\\) Set \\(\\beta_0 = 2, \\beta_1 = -1.5, \\sigma = 1, n = 100, x_i = i.\\) Generate 1000 simulated data sets and fit the model to each data set.  The sampling distribution of \\(b_1\\) is \\[b_1 \\sim N\\left(\\beta_1, \\frac{\\sigma^2}{\\sum_{i=1}^n (x_i - \\bar{x})^2}\\right).\\]\n\nFind the average of the 1000 estimates \\(b_1\\). Is it close to its true expected value?\nFind the variance of 1000 estimates \\(b_1\\). Is it close to its true value?\nDraw the histogram of \\(b_1\\). Comment on your graph.\nObtain 1000 95% confidence interval for \\(\\beta_1\\). What is your pertentage of coverage for \\(\\beta_1\\)? Comment your result.\n\nSimulation of bias-variance tradeoff. Let \\(f(x) = x ^ 2\\) be the true regression function. Simulate the data using \\(y_i = f(x_i) + \\epsilon_i, i = 1, \\dots, 100\\), where \\(x_i = 0.01i\\) and \\(\\epsilon_i \\stackrel{iid} \\sim N(0, 0.3^2).\\)\n\nGenerate 250 training data sets.\nFor each data set, fit the following three models:\n\n\nModel 1: \\(y = \\beta_0+\\beta_1x+\\epsilon\\)\nModel 2: \\(y = \\beta_0+\\beta_1x+ \\beta_2x^2 + \\epsilon\\)\nModel 3: \\(y = \\beta_0+\\beta_1x+ \\beta_2x^2 + \\cdots + \\beta_9x^9 + \\epsilon\\)\n\n\nCalculate empirical MSE of \\(\\hat{f}\\), bias of \\(\\hat{f}\\) and variance of \\(\\hat{f}\\). Then show that \\[\\text{MSE}_{\\hat{f}} \\approx \\text{Bias}^2(\\hat{f}) + \\mathrm{Var}(\\hat{f}).\\] Specifically, for each value of \\(x_i\\), \\(i = 1, \\dots, 100\\),\n\n\\[\\text{MSE}_{\\hat{f}} =  \\frac{1}{250}\\sum_{k=1}^{250} \\left(\\hat{f}_k(x_i) - f(x_i) \\right) ^2,\\] \\[\\text{Bias}(\\hat{f}) = \\overline{\\hat{f}}(x_i) - f(x_i),\\] where \\(\\overline{\\hat{f}}(x_i) = \\frac{1}{250}\\sum_{k = 1}^{250}\\hat{f}_k(x_i)\\) is the sample mean of \\(\\hat{f}(x_i)\\) that approximates \\(\\mathrm{E}_{\\hat{f}}\\left(\\hat{f}(x_i)\\right).\\) \\[ \\mathrm{Var}(\\hat{f}) =  \\frac{1}{250}\\sum_{k=1}^{250} \\left(\\hat{f}_k(x_i) - \\overline{\\hat{f}}(x_i) \\right) ^2.\\] [Note:] If you calculate the variance using the built-in function such as var() in R, the identity holds only approximately because of the \\(250 - 1\\) term in the denominator in the sample variance formula. If instead \\(250\\) is used in the denominator, the identity holds exactly.\n\nFor each model, plot first ten estimated \\(f\\), \\(\\hat{f}_{1}(x), \\dots, \\hat{f}_{10}(x)\\), and the average of \\(\\hat{f}\\), \\(\\frac{1}{250}\\sum_{k=1}^{250}\\hat{f}_{k}(x)\\) in one figure, as Figure 1 below. What’s your finding?\nGenerate one more data set and use it as the test data. Calculate the overall training MSE (for training \\(y\\)) and overall test MSE (for test \\(y\\)) for each model. \\[MSE_\\texttt{Tr} =  \\frac{1}{250} \\sum_{k = 1}^{250} \\frac{1}{100} \\sum_{i=1}^{100} \\left(\\hat{f}_{k}(x_i) - y_{i}^k\\right)^2\\] \\[MSE_\\texttt{Te} =  \\frac{1}{250} \\sum_{k = 1}^{250} \\frac{1}{100} \\sum_{i=1}^{100} \\left(\\hat{f}_{k}(x_i) - y_{i}^{\\texttt{Test}}\\right)^2\\]\n\n\n\n\n\n\n\n\n\n\nFigure 1: Trained \\(f\\)\n\n\n\n\n\n\n\n(MSSC PhD) Stochastic gradient descent. Write your own stochastic gradient descent algorithm for linear regression. Implement it and compare with the built-in function such as optim() to make sure that it converges correctly."
+    "objectID": "present-description.html",
+    "href": "present-description.html",
+    "title": "Midterm Presentation I - Regression",
+    "section": "",
+    "text": "Team up! You will be working as a group of 2, 3 or 4. One of you, please email me your team member list by Friday, 2/21 11:59 PM\nProposal. Please send me a one-page PDF describing what you are going to do for your project (no word limit) with your project title by Friday, 2/28 11:59 PM.\nPresentation. You will be presenting your project on Thursday, 3/6 in class.\nMaterials. Please share your entire work (slides, code, data, etc) by Friday, 3/7 11:59 PM.",
+    "crumbs": [
+      "Midterm Project I",
+      "Guideline and Policy"
+    ]
   },
   {
-    "objectID": "hw/hw-2.html#homework-questions",
-    "href": "hw/hw-2.html#homework-questions",
-    "title": "Homework 2 - Ridge, Lasso, and Splines",
-    "section": "Homework Questions",
-    "text": "Homework Questions\n\n\nISL Sec. 6.6: 4\nISL Sec. 6.6: 6\nISL Sec. 6.6: 9 (a)-(d)\nISL Sec. 7.9: 9\n[Special Case for Ridge and Lasso] Suppose for a linear regression problem with \\(n = p\\), \\({\\bf X} = {\\bf I}\\) and no intercept. Show that\n\nThe least squares problem can be simplified to finding \\(\\beta_1,     \\dots, \\beta_p\\) that minimize \\(\\sum_{j=1}^p\\left(y_j - \\beta_j\\right)^2\\). What is least squares estimator \\(b_j\\)?\nThe ridge estimator is \\(\\hat{\\beta}_j^r = \\frac{y_j}{1+\\lambda} = \\underset{\\beta_j}{\\arg\\min} \\sum_{j=1}^p\\left(y_j - \\beta_j\\right)^2 + \\lambda \\sum_{j=1}^p \\beta_j^2\\).\nThe lasso solution of \\(\\sum_{j=1}^p\\left(y_j - \\beta_j\\right)^2 + \\lambda \\sum_{j=1}^p | \\beta_j |\\) is \\[\\hat{\\beta}_j^l =\n  \\begin{cases}\ny_j - \\lambda/2       & \\quad \\text{if } y_j &gt; \\lambda/2\\\\\ny_j + \\lambda/2       & \\quad \\text{if } y_j &lt; -\\lambda/2 \\\\\n0  & \\quad \\text{if } |y_j| \\le \\lambda/2\n  \\end{cases}\\]\nDescribe the ridge and lasso shrinkage behavior.\n\n[Lasso with Correlated Variables]\nConsider the linear regression\n\\[ \\mathbf{y}= \\mathbf{X}\\boldsymbol \\beta+ \\boldsymbol \\epsilon\\]\nwhere \\(\\boldsymbol \\beta= (\\beta_1, \\beta_2, \\ldots, \\beta_{20})'\\) with \\(\\beta_1 = \\beta_{2} = \\beta_{3} = 0.5\\) and all other \\(\\beta_j = 0, j = 4, \\dots, 20\\). No intercept \\(\\beta_0\\). The input vector \\(\\mathbf{x}= (x_1, x_2, \\dots, x_{20})'\\) follows a multivariate Gaussian distribution\n\\[\\mathbf{x}\\sim N\\left(\\mathbf{0}, \\Sigma_{20 \\times 20}\\right)\\]\nIn \\(\\Sigma\\), all diagonal elements are 1, and all off-diagonal elements are \\(\\rho\\) which measures the correlation between any two predictors.\n\nGenerate training data of size 400 and test data of size 100 independently from the above model with \\(\\rho = 0.1\\) and \\(\\epsilon_i \\stackrel{iid} \\sim N(0, 1)\\).\nFit a Lasso model on the training data with 10-fold cross-validation (CV).\nCompute test MSE with the optimal \\(\\lambda\\) selected by CV in (b). Does Lasso select the correct variables?\nRepeat (a)-(c) 100 times. That is, generate 100 different training and test data sets. For each run, record the test MSE and whether or not the true model is correctly selected. Then compute the average test MSE and the proportion of runs where the correct model was selected.\nRedo (a)-(d) with \\(\\rho = 0.6\\). Compare the two average test MSEs and the proportions. Comment the result."
+    "objectID": "present-description.html#team-up",
+    "href": "present-description.html#team-up",
+    "title": "Midterm Presentation I - Regression",
+    "section": "Team up!",
+    "text": "Team up!\n\nEach one of you loses 3 points of your project grade if you don’t meet the requirement or miss the deadline.\nYou will be randomly assigned to a group if you do not belong to any group before the deadline.",
+    "crumbs": [
+      "Midterm Project Presentation",
+      "Guideline and Policy"
+    ]
   },
   {
-    "objectID": "hw/hw-4.html#homework-questions",
-    "href": "hw/hw-4.html#homework-questions",
-    "title": "Homework 4 - Support Vector Machines, Tree Methods, Unsupervised Learning",
-    "section": "Homework Questions",
-    "text": "Homework Questions\n\nISL Sec. 8.4: 12 (Don’t do BART)\nISL Sec. 9.7: 3\nISL Sec. 9.7: 5\nISL Sec. 12.6: 10"
+    "objectID": "present-description.html#proposal",
+    "href": "present-description.html#proposal",
+    "title": "Midterm Presentation I - Regression",
+    "section": "Proposal",
+    "text": "Proposal\n\nEach one of you loses 3 points of your project grade if you don’t meet the requirement or miss the deadline.\n\n\n\n\n\n\n\n\n\n\n\n–&gt;\n\n\n\n\n\n\n–&gt;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n–&gt;\n\n\n\n–&gt;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n–&gt;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n–&gt;",
+    "crumbs": [
+      "Midterm Project Presentation",
+      "Guideline and Policy"
+    ]
   },
   {
-    "objectID": "hw/hw-3.html#homework-questions",
-    "href": "hw/hw-3.html#homework-questions",
-    "title": "Homework 3 - Bayesian Statistics, Logistic Regression, Generative Models, and K-Nearest Neighbors",
-    "section": "Homework Questions",
-    "text": "Homework Questions\n\nRequired\n\nISL Sec. 4.8: 2\nISL Sec. 4.8: 3\nISL Sec. 4.8: 5\nISL Sec. 4.8: 13\n[KNN Curse of Dimensionality]\n\nGenerate Generate the covariates \\(x_1, x_2, \\dots, x_5\\) of \\(n = 1000\\) training data from independent standard normal distribution. Then, generate \\(Y\\) from \\[Y = X_1 + 0.5 X_2 - X_3 + \\epsilon,\\] where \\(\\epsilon \\sim N(0, 1).\\)\nUse the first 500 observations as the training data and the rest as the test data. Fit KNN regression, and report the test MSE of \\(y\\) with the optimal \\(K\\).\nAdd additional 95 noisy predictors as follows.\n\nCase 1: \\(x_6, x_7, \\dots, x_{100} \\overset{\\mathrm{iid}}{\\sim} N(0, 1)\\)\nCase 2: \\(XA\\) where \\(X_{1000 \\times 5} = [x_1 \\cdots x_5]\\) and \\(A_{5 \\times 95}\\) having entries from iid uniform(0, 1).\n\nFit KNN regression in both cases (with the total of 100 covariates) and select the best \\(K\\) value.\nFor both cases, what is the best K and the best mean squared error for prediction? Discuss the effect of adding 95 (unnecessary) covariates.\n\n[MNIST Handwritten Digits Image]\n\nLoad the prepared MNIST data mnist.csv. Print some images.\nUse the first 1000 observations as the training data and the second half as the test data.\nTraining with KNN and predicting on the test data with the best \\(K\\) selected from the training.\n\nCalculate the test error rate.\nGenerate the confusion matrix.\n\nTraining with multinomial logistic regression and predicting on the test data.\n\nCalculate the test error rate.\nGenerate the confusion matrix.\n\n\n\n\n\nDo one of the followings\nYou are encouraged to do both, but to complete the homework, you only need to do one of the two assignments.\n\nWatch the talk All About that Bayes: Probability, Statistics, and the Quest to Quantify Uncertainty by Dr. Kristin Lennox. In 250 words, summarize your thoughts and what you learn from the talk.\n\n\n\nIn 250 words, summarize your thoughts and what you learned from the deep learning workshop."
+    "objectID": "present-description.html#presentation",
+    "href": "present-description.html#presentation",
+    "title": "Midterm Presentation I - Regression",
+    "section": "Presentation",
+    "text": "Presentation\n\nEvery student has to participate (in-person) in the final presentation in order to pass the course.\nEach group presentation should be between 10 and 11 minute long, followed by 1 to 2 minute Q&A. If your presentation is too short or too long, every one of you loses 3 points of your project grade.\nEvery group member has to present some part of the group work. The one who does not present receives no point.\n\n\n\nQuestions are encouraged during Q&A. Everyone is welcome to ask any questions about the projects. It helps everyone evaluate every group’s project and presentation performance. See Section 4 for grading policy.\nEach group is required to ask as least one question.\n\nThe \\(k\\)-th group should ask at least one question to the \\((k-1)\\)-th group in Q&A, \\(k = 2, \\dots, 7\\).\nThe 1st group will ask the last (7th) group questions about their project.\n\nIf you, as a group, don’t ask a question when you should, every one of you loses 3 points of your project grade.",
+    "crumbs": [
+      "Midterm Project Presentation",
+      "Guideline and Policy"
+    ]
+  },
+  {
+    "objectID": "present-description.html#materials",
+    "href": "present-description.html#materials",
+    "title": "Midterm Presentation I - Regression",
+    "section": "Materials",
+    "text": "Materials\n\nEach one of you loses 3 points of your project grade if you don’t meet the requirement or miss the deadline.\nYou need to share your entire work, including slides, code, and data if applicable.\nYour code should be able to reproduce all the numerical results, outputs, tables, and figures shown in the slides, including the source of the raw data (where you find and load the data) if the project is about data analysis.",
+    "crumbs": [
+      "Midterm Project Presentation",
+      "Guideline and Policy"
+    ]
+  },
+  {
+    "objectID": "present-description.html#data-analysis",
+    "href": "present-description.html#data-analysis",
+    "title": "Midterm Presentation I - Regression",
+    "section": "Data Analysis",
+    "text": "Data Analysis\nFor your data analysis project,\n\nYou need to show that you are good at asking meaningful questions and answering them with results of data analysis.\nYour presentation should include data visualization. Your graphics should be informative that help you\n\nexplore relationships between variables in your data\ndecide which statistical model is used, so that your research questions can be properly answered.\n\n\n\n\nYou should discuss how and why statistical methods/machine learning algorithms are chosen for analyzing your data set.\n\nThe methods we learn in class may not be appropriate for your data and answering your research questions. If this happens, critique your own methods and provide suggestions for improving your analysis. Any issues of your data, and appropriateness of the statistical analysis should be discussed.\n\n\n\n\nYou can choose a data set that is publicly available or you may collect your own data using a survey or by conducting an experiment. The dataset you choose cannot be any datasets used in class, including homework assignments and lab exercises.\nBelow are a list of data repositories you can start with, but you are encouraged to explore more and find your favorite one, for example COVID-19 data if you are interested.\n\nTidyTuesday\nKaggle\nAwesome Public Datasets\nHarvard Dataverse\nUCI Machine Learning Repository\nFiveThirtyEight",
+    "crumbs": [
+      "Midterm Project Presentation",
+      "Guideline and Policy"
+    ]
+  },
+  {
+    "objectID": "present-description.html#rpython-packages",
+    "href": "present-description.html#rpython-packages",
+    "title": "Midterm Presentation I - Regression",
+    "section": "R/Python Packages",
+    "text": "R/Python Packages\nFor your R/Python package project,\n\nyou need to\n\nshow how and why the package greatly helps us do data science.\nexplain how to use the functions in the packages by providing data science examples with some real data set. Please don’t use the toy examples in the package documentation.\n\nIf the functions of the package return any results or outputs, please explain them, teaching your audience how to appropriately read the outputs.\nIf the functions return graphics, explain why the visualizations are informative and useful for understanding data and analysis results.\nYou can choose a package that helps us do what we cannot do with the packages and tools learned in class.\n\nFor example, we only learn and packages to help us import data files into R, and we don’t know how to extract data from a website. The  package helps us scrape data from web pages.\n\nIf you choose a package that provides the same functionality as the packages we learned, please show the packages you choose are better.\n\nFor example, its code is shorter, it is run faster, its output is more clear, its plot is prettier, etc. For example, (https://rdatatable.gitlab.io/data.table/) package provides a high-performance version of base R’s with syntax and feature enhancements for ease of use, convenience and programming speed.\n\nBelow are a list of popular R packages that you can start with.\n\nQuick list of useful R packages\nFavorite R Packages by Roel Verbelen\nGreat R packages for data import, wrangling, and visualization\nggplot2 extensions\n\n\nBelow are a list of popular Python packages that you can start with.\n\n20 Must-Have Python Libraries for Data Science for 2024\nTop 38 Python Libraries for Data Science, Data Visualization & Machine Learning",
+    "crumbs": [
+      "Midterm Project Presentation",
+      "Guideline and Policy"
+    ]
+  },
+  {
+    "objectID": "present-description.html#group-performance-evaluation",
+    "href": "present-description.html#group-performance-evaluation",
+    "title": "Midterm Presentation I - Regression",
+    "section": "Group Performance Evaluation",
+    "text": "Group Performance Evaluation\n\nYou will need to evaluate all group projects except the one you work on.\nYou evaluate group performance based on the rubric attached. Four evaluation criteria are considered:\n\nProject Content and Organization (8 pts)\nPresentation Material (Slides) Quality (4 pts)\nOral Presentation Skill and Delivery (4 pts)\nInteractions and Q&A (4 pts)\n\nThe total points of a project presentation is 20 points.\nEvaluation sheets will be provided on the presentation day.\nHow do you get the full points for each category? Check the requirements below. Note that for Content and Organization, data analysis and package projects have different requirements.\nContent and Organization (DA)\n\nBeautiful visualization helps find out relationship of variables and specification of models\nAll questions are answered accurately by the models\nDiscuss how and why the models are chosen\nApply sophisticated models and detailed analysis\nAll ideas are presented in logical order\n\nContent and Organization (MA)\n\nExplain the method clearly and accuratly\nShow the pros and cons of the method, and compare with the methods learned in class.\nShow how the method can be implemednted for supervised learning.\nAll ideas are presented in logical order\n\nPresentation Material Quality\n\nPresentation material show code and output beautifully\nPresentation material clearly aid the speaker in telling a coherent story\nAll tables and graphics are informative and related to the topic and make it easier to understand\nAttractive design, layout, and neatness.\n\nOral Presentation Skill\n\nGood volume and energy\nProper pace and diction\nAvoidance of distracting gestures\n\nInteractions and Q&A\n\nGood eye contact with audience\nExcellent listening skills\nAnswers audience questions with authority and accuracy\n\nAfter you evaluate all group project presentations, you rank them from 1st to last based on their earned points.\nNo two groups receive the same ranking. If you give two or more groups some points, you still need to give them a different ranking, deciding which teams deserve a higher ranking according to your preference.",
+    "crumbs": [
+      "Midterm Project I",
+      "Guideline and Policy"
+    ]
+  },
+  {
+    "objectID": "present-description.html#individual-performance-evaluation",
+    "href": "present-description.html#individual-performance-evaluation",
+    "title": "Midterm Presentation I - Regression",
+    "section": "Individual Performance Evaluation",
+    "text": "Individual Performance Evaluation\n\n\nYou choose one single person who you think contributes the most to your group project.\nYou cannot vote for yourself, and you can only vote for one of your teammates.\nIf you don’t vote, you can’t be the best contributor even if you obtain the most votes. The person with the second highest votes wins the best contribution reward.\nIf there is no one single person who gets the most votes, every team member remains the same grade. For example, if your group finish in third place (Bronze), and there is no best contributor, all members receive 91 (See Table 1).",
+    "crumbs": [
+      "Midterm Project Presentation",
+      "Guideline and Policy"
+    ]
+  },
+  {
+    "objectID": "present-description.html#timeline-and-things-to-do",
+    "href": "present-description.html#timeline-and-things-to-do",
+    "title": "Midterm Presentation I - Regression",
+    "section": "",
+    "text": "Team up! You will be working as a group of 2, 3 or 4. One of you, please email me your team member list by Friday, 2/21 11:59 PM\nProposal. Please send me a one-page PDF describing what you are going to do for your project (no word limit) with your project title by Friday, 2/28 11:59 PM.\nPresentation. You will be presenting your project on Thursday, 3/6 in class.\nMaterials. Please share your entire work (slides, code, data, etc) by Friday, 3/7 11:59 PM.",
+    "crumbs": [
+      "Midterm Project I",
+      "Guideline and Policy"
+    ]
+  },
+  {
+    "objectID": "present-description.html#policy",
+    "href": "present-description.html#policy",
+    "title": "Midterm Presentation I - Regression",
+    "section": "Policy",
+    "text": "Policy\n\nTeam up!\n\nEach one of you loses 5 points of your project grade if you don’t meet the requirement or miss the deadline.\nYou will be randomly assigned to a group if you do not belong to any group before the deadline.\n\n\n\nProposal\n\nEach one of you loses 5 points of your project grade if you don’t meet the requirement or miss the deadline.\nYour proposal (in PDF) should include three parts:\n\nProject title\nThe goal of your project. For example, what is the research question you’d like to answer? What machine learning method/model/algorithm you’d like to introduce? What data you’d like to use for analysis or demonstration? etc.\n\nAlthough it is risky, you can change your project topic after you submit your proposal if you decide to do something else.\n\n\n\nPresentation\n\nEach group presentation should be between 10 and 11 minute long, followed by 1 to 2 minute Q&A. If your presentation is too short or too long, every one of you loses 5 points of your project grade.\nEvery group member has to present some part of the group work. The one who does not present receives no point.\nQuestions are encouraged during Q&A. Everyone is welcome to ask any questions about the projects.\n\n\n\nMaterials\n\nEach one of you loses 5 points of your project grade if you don’t meet the requirement or miss the deadline.\nYou need to share your entire work, including slides, code, and data if applicable.\nYour code should be able to reproduce all the numerical results, outputs, tables, and figures shown in the slides, including the source of the raw data (where you find and load the data) if the project is about data analysis.",
+    "crumbs": [
+      "Midterm Project I",
+      "Guideline and Policy"
+    ]
+  },
+  {
+    "objectID": "present-description.html#project-content",
+    "href": "present-description.html#project-content",
+    "title": "Midterm Presentation I - Regression",
+    "section": "Project Content",
+    "text": "Project Content\nYour project can be in either of the following categories:\n\n(DA) Data analytics using one or more REGRESSION methods.\n(MA) Introduce a new REGRESSION model/method/algorithm not lectured in class.\n\n\nData Analytics\nFor your DA project, you need to\n\nDescribe the selected data set. Perform a thorough exploratory data analysis.\nExplain and show why the chosen model(s) is appropriate for answering your research questions and better than others.\nInterpret your analysis result.\n\nBelow are a list of data repositories you can start with, but you are encouraged to explore more and find your favorite one, for example COVID-19 data if you are interested.\n\nTidyTuesday\nKaggle\nAwesome Public Datasets\nHarvard Dataverse\nUCI Machine Learning Repository\nFiveThirtyEight\n\n\n\nModel/Algorithm\nFor your MA project, you need to\n\nDescribe the intuition and idea of the method. What are the pros and cons of the method?\nProvide the mathematical expression of the model/algorithm. Explain the model and its properties, and how we do supervised learning with the model/algorithm.\nCompare the chosen method with other methods learned in class. Determine which method performs better under what conditions.\nDemo how to implement the method using a programming language for supervised learning.",
+    "crumbs": [
+      "Midterm Project I",
+      "Guideline and Policy"
+    ]
+  },
+  {
+    "objectID": "present-description.html#sec-grading",
+    "href": "present-description.html#sec-grading",
+    "title": "Midterm Presentation I - Regression",
+    "section": "Project Evaluation and Grading",
+    "text": "Project Evaluation and Grading\n\nYour project performance grade is determined by your classmates and Dr. Yu.\nTable 1 shows your possible performance grade. For example, if your group finish in second place (Silver) you get 145 points.\nYour project grade will be\n\n\nproject grade = performance grade - points lost due to violation of policy\n\n\n\n\nPerformance Grade Sheet\n\n\n\nPerformace Grade 🎖\n\n\n\n\nGold 🥇 1st\n150\n\n\nSilver 🥈 2nd\n145\n\n\nBronze 🥉 3rd\n140\n\n\nOther teams\n135",
+    "crumbs": [
+      "Midterm Project I",
+      "Guideline and Policy"
+    ]
   }
 ]

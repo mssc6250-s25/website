@@ -67,11 +67,17 @@ website:
       #     - href: computing-troubleshooting.qmd
       #       text: Troubleshooting
 
-      - section: "Midterm Project Presentation"
+      - section: "Midterm Project I"
         contents:
           - href: present-description.qmd
             text: Guideline and Policy
           - href: present-work.qmd
+            text: Topics and Works
+      - section: "Midterm Project II"
+        contents:
+          - href: present-description2.qmd
+            text: Guideline and Policy
+          - href: present-work2.qmd
             text: Topics and Works
       - section: "Final Project"
         contents:

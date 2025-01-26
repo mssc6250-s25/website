@@ -55,7 +55,7 @@ editor: source
 
 (@) __Simulation of simple linear regression.__ Consider the model $y_i = \beta_0 + \beta_1x_i + \epsilon_i, ~~ \epsilon_i \stackrel{iid} \sim N(0, \sigma^2), ~~ i = 1, \dots, n,$ or equivalently, $p(y_i \mid x, \beta_0, \beta_1) = N\left(\beta_0 + \beta_1x_i, \sigma^2 \right).$ Set $\beta_0 = 2, \beta_1 = -1.5, \sigma = 1, n = 100, x_i = i.$ Generate 1000 simulated data sets and fit the model to each data set. 
 <!-- and obtain 100 corresponding regression coefficient estimates $b_0$ and $b_1$. -->
-The sampling distribution of $b_1$ is $$b_1 \sim N\left(\beta_1, \frac{\sigma^2}{\sum_{i=1}^n (x_i - \bar{x})^2}\right).$$
+The sampling distribution of the least-squares estimator $b_1$ is $$b_1 \sim N\left(\beta_1, \frac{\sigma^2}{\sum_{i=1}^n (x_i - \bar{x})^2}\right).$$
 
     (a) Find the average of the 1000 estimates $b_1$. Is it close to its true expected value?
     
@@ -100,7 +100,7 @@ knitr::include_graphics("../slides/images/03-bias-var/mse-var.png")
 <!-- (@) __Gradient descent.__ Write your own gradient descent algorithm for linear regression. Implement it and compare with the built-in function such as `optim()` to make sure that it converges correctly. -->
 
 
-(@) **(MSSC PhD)** __Stochastic gradient descent.__ Write your own stochastic gradient descent algorithm for linear regression. Implement it and compare with the built-in function such as `optim()` to make sure that it converges correctly.
+(@) **(MSSC PhD)** __Stochastic gradient descent.__ Write your own stochastic gradient descent algorithm for linear regression. Implement it and compare with the built-in function such as `optim()` of `R` or `scipy.optimize()` of `python` to make sure that it converges correctly.
 
 <!-- ## Optional Exercises -->
 

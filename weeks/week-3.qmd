@@ -5,7 +5,7 @@ editor: visual
 ---
 
 ::: callout-important
-**Homework 1 due Friday, Feb 7, 11:59 PM**
+**Homework 1 due Friday, Feb 14, 11:59 PM**
 :::
 
 ## Participate
@@ -13,7 +13,6 @@ editor: visual
 🖥️ [Slides - Ridge Regression and Cross Validation](/slides/05-ridge-cv.html)
 
 `r fontawesome::fa("table")` [Data Set - mtcars.csv](/slides/data/mtcars.csv)
-
 
 ## Reading and Resources
 
