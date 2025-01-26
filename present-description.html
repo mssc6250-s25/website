@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Dr.&nbsp;Cheng-Han Yu">
 
-<title>MSSC 6250 - Spring 2025 - Week 4</title>
+<title>MSSC 6250 - Spring 2025 - Midterm Presentation I - Regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,25 +24,25 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../weeks/week-5.qmd" rel="next">
-<link href="../weeks/week-3.html" rel="prev">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./present-work.qmd" rel="next">
+<link href="./course-syllabus.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -71,8 +72,8 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<meta property="og:title" content="MSSC 6250 - Spring 2025 - Week 4">
-<meta property="og:description" content="LASSO and Elastic Net">
+<meta property="og:title" content="MSSC 6250 - Spring 2025 - Midterm Presentation I - Regression">
+<meta property="og:description" content="MSSC 6250 Machine Learning, Spring 2025">
 <meta property="og:site_name" content="MSSC 6250 - Spring 2025">
 </head>
 
@@ -85,7 +86,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week-1.html">Weekly Materials</a></li><li class="breadcrumb-item"><a href="../weeks/week-4.html">Week 4</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./present-description.html">Midterm Project I</a></li><li class="breadcrumb-item"><a href="./present-description.html">Guideline and Policy</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -99,8 +100,8 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-center sidebar-header">
-      <a href="../index.html" class="sidebar-logo-link">
-      <img src="../images/logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./images/logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
       <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/mssc6250-s25/website" title="GitHub organization" class="quarto-navigation-tool px-1" aria-label="GitHub organization"><i class="bi bi-github"></i></a>
@@ -126,25 +127,25 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../course-news.html" class="sidebar-item-text sidebar-link">
+  <a href="./course-news.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">News/Annoucements</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../course-overview.html" class="sidebar-item-text sidebar-link">
+  <a href="./course-overview.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Schedule</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../course-syllabus.html" class="sidebar-item-text sidebar-link">
+  <a href="./course-syllabus.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
@@ -161,13 +162,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../present-description.html" class="sidebar-item-text sidebar-link">
+  <a href="./present-description.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Guideline and Policy</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../present-work.qmd" class="sidebar-item-text sidebar-link">
+  <a href="./present-work.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Topics and Works</span></a>
   </div>
 </li>
@@ -184,13 +185,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../present-description2.qmd" class="sidebar-item-text sidebar-link">
+  <a href="./present-description2.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Guideline and Policy</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../present-work2.qmd" class="sidebar-item-text sidebar-link">
+  <a href="./present-work2.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Topics and Works</span></a>
   </div>
 </li>
@@ -207,13 +208,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../project-description.qmd" class="sidebar-item-text sidebar-link">
+  <a href="./project-description.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Guideline and Policy</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../project-work.qmd" class="sidebar-item-text sidebar-link">
+  <a href="./project-work.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Topics and Works</span></a>
   </div>
 </li>
@@ -230,97 +231,97 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week-1.html" class="sidebar-item-text sidebar-link">
+  <a href="./weeks/week-1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 1</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week-2.html" class="sidebar-item-text sidebar-link">
+  <a href="./weeks/week-2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week-3.html" class="sidebar-item-text sidebar-link">
+  <a href="./weeks/week-3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 3</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week-4.html" class="sidebar-item-text sidebar-link active">
+  <a href="./weeks/week-4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week-5.qmd" class="sidebar-item-text sidebar-link">
+  <a href="./weeks/week-5.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 5</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week-6.qmd" class="sidebar-item-text sidebar-link">
+  <a href="./weeks/week-6.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 6</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week-7.qmd" class="sidebar-item-text sidebar-link">
+  <a href="./weeks/week-7.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 7</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week-8.qmd" class="sidebar-item-text sidebar-link">
+  <a href="./weeks/week-8.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 8</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week-9.qmd" class="sidebar-item-text sidebar-link">
+  <a href="./weeks/week-9.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 9</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week-10.qmd" class="sidebar-item-text sidebar-link">
+  <a href="./weeks/week-10.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 10</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week-11.qmd" class="sidebar-item-text sidebar-link">
+  <a href="./weeks/week-11.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 11</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week-12.qmd" class="sidebar-item-text sidebar-link">
+  <a href="./weeks/week-12.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 12</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week-13.qmd" class="sidebar-item-text sidebar-link">
+  <a href="./weeks/week-13.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 13</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week-14.qmd" class="sidebar-item-text sidebar-link">
+  <a href="./weeks/week-14.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 14</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week-15.qmd" class="sidebar-item-text sidebar-link">
+  <a href="./weeks/week-15.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 15</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week-16.qmd" class="sidebar-item-text sidebar-link">
+  <a href="./weeks/week-16.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 16</span></a>
   </div>
 </li>
@@ -336,27 +337,51 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#participate" id="toc-participate" class="nav-link active" data-scroll-target="#participate">Participate</a></li>
-  <li><a href="#reading-and-resources" id="toc-reading-and-resources" class="nav-link" data-scroll-target="#reading-and-resources">Reading and Resources</a></li>
-  <li><a href="#perform" id="toc-perform" class="nav-link" data-scroll-target="#perform">Perform</a></li>
+  <li><a href="#timeline-and-things-to-do" id="toc-timeline-and-things-to-do" class="nav-link active" data-scroll-target="#timeline-and-things-to-do">Timeline and Things to Do</a></li>
+  <li><a href="#policy" id="toc-policy" class="nav-link" data-scroll-target="#policy">Policy</a>
+  <ul class="collapse">
+  <li><a href="#team-up" id="toc-team-up" class="nav-link" data-scroll-target="#team-up"><strong>Team up!</strong></a></li>
+  <li><a href="#proposal" id="toc-proposal" class="nav-link" data-scroll-target="#proposal"><strong>Proposal</strong></a></li>
+  <li><a href="#presentation" id="toc-presentation" class="nav-link" data-scroll-target="#presentation"><strong>Presentation</strong></a></li>
+  <li><a href="#materials" id="toc-materials" class="nav-link" data-scroll-target="#materials"><strong>Materials</strong></a></li>
+  </ul></li>
+  <li><a href="#project-content" id="toc-project-content" class="nav-link" data-scroll-target="#project-content">Project Content</a>
+  <ul class="collapse">
+  <li><a href="#data-analytics" id="toc-data-analytics" class="nav-link" data-scroll-target="#data-analytics">Data Analytics</a></li>
+  <li><a href="#modelalgorithm" id="toc-modelalgorithm" class="nav-link" data-scroll-target="#modelalgorithm">Model/Algorithm</a></li>
+  </ul></li>
+  <li><a href="#sec-grading" id="toc-sec-grading" class="nav-link" data-scroll-target="#sec-grading">Project Evaluation and Grading</a></li>
+  <li><a href="#group-performance-evaluation" id="toc-group-performance-evaluation" class="nav-link" data-scroll-target="#group-performance-evaluation">Group Performance Evaluation</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/mssc6250-s25/website/edit/main/weeks/week-4.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/mssc6250-s25/website/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/mssc6250-s25/website/edit/main/present-description.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/mssc6250-s25/website/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week-1.html">Weekly Materials</a></li><li class="breadcrumb-item"><a href="../weeks/week-4.html">Week 4</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./present-description.html">Midterm Project I</a></li><li class="breadcrumb-item"><a href="./present-description.html">Guideline and Policy</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Week 4</h1>
-<p class="subtitle lead">LASSO and Elastic Net</p>
+<h1 class="title">Midterm Presentation I - Regression</h1>
+<p class="subtitle lead">MSSC 6250 Machine Learning, Spring 2025</p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dr.&nbsp;Cheng-Han Yu </p>
+          </div>
+  </div>
     
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">January 26, 2025</p>
+    </div>
+  </div>
     
   </div>
   
@@ -365,37 +390,182 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>Homework 1 due Friday, Feb 9, 11:59 PM</strong></p>
-</div>
-</div>
-<section id="participate" class="level2">
-<h2 class="anchored" data-anchor-id="participate">Participate</h2>
-<p>🖥️ <a href="../slides/06-lasso-cv.html">Slides - Lasso</a></p>
-<!-- `r fontawesome::fa("table")` [Data set - Prostate](https://hastie.su.domains/ElemStatLearn/) -->
-<p><code>r fontawesome::fa("table")</code> <a href="../slides/data/prostate.csv">Data Set - Prostate.csv</a></p>
+<section id="timeline-and-things-to-do" class="level2">
+<h2 class="anchored" data-anchor-id="timeline-and-things-to-do">Timeline and Things to Do</h2>
+<ul>
+<li><p><strong>Team up!</strong> You will be working as <strong>a group of 2, 3 or 4</strong>. One of you, please email me your team <span class="blue"><strong>member list</strong></span> by <span class="red"><strong>Friday, 2/21 11:59 PM</strong></span></p></li>
+<li><p><strong>Proposal</strong>. Please send me a <span class="blue"><strong>one-page PDF</strong></span> describing what you are going to do for your project (no word limit) with your <strong>project title</strong> by <span class="red"><strong>Friday, 2/28 11:59 PM</strong></span>.</p></li>
+<li><p><strong>Presentation</strong>. You will be presenting your project on <span class="red"><strong>Thursday, 3/6 in class</strong></span>.</p></li>
+<li><p><strong>Materials</strong>. Please share your <span class="blue"><strong>entire work</strong></span> (slides, code, data, etc) by <span class="red"><strong>Friday, 3/7 11:59 PM</strong></span>.</p></li>
+</ul>
 </section>
-<section id="reading-and-resources" class="level2">
-<h2 class="anchored" data-anchor-id="reading-and-resources">Reading and Resources</h2>
-<p>📖 <a href="https://www.statlearning.com/">ISL Ch 6.1, 6.2</a></p>
+<section id="policy" class="level2">
+<h2 class="anchored" data-anchor-id="policy">Policy</h2>
+<section id="team-up" class="level3">
+<h3 class="anchored" data-anchor-id="team-up"><strong>Team up!</strong></h3>
+<ul>
+<li><p><em>Each one of you loses 5 points of your project grade if you don’t meet the requirement or miss the deadline.</em></p></li>
+<li><p>You will be <em>randomly</em> assigned to a group if you do not belong to any group before the deadline.</p></li>
+</ul>
 </section>
-<section id="perform" class="level2">
-<h2 class="anchored" data-anchor-id="perform">Perform</h2>
-<!-- 📋 [Lab-08 Tibbles and Pipes](/exercise/lab08-tibble.html) -->
-<!-- 📋 [Lab-09 NumPy and pandas](/exercise/lab09-numpy.html) -->
-<p><br><br></p>
-<div style="font-size: 0.875em;">
-<p>Back to <a href=".." title="Course schedule">course schedule</a> ⏎</p>
+<section id="proposal" class="level3">
+<h3 class="anchored" data-anchor-id="proposal"><strong>Proposal</strong></h3>
+<ul>
+<li><p><em>Each one of you loses 5 points of your project grade if you don’t meet the requirement or miss the deadline.</em></p></li>
+<li><p>Your proposal (in PDF) should include three parts:</p>
+<ul>
+<li><strong>Project title</strong></li>
+<li><strong>The goal of your project</strong>. For example, what is the research question you’d like to answer? What machine learning method/model/algorithm you’d like to introduce? What data you’d like to use for analysis or demonstration? etc.</li>
+</ul></li>
+<li><p>Although it is risky, you can change your project topic after you submit your proposal if you decide to do something else.</p></li>
+</ul>
+</section>
+<section id="presentation" class="level3">
+<h3 class="anchored" data-anchor-id="presentation"><strong>Presentation</strong></h3>
+<ul>
+<li><p>Each group presentation should be between <strong>10 and 11 minute</strong> long, followed by <strong>1 to 2 minute</strong> Q&amp;A. If your presentation is too short or too long, <em>every one of you loses 5 points</em> of your project grade.</p></li>
+<li><p>Every group member has to present some part of the group work. <strong>The one who does not present receives no point</strong>.</p></li>
+<li><p>Questions are encouraged during Q&amp;A. Everyone is welcome to ask any questions about the projects.</p></li>
+</ul>
+</section>
+<section id="materials" class="level3">
+<h3 class="anchored" data-anchor-id="materials"><strong>Materials</strong></h3>
+<ul>
+<li><p><em>Each one of you loses 5 points of your project grade if you don’t meet the requirement or miss the deadline.</em></p></li>
+<li><p>You need to share your entire work, including slides, code, and data if applicable.</p></li>
+<li><p>Your code should be able to <strong>reproduce all the numerical results, outputs, tables, and figures shown in the slides</strong>, including the source of the raw data (where you find and load the data) if the project is about data analysis.</p></li>
+</ul>
+</section>
+</section>
+<section id="project-content" class="level2">
+<h2 class="anchored" data-anchor-id="project-content">Project Content</h2>
+<p>Your project can be in either of the following categories:</p>
+<ol type="1">
+<li><p><strong>(DA)</strong> Data analytics using one or more <strong>REGRESSION</strong> methods.</p></li>
+<li><p><strong>(MA)</strong> Introduce a new <strong>REGRESSION</strong> model/method/algorithm not lectured in class.</p></li>
+</ol>
+<section id="data-analytics" class="level3">
+<h3 class="anchored" data-anchor-id="data-analytics">Data Analytics</h3>
+<p>For your DA project, you need to</p>
+<ul>
+<li><p>Describe the selected data set. Perform a thorough exploratory data analysis.</p></li>
+<li><p>Explain and show why the chosen model(s) is appropriate for answering your research questions and better than others.</p></li>
+<li><p>Interpret your analysis result.</p></li>
+</ul>
+<p>Below are a list of data repositories you can start with, but you are encouraged to explore more and find your favorite one, for example COVID-19 data if you are interested.</p>
+<ul>
+<li><a href="https://github.com/rfordatascience/tidytuesday">TidyTuesday</a></li>
+<li><a href="https://www.kaggle.com/datasets">Kaggle</a></li>
+<li><a href="https://github.com/awesomedata/awesome-public-datasets">Awesome Public Datasets</a></li>
+<li><a href="https://dataverse.harvard.edu/">Harvard Dataverse</a></li>
+<li><a href="https://archive.ics.uci.edu/ml/index.php">UCI Machine Learning Repository</a></li>
+<li><a href="https://data.fivethirtyeight.com/">FiveThirtyEight</a></li>
+</ul>
+</section>
+<section id="modelalgorithm" class="level3">
+<h3 class="anchored" data-anchor-id="modelalgorithm">Model/Algorithm</h3>
+<p>For your MA project, you need to</p>
+<ul>
+<li><p>Describe the intuition and idea of the method. What are the pros and cons of the method?</p></li>
+<li><p>Provide the mathematical expression of the model/algorithm. Explain the model and its properties, and how we do supervised learning with the model/algorithm.</p></li>
+<li><p>Compare the chosen method with other methods learned in class. Determine which method performs better under what conditions.</p></li>
+<li><p>Demo how to implement the method using a programming language for supervised learning.</p></li>
+</ul>
+</section>
+</section>
+<section id="sec-grading" class="level2">
+<h2 class="anchored" data-anchor-id="sec-grading">Project Evaluation and Grading</h2>
+<ul>
+<li><p>Your project performance grade is <em>determined by <strong>your classmates and Dr.&nbsp;Yu</strong></em>.</p></li>
+<li><p>Table 1 shows your possible performance grade. For example, if your group finish in second place (Silver) you get 145 points.</p></li>
+<li><p>Your project grade will be</p></li>
+</ul>
+<blockquote class="blockquote">
+<p>project grade = performance grade - points lost due to violation of policy</p>
+</blockquote>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Performance Grade Sheet</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;">Performace Grade 🎖</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Gold 🥇 1st</td>
+<td style="text-align: center;">150</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Silver 🥈 2nd</td>
+<td style="text-align: center;">145</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bronze 🥉 3rd</td>
+<td style="text-align: center;">140</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Other teams</td>
+<td style="text-align: center;">135</td>
+</tr>
+</tbody>
+</table>
 </div>
+</div>
+</section>
+<section id="group-performance-evaluation" class="level2">
+<h2 class="anchored" data-anchor-id="group-performance-evaluation">Group Performance Evaluation</h2>
+<ul>
+<li><p>You will need to <strong>evaluate all group projects except the one you work on</strong>.</p></li>
+<li><p>You evaluate group performance based on the rubric attached. Four evaluation criteria are considered:</p>
+<ul>
+<li><strong>Project Content and Organization (8 pts)</strong></li>
+<li><strong>Presentation Material (Slides) Quality (4 pts)</strong></li>
+<li><strong>Oral Presentation Skill and Delivery (4 pts)</strong></li>
+<li><strong>Interactions and Q&amp;A (4 pts)</strong></li>
+</ul></li>
+<li><p>The total points of a project presentation is <strong>20</strong> points.</p></li>
+<li><p>Evaluation sheets will be provided on the presentation day.</p></li>
+<li><p>How do you get the full points for each category? Check the requirements below. Note that for Content and Organization, data analysis and package projects have different requirements.</p></li>
+<li><p><strong>Content and Organization (DA)</strong></p>
+<ul>
+<li>Beautiful visualization helps find out relationship of variables and specification of models</li>
+<li>All questions are answered accurately by the models</li>
+<li>Discuss how and why the models are chosen</li>
+<li>Apply sophisticated models and detailed analysis</li>
+<li>All ideas are presented in logical order</li>
+</ul></li>
+<li><p><strong>Content and Organization (MA)</strong></p>
+<ul>
+<li>Explain the method clearly and accuratly</li>
+<li>Show the pros and cons of the method, and compare with the methods learned in class.</li>
+<li>Show how the method can be implemednted for supervised learning.</li>
+<li>All ideas are presented in logical order</li>
+</ul></li>
+<li><p><strong>Presentation Material Quality</strong></p>
+<ul>
+<li>Presentation material show code and output beautifully</li>
+<li>Presentation material clearly aid the speaker in telling a coherent story</li>
+<li>All tables and graphics are informative and related to the topic and make it easier to understand</li>
+<li>Attractive design, layout, and neatness.</li>
+</ul></li>
+<li><p><strong>Oral Presentation Skill</strong></p>
+<ul>
+<li>Good volume and energy</li>
+<li>Proper pace and diction</li>
+<li>Avoidance of distracting gestures</li>
+</ul></li>
+<li><p><strong>Interactions and Q&amp;A</strong></p>
+<ul>
+<li>Good eye contact with audience</li>
+<li>Excellent listening skills</li>
+<li>Answers audience questions with authority and accuracy</li>
+</ul></li>
+<li><p>After you evaluate all group project presentations, you rank them from 1st to last based on their earned points.</p></li>
+<li><p><strong>No two groups receive the same ranking</strong>. If you give two or more groups some points, you still need to give them a different ranking, deciding which teams deserve a higher ranking according to your preference.</p></li>
+</ul>
 
 
 </section>
@@ -956,13 +1126,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../weeks/week-3.html" class="pagination-link" aria-label="Week 3">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Week 3</span>
+      <a href="./course-syllabus.html" class="pagination-link" aria-label="Syllabus">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Syllabus</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../weeks/week-5.qmd" class="pagination-link" aria-label="Week 5">
-        <span class="nav-page-text">Week 5</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./present-work.qmd" class="pagination-link" aria-label="Topics and Works">
+        <span class="nav-page-text">Topics and Works</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -974,7 +1144,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/mssc6250-s25/website/edit/main/weeks/week-4.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/mssc6250-s25/website/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/mssc6250-s25/website/edit/main/present-description.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/mssc6250-s25/website/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This page is built with ❤️ and <a href="https://quarto.org/">Quarto</a>.</p>
 </div>
