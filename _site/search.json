@@ -767,7 +767,7 @@
     "href": "index.html",
     "title": "MSSC 6250 - Statistical Machine Learning (Spring 2025)",
     "section": "",
-    "text": "Announcement:\n\nNo office hours first week.\n\n\nThis schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nTo Do\nSlides\nCode\nHomework\nProject\n\n\n\n\n1\nTue, Jan 14\nSyllabus/Overview of Statistical Learning\n📖\n🖥️🖥️\n\n\n\n\n\n\nThu, Jan 16\nBias-variance tradeoff\n\n🖥️\n\n\n\n\n\n2\nTue, Jan 21\nNO CLASS: Cold Weather\n📖\n🖥️\n\n\n\n\n\n\nThu, Jan 23\nLinear Regression and Numerical Optimization\n\n\n\n\n\n\n\n3\nTue, Jan 28\nStochastic Gradient Descent; Ridge Regression\n📖\n🖥️\n\n✍️\n\n\n\n\nThu, Jan 30\nCross-Validation\n\n\n\n\n\n\n\n4\nTue, Feb 4\nLASSO and Elastic Net\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 6\nPolynomial Regression and Regression Splines\n\n\n\n\n\n\n\n5\nTue, Feb 11\nSmoothing Splines and Generalized Additive Models\n📖\n🖥️\n\n✍️\n\n\n\n\nThu, Feb 13\nBayesian Inference\n\n\n\nHW 1 Due\n\n\n\n6\nTue, Feb 18\nBayesian Linear Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 20\nBinary Logistic Regression\n\n\n\n\n\n\n\n7\nTue, Feb 25\nMultinomial Logistic Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 27\nDiscriminant Analysis\n\n\n\n\n\n\n\n8\nTue, Mar 4\nNaive Bayes\n📖\n\n\n\n\n\n\n\nThu, Mar 6\nMidterm Presentation I\n\n\n\n✍️\n✅\n\n\n9\nTue, Mar 11\nNO CLASS: Spring break\n\n\n\n\n\n\n\n\nThu, Mar 13\nNO CLASS: Spring break\n\n\n\n\n\n\n\n10\nTue, Mar 18\nK-Nearest Neighbors Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 20\nK-Nearest Neighbors Classification\n\n\n\n\n\n\n\n11\nTue, Mar 25\nGaussian Process Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 27\nGaussian Process Classification\n\n\n\n\n\n\n\n12\nTue, Apr 1\nSupport Vector Machine\n📖\n\n\n\n\n\n\n\nThu, Apr 3\nSupport Vector Machine\n\n\n\n\n\n\n\n13\nTue, Apr 8\nCART and Bagging\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 10\nRandom Forests and Boosting\n\n\n\n✍️\n\n\n\n14\nTue, Apr 15\nMidterm Presentation II\n📖\n🖥️\n\n\n✅\n\n\n\nThu, Apr 17\nNO CLASS: Easter break\n\n\n\n\n\n\n\n15\nTue, Apr 22\nPrincipal Component Analysis\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 24\nK-Means Clustering\n\n\n\n\n\n\n\n16\nTue, Apr 29\nModel-based Clustering\n📖\n🖥️\n\n\n\n\n\n\nThu, May 1\nNeural Networks\n\n\n\n\n\n\n\n17\nThu, May 8\nFinal Project Submission\n\n\n\n\n✅\n\n\n\n\nI reserve the right to make changes to the schedule.",
+    "text": "Announcement:\n\nNo office hours first week.\n\n\nThis schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nTo Do\nSlides\nCode\nHomework\nProject\n\n\n\n\n1\nTue, Jan 14\nSyllabus/Overview of Statistical Learning\n📖\n🖥️🖥️\n\n\n\n\n\n\nThu, Jan 16\nBias-variance tradeoff\n\n🖥️\n\n\n\n\n\n2\nTue, Jan 21\nNO CLASS: Cold Weather\n📖\n🖥️\n\n\n\n\n\n\nThu, Jan 23\nLinear Regression and Numerical Optimization\n\n\n\n\n\n\n\n3\nTue, Jan 28\nStochastic Gradient Descent; Ridge Regression\n📖\n🖥️\n\n✍️\n\n\n\n\nThu, Jan 30\nCross-Validation\n\n\n\n\n\n\n\n4\nTue, Feb 4\nLASSO and Elastic Net\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 6\nPolynomial Regression and Regression Splines\n\n\n\n\n\n\n\n5\nTue, Feb 11\nSmoothing Splines and Generalized Additive Models\n📖\n🖥️\n\n✍️\n\n\n\n\nThu, Feb 13\nBayesian Inference\n\n\n\nHW 1 Due\n\n\n\n6\nTue, Feb 18\nBayesian Linear Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 20\nBinary Logistic Regression\n\n\n\n\nTeam up Due\n\n\n7\nTue, Feb 25\nMultinomial Logistic Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 27\nDiscriminant Analysis\n\n\n\n\nProposal Due\n\n\n8\nTue, Mar 4\nNaive Bayes\n📖\n\n\n\n\n\n\n\nThu, Mar 6\nMidterm Presentation I\n\n\n\n✍️\n✅ Materials Due\n\n\n9\nTue, Mar 11\nNO CLASS: Spring break\n\n\n\n\n\n\n\n\nThu, Mar 13\nNO CLASS: Spring break\n\n\n\n\n\n\n\n10\nTue, Mar 18\nK-Nearest Neighbors Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 20\nK-Nearest Neighbors Classification\n\n\n\n\n\n\n\n11\nTue, Mar 25\nGaussian Process Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 27\nGaussian Process Classification\n\n\n\n\n\n\n\n12\nTue, Apr 1\nSupport Vector Machine\n📖\n\n\n\n\n\n\n\nThu, Apr 3\nSupport Vector Machine\n\n\n\n\n\n\n\n13\nTue, Apr 8\nCART and Bagging\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 10\nRandom Forests and Boosting\n\n\n\n✍️\n\n\n\n14\nTue, Apr 15\nMidterm Presentation II\n📖\n🖥️\n\n\n✅\n\n\n\nThu, Apr 17\nNO CLASS: Easter break\n\n\n\n\n\n\n\n15\nTue, Apr 22\nPrincipal Component Analysis\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 24\nK-Means Clustering\n\n\n\n\n\n\n\n16\nTue, Apr 29\nModel-based Clustering\n📖\n🖥️\n\n\n\n\n\n\nThu, May 1\nNeural Networks\n\n\n\n\n\n\n\n17\nThu, May 8\nFinal Project Submission\n\n\n\n\n✅\n\n\n\n\nI reserve the right to make changes to the schedule.",
     "crumbs": [
       "Course Information",
       "Schedule"
@@ -905,6 +905,72 @@
     "crumbs": [
       "Weekly Materials",
       "Week 1"
+    ]
+  },
+  {
+    "objectID": "present-description.html",
+    "href": "present-description.html",
+    "title": "Midterm Presentation I - Regression",
+    "section": "",
+    "text": "Team up! You will be working as a group of 2, 3 or 4. One of you, please email me your team member list by Friday, 2/21 11:59 PM\nProposal. Please send me a one-page PDF describing what you are going to do for your project (no word limit) with your project title by Friday, 2/28 11:59 PM.\nPresentation. You will be presenting your project on Thursday, 3/6 in class.\nMaterials. Please share your entire work (slides, code, data, etc) by Friday, 3/7 11:59 PM.",
+    "crumbs": [
+      "Midterm Project I",
+      "Guideline and Policy"
+    ]
+  },
+  {
+    "objectID": "present-description.html#timeline-and-things-to-do",
+    "href": "present-description.html#timeline-and-things-to-do",
+    "title": "Midterm Presentation I - Regression",
+    "section": "",
+    "text": "Team up! You will be working as a group of 2, 3 or 4. One of you, please email me your team member list by Friday, 2/21 11:59 PM\nProposal. Please send me a one-page PDF describing what you are going to do for your project (no word limit) with your project title by Friday, 2/28 11:59 PM.\nPresentation. You will be presenting your project on Thursday, 3/6 in class.\nMaterials. Please share your entire work (slides, code, data, etc) by Friday, 3/7 11:59 PM.",
+    "crumbs": [
+      "Midterm Project I",
+      "Guideline and Policy"
+    ]
+  },
+  {
+    "objectID": "present-description.html#policy",
+    "href": "present-description.html#policy",
+    "title": "Midterm Presentation I - Regression",
+    "section": "Policy",
+    "text": "Policy\n\nTeam up!\n\nEach one of you loses 5 points of your project grade if you don’t meet the requirement or miss the deadline.\nYou will be randomly assigned to a group if you do not belong to any group before the deadline.\n\n\n\nProposal\n\nEach one of you loses 5 points of your project grade if you don’t meet the requirement or miss the deadline.\nYour proposal (in PDF) should include three parts:\n\nProject title\nThe goal of your project. For example, what is the research question you’d like to answer? What machine learning method/model/algorithm you’d like to introduce? What data you’d like to use for analysis or demonstration? etc.\n\nAlthough it is risky, you can change your project topic after you submit your proposal if you decide to do something else.\n\n\n\nPresentation\n\nEach group presentation should be between 10 and 11 minute long, followed by 1 to 2 minute Q&A. If your presentation is too short or too long, every one of you loses 5 points of your project grade.\nEvery group member has to present some part of the group work. The one who does not present receives no point.\nQuestions are encouraged during Q&A. Everyone is welcome to ask any questions about the projects.\n\n\n\nMaterials\n\nEach one of you loses 5 points of your project grade if you don’t meet the requirement or miss the deadline.\nYou need to share your entire work, including slides, code, and data if applicable.\nYour code should be able to reproduce all the numerical results, outputs, tables, and figures shown in the slides, including the source of the raw data (where you find and load the data) if the project is about data analysis.",
+    "crumbs": [
+      "Midterm Project I",
+      "Guideline and Policy"
+    ]
+  },
+  {
+    "objectID": "present-description.html#project-content",
+    "href": "present-description.html#project-content",
+    "title": "Midterm Presentation I - Regression",
+    "section": "Project Content",
+    "text": "Project Content\nYour project can be in either of the following categories:\n\n(DA) Data analytics using one or more REGRESSION methods.\n(MA) Introduce a new REGRESSION model/method/algorithm not lectured in class.\n\n\nData Analytics\nFor your DA project, you need to\n\nDescribe the selected data set. Perform a thorough exploratory data analysis.\nExplain and show why the chosen model(s) is appropriate for answering your research questions and better than others.\nInterpret your analysis result.\n\nBelow are a list of data repositories you can start with, but you are encouraged to explore more and find your favorite one, for example COVID-19 data if you are interested.\n\nTidyTuesday\nKaggle\nAwesome Public Datasets\nHarvard Dataverse\nUCI Machine Learning Repository\nFiveThirtyEight\n\n\n\nModel/Algorithm\nFor your MA project, you need to\n\nDescribe the intuition and idea of the method. What are the pros and cons of the method?\nProvide the mathematical expression of the model/algorithm. Explain the model and its properties, and how we do supervised learning with the model/algorithm.\nCompare the chosen method with other methods learned in class. Determine which method performs better under what conditions.\nDemo how to implement the method using a programming language for supervised learning.",
+    "crumbs": [
+      "Midterm Project I",
+      "Guideline and Policy"
+    ]
+  },
+  {
+    "objectID": "present-description.html#sec-grading",
+    "href": "present-description.html#sec-grading",
+    "title": "Midterm Presentation I - Regression",
+    "section": "Project Evaluation and Grading",
+    "text": "Project Evaluation and Grading\n\nYour project performance grade is determined by your classmates and Dr. Yu.\nTable 1 shows your possible performance grade. For example, if your group finish in second place (Silver) you get 145 points.\nYour project grade will be\n\n\nproject grade = performance grade - points lost due to violation of policy\n\n\n\n\nPerformance Grade Sheet\n\n\n\nPerformace Grade 🎖\n\n\n\n\nGold 🥇 1st\n150\n\n\nSilver 🥈 2nd\n145\n\n\nBronze 🥉 3rd\n140\n\n\nOther teams\n135",
+    "crumbs": [
+      "Midterm Project I",
+      "Guideline and Policy"
+    ]
+  },
+  {
+    "objectID": "present-description.html#group-performance-evaluation",
+    "href": "present-description.html#group-performance-evaluation",
+    "title": "Midterm Presentation I - Regression",
+    "section": "Group Performance Evaluation",
+    "text": "Group Performance Evaluation\n\nYou will need to evaluate all group projects except the one you work on.\nYou evaluate group performance based on the rubric attached. Four evaluation criteria are considered:\n\nProject Content and Organization (8 pts)\nPresentation Material (Slides) Quality (4 pts)\nOral Presentation Skill and Delivery (4 pts)\nInteractions and Q&A (4 pts)\n\nThe total points of a project presentation is 20 points.\nEvaluation sheets will be provided on the presentation day.\nHow do you get the full points for each category? Check the requirements below. Note that for Content and Organization, data analysis and package projects have different requirements.\nContent and Organization (DA)\n\nBeautiful visualization helps find out relationship of variables and specification of models\nAll questions are answered accurately by the models\nDiscuss how and why the models are chosen\nApply sophisticated models and detailed analysis\nAll ideas are presented in logical order\n\nContent and Organization (MA)\n\nExplain the method clearly and accuratly\nShow the pros and cons of the method, and compare with the methods learned in class.\nShow how the method can be implemednted for supervised learning.\nAll ideas are presented in logical order\n\nPresentation Material Quality\n\nPresentation material show code and output beautifully\nPresentation material clearly aid the speaker in telling a coherent story\nAll tables and graphics are informative and related to the topic and make it easier to understand\nAttractive design, layout, and neatness.\n\nOral Presentation Skill\n\nGood volume and energy\nProper pace and diction\nAvoidance of distracting gestures\n\nInteractions and Q&A\n\nGood eye contact with audience\nExcellent listening skills\nAnswers audience questions with authority and accuracy\n\nAfter you evaluate all group project presentations, you rank them from 1st to last based on their earned points.\nNo two groups receive the same ranking. If you give two or more groups some points, you still need to give them a different ranking, deciding which teams deserve a higher ranking according to your preference.",
+    "crumbs": [
+      "Midterm Project I",
+      "Guideline and Policy"
     ]
   },
   {
@@ -1349,148 +1415,5 @@
     "title": "Overview of Statistical Machine Learning 💻",
     "section": "Accuracy and Interpretability Trade-Off",
     "text": "Accuracy and Interpretability Trade-Off\n\n\n\n\nSource: ISL Fig. 2.7\n\nflexibility: a model is flexible if the model performs quite good for various types of data.\n\n\n\n\nmssc6250-s25.github.io/website"
-  },
-  {
-    "objectID": "present-description.html",
-    "href": "present-description.html",
-    "title": "Midterm Presentation I - Regression",
-    "section": "",
-    "text": "Team up! You will be working as a group of 2, 3 or 4. One of you, please email me your team member list by Friday, 2/21 11:59 PM\nProposal. Please send me a one-page PDF describing what you are going to do for your project (no word limit) with your project title by Friday, 2/28 11:59 PM.\nPresentation. You will be presenting your project on Thursday, 3/6 in class.\nMaterials. Please share your entire work (slides, code, data, etc) by Friday, 3/7 11:59 PM.",
-    "crumbs": [
-      "Midterm Project I",
-      "Guideline and Policy"
-    ]
-  },
-  {
-    "objectID": "present-description.html#team-up",
-    "href": "present-description.html#team-up",
-    "title": "Midterm Presentation I - Regression",
-    "section": "Team up!",
-    "text": "Team up!\n\nEach one of you loses 3 points of your project grade if you don’t meet the requirement or miss the deadline.\nYou will be randomly assigned to a group if you do not belong to any group before the deadline.",
-    "crumbs": [
-      "Midterm Project Presentation",
-      "Guideline and Policy"
-    ]
-  },
-  {
-    "objectID": "present-description.html#proposal",
-    "href": "present-description.html#proposal",
-    "title": "Midterm Presentation I - Regression",
-    "section": "Proposal",
-    "text": "Proposal\n\nEach one of you loses 3 points of your project grade if you don’t meet the requirement or miss the deadline.\n\n\n\n\n\n\n\n\n\n\n\n–&gt;\n\n\n\n\n\n\n–&gt;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n–&gt;\n\n\n\n–&gt;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n–&gt;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n–&gt;",
-    "crumbs": [
-      "Midterm Project Presentation",
-      "Guideline and Policy"
-    ]
-  },
-  {
-    "objectID": "present-description.html#presentation",
-    "href": "present-description.html#presentation",
-    "title": "Midterm Presentation I - Regression",
-    "section": "Presentation",
-    "text": "Presentation\n\nEvery student has to participate (in-person) in the final presentation in order to pass the course.\nEach group presentation should be between 10 and 11 minute long, followed by 1 to 2 minute Q&A. If your presentation is too short or too long, every one of you loses 3 points of your project grade.\nEvery group member has to present some part of the group work. The one who does not present receives no point.\n\n\n\nQuestions are encouraged during Q&A. Everyone is welcome to ask any questions about the projects. It helps everyone evaluate every group’s project and presentation performance. See Section 4 for grading policy.\nEach group is required to ask as least one question.\n\nThe \\(k\\)-th group should ask at least one question to the \\((k-1)\\)-th group in Q&A, \\(k = 2, \\dots, 7\\).\nThe 1st group will ask the last (7th) group questions about their project.\n\nIf you, as a group, don’t ask a question when you should, every one of you loses 3 points of your project grade.",
-    "crumbs": [
-      "Midterm Project Presentation",
-      "Guideline and Policy"
-    ]
-  },
-  {
-    "objectID": "present-description.html#materials",
-    "href": "present-description.html#materials",
-    "title": "Midterm Presentation I - Regression",
-    "section": "Materials",
-    "text": "Materials\n\nEach one of you loses 3 points of your project grade if you don’t meet the requirement or miss the deadline.\nYou need to share your entire work, including slides, code, and data if applicable.\nYour code should be able to reproduce all the numerical results, outputs, tables, and figures shown in the slides, including the source of the raw data (where you find and load the data) if the project is about data analysis.",
-    "crumbs": [
-      "Midterm Project Presentation",
-      "Guideline and Policy"
-    ]
-  },
-  {
-    "objectID": "present-description.html#data-analysis",
-    "href": "present-description.html#data-analysis",
-    "title": "Midterm Presentation I - Regression",
-    "section": "Data Analysis",
-    "text": "Data Analysis\nFor your data analysis project,\n\nYou need to show that you are good at asking meaningful questions and answering them with results of data analysis.\nYour presentation should include data visualization. Your graphics should be informative that help you\n\nexplore relationships between variables in your data\ndecide which statistical model is used, so that your research questions can be properly answered.\n\n\n\n\nYou should discuss how and why statistical methods/machine learning algorithms are chosen for analyzing your data set.\n\nThe methods we learn in class may not be appropriate for your data and answering your research questions. If this happens, critique your own methods and provide suggestions for improving your analysis. Any issues of your data, and appropriateness of the statistical analysis should be discussed.\n\n\n\n\nYou can choose a data set that is publicly available or you may collect your own data using a survey or by conducting an experiment. The dataset you choose cannot be any datasets used in class, including homework assignments and lab exercises.\nBelow are a list of data repositories you can start with, but you are encouraged to explore more and find your favorite one, for example COVID-19 data if you are interested.\n\nTidyTuesday\nKaggle\nAwesome Public Datasets\nHarvard Dataverse\nUCI Machine Learning Repository\nFiveThirtyEight",
-    "crumbs": [
-      "Midterm Project Presentation",
-      "Guideline and Policy"
-    ]
-  },
-  {
-    "objectID": "present-description.html#rpython-packages",
-    "href": "present-description.html#rpython-packages",
-    "title": "Midterm Presentation I - Regression",
-    "section": "R/Python Packages",
-    "text": "R/Python Packages\nFor your R/Python package project,\n\nyou need to\n\nshow how and why the package greatly helps us do data science.\nexplain how to use the functions in the packages by providing data science examples with some real data set. Please don’t use the toy examples in the package documentation.\n\nIf the functions of the package return any results or outputs, please explain them, teaching your audience how to appropriately read the outputs.\nIf the functions return graphics, explain why the visualizations are informative and useful for understanding data and analysis results.\nYou can choose a package that helps us do what we cannot do with the packages and tools learned in class.\n\nFor example, we only learn and packages to help us import data files into R, and we don’t know how to extract data from a website. The  package helps us scrape data from web pages.\n\nIf you choose a package that provides the same functionality as the packages we learned, please show the packages you choose are better.\n\nFor example, its code is shorter, it is run faster, its output is more clear, its plot is prettier, etc. For example, (https://rdatatable.gitlab.io/data.table/) package provides a high-performance version of base R’s with syntax and feature enhancements for ease of use, convenience and programming speed.\n\nBelow are a list of popular R packages that you can start with.\n\nQuick list of useful R packages\nFavorite R Packages by Roel Verbelen\nGreat R packages for data import, wrangling, and visualization\nggplot2 extensions\n\n\nBelow are a list of popular Python packages that you can start with.\n\n20 Must-Have Python Libraries for Data Science for 2024\nTop 38 Python Libraries for Data Science, Data Visualization & Machine Learning",
-    "crumbs": [
-      "Midterm Project Presentation",
-      "Guideline and Policy"
-    ]
-  },
-  {
-    "objectID": "present-description.html#group-performance-evaluation",
-    "href": "present-description.html#group-performance-evaluation",
-    "title": "Midterm Presentation I - Regression",
-    "section": "Group Performance Evaluation",
-    "text": "Group Performance Evaluation\n\nYou will need to evaluate all group projects except the one you work on.\nYou evaluate group performance based on the rubric attached. Four evaluation criteria are considered:\n\nProject Content and Organization (8 pts)\nPresentation Material (Slides) Quality (4 pts)\nOral Presentation Skill and Delivery (4 pts)\nInteractions and Q&A (4 pts)\n\nThe total points of a project presentation is 20 points.\nEvaluation sheets will be provided on the presentation day.\nHow do you get the full points for each category? Check the requirements below. Note that for Content and Organization, data analysis and package projects have different requirements.\nContent and Organization (DA)\n\nBeautiful visualization helps find out relationship of variables and specification of models\nAll questions are answered accurately by the models\nDiscuss how and why the models are chosen\nApply sophisticated models and detailed analysis\nAll ideas are presented in logical order\n\nContent and Organization (MA)\n\nExplain the method clearly and accuratly\nShow the pros and cons of the method, and compare with the methods learned in class.\nShow how the method can be implemednted for supervised learning.\nAll ideas are presented in logical order\n\nPresentation Material Quality\n\nPresentation material show code and output beautifully\nPresentation material clearly aid the speaker in telling a coherent story\nAll tables and graphics are informative and related to the topic and make it easier to understand\nAttractive design, layout, and neatness.\n\nOral Presentation Skill\n\nGood volume and energy\nProper pace and diction\nAvoidance of distracting gestures\n\nInteractions and Q&A\n\nGood eye contact with audience\nExcellent listening skills\nAnswers audience questions with authority and accuracy\n\nAfter you evaluate all group project presentations, you rank them from 1st to last based on their earned points.\nNo two groups receive the same ranking. If you give two or more groups some points, you still need to give them a different ranking, deciding which teams deserve a higher ranking according to your preference.",
-    "crumbs": [
-      "Midterm Project I",
-      "Guideline and Policy"
-    ]
-  },
-  {
-    "objectID": "present-description.html#individual-performance-evaluation",
-    "href": "present-description.html#individual-performance-evaluation",
-    "title": "Midterm Presentation I - Regression",
-    "section": "Individual Performance Evaluation",
-    "text": "Individual Performance Evaluation\n\n\nYou choose one single person who you think contributes the most to your group project.\nYou cannot vote for yourself, and you can only vote for one of your teammates.\nIf you don’t vote, you can’t be the best contributor even if you obtain the most votes. The person with the second highest votes wins the best contribution reward.\nIf there is no one single person who gets the most votes, every team member remains the same grade. For example, if your group finish in third place (Bronze), and there is no best contributor, all members receive 91 (See Table 1).",
-    "crumbs": [
-      "Midterm Project Presentation",
-      "Guideline and Policy"
-    ]
-  },
-  {
-    "objectID": "present-description.html#timeline-and-things-to-do",
-    "href": "present-description.html#timeline-and-things-to-do",
-    "title": "Midterm Presentation I - Regression",
-    "section": "",
-    "text": "Team up! You will be working as a group of 2, 3 or 4. One of you, please email me your team member list by Friday, 2/21 11:59 PM\nProposal. Please send me a one-page PDF describing what you are going to do for your project (no word limit) with your project title by Friday, 2/28 11:59 PM.\nPresentation. You will be presenting your project on Thursday, 3/6 in class.\nMaterials. Please share your entire work (slides, code, data, etc) by Friday, 3/7 11:59 PM.",
-    "crumbs": [
-      "Midterm Project I",
-      "Guideline and Policy"
-    ]
-  },
-  {
-    "objectID": "present-description.html#policy",
-    "href": "present-description.html#policy",
-    "title": "Midterm Presentation I - Regression",
-    "section": "Policy",
-    "text": "Policy\n\nTeam up!\n\nEach one of you loses 5 points of your project grade if you don’t meet the requirement or miss the deadline.\nYou will be randomly assigned to a group if you do not belong to any group before the deadline.\n\n\n\nProposal\n\nEach one of you loses 5 points of your project grade if you don’t meet the requirement or miss the deadline.\nYour proposal (in PDF) should include three parts:\n\nProject title\nThe goal of your project. For example, what is the research question you’d like to answer? What machine learning method/model/algorithm you’d like to introduce? What data you’d like to use for analysis or demonstration? etc.\n\nAlthough it is risky, you can change your project topic after you submit your proposal if you decide to do something else.\n\n\n\nPresentation\n\nEach group presentation should be between 10 and 11 minute long, followed by 1 to 2 minute Q&A. If your presentation is too short or too long, every one of you loses 5 points of your project grade.\nEvery group member has to present some part of the group work. The one who does not present receives no point.\nQuestions are encouraged during Q&A. Everyone is welcome to ask any questions about the projects.\n\n\n\nMaterials\n\nEach one of you loses 5 points of your project grade if you don’t meet the requirement or miss the deadline.\nYou need to share your entire work, including slides, code, and data if applicable.\nYour code should be able to reproduce all the numerical results, outputs, tables, and figures shown in the slides, including the source of the raw data (where you find and load the data) if the project is about data analysis.",
-    "crumbs": [
-      "Midterm Project I",
-      "Guideline and Policy"
-    ]
-  },
-  {
-    "objectID": "present-description.html#project-content",
-    "href": "present-description.html#project-content",
-    "title": "Midterm Presentation I - Regression",
-    "section": "Project Content",
-    "text": "Project Content\nYour project can be in either of the following categories:\n\n(DA) Data analytics using one or more REGRESSION methods.\n(MA) Introduce a new REGRESSION model/method/algorithm not lectured in class.\n\n\nData Analytics\nFor your DA project, you need to\n\nDescribe the selected data set. Perform a thorough exploratory data analysis.\nExplain and show why the chosen model(s) is appropriate for answering your research questions and better than others.\nInterpret your analysis result.\n\nBelow are a list of data repositories you can start with, but you are encouraged to explore more and find your favorite one, for example COVID-19 data if you are interested.\n\nTidyTuesday\nKaggle\nAwesome Public Datasets\nHarvard Dataverse\nUCI Machine Learning Repository\nFiveThirtyEight\n\n\n\nModel/Algorithm\nFor your MA project, you need to\n\nDescribe the intuition and idea of the method. What are the pros and cons of the method?\nProvide the mathematical expression of the model/algorithm. Explain the model and its properties, and how we do supervised learning with the model/algorithm.\nCompare the chosen method with other methods learned in class. Determine which method performs better under what conditions.\nDemo how to implement the method using a programming language for supervised learning.",
-    "crumbs": [
-      "Midterm Project I",
-      "Guideline and Policy"
-    ]
-  },
-  {
-    "objectID": "present-description.html#sec-grading",
-    "href": "present-description.html#sec-grading",
-    "title": "Midterm Presentation I - Regression",
-    "section": "Project Evaluation and Grading",
-    "text": "Project Evaluation and Grading\n\nYour project performance grade is determined by your classmates and Dr. Yu.\nTable 1 shows your possible performance grade. For example, if your group finish in second place (Silver) you get 145 points.\nYour project grade will be\n\n\nproject grade = performance grade - points lost due to violation of policy\n\n\n\n\nPerformance Grade Sheet\n\n\n\nPerformace Grade 🎖\n\n\n\n\nGold 🥇 1st\n150\n\n\nSilver 🥈 2nd\n145\n\n\nBronze 🥉 3rd\n140\n\n\nOther teams\n135",
-    "crumbs": [
-      "Midterm Project I",
-      "Guideline and Policy"
-    ]
   }
 ]
