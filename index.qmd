@@ -3,8 +3,7 @@ title: "MSSC 6250 - Statistical Machine Learning (Spring 2025)"
 tbl-colwidths: [5,8,20,6,6,6,6]
 ---
 
--   **Announcement:**
-    -   No office hours first week.
+- **Homework 1 released, and due Friday, 2/14, 11:59 PM**.
 
 *This schedule will be updated as the semester progresses, with all changes documented here.*
 

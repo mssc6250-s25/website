@@ -39,7 +39,7 @@ editor: source
 
 - Readings: **ISL** Chapter 2 and 3.
 
-## Homework Questions
+## Homework Problems
 
 (@) **ISL** Sec. 2.4: 1
 
