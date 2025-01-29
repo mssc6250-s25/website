@@ -16,8 +16,6 @@ editor: visual
 
 `r fontawesome::fa("table")` [Data Set - Prostate.csv](/slides/data/prostate.csv)
 
-
-
 ## Reading and Resources
 
 📖 [ISL Ch 6.1, 6.2](https://www.statlearning.com/)

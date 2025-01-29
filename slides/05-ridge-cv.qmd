@@ -29,6 +29,7 @@ format:
     fig-cap-location: bottom
     fig-align: center
     transition: none ## fade slide convex concave zoom
+    code-line-numbers: true
     title-slide-attributes:
       data-background-color: "#447099"
       # data-background-image: images/paper-texture.jpg
@@ -79,6 +80,7 @@ library(ggplot2)
 library(ISLR2)
 library(genridge)
 library(glmnet)
+library(plotly)
 # library(ElemStatLearn)
 knitr::opts_chunk$set(
     fig.asp = 0.618,
@@ -128,6 +130,7 @@ knitr::knit_hooks$set(output = function(x, options) {
 
 
 ## When Ordinary Least Squares (OLS) Doesn't Work Well: Collinearity
+
 - When predictors are highly correlated, $\var(b_j)$ is much inflated.^[Although $\var(b_j)$ is still the smallest among all linear unbiased estimators.]
   + A tiny change in the training set causes a large change in $b_j$, leading to *unreliable* estimation and possibly prediction.
 
@@ -141,15 +144,21 @@ knitr::knit_hooks$set(output = function(x, options) {
 
 ```{r}
 #| echo: true
+#| code-line-numbers: false
 solve(matrix(c(1, 0.99, 0.99, 1), 2, 2))
 ```
 
 
 ::: notes
+
 the eigen vector direction with the smallest eigen value
 https://online.stat.psu.edu/stat857/node/155/
 https://robjhyndman.com/hyndsight/loocv-linear-models/
+
 :::
+
+
+
 
 ## When OLS Doesn't Work Well: Optimization Perspective
 
@@ -158,17 +167,19 @@ https://robjhyndman.com/hyndsight/loocv-linear-models/
 - The relatively "flat" valley in the objective function walks along the eigen-vector of ${\bf X}'{\bf X}$ having the smallest eigen-value.
 
 :::: columns
+
 ::: {.column width="60%"}
+
 ```{r}
-#| out-width: "100%"
+#| out-width: 100%
 library(MASS)
 set.seed(2023)
 n <- 50
 # create highly correlated variables and a linear model
 X <- mvrnorm(n, c(0, 0), matrix(c(1, 0.99, 0.99, 1), 2, 2))
 y <- rnorm(n, mean = X[, 1] + X[, 2])
-beta1 <- seq(-1, 3, 0.005)
-beta2 <- seq(-1, 3, 0.005)
+beta1 <- seq(-1, 3, 0.05)
+beta2 <- seq(-1, 3, 0.05)
 allbeta <- data.matrix(expand.grid(beta1, beta2))
 rss <- matrix(apply(allbeta, 1, function(b, X, y) sum((y - X %*% b)^2), X, y),
               length(beta1), length(beta2))
@@ -190,17 +201,21 @@ points(betahat[1], betahat[2], pch = 19, col = "blue", cex = 2)
 legend("topright", c("true beta value", "OLS estimates"), 
        col = c("red", "blue"), pch = 19, bty = "n")
 ```
+
 :::
 
 ::: {.column width="40%"}
+
 ```{r}
 #| echo: true
+#| code-line-numbers: false
 eigen(
     matrix(c(1, 0.99, 0.99, 1), 
              2, 2)
     )
 ```
 :::
+
 ::::
 
 
@@ -208,19 +223,99 @@ eigen(
 
 - From optimization point of view, the objective function ($\ell_2$ loss) is "flat" along certain directions in the parameter domain.
 - a small eigen-value in XTX makes the corresponding eigen-value large in the inverse.
+
 :::
+
+
+## Ridge and Valley
+
+
+:::: columns
+
+::: {.column width="50%"}
+
+- Statisticians used to *maximize the likelihood*, leading to a ["ridge"]{.green}.
+
+```{r}
+#| out-width: 100%
+
+    onepoint <- data.frame("x" = betahat[1], "y" = betahat[2],
+                           "z" = sum((y - X %*% betahat)^2))
+    truepoint <- data.frame("x" = 1, "y" = 1,
+                            "z" = sum((y - X %*% c(1, 1))^2))
+    # # 3d plot of RSS using `plotly`
+    plotly::plot_ly(x = beta1, y = beta2) |>
+        layout(plot_bgcolor='rgb(254, 247, 234)') |>
+        layout(paper_bgcolor='transparent') |>
+        add_surface(z = -rss,
+                    colorscale = 'Viridis',
+                    opacity = 0.6, showlegend = FALSE) |>
+        layout(scene = list(xaxis = list(title = "beta1"),
+                            yaxis = list(title = "beta2"),
+                            zaxis = list(title = "Likelihood"))) |>
+        add_markers(data = onepoint,
+                    x = ~x, y = ~y, z = ~-z, showlegend = FALSE,
+                    marker = list(size = 6, color = "blue", symbol = 104)) |>
+        add_markers(data = truepoint,
+                    x = ~x, y = ~y, z = ~-z, showlegend = FALSE,
+                    marker = list(size = 6, color = "red", symbol = 104)) |> 
+        layout(showlegend = FALSE) |> 
+        layout(margin = list(l = 0, r = 0, b = 0, t = 0)) 
+```
+
+:::
+
+
+::: {.column width="50%"}
+
+- Computer scientists like to *minimize the loss*, leading to a ["valley"]{.green}.
+
+```{r}
+#| out-width: 100%
+#| label: 3dplot-ridge
+    # # 3d plot of RSS using `plotly`
+    plotly::plot_ly(x = beta1, y = beta2) |>
+        layout(plot_bgcolor='rgb(254, 247, 234)') |>
+        layout(paper_bgcolor='transparent') |>
+        add_surface(z = rss,
+                    colorscale = 'Viridis',
+                    opacity = 0.6, showlegend = FALSE) |>
+        layout(scene = list(xaxis = list(title = "beta1"),
+                            yaxis = list(title = "beta2"),
+                            zaxis = list(title = "RSS"))) |>
+        add_markers(data = onepoint,
+                    x = ~x, y = ~y, z = ~z, showlegend = FALSE,
+                    marker = list(size = 6, color = "blue", symbol = 104)) |>
+        add_markers(data = truepoint,
+                    x = ~x, y = ~y, z = ~z, showlegend = FALSE,
+                    marker = list(size = 6, color = "red", symbol = 104)) |> 
+        layout(showlegend = FALSE) |> 
+        layout(margin = list(l = 0, r = 0, b = 0, t = 0)) 
+```
+
+:::
+
+::::
+
+::: notes
+https://stats.stackexchange.com/questions/151304/why-is-ridge-regression-called-ridge-why-is-it-needed-and-what-happens-when
+
+https://stats.stackexchange.com/questions/118712/why-does-ridge-estimate-become-better-than-ols-by-adding-a-constant-to-the-diago/119708#119708
+:::
+
 
 
 ## When OLS Doesn't Work Well: Optimization Perspective
 
 - A little change in the training set perturbs the objective function. The LSEs lie on a valley centered around the truth.
 
+
 ```{r}
-#| out-width: "100%"
+#| out-width: 100%
 #| cache: true
 par(mfrow = c(2, 2))
 par(mar = c(2, 2, 0, 0))
-set.seed(2024)
+set.seed(2025)
   for (i in 1:4)
   {
     # create highly correlated variables and a linear model
@@ -250,6 +345,7 @@ set.seed(2024)
 ```
 
 
+
 ## When OLS Doesn't Work Well: High Variance
 
 - The optimizer could land anywhere along the valley, leading to *large variance* of the LSE.
@@ -258,7 +354,9 @@ set.seed(2024)
 
 
 :::: columns
+
 ::: column
+
 ```{r}
 par(mar = c(2, 2, 2, 0))
   # the truth
@@ -278,9 +376,11 @@ par(mar = c(2, 2, 2, 0))
   }
   
 ```
+
 :::
 
 ::: column
+
 ```{r}
 par(mar = c(2, 2, 2, 0))
   # the truth
@@ -305,9 +405,63 @@ par(mar = c(2, 2, 2, 0))
 ::::
 
 
+::: aside
+
+The shape of the loss function for independent predictors is shown in [04-lin-reg optimization](https://mssc6250-s25.github.io/website/slides/04-lin-reg.html#/basic-concepts-1)
+
+:::
+
+<!-- ## -->
+
+<!-- :::: columns -->
+
+<!-- ::: column -->
+
+<!-- ```{r, ref.label="3dplot-ridge"} -->
+<!-- #| out-width: 100% -->
+<!-- ``` -->
+
+
+<!-- ::: -->
+
+<!-- ::: column -->
+
+<!-- # ```{r} -->
+<!-- # n <- 50 -->
+<!-- # # create highly correlated variables and a linear model -->
+<!-- # X_ind <- mvrnorm(n, c(0, 0), matrix(c(1, 0, 0, 1), 2, 2)) -->
+<!-- # y_ind <- rnorm(n, mean = X_ind[, 1] + X_ind[, 2]) -->
+<!-- # beta1_ind <- seq(-1, 3, 0.05) -->
+<!-- # beta2_ind <- seq(-1, 3, 0.05) -->
+<!-- # allbeta_ind <- data.matrix(expand.grid(beta1_ind, beta2_ind)) -->
+<!-- # rss_ind <- matrix(apply(allbeta_ind, 1, function(b, X, y) sum((y - X %*% b)^2), X_ind, y_ind), -->
+<!-- #               length(beta1_ind), length(beta2_ind)) -->
+<!-- # ``` -->
+<!-- #  -->
+<!-- # ```{r} -->
+<!-- # #| out-width: 100% -->
+<!-- #     # # 3d plot of RSS using `plotly` -->
+<!-- #     plotly::plot_ly(x = beta1_ind, y = beta2_ind) |> -->
+<!-- #         layout(plot_bgcolor='rgb(254, 247, 234)') |> -->
+<!-- #         layout(paper_bgcolor='transparent') |> -->
+<!-- #         add_surface(z = rss_ind, -->
+<!-- #                     colorscale = 'Viridis', -->
+<!-- #                     opacity = 0.6, showlegend = FALSE) |> -->
+<!-- #         layout(scene = list(xaxis = list(title = "beta1"), -->
+<!-- #                             yaxis = list(title = "beta2"), -->
+<!-- #                             zaxis = list(title = "RSS"))) |> -->
+<!-- #         layout(showlegend = FALSE) |> -->
+<!-- #         layout(margin = list(l = 0, r = 0, b = 0, t = 0)) -->
+<!-- # ``` -->
+
+<!-- ::: -->
+
+<!-- :::: -->
+
 
 
 ## When OLS Doesn't Work Well: Large-$p$-small-$n$ (High Dimensional Data)
+
 - OLS stays well in the world of "large-$n$-small-$p$".
 
 - When $p > n$, ${\bf X}'{\bf X}$ is not invertible.
@@ -322,6 +476,13 @@ par(mar = c(2, 2, 2, 0))
 - Too flexible and ends up with overfitting
 
 
+::: notes
+
+Too much flexibility about how $f$ can be shaped, but too little information to guide or determine which shape it should be.
+
+:::
+
+
 
 ## Remedy for Large Variance and Large-$p$-small-$n$
 
@@ -332,9 +493,11 @@ par(mar = c(2, 2, 2, 0))
 - A slightly **biased** estimator $\hat{\bbeta}$ that has *much smaller variance and MSE* than the LSE ${\bf b}$.
 
 :::: columns
+
 ::: column
+
 ```{r}
-#| out-width: "90%"
+#| out-width: 90%
 #| fig-asp: 0.6
 par(mar = c(2, 0, 2, 0), mgp = c(0.5, 0.5, 0), las = 1)
 x <- seq(-6, 6, by = 0.1)
@@ -351,11 +514,13 @@ text(3.5, dnorm(1), expression(paste(E(hat(beta)) != bold(beta), " (biased)")),
 text(4, dnorm(1.5), expression(paste(Var(hat(beta)), " small")),
      cex = 1.5)
 ```
+
 :::
 
 ::: column
+
 ```{r}
-#| out-width: "100%"
+#| out-width: 100%
 #| fig-asp: 0.3
 par(mar = c(2, 0, 2, 0), mgp = c(0.5, 0.5, 0), las = 1)
 x <- seq(-3, 3, by = 0.1)
@@ -368,8 +533,12 @@ text(2, dnorm(1), expression(paste("E(b) = ", bold(beta), " (unbiased)")),
      cex = 1.5)
 text(2.5, dnorm(1.5), paste("Var(b) large"), cex = 1.5)
 ```
+
 :::
+
 ::::
+
+
 
 ## Ridge Regression
 
@@ -389,6 +558,7 @@ $$
 =& \, \argmin_{\bbeta} \color{green} - \text{ goodness of fit } + \text{ model complexity/flexibility}
 \end{align}
 $$
+
 
 
 ## Properties of Ridge Regression
@@ -430,9 +600,11 @@ $$\lambda \lVert \bbeta \rVert^2_2 = \lambda \bbeta' \bI \bbeta$$
 - Force the objective function to be more *convex*
 
 - A more stable or less varying solution
+
 :::
 
 ::: {.column width="50%"}
+
 ```{r}
 #| fig-asp: 1
 pen <- matrix(apply(allbeta, 1, function(b) 3 * b %*% b),
@@ -443,6 +615,7 @@ contour(beta1, beta2, pen, levels = quantile(pen, quanlvl), las = 1, lwd = 3,
 points(1, 1, pch = 19, col = "red", cex = 3)
 box()
 ```
+
 :::
 
 ::::
@@ -454,12 +627,15 @@ box()
 
 ## Geometrical Meaning of Ridge Regression
 
+::: small
+
 ```{r}
-#| out-width: 52%
+#| out-width: 50%
 #| fig-cap: "Source: https://online.stat.psu.edu/stat508/lessons/Lesson06"
 knitr::include_graphics("./images/05-ridge-cv/ridge_pc.png")
 ```
 
+:::
 
 
 ::: notes
@@ -476,15 +652,16 @@ knitr::include_graphics("./images/05-ridge-cv/ridge_pc.png")
 
 ```{r}
 #| echo: true
+#| code-line-numbers: false
 eigen(matrix(c(1, 0.99, 0.99, 1), 2, 2) + diag(2))[1]
 ```
 
 
-```{r fig.dim = c(18, 6)}
-#| out-width: "100%"
-
+```{r}
+#| out-width: 100%
+#| fig-asp: 0.33
 par(mfrow = c(1, 3))
-set.seed(2024)
+set.seed(2025)
 n <- 50
 # create highly correlated variables and a linear model
 X <- mvrnorm(n, c(0, 0), matrix(c(1, 0.99, 0.99, 1), 2, 2))
@@ -499,16 +676,16 @@ rss <- matrix(apply(allbeta, 1, function(b, X, y) sum((y - X %*% b)^2), X, y),
 quanlvl = c(0.01, 0.025, 0.05, 0.2, 0.5, 0.75)
 par(mar = c(2, 2, 2, 0))
 # plot the contour
-contour(beta1, beta2, rss, levels = quantile(rss, quanlvl), las = 1,lwd = 3, 
-        xlab = "beta 1", ylab = "beta 2", main = "Lambda = 0 OLS", cex.main = 3)
+contour(beta1, beta2, rss, levels = quantile(rss, quanlvl), las = 1,lwd = 1.3, 
+        xlab = "beta 1", ylab = "beta 2", main = "Lambda = 0 OLS")
 box()
   
 # the truth
-points(1, 1, pch = 19, col = "red", cex = 3)
+points(1, 1, pch = 19, col = "red", cex = 1.3)
   
 # the data 
 betahat <- coef(lm(y~X-1))
-points(betahat[1], betahat[2], pch = 19, col = "blue", cex = 3)
+points(betahat[1], betahat[2], pch = 19, col = "blue", cex = 1.3)
 
     # adding a L2 penalty to the objective function
     rss <- matrix(apply(allbeta, 1, function(b, X, y) sum((y - X %*% b)^2) + b %*% b, X, y),
@@ -517,10 +694,10 @@ points(betahat[1], betahat[2], pch = 19, col = "blue", cex = 3)
     # the ridge solution
     bh = solve(t(X) %*% X + diag(2)) %*% t(X) %*% y
     
-    contour(beta1, beta2, rss, levels = quantile(rss, quanlvl), las = 1,lwd = 3, 
-            main = "Lambda = 1", cex.main = 3)
-    points(1, 1, pch = 19, col = "red", cex = 3)
-    points(bh[1], bh[2], pch = 19, col = "blue", cex = 3)
+    contour(beta1, beta2, rss, levels = quantile(rss, quanlvl), las = 1,lwd = 1.3, 
+            main = "Lambda = 1")
+    points(1, 1, pch = 19, col = "red", cex = 1.3)
+    points(bh[1], bh[2], pch = 19, col = "blue", cex = 1.3)
     box()
     
     # adding a larger penalty
@@ -530,10 +707,10 @@ points(betahat[1], betahat[2], pch = 19, col = "blue", cex = 3)
     bh = solve(t(X) %*% X + 10*diag(2)) %*% t(X) %*% y
     
     # the ridge solution
-    contour(beta1, beta2, rss, levels = quantile(rss, quanlvl), las = 1,lwd = 3, 
-            main = "Lambda = 10", cex.main = 3)
-    points(1, 1, pch = 19, col = "red", cex = 3)
-    points(bh[1], bh[2], pch = 19, col = "blue", cex = 3)
+    contour(beta1, beta2, rss, levels = quantile(rss, quanlvl), las = 1,lwd = 1.3, 
+            main = "Lambda = 10")
+    points(1, 1, pch = 19, col = "red", cex = 1.3)
+    points(bh[1], bh[2], pch = 19, col = "blue", cex = 1.3)
     box()
 ```
 
@@ -596,13 +773,14 @@ We will set up a simulation study with the following steps, with both $\widehat{
 
 
 ## The Bias-variance Tradeoff
+
   * As $\lambda \downarrow$, bias $\downarrow$ and variance $\uparrow$
   * As $\lambda \uparrow$, bias $\uparrow$ and variance $\downarrow$
 
 
 ```{r}
-#| out-width: "100%"
-#| fig-asp: 0.3
+#| out-width: 100%
+#| fig-asp: 0.33
     par(mfrow = c(1, 3))
 par(mar = c(2, 2, 2, 0))
   # the truth
@@ -669,6 +847,9 @@ Now, we may ask the question: is it worth it? In fact, this bias and variance wi
 __Remark__: The bias-variance trade-off will appear frequently in this course. And the way to evaluate the benefit of this is to see if it eventually reduces the prediction error ($\text{Bias}^2 + \text{Variance}$ plus a term called __irreducible error__, which will be introduced in later chapter). 
 :::
 
+
+
+
 ## Lower Test MSE
 
 
@@ -679,34 +860,36 @@ __Remark__: The bias-variance trade-off will appear frequently in this course. A
 
 - When $b_j$ has large variance or $p > n$, ridge regression could have lower test MSE and better predictive performance.
 
-- [$\text{MSE}_{\texttt{Tr}}$ (purple)]{.purple}
+- [**$\text{MSE}_{\texttt{Tr}}$ (purple)**]{.purple}
 
 - **Squared bias (black)**
 
 - [**Variance (green)**]{.green}
 
-
-
 :::
 
 ::: {.column width="62%"}
+
 ::: small
 
 ```{r}
-#| out-width: "100%"
+#| out-width: 100%
 #| fig-cap: "Source: ISL Figure 6.5"
 #| fig-align: left
 knitr::include_graphics("./images/05-ridge-cv/6_5.png")
 ```
 
 :::
+
 :::
+
 ::::
+
 
 
 ## `MASS::lm.ridge()`
 
-- The `lambda` parameter in `lm.ridge()` specifies the $n\lambda$ in our notation.
+- The `lambda` parameter in `MASS::lm.ridge()` specifies the $n\lambda$ in our notation.
 
 - OLS is *scale equivalent*: $X_jb_j$ remains the same regardless of how $X_j$ is scaled.
 
@@ -719,10 +902,10 @@ knitr::include_graphics("./images/05-ridge-cv/6_5.png")
 
 ```{r}
 #| echo: true
+#| code-line-numbers: false
 head(mtcars, 3)
 (fit <- MASS::lm.ridge(mpg ~ ., data = mtcars, lambda = 1)) ## ridge fit
 ```
-
 
 
 
@@ -730,24 +913,28 @@ head(mtcars, 3)
 
 :::
 
-## Scaling Issues of `lm.ridge()`
 
-- `coef(fit)` transforms these back to the *original* scale. 
 
-- `fit$coef` shows the coefficients of the standardized predictors.
+## Scaling of `lm.ridge()`
+
+- `coef(fit)` transforms these back to the *original* scale for non-standardized $\bX$. 
+
+- `fit$coef` shows the coefficients of the *standardized* predictors.
 
 
 ```{r}
 #| echo: true
+#| code-line-numbers: false
 coef(fit)
 fit$coef
 ```
 
 
-## Scaling Issues of `lm.ridge()`
+## Scaling Issues of `lm.ridge()` {visibility="hidden"}
 
 ```{r}
 #| echo: true
+#| code-line-numbers: false
 fit$coef
 ```
 
@@ -755,9 +942,9 @@ fit$coef
 
 ```{r}
 #| echo: true
+#| code-line-numbers: false
 # each column has mean 0 and var 1
 X <- scale(data.matrix(mtcars[, -1]), center = TRUE, scale = TRUE)
-
 # center y but not scaling
 y <- scale(mtcars$mpg, center = TRUE, scale = FALSE)
 ```
@@ -767,6 +954,7 @@ y <- scale(mtcars$mpg, center = TRUE, scale = FALSE)
 
 ```{r}
 #| echo: true
+#| code-line-numbers: false
 
 # lambda = 1
 my_ridge_coef <- solve(t(X) %*% X + diag(ncol(X))) %*% t(X) %*% y
@@ -774,11 +962,15 @@ t(my_ridge_coef)
 
 ```
 
-## Scaling Issues of `lm.ridge()`
+
+
+
+## Scaling Issues of `lm.ridge()` {visibility="hidden"}
 
 
 ```{r}
 #| echo: true
+#| code-line-numbers: false
 fit$coef
 ```
 
@@ -786,6 +978,7 @@ fit$coef
 
 ```{r}
 #| echo: true
+#| code-line-numbers: false
 # use n instead of (n-1) for standardization
 n <- nrow(X); X <- X * sqrt(n / (n - 1))
 ```
@@ -799,6 +992,8 @@ t(my_ridge_coef)
 ::: notes
 More discussion at https://stats.stackexchange.com/questions/288754/lm-ridge-returns-different-results-that-are-from-manual-calculation
 :::
+
+
 
 
 ## Ridge Trace
@@ -823,8 +1018,10 @@ text(rep(1, 10), coef(ridge_fit)[1,-1], colnames(mtcars)[2:11])
 
 
 ## Methods for Choosing $\lambda$
+
 ```{r}
 #| echo: true
+#| code-line-numbers: false
 MASS::select(ridge_fit)
 ```
 
@@ -833,6 +1030,7 @@ MASS::select(ridge_fit)
 - Lawless and Wang (1976): $\lambda \approx \frac{np \hat{\sigma}^2}{{\bf b'X}'{\bf Xb}}$
 
 - [Golub, Health, and Wahba (1979)](https://pages.stat.wisc.edu/~wahba/ftp1/oldie/golub.heath.wahba.pdf): Generalized Cross Validation
+
 
 
 ## Cross Validation
@@ -847,10 +1045,11 @@ MASS::select(ridge_fit)
 
 
 
-
 ::: notes
 Hence, by adding this to the OLS objective function, the solution is more stable, in the sense that each time we observe a new set of data, this contour looks pretty much the same. This may be interpreted in several different ways such as: 1) the objective function is more convex and less affected by the random samples; 2) the variance of the estimator is smaller because the eigenvalues of $\bX^\T \bX + n \lambda \bI$ are large. 
 :::
+
+
 
 
 ## 
@@ -868,6 +1067,7 @@ Hence, by adding this to the OLS objective function, the solution is more stable
 4. Average $k$ metrics, $\text{MSE}_{CV} = \frac{1}{k}\sum_{i=1}^k\text{MSE}_i$.
 
 5. Use the CV estimate $\text{MSE}_{CV}$ to select the "best" tuning parameter.
+
 :::
 
 
@@ -885,6 +1085,9 @@ knitr::include_graphics("./images/05-ridge-cv/cross-validation.png")
 ::: notes
 Can compute other performance measures.
 :::
+
+
+
 
 ## $k$-Fold Cross Validation in `R` {visibility="hidden"}
 
@@ -915,9 +1118,13 @@ ridge_cvfit
 
 
 ::: notes
+
 Cross-validation can be setup using the `caret` package. However, you should be careful that not all models are available in `caret`, and you should always check the documentation to see how to implement them. For example, if you use `method = "ridge"`, they do not use `lm.ridge` to fit the model, instead, they use a package called `elasticnet`, which can do the same job. However, the definition of parameters may vary. Hence, it is always good to check the main [help pages](https://topepo.github.io/caret/) for the package. We will use the caret package later for other models. 
 https://rsample.tidymodels.org/reference/vfold_cv.html
+
 :::
+
+
 
 ## [`glmnet`](https://glmnet.stanford.edu/index.html) package  ![](images/05-ridge-cv/glmnet_logo.png){.absolute left="450" top="0" width="70"}
 
@@ -931,32 +1138,44 @@ https://rsample.tidymodels.org/reference/vfold_cv.html
 
 
 :::: columns
+
 ::: column
+
 ```{r}
 #| echo: true
+#| code-line-numbers: false
 #| eval: false
 glmnet(x = data.matrix(mtcars[, -1]), 
        y = mtcars$mpg, 
        alpha = 0, 
        lambda = 5:0/nrow(mtcars))
 ```
+
 :::
 
 
 ::: column
+
 ```{r}
 #| echo: true
+#| code-line-numbers: false
 #| eval: false
 lm.ridge(formula = mpg ~ ., 
          data = mtcars, 
-         lambda = 5:0/nrow(mtcars))
+         lambda = 5:0)
 ```
+
 :::
 
 
 :::{.callout-note style="font-size: 1.2em"}
-- `lm.ridge()` and `glmnet()` coefficients do not match exactly, specially when transforming back to original scale.
+
+- `glmnet()` only use `coef()` and return coefficients at the original scale.
+
+- `lm.ridge()` and `glmnet()` coefficients do not match exactly, especially when transforming back to original scale.
+
 - No need to worry too much as we focus on predictive performance.
+
 :::
 
 ::::
@@ -965,6 +1184,8 @@ lm.ridge(formula = mpg ~ .,
 
 ::: notes
 https://stats.stackexchange.com/questions/74206/ridge-regression-results-different-in-using-lm-ridge-and-glmnet
+
+by default, glmnet standardize predictors and include intercept
 :::
 
 
@@ -989,6 +1210,7 @@ matplot(apply(t(as.matrix(coef(fit2))), 2, rev), type = "l",
 ```
 
 
+
 ##
 
 ```{r}
@@ -1009,11 +1231,13 @@ matplot(apply(t(as.matrix(coef(ridge_net))), 2, rev), type = "l",
 
 ## $k$-Fold Cross Validation using `cv.glmnet()`^[There are other ways to do CV for ridge regression in `R`, for example, the [`caret`](https://topepo.github.io/caret/) (**C**lassification **A**nd **RE**gression **T**raining) package and the [`rsample`](https://rsample.tidymodels.org/reference/vfold_cv.html) package in [`tidymodels`](https://www.tidymodels.org/) ecosystem.]
 
+
 - The $\lambda$ values are automatically selected, on the *$\log_{e}$* scale.
 
 ```{r}
 #| echo: true
-#| out-width: "50%"
+#| code-line-numbers: false
+#| out-width: 50%
 ridge_cv_fit <- cv.glmnet(x = data.matrix(mtcars[, -1]), y = mtcars$mpg, alpha = 0,
                           nfolds = 10, type.measure = "mse")
 plot(ridge_cv_fit$glmnet.fit, "lambda")
@@ -1032,12 +1256,13 @@ s: Value(s) of the penalty parameter lambda at which predictions are required. D
 ## Determine $\lambda$
 
 :::: columns
-::: column
 
+::: column
 
 ```{r}
 #| echo: true
-#| out-width: "100%"
+#| code-line-numbers: false
+#| out-width: 100%
 plot(ridge_cv_fit)
 ```
 
@@ -1045,33 +1270,59 @@ plot(ridge_cv_fit)
 
 
 ::: column
+
 ```{r}
 #| echo: true
-
+#| code-line-numbers: false
 ridge_cv_fit$lambda.min
 # largest lambda s.t. error is within 1 s.e of the min
 ridge_cv_fit$lambda.1se 
+```
+
+```{r}
+#| echo: true
+#| class-output: my_class600
 coef(ridge_cv_fit, s = "lambda.min")
 ```
+
 :::
+
 ::::
 
 
 ::: notes
+
 coef(fit2, s = "lambda.1se")
 This plots the cross-validation curve (red dotted line) along with upper and lower standard deviation curves along the 𝜆
  sequence (error bars). Two special values along the 𝜆
  sequence are indicated by the vertical dotted lines. lambda.min is the value of 𝜆
  that gives minimum mean cross-validated error, while lambda.1se is the value of 𝜆
  that gives the most regularized model such that the cross-validated error is within one standard error of the minimum.
+https://stats.stackexchange.com/questions/253963/how-to-interpret-cv-glmnet-plot
 :::
 
 
 
 ## Generalized Cross-Validation
-- The generalized cross-validation (GCV) is a modified version of the **leave-one-out CV** ($n$-fold CV).
 
-- The GCV criterion is given by $$\text{GCV}(\lambda) = \frac{1}{n}\sum_{i=1}^n \left[ \frac{y_i - x_i' \widehat{\bbeta}^\text{r}_\lambda}{1 - \frac{\Trace(\bS_\lambda)}{n}} \right]^2$$
+- The generalized cross-validation (GCV) is a modified version of the **leave-one-out CV (LOOCV)** ($n$-fold CV).
+
+- The LOOCV for linear regression is 
+
+::: midi
+
+$$\text{CV}_{(n)} = \frac{1}{n}\sum_{i=1}^n \left[ \frac{y_i - x_i' {\mathbf{b}}} {1 - {\bf H}_{ii}} \right]^2 $$
+
+:::
+
+. . .
+
+- The GCV criterion is given by 
+
+::: midi
+
+$$\text{GCV}(\lambda) = \frac{1}{n}\sum_{i=1}^n \left[ \frac{y_i - x_i' \widehat{\bbeta}^\text{r}_\lambda}{1 - \frac{\Trace(\bS_\lambda)}{n}} \right]^2$$
+:::
 
 where $\bS_\lambda$ is the _hat matrix_ corresponding to the ridge regression:
 
@@ -1089,13 +1340,25 @@ The interesting fact about leave-one-out CV in the linear regression setting is 
 :::
 
 
-## Generalized Cross-Validation
+## Generalized Cross-Validation 
+
+Select the best $\lambda$ that produces the smallest GCV error.
+
+```{r}
+#| eval: false
+#| echo: true
+#| code-line-numbers: false
+ridge_fit <- lm.ridge(mpg ~ ., data = mtcars, lambda = 0:40)
+```
 
 :::: columns 
+
 ::: {.column width="49%"}
 
-```{r, echo=-1}
-#| out-width: "100%"
+```{r}
+#| out-width: 100%
+#| echo: !expr c(-1)
+#| code-line-numbers: false
 par(mar = c(4, 4, 0, 0))
 plot(ridge_fit$lambda, 
      ridge_fit$GCV, 
@@ -1103,21 +1366,22 @@ plot(ridge_fit$lambda,
      ylab = "GCV", xlab = "Lambda", 
      lwd = 3)
 ```
+
 :::
 
 ::: {.column width="49%"}
 
 ```{r}
 #| echo: true
+#| code-line-numbers: false
 idx <- which.min(ridge_fit$GCV)
 ridge_fit$lambda[idx]
 round(coef(ridge_fit)[idx, ], 2)
 ```
+
 :::
+
 ::::
-
-
-Select the best $\lambda$ that produces the smallest GCV.
 
 
 ::: notes
