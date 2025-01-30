@@ -21,11 +21,11 @@ tbl-colwidths: [5,8,20,6,6,6,6]
 | 5 | Tue, Feb 11 | Smoothing Splines and Generalized Additive Models | [📖](/weeks/week-5.html "Week 5") | [🖥️](slides/07-splines.html "07-splines") | `r fontawesome::fa("file-code")` | ✍️ |  |
 |  | Thu, Feb 13 | Bayesian Inference |  |  |  | HW 1 Due |  |
 | 6 | Tue, Feb 18 | Bayesian Linear Regression | [📖](/weeks/week-6.html "Week 6") | [🖥️](slides/08-bayes.html "08-bayes") | `r fontawesome::fa("file-code")` |  |  |
-|  | Thu, Feb 20 | Binary Logistic Regression |  |  |  |  | Team up Due |
+|  | Thu, Feb 20 | Binary Logistic Regression |  |  |  |  | [✅](present-description.html#timeline-and-things-to-do "Midterm presentation 1") Team up Due |
 | 7 | Tue, Feb 25 | Multinomial Logistic Regression | [📖](/weeks/week-7.html "Week 7") | [🖥️](slides/09-class-glm.html "09-class-glm") | `r fontawesome::fa("file-code")` |  |  |
-|  | Thu, Feb 27 | Discriminant Analysis |  |  | `r fontawesome::fa("file-code")` |  | Proposal Due |
+|  | Thu, Feb 27 | Discriminant Analysis |  |  | `r fontawesome::fa("file-code")` |  | [✅](present-description.html#proposal "Midterm presentation 1") Proposal Due |
 | 8 | Tue, Mar 4 | Naive Bayes | [📖](/weeks/week-8.html "Week 8") |  | `r fontawesome::fa("file-code")` |  |  |
-|  | Thu, Mar 6 | **Midterm Presentation I** |  |  |  | ✍️ | [✅](present-decription.html "Midterm presentation 1") Materials Due |
+|  | Thu, Mar 6 | **Midterm Presentation I** |  |  |  | ✍️ | [✅](present-description.html#materials "Midterm presentation 1") Materials Due |
 | 9 | Tue, Mar 11 | ***NO CLASS: Spring break*** |  |  |  |  |  |
 |  | Thu, Mar 13 | ***NO CLASS: Spring break*** |  |  |  |  |  |
 | 10 | Tue, Mar 18 | K-Nearest Neighbors Regression | [📖](/weeks/week-10.html "Week 10") | [🖥️](slides/10-generative.html "10-generative") |  |  |  |

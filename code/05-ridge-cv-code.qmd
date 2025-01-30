@@ -21,11 +21,9 @@ coef(fit) ## original scale
 fit$coef ## standardized scale
 ```
 
-
 ```{r}
 X <- scale(data.matrix(mtcars[, -1]), center = TRUE, scale = TRUE)
 ```
-
 
 ```{r}
 df <- data.frame(cbind(mtcars[, 1, drop=FALSE], X))
@@ -39,13 +37,11 @@ plot(ridge_fit$lambda, ridge_fit$GCV, type = "l", col = "darkgreen",
      ylab = "GCV", xlab = "Lambda", lwd = 3)
 ```
 
-
 ### glmnet::glmnet()
 
 By defualt, `glmnet()` standardizes the `x` variables with `standardize = TRUE`, and does not standardize the response (`standardize.response = FALSE`).
 
 `glmnet()` always return the coefficients at the original scale.
-
 
 #### Use standardized `X` as the original scale
 
@@ -87,7 +83,6 @@ ridge_cv_fit_ori$lambda.1se
 coef(ridge_cv_fit_ori, s = "lambda.min")
 ```
 
-
 ## Python implementation
 
 ```{python}
@@ -97,7 +92,6 @@ import matplotlib.pyplot as plt
 from sklearn.linear_model import Ridge, RidgeCV
 from sklearn.preprocessing import StandardScaler
 ```
-
 
 ```{python}
 mtcars = pd.read_csv("../data/mtcars.csv")
@@ -138,9 +132,7 @@ plt.legend()
 plt.show()
 ```
 
-
 Here we transform the coefficients back to the original scale when non-standardized `X` is used.
-
 
 ```{python}
 # Reverse standardization
@@ -176,4 +168,3 @@ plt.xlabel("Log(Lambda)")
 plt.ylabel("Coefficients")
 plt.show()
 ```
-
