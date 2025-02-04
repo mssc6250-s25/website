@@ -455,337 +455,219 @@
     "text": "Generative AI and Sharing/Reusing Code Policy\n\n\n\nYou are responsible for the content of all work submitted for this course.\nYou may use generative AI tools such as ChatGPT or DALL-E to generate a first draft of text for your assignments, provided that this use is appropriately documented and cited.\nLearn how to cite the use of AI in MLA and APA format, and more\n\n\n\n\n\n\n\n\n\n\n\n\n\nSharing/Reusing Code\n\nUnless explicitly stated otherwise, you may make use of any online resources, but you must explicitly cite where you obtained any code you directly use or use as inspiration in your solutions.\nAny recycled code that is discovered and is not explicitly cited will be treated as plagiarism, regardless of source.\n\n\n\n\n\nmssc6250-s25.github.io/website"
   },
   {
-    "objectID": "slides/04-lin-reg.html#linear-regression",
-    "href": "slides/04-lin-reg.html#linear-regression",
-    "title": "Linear Regression 📈",
-    "section": "Linear Regression",
-    "text": "Linear Regression\n\nLinear regression is an approach to supervised learning.\nIt assumes that the dependence of \\(Y\\) on \\(X_1, X_2, \\dots, X_k\\)1 is linear.\nTrue regression functions \\(f(x)\\) are never linear!\nAlthough it is overly simplistic, the linear model has distinct advantages in terms of its interpretability and often shows good predictive performance.\n\nlinear regression is extremely useful both conceptually and practically\nThe textbook ISL uses \\(p\\) instead of \\(k\\) to denote the number of predictors in the model. We use \\(k\\) here, but switch to \\(p\\) starting next week."
+    "objectID": "slides/06-lasso-vs.html#when-ols-doesnt-work-well",
+    "href": "slides/06-lasso-vs.html#when-ols-doesnt-work-well",
+    "title": "Feature Selection and LASSO \n",
+    "section": "When OLS Doesn’t Work Well",
+    "text": "When OLS Doesn’t Work Well\nWhen \\(p \\gg n\\), it is often that many of the features in the model are not associated with the response.\n\nModel Interpretability: By removing irrelevant features \\(X_j\\)s, i.e., setting the corresponding \\(\\beta_j\\)s to zero, we can obtain a model that is more easily interpreted. (Feature/Variable selection)\nLeast squares is unlikely to yield any coefficient estimates that are exactly zero."
   },
   {
-    "objectID": "slides/04-lin-reg.html#why-multiple-linear-regression-mlr-model",
-    "href": "slides/04-lin-reg.html#why-multiple-linear-regression-mlr-model",
-    "title": "Linear Regression 📈",
-    "section": "Why Multiple Linear Regression (MLR) Model",
-    "text": "Why Multiple Linear Regression (MLR) Model\n\nOur target response may be affected by several factors.\nTotal sales \\((Y)\\) and amount of money spent on advertising on YouTube (YT) \\((X_1)\\), Facebook (FB) \\((X_2)\\), Instagram (IG) \\((X_3)\\).1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPredict sales based on the three advertising expenditures and see which medium is more effective.\nIn ISL, the predictors are TV, radio and newspaper."
+    "objectID": "slides/06-lasso-vs.html#variable-selection",
+    "href": "slides/06-lasso-vs.html#variable-selection",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Variable Selection",
+    "text": "Variable Selection\n\nWe have a large pool of candidate regressors, of which only a few are likely to be important.\n\nTwo “conflicting” goals in model building:\n\nas many features as possible for better predictive performance on new data (smaller bias).\n\nas few regressors as possible because as the number of regressors increases,\n\n\n\\(\\mathrm{Var}(\\hat{y})\\) will increase (larger variance)\ncost more in data collecting and maintaining\nmore model complexity\n\n\n\nA compromise between the two hopefully leads to the “best” regression equation.\n\nWhat does best mean?\n\n\nThere is no unique definition of “best”, and different methods specify different subsets of the candidate regressors as best."
   },
   {
-    "objectID": "slides/04-lin-reg.html#fit-separate-simple-linear-regression-slr-models",
-    "href": "slides/04-lin-reg.html#fit-separate-simple-linear-regression-slr-models",
-    "title": "Linear Regression 📈",
-    "section": "Fit Separate Simple Linear Regression (SLR) Models",
-    "text": "Fit Separate Simple Linear Regression (SLR) Models\n\n\n\n❌ Fitting a separate SLR model for each predictor is not satisfactory."
+    "objectID": "slides/06-lasso-vs.html#three-classes-of-methods",
+    "href": "slides/06-lasso-vs.html#three-classes-of-methods",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Three Classes of Methods",
+    "text": "Three Classes of Methods\n\n\nSubset Selection (ISL Sec. 6.1) Identify a subset of the \\(p\\) predictors that we believe to be related to the response.\n\nNeed a selection method and a selection criterion.\nCovered in MSSC 5780 slides\n\n\n\n\n\n\n\nShrinkage (ISL Sec. 6.2) Fit a model that forces some coefficients to be shrunk to zero.\n\n\nLasso (Discussed in MSSC 6250)  \n\n\n\n\n\n\n\n\nDimension Reduction (ISL Sec. 6.3) Find \\(m\\) representative features that are linear combinations of the \\(p\\) original predictors (\\(m \\ll p\\)), then fit least squares.\n\nPrincipal component regression (Unsupervised)  \nPartial least squares (Supervised)"
   },
   {
-    "objectID": "slides/04-lin-reg.html#dont-fit-a-separate-simple-linear-regression",
-    "href": "slides/04-lin-reg.html#dont-fit-a-separate-simple-linear-regression",
-    "title": "Linear Regression 📈",
-    "section": "Don’t Fit a Separate Simple Linear Regression",
-    "text": "Don’t Fit a Separate Simple Linear Regression\n\n👉 How to make a single prediction of sales given levels of the 3 advertising media budgets?\n\n How to predict the sales when the amount spent on YT is 50, 100 on FB and 30 on IG? \n\n\n\n\n\n👉 Each regression equation ignores the other 2 media in forming coefficient estimates.\n\n The effect of FB advertising on sales may be increased or decreased when YT and IG advertising are in the model. \n IG advertising may have no impact on sales when YT and FB advertising are in the model. \n\n\n\n\n\n\n👍👍 Better approach: extend the SLR model so that it can directly accommodate multiple predictors."
+    "objectID": "slides/06-lasso-vs.html#why-lasso",
+    "href": "slides/06-lasso-vs.html#why-lasso",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Why Lasso?",
+    "text": "Why Lasso?\n\n\nSubset selection methods\n\nmay be computationally infeasible (fit OLS over millions of times)\ndo not explore all possible subset models (no global solution)\n\n\n\n\nRidge regression does shrink coefficients, but still include all predictors.\nLasso regularizes coefficients so that some coefficients are shrunk to zero, doing feature selection.\nLike ridge regression, for a given \\(\\lambda\\), Lasso only fits a single model.\n\nRidge OK for prediction, but bad at interpretation https://stats.stackexchange.com/questions/76518/what-is-the-time-complexity-of-lasso-regression same computation complexity as OLS \\(O(p^2n)\\) when \\(p &lt; n\\) and \\(O(p^3)\\)"
   },
   {
-    "objectID": "slides/04-lin-reg.html#multiple-linear-regression-model",
-    "href": "slides/04-lin-reg.html#multiple-linear-regression-model",
-    "title": "Linear Regression 📈",
-    "section": "Multiple Linear Regression Model",
-    "text": "Multiple Linear Regression Model\n\nThe population MLR model: \\[Y_i= \\beta_0 + \\beta_1X_{i1} + \\beta_2X_{i2} + \\dots + \\beta_kX_{ik} + \\epsilon_i\\]  \n\nIn the advertising example, \\(k = 3\\) and \\[\\texttt{sales} = \\beta_0 + \\beta_1 \\times \\texttt{YouTube} + \\beta_2 \\times  \\texttt{Facebook} + \\beta_3 \\times \\texttt{Instagram} + \\epsilon\\]\n\nModel assumptions:\n\n\\(\\epsilon_i \\stackrel{iid}{\\sim} N(0, \\sigma^2)\\)\n\n\n\n\n\nHow many parameters are there in the model?"
+    "objectID": "slides/06-lasso-vs.html#what-is-lasso",
+    "href": "slides/06-lasso-vs.html#what-is-lasso",
+    "title": "Feature Selection and LASSO \n",
+    "section": "What is Lasso?",
+    "text": "What is Lasso?\nDifferent from the Ridge regression that adds \\(\\ell_2\\) norm, Lasso adds \\(\\ell_1\\) penalty on the parameters:\n\\[\\begin{align}\n\\widehat{\\boldsymbol \\beta}^\\text{l} =& \\, \\, \\mathop{\\mathrm{arg\\,min}}_{\\boldsymbol \\beta} \\lVert \\mathbf{y}- \\mathbf{X}\\boldsymbol \\beta\\rVert_2^2 + n \\lambda \\lVert\\boldsymbol \\beta\\rVert_1\\\\\n=& \\, \\, \\mathop{\\mathrm{arg\\,min}}_{\\boldsymbol \\beta} \\frac{1}{n} \\sum_{i=1}^n (y_i - x_i' \\boldsymbol \\beta)^2 + \\lambda \\sum_{j=1}^p |\\beta_j|,\n\\end{align}\\]\n\nThe \\(\\ell_1\\) penalty forces some of the coefficient estimates to be exactly equal to zero when \\(\\lambda\\) is sufficiently large, yielding sparse models."
   },
   {
-    "objectID": "slides/04-lin-reg.html#sample-mlr-model",
-    "href": "slides/04-lin-reg.html#sample-mlr-model",
-    "title": "Linear Regression 📈",
-    "section": "Sample MLR Model",
-    "text": "Sample MLR Model\n\nGiven the training sample \\((x_{11}, \\dots, x_{1k}, y_1), (x_{21}, \\dots, x_{2k}, y_2), \\dots, (x_{n1}, \\dots, x_{nk}, y_n),\\)\n\nThe sample MLR model to be trained: \\[\\begin{align*}\ny_i &= \\beta_0 + \\beta_1x_{i1} + \\beta_2x_{i2} + \\dots + \\beta_k x_{ik} + \\epsilon_i \\\\\n&= \\beta_0 + \\sum_{j=1}^k\\beta_j x_{ij} + \\epsilon_i, \\quad i = 1, 2, \\dots, n\n\\end{align*}\\]"
+    "objectID": "slides/06-lasso-vs.html#ell_2-vs.-ell_1",
+    "href": "slides/06-lasso-vs.html#ell_2-vs.-ell_1",
+    "title": "Feature Selection and LASSO \n",
+    "section": "\n\\(\\ell_2\\) vs. \\(\\ell_1\\)\n",
+    "text": "\\(\\ell_2\\) vs. \\(\\ell_1\\)\n\n\nRidge shrinks big coefficients much more than lasso.\nLasso has larger penalty on small coefficients.\n\n\n\nRidge shrinks big coefficients much more than lasso.\nLasso has larger penalty on small coefficients. This is one of the intuitions why Lasso has exact zero coefficients after shrinkage. Because when punishing small coefficients a lot more, it may be better to set them exactly equal to zero to get smaller loss or objective value."
   },
   {
-    "objectID": "slides/04-lin-reg.html#regression-hyperplane",
-    "href": "slides/04-lin-reg.html#regression-hyperplane",
-    "title": "Linear Regression 📈",
-    "section": "Regression Hyperplane",
-    "text": "Regression Hyperplane\n\n\nSLR: regression line\nMLR: regression hyperplane or response surface\n\\(y = \\beta_0 + \\beta_1x_1 + \\beta_{2}x_2 + \\epsilon\\)\n\\(E(y \\mid x_1, x_2) = 50 + 10x_1 + 7x_2\\)"
+    "objectID": "slides/06-lasso-vs.html#elemstatlearnprostate-data",
+    "href": "slides/06-lasso-vs.html#elemstatlearnprostate-data",
+    "title": "Feature Selection and LASSO \n",
+    "section": "\nElemStatLearn::prostate Data",
+    "text": "ElemStatLearn::prostate Data\n\n\n\n\n\n\n\n\nlcavol\nlweight\nage\nlbph\nsvi\nlcp\ngleason\npgg45\nlpsa\ntrain\n\n\n\n-0.580\n2.77\n50\n-1.386\n0\n-1.39\n6\n0\n-0.431\nTRUE\n\n\n-0.994\n3.32\n58\n-1.386\n0\n-1.39\n6\n0\n-0.163\nTRUE\n\n\n-0.511\n2.69\n74\n-1.386\n0\n-1.39\n7\n20\n-0.163\nTRUE\n\n\n-1.204\n3.28\n58\n-1.386\n0\n-1.39\n6\n0\n-0.163\nTRUE\n\n\n0.751\n3.43\n62\n-1.386\n0\n-1.39\n6\n0\n0.372\nTRUE\n\n\n-1.050\n3.23\n50\n-1.386\n0\n-1.39\n6\n0\n0.765\nTRUE\n\n\n0.737\n3.47\n64\n0.615\n0\n-1.39\n6\n0\n0.765\nFALSE\n\n\n0.693\n3.54\n58\n1.537\n0\n-1.39\n6\n0\n0.854\nTRUE"
   },
   {
-    "objectID": "slides/04-lin-reg.html#response-surface",
-    "href": "slides/04-lin-reg.html#response-surface",
-    "title": "Linear Regression 📈",
-    "section": "Response Surface",
-    "text": "Response Surface\n\n\\(y = \\beta_0 + \\beta_1x_1 + \\beta_{2}x_2 + \\beta_{11}x_1^2 + \\beta_{22}x_2^2 + \\beta_{12}x_1x_2 + \\epsilon\\)\n\\(E(y \\mid x_1, x_2) = 800+10x_1+7x_2 -8.5x_1^2-5x_2^2- 4x_1x_2\\)\n😎 🤓 A linear regression model can describe a complex nonlinear relationship between the response and predictors!"
+    "objectID": "slides/06-lasso-vs.html#cv.glmnetalpha-1",
+    "href": "slides/06-lasso-vs.html#cv.glmnetalpha-1",
+    "title": "Feature Selection and LASSO \n",
+    "section": "cv.glmnet(alpha = 1)",
+    "text": "cv.glmnet(alpha = 1)\n\nlasso_fit &lt;- cv.glmnet(x = data.matrix(prostate[, 1:8]), y = prostate$lpsa, nfolds = 10, \n                       alpha = 1)\n\n\nCodeplot(lasso_fit)\nplot(lasso_fit$glmnet.fit, \"lambda\")\n\n\ngenridge Package"
   },
   {
-    "objectID": "slides/04-lin-reg.html#ordinary-least-squares-estimation-of-the-coefficients",
-    "href": "slides/04-lin-reg.html#ordinary-least-squares-estimation-of-the-coefficients",
-    "title": "Linear Regression 📈",
-    "section": "Ordinary Least Squares Estimation of the Coefficients",
-    "text": "Ordinary Least Squares Estimation of the Coefficients\n\\[\\begin{align*}\ny_i &= \\beta_0 + \\beta_1x_{i1} + \\beta_2x_{i2} + \\dots + \\beta_k x_{ik} + \\epsilon_i \\\\\n&= \\beta_0 + \\sum_{j=1}^k\\beta_j x_{ij} + \\epsilon_i, \\quad i = 1, 2, \\dots, n\n\\end{align*}\\]\n\nThe least-squares function Sum of Squared Residuals (\\(SS_{res}\\))1 is \\[SS_{res}(\\alpha_0, \\alpha_1, \\dots, \\alpha_k) = \\sum_{i=1}^n\\left(y_i - \\alpha_0 - \\sum_{j=1}^k\\alpha_j x_{ij}\\right)^2\\]\n\n\n\\(SS_{res}\\) must be minimized with respect to the coefficients, i.e., \\[(b_0, b_1, \\dots, b_k) = \\underset{{\\alpha_0, \\alpha_1, \\dots, \\alpha_k}}{\\mathrm{arg \\, min}}  SS_{res}(\\alpha_0, \\alpha_1, \\dots, \\alpha_k)\\]\n\nIn ISL, RSS is used for Residual Sum of Squares."
+    "objectID": "slides/06-lasso-vs.html#lasso-coefficients",
+    "href": "slides/06-lasso-vs.html#lasso-coefficients",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Lasso Coefficients",
+    "text": "Lasso Coefficients\n\nlambda.min contains more nonzero coefficients.\nLarger penalty \\(\\lambda\\) forces more coefficients to be zero, and the model is more “sparse”.\n\n\n\n\ncoef(lasso_fit, s = \"lambda.min\")\n\n9 x 1 sparse Matrix of class \"dgCMatrix\"\n                  s1\n(Intercept)  0.17999\nlcavol       0.56099\nlweight      0.61908\nage         -0.02069\nlbph         0.09531\nsvi          0.75180\nlcp         -0.09912\ngleason      0.04745\npgg45        0.00432\n\n\n\n\ncoef(lasso_fit, s = \"lambda.1se\")\n\n9 x 1 sparse Matrix of class \"dgCMatrix\"\n               s1\n(Intercept) 0.644\nlcavol      0.455\nlweight     0.314\nage         .    \nlbph        .    \nsvi         0.367\nlcp         .    \ngleason     .    \npgg45       ."
   },
   {
-    "objectID": "slides/04-lin-reg.html#geometry-of-least-squares-estimation",
-    "href": "slides/04-lin-reg.html#geometry-of-least-squares-estimation",
-    "title": "Linear Regression 📈",
-    "section": "Geometry of Least Squares Estimation",
-    "text": "Geometry of Least Squares Estimation"
+    "objectID": "slides/06-lasso-vs.html#one-variable-lasso-and-shrinkage-concept",
+    "href": "slides/06-lasso-vs.html#one-variable-lasso-and-shrinkage-concept",
+    "title": "Feature Selection and LASSO \n",
+    "section": "One-Variable Lasso and Shrinkage: Concept",
+    "text": "One-Variable Lasso and Shrinkage: Concept\n\nLasso solution does not have an analytic or closed form in general.\nThe univariate regression model with no intercept\n\n\\[\\underset{\\beta}{\\mathop{\\mathrm{arg\\,min}}}  \\quad \\frac{1}{n} \\sum_{i=1}^n (y_i - x_i \\beta)^2 + \\lambda |\\beta|\\]\nWith some derivation, and also utilize the OLS solution of the loss function, we have\n\\[\\begin{align}\n&\\frac{1}{n} \\sum_{i=1}^n (y_i - x_i \\beta)^2 \\\\\n=& \\frac{1}{n} \\sum_{i=1}^n (y_i - x_i b + x_i b - x_i \\beta)^2 \\\\\n=& \\frac{1}{n} \\sum_{i=1}^n \\Big[ \\underbrace{(y_i - x_i b)^2}_{\\text{I}} + \\underbrace{2(y_i - x_i b)(x_i b - x_i \\beta)}_{\\text{II}} + \\underbrace{(x_i b - x_i \\beta)^2}_{\\text{III}} \\Big]\n\\end{align}\\]"
   },
   {
-    "objectID": "slides/04-lin-reg.html#least-squares-normal-equations",
-    "href": "slides/04-lin-reg.html#least-squares-normal-equations",
-    "title": "Linear Regression 📈",
-    "section": "Least-squares Normal Equations",
-    "text": "Least-squares Normal Equations\n\\[\\begin{align*}\n\\left.\\frac{\\partial SS_{res}}{\\partial\\alpha_0}\\right\\vert_{b_0, b_1, \\dots, b_k} &= -2 \\sum_{i=1}^n\\left(y_i - \\alpha_0 - \\sum_{j=1}^k \\alpha_j x_{ij}\\right) = 0\\\\\n\\left.\\frac{\\partial SS_{res}}{\\partial\\alpha_j}\\right\\vert_{b_0, b_1, \\dots, b_k} &= -2 \\sum_{i=1}^n\\left(y_i - \\alpha_0 - \\sum_{j=1}^k \\alpha_j x_{ij}\\right)x_{ij} = 0, \\quad j = 1, 2, \\dots, k\n\\end{align*}\\]\n\n\\(k + 1\\) equations with \\(k + 1\\) unknown parameters.\nThe ordinary least squares estimators are the solutions to the normal equations.\n\n\n\n🍹 🍺 🍸 🥂 I buy you a drink if you solve the equations by hand without using matrix notations or operations!"
+    "objectID": "slides/06-lasso-vs.html#one-variable-lasso-and-shrinkage-concept-1",
+    "href": "slides/06-lasso-vs.html#one-variable-lasso-and-shrinkage-concept-1",
+    "title": "Feature Selection and LASSO \n",
+    "section": "One-Variable Lasso and Shrinkage: Concept",
+    "text": "One-Variable Lasso and Shrinkage: Concept\n\\[\\begin{align}\n& \\sum_{i=1}^n 2(y_i - x_i b)(x_i b - x_i \\beta)\n= (b - \\beta) {\\color{OrangeRed}{\\sum_{i=1}^n 2(y_i - x_i b)x_i}}\n= (b - \\beta) {\\color{OrangeRed}{0}} = 0\n\\end{align}\\]\nOur original problem reduces to just the third term and the penalty\n\\[\\begin{align}\n&\\underset{\\beta}{\\mathop{\\mathrm{arg\\,min}}}  \\quad \\frac{1}{n} \\sum_{i=1}^n (x_ib - x_i \\beta)^2 + \\lambda |\\beta| \\\\\n=&\\underset{\\beta}{\\mathop{\\mathrm{arg\\,min}}}  \\quad \\frac{1}{n} \\left[ \\sum_{i=1}^n x_i^2 \\right] (b - \\beta)^2 + \\lambda |\\beta|\n\\end{align}\n\\] Without loss of generality, assume that \\(x\\) is standardized with mean 0 and variance \\(\\frac{1}{n}\\sum_{i=1}^n x_i^2 = 1\\).\nb is arbitrary We learned that to solve for an optimizer, we can set the gradient to be zero. However, the function is not everywhere differentiable"
   },
   {
-    "objectID": "slides/04-lin-reg.html#interpreting-coefficients",
-    "href": "slides/04-lin-reg.html#interpreting-coefficients",
-    "title": "Linear Regression 📈",
-    "section": "Interpreting Coefficients",
-    "text": "Interpreting Coefficients\n\n\n\n            Estimate Std. Error t value Pr(&gt;|t|)\n(Intercept)    2.939      0.312   9.422     0.00\nyoutube        0.046      0.001  32.809     0.00\nfacebook       0.189      0.009  21.893     0.00\ninstagram     -0.001      0.006  -0.177     0.86\n\n\n\n\\[\\hat{y} = b_0 + b_1 x_1 + \\cdots + b_kx_k\\]\n\\[\\widehat{\\texttt{sales}} = 2.939 + 0.046 \\times \\texttt{YouTube} + 0.189 \\times  \\texttt{Facebook} - 0.001 \\times \\texttt{Instagram}\\]\n\n\n\\(b_1\\): Holding all other predictors fixed, for one unit increase of Youtube, the sales is expected to be increased, on average, by 0.046 units.\n\n\\(b_2\\): All else held constant, one unit increase of Facebook leads to, on average, 0.189 unit increase of sales.\n\n\\(b_0\\): The sales with no expenditures on Youtube, Facebook, and Instagram is expected to be 2.939. (Make sense?!)"
+    "objectID": "slides/06-lasso-vs.html#one-variable-lasso-and-shrinkage-concept-2",
+    "href": "slides/06-lasso-vs.html#one-variable-lasso-and-shrinkage-concept-2",
+    "title": "Feature Selection and LASSO \n",
+    "section": "One-Variable Lasso and Shrinkage: Concept",
+    "text": "One-Variable Lasso and Shrinkage: Concept\nThis leads to a general problem of\n\\[\\underset{\\beta}{\\mathop{\\mathrm{arg\\,min}}}  \\quad (\\beta - b)^2 + \\lambda |\\beta|,\\] For \\(\\beta &gt; 0\\),\n\\[\\begin{align}\n0 =& \\frac{\\partial}{\\partial \\beta} \\,\\, \\left[(\\beta - b)^2 + \\lambda |\\beta| \\right] = 2 (\\beta - b) + \\lambda \\\\\n\\Longrightarrow \\quad \\beta =&\\, b - \\lambda/2\n\\end{align}\\]\n\\[\\begin{align}\n\\widehat{\\beta}^l &=\n        \\begin{cases}\n        b - \\lambda/2 & \\text{if} \\quad b &gt; \\lambda/2 \\\\\n        0 & \\text{if} \\quad |b| \\le \\lambda/2 \\\\\n        b + \\lambda/2 & \\text{if} \\quad b &lt; -\\lambda/2 \\\\\n        \\end{cases}\n\\end{align}\\]\n\nLasso provides a soft-thresholding solution.\nWhen \\(\\lambda\\) is large enough, \\(\\widehat{\\beta}^l\\) will be shrunk to zero.\n\nb is arbitrary We learned that to solve for an optimizer, we can set the gradient to be zero. However, the function is not everywhere differentiable"
   },
   {
-    "objectID": "slides/04-lin-reg.html#inference-on-coefficients",
-    "href": "slides/04-lin-reg.html#inference-on-coefficients",
-    "title": "Linear Regression 📈",
-    "section": "Inference on Coefficients",
-    "text": "Inference on Coefficients\n\n\n\n\n\nThe \\((1-\\alpha)100\\%\\) Wald confidence interval (CI) for \\(\\beta_j\\), \\(j = 0, 1, \\dots, k\\) is\n\n\\[\\left(b_j- t_{\\alpha/2, n-p}~se(b_j), \\quad b_j + t_{\\alpha/2, n-p}~ se(b_j)\\right)\\]\n\n\n\n            2.5 % 97.5 %\n(Intercept)  2.32   3.55\nyoutube      0.04   0.05\nfacebook     0.17   0.21\ninstagram   -0.01   0.01\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\n\nThese are marginal CIs seperately for each \\(b_j\\).\nIndividual CI ignores the correlation between \\(b_j\\)s.\nBetter to consider elliptically-shaped regions."
+    "objectID": "slides/06-lasso-vs.html#objective-function",
+    "href": "slides/06-lasso-vs.html#objective-function",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Objective function",
+    "text": "Objective function\nThe objective function is \\((\\beta - 1)^2 + \\lambda |\\beta|\\). Once the penalty is larger than 2, the optimizer would stay at 0.\n\n\n\n\n\n\nBased on our analysis, once the penalty is larger than 2, the optimizer would stay at 0."
   },
   {
-    "objectID": "slides/04-lin-reg.html#collinearity",
-    "href": "slides/04-lin-reg.html#collinearity",
-    "title": "Linear Regression 📈",
-    "section": "Collinearity",
-    "text": "Collinearity\n\nInterpretation makes sense when predictors are not highly correlated.\n\nCorrelations amongst predictors cause problems (Collinearity).\n\n\nLarge variance of coefficients.\n\nLarge magnitude of coefficients.\n\nInstable and wrong signed coefficients.\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nThink about the standard error size. Do we tend to conclude \\(\\beta_j = 0\\) or not?"
+    "objectID": "slides/06-lasso-vs.html#variable-selection-property-and-shrinkage",
+    "href": "slides/06-lasso-vs.html#variable-selection-property-and-shrinkage",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Variable Selection Property and Shrinkage",
+    "text": "Variable Selection Property and Shrinkage\n\nThe proportion of times a variable has a zero parameter estimation.\n\\(\\mathbf{y}= \\mathbf{X}\\boldsymbol \\beta + \\epsilon = \\sum_{j = 1}^{20} X_j \\times 0.4^{\\sqrt{j}} + N(0, 1).\\)\n\\(\\beta_1 = 0.4, \\beta_2 = 0.4^{\\sqrt{2}}, \\dots, \\beta_{20} = 0.4^{\\sqrt{20}}\\)\n\n\n\nSince Lasso shrinks some parameter to exactly zero, it has the variable selection property — the ones that are nonzero are the ones being selected. This is a very nice properly in high-dimensional data analysis, where we cannot estimate the effects of all variables.\nWe can then look at the proportion of times a variable has a non-zero parameter estimation"
   },
   {
-    "objectID": "slides/04-lin-reg.html#extrapolation",
-    "href": "slides/04-lin-reg.html#extrapolation",
-    "title": "Linear Regression 📈",
-    "section": "Extrapolation",
-    "text": "Extrapolation\n\nRegression models are intended as interpolation equations over the range of the regressors used to fit the model.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nDo not use regression for time series forecasting!"
+    "objectID": "slides/06-lasso-vs.html#bias-variance-trade-off",
+    "href": "slides/06-lasso-vs.html#bias-variance-trade-off",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Bias-Variance Trade-off",
+    "text": "Bias-Variance Trade-off"
   },
   {
-    "objectID": "slides/04-lin-reg.html#regression-is-not-for-causal-inference",
-    "href": "slides/04-lin-reg.html#regression-is-not-for-causal-inference",
-    "title": "Linear Regression 📈",
-    "section": "Regression is Not for Causal Inference",
-    "text": "Regression is Not for Causal Inference\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClaims of causality should be avoided for observational data."
+    "objectID": "slides/06-lasso-vs.html#constrained-optimization",
+    "href": "slides/06-lasso-vs.html#constrained-optimization",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Constrained Optimization",
+    "text": "Constrained Optimization\n\n\nLasso \\[\\begin{align}\n\\min_{\\boldsymbol \\beta} \\,\\,& \\lVert \\mathbf{y}- \\mathbf{X}\\boldsymbol \\beta\\rVert_2^2 + n\\lambda\\lVert\\boldsymbol \\beta\\rVert_1\n\\end{align}\\]\n\\[\\begin{align}\n\\min_{\\boldsymbol \\beta} \\,\\,& \\lVert \\mathbf{y}- \\mathbf{X}\\boldsymbol \\beta\\rVert_2^2\\\\\n\\text{s.t.} \\,\\, & \\sum_{j=1}^p|\\beta_j| \\leq s\n\\end{align}\\]\n\nRidge \\[\\begin{align}\n\\min_{\\boldsymbol \\beta} \\,\\,& \\lVert \\mathbf{y}- \\mathbf{X}\\boldsymbol \\beta\\rVert_2^2 + n\\lambda\\lVert\\boldsymbol \\beta\\rVert_2^2\n\\end{align}\\]\n\\[\\begin{align}\n\\min_{\\boldsymbol \\beta} \\,\\,& \\lVert \\mathbf{y}- \\mathbf{X}\\boldsymbol \\beta\\rVert_2^2\\\\\n\\text{s.t.} \\,\\, & \\sum_{j=1}^p \\beta_j^2 \\leq s\n\\end{align}\\]\n\n\n\nFor every value of \\(\\lambda\\), there is some \\(s\\) such that the two optimization problems are equivalent, giving the same coefficient estimates.\nThe \\(\\ell_1\\) and \\(\\ell_2\\) penalties form a constraint region that \\(\\beta_j\\) can move around or budget for how large \\(\\beta_j\\) can be.\nLarger \\(s\\) (smaller \\(\\lambda\\)) means a larger region \\(\\beta_j\\) can freely move."
   },
   {
-    "objectID": "slides/04-lin-reg.html#practical-significance-vs.-statisical-significance",
-    "href": "slides/04-lin-reg.html#practical-significance-vs.-statisical-significance",
-    "title": "Linear Regression 📈",
-    "section": "Practical Significance vs. Statisical Significance",
-    "text": "Practical Significance vs. Statisical Significance\n\n\n\n\n\n\nImportant\n\n\n\n\n\n\\(H_0:\\beta_j = 0\\) will always be rejected as long as the sample size is large enough, even \\(x_j\\) has a very small effect on \\(y\\).\n\nConsider the practical significance of the result, not just the statistical significance.\nUse confidence intervals to draw conclusions instead of relying only on p-values.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\n\nIf the sample size is small, there may not be enough evidence to reject \\(H_0:\\beta_j = 0\\).\n\n\nDo Not immediately conclude that the variable has no association with the response.\nThere may be a linear association that is just not strong enough to detect given your data, or there may be a non-linear association.\n\n\n\n\n\n\n\np-value is a dichotomous approach"
+    "objectID": "slides/06-lasso-vs.html#geometric-representation-of-optimization",
+    "href": "slides/06-lasso-vs.html#geometric-representation-of-optimization",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Geometric Representation of Optimization",
+    "text": "Geometric Representation of Optimization\n\nWhat do the constraints look like geometrically?\n\n\nWhen \\(p = 2\\),\n\nthe \\(\\ell_1\\) constraint is \\(|\\beta_1| + |\\beta_2| \\leq s\\) (diamond)\nthe \\(\\ell_2\\) constraint is \\(\\beta_1^2 + \\beta_2^2 \\leq s\\) (circle)\n\n\n\n\n\n\n\n\nSource: https://stats.stackexchange.com/questions/350046/the-graphical-intuiton-of-the-lasso-in-case-p-2\n\n\n\n\nthe solution has to stay within the shaded area. The objective function is shown with the contour, and once the contained area is sufficiently small, some β parameter will be shrunk to exactly zero. On the other hand, the Ridge regression also has a similar interpretation. However, since the constrained areas is a circle, it will never for the estimated parameters to be zero."
   },
   {
-    "objectID": "slides/04-lin-reg.html#regression-model-in-matrix-form",
-    "href": "slides/04-lin-reg.html#regression-model-in-matrix-form",
-    "title": "Linear Regression 📈",
-    "section": "Regression Model in Matrix Form",
-    "text": "Regression Model in Matrix Form\n\\[y_i= \\beta_0 + \\beta_1x_{i1} + \\beta_2x_{i2} + \\dots + \\beta_kx_{ik} + \\epsilon_i, \\quad \\epsilon_i \\stackrel{iid}{\\sim} N(0, \\sigma^2), \\quad i = 1, 2, \\dots, n\\]\n\n\n\\[{\\bf y} = {\\bf X} \\boldsymbol{\\beta} + \\boldsymbol{\\epsilon}\\] where\n\\[\\begin{align}\n\\bf y = \\begin{bmatrix}\ny_1 \\\\\ny_2 \\\\\n\\vdots \\\\\ny_n \\end{bmatrix},\\quad\n\\bf X = \\begin{bmatrix}\n  1 & x_{11} & x_{12} & \\cdots & x_{1k} \\\\\n  1 & x_{21} & x_{22} & \\cdots & x_{2k} \\\\\n  \\vdots & \\vdots  & \\vdots  & \\ddots & \\vdots  \\\\\n  1 & x_{n1} & x_{n2} & \\cdots & x_{nk} \\end{bmatrix}, \\quad\n\\boldsymbol{\\beta} = \\begin{bmatrix}\n\\beta_0 \\\\\n\\beta_1 \\\\\n\\vdots \\\\\n\\beta_k \\end{bmatrix} , \\quad\n\\boldsymbol{\\epsilon} = \\begin{bmatrix}\n\\epsilon_1 \\\\\n\\epsilon_2 \\\\\n\\vdots \\\\\n\\epsilon_n\\end{bmatrix}\n\\end{align}\\]\n\n\n\\({\\bf X}_{n \\times p}\\): Design matrix\n\n\\(\\boldsymbol{\\epsilon} \\sim MVN_n({\\bf 0}, \\sigma^2 {\\bf I}_n)\\)1\n\n\n\nFor simplicity and convenience, \\(N({\\bf a}, {\\bf B})\\) represents a multivariate normal distribution with mean vector \\({\\bf a}\\) and covariance matrix \\({\\bf B}\\)."
+    "objectID": "slides/06-lasso-vs.html#way-of-shrinking-p-1-and-standardized-x",
+    "href": "slides/06-lasso-vs.html#way-of-shrinking-p-1-and-standardized-x",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Way of Shrinking (\\(p = 1\\) and standardized \\(x\\))",
+    "text": "Way of Shrinking (\\(p = 1\\) and standardized \\(x\\))\n\n\nLasso Soft-thresholding\n\n\\[\\begin{align}\n\\widehat{\\beta}^l &=\n        \\begin{cases}\n        b - \\lambda/2 & \\text{if} \\quad b &gt; \\lambda/2 \\\\\n        0 & \\text{if} \\quad |b| &lt; \\lambda/2 \\\\\n        b + \\lambda/2 & \\text{if} \\quad b &lt; -\\lambda/2 \\\\\n        \\end{cases}\n\\end{align}\\]\n\n\n\n\n\n\n\n\n\n\nRidge Proportional shrinkage\n\\[\\begin{align}\n\\widehat{\\beta}^r = \\dfrac{b}{1+\\lambda}\\end{align}\\]"
   },
   {
-    "objectID": "slides/04-lin-reg.html#least-squares-estimation-in-matrix-form",
-    "href": "slides/04-lin-reg.html#least-squares-estimation-in-matrix-form",
-    "title": "Linear Regression 📈",
-    "section": "Least Squares Estimation in Matrix Form",
-    "text": "Least Squares Estimation in Matrix Form\n\n\\[\\begin{align}\nS(\\boldsymbol{\\beta}) = \\sum_{i=1}^n\\epsilon_i^2 = \\boldsymbol{\\epsilon}'\\boldsymbol{\\epsilon} &= ({\\bf y} - {\\bf X} \\boldsymbol{\\beta})'({\\bf y} - {\\bf X} \\boldsymbol{\\beta}) \\\\\n&={\\bf y}'{\\bf y} - \\boldsymbol{\\beta}'{\\bf X}'{\\bf y} - {\\bf y}'{\\bf X} \\boldsymbol{\\beta} + \\boldsymbol{\\beta}' {\\bf X}' {\\bf X} \\boldsymbol{\\beta} \\\\\n&={\\bf y}'{\\bf y} - 2\\boldsymbol{\\beta}'{\\bf X}'{\\bf y} + \\boldsymbol{\\beta}' {\\bf X}' {\\bf X} \\boldsymbol{\\beta}\n\\end{align}\\]\n\n\nLet \\({\\bf t}\\) and \\({\\bf a}\\) be \\(n \\times 1\\) column vectors, and \\({\\bf A}_{n \\times n}\\) is a symmetric matrix.\n\n\\(\\frac{\\partial {\\bf t}'{\\bf a} }{\\partial {\\bf t}} = \\frac{\\partial {\\bf a}'{\\bf t} }{\\partial {\\bf t}} = {\\bf a}\\)\n\\(\\frac{\\partial {\\bf t}'{\\bf A} {\\bf t}}{\\partial {\\bf t}} = 2{\\bf A} {\\bf t}\\)\n\n\n\nNormal equations: \\(\\begin{align} \\left.\\frac{\\partial S}{\\partial \\boldsymbol{\\beta}}\\right \\vert_{\\bf b} = -2 {\\bf X}' {\\bf y} + 2 {\\bf X}' {\\bf X} {\\bf b} = \\boldsymbol{0} \\end{align}\\)\n\n\n\n\nLSE for \\(\\boldsymbol{\\beta}\\):  \\(\\begin{align} \\boxed{{\\bf b} = \\arg \\min _{\\boldsymbol{\\beta}} ({\\bf y} - {\\bf X} \\boldsymbol{\\beta})'({\\bf y} - {\\bf X} \\boldsymbol{\\beta}) = ({\\bf X}' {\\bf X})^{-1} {\\bf X}' \\bf y} \\end{align}\\)  provided that \\({\\bf X}' {\\bf X}\\) is full rank."
+    "objectID": "slides/06-lasso-vs.html#predictive-performance",
+    "href": "slides/06-lasso-vs.html#predictive-performance",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Predictive Performance",
+    "text": "Predictive Performance\nPerform well (lower test MSE) when\n\n\nLasso (—)\n\nA relatively small number of \\(\\beta_j\\)s are substantially large, and the remaining \\(\\beta_k\\)s are small or equal to zero.\nReduce more bias\n\n\n\n\n\nISL Fig. 6.9\n\n\n\n\nRidge (\\(\\cdots\\cdots\\))\n\nThe response is a function of many predictors, all with coefficients of roughly equal size.\nReduce more variance\n\n\n\n\n\nISL Fig. 6.8\n\n\n\n\n\nRidge focus more on variance stablization Lasso focus more on model selection and interpretbility higher R^2 (larger lambda), more overfitting, so low bias high variance"
   },
   {
-    "objectID": "slides/04-lin-reg.html#normal-equations",
-    "href": "slides/04-lin-reg.html#normal-equations",
-    "title": "Linear Regression 📈",
-    "section": "Normal Equations",
-    "text": "Normal Equations\n\\(({\\bf X}' {\\bf X}) {\\bf b} = {\\bf X}' {\\bf y}\\)"
+    "objectID": "slides/06-lasso-vs.html#bayesian-interpretation",
+    "href": "slides/06-lasso-vs.html#bayesian-interpretation",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Bayesian Interpretation",
+    "text": "Bayesian Interpretation\n\n\nLasso\n\nRidge\n\n\n\n\nLet’s wait until we discuss Bayesian Regression!"
   },
   {
-    "objectID": "slides/04-lin-reg.html#hat-matrix",
-    "href": "slides/04-lin-reg.html#hat-matrix",
-    "title": "Linear Regression 📈",
-    "section": "Hat Matrix",
-    "text": "Hat Matrix\n\\[\\hat{\\bf y} = {\\bf X} {\\bf b} = {\\bf X} ({\\bf X}' {\\bf X}) ^{-1} {\\bf X}' {\\bf y} = {\\bf H} {\\bf y}\\]\n\nThe hat matrix \\({\\bf H}_{n \\times n} = {\\bf X} ({\\bf X}' {\\bf X}) ^{-1} {\\bf X}'\\)\nThe vector of residuals \\(e_i = y_i - \\hat{y}_i\\) is \\[{\\bf e} = {\\bf y} - \\hat{\\bf y} = {\\bf y} - {\\bf X} {\\bf b} = {\\bf y} - {\\bf H} {\\bf y} = ({\\bf I} - {\\bf H}) {\\bf y}\\]\n\n\n\n\nBoth \\({\\bf H}\\) and \\({\\bf I} - {\\bf H}\\) are symmetric and idempotent. They are projection matrices.\n\\(\\bf H\\) projects \\(\\bf y\\) to \\(\\hat{\\bf y}\\) on the \\((k+1)\\)-dimensional space spanned by columns of \\(\\bf X\\), or the column space of \\(\\bf X\\), \\(Col({\\bf X})\\).\n\\({\\bf I} - {\\bf H}\\) projects \\(\\bf y\\) to \\(\\bf e\\) on the space perpendicular to \\(Col({\\bf X})\\), or \\(Col({\\bf X})^{\\bot}\\)."
+    "objectID": "slides/06-lasso-vs.html#notes-of-lasso",
+    "href": "slides/06-lasso-vs.html#notes-of-lasso",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Notes of Lasso",
+    "text": "Notes of Lasso\n\n\n\n\n\n\nWarning\n\n\n\n\nEven Lasso does feature selection, do NOT add predictors that are known to be not associated with the response in any way.\nCurse of dimensionality. The test MSE tends to increase as the dimensionality \\(p\\) increases, unless the additional features are truly associated with the response.\nDo NOT conclude that the predictors with non-zero coefficients selected by Lasso and other selection methods predict the response more effectively than other predictors not included in the model.\n\n\n\n\n\nThis is just one of many possible models for predicting response, and that it must be further validated on independent data sets."
   },
   {
-    "objectID": "slides/04-lin-reg.html#geometrical-interpretation-of-least-squares",
-    "href": "slides/04-lin-reg.html#geometrical-interpretation-of-least-squares",
-    "title": "Linear Regression 📈",
-    "section": "Geometrical Interpretation of Least Squares",
-    "text": "Geometrical Interpretation of Least Squares\n\n\n\n\\(Col({\\bf X}) = \\{ {\\bf Xb}: {\\bf b} \\in {\\bf R}^{k+1} \\}\\)\n\\({\\bf y} \\notin Col({\\bf X})\\)\n\\(\\hat{{\\bf y}} = {\\bf Xb} = {\\bf H} {\\bf y} \\in Col({\\bf X})\\)\n\\(\\small {\\bf e} = ({\\bf y} - \\hat{{\\bf y}}) = ({\\bf y} - {\\bf X b}) = ({\\bf I} - {\\bf H}) {\\bf y} \\perp Col({\\bf X})\\)\n\\({\\bf X}'{\\bf e} = 0\\)\n\n\nSearching for \\(\\bf b\\) that minimizes \\(SS_{res}\\) is equivalent to locating the point \\({\\bf Xb} \\in Col({\\bf X})\\) (C) that is as close to \\(\\bf y\\) (A) as possible!\n\n\n\n\n\n\nhttps://commons.wikimedia.org/wiki/File:OLS_geometric_interpretation.svg\n\n\n\n\n\n\nMinimize the distance of \\(\\color{red}{A}\\) to \\(Col(\\bf X)\\): Find the point in \\(Col(\\bf X)\\) that is closest to \\(A\\). The distance is minimized when the point in the space is the foot of the line from \\(A\\) normal to the space. This is point \\(C\\)."
+    "objectID": "slides/06-lasso-vs.html#other-topics",
+    "href": "slides/06-lasso-vs.html#other-topics",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Other Topics",
+    "text": "Other Topics\n\n\nCombination \\(\\ell_1\\) and \\(\\ell_2\\): Elastic net penalty (Zou and Hastie, 2005)\n\n\n\\[\\lambda \\left[ (1 - \\alpha) \\lVert \\boldsymbol \\beta\\rVert_2^2 + \\alpha \\lVert\\boldsymbol \\beta\\lVert_1 \\right]\\]\n\n\n\nGeneral \\(\\ell_q\\) penalty: \\(\\lambda \\sum_{j=1}^p |\\beta_j|^q\\)\n\n\n\n\n\n\nESL Fig. 3.12"
   },
   {
-    "objectID": "slides/04-lin-reg.html#multivariate-gaussiannormal-distribution",
-    "href": "slides/04-lin-reg.html#multivariate-gaussiannormal-distribution",
-    "title": "Linear Regression 📈",
-    "section": "Multivariate Gaussian/Normal Distribution",
-    "text": "Multivariate Gaussian/Normal Distribution\n\n\n\\({\\bf y} \\sim N_n(\\boldsymbol \\mu, {\\bf \\Sigma})\\)\n\n\n\\(\\boldsymbol \\mu\\): \\(n \\times 1\\) mean vector\n\n\\({\\bf \\Sigma}\\): \\(n \\times n\\) covariance matrix\n\n\n\n\\(\\boldsymbol \\mu= (2, 1)'\\); \\({\\bf \\Sigma} = \\begin{pmatrix} 2 & -1 \\\\ -1 & 2\\end{pmatrix}\\)\n\n\n\n\n\n\n\n\nNotes"
+    "objectID": "slides/06-lasso-vs.html#other-topics-1",
+    "href": "slides/06-lasso-vs.html#other-topics-1",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Other Topics",
+    "text": "Other Topics\n\n\nAlgorithms\n\nShooting algorithm (Fu 1998)\nLeast angle regression (LAR) (Efron et al. 2004)\nCoordinate descent (Friedman et al 2010) (used in glmnet)\n\n\n\n\n\n\nVariants\n\nAdaptive Lasso\nGroup Lasso\nBayesian Lasso\nSpike-and-Slab Lasso, etc.\n\n\n\nLasso may suffer in the case where two variables are strongly correlated. The situation is similar to OLS, however, in Lasso, it would only select one out of the two, instead of letting both parameter estimates to be large. This is not preferred in some practical situations such as genetic studies because expressions of genes from the same pathway may have large correlation, but biologist want to identify all of them instead of just one. The Ridge penalty may help in this case because it naturally considers the correlation structure. The following simulation may show the effect. - The Lasso problem is convex, although it may not be strictly convex in β when p is large - The solution is a global minimum, but may not be the unique global one - The Lasso solution is unique under conditions of the covariance matrix\n\n\n\n\nmssc6250-s25.github.io/website"
   },
   {
-    "objectID": "slides/04-lin-reg.html#sampling-distribution-of-bf-b",
-    "href": "slides/04-lin-reg.html#sampling-distribution-of-bf-b",
-    "title": "Linear Regression 📈",
-    "section": "Sampling Distribution of \\({\\bf b}\\)\n",
-    "text": "Sampling Distribution of \\({\\bf b}\\)\n\n\n\\({\\bf y} \\sim N(\\boldsymbol \\mu, {\\bf \\Sigma})\\), and \\({\\bf Z} = {\\bf By} + {\\bf c}\\) with a constant matrix \\({\\bf B}\\) and vector \\(\\bf c\\), then \\[{\\bf Z} \\sim N({\\bf B\\boldsymbol \\mu}, {\\bf B \\Sigma B}')\\]\n\n\\({\\bf b} = ({\\bf X}' {\\bf X}) ^{-1} {\\bf X}' \\bf y\\)\n\\[\\textbf{b} \\sim N \\left( \\boldsymbol \\beta, \\sigma^2 ( {\\bf X}' {\\bf X})^{-1}  \\right)\\] \\[E(\\textbf{b}) = E\\left[ ({\\bf X}' {\\bf X})^{-1} {\\bf X}' {\\bf y}\\right] = \\boldsymbol \\beta\\] \\[\\mathrm{Var}(\\textbf{b}) = \\mathrm{Var}\\left[({\\bf X}' {\\bf X})^{-1} {\\bf X}' {\\bf y} \\right] = \\sigma^2 ({\\bf X}' {\\bf X})^{-1}\\]\n\nThe unknown \\(\\sigma^2\\) is estimated by \\(\\hat{\\sigma}^2 = MS_{res} = \\frac{SS_{res}}{n - k - 1}\\).\n\\(\\textbf{b}\\) is Best Linear Unbiased Estimator (BLUE) (Gauss-Markov Theorem).\n\nThe standard error of \\(b_j\\) is \\({\\sqrt{s^2C_{jj}}}\\), where \\(C_{jj}\\) is the diagonal element of \\(({\\bf X'X})^{-1}\\) corresponding to \\(b_j\\)."
-  },
-  {
-    "objectID": "slides/04-lin-reg.html#what-this-review-is-not-covered",
-    "href": "slides/04-lin-reg.html#what-this-review-is-not-covered",
-    "title": "Linear Regression 📈",
-    "section": "What This Review is Not Covered",
-    "text": "What This Review is Not Covered\n\nDetailed statistical inference\nRegression Diagnostics (Usual Data: Outliers, leverage points, influential points; Non-normality; Non-constant variance; Non-linearity)\nCategorical variables\nModel/Variable Selection\nCode for doing regression (lm() in R and linear_model.LinearRegression() in sklearn of Python)\nMaximum likelihood estimation\n\n\nWhere to learn these stuff?\n\nDr. Yu’s MSSC 5780 slides https://math4780-f23.github.io/website/\nISL Ch 3, 6.1."
-  },
-  {
-    "objectID": "slides/04-lin-reg.html#generalizations-of-the-linear-model",
-    "href": "slides/04-lin-reg.html#generalizations-of-the-linear-model",
-    "title": "Linear Regression 📈",
-    "section": "Generalizations of the Linear Model",
-    "text": "Generalizations of the Linear Model\n\nClassification: logistic regression, support vector machines\nNon-linearity: kernel smoothing, splines and generalized additive models, nearest neighbor methods.\nInteractions: Tree-based methods, bagging, random forests and boosting\nShrinkage and Regularization: Ridge regression and LASSO"
-  },
-  {
-    "objectID": "slides/04-lin-reg.html#basic-concepts",
-    "href": "slides/04-lin-reg.html#basic-concepts",
-    "title": "Linear Regression 📈",
-    "section": "Basic Concepts",
-    "text": "Basic Concepts\n\nAlthough we have the closed form for \\({\\bf b} = ({\\bf X}' {\\bf X}) ^ {-1} {\\bf X}' {\\bf y}\\), we can solve for \\(\\bf b\\) numerically.\n\n\\[\\begin{align}\n\\underset{\\boldsymbol \\beta}{\\text{min}} \\quad \\ell(\\boldsymbol \\beta) = \\frac{1}{n} \\sum_i (y_i - \\beta_0 - x_i\\beta_1)^2 \\\\\n\\end{align}\\]\n\n\n\\(\\ell(\\boldsymbol \\beta)\\), the \\(\\text{MSE}_{\\texttt{Tr}}\\), is called the (squared) loss function.\n\n\n# generate data from a simple linear regression beta0 = 0.5, beta1 = 1\nset.seed(2025)\nn &lt;- 1000\nx &lt;- rnorm(n)\ny &lt;- 0.5 + x + rnorm(n)\n\n\nStart with an initial value of \\(\\boldsymbol \\beta\\), say \\(\\widehat{\\boldsymbol \\beta} = (0.3, 1.5)\\), we compute the \\(\\text{MSE}_{\\texttt{Tr}}\\)\n\n\n\\[\\begin{align}\n\\frac{1}{n}\\sum_i \\left( y_i - 0.3 - 1.5 x_i \\right)^2 \\\\\n\\end{align}\\]\nLet’s first generate a set of data. We have two parameters, an intercept \\(\\beta_= 0.5\\) and a slope \\(\\beta_1 = 1\\)."
-  },
-  {
-    "objectID": "slides/04-lin-reg.html#basic-concepts-1",
-    "href": "slides/04-lin-reg.html#basic-concepts-1",
-    "title": "Linear Regression 📈",
-    "section": "Basic Concepts",
-    "text": "Basic Concepts\n\n# calculate the residual sum of squares for a grid of beta values\nmse &lt;- function(b, trainx, trainy) mean((trainy - b[1] - trainx * b[2]) ^ 2)\nmse(b = c(0.3, 1.5), trainx = x, trainy = y)\n\n[1] 1.354548\n\n\n\nThe initial point \\((0.3, 1.5)\\) (red) is not at the bottom of the surface.\n\n\n\n\n\n\n\nDoing this on all such β values would allow us to create a surface of the RSS, as a function of the parameters. - Our goal is to minimize the \\(RR_{res}\\), knowing the corresponding \\(\\boldsymbol \\beta\\) values. Numerical optimization is a research field that investigates such problems and their properties."
-  },
-  {
-    "objectID": "slides/04-lin-reg.html#optim",
-    "href": "slides/04-lin-reg.html#optim",
-    "title": "Linear Regression 📈",
-    "section": "\noptim()1\n",
-    "text": "optim()1\n\n\n(lm_optim &lt;- optim(par = c(0.3, 1.5), fn = mse, trainx = x, trainy = y))\n\n$par\n[1] 0.4571491 0.9723691\n\n$value\n[1] 1.055419\n\n$counts\nfunction gradient \n      53       NA \n\n$convergence\n[1] 0\n\n$message\nNULL\n\n\n\n\nlm(y ~ x)$coef\n\n(Intercept)           x \n  0.4572794   0.9723262 \n\n\n\nThe par argument specifies an initial value. In this case, it is \\(\\beta_0 = \\beta_1 = 2\\).\nThe fn argument specifies the name of a function (mse in this case) that can calculate the objective function. This function may have multiple arguments. However, the first argument has to be the parameter(s) that is being optimized. In addition, the parameters need to be supplied to the function as a vector, but not matrix, list or other formats.\n\nThe arguments trainx = x, trainy = y specifies any additional arguments that the objective function fn (mse) needs. It behaves the same as if you are supplying this to the function mse it self.\n\n\n\n\nscipy.optimize for Python."
-  },
-  {
-    "objectID": "slides/04-lin-reg.html#basic-principles",
-    "href": "slides/04-lin-reg.html#basic-principles",
-    "title": "Linear Regression 📈",
-    "section": "Basic Principles",
-    "text": "Basic Principles\nFor a general function \\(f(\\mathbf{x})\\) to be minimized with respect to (w.r.t.) \\(\\mathbf{x}\\in \\mathbf{R}^{p}\\), we have\n\n\nFirst-Order Necessary Condition:\n\n\nIf \\(f\\) is continuously differentiable in an open neighborhood of local minimum \\(\\mathbf{x}^\\ast\\), then \\(\\nabla f(\\mathbf{x}^\\ast) = \\mathbf{0}\\)."
-  },
-  {
-    "objectID": "slides/04-lin-reg.html#taylor-expansion",
-    "href": "slides/04-lin-reg.html#taylor-expansion",
-    "title": "Linear Regression 📈",
-    "section": "Taylor Expansion",
-    "text": "Taylor Expansion\n\\[f(\\mathbf{x}^\\text{new}) \\approx f(\\mathbf{x}) + \\nabla f(\\mathbf{x})' (\\mathbf{x}^\\text{new} - \\mathbf{x})\\]\n\nWhether \\(\\nabla f(\\mathbf{x})\\) is positive or negative, we can always find a new point \\(\\mathbf{x}^\\text{new}\\) that makes \\(\\nabla f(\\mathbf{x})' (\\mathbf{x}^\\text{new} - \\mathbf{x})\\) less than 0, so that \\(f(\\mathbf{x}^\\text{new}) &lt; f(\\mathbf{x})\\).\n\n\n\n\n\\(\\nabla f(\\mathbf{x}^\\ast) = \\mathbf{0}\\) is only a necessary condition, not a sufficient condition.\n\\(x = 1\\) is a local minimizer, not a global one.\n\nOn the left hand side, we have a convex function, which looks like a bowl. The intuition is that, if \\(f(\\mathbf{x})\\) is a function that is smooth enough, and \\(\\mathbf{x}\\) is a point with \\(\\nabla f(\\mathbf{x}^\\ast) \\neq 0\\), then by the Taylor expansion, we have, for any new point \\(\\mathbf{x}^{new}\\) in the neighborhood of \\(\\mathbf{x}\\), we can approximate its function value - Since we only checked if the slope if “flat” but didn’t care if its facing upward or downward, our condition cannot tell the difference."
-  },
-  {
-    "objectID": "slides/04-lin-reg.html#second-order-property",
-    "href": "slides/04-lin-reg.html#second-order-property",
-    "title": "Linear Regression 📈",
-    "section": "Second-order Property",
-    "text": "Second-order Property\nSecond-order Sufficient Condition:\n\n\\(f\\) is twice continuously differentiable in an open neighborhood of \\(\\mathbf{x}^\\ast\\). If \\(\\nabla f(\\mathbf{x}^\\ast) = \\mathbf{0}\\) and \\(\\nabla^2 f(\\mathbf{x}^\\ast),\\) the Hessian matrix, is positive definite, i.e., \\[\n\\nabla^2 f(\\mathbf{x}) = \\left(\\frac{\\partial^2 f(\\mathbf{x})}{\\partial x_i \\partial x_j}\\right) = \\mathbf{H}(\\mathbf{x}) \\succeq 0,\n\\] then \\(\\mathbf{x}^\\ast\\) is a strict local minimizer of \\(f\\).\n\n\n\n\\[\\begin{align}\n\\text{Left:}& f_1(x) = x ^ 2; \\qquad \\nabla^2 f_1(x) = 2 \\\\\n\\text{Right:}& f_2(x) = x ^ 4 + 2 x ^ 3 - 5 x ^ 2; \\qquad \\nabla^2 f_2(x) = 12x^2 + 12 x - 10\\\\\n\\end{align}\\]\n\nFor \\(f_1\\), \\(\\mathbf{H}(\\mathbf{x}) \\succeq 0\\), and the solution is a minimizer.\nFor \\(f_2\\), \\(\\nabla^2 f_2(-2.5) = 35\\), \\(\\nabla^2 f_2(0) = -10\\) and \\(\\nabla^2 f_2(1) = 14\\). So \\(x = -2.5\\) and \\(1\\) are local minimizers and \\(0\\) is a local maximizer.\n\n\n\n\\(\\mathbf{H}(\\mathbf{x})\\) is called the Hessian matrix, which will be frequently used in second-order methods. We can easily check this property for our examples: These conditions are sufficient, but again, they only discuss local properties, not global properties."
-  },
-  {
-    "objectID": "slides/04-lin-reg.html#optimization-algorithm",
-    "href": "slides/04-lin-reg.html#optimization-algorithm",
-    "title": "Linear Regression 📈",
-    "section": "Optimization Algorithm",
-    "text": "Optimization Algorithm\n\n\n1. Start with \\(\\mathbf{x}^{(0)}\\)\n\nFor \\(i = 1, 2, \\dots\\) until convergence, find \\(\\mathbf{x}^{(i)}\\) s.t. \\(f(\\mathbf{x}^{(i)}) &lt; f(\\mathbf{x}^{(i-1)})\\)\n\n\n\n\n\nStopping criterion:\n\nGradient of the objective function: \\(\\lVert \\nabla f(\\mathbf{x}^{(i)}) \\rVert &lt; \\epsilon\\)\n\n(Relative) change of distance: \\(\\frac{\\lVert \\mathbf{x}^{(i)} - \\mathbf{x}^{(i-1)} \\rVert} {\\lVert \\mathbf{x}^{(i-1)}\\rVert}&lt; \\epsilon\\) or \\(\\lVert \\mathbf{x}^{(i)} - \\mathbf{x}^{(i-1)} \\rVert &lt; \\epsilon\\)\n\n(Relative) change of functional value: \\(\\frac{| f(\\mathbf{x}^{(i)}) - f(\\mathbf{x}^{(i-1)})|}{|f(\\mathbf{x}^{(i)})|} &lt; \\epsilon\\) or \\(| f(\\mathbf{x}^{(i)}) - f(\\mathbf{x}^{(i-1)})| &lt; \\epsilon\\)\n\nStop at a pre-specified number of iterations\n\n\n\n\n\nMost optimization algorithms follow the same idea: starting from a point x(0) (which is usually specified by the user) and move to a new point x(1) that improves the objective function value. Repeatedly performing this to get a sequence of points x(0),x(1),x(2),x(3),… until the certain stopping criterion is reached. Most algorithms differ in terms of how to move from the current point x(k) to the next, better target point x(k+1). This may depend on the smoothness or structure of f, constrains on the domain, computational complexity, memory limitation, and many others."
-  },
-  {
-    "objectID": "slides/04-lin-reg.html#bfgs-demo",
-    "href": "slides/04-lin-reg.html#bfgs-demo",
-    "title": "Linear Regression 📈",
-    "section": "\nBFGS Demo",
-    "text": "BFGS Demo\n\n\n\nf1 &lt;- function(x) x ^ 2\nf2 &lt;- function(x) {\n    x ^ 4 + 2 * x ^ 3 - 5 * x ^ 2\n}\noptim(par = 3, fn = f1, method = \"BFGS\")\n\n$par\n[1] -8.384004e-16\n\n$value\n[1] 1.75742e-29\n\n$counts\nfunction gradient \n       8        3 \n\n$convergence\n[1] 0\n\n$message\nNULL\n\n\n\n\noptim(par = 10, fn = f2, method = \"BFGS\")\n\n$par\n[1] 0.9999996\n\n$value\n[1] -2\n\n$counts\nfunction gradient \n      37       12 \n\n$convergence\n[1] 0\n\n$message\nNULL\n\n\n\noptim(par = 3, fn = f2, method = \"BFGS\")$par\n\n[1] -2.5"
-  },
-  {
-    "objectID": "slides/04-lin-reg.html#second-order-newtons-method",
-    "href": "slides/04-lin-reg.html#second-order-newtons-method",
-    "title": "Linear Regression 📈",
-    "section": "Second-order Newton’s Method\n",
-    "text": "Second-order Newton’s Method\n\n\nSecond order Taylor expansion at a current point \\(\\mathbf{x}\\):\n\n\\[f(\\mathbf{x}^\\ast) \\approx f(\\mathbf{x}) + \\nabla f(\\mathbf{x})' (\\mathbf{x}^\\ast - \\mathbf{x}) + \\frac{1}{2} (\\mathbf{x}^\\ast - \\mathbf{x})' \\mathbf{H}(\\mathbf{x}) (\\mathbf{x}^\\ast - \\mathbf{x})\\]\n\nTake derivative w.r.t \\(\\mathbf{x}^\\ast\\) on both sides: \\[0 = \\nabla f(\\mathbf{x}^\\ast) = 0 + \\nabla f(\\mathbf{x}) + \\mathbf{H}(\\mathbf{x}) (\\mathbf{x}^\\ast - \\mathbf{x})\\] \\[\\boxed{\\mathbf{x}^{(i+1)} = \\mathbf{x}^{(i)} -  \\mathbf{H}(\\mathbf{x}^{(i)})^{-1} \\nabla f(\\mathbf{x}^{(i)})}\\]\nFor numerical stability, introduce a step size \\(\\delta \\in (0, 1)\\): \\[\\mathbf{x}^{(i+1)} = \\mathbf{x}^{(i)} -  {\\color{red}{\\delta}} \\, \\mathbf{H}(\\mathbf{x}^{(i)})^{-1} \\nabla f(\\mathbf{x}^{(i)})\\]\n\nIf \\(\\mathbf{H}\\) is difficult to compute, we may use some matrix to substitute it. For example, if we simplify use the identity matrix \\(\\mathbf{I}\\), then this reduces to a first-order method to be introduced later. However, if we can get a good approximation, we can still solve this linear system and get to a better point. Then the question is how to obtain such matrix in a computationally inexpensive way. The Broyden–Fletcher–Goldfarb–Shanno (BFSG) algorithm is such an approach by iteratively updating its (inverse) estimation. For details, please see the SMLR book. We have already used the BFGS method previously in the optim() example. - when x(k+1) is not too far away from x(k), the quadratic approximation is fairly accurate."
-  },
-  {
-    "objectID": "slides/04-lin-reg.html#first-order-gradient-descent",
-    "href": "slides/04-lin-reg.html#first-order-gradient-descent",
-    "title": "Linear Regression 📈",
-    "section": "First-Order Gradient Descent\n",
-    "text": "First-Order Gradient Descent\n\n\n\n\n\n\n\nNote\n\n\n\nWhen \\(\\mathbf{H}\\) or \\(\\mathbf{H}^{-1}\\) is difficult to compute (usually in deep learning)\n\nGet an approximate one in a computationally inexpensive way. The BFGS algorithm is such an approach by iteratively updating its (inverse) estimation.\nUse first-order methods\n\n\n\n\n\n\nWhen using \\(\\mathbf{H}= \\mathbf{I}\\), we update \\[\\mathbf{x}^{(i+1)} = \\mathbf{x}^{(i)} - \\delta \\nabla f(\\mathbf{x}^{(i)}).\\]\n\nIt is crucial to figure out a good step size \\(\\delta\\), usually \\(&lt;1\\).\n\nA too large \\(\\delta\\) may not converge.\nA too small \\(\\delta\\) takes too many iterations.\n\n\n\nAlternatively, line search could be used."
-  },
-  {
-    "objectID": "slides/04-lin-reg.html#demo-ss_res-contour",
-    "href": "slides/04-lin-reg.html#demo-ss_res-contour",
-    "title": "Linear Regression 📈",
-    "section": "\nDemo \\(SS_{res}\\) Contour",
-    "text": "Demo \\(SS_{res}\\) Contour\nThe objective function is \\(\\ell(\\boldsymbol \\beta) = \\frac{1}{2n}||\\mathbf{y} - \\mathbf{X} \\boldsymbol \\beta ||^2\\) with solution \\({\\bf b} = \\left(\\mathbf{X}'\\mathbf{X}\\right)^{-1} \\mathbf{X}'\\mathbf{y}\\).\n\nCodeset.seed(2025)\nn &lt;- 200\n\n# create some data with linear model\nX &lt;- MASS::mvrnorm(n, c(0, 0), matrix(c(1, 0.7, 0.7, 1), 2, 2))\ny &lt;- rnorm(n, mean = 2 * X[, 1] + X[, 2])\n  \nbeta1 &lt;- seq(-1, 4, 0.005)\nbeta2 &lt;- seq(-1, 4, 0.005)\nallbeta &lt;- data.matrix(expand.grid(beta1, beta2))\nrss &lt;- matrix(apply(allbeta, 1, \n                    function(b, X, y) sum((y - X %*% b) ^ 2), X, y),\n              length(beta1), length(beta2))\n  \n# quantile levels for drawing contour\nquanlvl = c(0.01, 0.025, 0.05, 0.2, 0.5, 0.75)\n  \n# plot the contour\ncontour(beta1, beta2, rss, levels = quantile(rss, quanlvl), las = 1)\nbox()\n  \n# the truth\nb &lt;- solve(t(X) %*% X) %*% t(X) %*% y\npoints(b[1], b[2], pch = 19, col = \"blue\", cex = 2)"
-  },
-  {
-    "objectID": "slides/04-lin-reg.html#demo-gradient-descent",
-    "href": "slides/04-lin-reg.html#demo-gradient-descent",
-    "title": "Linear Regression 📈",
-    "section": "\nDemo Gradient Descent",
-    "text": "Demo Gradient Descent\n\\[\n\\begin{align}\n\\frac{\\partial \\ell(\\boldsymbol \\beta)}{\\partial \\boldsymbol \\beta} = -\\frac{1}{n} \\sum_{i=1}^n (y_i - x_i' \\boldsymbol \\beta) x_i = \\frac{1}{n} \\sum_{i=1}^n \\frac{\\partial \\ell_i(\\boldsymbol \\beta)}{\\partial \\boldsymbol \\beta}.\n\\end{align}\n\\] where \\(\\ell_i(\\boldsymbol \\beta) = \\frac{1}{2}(y_i - x_i' \\boldsymbol \\beta)^2\\).\nFirst set an initial beta value, say \\(\\boldsymbol \\beta = \\mathbf{0}\\) for all entries, then proceed with the update\n\\[\\begin{align}\n\\boldsymbol \\beta^\\text{new} =& \\boldsymbol \\beta^\\text{old} - \\delta \\frac{\\partial \\ell(\\boldsymbol \\beta)}{\\partial \\boldsymbol \\beta}\\\\\n=&\\boldsymbol \\beta^\\text{old} + \\delta \\frac{1}{n} \\sum_{i=1}^n (y_i - x_i' \\boldsymbol \\beta) x_i.\\\\\n\\end{align}\\]"
-  },
-  {
-    "objectID": "slides/04-lin-reg.html#demo-gradient-descent-1",
-    "href": "slides/04-lin-reg.html#demo-gradient-descent-1",
-    "title": "Linear Regression 📈",
-    "section": "\nDemo Gradient Descent",
-    "text": "Demo Gradient Descent\n\nSet \\(\\boldsymbol{\\beta}^{(0)} = \\mathbf{0}\\), \\(\\delta = 0.2\\)"
-  },
-  {
-    "objectID": "slides/04-lin-reg.html#demo-effect-of-delta",
-    "href": "slides/04-lin-reg.html#demo-effect-of-delta",
-    "title": "Linear Regression 📈",
-    "section": "\nDemo Effect of \\(\\delta\\)\n",
-    "text": "Demo Effect of \\(\\delta\\)\n\n\nThe descent path is very smooth because we choose a very small step size. However, if the step size is too large, we may observe unstable results or even unable to converge. For example, if We set \\(\\delta = 1\\) or \\(\\delta = 1.5\\)."
-  },
-  {
-    "objectID": "slides/04-lin-reg.html#mini-batch-stochastic-gradient-descent-sgd",
-    "href": "slides/04-lin-reg.html#mini-batch-stochastic-gradient-descent-sgd",
-    "title": "Linear Regression 📈",
-    "section": "Mini-batch Stochastic Gradient Descent (SGD)",
-    "text": "Mini-batch Stochastic Gradient Descent (SGD)\nIn deep learning,\n\nCalculating the gradient using entire data can be costly (memory limit).\nConsider update the parameter using a subset of data of size \\(m \\ll n\\), called minibatch: \\(\\mathcal{D}_B = \\{x_j, y_j \\}_{j = 1}^m \\subset \\mathcal{D}\\)\n\n\n\\[\n\\begin{align}\n\\frac{\\partial \\ell_B(\\boldsymbol \\beta)}{\\partial \\boldsymbol \\beta} = -\\frac{1}{m} \\sum_{j=1}^m (y_j - x_j' \\boldsymbol \\beta) x_j = \\frac{1}{m} \\sum_{j=1}^m \\frac{\\partial \\ell_j(\\boldsymbol \\beta)}{\\partial \\boldsymbol \\beta}\n\\end{align}\n\\] where \\(\\ell_j(\\boldsymbol \\beta) = \\frac{1}{2}(y_j - x_j' \\boldsymbol \\beta)^2\\).\n\\[\\begin{align}\n\\boldsymbol \\beta^\\text{new} =& \\boldsymbol \\beta^\\text{old} - \\delta \\frac{\\partial \\ell_B(\\boldsymbol \\beta)}{\\partial \\boldsymbol \\beta}\\\\\n=&\\boldsymbol \\beta^\\text{old} + \\delta \\frac{1}{m} \\sum_{j=1}^m (y_j - x_j' \\boldsymbol \\beta) x_j.\\\\\n\\end{align}\\]"
-  },
-  {
-    "objectID": "slides/04-lin-reg.html#sgd",
-    "href": "slides/04-lin-reg.html#sgd",
-    "title": "Linear Regression 📈",
-    "section": "SGD",
-    "text": "SGD\n\n\\(\\nabla_{\\boldsymbol \\beta} \\ell_B(\\boldsymbol \\beta)\\) approximates \\(\\nabla_{\\boldsymbol \\beta} \\ell(\\boldsymbol \\beta)\\) with stochasticity due to random sampling.\nDifferent samples give us a different gradient value, making it stochastic!\nSuppose we have \\(n=1000\\) training points, and batch size is \\(m=100\\), it needs \\(n/m = 10\\) updates (iterations can be parallelized) to pass all data into the algorithm, which completes one epoch.\n\nTo gaurantee convergence, the learning rate \\(\\delta\\) should\n\nbe decreasing (with epochs or iterations)\nhave \\(\\sum_{k=1}^{\\infty}\\delta_k = \\infty\\) and \\(\\sum_{k=1}^{\\infty}\\delta_k^2 &lt; \\infty\\)\n\n\n\n\nIterations: Decay happens more frequently (every batch). This is more precise and often used for large datasets. Epochs: Decay happens less frequently (after all batches of one epoch). This is simpler and often used for smaller datasets or in step-based schedules."
-  },
-  {
-    "objectID": "slides/04-lin-reg.html#demo-sgd",
-    "href": "slides/04-lin-reg.html#demo-sgd",
-    "title": "Linear Regression 📈",
-    "section": "\nDemo SGD",
-    "text": "Demo SGD\n\n\n\n\n\n\n\n\n\n\n\n\nmssc6250-s25.github.io/website"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "MSSC 6250 - Statistical Machine Learning (Spring 2025)",
+    "objectID": "course-news.html",
+    "href": "course-news.html",
+    "title": "News/Announcements",
     "section": "",
-    "text": "Homework 1 released, and due Friday, 2/14, 11:59 PM.\n\nThis schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nTo Do\nSlides\nCode\nHomework\nProject\n\n\n\n\n1\nTue, Jan 14\nSyllabus/Overview of Statistical Learning\n📖\n🖥️🖥️\n\n\n\n\n\n\nThu, Jan 16\nBias-variance tradeoff\n\n🖥️\n\n\n\n\n\n2\nTue, Jan 21\nNO CLASS: Cold Weather\n📖\n🖥️\n\n\n\n\n\n\nThu, Jan 23\nLinear Regression\n\n\n\n\n\n\n\n3\nTue, Jan 28\nNumerical Optimization\n📖\n\n\n✍️\n\n\n\n\nThu, Jan 30\nStochastic Gradient Descen; Ridge Regression\n\n🖥️\n\n\n\n\n\n4\nTue, Feb 4\nCross-Validation; LASSO\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 6\nPolynomial Regression and Regression Splines\n\n\n\n\n\n\n\n5\nTue, Feb 11\nSmoothing Splines and Generalized Additive Models\n📖\n🖥️\n\n✍️\n\n\n\n\nThu, Feb 13\nBayesian Inference\n\n\n\nHW 1 Due\n\n\n\n6\nTue, Feb 18\nBayesian Linear Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 20\nBinary Logistic Regression\n\n\n\n\n✅ Team up Due\n\n\n7\nTue, Feb 25\nMultinomial Logistic Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 27\nDiscriminant Analysis\n\n\n\n\n✅ Proposal Due\n\n\n8\nTue, Mar 4\nNaive Bayes\n📖\n\n\n\n\n\n\n\nThu, Mar 6\nMidterm Presentation I\n\n\n\n✍️\n✅ Materials Due\n\n\n9\nTue, Mar 11\nNO CLASS: Spring break\n\n\n\n\n\n\n\n\nThu, Mar 13\nNO CLASS: Spring break\n\n\n\n\n\n\n\n10\nTue, Mar 18\nK-Nearest Neighbors Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 20\nK-Nearest Neighbors Classification\n\n\n\n\n\n\n\n11\nTue, Mar 25\nGaussian Process Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 27\nGaussian Process Classification\n\n\n\n\n\n\n\n12\nTue, Apr 1\nSupport Vector Machine\n📖\n\n\n\n\n\n\n\nThu, Apr 3\nSupport Vector Machine\n\n\n\n\n\n\n\n13\nTue, Apr 8\nCART and Bagging\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 10\nRandom Forests and Boosting\n\n\n\n✍️\n\n\n\n14\nTue, Apr 15\nMidterm Presentation II\n📖\n🖥️\n\n\n✅\n\n\n\nThu, Apr 17\nNO CLASS: Easter break\n\n\n\n\n\n\n\n15\nTue, Apr 22\nPrincipal Component Analysis\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 24\nK-Means Clustering\n\n\n\n\n\n\n\n16\nTue, Apr 29\nModel-based Clustering\n📖\n🖥️\n\n\n\n\n\n\nThu, May 1\nNeural Networks\n\n\n\n\n\n\n\n17\nThu, May 8\nFinal Project Submission\n\n\n\n\n✅\n\n\n\n\nI reserve the right to make changes to the schedule.",
+    "text": "Any announcement will be posted in this page. The latest news will also be put on top of the main page.",
     "crumbs": [
       "Course Information",
-      "Schedule"
+      "News/Annoucements"
     ]
   },
   {
-    "objectID": "code/04-linear-reg-code.html",
-    "href": "code/04-linear-reg-code.html",
-    "title": "04-Linear Regression Code Demo",
-    "section": "",
-    "text": "Show/Hideadvertising_data &lt;- read.csv(\"../data/Advertising.csv\")\nadvertising_data &lt;- advertising_data[, 2:5]\nhead(advertising_data)\n\n     TV radio newspaper sales\n1 230.1  37.8      69.2  22.1\n2  44.5  39.3      45.1  10.4\n3  17.2  45.9      69.3   9.3\n4 151.5  41.3      58.5  18.5\n5 180.8  10.8      58.4  12.9\n6   8.7  48.9      75.0   7.2\n\nShow/Hidelm_out &lt;- lm(advertising_data$sales ~ ., data = advertising_data)\nsummary(lm_out)\n\n\nCall:\nlm(formula = advertising_data$sales ~ ., data = advertising_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-8.8277 -0.8908  0.2418  1.1893  2.8292 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  2.938889   0.311908   9.422   &lt;2e-16 ***\nTV           0.045765   0.001395  32.809   &lt;2e-16 ***\nradio        0.188530   0.008611  21.893   &lt;2e-16 ***\nnewspaper   -0.001037   0.005871  -0.177     0.86    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.686 on 196 degrees of freedom\nMultiple R-squared:  0.8972,    Adjusted R-squared:  0.8956 \nF-statistic: 570.3 on 3 and 196 DF,  p-value: &lt; 2.2e-16\n\nShow/Hideconfint(lm_out)\n\n                  2.5 %     97.5 %\n(Intercept)  2.32376228 3.55401646\nTV           0.04301371 0.04851558\nradio        0.17154745 0.20551259\nnewspaper   -0.01261595 0.01054097"
+    "objectID": "course-news.html#jan-14-2025",
+    "href": "course-news.html#jan-14-2025",
+    "title": "News/Announcements",
+    "section": "Jan 14, 2025",
+    "text": "Jan 14, 2025\n\nNo office hours first week.",
+    "crumbs": [
+      "Course Information",
+      "News/Annoucements"
+    ]
   },
   {
-    "objectID": "code/04-linear-reg-code.html#r-implementation",
-    "href": "code/04-linear-reg-code.html#r-implementation",
-    "title": "04-Linear Regression Code Demo",
+    "objectID": "course-overview.html",
+    "href": "course-overview.html",
+    "title": "MSSC 6250 - Statistical Machine Learning (Spring 2025)",
     "section": "",
-    "text": "Show/Hideadvertising_data &lt;- read.csv(\"../data/Advertising.csv\")\nadvertising_data &lt;- advertising_data[, 2:5]\nhead(advertising_data)\n\n     TV radio newspaper sales\n1 230.1  37.8      69.2  22.1\n2  44.5  39.3      45.1  10.4\n3  17.2  45.9      69.3   9.3\n4 151.5  41.3      58.5  18.5\n5 180.8  10.8      58.4  12.9\n6   8.7  48.9      75.0   7.2\n\nShow/Hidelm_out &lt;- lm(advertising_data$sales ~ ., data = advertising_data)\nsummary(lm_out)\n\n\nCall:\nlm(formula = advertising_data$sales ~ ., data = advertising_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-8.8277 -0.8908  0.2418  1.1893  2.8292 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  2.938889   0.311908   9.422   &lt;2e-16 ***\nTV           0.045765   0.001395  32.809   &lt;2e-16 ***\nradio        0.188530   0.008611  21.893   &lt;2e-16 ***\nnewspaper   -0.001037   0.005871  -0.177     0.86    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.686 on 196 degrees of freedom\nMultiple R-squared:  0.8972,    Adjusted R-squared:  0.8956 \nF-statistic: 570.3 on 3 and 196 DF,  p-value: &lt; 2.2e-16\n\nShow/Hideconfint(lm_out)\n\n                  2.5 %     97.5 %\n(Intercept)  2.32376228 3.55401646\nTV           0.04301371 0.04851558\nradio        0.17154745 0.20551259\nnewspaper   -0.01261595 0.01054097"
+    "text": "The course discuss machine learning from statistical and modeling points of view, covering supervised learning and unsupervised learning models and algorithms. Supervised learning methods include various regression and classification methods, and unsupervised learning methods involves dimension reduction and clustering techniques. Topics include Bayesian linear regression, shrinkage and regularization, regression splines, Gaussian processes, logistic regression, discriminant analysis, nearest neighbors, tree-based methods, principal components, K-means, Gaussian mixture clustering, neural networks, etc.",
+    "crumbs": [
+      "Course Information",
+      "Overview"
+    ]
   },
   {
-    "objectID": "code/04-linear-reg-code.html#python-implementation",
-    "href": "code/04-linear-reg-code.html#python-implementation",
-    "title": "04-Linear Regression Code Demo",
+    "objectID": "code/06-lasso-vs-code.html",
+    "href": "code/06-lasso-vs-code.html",
+    "title": "06-Lasso Code Demo",
+    "section": "",
+    "text": "Show/Hidelibrary(glmnet)\n\nLoading required package: Matrix\n\n\nLoaded glmnet 4.1-8\n\n\n\nShow/Hideprostate &lt;- read.csv(\"../data/prostate.csv\")\nlasso_fit &lt;- cv.glmnet(x = data.matrix(prostate[, 1:8]), \n                       y = prostate$lpsa, nfolds = 10, \n                       alpha = 1)\n\n\n\nShow/Hidelasso_fit$lambda.min\n\n[1] 0.02961435\n\nShow/Hidelasso_fit$lambda.1se\n\n[1] 0.2089234\n\nShow/Hideplot(lasso_fit)\n\n\n\n\n\n\nShow/Hideplot(lasso_fit$glmnet.fit, \"lambda\")\n\n\n\n\n\n\n\n\nShow/Hidecoef(lasso_fit, s = \"lambda.min\")\n\n9 x 1 sparse Matrix of class \"dgCMatrix\"\n                      s1\n(Intercept)  0.169279155\nlcavol       0.509085165\nlweight      0.558643448\nage         -0.010256773\nlbph         0.067418867\nsvi          0.598979114\nlcp          .          \ngleason      0.008139093\npgg45        0.002387475\n\n\n\nShow/Hidecoef(lasso_fit, s = \"lambda.1se\")\n\n9 x 1 sparse Matrix of class \"dgCMatrix\"\n                   s1\n(Intercept) 0.7820637\nlcavol      0.4485189\nlweight     0.2804033\nage         .        \nlbph        .        \nsvi         0.3383490\nlcp         .        \ngleason     .        \npgg45       ."
+  },
+  {
+    "objectID": "code/06-lasso-vs-code.html#r-implementation",
+    "href": "code/06-lasso-vs-code.html#r-implementation",
+    "title": "06-Lasso Code Demo",
+    "section": "",
+    "text": "Show/Hidelibrary(glmnet)\n\nLoading required package: Matrix\n\n\nLoaded glmnet 4.1-8\n\n\n\nShow/Hideprostate &lt;- read.csv(\"../data/prostate.csv\")\nlasso_fit &lt;- cv.glmnet(x = data.matrix(prostate[, 1:8]), \n                       y = prostate$lpsa, nfolds = 10, \n                       alpha = 1)\n\n\n\nShow/Hidelasso_fit$lambda.min\n\n[1] 0.02961435\n\nShow/Hidelasso_fit$lambda.1se\n\n[1] 0.2089234\n\nShow/Hideplot(lasso_fit)\n\n\n\n\n\n\nShow/Hideplot(lasso_fit$glmnet.fit, \"lambda\")\n\n\n\n\n\n\n\n\nShow/Hidecoef(lasso_fit, s = \"lambda.min\")\n\n9 x 1 sparse Matrix of class \"dgCMatrix\"\n                      s1\n(Intercept)  0.169279155\nlcavol       0.509085165\nlweight      0.558643448\nage         -0.010256773\nlbph         0.067418867\nsvi          0.598979114\nlcp          .          \ngleason      0.008139093\npgg45        0.002387475\n\n\n\nShow/Hidecoef(lasso_fit, s = \"lambda.1se\")\n\n9 x 1 sparse Matrix of class \"dgCMatrix\"\n                   s1\n(Intercept) 0.7820637\nlcavol      0.4485189\nlweight     0.2804033\nage         .        \nlbph        .        \nsvi         0.3383490\nlcp         .        \ngleason     .        \npgg45       ."
+  },
+  {
+    "objectID": "code/06-lasso-vs-code.html#python-implementation",
+    "href": "code/06-lasso-vs-code.html#python-implementation",
+    "title": "06-Lasso Code Demo",
     "section": "Python implementation",
-    "text": "Python implementation\n\nShow/Hideimport pandas as pd\nimport numpy as np\n\n\n\nShow/Hideadvertising_data = pd.read_csv(\"../data/Advertising.csv\")\nadvertising_data = advertising_data.iloc[:, 1:5]\nX = advertising_data.drop(columns=[\"sales\"])\ny = advertising_data[\"sales\"]\n\n\nscikit-learn\n\nShow/Hidefrom sklearn.linear_model import LinearRegression\nreg = LinearRegression().fit(X, y)\nreg.intercept_\n\n2.9388893694594014\n\nShow/Hidereg.coef_\n\narray([ 0.04576465,  0.18853002, -0.00103749])\n\n\nstatsmodels\n\nShow/Hidefrom statsmodels.formula.api import ols\nols_out = ols(formula='sales ~ TV + radio + newspaper', data=advertising_data).fit()\nols_out.params\n\nIntercept    2.938889\nTV           0.045765\nradio        0.188530\nnewspaper   -0.001037\ndtype: float64\n\nShow/Hideprint(ols_out.summary())\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                  sales   R-squared:                       0.897\nModel:                            OLS   Adj. R-squared:                  0.896\nMethod:                 Least Squares   F-statistic:                     570.3\nDate:                Mon, 13 Jan 2025   Prob (F-statistic):           1.58e-96\nTime:                        11:56:31   Log-Likelihood:                -386.18\nNo. Observations:                 200   AIC:                             780.4\nDf Residuals:                     196   BIC:                             793.6\nDf Model:                           3                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nIntercept      2.9389      0.312      9.422      0.000       2.324       3.554\nTV             0.0458      0.001     32.809      0.000       0.043       0.049\nradio          0.1885      0.009     21.893      0.000       0.172       0.206\nnewspaper     -0.0010      0.006     -0.177      0.860      -0.013       0.011\n==============================================================================\nOmnibus:                       60.414   Durbin-Watson:                   2.084\nProb(Omnibus):                  0.000   Jarque-Bera (JB):              151.241\nSkew:                          -1.327   Prob(JB):                     1.44e-33\nKurtosis:                       6.332   Cond. No.                         454.\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n\nShow/Hidecoef_summary = ols_out.summary2().tables[1]  # Get the coefficients table\nprint(coef_summary)\n\n              Coef.  Std.Err.          t         P&gt;|t|    [0.025    0.975]\nIntercept  2.938889  0.311908   9.422288  1.267295e-17  2.323762  3.554016\nTV         0.045765  0.001395  32.808624  1.509960e-81  0.043014  0.048516\nradio      0.188530  0.008611  21.893496  1.505339e-54  0.171547  0.205513\nnewspaper -0.001037  0.005871  -0.176715  8.599151e-01 -0.012616  0.010541\n\nShow/Hideconf_intervals = ols_out.conf_int()\nprint(conf_intervals)\n\n                  0         1\nIntercept  2.323762  3.554016\nTV         0.043014  0.048516\nradio      0.171547  0.205513\nnewspaper -0.012616  0.010541"
+    "text": "Python implementation\n\nShow/Hideimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.linear_model import Lasso, LassoCV\nfrom sklearn.preprocessing import StandardScaler\n\n\n\nShow/Hideprostate = pd.read_csv(\"../data/prostate.csv\")\nX = prostate.iloc[:, 0:8]\ny = prostate[\"lpsa\"]\n\n# Standardize predictors\nscaler = StandardScaler()\nX_scaled = scaler.fit_transform(X)\n\n# Perform Lasso regression with cross-validation\n# Automatically selects alphas\nlasso_cv = LassoCV(alphas=None, cv=10, random_state=2025)  \nlasso_cv.fit(X_scaled, y)\n\n\n\n\nLassoCV(cv=10, random_state=2025)\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\n  LassoCV?Documentation for LassoCViFittedLassoCV(cv=10, random_state=2025) \n\n\nShow/Hide# Plot MSE across alphas\nmse_path = np.mean(lasso_cv.mse_path_, axis=1)\n\nplt.plot(np.log(lasso_cv.alphas_), mse_path, marker='o', label=\"Mean MSE\")\nplt.axvline(np.log(lasso_cv.alpha_), color=\"red\", linestyle=\"--\", \n            label=f\"Optimal Lambda: {lasso_cv.alpha_:.4f}\")\nplt.xlabel(\"Log(lambda)\")\nplt.ylabel(\"Mean Squared Error (MSE)\")\nplt.title(\"Lasso Cross-Validation: MSE vs. Log(lambda)\", fontsize=14)\nplt.legend()\nplt.show()\n\n\n\n\n\n\n\n\nShow/Hideoptimal_lambda = lasso_cv.alpha_\noptimal_lambda\n\n0.0008434274382607599\n\nShow/Hidelasso_cv.coef_\n\narray([ 0.65931859,  0.26435421, -0.15492328,  0.13834575,  0.31131745,\n       -0.14188085,  0.03451933,  0.12292875])\n\nShow/Hidelasso_cv.intercept_\n\n2.4783868783505154\n\n\n\nShow/Hide# Reverse standardization\nstd_devs = scaler.scale_  # Feature standard deviations\nmeans = scaler.mean_      # Feature means\ncoef_original = lasso_cv.coef_ / std_devs\ncoef_original\n\narray([ 0.56230244,  0.62026266, -0.02091681,  0.09585318,  0.75589027,\n       -0.10199745,  0.04805015,  0.00438119])\n\nShow/Hideintercept_original = lasso_cv.intercept_ - np.sum(lasso_cv.coef_ * means / std_devs)\nintercept_original\n\n0.18140520823512718\n\n\n\nShow/Hidelambdas = np.logspace(-6.5, 0.1, 100, base=np.exp(1))\n\ncoefficients = []\nfor lam in lambdas:\n    lasso = Lasso(alpha=lam, fit_intercept=True, max_iter=10000)\n    lasso.fit(X_scaled, y)\n    coefficients.append(lasso.coef_)\n\n\n\n\nLasso(alpha=1.1051709180756477, max_iter=10000)\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\n  Lasso?Documentation for LassoiFittedLasso(alpha=1.1051709180756477, max_iter=10000) \n\n\nShow/Hidecoefficients = np.array(coefficients)\n\n# Plot coefficient paths\nfor i in range(coefficients.shape[1]):\n    plt.plot(np.log(lambdas), coefficients[:, i], label=f\"Feature {i+1}\")\n\nplt.xlabel(\"Log(lambda)\")\nplt.ylabel(\"Coefficients\")\nplt.title(\"Lasso Coefficient Paths vs. Log(lambdas)\")\nplt.legend(loc=\"upper right\", frameon=False)\nplt.show()\n\n\n\n\n\n\n\n\nShow/Hidelasso = Lasso(alpha=0.21, fit_intercept=True)\nlasso.fit(X_scaled, y)\n\n\n\n\nLasso(alpha=0.21)\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\n  Lasso?Documentation for LassoiFittedLasso(alpha=0.21) \n\n\nShow/Hidelasso.coef_\n\narray([0.52543798, 0.1186707 , 0.        , 0.        , 0.13865508,\n       0.        , 0.        , 0.        ])"
   },
   {
     "objectID": "hw/hw-2.html#homework-questions",
@@ -1097,37 +979,337 @@
     "text": "2 Python implementation\n\nCodeimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.linear_model import Ridge, RidgeCV\nfrom sklearn.preprocessing import StandardScaler\n\n\n\nCodemtcars = pd.read_csv(\"../data/mtcars.csv\")\nX = mtcars.drop(columns=[\"mpg\"])\ny = mtcars[\"mpg\"]\nscaler = StandardScaler()\nX_scaled = scaler.fit_transform(X)\nridge_model = Ridge(alpha=1) ## alpha is the n*lambda\nridge_model.fit(X_scaled, y)\n\n\n\n\nRidge(alpha=1)\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\nRidgeRidge(alpha=1)\n\n\n\nCoderidge_model.coef_\n\narray([-0.28547077,  0.28460463, -1.00784994,  0.4865947 , -2.37020101,\n        0.86636324,  0.18585663,  1.13371791,  0.49795614, -0.91537115])\n\n\n\nCodelambdas = np.arange(1, 41) ## alpha must be &gt; 0\n# Ridge regression with cross-validation to select the best lambda\n# Enable storing CV values (can only use LOOCV)\nridge_cv = RidgeCV(alphas=lambdas, store_cv_values=True)  \nridge_cv.fit(X_scaled, y)\n\n\n\n\nRidgeCV(alphas=array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17,\n       18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34,\n       35, 36, 37, 38, 39, 40]),\n        store_cv_values=True)\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\nRidgeCVRidgeCV(alphas=array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17,\n       18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34,\n       35, 36, 37, 38, 39, 40]),\n        store_cv_values=True)\n\n\n\nCode# Optimal lambda and corresponding coefficients\noptimal_lambda = ridge_cv.alpha_\noptimal_lambda\n\n13\n\nCodeoptimal_coefficients = ridge_cv.coef_\noptimal_coefficients\n\narray([-0.64745384, -0.62930084, -0.79208923,  0.55274563, -1.2273356 ,\n        0.2909736 ,  0.37094879,  0.81866969,  0.3981575 , -0.89842163])\n\nCoderidge_cv.intercept_\n\n20.090625000000003\n\nCode# Cross-validation mean squared error for each lambda\ncv_mse = np.mean(ridge_cv.cv_values_, axis=0)\n\n# Plot the CV MSE vs Lambda\nplt.plot(lambdas, cv_mse, marker=\"o\", linestyle=\"-\")\nplt.axvline(optimal_lambda, color=\"red\", linestyle=\"--\", \n            label=f\"Optimal Lambda = {optimal_lambda}\")\nplt.xlabel(\"Lambda (Alpha)\")\nplt.ylabel(\"Mean Squared Error (MSE)\")\nplt.title(\"Cross-Validation MSE vs Lambda\")\nplt.legend()\nplt.show()\n\n\n\n\n\n\n\nHere we transform the coefficients back to the original scale when non-standardized X is used.\n\nCode# Reverse standardization\nstd_devs = scaler.scale_  # Feature standard deviations\nmeans = scaler.mean_      # Feature means\n\ncoef_original = optimal_coefficients / std_devs\ncoef_original\n\narray([-0.36833293, -0.00515876, -0.0117376 ,  1.05033188, -1.27442867,\n        0.16543865,  0.74776248,  1.66690255,  0.54828706, -0.56512958])\n\nCodeintercept_original = ridge_cv.intercept_ - np.sum(optimal_coefficients * means / std_devs)\nintercept_original\n\n21.21467495074396\n\n\n\nCode## the lambda size is matching the size used in cv.glmnet(). Should it be multiplied by 32?\nlambdas = 5 * 10 ** np.linspace(-1, 3, 100)\n\n# RidgeCV with 10-fold cross-validation\nridge_cv = RidgeCV(alphas=lambdas, scoring=\"neg_mean_squared_error\", cv=10)\nridge_cv.fit(X_scaled, y)\n\n\n\n\nRidgeCV(alphas=array([5.00000000e-01, 5.48749383e-01, 6.02251770e-01, 6.60970574e-01,\n       7.25414389e-01, 7.96141397e-01, 8.73764200e-01, 9.58955131e-01,\n       1.05245207e+00, 1.15506485e+00, 1.26768225e+00, 1.39127970e+00,\n       1.52692775e+00, 1.67580133e+00, 1.83918989e+00, 2.01850863e+00,\n       2.21531073e+00, 2.43130079e+00, 2.66834962e+00, 2.92851041e+00,\n       3.21403656e+00, 3.52740116e+0...\n       5.88405976e+02, 6.45774833e+02, 7.08737081e+02, 7.77838072e+02,\n       8.53676324e+02, 9.36908711e+02, 1.02825615e+03, 1.12850986e+03,\n       1.23853818e+03, 1.35929412e+03, 1.49182362e+03, 1.63727458e+03,\n       1.79690683e+03, 1.97210303e+03, 2.16438064e+03, 2.37540508e+03,\n       2.60700414e+03, 2.86118383e+03, 3.14014572e+03, 3.44630605e+03,\n       3.78231664e+03, 4.15108784e+03, 4.55581378e+03, 5.00000000e+03]),\n        cv=10, scoring='neg_mean_squared_error')\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\nRidgeCVRidgeCV(alphas=array([5.00000000e-01, 5.48749383e-01, 6.02251770e-01, 6.60970574e-01,\n       7.25414389e-01, 7.96141397e-01, 8.73764200e-01, 9.58955131e-01,\n       1.05245207e+00, 1.15506485e+00, 1.26768225e+00, 1.39127970e+00,\n       1.52692775e+00, 1.67580133e+00, 1.83918989e+00, 2.01850863e+00,\n       2.21531073e+00, 2.43130079e+00, 2.66834962e+00, 2.92851041e+00,\n       3.21403656e+00, 3.52740116e+0...\n       5.88405976e+02, 6.45774833e+02, 7.08737081e+02, 7.77838072e+02,\n       8.53676324e+02, 9.36908711e+02, 1.02825615e+03, 1.12850986e+03,\n       1.23853818e+03, 1.35929412e+03, 1.49182362e+03, 1.63727458e+03,\n       1.79690683e+03, 1.97210303e+03, 2.16438064e+03, 2.37540508e+03,\n       2.60700414e+03, 2.86118383e+03, 3.14014572e+03, 3.44630605e+03,\n       3.78231664e+03, 4.15108784e+03, 4.55581378e+03, 5.00000000e+03]),\n        cv=10, scoring='neg_mean_squared_error')\n\n\n\nCodebest_lambda = ridge_cv.alpha_\n\ncoefficients = []\nfor lam in lambdas:\n    ridge = Ridge(alpha=lam)\n    ridge.fit(X_scaled, y)\n    coefficients.append(ridge.coef_)\n\n\n\n\nRidge(alpha=5000.0)\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\nRidgeRidge(alpha=5000.0)\n\n\n\nCodecoefficients = np.array(coefficients)\nfor i in range(coefficients.shape[1]):\n    plt.plot(np.log(lambdas), coefficients[:, i])\nplt.xlabel(\"Log(Lambda)\")\nplt.ylabel(\"Coefficients\")\nplt.show()"
   },
   {
-    "objectID": "course-overview.html",
-    "href": "course-overview.html",
+    "objectID": "code/04-linear-reg-code.html",
+    "href": "code/04-linear-reg-code.html",
+    "title": "04-Linear Regression Code Demo",
+    "section": "",
+    "text": "Show/Hideadvertising_data &lt;- read.csv(\"../data/Advertising.csv\")\nadvertising_data &lt;- advertising_data[, 2:5]\nhead(advertising_data)\n\n     TV radio newspaper sales\n1 230.1  37.8      69.2  22.1\n2  44.5  39.3      45.1  10.4\n3  17.2  45.9      69.3   9.3\n4 151.5  41.3      58.5  18.5\n5 180.8  10.8      58.4  12.9\n6   8.7  48.9      75.0   7.2\n\nShow/Hidelm_out &lt;- lm(advertising_data$sales ~ ., data = advertising_data)\nsummary(lm_out)\n\n\nCall:\nlm(formula = advertising_data$sales ~ ., data = advertising_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-8.8277 -0.8908  0.2418  1.1893  2.8292 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  2.938889   0.311908   9.422   &lt;2e-16 ***\nTV           0.045765   0.001395  32.809   &lt;2e-16 ***\nradio        0.188530   0.008611  21.893   &lt;2e-16 ***\nnewspaper   -0.001037   0.005871  -0.177     0.86    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.686 on 196 degrees of freedom\nMultiple R-squared:  0.8972,    Adjusted R-squared:  0.8956 \nF-statistic: 570.3 on 3 and 196 DF,  p-value: &lt; 2.2e-16\n\nShow/Hideconfint(lm_out)\n\n                  2.5 %     97.5 %\n(Intercept)  2.32376228 3.55401646\nTV           0.04301371 0.04851558\nradio        0.17154745 0.20551259\nnewspaper   -0.01261595 0.01054097"
+  },
+  {
+    "objectID": "code/04-linear-reg-code.html#r-implementation",
+    "href": "code/04-linear-reg-code.html#r-implementation",
+    "title": "04-Linear Regression Code Demo",
+    "section": "",
+    "text": "Show/Hideadvertising_data &lt;- read.csv(\"../data/Advertising.csv\")\nadvertising_data &lt;- advertising_data[, 2:5]\nhead(advertising_data)\n\n     TV radio newspaper sales\n1 230.1  37.8      69.2  22.1\n2  44.5  39.3      45.1  10.4\n3  17.2  45.9      69.3   9.3\n4 151.5  41.3      58.5  18.5\n5 180.8  10.8      58.4  12.9\n6   8.7  48.9      75.0   7.2\n\nShow/Hidelm_out &lt;- lm(advertising_data$sales ~ ., data = advertising_data)\nsummary(lm_out)\n\n\nCall:\nlm(formula = advertising_data$sales ~ ., data = advertising_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-8.8277 -0.8908  0.2418  1.1893  2.8292 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  2.938889   0.311908   9.422   &lt;2e-16 ***\nTV           0.045765   0.001395  32.809   &lt;2e-16 ***\nradio        0.188530   0.008611  21.893   &lt;2e-16 ***\nnewspaper   -0.001037   0.005871  -0.177     0.86    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.686 on 196 degrees of freedom\nMultiple R-squared:  0.8972,    Adjusted R-squared:  0.8956 \nF-statistic: 570.3 on 3 and 196 DF,  p-value: &lt; 2.2e-16\n\nShow/Hideconfint(lm_out)\n\n                  2.5 %     97.5 %\n(Intercept)  2.32376228 3.55401646\nTV           0.04301371 0.04851558\nradio        0.17154745 0.20551259\nnewspaper   -0.01261595 0.01054097"
+  },
+  {
+    "objectID": "code/04-linear-reg-code.html#python-implementation",
+    "href": "code/04-linear-reg-code.html#python-implementation",
+    "title": "04-Linear Regression Code Demo",
+    "section": "Python implementation",
+    "text": "Python implementation\n\nShow/Hideimport pandas as pd\nimport numpy as np\n\n\n\nShow/Hideadvertising_data = pd.read_csv(\"../data/Advertising.csv\")\nadvertising_data = advertising_data.iloc[:, 1:5]\nX = advertising_data.drop(columns=[\"sales\"])\ny = advertising_data[\"sales\"]\n\n\nscikit-learn\n\nShow/Hidefrom sklearn.linear_model import LinearRegression\nreg = LinearRegression().fit(X, y)\nreg.intercept_\n\n2.9388893694594014\n\nShow/Hidereg.coef_\n\narray([ 0.04576465,  0.18853002, -0.00103749])\n\n\nstatsmodels\n\nShow/Hidefrom statsmodels.formula.api import ols\nols_out = ols(formula='sales ~ TV + radio + newspaper', data=advertising_data).fit()\nols_out.params\n\nIntercept    2.938889\nTV           0.045765\nradio        0.188530\nnewspaper   -0.001037\ndtype: float64\n\nShow/Hideprint(ols_out.summary())\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                  sales   R-squared:                       0.897\nModel:                            OLS   Adj. R-squared:                  0.896\nMethod:                 Least Squares   F-statistic:                     570.3\nDate:                Mon, 13 Jan 2025   Prob (F-statistic):           1.58e-96\nTime:                        11:56:31   Log-Likelihood:                -386.18\nNo. Observations:                 200   AIC:                             780.4\nDf Residuals:                     196   BIC:                             793.6\nDf Model:                           3                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nIntercept      2.9389      0.312      9.422      0.000       2.324       3.554\nTV             0.0458      0.001     32.809      0.000       0.043       0.049\nradio          0.1885      0.009     21.893      0.000       0.172       0.206\nnewspaper     -0.0010      0.006     -0.177      0.860      -0.013       0.011\n==============================================================================\nOmnibus:                       60.414   Durbin-Watson:                   2.084\nProb(Omnibus):                  0.000   Jarque-Bera (JB):              151.241\nSkew:                          -1.327   Prob(JB):                     1.44e-33\nKurtosis:                       6.332   Cond. No.                         454.\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n\nShow/Hidecoef_summary = ols_out.summary2().tables[1]  # Get the coefficients table\nprint(coef_summary)\n\n              Coef.  Std.Err.          t         P&gt;|t|    [0.025    0.975]\nIntercept  2.938889  0.311908   9.422288  1.267295e-17  2.323762  3.554016\nTV         0.045765  0.001395  32.808624  1.509960e-81  0.043014  0.048516\nradio      0.188530  0.008611  21.893496  1.505339e-54  0.171547  0.205513\nnewspaper -0.001037  0.005871  -0.176715  8.599151e-01 -0.012616  0.010541\n\nShow/Hideconf_intervals = ols_out.conf_int()\nprint(conf_intervals)\n\n                  0         1\nIntercept  2.323762  3.554016\nTV         0.043014  0.048516\nradio      0.171547  0.205513\nnewspaper -0.012616  0.010541"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
     "title": "MSSC 6250 - Statistical Machine Learning (Spring 2025)",
     "section": "",
-    "text": "The course discuss machine learning from statistical and modeling points of view, covering supervised learning and unsupervised learning models and algorithms. Supervised learning methods include various regression and classification methods, and unsupervised learning methods involves dimension reduction and clustering techniques. Topics include Bayesian linear regression, shrinkage and regularization, regression splines, Gaussian processes, logistic regression, discriminant analysis, nearest neighbors, tree-based methods, principal components, K-means, Gaussian mixture clustering, neural networks, etc.",
+    "text": "Homework 1 released, and due Friday, 2/14, 11:59 PM.\n\nThis schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nTo Do\nSlides\nCode\nHomework\nProject\n\n\n\n\n1\nTue, Jan 14\nSyllabus/Overview of Statistical Learning\n📖\n🖥️🖥️\n\n\n\n\n\n\nThu, Jan 16\nBias-variance tradeoff\n\n🖥️\n\n\n\n\n\n2\nTue, Jan 21\nNO CLASS: Cold Weather\n📖\n🖥️\n\n\n\n\n\n\nThu, Jan 23\nLinear Regression\n\n\n\n\n\n\n\n3\nTue, Jan 28\nNumerical Optimization\n📖\n\n\n✍️\n\n\n\n\nThu, Jan 30\nStochastic Gradient Descen; Ridge Regression\n\n🖥️\n\n\n\n\n\n4\nTue, Feb 4\nCross-Validation; Feature Selection\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 6\nLASSO; Polynomial Regression and Regression Splines\n\n\n\n\n\n\n\n5\nTue, Feb 11\nSmoothing Splines and Generalized Additive Models\n📖\n🖥️\n\n✍️\n\n\n\n\nThu, Feb 13\nBayesian Inference\n\n\n\nHW 1 Due\n\n\n\n6\nTue, Feb 18\nBayesian Linear Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 20\nBinary Logistic Regression\n\n\n\n\n✅ Team up Due\n\n\n7\nTue, Feb 25\nMultinomial Logistic Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 27\nDiscriminant Analysis\n\n\n\n\n✅ Proposal Due\n\n\n8\nTue, Mar 4\nNaive Bayes\n📖\n\n\n\n\n\n\n\nThu, Mar 6\nMidterm Presentation I\n\n\n\n✍️\n✅ Materials Due\n\n\n9\nTue, Mar 11\nNO CLASS: Spring break\n\n\n\n\n\n\n\n\nThu, Mar 13\nNO CLASS: Spring break\n\n\n\n\n\n\n\n10\nTue, Mar 18\nK-Nearest Neighbors Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 20\nK-Nearest Neighbors Classification\n\n\n\n\n\n\n\n11\nTue, Mar 25\nGaussian Process Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 27\nGaussian Process Classification\n\n\n\n\n\n\n\n12\nTue, Apr 1\nSupport Vector Machine\n📖\n\n\n\n\n\n\n\nThu, Apr 3\nSupport Vector Machine\n\n\n\n\n\n\n\n13\nTue, Apr 8\nCART and Bagging\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 10\nRandom Forests and Boosting\n\n\n\n✍️\n\n\n\n14\nTue, Apr 15\nMidterm Presentation II\n📖\n🖥️\n\n\n✅\n\n\n\nThu, Apr 17\nNO CLASS: Easter break\n\n\n\n\n\n\n\n15\nTue, Apr 22\nPrincipal Component Analysis\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 24\nK-Means Clustering\n\n\n\n\n\n\n\n16\nTue, Apr 29\nModel-based Clustering\n📖\n🖥️\n\n\n\n\n\n\nThu, May 1\nNeural Networks\n\n\n\n\n\n\n\n17\nThu, May 8\nFinal Project Submission\n\n\n\n\n✅\n\n\n\n\nI reserve the right to make changes to the schedule.",
     "crumbs": [
       "Course Information",
-      "Overview"
+      "Schedule"
     ]
   },
   {
-    "objectID": "course-news.html",
-    "href": "course-news.html",
-    "title": "News/Announcements",
-    "section": "",
-    "text": "Any announcement will be posted in this page. The latest news will also be put on top of the main page.",
-    "crumbs": [
-      "Course Information",
-      "News/Annoucements"
-    ]
+    "objectID": "slides/04-lin-reg.html#linear-regression",
+    "href": "slides/04-lin-reg.html#linear-regression",
+    "title": "Linear Regression 📈",
+    "section": "Linear Regression",
+    "text": "Linear Regression\n\nLinear regression is an approach to supervised learning.\nIt assumes that the dependence of \\(Y\\) on \\(X_1, X_2, \\dots, X_k\\)1 is linear.\nTrue regression functions \\(f(x)\\) are never linear!\nAlthough it is overly simplistic, the linear model has distinct advantages in terms of its interpretability and often shows good predictive performance.\n\nlinear regression is extremely useful both conceptually and practically\nThe textbook ISL uses \\(p\\) instead of \\(k\\) to denote the number of predictors in the model. We use \\(k\\) here, but switch to \\(p\\) starting next week."
   },
   {
-    "objectID": "course-news.html#jan-14-2025",
-    "href": "course-news.html#jan-14-2025",
-    "title": "News/Announcements",
-    "section": "Jan 14, 2025",
-    "text": "Jan 14, 2025\n\nNo office hours first week.",
-    "crumbs": [
-      "Course Information",
-      "News/Annoucements"
-    ]
+    "objectID": "slides/04-lin-reg.html#why-multiple-linear-regression-mlr-model",
+    "href": "slides/04-lin-reg.html#why-multiple-linear-regression-mlr-model",
+    "title": "Linear Regression 📈",
+    "section": "Why Multiple Linear Regression (MLR) Model",
+    "text": "Why Multiple Linear Regression (MLR) Model\n\nOur target response may be affected by several factors.\nTotal sales \\((Y)\\) and amount of money spent on advertising on YouTube (YT) \\((X_1)\\), Facebook (FB) \\((X_2)\\), Instagram (IG) \\((X_3)\\).1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPredict sales based on the three advertising expenditures and see which medium is more effective.\nIn ISL, the predictors are TV, radio and newspaper."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#fit-separate-simple-linear-regression-slr-models",
+    "href": "slides/04-lin-reg.html#fit-separate-simple-linear-regression-slr-models",
+    "title": "Linear Regression 📈",
+    "section": "Fit Separate Simple Linear Regression (SLR) Models",
+    "text": "Fit Separate Simple Linear Regression (SLR) Models\n\n\n\n❌ Fitting a separate SLR model for each predictor is not satisfactory."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#dont-fit-a-separate-simple-linear-regression",
+    "href": "slides/04-lin-reg.html#dont-fit-a-separate-simple-linear-regression",
+    "title": "Linear Regression 📈",
+    "section": "Don’t Fit a Separate Simple Linear Regression",
+    "text": "Don’t Fit a Separate Simple Linear Regression\n\n👉 How to make a single prediction of sales given levels of the 3 advertising media budgets?\n\n How to predict the sales when the amount spent on YT is 50, 100 on FB and 30 on IG? \n\n\n\n\n\n👉 Each regression equation ignores the other 2 media in forming coefficient estimates.\n\n The effect of FB advertising on sales may be increased or decreased when YT and IG advertising are in the model. \n IG advertising may have no impact on sales when YT and FB advertising are in the model. \n\n\n\n\n\n\n👍👍 Better approach: extend the SLR model so that it can directly accommodate multiple predictors."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#multiple-linear-regression-model",
+    "href": "slides/04-lin-reg.html#multiple-linear-regression-model",
+    "title": "Linear Regression 📈",
+    "section": "Multiple Linear Regression Model",
+    "text": "Multiple Linear Regression Model\n\nThe population MLR model: \\[Y_i= \\beta_0 + \\beta_1X_{i1} + \\beta_2X_{i2} + \\dots + \\beta_kX_{ik} + \\epsilon_i\\]  \n\nIn the advertising example, \\(k = 3\\) and \\[\\texttt{sales} = \\beta_0 + \\beta_1 \\times \\texttt{YouTube} + \\beta_2 \\times  \\texttt{Facebook} + \\beta_3 \\times \\texttt{Instagram} + \\epsilon\\]\n\nModel assumptions:\n\n\\(\\epsilon_i \\stackrel{iid}{\\sim} N(0, \\sigma^2)\\)\n\n\n\n\n\nHow many parameters are there in the model?"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#sample-mlr-model",
+    "href": "slides/04-lin-reg.html#sample-mlr-model",
+    "title": "Linear Regression 📈",
+    "section": "Sample MLR Model",
+    "text": "Sample MLR Model\n\nGiven the training sample \\((x_{11}, \\dots, x_{1k}, y_1), (x_{21}, \\dots, x_{2k}, y_2), \\dots, (x_{n1}, \\dots, x_{nk}, y_n),\\)\n\nThe sample MLR model to be trained: \\[\\begin{align*}\ny_i &= \\beta_0 + \\beta_1x_{i1} + \\beta_2x_{i2} + \\dots + \\beta_k x_{ik} + \\epsilon_i \\\\\n&= \\beta_0 + \\sum_{j=1}^k\\beta_j x_{ij} + \\epsilon_i, \\quad i = 1, 2, \\dots, n\n\\end{align*}\\]"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#regression-hyperplane",
+    "href": "slides/04-lin-reg.html#regression-hyperplane",
+    "title": "Linear Regression 📈",
+    "section": "Regression Hyperplane",
+    "text": "Regression Hyperplane\n\n\nSLR: regression line\nMLR: regression hyperplane or response surface\n\\(y = \\beta_0 + \\beta_1x_1 + \\beta_{2}x_2 + \\epsilon\\)\n\\(E(y \\mid x_1, x_2) = 50 + 10x_1 + 7x_2\\)"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#response-surface",
+    "href": "slides/04-lin-reg.html#response-surface",
+    "title": "Linear Regression 📈",
+    "section": "Response Surface",
+    "text": "Response Surface\n\n\\(y = \\beta_0 + \\beta_1x_1 + \\beta_{2}x_2 + \\beta_{11}x_1^2 + \\beta_{22}x_2^2 + \\beta_{12}x_1x_2 + \\epsilon\\)\n\\(E(y \\mid x_1, x_2) = 800+10x_1+7x_2 -8.5x_1^2-5x_2^2- 4x_1x_2\\)\n😎 🤓 A linear regression model can describe a complex nonlinear relationship between the response and predictors!"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#ordinary-least-squares-estimation-of-the-coefficients",
+    "href": "slides/04-lin-reg.html#ordinary-least-squares-estimation-of-the-coefficients",
+    "title": "Linear Regression 📈",
+    "section": "Ordinary Least Squares Estimation of the Coefficients",
+    "text": "Ordinary Least Squares Estimation of the Coefficients\n\\[\\begin{align*}\ny_i &= \\beta_0 + \\beta_1x_{i1} + \\beta_2x_{i2} + \\dots + \\beta_k x_{ik} + \\epsilon_i \\\\\n&= \\beta_0 + \\sum_{j=1}^k\\beta_j x_{ij} + \\epsilon_i, \\quad i = 1, 2, \\dots, n\n\\end{align*}\\]\n\nThe least-squares function Sum of Squared Residuals (\\(SS_{res}\\))1 is \\[SS_{res}(\\alpha_0, \\alpha_1, \\dots, \\alpha_k) = \\sum_{i=1}^n\\left(y_i - \\alpha_0 - \\sum_{j=1}^k\\alpha_j x_{ij}\\right)^2\\]\n\n\n\\(SS_{res}\\) must be minimized with respect to the coefficients, i.e., \\[(b_0, b_1, \\dots, b_k) = \\underset{{\\alpha_0, \\alpha_1, \\dots, \\alpha_k}}{\\mathrm{arg \\, min}}  SS_{res}(\\alpha_0, \\alpha_1, \\dots, \\alpha_k)\\]\n\nIn ISL, RSS is used for Residual Sum of Squares."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#geometry-of-least-squares-estimation",
+    "href": "slides/04-lin-reg.html#geometry-of-least-squares-estimation",
+    "title": "Linear Regression 📈",
+    "section": "Geometry of Least Squares Estimation",
+    "text": "Geometry of Least Squares Estimation"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#least-squares-normal-equations",
+    "href": "slides/04-lin-reg.html#least-squares-normal-equations",
+    "title": "Linear Regression 📈",
+    "section": "Least-squares Normal Equations",
+    "text": "Least-squares Normal Equations\n\\[\\begin{align*}\n\\left.\\frac{\\partial SS_{res}}{\\partial\\alpha_0}\\right\\vert_{b_0, b_1, \\dots, b_k} &= -2 \\sum_{i=1}^n\\left(y_i - \\alpha_0 - \\sum_{j=1}^k \\alpha_j x_{ij}\\right) = 0\\\\\n\\left.\\frac{\\partial SS_{res}}{\\partial\\alpha_j}\\right\\vert_{b_0, b_1, \\dots, b_k} &= -2 \\sum_{i=1}^n\\left(y_i - \\alpha_0 - \\sum_{j=1}^k \\alpha_j x_{ij}\\right)x_{ij} = 0, \\quad j = 1, 2, \\dots, k\n\\end{align*}\\]\n\n\\(k + 1\\) equations with \\(k + 1\\) unknown parameters.\nThe ordinary least squares estimators are the solutions to the normal equations.\n\n\n\n🍹 🍺 🍸 🥂 I buy you a drink if you solve the equations by hand without using matrix notations or operations!"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#interpreting-coefficients",
+    "href": "slides/04-lin-reg.html#interpreting-coefficients",
+    "title": "Linear Regression 📈",
+    "section": "Interpreting Coefficients",
+    "text": "Interpreting Coefficients\n\n\n\n            Estimate Std. Error t value Pr(&gt;|t|)\n(Intercept)    2.939      0.312   9.422     0.00\nyoutube        0.046      0.001  32.809     0.00\nfacebook       0.189      0.009  21.893     0.00\ninstagram     -0.001      0.006  -0.177     0.86\n\n\n\n\\[\\hat{y} = b_0 + b_1 x_1 + \\cdots + b_kx_k\\]\n\\[\\widehat{\\texttt{sales}} = 2.939 + 0.046 \\times \\texttt{YouTube} + 0.189 \\times  \\texttt{Facebook} - 0.001 \\times \\texttt{Instagram}\\]\n\n\n\\(b_1\\): Holding all other predictors fixed, for one unit increase of Youtube, the sales is expected to be increased, on average, by 0.046 units.\n\n\\(b_2\\): All else held constant, one unit increase of Facebook leads to, on average, 0.189 unit increase of sales.\n\n\\(b_0\\): The sales with no expenditures on Youtube, Facebook, and Instagram is expected to be 2.939. (Make sense?!)"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#inference-on-coefficients",
+    "href": "slides/04-lin-reg.html#inference-on-coefficients",
+    "title": "Linear Regression 📈",
+    "section": "Inference on Coefficients",
+    "text": "Inference on Coefficients\n\n\n\n\n\nThe \\((1-\\alpha)100\\%\\) Wald confidence interval (CI) for \\(\\beta_j\\), \\(j = 0, 1, \\dots, k\\) is\n\n\\[\\left(b_j- t_{\\alpha/2, n-p}~se(b_j), \\quad b_j + t_{\\alpha/2, n-p}~ se(b_j)\\right)\\]\n\n\n\n            2.5 % 97.5 %\n(Intercept)  2.32   3.55\nyoutube      0.04   0.05\nfacebook     0.17   0.21\ninstagram   -0.01   0.01\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\n\nThese are marginal CIs seperately for each \\(b_j\\).\nIndividual CI ignores the correlation between \\(b_j\\)s.\nBetter to consider elliptically-shaped regions."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#collinearity",
+    "href": "slides/04-lin-reg.html#collinearity",
+    "title": "Linear Regression 📈",
+    "section": "Collinearity",
+    "text": "Collinearity\n\nInterpretation makes sense when predictors are not highly correlated.\n\nCorrelations amongst predictors cause problems (Collinearity).\n\n\nLarge variance of coefficients.\n\nLarge magnitude of coefficients.\n\nInstable and wrong signed coefficients.\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nThink about the standard error size. Do we tend to conclude \\(\\beta_j = 0\\) or not?"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#extrapolation",
+    "href": "slides/04-lin-reg.html#extrapolation",
+    "title": "Linear Regression 📈",
+    "section": "Extrapolation",
+    "text": "Extrapolation\n\nRegression models are intended as interpolation equations over the range of the regressors used to fit the model.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nDo not use regression for time series forecasting!"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#regression-is-not-for-causal-inference",
+    "href": "slides/04-lin-reg.html#regression-is-not-for-causal-inference",
+    "title": "Linear Regression 📈",
+    "section": "Regression is Not for Causal Inference",
+    "text": "Regression is Not for Causal Inference\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClaims of causality should be avoided for observational data."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#practical-significance-vs.-statisical-significance",
+    "href": "slides/04-lin-reg.html#practical-significance-vs.-statisical-significance",
+    "title": "Linear Regression 📈",
+    "section": "Practical Significance vs. Statisical Significance",
+    "text": "Practical Significance vs. Statisical Significance\n\n\n\n\n\n\nImportant\n\n\n\n\n\n\\(H_0:\\beta_j = 0\\) will always be rejected as long as the sample size is large enough, even \\(x_j\\) has a very small effect on \\(y\\).\n\nConsider the practical significance of the result, not just the statistical significance.\nUse confidence intervals to draw conclusions instead of relying only on p-values.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\n\nIf the sample size is small, there may not be enough evidence to reject \\(H_0:\\beta_j = 0\\).\n\n\nDo Not immediately conclude that the variable has no association with the response.\nThere may be a linear association that is just not strong enough to detect given your data, or there may be a non-linear association.\n\n\n\n\n\n\n\np-value is a dichotomous approach"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#regression-model-in-matrix-form",
+    "href": "slides/04-lin-reg.html#regression-model-in-matrix-form",
+    "title": "Linear Regression 📈",
+    "section": "Regression Model in Matrix Form",
+    "text": "Regression Model in Matrix Form\n\\[y_i= \\beta_0 + \\beta_1x_{i1} + \\beta_2x_{i2} + \\dots + \\beta_kx_{ik} + \\epsilon_i, \\quad \\epsilon_i \\stackrel{iid}{\\sim} N(0, \\sigma^2), \\quad i = 1, 2, \\dots, n\\]\n\n\n\\[{\\bf y} = {\\bf X} \\boldsymbol{\\beta} + \\boldsymbol{\\epsilon}\\] where\n\\[\\begin{align}\n\\bf y = \\begin{bmatrix}\ny_1 \\\\\ny_2 \\\\\n\\vdots \\\\\ny_n \\end{bmatrix},\\quad\n\\bf X = \\begin{bmatrix}\n  1 & x_{11} & x_{12} & \\cdots & x_{1k} \\\\\n  1 & x_{21} & x_{22} & \\cdots & x_{2k} \\\\\n  \\vdots & \\vdots  & \\vdots  & \\ddots & \\vdots  \\\\\n  1 & x_{n1} & x_{n2} & \\cdots & x_{nk} \\end{bmatrix}, \\quad\n\\boldsymbol{\\beta} = \\begin{bmatrix}\n\\beta_0 \\\\\n\\beta_1 \\\\\n\\vdots \\\\\n\\beta_k \\end{bmatrix} , \\quad\n\\boldsymbol{\\epsilon} = \\begin{bmatrix}\n\\epsilon_1 \\\\\n\\epsilon_2 \\\\\n\\vdots \\\\\n\\epsilon_n\\end{bmatrix}\n\\end{align}\\]\n\n\n\\({\\bf X}_{n \\times p}\\): Design matrix\n\n\\(\\boldsymbol{\\epsilon} \\sim MVN_n({\\bf 0}, \\sigma^2 {\\bf I}_n)\\)1\n\n\n\nFor simplicity and convenience, \\(N({\\bf a}, {\\bf B})\\) represents a multivariate normal distribution with mean vector \\({\\bf a}\\) and covariance matrix \\({\\bf B}\\)."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#least-squares-estimation-in-matrix-form",
+    "href": "slides/04-lin-reg.html#least-squares-estimation-in-matrix-form",
+    "title": "Linear Regression 📈",
+    "section": "Least Squares Estimation in Matrix Form",
+    "text": "Least Squares Estimation in Matrix Form\n\n\\[\\begin{align}\nS(\\boldsymbol{\\beta}) = \\sum_{i=1}^n\\epsilon_i^2 = \\boldsymbol{\\epsilon}'\\boldsymbol{\\epsilon} &= ({\\bf y} - {\\bf X} \\boldsymbol{\\beta})'({\\bf y} - {\\bf X} \\boldsymbol{\\beta}) \\\\\n&={\\bf y}'{\\bf y} - \\boldsymbol{\\beta}'{\\bf X}'{\\bf y} - {\\bf y}'{\\bf X} \\boldsymbol{\\beta} + \\boldsymbol{\\beta}' {\\bf X}' {\\bf X} \\boldsymbol{\\beta} \\\\\n&={\\bf y}'{\\bf y} - 2\\boldsymbol{\\beta}'{\\bf X}'{\\bf y} + \\boldsymbol{\\beta}' {\\bf X}' {\\bf X} \\boldsymbol{\\beta}\n\\end{align}\\]\n\n\nLet \\({\\bf t}\\) and \\({\\bf a}\\) be \\(n \\times 1\\) column vectors, and \\({\\bf A}_{n \\times n}\\) is a symmetric matrix.\n\n\\(\\frac{\\partial {\\bf t}'{\\bf a} }{\\partial {\\bf t}} = \\frac{\\partial {\\bf a}'{\\bf t} }{\\partial {\\bf t}} = {\\bf a}\\)\n\\(\\frac{\\partial {\\bf t}'{\\bf A} {\\bf t}}{\\partial {\\bf t}} = 2{\\bf A} {\\bf t}\\)\n\n\n\nNormal equations: \\(\\begin{align} \\left.\\frac{\\partial S}{\\partial \\boldsymbol{\\beta}}\\right \\vert_{\\bf b} = -2 {\\bf X}' {\\bf y} + 2 {\\bf X}' {\\bf X} {\\bf b} = \\boldsymbol{0} \\end{align}\\)\n\n\n\n\nLSE for \\(\\boldsymbol{\\beta}\\):  \\(\\begin{align} \\boxed{{\\bf b} = \\arg \\min _{\\boldsymbol{\\beta}} ({\\bf y} - {\\bf X} \\boldsymbol{\\beta})'({\\bf y} - {\\bf X} \\boldsymbol{\\beta}) = ({\\bf X}' {\\bf X})^{-1} {\\bf X}' \\bf y} \\end{align}\\)  provided that \\({\\bf X}' {\\bf X}\\) is full rank."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#normal-equations",
+    "href": "slides/04-lin-reg.html#normal-equations",
+    "title": "Linear Regression 📈",
+    "section": "Normal Equations",
+    "text": "Normal Equations\n\\(({\\bf X}' {\\bf X}) {\\bf b} = {\\bf X}' {\\bf y}\\)"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#hat-matrix",
+    "href": "slides/04-lin-reg.html#hat-matrix",
+    "title": "Linear Regression 📈",
+    "section": "Hat Matrix",
+    "text": "Hat Matrix\n\\[\\hat{\\bf y} = {\\bf X} {\\bf b} = {\\bf X} ({\\bf X}' {\\bf X}) ^{-1} {\\bf X}' {\\bf y} = {\\bf H} {\\bf y}\\]\n\nThe hat matrix \\({\\bf H}_{n \\times n} = {\\bf X} ({\\bf X}' {\\bf X}) ^{-1} {\\bf X}'\\)\nThe vector of residuals \\(e_i = y_i - \\hat{y}_i\\) is \\[{\\bf e} = {\\bf y} - \\hat{\\bf y} = {\\bf y} - {\\bf X} {\\bf b} = {\\bf y} - {\\bf H} {\\bf y} = ({\\bf I} - {\\bf H}) {\\bf y}\\]\n\n\n\n\nBoth \\({\\bf H}\\) and \\({\\bf I} - {\\bf H}\\) are symmetric and idempotent. They are projection matrices.\n\\(\\bf H\\) projects \\(\\bf y\\) to \\(\\hat{\\bf y}\\) on the \\((k+1)\\)-dimensional space spanned by columns of \\(\\bf X\\), or the column space of \\(\\bf X\\), \\(Col({\\bf X})\\).\n\\({\\bf I} - {\\bf H}\\) projects \\(\\bf y\\) to \\(\\bf e\\) on the space perpendicular to \\(Col({\\bf X})\\), or \\(Col({\\bf X})^{\\bot}\\)."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#geometrical-interpretation-of-least-squares",
+    "href": "slides/04-lin-reg.html#geometrical-interpretation-of-least-squares",
+    "title": "Linear Regression 📈",
+    "section": "Geometrical Interpretation of Least Squares",
+    "text": "Geometrical Interpretation of Least Squares\n\n\n\n\\(Col({\\bf X}) = \\{ {\\bf Xb}: {\\bf b} \\in {\\bf R}^{k+1} \\}\\)\n\\({\\bf y} \\notin Col({\\bf X})\\)\n\\(\\hat{{\\bf y}} = {\\bf Xb} = {\\bf H} {\\bf y} \\in Col({\\bf X})\\)\n\\(\\small {\\bf e} = ({\\bf y} - \\hat{{\\bf y}}) = ({\\bf y} - {\\bf X b}) = ({\\bf I} - {\\bf H}) {\\bf y} \\perp Col({\\bf X})\\)\n\\({\\bf X}'{\\bf e} = 0\\)\n\n\nSearching for \\(\\bf b\\) that minimizes \\(SS_{res}\\) is equivalent to locating the point \\({\\bf Xb} \\in Col({\\bf X})\\) (C) that is as close to \\(\\bf y\\) (A) as possible!\n\n\n\n\n\n\nhttps://commons.wikimedia.org/wiki/File:OLS_geometric_interpretation.svg\n\n\n\n\n\n\nMinimize the distance of \\(\\color{red}{A}\\) to \\(Col(\\bf X)\\): Find the point in \\(Col(\\bf X)\\) that is closest to \\(A\\). The distance is minimized when the point in the space is the foot of the line from \\(A\\) normal to the space. This is point \\(C\\)."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#multivariate-gaussiannormal-distribution",
+    "href": "slides/04-lin-reg.html#multivariate-gaussiannormal-distribution",
+    "title": "Linear Regression 📈",
+    "section": "Multivariate Gaussian/Normal Distribution",
+    "text": "Multivariate Gaussian/Normal Distribution\n\n\n\\({\\bf y} \\sim N_n(\\boldsymbol \\mu, {\\bf \\Sigma})\\)\n\n\n\\(\\boldsymbol \\mu\\): \\(n \\times 1\\) mean vector\n\n\\({\\bf \\Sigma}\\): \\(n \\times n\\) covariance matrix\n\n\n\n\\(\\boldsymbol \\mu= (2, 1)'\\); \\({\\bf \\Sigma} = \\begin{pmatrix} 2 & -1 \\\\ -1 & 2\\end{pmatrix}\\)\n\n\n\n\n\n\n\n\nNotes"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#sampling-distribution-of-bf-b",
+    "href": "slides/04-lin-reg.html#sampling-distribution-of-bf-b",
+    "title": "Linear Regression 📈",
+    "section": "Sampling Distribution of \\({\\bf b}\\)\n",
+    "text": "Sampling Distribution of \\({\\bf b}\\)\n\n\n\\({\\bf y} \\sim N(\\boldsymbol \\mu, {\\bf \\Sigma})\\), and \\({\\bf Z} = {\\bf By} + {\\bf c}\\) with a constant matrix \\({\\bf B}\\) and vector \\(\\bf c\\), then \\[{\\bf Z} \\sim N({\\bf B\\boldsymbol \\mu}, {\\bf B \\Sigma B}')\\]\n\n\\({\\bf b} = ({\\bf X}' {\\bf X}) ^{-1} {\\bf X}' \\bf y\\)\n\\[\\textbf{b} \\sim N \\left( \\boldsymbol \\beta, \\sigma^2 ( {\\bf X}' {\\bf X})^{-1}  \\right)\\] \\[E(\\textbf{b}) = E\\left[ ({\\bf X}' {\\bf X})^{-1} {\\bf X}' {\\bf y}\\right] = \\boldsymbol \\beta\\] \\[\\mathrm{Var}(\\textbf{b}) = \\mathrm{Var}\\left[({\\bf X}' {\\bf X})^{-1} {\\bf X}' {\\bf y} \\right] = \\sigma^2 ({\\bf X}' {\\bf X})^{-1}\\]\n\nThe unknown \\(\\sigma^2\\) is estimated by \\(\\hat{\\sigma}^2 = MS_{res} = \\frac{SS_{res}}{n - k - 1}\\).\n\\(\\textbf{b}\\) is Best Linear Unbiased Estimator (BLUE) (Gauss-Markov Theorem).\n\nThe standard error of \\(b_j\\) is \\({\\sqrt{s^2C_{jj}}}\\), where \\(C_{jj}\\) is the diagonal element of \\(({\\bf X'X})^{-1}\\) corresponding to \\(b_j\\)."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#what-this-review-is-not-covered",
+    "href": "slides/04-lin-reg.html#what-this-review-is-not-covered",
+    "title": "Linear Regression 📈",
+    "section": "What This Review is Not Covered",
+    "text": "What This Review is Not Covered\n\nDetailed statistical inference\nRegression Diagnostics (Usual Data: Outliers, leverage points, influential points; Non-normality; Non-constant variance; Non-linearity)\nCategorical variables\nModel/Variable Selection\nCode for doing regression (lm() in R and linear_model.LinearRegression() in sklearn of Python)\nMaximum likelihood estimation\n\n\nWhere to learn these stuff?\n\nDr. Yu’s MSSC 5780 slides https://math4780-f23.github.io/website/\nISL Ch 3, 6.1."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#generalizations-of-the-linear-model",
+    "href": "slides/04-lin-reg.html#generalizations-of-the-linear-model",
+    "title": "Linear Regression 📈",
+    "section": "Generalizations of the Linear Model",
+    "text": "Generalizations of the Linear Model\n\nClassification: logistic regression, support vector machines\nNon-linearity: kernel smoothing, splines and generalized additive models, nearest neighbor methods.\nInteractions: Tree-based methods, bagging, random forests and boosting\nShrinkage and Regularization: Ridge regression and LASSO"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#basic-concepts",
+    "href": "slides/04-lin-reg.html#basic-concepts",
+    "title": "Linear Regression 📈",
+    "section": "Basic Concepts",
+    "text": "Basic Concepts\n\nAlthough we have the closed form for \\({\\bf b} = ({\\bf X}' {\\bf X}) ^ {-1} {\\bf X}' {\\bf y}\\), we can solve for \\(\\bf b\\) numerically.\n\n\\[\\begin{align}\n\\underset{\\boldsymbol \\beta}{\\text{min}} \\quad \\ell(\\boldsymbol \\beta) = \\frac{1}{n} \\sum_i (y_i - \\beta_0 - x_i\\beta_1)^2 \\\\\n\\end{align}\\]\n\n\n\\(\\ell(\\boldsymbol \\beta)\\), the \\(\\text{MSE}_{\\texttt{Tr}}\\), is called the (squared) loss function.\n\n\n# generate data from a simple linear regression beta0 = 0.5, beta1 = 1\nset.seed(2025)\nn &lt;- 1000\nx &lt;- rnorm(n)\ny &lt;- 0.5 + x + rnorm(n)\n\n\nStart with an initial value of \\(\\boldsymbol \\beta\\), say \\(\\widehat{\\boldsymbol \\beta} = (0.3, 1.5)\\), we compute the \\(\\text{MSE}_{\\texttt{Tr}}\\)\n\n\n\\[\\begin{align}\n\\frac{1}{n}\\sum_i \\left( y_i - 0.3 - 1.5 x_i \\right)^2 \\\\\n\\end{align}\\]\nLet’s first generate a set of data. We have two parameters, an intercept \\(\\beta_= 0.5\\) and a slope \\(\\beta_1 = 1\\)."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#basic-concepts-1",
+    "href": "slides/04-lin-reg.html#basic-concepts-1",
+    "title": "Linear Regression 📈",
+    "section": "Basic Concepts",
+    "text": "Basic Concepts\n\n# calculate the residual sum of squares for a grid of beta values\nmse &lt;- function(b, trainx, trainy) mean((trainy - b[1] - trainx * b[2]) ^ 2)\nmse(b = c(0.3, 1.5), trainx = x, trainy = y)\n\n[1] 1.354548\n\n\n\nThe initial point \\((0.3, 1.5)\\) (red) is not at the bottom of the surface.\n\n\n\n\n\n\n\nDoing this on all such β values would allow us to create a surface of the RSS, as a function of the parameters. - Our goal is to minimize the \\(RR_{res}\\), knowing the corresponding \\(\\boldsymbol \\beta\\) values. Numerical optimization is a research field that investigates such problems and their properties."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#optim",
+    "href": "slides/04-lin-reg.html#optim",
+    "title": "Linear Regression 📈",
+    "section": "\noptim()1\n",
+    "text": "optim()1\n\n\n(lm_optim &lt;- optim(par = c(0.3, 1.5), fn = mse, trainx = x, trainy = y))\n\n$par\n[1] 0.4571491 0.9723691\n\n$value\n[1] 1.055419\n\n$counts\nfunction gradient \n      53       NA \n\n$convergence\n[1] 0\n\n$message\nNULL\n\n\n\n\nlm(y ~ x)$coef\n\n(Intercept)           x \n  0.4572794   0.9723262 \n\n\n\nThe par argument specifies an initial value. In this case, it is \\(\\beta_0 = \\beta_1 = 2\\).\nThe fn argument specifies the name of a function (mse in this case) that can calculate the objective function. This function may have multiple arguments. However, the first argument has to be the parameter(s) that is being optimized. In addition, the parameters need to be supplied to the function as a vector, but not matrix, list or other formats.\n\nThe arguments trainx = x, trainy = y specifies any additional arguments that the objective function fn (mse) needs. It behaves the same as if you are supplying this to the function mse it self.\n\n\n\n\nscipy.optimize for Python."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#basic-principles",
+    "href": "slides/04-lin-reg.html#basic-principles",
+    "title": "Linear Regression 📈",
+    "section": "Basic Principles",
+    "text": "Basic Principles\nFor a general function \\(f(\\mathbf{x})\\) to be minimized with respect to (w.r.t.) \\(\\mathbf{x}\\in \\mathbf{R}^{p}\\), we have\n\n\nFirst-Order Necessary Condition:\n\n\nIf \\(f\\) is continuously differentiable in an open neighborhood of local minimum \\(\\mathbf{x}^\\ast\\), then \\(\\nabla f(\\mathbf{x}^\\ast) = \\mathbf{0}\\)."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#taylor-expansion",
+    "href": "slides/04-lin-reg.html#taylor-expansion",
+    "title": "Linear Regression 📈",
+    "section": "Taylor Expansion",
+    "text": "Taylor Expansion\n\\[f(\\mathbf{x}^\\text{new}) \\approx f(\\mathbf{x}) + \\nabla f(\\mathbf{x})' (\\mathbf{x}^\\text{new} - \\mathbf{x})\\]\n\nWhether \\(\\nabla f(\\mathbf{x})\\) is positive or negative, we can always find a new point \\(\\mathbf{x}^\\text{new}\\) that makes \\(\\nabla f(\\mathbf{x})' (\\mathbf{x}^\\text{new} - \\mathbf{x})\\) less than 0, so that \\(f(\\mathbf{x}^\\text{new}) &lt; f(\\mathbf{x})\\).\n\n\n\n\n\\(\\nabla f(\\mathbf{x}^\\ast) = \\mathbf{0}\\) is only a necessary condition, not a sufficient condition.\n\\(x = 1\\) is a local minimizer, not a global one.\n\nOn the left hand side, we have a convex function, which looks like a bowl. The intuition is that, if \\(f(\\mathbf{x})\\) is a function that is smooth enough, and \\(\\mathbf{x}\\) is a point with \\(\\nabla f(\\mathbf{x}^\\ast) \\neq 0\\), then by the Taylor expansion, we have, for any new point \\(\\mathbf{x}^{new}\\) in the neighborhood of \\(\\mathbf{x}\\), we can approximate its function value - Since we only checked if the slope if “flat” but didn’t care if its facing upward or downward, our condition cannot tell the difference."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#second-order-property",
+    "href": "slides/04-lin-reg.html#second-order-property",
+    "title": "Linear Regression 📈",
+    "section": "Second-order Property",
+    "text": "Second-order Property\nSecond-order Sufficient Condition:\n\n\\(f\\) is twice continuously differentiable in an open neighborhood of \\(\\mathbf{x}^\\ast\\). If \\(\\nabla f(\\mathbf{x}^\\ast) = \\mathbf{0}\\) and \\(\\nabla^2 f(\\mathbf{x}^\\ast),\\) the Hessian matrix, is positive definite, i.e., \\[\n\\nabla^2 f(\\mathbf{x}) = \\left(\\frac{\\partial^2 f(\\mathbf{x})}{\\partial x_i \\partial x_j}\\right) = \\mathbf{H}(\\mathbf{x}) \\succeq 0,\n\\] then \\(\\mathbf{x}^\\ast\\) is a strict local minimizer of \\(f\\).\n\n\n\n\\[\\begin{align}\n\\text{Left:}& f_1(x) = x ^ 2; \\qquad \\nabla^2 f_1(x) = 2 \\\\\n\\text{Right:}& f_2(x) = x ^ 4 + 2 x ^ 3 - 5 x ^ 2; \\qquad \\nabla^2 f_2(x) = 12x^2 + 12 x - 10\\\\\n\\end{align}\\]\n\nFor \\(f_1\\), \\(\\mathbf{H}(\\mathbf{x}) \\succeq 0\\), and the solution is a minimizer.\nFor \\(f_2\\), \\(\\nabla^2 f_2(-2.5) = 35\\), \\(\\nabla^2 f_2(0) = -10\\) and \\(\\nabla^2 f_2(1) = 14\\). So \\(x = -2.5\\) and \\(1\\) are local minimizers and \\(0\\) is a local maximizer.\n\n\n\n\\(\\mathbf{H}(\\mathbf{x})\\) is called the Hessian matrix, which will be frequently used in second-order methods. We can easily check this property for our examples: These conditions are sufficient, but again, they only discuss local properties, not global properties."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#optimization-algorithm",
+    "href": "slides/04-lin-reg.html#optimization-algorithm",
+    "title": "Linear Regression 📈",
+    "section": "Optimization Algorithm",
+    "text": "Optimization Algorithm\n\n\n1. Start with \\(\\mathbf{x}^{(0)}\\)\n\nFor \\(i = 1, 2, \\dots\\) until convergence, find \\(\\mathbf{x}^{(i)}\\) s.t. \\(f(\\mathbf{x}^{(i)}) &lt; f(\\mathbf{x}^{(i-1)})\\)\n\n\n\n\n\nStopping criterion:\n\nGradient of the objective function: \\(\\lVert \\nabla f(\\mathbf{x}^{(i)}) \\rVert &lt; \\epsilon\\)\n\n(Relative) change of distance: \\(\\frac{\\lVert \\mathbf{x}^{(i)} - \\mathbf{x}^{(i-1)} \\rVert} {\\lVert \\mathbf{x}^{(i-1)}\\rVert}&lt; \\epsilon\\) or \\(\\lVert \\mathbf{x}^{(i)} - \\mathbf{x}^{(i-1)} \\rVert &lt; \\epsilon\\)\n\n(Relative) change of functional value: \\(\\frac{| f(\\mathbf{x}^{(i)}) - f(\\mathbf{x}^{(i-1)})|}{|f(\\mathbf{x}^{(i)})|} &lt; \\epsilon\\) or \\(| f(\\mathbf{x}^{(i)}) - f(\\mathbf{x}^{(i-1)})| &lt; \\epsilon\\)\n\nStop at a pre-specified number of iterations\n\n\n\n\n\nMost optimization algorithms follow the same idea: starting from a point x(0) (which is usually specified by the user) and move to a new point x(1) that improves the objective function value. Repeatedly performing this to get a sequence of points x(0),x(1),x(2),x(3),… until the certain stopping criterion is reached. Most algorithms differ in terms of how to move from the current point x(k) to the next, better target point x(k+1). This may depend on the smoothness or structure of f, constrains on the domain, computational complexity, memory limitation, and many others."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#bfgs-demo",
+    "href": "slides/04-lin-reg.html#bfgs-demo",
+    "title": "Linear Regression 📈",
+    "section": "\nBFGS Demo",
+    "text": "BFGS Demo\n\n\n\nf1 &lt;- function(x) x ^ 2\nf2 &lt;- function(x) {\n    x ^ 4 + 2 * x ^ 3 - 5 * x ^ 2\n}\noptim(par = 3, fn = f1, method = \"BFGS\")\n\n$par\n[1] -8.384004e-16\n\n$value\n[1] 1.75742e-29\n\n$counts\nfunction gradient \n       8        3 \n\n$convergence\n[1] 0\n\n$message\nNULL\n\n\n\n\noptim(par = 10, fn = f2, method = \"BFGS\")\n\n$par\n[1] 0.9999996\n\n$value\n[1] -2\n\n$counts\nfunction gradient \n      37       12 \n\n$convergence\n[1] 0\n\n$message\nNULL\n\n\n\noptim(par = 3, fn = f2, method = \"BFGS\")$par\n\n[1] -2.5"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#second-order-newtons-method",
+    "href": "slides/04-lin-reg.html#second-order-newtons-method",
+    "title": "Linear Regression 📈",
+    "section": "Second-order Newton’s Method\n",
+    "text": "Second-order Newton’s Method\n\n\nSecond order Taylor expansion at a current point \\(\\mathbf{x}\\):\n\n\\[f(\\mathbf{x}^\\ast) \\approx f(\\mathbf{x}) + \\nabla f(\\mathbf{x})' (\\mathbf{x}^\\ast - \\mathbf{x}) + \\frac{1}{2} (\\mathbf{x}^\\ast - \\mathbf{x})' \\mathbf{H}(\\mathbf{x}) (\\mathbf{x}^\\ast - \\mathbf{x})\\]\n\nTake derivative w.r.t \\(\\mathbf{x}^\\ast\\) on both sides: \\[0 = \\nabla f(\\mathbf{x}^\\ast) = 0 + \\nabla f(\\mathbf{x}) + \\mathbf{H}(\\mathbf{x}) (\\mathbf{x}^\\ast - \\mathbf{x})\\] \\[\\boxed{\\mathbf{x}^{(i+1)} = \\mathbf{x}^{(i)} -  \\mathbf{H}(\\mathbf{x}^{(i)})^{-1} \\nabla f(\\mathbf{x}^{(i)})}\\]\nFor numerical stability, introduce a step size \\(\\delta \\in (0, 1)\\): \\[\\mathbf{x}^{(i+1)} = \\mathbf{x}^{(i)} -  {\\color{red}{\\delta}} \\, \\mathbf{H}(\\mathbf{x}^{(i)})^{-1} \\nabla f(\\mathbf{x}^{(i)})\\]\n\nIf \\(\\mathbf{H}\\) is difficult to compute, we may use some matrix to substitute it. For example, if we simplify use the identity matrix \\(\\mathbf{I}\\), then this reduces to a first-order method to be introduced later. However, if we can get a good approximation, we can still solve this linear system and get to a better point. Then the question is how to obtain such matrix in a computationally inexpensive way. The Broyden–Fletcher–Goldfarb–Shanno (BFSG) algorithm is such an approach by iteratively updating its (inverse) estimation. For details, please see the SMLR book. We have already used the BFGS method previously in the optim() example. - when x(k+1) is not too far away from x(k), the quadratic approximation is fairly accurate."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#first-order-gradient-descent",
+    "href": "slides/04-lin-reg.html#first-order-gradient-descent",
+    "title": "Linear Regression 📈",
+    "section": "First-Order Gradient Descent\n",
+    "text": "First-Order Gradient Descent\n\n\n\n\n\n\n\nNote\n\n\n\nWhen \\(\\mathbf{H}\\) or \\(\\mathbf{H}^{-1}\\) is difficult to compute (usually in deep learning)\n\nGet an approximate one in a computationally inexpensive way. The BFGS algorithm is such an approach by iteratively updating its (inverse) estimation.\nUse first-order methods\n\n\n\n\n\n\nWhen using \\(\\mathbf{H}= \\mathbf{I}\\), we update \\[\\mathbf{x}^{(i+1)} = \\mathbf{x}^{(i)} - \\delta \\nabla f(\\mathbf{x}^{(i)}).\\]\n\nIt is crucial to figure out a good step size \\(\\delta\\), usually \\(&lt;1\\).\n\nA too large \\(\\delta\\) may not converge.\nA too small \\(\\delta\\) takes too many iterations.\n\n\n\nAlternatively, line search could be used."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#demo-ss_res-contour",
+    "href": "slides/04-lin-reg.html#demo-ss_res-contour",
+    "title": "Linear Regression 📈",
+    "section": "\nDemo \\(SS_{res}\\) Contour",
+    "text": "Demo \\(SS_{res}\\) Contour\nThe objective function is \\(\\ell(\\boldsymbol \\beta) = \\frac{1}{2n}||\\mathbf{y} - \\mathbf{X} \\boldsymbol \\beta ||^2\\) with solution \\({\\bf b} = \\left(\\mathbf{X}'\\mathbf{X}\\right)^{-1} \\mathbf{X}'\\mathbf{y}\\).\n\nCodeset.seed(2025)\nn &lt;- 200\n\n# create some data with linear model\nX &lt;- MASS::mvrnorm(n, c(0, 0), matrix(c(1, 0.7, 0.7, 1), 2, 2))\ny &lt;- rnorm(n, mean = 2 * X[, 1] + X[, 2])\n  \nbeta1 &lt;- seq(-1, 4, 0.005)\nbeta2 &lt;- seq(-1, 4, 0.005)\nallbeta &lt;- data.matrix(expand.grid(beta1, beta2))\nrss &lt;- matrix(apply(allbeta, 1, \n                    function(b, X, y) sum((y - X %*% b) ^ 2), X, y),\n              length(beta1), length(beta2))\n  \n# quantile levels for drawing contour\nquanlvl = c(0.01, 0.025, 0.05, 0.2, 0.5, 0.75)\n  \n# plot the contour\ncontour(beta1, beta2, rss, levels = quantile(rss, quanlvl), las = 1)\nbox()\n  \n# the truth\nb &lt;- solve(t(X) %*% X) %*% t(X) %*% y\npoints(b[1], b[2], pch = 19, col = \"blue\", cex = 2)"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#demo-gradient-descent",
+    "href": "slides/04-lin-reg.html#demo-gradient-descent",
+    "title": "Linear Regression 📈",
+    "section": "\nDemo Gradient Descent",
+    "text": "Demo Gradient Descent\n\\[\n\\begin{align}\n\\frac{\\partial \\ell(\\boldsymbol \\beta)}{\\partial \\boldsymbol \\beta} = -\\frac{1}{n} \\sum_{i=1}^n (y_i - x_i' \\boldsymbol \\beta) x_i = \\frac{1}{n} \\sum_{i=1}^n \\frac{\\partial \\ell_i(\\boldsymbol \\beta)}{\\partial \\boldsymbol \\beta}.\n\\end{align}\n\\] where \\(\\ell_i(\\boldsymbol \\beta) = \\frac{1}{2}(y_i - x_i' \\boldsymbol \\beta)^2\\).\nFirst set an initial beta value, say \\(\\boldsymbol \\beta = \\mathbf{0}\\) for all entries, then proceed with the update\n\\[\\begin{align}\n\\boldsymbol \\beta^\\text{new} =& \\boldsymbol \\beta^\\text{old} - \\delta \\frac{\\partial \\ell(\\boldsymbol \\beta)}{\\partial \\boldsymbol \\beta}\\\\\n=&\\boldsymbol \\beta^\\text{old} + \\delta \\frac{1}{n} \\sum_{i=1}^n (y_i - x_i' \\boldsymbol \\beta) x_i.\\\\\n\\end{align}\\]"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#demo-gradient-descent-1",
+    "href": "slides/04-lin-reg.html#demo-gradient-descent-1",
+    "title": "Linear Regression 📈",
+    "section": "\nDemo Gradient Descent",
+    "text": "Demo Gradient Descent\n\nSet \\(\\boldsymbol{\\beta}^{(0)} = \\mathbf{0}\\), \\(\\delta = 0.2\\)"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#demo-effect-of-delta",
+    "href": "slides/04-lin-reg.html#demo-effect-of-delta",
+    "title": "Linear Regression 📈",
+    "section": "\nDemo Effect of \\(\\delta\\)\n",
+    "text": "Demo Effect of \\(\\delta\\)\n\n\nThe descent path is very smooth because we choose a very small step size. However, if the step size is too large, we may observe unstable results or even unable to converge. For example, if We set \\(\\delta = 1\\) or \\(\\delta = 1.5\\)."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#mini-batch-stochastic-gradient-descent-sgd",
+    "href": "slides/04-lin-reg.html#mini-batch-stochastic-gradient-descent-sgd",
+    "title": "Linear Regression 📈",
+    "section": "Mini-batch Stochastic Gradient Descent (SGD)",
+    "text": "Mini-batch Stochastic Gradient Descent (SGD)\nIn deep learning,\n\nCalculating the gradient using entire data can be costly (memory limit).\nConsider update the parameter using a subset of data of size \\(m \\ll n\\), called minibatch: \\(\\mathcal{D}_B = \\{x_j, y_j \\}_{j = 1}^m \\subset \\mathcal{D}\\)\n\n\n\\[\n\\begin{align}\n\\frac{\\partial \\ell_B(\\boldsymbol \\beta)}{\\partial \\boldsymbol \\beta} = -\\frac{1}{m} \\sum_{j=1}^m (y_j - x_j' \\boldsymbol \\beta) x_j = \\frac{1}{m} \\sum_{j=1}^m \\frac{\\partial \\ell_j(\\boldsymbol \\beta)}{\\partial \\boldsymbol \\beta}\n\\end{align}\n\\] where \\(\\ell_j(\\boldsymbol \\beta) = \\frac{1}{2}(y_j - x_j' \\boldsymbol \\beta)^2\\).\n\\[\\begin{align}\n\\boldsymbol \\beta^\\text{new} =& \\boldsymbol \\beta^\\text{old} - \\delta \\frac{\\partial \\ell_B(\\boldsymbol \\beta)}{\\partial \\boldsymbol \\beta}\\\\\n=&\\boldsymbol \\beta^\\text{old} + \\delta \\frac{1}{m} \\sum_{j=1}^m (y_j - x_j' \\boldsymbol \\beta) x_j.\\\\\n\\end{align}\\]"
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#sgd",
+    "href": "slides/04-lin-reg.html#sgd",
+    "title": "Linear Regression 📈",
+    "section": "SGD",
+    "text": "SGD\n\n\\(\\nabla_{\\boldsymbol \\beta} \\ell_B(\\boldsymbol \\beta)\\) approximates \\(\\nabla_{\\boldsymbol \\beta} \\ell(\\boldsymbol \\beta)\\) with stochasticity due to random sampling.\nDifferent samples give us a different gradient value, making it stochastic!\nSuppose we have \\(n=1000\\) training points, and batch size is \\(m=100\\), it needs \\(n/m = 10\\) updates (iterations can be parallelized) to pass all data into the algorithm, which completes one epoch.\n\nTo gaurantee convergence, the learning rate \\(\\delta\\) should\n\nbe decreasing (with epochs or iterations)\nhave \\(\\sum_{k=1}^{\\infty}\\delta_k = \\infty\\) and \\(\\sum_{k=1}^{\\infty}\\delta_k^2 &lt; \\infty\\)\n\n\n\n\nIterations: Decay happens more frequently (every batch). This is more precise and often used for large datasets. Epochs: Decay happens less frequently (after all batches of one epoch). This is simpler and often used for smaller datasets or in step-based schedules."
+  },
+  {
+    "objectID": "slides/04-lin-reg.html#demo-sgd",
+    "href": "slides/04-lin-reg.html#demo-sgd",
+    "title": "Linear Regression 📈",
+    "section": "\nDemo SGD",
+    "text": "Demo SGD\n\n\n\n\n\n\n\n\n\n\n\n\nmssc6250-s25.github.io/website"
   },
   {
     "objectID": "slides/03-bias-var.html#supervised-learning-1",
