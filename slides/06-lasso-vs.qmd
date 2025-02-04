@@ -1,0 +1,1057 @@
+---
+title: "Feature Selection and LASSO ![](./images/06-lasso-vs/lasso.png){width='100px'}"
+subtitle: "MSSC 6250 Statistical Machine Learning"
+author: "Dr. Cheng-Han Yu <br> Department of Mathematical and Statistical Sciences <br> Marquette University"
+# date: "`r format(Sys.time(), '%B %d %Y')`"
+# macros: _macros.tex # import a list of TeX/LaTeX definitions
+format: 
+  revealjs:
+    html-math-method:
+      method: mathjax
+      url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    # include-in-header:
+    #     - "macros.tex"
+    highlight-style: github
+    code-block-bg: true
+    self-contained: false
+    slide-number: c/t
+    incremental: false
+    width: 1800
+    height: 1000
+    margin: 0.05
+    logo: "https://upload.wikimedia.org/wikipedia/commons/e/e8/Marquette_Golden_Eagles_logo.svg"
+    footer: "[mssc6250-s25.github.io/website](https://mssc6250-s25.github.io/website/)"
+    theme: ["simple", "styles.scss"]
+    echo: false
+    multiplex: true
+    code-link: true
+    fig-cap-location: bottom
+    fig-align: center
+    transition: none ## fade slide convex concave zoom
+    code-line-numbers: true
+    title-slide-attributes:
+      data-background-color: "#447099"
+      # data-background-image: images/paper-texture.jpg
+      # data-background-size: cover
+      # data-background-color: "#698ED5"
+editor: source
+execute:
+  freeze: true
+  echo: false
+
+---
+
+
+# {visibility="hidden"}
+
+
+\def\bx{\mathbf{x}}
+\def\bg{\mathbf{g}}
+\def\bw{\mathbf{w}}
+\def\bbeta{\boldsymbol \beta}
+\def\bX{\mathbf{X}}
+\def\by{\mathbf{y}}
+\def\bH{\mathbf{H}}
+\def\bI{\mathbf{I}}
+\def\bS{\mathbf{S}}
+\def\bW{\mathbf{W}}
+\def\T{\text{T}}
+\def\cov{\mathrm{Cov}}
+\def\cor{\mathrm{Corr}}
+\def\var{\mathrm{Var}}
+\def\E{\mathrm{E}}
+\def\bmu{\boldsymbol \mu}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\def\Trace{\text{Trace}}
+
+
+
+```{r}
+#| label: setup
+#| include: false
+#| eval: true
+library(countdown)
+library(knitr)
+library(gt)
+library(gtExtras)
+library(ggplot2)
+library(ISLR2)
+library(genridge)
+library(glmnet)
+# library(ElemStatLearn)
+knitr::opts_chunk$set(
+    fig.asp = 0.618,
+    fig.align = "center",
+    out.width = "100%",
+    fig.retina = 10,
+    fig.path = "images/06-lasso-vs/",
+    message = FALSE,
+    global.par = TRUE
+)
+options(
+  htmltools.dir.version = FALSE,
+  dplyr.print_min = 6, 
+  dplyr.print_max = 6,
+  tibble.width = 80,
+  width = 80,
+  digits = 3
+  )
+hook_output <- knitr::knit_hooks$get("output")
+knitr::knit_hooks$set(output = function(x, options) {
+  lines <- options$output.lines
+  if (is.null(lines)) {
+    return(hook_output(x, options))  # pass to default hook
+  }
+  x <- unlist(strsplit(x, "\n"))
+  more <- "..."
+  if (length(lines)==1) {        # first n lines
+    if (length(x) > lines) {
+      # truncate the output, but add ....
+      x <- c(head(x, lines), more)
+    }
+  } else {
+    x <- c(more, x[lines], more)
+  }
+  # paste these lines together
+  x <- paste(c(x, ""), collapse = "\n")
+  hook_output(x, options)
+})
+```
+
+
+
+
+# Feature/Variable Selection
+
+
+## When OLS Doesn't Work Well
+
+When $p \gg n$, it is often that many of the features in the model are not associated with the response.
+
+- [*Model Interpretability*]{.green}: By removing irrelevant features $X_j$s, i.e., setting the corresponding $\beta_j$s to zero, we can obtain a model that is more easily interpreted. (**Feature/Variable selection**)
+
+- Least squares is unlikely to yield any coefficient estimates that are exactly zero.
+
+
+
+## Variable Selection
+- We have a *large pool of __candidate regressors__*, of which only a few are likely to be important. 
+
+Two "conflicting" goals in model building:
+
+- as many features as possible for better *predictive performance on new data* (**smaller bias**).
+
+- as few regressors as possible because as the number of regressors increases, 
+  + $\var(\hat{y})$ will increase (**larger variance**)
+  + cost more in data collecting and maintaining
+  + more model complexity
+
+A compromise between the two hopefully leads to the *"best" regression equation*.
+
+:::{.question}
+What does **best** mean?
+:::
+
+. . .
+
+There is **no unique definition of "best"**, and different methods specify **different subsets of the candidate regressors as best**.
+
+
+
+## Three Classes of Methods
+
+- [**Subset Selection (ISL Sec. 6.1)**]{.green} Identify a subset of the $p$ predictors that we believe to be related to the response.
+  + Need a selection method and a selection criterion.
+  + Covered in [MSSC 5780 slides](https://math4780-f23.github.io/website/slides/15-var-select.html#/title-slide)
+
+. . .
+
+- [**Shrinkage (ISL Sec. 6.2)**]{.green} Fit a model that forces some coefficients to be shrunk to zero.
+  + [*Lasso*]{.blue} (Discussed in MSSC 6250)
+  <!-- + R: `glmnet::glmnet()`  -->
+  <!-- + Python: [`sklearn.linear_model.ElasticNetCV()`](https://scikit-learn.org/1.5/modules/generated/sklearn.linear_model.ElasticNetCV.html) -->
+
+. . .
+
+- [**Dimension Reduction (ISL Sec. 6.3)**]{.green} Find $m$ representative features that are linear combinations of the $p$ original predictors ($m \ll p$), then fit least squares. 
+  + Principal component regression (Unsupervised) 
+     <!-- * R: `pls::plsr()` -->
+     <!-- * Python: `sklearn.decomposition.pca()` `sklearn.linear_model.LinearRegression()` `sklearn.pipeline.Pipeline([('pca', pca), ('linreg', linreg)])` -->
+  
+  + Partial least squares (Supervised) 
+     <!-- * R: `pls::plsr()`  -->
+     <!-- * Python: [`sklearn.cross_decomposition.PLSRegression()`](https://scikit-learn.org/1.5/modules/generated/sklearn.cross_decomposition.PLSRegression.html) -->
+
+
+
+## Subset Selection {visibility="hidden"}
+
+- [MSSC 5780 slides](https://math4780-f23.github.io/website/slides/15-var-select.html#/title-slide) and ISL Sec. 6.1
+
+:::: columns
+:::{.column width="75%"}
+
+- Identify a subset of all the candidate predictors with the *best* OLS performance.
+  + Best subset selection `olsrr::ols_step_best_subset()`
+  + Forward stepwise selection `olsrr::ols_step_forward_p()`
+  + Backward stepwise elimination `olsrr::ols_step_backward_p()`
+  + Hybrid stepwise selection `olsrr::ols_step_both_p()`
+  
+:::
+
+::: {.column width="25%"}
+[![](./images/06-lasso-vs/hex_olsrr.png)](https://olsrr.rsquaredacademy.com/)
+:::
+
+::::
+
+::: notes
+We then fit a model using least squares on the reduced set of variables.
+:::
+
+  
+## Selection Criteria {visibility="hidden"}
+
++ An evaluation metric should consider **Goodness of Fit** and **Model Complexity**:
+
+> **Goodness of Fit**: The more regressors, the better
+
+> **Complexity Penalty**: The less regressors, the better
+    
+. . .
+
+- Evaluate subset models:
+  + $R_{adj}^2$ $\uparrow$
+  + Mallow's $C_p$  $\downarrow$
+  + Information Criterion (AIC, BIC)  $\downarrow$
+  + **PRE**diction **S**um of **S**quares (PRESS) $\downarrow$ (Allen, D.M. (1974))
+  
+
+::: notes
+::: {.callout-note style="font-size: 1.5em"}
+All the measures are not appropriate in the high-dimensional ($n \ll p$) setting.
+- Indirectly estimate test error by making adjustment to the training error to account for the bias due to overfitting.
+- Directly estimate test error using CV.
+:::
+:::
+
+
+<!-- ## Three Classes of Methods - Subset Selection -->
+
+<!-- - [**Shrinkage (ISL Sec. 6.2)**]{.green} Fit a model that forces some coefficients to be shrunk to zero. -->
+<!--   + *Lasso* `glmnet::glmnet()` -->
+
+<!-- . . . -->
+
+<!-- - [**Dimension Reduction (ISL Sec. 6.3)**]{.green} Find $m$ representative features that are linear combinations of the $p$ original predictors ($m \ll p$), then fit least squares.  -->
+<!--   + *Principal component regression* (Unsupervised) `pls::pcr()` -->
+<!--   + Partial least squares (Supervised) `pls::plsr()` -->
+
+
+
+
+
+<!-- # Subset Selection Method -->
+
+
+<!-- ## Model Selection Criteria -->
+<!-- - The full (largest) model has $M$ candidate regressors. -->
+<!-- - There are $M \choose d$ possible subset models of $d$ coefficients. -->
+<!-- - There are totally $2^M$ possible subset models. -->
+
+<!-- - An evaluation metric should consider **Goodness of Fit** and **Model Complexity**: -->
+
+<!-- > **Goodness of Fit**: The more regressors, the better -->
+
+<!-- > **Complexity Penalty**: The less regressors, the better -->
+
+<!-- . . . -->
+
+<!-- - Evaluate subset models: -->
+<!--   + $R_{adj}^2$ $\uparrow$ -->
+<!--   + Mallow's $C_p$  $\downarrow$ -->
+<!--   + Information Criterion (AIC, BIC)  $\downarrow$ -->
+<!--   + **PRE**diction **S**um of **S**quares (PRESS) $\downarrow$ (Allen, D.M. (1974)) -->
+
+
+<!-- ::: notes -->
+<!-- ::: {.callout-note style="font-size: 1.5em"} -->
+<!-- All the measures are not appropriate in the high-dimensional ($n \ll p$) setting. -->
+<!-- - Indirectly estimate test error by making adjustment to the training error to account for the bias due to overfitting. -->
+<!-- - Directly estimate test error using CV. -->
+<!-- ::: -->
+<!-- ::: -->
+
+<!-- ## Selection Criteria: Mallow's $C_p$ Statistic $\downarrow$ -->
+<!-- For a model with $d$ predictors, -->
+
+<!-- $$\begin{align} C_p &= \frac{SS_{res}(d)}{\hat{\sigma}^2} - n + 2d \\ &= d + \frac{(s^2 - \hat{\sigma}^2)(n-d)}{\hat{\sigma}^2} \end{align}$$ -->
+
+<!-- - $\hat{\sigma}^2$ is the variance estimate from the *full* model, i.e., $\hat{\sigma}^2 = MS_{res}(M)$. -->
+
+<!-- - $s^2$ is the variance estimate from the model with $d$ coefficients, i.e., $s^2 = MS_{res}(d)$. -->
+
+<!-- - Favors the candidate model with the **smallest $C_p$**. -->
+
+<!-- - For unbiased models that $E[\hat{y}_i] = E[y_i]$, $C_p = d$. -->
+<!--   + All of the errors in $\hat{y}_i$ is variance, and the model is not underfitted.  -->
+
+<!-- ::: aside -->
+<!-- $C_p$ in ISL is defined as $C_p = \frac{1}{n}(SS_{res} + 2d\hat{\sigma}^2)$ which is equivalent to the definition given above. -->
+<!-- ::: -->
+
+<!-- ::: notes -->
+
+<!-- If $\hat{\sigma}^2$ is unbiased, Cp is unbiased for test MSE. -->
+<!-- ::: -->
+
+
+
+<!-- ## Mallow's $C_p$ Plot -->
+
+<!-- :::: columns -->
+<!-- ::: {.column width="55%"} -->
+<!-- ```{r} -->
+<!-- #| out-width: "90%" -->
+<!-- #| fig-asp: 1 -->
+<!-- par(mar = c(3, 3, 0, 0), mgp = c(2, 0.5, 0), las = 1) -->
+<!-- x <- 1:4 -->
+<!-- y <- c(2.5, 2.2, 2.2, 4.3) -->
+<!-- plot(x, y, col = 4, axes = F, xlab = "d", ylab = "Cp", pch = 19, cex = 2, -->
+<!--      xlim = c(0, 5), ylim = c(0, 5)) -->
+<!-- axis(1, 0:5) -->
+<!-- axis(2, 0:5) -->
+<!-- text(x[1], y[1]+0.4, "A", cex = 1.3) -->
+<!-- text(x[2], y[2]+0.4, "B", cex = 1.3) -->
+<!-- text(x[3], y[3]+0.4, "C", cex = 1.3) -->
+<!-- text(x[4], y[4]+0.4, "D", cex = 1.3) -->
+<!-- abline(a = 0, b = 1, lwd = 2, col = "#003366") -->
+<!-- text(c(0.1), c(0.4), "Cp = d", srt = 45, font = 3, cex = 1.5) -->
+<!-- ``` -->
+<!-- ::: -->
+
+<!-- ::: {.column width="45%"} -->
+<!-- - Model A is a heavily biased model. -->
+<!-- - Model D is the poorest performer. -->
+<!-- - Model B and C are reasonable. -->
+<!-- - Model C has $C_p < 3$ which implies $MS_{res}(3) < MS_{res}(M)$ -->
+<!-- ::: -->
+<!-- :::: -->
+
+
+<!-- ## Selection Criteria: Information Criterion $\downarrow$ -->
+<!-- For a model with $d$ predictors, -->
+
+<!-- - Akaike information criterion (AIC)^[For least squares models, $\text{AIC}$ is proportional to $C_p$.] is $$\text{AIC} = n \ln \left( \frac{SS_{res}(d)}{n} \right) + 2d$$ -->
+
+<!-- - Bayesian information criterion (BIC) is $$\text{BIC} = n \ln \left( \frac{SS_{res}(d)}{n} \right) + d \ln (n)$$ -->
+
+<!-- - BIC penalizes more when adding more variables as the sample size increases.  -->
+
+<!-- - BIC tends to choose models with less features. -->
+
+
+<!-- ::: aside -->
+<!-- Some use $2(d+1)$ to consider the additional parameter $\sigma$. -->
+<!-- ::: -->
+
+
+<!-- ## Selection Criteria: PRESS $\downarrow$ -->
+<!-- - **PRE**diction **S**um of **S**quares (PRESS) -->
+
+<!-- - $\text{PRESS}_d = \sum_{i=1}^n[y_i - \hat{y}_{(i)}]^2 = \sum_{i=1}^n\left( \frac{e_i}{1-h_{ii}}\right)^2$ where $e_i = y_i - \hat{y}_i$.^[$\text{Absolute PRESS}_p = \sum_{i=1}^n|y_i - \hat{y}_{(i)}|$ can also be considered when some large prediction errors are too influential.] -->
+
+<!-- - PRESS is in fact the Leave-One-Out CV estimate of test MSE! -->
+
+<!-- - $R_{pred, d}^2 = 1 - \frac{PRESS_d}{SS_T}$ -->
+
+
+<!-- ## Selection Methods: All Possible Selection -->
+<!-- - Assume the intercept is in all models. -->
+
+<!-- - If there are $M$ possible regressors, we investigate all $2^M - 1$ possible regression equations. -->
+
+<!-- - Use the selection criteria to determine some candidate models and complete regression analysis on them. -->
+
+<!-- :::: columns -->
+<!-- :::{.column width="80%"} -->
+
+<!-- ```{r} -->
+<!-- #| echo: true -->
+<!-- manpower <- read.csv(file = "./data/manpower.csv", header = TRUE) -->
+<!-- lm_full <- lm(y ~ ., data = manpower) -->
+<!-- olsrr_all <- olsrr::ols_step_all_possible(lm_full) -->
+<!-- names(olsrr_all) -->
+<!-- ``` -->
+<!-- ::: -->
+
+<!-- ::: {.column width="20%"} -->
+<!-- [![](./images/06-lasso-vs/hex_olsrr.png)](https://olsrr.rsquaredacademy.com/) -->
+<!-- ::: -->
+
+<!-- :::: -->
+
+
+<!-- ::: notes -->
+<!-- - `n`: number of predictors -->
+<!-- - `predictors`: predictors in the model -->
+<!-- - `rsquare`: R-square of the model -->
+<!-- - `adjr`: adjusted R-square of the model -->
+<!-- - `predrsq`: predicted R-square of the model -->
+<!-- - `cp`: Mallow’s Cp -->
+<!-- - `aic`: AIC -->
+<!-- - `sbic`: Sawa BIC -->
+<!-- - `sbc`: Schwarz BIC (the one we defined) -->
+<!-- ::: -->
+
+<!-- ## -->
+
+<!-- ::: {style="font-size: 0.78em;"} -->
+<!-- ```{r, highlight.output = 17, highlight=TRUE} -->
+<!-- #| class-output: my_classfull -->
+<!-- print(olsrr_all, row.names = FALSE) -->
+<!-- ``` -->
+<!-- ::: -->
+
+
+
+<!-- ## Other Subset Selection Methods {visibility="hidden"} -->
+
+<!-- - [All possible selection]{.green} `olsrr::ols_step_all_possible()` -->
+<!--   + Consider all possible subsets of regressors. -->
+
+<!-- - [Best subset]{.green} `olsrr::ols_step_best_subset()` -->
+<!--   + Identify the best model of each model size. -->
+
+<!-- - [Forward selection]{.green} `olsrr::ols_step_forward_p()` -->
+<!--   + Begins with no regressors, and insert regressors into the model one at a time. -->
+
+<!-- - [Backward elimination]{.green} `olsrr::ols_step_backward_p()` -->
+<!--   + Begin with the full model with all possible regressors, then remove regressors from the model one at a time. -->
+
+<!-- - [Stepwise regression]{.green} `olsrr::ols_step_both_p()` -->
+<!--   + Do forward selection, but refit the model when a new predictor is inserted. Remove a predictor that becomes redundant from the refit model. -->
+
+<!-- - Check [Variable Selection Methods](https://olsrr.rsquaredacademy.com/articles/variable_selection.html) -->
+
+
+# Lasso (Least Absolute Shrinkage and Selection Operator) ![](./images/06-lasso-vs/lasso.png){width='100px'}
+
+
+## Why Lasso?
+
+- Subset selection methods 
+
+  + may be computationally infeasible (fit OLS over millions of times)
+  + do not explore all possible subset models (no global solution)
+
+<!-- - Other subset selection methods .  -->
+
+- Ridge regression does shrink coefficients, but still include all predictors. 
+
+- Lasso regularizes coefficients so that some coefficients are [*shrunk to zero*]{.blue}, doing feature selection.
+
+- Like ridge regression, for a given $\lambda$, Lasso only fits a single model.
+
+
+::: notes
+Ridge OK for prediction, but bad at interpretation
+https://stats.stackexchange.com/questions/76518/what-is-the-time-complexity-of-lasso-regression
+same computation complexity as OLS $O(p^2n)$ when $p < n$ and $O(p^3)$
+:::
+
+## What is Lasso?
+
+Different from the Ridge regression that adds $\ell_2$ norm, Lasso adds $\ell_1$ penalty on the parameters:
+
+
+$$\begin{align}
+\widehat{\bbeta}^\text{l} =& \, \, \argmin_{\bbeta} \lVert \by - \bX \bbeta\rVert_2^2 + n \lambda \lVert\bbeta\rVert_1\\
+=& \, \, \argmin_{\bbeta} \frac{1}{n} \sum_{i=1}^n (y_i - x_i' \bbeta)^2 + \lambda \sum_{j=1}^p |\beta_j|,
+\end{align}$$
+
+- The $\ell_1$ penalty forces some of the coefficient estimates to be exactly equal to zero when $\lambda$ is sufficiently large, yielding *sparse* models.
+
+
+
+## $\ell_2$ vs. $\ell_1$
+- Ridge shrinks big coefficients much more than lasso.
+- Lasso has larger penalty on small coefficients.
+
+```{r}
+beta <- seq(-2, 2, length = 1000)
+par(mar = c(4, 4, 0, 0))
+plot(beta, beta^2, type = "l", col = "red", lwd = 2, las = 1, 
+     ylab = "Penalty level")
+lines(beta, abs(beta), col = "blue", lwd = 2)
+legend("top", c("Ridge L2", "Lasso L1"), lwd = 2, lty = 1, col = c("red", "blue"),
+       bty = "n")
+```
+
+::: notes
+- Ridge shrinks big coefficients much more than lasso.
+- Lasso has larger penalty on small coefficients. This is one of the intuitions why Lasso has exact zero coefficients after shrinkage. Because when punishing small coefficients a lot more, it may be better to set them exactly equal to zero to get smaller loss or objective value.
+:::
+
+
+
+## [`ElemStatLearn::prostate`](https://hastie.su.domains/ElemStatLearn/) Data
+
+::: large
+```{r}
+data(prostate)
+head(prostate, 8) |> gt() |> tab_options(table.font.size=42)
+```
+:::
+
+
+## `cv.glmnet(alpha = 1)`
+
+```{r}
+#| echo: true
+#| code-line-numbers: "1-2|2"
+lasso_fit <- cv.glmnet(x = data.matrix(prostate[, 1:8]), y = prostate$lpsa, nfolds = 10, 
+                       alpha = 1)
+
+```
+
+
+```{r}
+#| code-fold: true
+#| code-line-numbers: false
+#| out-width: 100%
+#| echo: !expr c(2, 3)
+#| fig-asp: 0.5
+par(mfrow = c(1, 2), mar = c(4, 4, 2, 0), mgp = c(2, 0.5, 0))
+plot(lasso_fit)
+plot(lasso_fit$glmnet.fit, "lambda")
+```
+
+
+
+:::notes
+`genridge` Package
+:::
+
+
+## Lasso Coefficients
+
+- `lambda.min` contains more nonzero coefficients. 
+
+- Larger penalty $\lambda$ forces more coefficients to be zero, and the model is more *"sparse"*.
+
+
+:::: columns
+
+::: column
+
+```{r}
+#| echo: true
+#| class-output: myclass_600
+coef(lasso_fit, s = "lambda.min")
+```
+
+:::
+
+::: column
+
+```{r}
+#| echo: true
+#| class-output: myclass_600
+coef(lasso_fit, s = "lambda.1se")
+```
+
+:::
+
+::::
+
+
+
+## One-Variable Lasso and Shrinkage: Concept
+
+- Lasso solution does not have an analytic or closed form in general.
+
+- The univariate regression model with no intercept
+
+$$\underset{\beta}{\argmin}  \quad \frac{1}{n} \sum_{i=1}^n (y_i - x_i \beta)^2 + \lambda |\beta|$$
+
+With some derivation, and also utilize the OLS solution of the loss function, we have 
+
+$$\begin{align}
+&\frac{1}{n} \sum_{i=1}^n (y_i - x_i \beta)^2 \\
+=& \frac{1}{n} \sum_{i=1}^n (y_i - x_i b + x_i b - x_i \beta)^2 \\
+=& \frac{1}{n} \sum_{i=1}^n \Big[ \underbrace{(y_i - x_i b)^2}_{\text{I}} + \underbrace{2(y_i - x_i b)(x_i b - x_i \beta)}_{\text{II}} + \underbrace{(x_i b - x_i \beta)^2}_{\text{III}} \Big]
+\end{align}$$
+
+
+
+## One-Variable Lasso and Shrinkage: Concept
+
+$$\begin{align}
+& \sum_{i=1}^n 2(y_i - x_i b)(x_i b - x_i \beta) 
+= (b - \beta) {\color{OrangeRed}{\sum_{i=1}^n 2(y_i - x_i b)x_i}}
+= (b - \beta) {\color{OrangeRed}{0}} = 0
+\end{align}$$
+
+Our original problem reduces to just the third term and the penalty
+
+$$\begin{align}
+&\underset{\beta}{\argmin}  \quad \frac{1}{n} \sum_{i=1}^n (x_ib - x_i \beta)^2 + \lambda |\beta| \\
+=&\underset{\beta}{\argmin}  \quad \frac{1}{n} \left[ \sum_{i=1}^n x_i^2 \right] (b - \beta)^2 + \lambda |\beta|
+\end{align}
+$$
+Without loss of generality, assume that $x$ is standardized with mean 0 and variance $\frac{1}{n}\sum_{i=1}^n x_i^2 = 1$.
+
+
+
+::: notes
+b is arbitrary
+We learned that to solve for an optimizer, we can set the gradient to be zero. However, the function is not everywhere differentiable
+:::
+
+
+
+## One-Variable Lasso and Shrinkage: Concept
+
+This leads to a general problem of 
+
+$$\underset{\beta}{\argmin}  \quad (\beta - b)^2 + \lambda |\beta|,$$
+For $\beta > 0$,
+
+$$\begin{align}
+0 =& \frac{\partial}{\partial \beta} \,\, \left[(\beta - b)^2 + \lambda |\beta| \right] = 2 (\beta - b) + \lambda \\
+\Longrightarrow \quad \beta =&\, b - \lambda/2
+\end{align}$$
+
+
+$$\begin{align}
+\widehat{\beta}^l &=
+        \begin{cases}
+        b - \lambda/2 & \text{if} \quad b > \lambda/2 \\
+        0 & \text{if} \quad |b| \le \lambda/2 \\
+        b + \lambda/2 & \text{if} \quad b < -\lambda/2 \\
+        \end{cases}
+\end{align}$$
+
+- Lasso provides a **soft-thresholding** solution.
+
+- When $\lambda$ is large enough, $\widehat{\beta}^l$ will be shrunk to zero.
+
+::: notes
+b is arbitrary
+We learned that to solve for an optimizer, we can set the gradient to be zero. However, the function is not everywhere differentiable
+:::
+
+
+
+## Objective function
+
+The objective function is $(\beta - 1)^2 + \lambda |\beta|$. Once the penalty is larger than 2, the optimizer would stay at 0.
+
+```{r}
+#| warning: false
+#| message: false
+#| fig-align: center
+#| fig-asp: 0.9
+#| out-width: 100%
+  library(gganimate)
+  library(plotly)
+  
+  b = seq(-0.5, 2, 0.005)
+  fb = (b - 1)^2
+  alllambda = seq(0, 2.5, 0.1)
+  onevarlasso = data.frame()
+  
+  for (i in 1:length(alllambda))
+  {
+    lambdadata = rbind(data.frame("b" = b, "value" = fb, "Function" = "Loss", 
+                             "Lambda" = alllambda[i], "bnum" = 1:length(b)), 
+                       data.frame("b" = b, "value" = abs(b*alllambda[i]), "Function" = "Penalty", 
+                             "Lambda" = alllambda[i], "bnum" = 1:length(b)),
+                       data.frame("b" = b, "value" = fb + abs(b*alllambda[i]), "Function" = "Loss + Penalty", 
+                             "Lambda" = alllambda[i], "bnum" = 1:length(b)))
+    
+    onevarlasso = rbind(onevarlasso, lambdadata)
+  }
+
+  p <- ggplot(data.frame(onevarlasso), aes(x = b, y = value, color = Function)) +
+    geom_line(aes(frame = Lambda), size = 1.5) +
+    scale_x_continuous(name = "Beta", limits = c(-0.5, 2)) +
+    scale_y_continuous(name = "Function Value", limits = c(0, 4)) +
+    scale_color_manual(values=c(2, "#000000", 4)) +
+    theme(
+      panel.background = element_rect(fill = "transparent"), # bg of the panel
+      plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
+      legend.background = element_rect(fill = "transparent"), # get rid of legend bg
+      legend.box.background = element_rect(fill = "transparent") # get rid of legend panel bg
+    )
+  
+  fig <- ggplotly(p)
+  fig
+```
+
+
+::: notes
+Based on our analysis, once the penalty is larger than 2, the optimizer would stay at 0.
+:::
+
+
+
+## Variable Selection Property and Shrinkage
+
+- The proportion of times a variable has a zero parameter estimation.
+
+- $\by = \bX \boldsymbol \beta + \epsilon = \sum_{j = 1}^{20} X_j \times 0.4^{\sqrt{j}} + N(0, 1).$ 
+
+- $\beta_1 = 0.4, \beta_2 = 0.4^{\sqrt{2}}, \dots, \beta_{20} = 0.4^{\sqrt{20}}$
+
+<!-- - $p = 20$, $\epsilon \sim N(0, 1)$ and replicate 100 times. -->
+
+```{r}
+    nsim = 100
+    n = 150
+    p = 20
+    
+    betamat_1 = matrix(NA, nsim, p)
+    betamat_2 = matrix(NA, nsim, p)
+    betamat_3 = matrix(NA, nsim, p)
+    
+    for (i in 1:nsim)
+    {
+        # the design matrix
+        X = matrix(rnorm(n*p), n, p)
+        y = X %*% 0.4^sqrt(c(1:p)) + rnorm(n)
+        
+        # fit lasso on a grid of lambda values 
+        lasso.fit = glmnet(x = X, y = y, lambda = c(0.15, 0.07, 0.02))
+        
+        betamat_1[i, ] = lasso.fit$beta[, 1]
+        betamat_2[i, ] = lasso.fit$beta[, 2]
+        betamat_3[i, ] = lasso.fit$beta[, 3]
+    }
+    par(mar = c(3.5, 3.5, 1.8, 0), mgp = c(2, 1, 0))
+    plot(colMeans(betamat_1 == 0), type = "b", pch = 15, 
+         xlab = "Predictor Index", ylab = "Zero Proportion",
+         main = "Proportion of zeros over 100 replicates",
+         ylim = c(0, 1))
+    lines(colMeans(betamat_2 == 0), type = "b", pch = 16, col = "red")
+    lines(colMeans(betamat_3 == 0), type = "b", pch = 17, col = "blue")
+    legend("topleft", legend = paste("Lambda =", c(0.15, 0.07, 0.02)), 
+           col = c("black", "red", "blue"), lty = 1, lwd = 2, 
+           pch = c(15, 16, 17), bty = 'n')
+```
+
+
+::: notes
+- Since Lasso shrinks some parameter to exactly zero, it has the variable selection property — the ones that are nonzero are the ones being selected. This is a very nice properly in high-dimensional data analysis, where we cannot estimate the effects of all variables.
+
+- We can then look at the proportion of times a variable has a non-zero parameter estimation
+:::
+
+
+
+## Bias-Variance Trade-off
+
+```{r}
+#| fig-asp: 0.3
+   par(mfrow = c(1, 3))
+    par(mar = c(3, 3, 2, 1))
+    # lambda = 0.02
+    boxplot(betamat_3, ylim = c(-0.2, 0.65), main = "Lambda = 0.02", cex.main = 2)
+    lines(1:p, 0.4^sqrt(1:p), type = "b", col = "red", pch = 19, lwd = 2)
+    legend("topright", "True Beta", col = "red", pch = 19, lwd = 2, cex = 1.2, bty = "n")
+    
+    # lambda = 0.07
+    boxplot(betamat_2, ylim = c(-0.2, 0.65), main = "Lambda = 0.07", cex.main = 2)
+    lines(1:p, 0.4^sqrt(1:p), type = "b", col = "red", pch = 19, lwd = 2)
+    legend("topright", "True Beta", col = "red", pch = 19, lwd = 2, cex = 1.2, bty = "n")
+    
+    # lambda = 0.15
+    boxplot(betamat_1, ylim = c(-0.2, 0.65), main = "Lambda = 0.15", cex.main = 2)
+    lines(1:p, 0.4^sqrt(1:p), type = "b", col = "red", pch = 19, lwd = 2)
+    legend("topright", "True Beta", col = "red", pch = 19, lwd = 2, cex = 1.2, bty = "n")
+```
+
+
+
+# Comparing Lasso and Ridge
+
+## Constrained Optimization
+
+:::: columns
+
+::: column
+[**Lasso**]{.green}
+$$\begin{align}
+\min_{\bbeta} \,\,& \lVert \by - \bX \bbeta \rVert_2^2 + n\lambda\lVert\bbeta\rVert_1
+\end{align}$$
+
+$$\begin{align}
+\min_{\bbeta} \,\,& \lVert \by - \bX \bbeta \rVert_2^2\\
+\text{s.t.} \,\, & \sum_{j=1}^p|\beta_j| \leq s
+\end{align}$$
+
+:::
+
+::: column
+[**Ridge**]{.green}
+$$\begin{align}
+\min_{\bbeta} \,\,& \lVert \by - \bX \bbeta \rVert_2^2 + n\lambda\lVert\bbeta\rVert_2^2
+\end{align}$$
+
+$$\begin{align}
+\min_{\bbeta} \,\,& \lVert \by - \bX \bbeta \rVert_2^2\\
+\text{s.t.} \,\, & \sum_{j=1}^p \beta_j^2 \leq s
+\end{align}$$
+
+:::
+
+::::
+
+- For every value of $\lambda$, there is some $s$ such that
+the two optimization problems are equivalent, giving the same coefficient estimates.
+
+- The $\ell_1$ and $\ell_2$ penalties form a *constraint region* that $\beta_j$ can move around or budget for how large $\beta_j$ can be.
+
+- Larger $s$ (smaller $\lambda$) means a larger region $\beta_j$ can freely move.
+
+
+
+
+## Geometric Representation of Optimization
+
+:::{.question}
+What do the constraints look like geometrically?
+:::
+
+. . .
+
+When $p = 2$, 
+
+- the $\ell_1$ constraint is $|\beta_1| + |\beta_2| \leq s$ (**diamond**)
+- the $\ell_2$ constraint is $\beta_1^2 + \beta_2^2 \leq s$ (**circle**)
+
+. . .
+
+::: small
+
+```{r}
+#| fig-cap: "Source: https://stats.stackexchange.com/questions/350046/the-graphical-intuiton-of-the-lasso-in-case-p-2"
+#| out-width: 60%
+knitr::include_graphics("./images/06-lasso-vs/path.png")
+```
+
+:::
+
+
+
+::: notes
+the solution has to stay within the shaded area. The objective function is shown with the contour, and once the contained area is sufficiently small, some β parameter will be shrunk to exactly zero. On the other hand, the Ridge regression also has a similar interpretation. However, since the constrained areas is a circle, it will never for the estimated parameters to be zero.
+:::
+
+
+
+## Way of Shrinking ($p = 1$ and standardized $x$)
+
+:::: columns
+
+::: column
+[**Lasso**]{.green} **Soft-thresholding**
+
+::: {.midi}
+$$\begin{align}
+\widehat{\beta}^l &=
+        \begin{cases}
+        b - \lambda/2 & \text{if} \quad b > \lambda/2 \\
+        0 & \text{if} \quad |b| < \lambda/2 \\
+        b + \lambda/2 & \text{if} \quad b < -\lambda/2 \\
+        \end{cases}
+\end{align}$$
+:::
+
+
+```{r}
+#| out-width: 100%
+beta <- seq(-2.1, 2.1, length = 10000)
+lambda <- 0.5
+par(mar = c(4, 4, 0, 0), mgp = c(2, 0.8, 0))
+plot(beta, beta, xlab = "beta", ylab = "Cofficient estimates",  cex.lab = 2,
+     cex.axis = 1.5,
+     type = "l", lty = 2, lwd = 2, xlim = c(-2, 2), ylim = c(-2, 2), las = 1)
+abline(v = 0, lwd = 0.5, lty = 3)
+abline(h = 0, lwd = 0.5, lty = 3)
+lines(beta[beta > lambda/2], (beta - lambda/2)[beta > lambda/2], lty = 1, lwd = 3, col = "red")
+lines(beta[(-lambda/2) < beta & beta < (lambda/2)], 
+      rep(0, sum((-lambda/2) < beta & beta < (lambda/2))), 
+      lty = 1, lwd = 3, col = "red")
+lines(beta[beta < -lambda/2], (beta + lambda/2)[beta < -lambda/2], lty = 1, lwd = 3, col = "red")
+legend("topleft", c("Lasso", "OLS"), lty = c(1, 2), lwd = c(3, 2), 
+       col = c("red", 1), bty = "n", cex = 2)
+```
+
+:::
+
+
+::: column
+
+[**Ridge**]{.green} **Proportional shrinkage**
+
+$$\begin{align}
+\widehat{\beta}^r = \dfrac{b}{1+\lambda}\end{align}$$
+
+```{r}
+#| out-width: 100%
+par(mar = c(4, 4, 0, 0), mgp = c(2, 0.8, 0))
+plot(beta, beta, xlab = "beta", ylab = "Cofficient estimates", cex.lab = 2,
+     cex.axis = 1.5,
+     type = "l", lty = 2, lwd = 2, xlim = c(-2, 2), ylim = c(-2, 2), las = 1)
+abline(v = 0, lwd = 0.5, lty = 3)
+abline(h = 0, lwd = 0.5, lty = 3)
+lines(beta, beta/(1 + lambda), lty = 1, lwd = 3, col = "red")
+legend("topleft", c("Ridge", "OLS"), lty = c(1, 2), lwd = c(3, 2), 
+       col = c("red", 1), bty = "n", cex = 2)
+```
+
+:::
+
+
+::::
+
+
+
+
+
+## Predictive Performance
+
+Perform well (lower [__*test MSE*__]{.purple}) when
+
+:::: columns
+
+::: column
+[**Lasso**]{.green} (**---**)
+
+- A relatively small number of $\beta_j$s are substantially large, and the remaining $\beta_k$s are small or equal to zero.
+
+- Reduce more __*bias*__
+
+```{r}
+#| fig-cap: "ISL Fig. 6.9"
+#| out-width: 60%
+knitr::include_graphics("./images/06-lasso-vs/6_9.png")
+```
+:::
+
+::: column
+[**Ridge**]{.green}  ($\cdots\cdots$)
+
+
+- The response is a function of many predictors, all with coefficients of roughly equal size.
+
+- Reduce more [__*variance*__]{.green}
+
+```{r}
+#| fig-cap: "ISL Fig. 6.8"
+#| out-width: "60%"
+knitr::include_graphics("./images/06-lasso-vs/6_8.png")
+```
+
+:::
+
+::::
+
+
+::: notes
+Ridge focus more on variance stablization
+Lasso focus more on model selection and interpretbility
+higher R^2 (larger lambda), more overfitting, so low bias high variance
+:::
+
+
+
+## Bayesian Interpretation
+
+:::: columns
+
+::: column
+[**Lasso**]{.green}
+:::
+
+::: column
+[**Ridge**]{.green}
+:::
+
+::::
+
+. . .
+
+:::{.r-fit-text}
+
+[Let's wait until we discuss Bayesian Regression!]{.blue}
+
+:::
+
+
+
+## Notes of Lasso
+
+:::{.callout-warning}
+
+:::{style="font-size: 1.2em;"}
+
+- Even Lasso does feature selection, *do NOT add predictors that are known to be not associated with the response in any way*.
+
+- [**Curse of dimensionality.**]{.green} The test MSE tends to increase as the dimensionality $p$ increases, unless the additional features are truly associated with the response.
+
+- Do NOT conclude that the predictors with non-zero coefficients selected by Lasso and other selection methods predict the response more effectively than other predictors not included in the model. 
+
+:::
+
+:::
+
+
+::: notes
+This is just one of many possible models for predicting response, and that it must be further validated on independent data sets.
+:::
+
+## Other Topics
+
+- *Combination $\ell_1$ and $\ell_2$*: [Elastic net penalty (Zou and Hastie, 2005)](https://sites.stat.washington.edu/courses/stat527/s13/readings/zouhastie05.pdf)
+
+$$\lambda \left[ (1 - \alpha) \lVert \bbeta\rVert_2^2 + \alpha \lVert\bbeta\lVert_1 \right]$$
+
+. . .
+
+- *General $\ell_q$ penalty*: $\lambda \sum_{j=1}^p |\beta_j|^q$
+
+```{r}
+#| fig-cap: "ESL Fig. 3.12"
+knitr::include_graphics("./images/06-lasso-vs/ell_q.png")
+```
+
+
+## Other Topics
+
+- *Algorithms*
+  + Shooting algorithm (Fu 1998)
+  + Least angle regression (LAR) (Efron et al. 2004)
+  + Coordinate descent (Friedman et al 2010) (used in `glmnet`)
+
+. . .
+
+- *Variants*
+  + Adaptive Lasso
+  + Group Lasso
+  + Bayesian Lasso
+  + Spike-and-Slab Lasso, etc.
+
+
+
+
+
+::: notes
+Lasso may suffer in the case where two variables are strongly correlated. The situation is similar to OLS, however, in Lasso, it would only select one out of the two, instead of letting both parameter estimates to be large. This is not preferred in some practical situations such as genetic studies because expressions of genes from the same pathway may have large correlation, but biologist want to identify all of them instead of just one. The Ridge penalty may help in this case because it naturally considers the correlation structure. The following simulation may show the effect.
+- The Lasso problem is convex, although it may not be strictly convex in β when p is large
+- The solution is a global minimum, but may not be the unique global one
+- The Lasso solution is unique under conditions of the covariance matrix
+:::
+

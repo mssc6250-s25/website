@@ -1,0 +1,130 @@
+---
+title: "06-Lasso Code Demo"
+author: 'Dr. Cheng-Han Yu'
+format: 
+  html:
+    toc: true
+    code-link: true
+    code-fold: show
+    code-summary: "Show/Hide"
+    code-tools: true
+---
+
+## R implementation
+
+```{r}
+library(glmnet)
+```
+
+
+```{r}
+prostate <- read.csv("../data/prostate.csv")
+lasso_fit <- cv.glmnet(x = data.matrix(prostate[, 1:8]), 
+                       y = prostate$lpsa, nfolds = 10, 
+                       alpha = 1)
+```
+
+```{r}
+lasso_fit$lambda.min
+lasso_fit$lambda.1se
+plot(lasso_fit)
+plot(lasso_fit$glmnet.fit, "lambda")
+```
+
+```{r}
+coef(lasso_fit, s = "lambda.min")
+```
+
+```{r}
+coef(lasso_fit, s = "lambda.1se")
+```
+
+
+
+## Python implementation
+
+```{python}
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import Lasso, LassoCV
+from sklearn.preprocessing import StandardScaler
+```
+
+
+
+```{python}
+prostate = pd.read_csv("../data/prostate.csv")
+X = prostate.iloc[:, 0:8]
+y = prostate["lpsa"]
+
+# Standardize predictors
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# Perform Lasso regression with cross-validation
+# Automatically selects alphas
+lasso_cv = LassoCV(alphas=None, cv=10, random_state=2025)  
+lasso_cv.fit(X_scaled, y)
+
+# Plot MSE across alphas
+mse_path = np.mean(lasso_cv.mse_path_, axis=1)
+
+plt.plot(np.log(lasso_cv.alphas_), mse_path, marker='o', label="Mean MSE")
+plt.axvline(np.log(lasso_cv.alpha_), color="red", linestyle="--", 
+            label=f"Optimal Lambda: {lasso_cv.alpha_:.4f}")
+plt.xlabel("Log(lambda)")
+plt.ylabel("Mean Squared Error (MSE)")
+plt.title("Lasso Cross-Validation: MSE vs. Log(lambda)", fontsize=14)
+plt.legend()
+plt.show()
+```
+
+
+```{python}
+optimal_lambda = lasso_cv.alpha_
+optimal_lambda
+lasso_cv.coef_
+lasso_cv.intercept_
+```
+
+```{python}
+# Reverse standardization
+std_devs = scaler.scale_  # Feature standard deviations
+means = scaler.mean_      # Feature means
+coef_original = lasso_cv.coef_ / std_devs
+coef_original
+intercept_original = lasso_cv.intercept_ - np.sum(lasso_cv.coef_ * means / std_devs)
+intercept_original
+```
+
+
+```{python}
+lambdas = np.logspace(-6.5, 0.1, 100, base=np.exp(1))
+
+coefficients = []
+for lam in lambdas:
+    lasso = Lasso(alpha=lam, fit_intercept=True, max_iter=10000)
+    lasso.fit(X_scaled, y)
+    coefficients.append(lasso.coef_)
+
+coefficients = np.array(coefficients)
+
+# Plot coefficient paths
+for i in range(coefficients.shape[1]):
+    plt.plot(np.log(lambdas), coefficients[:, i], label=f"Feature {i+1}")
+
+plt.xlabel("Log(lambda)")
+plt.ylabel("Coefficients")
+plt.title("Lasso Coefficient Paths vs. Log(lambdas)")
+plt.legend(loc="upper right", frameon=False)
+plt.show()
+```
+
+
+```{python}
+lasso = Lasso(alpha=0.21, fit_intercept=True)
+lasso.fit(X_scaled, y)
+lasso.coef_
+```
+
