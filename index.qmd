@@ -3,6 +3,7 @@ title: "MSSC 6250 - Statistical Machine Learning (Spring 2025)"
 tbl-colwidths: [5,8,20,6,6,6,6]
 ---
 
+-   **Midterm Presentation I - Regression guideline is released.**
 -   **Homework 1 released, and due Friday, 2/14, 11:59 PM**.
 
 *This schedule will be updated as the semester progresses, with all changes documented here.*
@@ -17,10 +18,10 @@ tbl-colwidths: [5,8,20,6,6,6,6]
 | 3 | Tue, Jan 28 | Numerical Optimization | [📖](/weeks/week-3.html "Week 3") |  |  | [✍️](/hw/hw-1.html "Homework 1") |  |
 |  | Thu, Jan 30 | Stochastic Gradient Descen; Ridge Regression |  | [🖥️](slides/05-ridge-cv.html "Ridge regression and cross validation") | [`r fontawesome::fa("file-code")`](code/05-ridge-cv-code.html "05-ridge-cv-code") |  |  |
 | 4 | Tue, Feb 4 | Cross-Validation; Feature Selection | [📖](/weeks/week-4.html "Week 4") | [🖥️](slides/06-lasso-vs.html "06-lasso-vs") | [`r fontawesome::fa("file-code")`](code/06-lasso-vs-code.html "06-lasso-vs") |  |  |
-|  | Thu, Feb 6 | LASSO; Polynomial Regression and Regression Splines |  |  |  |  |  |
-| 5 | Tue, Feb 11 | Smoothing Splines and Generalized Additive Models | [📖](/weeks/week-5.html "Week 5") | [🖥️](slides/07-splines.html "07-splines") | `r fontawesome::fa("file-code")` | ✍️ |  |
-|  | Thu, Feb 13 | Bayesian Inference |  |  |  | HW 1 Due |  |
-| 6 | Tue, Feb 18 | Bayesian Linear Regression | [📖](/weeks/week-6.html "Week 6") | [🖥️](slides/08-bayes.html "08-bayes") | `r fontawesome::fa("file-code")` |  |  |
+|  | Thu, Feb 6 | LASSO |  |  |  |  |  |
+| 5 | Tue, Feb 11 | Regression Splines and Smoothing Splines | [📖](/weeks/week-5.html "Week 5") | [🖥️](slides/07-splines.html "07-splines") | `r fontawesome::fa("file-code")` | ✍️ |  |
+|  | Thu, Feb 13 | Generalized Additive Models |  |  |  | HW 1 Due |  |
+| 6 | Tue, Feb 18 | Bayesian Inference and Linear Regression | [📖](/weeks/week-6.html "Week 6") | [🖥️](slides/08-bayes.html "08-bayes") | `r fontawesome::fa("file-code")` |  |  |
 |  | Thu, Feb 20 | Binary Logistic Regression |  |  |  |  | [✅](present-description.html#timeline-and-things-to-do "Midterm presentation 1") Team up Due |
 | 7 | Tue, Feb 25 | Multinomial Logistic Regression | [📖](/weeks/week-7.html "Week 7") | [🖥️](slides/09-class-glm.html "09-class-glm") | `r fontawesome::fa("file-code")` |  |  |
 |  | Thu, Feb 27 | Discriminant Analysis |  |  | `r fontawesome::fa("file-code")` |  | [✅](present-description.html#proposal "Midterm presentation 1") Proposal Due |

@@ -455,6 +455,562 @@
     "text": "Generative AI and Sharing/Reusing Code Policy\n\n\n\nYou are responsible for the content of all work submitted for this course.\nYou may use generative AI tools such as ChatGPT or DALL-E to generate a first draft of text for your assignments, provided that this use is appropriately documented and cited.\nLearn how to cite the use of AI in MLA and APA format, and more\n\n\n\n\n\n\n\n\n\n\n\n\n\nSharing/Reusing Code\n\nUnless explicitly stated otherwise, you may make use of any online resources, but you must explicitly cite where you obtained any code you directly use or use as inspiration in your solutions.\nAny recycled code that is discovered and is not explicitly cited will be treated as plagiarism, regardless of source.\n\n\n\n\n\nmssc6250-s25.github.io/website"
   },
   {
+    "objectID": "slides/06-lasso-vs.html#when-ols-doesnt-work-well",
+    "href": "slides/06-lasso-vs.html#when-ols-doesnt-work-well",
+    "title": "Feature Selection and LASSO \n",
+    "section": "When OLS Doesn’t Work Well",
+    "text": "When OLS Doesn’t Work Well\nWhen \\(p \\gg n\\), it is often that many of the features in the model are not associated with the response.\n\nModel Interpretability: By removing irrelevant features \\(X_j\\)s, i.e., setting the corresponding \\(\\beta_j\\)s to zero, we can obtain a model that is more easily interpreted. (Feature/Variable selection)\nLeast squares is unlikely to yield any coefficient estimates that are exactly zero."
+  },
+  {
+    "objectID": "slides/06-lasso-vs.html#variable-selection",
+    "href": "slides/06-lasso-vs.html#variable-selection",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Variable Selection",
+    "text": "Variable Selection\n\nWe have a large pool of candidate regressors, of which only a few are likely to be important.\n\nTwo “conflicting” goals in model building:\n\nas many features as possible for better predictive performance on new data (smaller bias).\n\nas few regressors as possible because as the number of regressors increases,\n\n\n\\(\\mathrm{Var}(\\hat{y})\\) will increase (larger variance)\ncost more in data collecting and maintaining\nmore model complexity\n\n\n\nA compromise between the two hopefully leads to the “best” regression equation.\n\nWhat does best mean?\n\n\nThere is no unique definition of “best”, and different methods specify different subsets of the candidate regressors as best."
+  },
+  {
+    "objectID": "slides/06-lasso-vs.html#three-classes-of-methods",
+    "href": "slides/06-lasso-vs.html#three-classes-of-methods",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Three Classes of Methods",
+    "text": "Three Classes of Methods\n\n\nSubset Selection (ISL Sec. 6.1) Identify a subset of the \\(p\\) predictors that we believe to be related to the response.\n\nNeed a selection method and a selection criterion.\nCovered in MSSC 5780 slides\n\n\n\n\n\n\n\nShrinkage (ISL Sec. 6.2) Fit a model that forces some coefficients to be shrunk to zero.\n\n\nLasso (Discussed in MSSC 6250)  \n\n\n\n\n\n\n\n\nDimension Reduction (ISL Sec. 6.3) Find \\(m\\) representative features that are linear combinations of the \\(p\\) original predictors (\\(m \\ll p\\)), then fit least squares.\n\nPrincipal component regression (Unsupervised)  \nPartial least squares (Supervised)"
+  },
+  {
+    "objectID": "slides/06-lasso-vs.html#why-lasso",
+    "href": "slides/06-lasso-vs.html#why-lasso",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Why Lasso?",
+    "text": "Why Lasso?\n\n\nSubset selection methods\n\nmay be computationally infeasible (fit OLS over millions of times)\ndo not explore all possible subset models (no global solution)\n\n\n\n\nRidge regression does shrink coefficients, but still include all predictors.\nLasso regularizes coefficients so that some coefficients are shrunk to zero, doing feature selection.\nLike ridge regression, for a given \\(\\lambda\\), Lasso only fits a single model.\n\nRidge OK for prediction, but bad at interpretation https://stats.stackexchange.com/questions/76518/what-is-the-time-complexity-of-lasso-regression same computation complexity as OLS \\(O(p^2n)\\) when \\(p &lt; n\\) and \\(O(p^3)\\)"
+  },
+  {
+    "objectID": "slides/06-lasso-vs.html#what-is-lasso",
+    "href": "slides/06-lasso-vs.html#what-is-lasso",
+    "title": "Feature Selection and LASSO \n",
+    "section": "What is Lasso?",
+    "text": "What is Lasso?\nDifferent from the Ridge regression that adds \\(\\ell_2\\) norm, Lasso adds \\(\\ell_1\\) penalty on the parameters:\n\\[\\begin{align}\n\\widehat{\\boldsymbol \\beta}^\\text{l} =& \\, \\, \\mathop{\\mathrm{arg\\,min}}_{\\boldsymbol \\beta} \\lVert \\mathbf{y}- \\mathbf{X}\\boldsymbol \\beta\\rVert_2^2 + n \\lambda \\lVert\\boldsymbol \\beta\\rVert_1\\\\\n=& \\, \\, \\mathop{\\mathrm{arg\\,min}}_{\\boldsymbol \\beta} \\frac{1}{n} \\sum_{i=1}^n (y_i - x_i' \\boldsymbol \\beta)^2 + \\lambda \\sum_{j=1}^p |\\beta_j|,\n\\end{align}\\]\n\nThe \\(\\ell_1\\) penalty forces some of the coefficient estimates to be exactly equal to zero when \\(\\lambda\\) is sufficiently large, yielding sparse models."
+  },
+  {
+    "objectID": "slides/06-lasso-vs.html#ell_2-vs.-ell_1",
+    "href": "slides/06-lasso-vs.html#ell_2-vs.-ell_1",
+    "title": "Feature Selection and LASSO \n",
+    "section": "\n\\(\\ell_2\\) vs. \\(\\ell_1\\)\n",
+    "text": "\\(\\ell_2\\) vs. \\(\\ell_1\\)\n\n\nRidge shrinks big coefficients much more than lasso.\nLasso has larger penalty on small coefficients.\n\n\n\nRidge shrinks big coefficients much more than lasso.\nLasso has larger penalty on small coefficients. This is one of the intuitions why Lasso has exact zero coefficients after shrinkage. Because when punishing small coefficients a lot more, it may be better to set them exactly equal to zero to get smaller loss or objective value."
+  },
+  {
+    "objectID": "slides/06-lasso-vs.html#elemstatlearnprostate-data",
+    "href": "slides/06-lasso-vs.html#elemstatlearnprostate-data",
+    "title": "Feature Selection and LASSO \n",
+    "section": "\nElemStatLearn::prostate Data",
+    "text": "ElemStatLearn::prostate Data\n\n\n\n\n\n\n\n\nlcavol\nlweight\nage\nlbph\nsvi\nlcp\ngleason\npgg45\nlpsa\ntrain\n\n\n\n-0.580\n2.77\n50\n-1.386\n0\n-1.39\n6\n0\n-0.431\nTRUE\n\n\n-0.994\n3.32\n58\n-1.386\n0\n-1.39\n6\n0\n-0.163\nTRUE\n\n\n-0.511\n2.69\n74\n-1.386\n0\n-1.39\n7\n20\n-0.163\nTRUE\n\n\n-1.204\n3.28\n58\n-1.386\n0\n-1.39\n6\n0\n-0.163\nTRUE\n\n\n0.751\n3.43\n62\n-1.386\n0\n-1.39\n6\n0\n0.372\nTRUE\n\n\n-1.050\n3.23\n50\n-1.386\n0\n-1.39\n6\n0\n0.765\nTRUE\n\n\n0.737\n3.47\n64\n0.615\n0\n-1.39\n6\n0\n0.765\nFALSE\n\n\n0.693\n3.54\n58\n1.537\n0\n-1.39\n6\n0\n0.854\nTRUE"
+  },
+  {
+    "objectID": "slides/06-lasso-vs.html#cv.glmnetalpha-1",
+    "href": "slides/06-lasso-vs.html#cv.glmnetalpha-1",
+    "title": "Feature Selection and LASSO \n",
+    "section": "cv.glmnet(alpha = 1)",
+    "text": "cv.glmnet(alpha = 1)\n\nlasso_fit &lt;- cv.glmnet(x = data.matrix(prostate[, 1:8]), y = prostate$lpsa, nfolds = 10, \n                       alpha = 1)\n\n\nCodeplot(lasso_fit)\nplot(lasso_fit$glmnet.fit, \"lambda\")\n\n\ngenridge Package"
+  },
+  {
+    "objectID": "slides/06-lasso-vs.html#lasso-coefficients",
+    "href": "slides/06-lasso-vs.html#lasso-coefficients",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Lasso Coefficients",
+    "text": "Lasso Coefficients\n\nlambda.min contains more nonzero coefficients.\nLarger penalty \\(\\lambda\\) forces more coefficients to be zero, and the model is more “sparse”.\n\n\n\n\ncoef(lasso_fit, s = \"lambda.min\")\n\n9 x 1 sparse Matrix of class \"dgCMatrix\"\n                  s1\n(Intercept)  0.17999\nlcavol       0.56099\nlweight      0.61908\nage         -0.02069\nlbph         0.09531\nsvi          0.75180\nlcp         -0.09912\ngleason      0.04745\npgg45        0.00432\n\n\n\n\ncoef(lasso_fit, s = \"lambda.1se\")\n\n9 x 1 sparse Matrix of class \"dgCMatrix\"\n               s1\n(Intercept) 0.644\nlcavol      0.455\nlweight     0.314\nage         .    \nlbph        .    \nsvi         0.367\nlcp         .    \ngleason     .    \npgg45       ."
+  },
+  {
+    "objectID": "slides/06-lasso-vs.html#one-variable-lasso-and-shrinkage-concept",
+    "href": "slides/06-lasso-vs.html#one-variable-lasso-and-shrinkage-concept",
+    "title": "Feature Selection and LASSO \n",
+    "section": "One-Variable Lasso and Shrinkage: Concept",
+    "text": "One-Variable Lasso and Shrinkage: Concept\n\nLasso solution does not have an analytic or closed form in general.\nThe univariate regression model with no intercept\n\n\\[\\underset{\\beta}{\\mathop{\\mathrm{arg\\,min}}}  \\quad \\frac{1}{n} \\sum_{i=1}^n (y_i - x_i \\beta)^2 + \\lambda |\\beta|\\]\nWith some derivation, and also utilize the OLS solution of the loss function, we have\n\\[\\begin{align}\n&\\frac{1}{n} \\sum_{i=1}^n (y_i - x_i \\beta)^2 \\\\\n=& \\frac{1}{n} \\sum_{i=1}^n (y_i - x_i b + x_i b - x_i \\beta)^2 \\\\\n=& \\frac{1}{n} \\sum_{i=1}^n \\Big[ \\underbrace{(y_i - x_i b)^2}_{\\text{I}} + \\underbrace{2(y_i - x_i b)(x_i b - x_i \\beta)}_{\\text{II}} + \\underbrace{(x_i b - x_i \\beta)^2}_{\\text{III}} \\Big]\n\\end{align}\\]"
+  },
+  {
+    "objectID": "slides/06-lasso-vs.html#one-variable-lasso-and-shrinkage-concept-1",
+    "href": "slides/06-lasso-vs.html#one-variable-lasso-and-shrinkage-concept-1",
+    "title": "Feature Selection and LASSO \n",
+    "section": "One-Variable Lasso and Shrinkage: Concept",
+    "text": "One-Variable Lasso and Shrinkage: Concept\n\\[\\begin{align}\n& \\sum_{i=1}^n 2(y_i - x_i b)(x_i b - x_i \\beta)\n= (b - \\beta) {\\color{OrangeRed}{\\sum_{i=1}^n 2(y_i - x_i b)x_i}}\n= (b - \\beta) {\\color{OrangeRed}{0}} = 0\n\\end{align}\\]\nOur original problem reduces to just the third term and the penalty\n\\[\\begin{align}\n&\\underset{\\beta}{\\mathop{\\mathrm{arg\\,min}}}  \\quad \\frac{1}{n} \\sum_{i=1}^n (x_ib - x_i \\beta)^2 + \\lambda |\\beta| \\\\\n=&\\underset{\\beta}{\\mathop{\\mathrm{arg\\,min}}}  \\quad \\frac{1}{n} \\left[ \\sum_{i=1}^n x_i^2 \\right] (b - \\beta)^2 + \\lambda |\\beta|\n\\end{align}\n\\] Without loss of generality, assume that \\(x\\) is standardized with mean 0 and variance \\(\\frac{1}{n}\\sum_{i=1}^n x_i^2 = 1\\).\nb is arbitrary We learned that to solve for an optimizer, we can set the gradient to be zero. However, the function is not everywhere differentiable"
+  },
+  {
+    "objectID": "slides/06-lasso-vs.html#one-variable-lasso-and-shrinkage-concept-2",
+    "href": "slides/06-lasso-vs.html#one-variable-lasso-and-shrinkage-concept-2",
+    "title": "Feature Selection and LASSO \n",
+    "section": "One-Variable Lasso and Shrinkage: Concept",
+    "text": "One-Variable Lasso and Shrinkage: Concept\nThis leads to a general problem of\n\\[\\underset{\\beta}{\\mathop{\\mathrm{arg\\,min}}}  \\quad (\\beta - b)^2 + \\lambda |\\beta|,\\] For \\(\\beta &gt; 0\\),\n\\[\\begin{align}\n0 =& \\frac{\\partial}{\\partial \\beta} \\,\\, \\left[(\\beta - b)^2 + \\lambda |\\beta| \\right] = 2 (\\beta - b) + \\lambda \\\\\n\\Longrightarrow \\quad \\beta =&\\, b - \\lambda/2\n\\end{align}\\]\n\\[\\begin{align}\n\\widehat{\\beta}^l &=\n        \\begin{cases}\n        b - \\lambda/2 & \\text{if} \\quad b &gt; \\lambda/2 \\\\\n        0 & \\text{if} \\quad |b| \\le \\lambda/2 \\\\\n        b + \\lambda/2 & \\text{if} \\quad b &lt; -\\lambda/2 \\\\\n        \\end{cases}\n\\end{align}\\]\n\nLasso provides a soft-thresholding solution.\nWhen \\(\\lambda\\) is large enough, \\(\\widehat{\\beta}^l\\) will be shrunk to zero.\n\nb is arbitrary We learned that to solve for an optimizer, we can set the gradient to be zero. However, the function is not everywhere differentiable"
+  },
+  {
+    "objectID": "slides/06-lasso-vs.html#objective-function",
+    "href": "slides/06-lasso-vs.html#objective-function",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Objective function",
+    "text": "Objective function\nThe objective function is \\((\\beta - 1)^2 + \\lambda |\\beta|\\). Once the penalty is larger than 2, the optimizer would stay at 0.\n\n\n\n\n\n\nBased on our analysis, once the penalty is larger than 2, the optimizer would stay at 0."
+  },
+  {
+    "objectID": "slides/06-lasso-vs.html#variable-selection-property-and-shrinkage",
+    "href": "slides/06-lasso-vs.html#variable-selection-property-and-shrinkage",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Variable Selection Property and Shrinkage",
+    "text": "Variable Selection Property and Shrinkage\n\nThe proportion of times a variable has a zero parameter estimation.\n\\(\\mathbf{y}= \\mathbf{X}\\boldsymbol \\beta + \\epsilon = \\sum_{j = 1}^{20} X_j \\times 0.4^{\\sqrt{j}} + N(0, 1).\\)\n\\(\\beta_1 = 0.4, \\beta_2 = 0.4^{\\sqrt{2}}, \\dots, \\beta_{20} = 0.4^{\\sqrt{20}}\\)\n\n\n\nSince Lasso shrinks some parameter to exactly zero, it has the variable selection property — the ones that are nonzero are the ones being selected. This is a very nice properly in high-dimensional data analysis, where we cannot estimate the effects of all variables.\nWe can then look at the proportion of times a variable has a non-zero parameter estimation"
+  },
+  {
+    "objectID": "slides/06-lasso-vs.html#bias-variance-trade-off",
+    "href": "slides/06-lasso-vs.html#bias-variance-trade-off",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Bias-Variance Trade-off",
+    "text": "Bias-Variance Trade-off"
+  },
+  {
+    "objectID": "slides/06-lasso-vs.html#constrained-optimization",
+    "href": "slides/06-lasso-vs.html#constrained-optimization",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Constrained Optimization",
+    "text": "Constrained Optimization\n\n\nLasso \\[\\begin{align}\n\\min_{\\boldsymbol \\beta} \\,\\,& \\lVert \\mathbf{y}- \\mathbf{X}\\boldsymbol \\beta\\rVert_2^2 + n\\lambda\\lVert\\boldsymbol \\beta\\rVert_1\n\\end{align}\\]\n\\[\\begin{align}\n\\min_{\\boldsymbol \\beta} \\,\\,& \\lVert \\mathbf{y}- \\mathbf{X}\\boldsymbol \\beta\\rVert_2^2\\\\\n\\text{s.t.} \\,\\, & \\sum_{j=1}^p|\\beta_j| \\leq s\n\\end{align}\\]\n\nRidge \\[\\begin{align}\n\\min_{\\boldsymbol \\beta} \\,\\,& \\lVert \\mathbf{y}- \\mathbf{X}\\boldsymbol \\beta\\rVert_2^2 + n\\lambda\\lVert\\boldsymbol \\beta\\rVert_2^2\n\\end{align}\\]\n\\[\\begin{align}\n\\min_{\\boldsymbol \\beta} \\,\\,& \\lVert \\mathbf{y}- \\mathbf{X}\\boldsymbol \\beta\\rVert_2^2\\\\\n\\text{s.t.} \\,\\, & \\sum_{j=1}^p \\beta_j^2 \\leq s\n\\end{align}\\]\n\n\n\nFor every value of \\(\\lambda\\), there is some \\(s\\) such that the two optimization problems are equivalent, giving the same coefficient estimates.\nThe \\(\\ell_1\\) and \\(\\ell_2\\) penalties form a constraint region that \\(\\beta_j\\) can move around or budget for how large \\(\\beta_j\\) can be.\nLarger \\(s\\) (smaller \\(\\lambda\\)) means a larger region \\(\\beta_j\\) can freely move."
+  },
+  {
+    "objectID": "slides/06-lasso-vs.html#geometric-representation-of-optimization",
+    "href": "slides/06-lasso-vs.html#geometric-representation-of-optimization",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Geometric Representation of Optimization",
+    "text": "Geometric Representation of Optimization\n\nWhat do the constraints look like geometrically?\n\n\nWhen \\(p = 2\\),\n\nthe \\(\\ell_1\\) constraint is \\(|\\beta_1| + |\\beta_2| \\leq s\\) (diamond)\nthe \\(\\ell_2\\) constraint is \\(\\beta_1^2 + \\beta_2^2 \\leq s\\) (circle)\n\n\n\n\n\n\n\n\nSource: https://stats.stackexchange.com/questions/350046/the-graphical-intuiton-of-the-lasso-in-case-p-2\n\n\n\n\nthe solution has to stay within the shaded area. The objective function is shown with the contour, and once the contained area is sufficiently small, some β parameter will be shrunk to exactly zero. On the other hand, the Ridge regression also has a similar interpretation. However, since the constrained areas is a circle, it will never for the estimated parameters to be zero."
+  },
+  {
+    "objectID": "slides/06-lasso-vs.html#way-of-shrinking-p-1-and-standardized-x",
+    "href": "slides/06-lasso-vs.html#way-of-shrinking-p-1-and-standardized-x",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Way of Shrinking (\\(p = 1\\) and standardized \\(x\\))",
+    "text": "Way of Shrinking (\\(p = 1\\) and standardized \\(x\\))\n\n\nLasso Soft-thresholding\n\n\\[\\begin{align}\n\\widehat{\\beta}^l &=\n        \\begin{cases}\n        b - \\lambda/2 & \\text{if} \\quad b &gt; \\lambda/2 \\\\\n        0 & \\text{if} \\quad |b| &lt; \\lambda/2 \\\\\n        b + \\lambda/2 & \\text{if} \\quad b &lt; -\\lambda/2 \\\\\n        \\end{cases}\n\\end{align}\\]\n\n\n\n\n\n\n\n\n\n\nRidge Proportional shrinkage\n\\[\\begin{align}\n\\widehat{\\beta}^r = \\dfrac{b}{1+\\lambda}\\end{align}\\]"
+  },
+  {
+    "objectID": "slides/06-lasso-vs.html#predictive-performance",
+    "href": "slides/06-lasso-vs.html#predictive-performance",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Predictive Performance",
+    "text": "Predictive Performance\nPerform well (lower test MSE) when\n\n\nLasso (—)\n\nA relatively small number of \\(\\beta_j\\)s are substantially large, and the remaining \\(\\beta_k\\)s are small or equal to zero.\nReduce more bias\n\n\n\n\n\nISL Fig. 6.9\n\n\n\n\nRidge (\\(\\cdots\\cdots\\))\n\nThe response is a function of many predictors, all with coefficients of roughly equal size.\nReduce more variance\n\n\n\n\n\nISL Fig. 6.8\n\n\n\n\n\nRidge focus more on variance stablization Lasso focus more on model selection and interpretbility higher R^2 (larger lambda), more overfitting, so low bias high variance"
+  },
+  {
+    "objectID": "slides/06-lasso-vs.html#bayesian-interpretation",
+    "href": "slides/06-lasso-vs.html#bayesian-interpretation",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Bayesian Interpretation",
+    "text": "Bayesian Interpretation\n\n\nLasso\n\nRidge\n\n\n\n\nLet’s wait until we discuss Bayesian Regression!"
+  },
+  {
+    "objectID": "slides/06-lasso-vs.html#notes-of-lasso",
+    "href": "slides/06-lasso-vs.html#notes-of-lasso",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Notes of Lasso",
+    "text": "Notes of Lasso\n\n\n\n\n\n\nWarning\n\n\n\n\nEven Lasso does feature selection, do NOT add predictors that are known to be not associated with the response in any way.\nCurse of dimensionality. The test MSE tends to increase as the dimensionality \\(p\\) increases, unless the additional features are truly associated with the response.\nDo NOT conclude that the predictors with non-zero coefficients selected by Lasso and other selection methods predict the response more effectively than other predictors not included in the model.\n\n\n\n\n\nThis is just one of many possible models for predicting response, and that it must be further validated on independent data sets."
+  },
+  {
+    "objectID": "slides/06-lasso-vs.html#other-topics",
+    "href": "slides/06-lasso-vs.html#other-topics",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Other Topics",
+    "text": "Other Topics\n\n\nCombination \\(\\ell_1\\) and \\(\\ell_2\\): Elastic net penalty (Zou and Hastie, 2005)\n\n\n\\[\\lambda \\left[ (1 - \\alpha) \\lVert \\boldsymbol \\beta\\rVert_2^2 + \\alpha \\lVert\\boldsymbol \\beta\\lVert_1 \\right]\\]\n\n\n\nGeneral \\(\\ell_q\\) penalty: \\(\\lambda \\sum_{j=1}^p |\\beta_j|^q\\)\n\n\n\n\n\n\nESL Fig. 3.12"
+  },
+  {
+    "objectID": "slides/06-lasso-vs.html#other-topics-1",
+    "href": "slides/06-lasso-vs.html#other-topics-1",
+    "title": "Feature Selection and LASSO \n",
+    "section": "Other Topics",
+    "text": "Other Topics\n\n\nAlgorithms\n\nShooting algorithm (Fu 1998)\nLeast angle regression (LAR) (Efron et al. 2004)\nCoordinate descent (Friedman et al 2010) (used in glmnet)\n\n\n\n\n\n\nVariants\n\nAdaptive Lasso\nGroup Lasso\nBayesian Lasso\nSpike-and-Slab Lasso, etc.\n\n\n\nLasso may suffer in the case where two variables are strongly correlated. The situation is similar to OLS, however, in Lasso, it would only select one out of the two, instead of letting both parameter estimates to be large. This is not preferred in some practical situations such as genetic studies because expressions of genes from the same pathway may have large correlation, but biologist want to identify all of them instead of just one. The Ridge penalty may help in this case because it naturally considers the correlation structure. The following simulation may show the effect. - The Lasso problem is convex, although it may not be strictly convex in β when p is large - The solution is a global minimum, but may not be the unique global one - The Lasso solution is unique under conditions of the covariance matrix\n\n\n\n\nmssc6250-s25.github.io/website"
+  },
+  {
+    "objectID": "course-news.html",
+    "href": "course-news.html",
+    "title": "News/Announcements",
+    "section": "",
+    "text": "Any announcement will be posted in this page. The latest news will also be put on top of the main page.",
+    "crumbs": [
+      "Course Information",
+      "News/Annoucements"
+    ]
+  },
+  {
+    "objectID": "course-news.html#jan-14-2025",
+    "href": "course-news.html#jan-14-2025",
+    "title": "News/Announcements",
+    "section": "Jan 14, 2025",
+    "text": "Jan 14, 2025\n\nNo office hours first week.",
+    "crumbs": [
+      "Course Information",
+      "News/Annoucements"
+    ]
+  },
+  {
+    "objectID": "course-overview.html",
+    "href": "course-overview.html",
+    "title": "MSSC 6250 - Statistical Machine Learning (Spring 2025)",
+    "section": "",
+    "text": "The course discuss machine learning from statistical and modeling points of view, covering supervised learning and unsupervised learning models and algorithms. Supervised learning methods include various regression and classification methods, and unsupervised learning methods involves dimension reduction and clustering techniques. Topics include Bayesian linear regression, shrinkage and regularization, regression splines, Gaussian processes, logistic regression, discriminant analysis, nearest neighbors, tree-based methods, principal components, K-means, Gaussian mixture clustering, neural networks, etc.",
+    "crumbs": [
+      "Course Information",
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "code/06-lasso-vs-code.html",
+    "href": "code/06-lasso-vs-code.html",
+    "title": "06-Lasso Code Demo",
+    "section": "",
+    "text": "Show/Hidelibrary(glmnet)\n\nLoading required package: Matrix\n\n\nLoaded glmnet 4.1-8\n\n\n\nShow/Hideprostate &lt;- read.csv(\"../data/prostate.csv\")\nlasso_fit &lt;- cv.glmnet(x = data.matrix(prostate[, 1:8]), \n                       y = prostate$lpsa, nfolds = 10, \n                       alpha = 1)\n\n\n\nShow/Hidelasso_fit$lambda.min\n\n[1] 0.02961435\n\nShow/Hidelasso_fit$lambda.1se\n\n[1] 0.2089234\n\nShow/Hideplot(lasso_fit)\n\n\n\n\n\n\nShow/Hideplot(lasso_fit$glmnet.fit, \"lambda\")\n\n\n\n\n\n\n\n\nShow/Hidecoef(lasso_fit, s = \"lambda.min\")\n\n9 x 1 sparse Matrix of class \"dgCMatrix\"\n                      s1\n(Intercept)  0.169279155\nlcavol       0.509085165\nlweight      0.558643448\nage         -0.010256773\nlbph         0.067418867\nsvi          0.598979114\nlcp          .          \ngleason      0.008139093\npgg45        0.002387475\n\n\n\nShow/Hidecoef(lasso_fit, s = \"lambda.1se\")\n\n9 x 1 sparse Matrix of class \"dgCMatrix\"\n                   s1\n(Intercept) 0.7820637\nlcavol      0.4485189\nlweight     0.2804033\nage         .        \nlbph        .        \nsvi         0.3383490\nlcp         .        \ngleason     .        \npgg45       ."
+  },
+  {
+    "objectID": "code/06-lasso-vs-code.html#r-implementation",
+    "href": "code/06-lasso-vs-code.html#r-implementation",
+    "title": "06-Lasso Code Demo",
+    "section": "",
+    "text": "Show/Hidelibrary(glmnet)\n\nLoading required package: Matrix\n\n\nLoaded glmnet 4.1-8\n\n\n\nShow/Hideprostate &lt;- read.csv(\"../data/prostate.csv\")\nlasso_fit &lt;- cv.glmnet(x = data.matrix(prostate[, 1:8]), \n                       y = prostate$lpsa, nfolds = 10, \n                       alpha = 1)\n\n\n\nShow/Hidelasso_fit$lambda.min\n\n[1] 0.02961435\n\nShow/Hidelasso_fit$lambda.1se\n\n[1] 0.2089234\n\nShow/Hideplot(lasso_fit)\n\n\n\n\n\n\nShow/Hideplot(lasso_fit$glmnet.fit, \"lambda\")\n\n\n\n\n\n\n\n\nShow/Hidecoef(lasso_fit, s = \"lambda.min\")\n\n9 x 1 sparse Matrix of class \"dgCMatrix\"\n                      s1\n(Intercept)  0.169279155\nlcavol       0.509085165\nlweight      0.558643448\nage         -0.010256773\nlbph         0.067418867\nsvi          0.598979114\nlcp          .          \ngleason      0.008139093\npgg45        0.002387475\n\n\n\nShow/Hidecoef(lasso_fit, s = \"lambda.1se\")\n\n9 x 1 sparse Matrix of class \"dgCMatrix\"\n                   s1\n(Intercept) 0.7820637\nlcavol      0.4485189\nlweight     0.2804033\nage         .        \nlbph        .        \nsvi         0.3383490\nlcp         .        \ngleason     .        \npgg45       ."
+  },
+  {
+    "objectID": "code/06-lasso-vs-code.html#python-implementation",
+    "href": "code/06-lasso-vs-code.html#python-implementation",
+    "title": "06-Lasso Code Demo",
+    "section": "Python implementation",
+    "text": "Python implementation\n\nShow/Hideimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.linear_model import Lasso, LassoCV\nfrom sklearn.preprocessing import StandardScaler\n\n\n\nShow/Hideprostate = pd.read_csv(\"../data/prostate.csv\")\nX = prostate.iloc[:, 0:8]\ny = prostate[\"lpsa\"]\n\n# Standardize predictors\nscaler = StandardScaler()\nX_scaled = scaler.fit_transform(X)\n\n# Perform Lasso regression with cross-validation\n# Automatically selects alphas\nlasso_cv = LassoCV(alphas=None, cv=10, random_state=2025)  \nlasso_cv.fit(X_scaled, y)\n\n\n\n\nLassoCV(cv=10, random_state=2025)\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\n  LassoCV?Documentation for LassoCViFittedLassoCV(cv=10, random_state=2025) \n\n\nShow/Hide# Plot MSE across alphas\nmse_path = np.mean(lasso_cv.mse_path_, axis=1)\n\nplt.plot(np.log(lasso_cv.alphas_), mse_path, marker='o', label=\"Mean MSE\")\nplt.axvline(np.log(lasso_cv.alpha_), color=\"red\", linestyle=\"--\", \n            label=f\"Optimal Lambda: {lasso_cv.alpha_:.4f}\")\nplt.xlabel(\"Log(lambda)\")\nplt.ylabel(\"Mean Squared Error (MSE)\")\nplt.title(\"Lasso Cross-Validation: MSE vs. Log(lambda)\", fontsize=14)\nplt.legend()\nplt.show()\n\n\n\n\n\n\n\n\nShow/Hideoptimal_lambda = lasso_cv.alpha_\noptimal_lambda\n\n0.0008434274382607599\n\nShow/Hidelasso_cv.coef_\n\narray([ 0.65931859,  0.26435421, -0.15492328,  0.13834575,  0.31131745,\n       -0.14188085,  0.03451933,  0.12292875])\n\nShow/Hidelasso_cv.intercept_\n\n2.4783868783505154\n\n\n\nShow/Hide# Reverse standardization\nstd_devs = scaler.scale_  # Feature standard deviations\nmeans = scaler.mean_      # Feature means\ncoef_original = lasso_cv.coef_ / std_devs\ncoef_original\n\narray([ 0.56230244,  0.62026266, -0.02091681,  0.09585318,  0.75589027,\n       -0.10199745,  0.04805015,  0.00438119])\n\nShow/Hideintercept_original = lasso_cv.intercept_ - np.sum(lasso_cv.coef_ * means / std_devs)\nintercept_original\n\n0.18140520823512718\n\n\n\nShow/Hidelambdas = np.logspace(-6.5, 0.1, 100, base=np.exp(1))\n\ncoefficients = []\nfor lam in lambdas:\n    lasso = Lasso(alpha=lam, fit_intercept=True, max_iter=10000)\n    lasso.fit(X_scaled, y)\n    coefficients.append(lasso.coef_)\n\n\n\n\nLasso(alpha=1.1051709180756477, max_iter=10000)\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\n  Lasso?Documentation for LassoiFittedLasso(alpha=1.1051709180756477, max_iter=10000) \n\n\nShow/Hidecoefficients = np.array(coefficients)\n\n# Plot coefficient paths\nfor i in range(coefficients.shape[1]):\n    plt.plot(np.log(lambdas), coefficients[:, i], label=f\"Feature {i+1}\")\n\nplt.xlabel(\"Log(lambda)\")\nplt.ylabel(\"Coefficients\")\nplt.title(\"Lasso Coefficient Paths vs. Log(lambdas)\")\nplt.legend(loc=\"upper right\", frameon=False)\nplt.show()\n\n\n\n\n\n\n\n\nShow/Hidelasso = Lasso(alpha=0.21, fit_intercept=True)\nlasso.fit(X_scaled, y)\n\n\n\n\nLasso(alpha=0.21)\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\n  Lasso?Documentation for LassoiFittedLasso(alpha=0.21) \n\n\nShow/Hidelasso.coef_\n\narray([0.52543798, 0.1186707 , 0.        , 0.        , 0.13865508,\n       0.        , 0.        , 0.        ])"
+  },
+  {
+    "objectID": "hw/hw-2.html#homework-questions",
+    "href": "hw/hw-2.html#homework-questions",
+    "title": "Homework 2 - Ridge, Lasso, and Splines",
+    "section": "Homework Questions",
+    "text": "Homework Questions\n\n\nISL Sec. 6.6: 4\nISL Sec. 6.6: 6\nISL Sec. 6.6: 9 (a)-(d)\nISL Sec. 7.9: 9\n[Special Case for Ridge and Lasso] Suppose for a linear regression problem with \\(n = p\\), \\({\\bf X} = {\\bf I}\\) and no intercept. Show that\n\nThe least squares problem can be simplified to finding \\(\\beta_1,     \\dots, \\beta_p\\) that minimize \\(\\sum_{j=1}^p\\left(y_j - \\beta_j\\right)^2\\). What is least squares estimator \\(b_j\\)?\nThe ridge estimator is \\(\\hat{\\beta}_j^r = \\frac{y_j}{1+\\lambda} = \\underset{\\beta_j}{\\arg\\min} \\sum_{j=1}^p\\left(y_j - \\beta_j\\right)^2 + \\lambda \\sum_{j=1}^p \\beta_j^2\\).\nThe lasso solution of \\(\\sum_{j=1}^p\\left(y_j - \\beta_j\\right)^2 + \\lambda \\sum_{j=1}^p | \\beta_j |\\) is \\[\\hat{\\beta}_j^l =\n  \\begin{cases}\ny_j - \\lambda/2       & \\quad \\text{if } y_j &gt; \\lambda/2\\\\\ny_j + \\lambda/2       & \\quad \\text{if } y_j &lt; -\\lambda/2 \\\\\n0  & \\quad \\text{if } |y_j| \\le \\lambda/2\n  \\end{cases}\\]\nDescribe the ridge and lasso shrinkage behavior.\n\n[Lasso with Correlated Variables]\nConsider the linear regression\n\\[ \\mathbf{y}= \\mathbf{X}\\boldsymbol \\beta+ \\boldsymbol \\epsilon\\]\nwhere \\(\\boldsymbol \\beta= (\\beta_1, \\beta_2, \\ldots, \\beta_{20})'\\) with \\(\\beta_1 = \\beta_{2} = \\beta_{3} = 0.5\\) and all other \\(\\beta_j = 0, j = 4, \\dots, 20\\). No intercept \\(\\beta_0\\). The input vector \\(\\mathbf{x}= (x_1, x_2, \\dots, x_{20})'\\) follows a multivariate Gaussian distribution\n\\[\\mathbf{x}\\sim N\\left(\\mathbf{0}, \\Sigma_{20 \\times 20}\\right)\\]\nIn \\(\\Sigma\\), all diagonal elements are 1, and all off-diagonal elements are \\(\\rho\\) which measures the correlation between any two predictors.\n\nGenerate training data of size 400 and test data of size 100 independently from the above model with \\(\\rho = 0.1\\) and \\(\\epsilon_i \\stackrel{iid} \\sim N(0, 1)\\).\nFit a Lasso model on the training data with 10-fold cross-validation (CV).\nCompute test MSE with the optimal \\(\\lambda\\) selected by CV in (b). Does Lasso select the correct variables?\nRepeat (a)-(c) 100 times. That is, generate 100 different training and test data sets. For each run, record the test MSE and whether or not the true model is correctly selected. Then compute the average test MSE and the proportion of runs where the correct model was selected.\nRedo (a)-(d) with \\(\\rho = 0.6\\). Compare the two average test MSEs and the proportions. Comment the result."
+  },
+  {
+    "objectID": "hw/hw-4.html#homework-questions",
+    "href": "hw/hw-4.html#homework-questions",
+    "title": "Homework 4 - Support Vector Machines, Tree Methods, Unsupervised Learning",
+    "section": "Homework Questions",
+    "text": "Homework Questions\n\nISL Sec. 8.4: 12 (Don’t do BART)\nISL Sec. 9.7: 3\nISL Sec. 9.7: 5\nISL Sec. 12.6: 10"
+  },
+  {
+    "objectID": "weeks/week-3.html",
+    "href": "weeks/week-3.html",
+    "title": "Week 3",
+    "section": "",
+    "text": "Important\n\n\n\nHomework 1 due Friday, Feb 14, 11:59 PM",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 3"
+    ]
+  },
+  {
+    "objectID": "weeks/week-3.html#participate",
+    "href": "weeks/week-3.html#participate",
+    "title": "Week 3",
+    "section": "Participate",
+    "text": "Participate\n🖥️ Slides - Ridge Regression and Cross Validation\nr fontawesome::fa(\"table\") Data Set - mtcars.csv",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 3"
+    ]
+  },
+  {
+    "objectID": "weeks/week-3.html#reading-and-resources",
+    "href": "weeks/week-3.html#reading-and-resources",
+    "title": "Week 3",
+    "section": "Reading and Resources",
+    "text": "Reading and Resources\n📖 ISL Ch 5.1, 6.2.1\n📖 MML Ch 8.2.3 - 8.2.4",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 3"
+    ]
+  },
+  {
+    "objectID": "weeks/week-3.html#exercise",
+    "href": "weeks/week-3.html#exercise",
+    "title": "Week 3",
+    "section": "Exercise",
+    "text": "Exercise\n\n\n\n\n\nBack to course schedule ⏎",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 3"
+    ]
+  },
+  {
+    "objectID": "weeks/week-4.html",
+    "href": "weeks/week-4.html",
+    "title": "Week 4",
+    "section": "",
+    "text": "Important\n\n\n\nHomework 1 due Friday, Feb 9, 11:59 PM",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 4"
+    ]
+  },
+  {
+    "objectID": "weeks/week-4.html#participate",
+    "href": "weeks/week-4.html#participate",
+    "title": "Week 4",
+    "section": "Participate",
+    "text": "Participate\n🖥️ Slides - Lasso\n\nr fontawesome::fa(\"table\") Data Set - Prostate.csv",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 4"
+    ]
+  },
+  {
+    "objectID": "weeks/week-4.html#reading-and-resources",
+    "href": "weeks/week-4.html#reading-and-resources",
+    "title": "Week 4",
+    "section": "Reading and Resources",
+    "text": "Reading and Resources\n📖 ISL Ch 6.1, 6.2",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 4"
+    ]
+  },
+  {
+    "objectID": "weeks/week-4.html#perform",
+    "href": "weeks/week-4.html#perform",
+    "title": "Week 4",
+    "section": "Perform",
+    "text": "Perform\n\n\n\n\nBack to course schedule ⏎",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 4"
+    ]
+  },
+  {
+    "objectID": "LICENSE.html#creative-commons-attribution-sharealike-4.0-international-public-license",
+    "href": "LICENSE.html#creative-commons-attribution-sharealike-4.0-international-public-license",
+    "title": "Attribution-ShareAlike 4.0 International",
+    "section": "Creative Commons Attribution-ShareAlike 4.0 International Public License",
+    "text": "Creative Commons Attribution-ShareAlike 4.0 International Public License\nBy exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution-ShareAlike 4.0 International Public License (“Public License”). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.\n\nSection 1 – Definitions.\n\nAdapted Material means material subject to Copyright and Similar Rights that is derived from or based upon the Licensed Material and in which the Licensed Material is translated, altered, arranged, transformed, or otherwise modified in a manner requiring permission under the Copyright and Similar Rights held by the Licensor. For purposes of this Public License, where the Licensed Material is a musical work, performance, or sound recording, Adapted Material is always produced where the Licensed Material is synched in timed relation with a moving image.\nAdapter’s License means the license You apply to Your Copyright and Similar Rights in Your contributions to Adapted Material in accordance with the terms and conditions of this Public License.\nBY-SA Compatible License means a license listed at creativecommons.org/compatiblelicenses, approved by Creative Commons as essentially the equivalent of this Public License.\nCopyright and Similar Rights means copyright and/or similar rights closely related to copyright including, without limitation, performance, broadcast, sound recording, and Sui Generis Database Rights, without regard to how the rights are labeled or categorized. For purposes of this Public License, the rights specified in Section 2(b)(1)-(2) are not Copyright and Similar Rights.\nEffective Technological Measures means those measures that, in the absence of proper authority, may not be circumvented under laws fulfilling obligations under Article 11 of the WIPO Copyright Treaty adopted on December 20, 1996, and/or similar international agreements.\nExceptions and Limitations means fair use, fair dealing, and/or any other exception or limitation to Copyright and Similar Rights that applies to Your use of the Licensed Material.\nLicense Elements means the license attributes listed in the name of a Creative Commons Public License. The License Elements of this Public License are Attribution and ShareAlike.\nLicensed Material means the artistic or literary work, database, or other material to which the Licensor applied this Public License.\nLicensed Rights means the rights granted to You subject to the terms and conditions of this Public License, which are limited to all Copyright and Similar Rights that apply to Your use of the Licensed Material and that the Licensor has authority to license.\nLicensor means the individual(s) or entity(ies) granting rights under this Public License.\nShare means to provide material to the public by any means or process that requires permission under the Licensed Rights, such as reproduction, public display, public performance, distribution, dissemination, communication, or importation, and to make material available to the public including in ways that members of the public may access the material from a place and at a time individually chosen by them.\nSui Generis Database Rights means rights other than copyright resulting from Directive 96/9/EC of the European Parliament and of the Council of 11 March 1996 on the legal protection of databases, as amended and/or succeeded, as well as other essentially equivalent rights anywhere in the world.\nYou means the individual or entity exercising the Licensed Rights under this Public License. Your has a corresponding meaning.\n\n\n\nSection 2 – Scope.\n\nLicense grant.\n\nSubject to the terms and conditions of this Public License, the Licensor hereby grants You a worldwide, royalty-free, non-sublicensable, non-exclusive, irrevocable license to exercise the Licensed Rights in the Licensed Material to:\nA. reproduce and Share the Licensed Material, in whole or in part; and\nB. produce, reproduce, and Share Adapted Material.\nExceptions and Limitations. For the avoidance of doubt, where Exceptions and Limitations apply to Your use, this Public License does not apply, and You do not need to comply with its terms and conditions.\nTerm. The term of this Public License is specified in Section 6(a).\nMedia and formats; technical modifications allowed. The Licensor authorizes You to exercise the Licensed Rights in all media and formats whether now known or hereafter created, and to make technical modifications necessary to do so. The Licensor waives and/or agrees not to assert any right or authority to forbid You from making technical modifications necessary to exercise the Licensed Rights, including technical modifications necessary to circumvent Effective Technological Measures. For purposes of this Public License, simply making modifications authorized by this Section 2(a)(4) never produces Adapted Material.\nDownstream recipients.\nA. Offer from the Licensor – Licensed Material. Every recipient of the Licensed Material automatically receives an offer from the Licensor to exercise the Licensed Rights under the terms and conditions of this Public License.\nB. Additional offer from the Licensor – Adapted Material. Every recipient of Adapted Material from You automatically receives an offer from the Licensor to exercise the Licensed Rights in the Adapted Material under the conditions of the Adapter’s License You apply.\nC. No downstream restrictions. You may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, the Licensed Material if doing so restricts exercise of the Licensed Rights by any recipient of the Licensed Material.\nNo endorsement. Nothing in this Public License constitutes or may be construed as permission to assert or imply that You are, or that Your use of the Licensed Material is, connected with, or sponsored, endorsed, or granted official status by, the Licensor or others designated to receive attribution as provided in Section 3(a)(1)(A)(i).\n\nOther rights.\n\nMoral rights, such as the right of integrity, are not licensed under this Public License, nor are publicity, privacy, and/or other similar personality rights; however, to the extent possible, the Licensor waives and/or agrees not to assert any such rights held by the Licensor to the limited extent necessary to allow You to exercise the Licensed Rights, but not otherwise.\nPatent and trademark rights are not licensed under this Public License.\nTo the extent possible, the Licensor waives any right to collect royalties from You for the exercise of the Licensed Rights, whether directly or through a collecting society under any voluntary or waivable statutory or compulsory licensing scheme. In all other cases the Licensor expressly reserves any right to collect such royalties.\n\n\n\n\nSection 3 – License Conditions.\nYour exercise of the Licensed Rights is expressly made subject to the following conditions.\n\nAttribution.\n\nIf You Share the Licensed Material (including in modified form), You must:\nA. retain the following if it is supplied by the Licensor with the Licensed Material:\n\nidentification of the creator(s) of the Licensed Material and any others designated to receive attribution, in any reasonable manner requested by the Licensor (including by pseudonym if designated);\na copyright notice;\na notice that refers to this Public License;\na notice that refers to the disclaimer of warranties;\na URI or hyperlink to the Licensed Material to the extent reasonably practicable;\n\nB. indicate if You modified the Licensed Material and retain an indication of any previous modifications; and\nC. indicate the Licensed Material is licensed under this Public License, and include the text of, or the URI or hyperlink to, this Public License.\nYou may satisfy the conditions in Section 3(a)(1) in any reasonable manner based on the medium, means, and context in which You Share the Licensed Material. For example, it may be reasonable to satisfy the conditions by providing a URI or hyperlink to a resource that includes the required information.\nIf requested by the Licensor, You must remove any of the information required by Section 3(a)(1)(A) to the extent reasonably practicable.\n\nShareAlike.\n\nIn addition to the conditions in Section 3(a), if You Share Adapted Material You produce, the following conditions also apply.\n\nThe Adapter’s License You apply must be a Creative Commons license with the same License Elements, this version or later, or a BY-SA Compatible License.\nYou must include the text of, or the URI or hyperlink to, the Adapter’s License You apply. You may satisfy this condition in any reasonable manner based on the medium, means, and context in which You Share Adapted Material.\nYou may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, Adapted Material that restrict exercise of the rights granted under the Adapter’s License You apply.\n\n\n\nSection 4 – Sui Generis Database Rights.\nWhere the Licensed Rights include Sui Generis Database Rights that apply to Your use of the Licensed Material:\n\nfor the avoidance of doubt, Section 2(a)(1) grants You the right to extract, reuse, reproduce, and Share all or a substantial portion of the contents of the database;\nif You include all or a substantial portion of the database contents in a database in which You have Sui Generis Database Rights, then the database in which You have Sui Generis Database Rights (but not its individual contents) is Adapted Material, including for purposes of Section 3(b); and\nYou must comply with the conditions in Section 3(a) if You Share all or a substantial portion of the contents of the database.\n\nFor the avoidance of doubt, this Section 4 supplements and does not replace Your obligations under this Public License where the Licensed Rights include other Copyright and Similar Rights.\n\n\nSection 5 – Disclaimer of Warranties and Limitation of Liability.\n\nUnless otherwise separately undertaken by the Licensor, to the extent possible, the Licensor offers the Licensed Material as-is and as-available, and makes no representations or warranties of any kind concerning the Licensed Material, whether express, implied, statutory, or other. This includes, without limitation, warranties of title, merchantability, fitness for a particular purpose, non-infringement, absence of latent or other defects, accuracy, or the presence or absence of errors, whether or not known or discoverable. Where disclaimers of warranties are not allowed in full or in part, this disclaimer may not apply to You.\nTo the extent possible, in no event will the Licensor be liable to You on any legal theory (including, without limitation, negligence) or otherwise for any direct, special, indirect, incidental, consequential, punitive, exemplary, or other losses, costs, expenses, or damages arising out of this Public License or use of the Licensed Material, even if the Licensor has been advised of the possibility of such losses, costs, expenses, or damages. Where a limitation of liability is not allowed in full or in part, this limitation may not apply to You.\nThe disclaimer of warranties and limitation of liability provided above shall be interpreted in a manner that, to the extent possible, most closely approximates an absolute disclaimer and waiver of all liability.\n\n\n\nSection 6 – Term and Termination.\n\nThis Public License applies for the term of the Copyright and Similar Rights licensed here. However, if You fail to comply with this Public License, then Your rights under this Public License terminate automatically.\nWhere Your right to use the Licensed Material has terminated under Section 6(a), it reinstates:\n\nautomatically as of the date the violation is cured, provided it is cured within 30 days of Your discovery of the violation; or\nupon express reinstatement by the Licensor.\n\nFor the avoidance of doubt, this Section 6(b) does not affect any right the Licensor may have to seek remedies for Your violations of this Public License.\nFor the avoidance of doubt, the Licensor may also offer the Licensed Material under separate terms or conditions or stop distributing the Licensed Material at any time; however, doing so will not terminate this Public License.\nSections 1, 5, 6, 7, and 8 survive termination of this Public License.\n\n\n\nSection 7 – Other Terms and Conditions.\n\nThe Licensor shall not be bound by any additional or different terms or conditions communicated by You unless expressly agreed.\nAny arrangements, understandings, or agreements regarding the Licensed Material not stated herein are separate from and independent of the terms and conditions of this Public License.\n\n\n\nSection 8 – Interpretation.\n\nFor the avoidance of doubt, this Public License does not, and shall not be interpreted to, reduce, limit, restrict, or impose conditions on any use of the Licensed Material that could lawfully be made without permission under this Public License.\nTo the extent possible, if any provision of this Public License is deemed unenforceable, it shall be automatically reformed to the minimum extent necessary to make it enforceable. If the provision cannot be reformed, it shall be severed from this Public License without affecting the enforceability of the remaining terms and conditions.\nNo term or condition of this Public License will be waived and no failure to comply consented to unless expressly agreed to by the Licensor.\nNothing in this Public License constitutes or may be interpreted as a limitation upon, or waiver of, any privileges and immunities that apply to the Licensor or You, including from the legal processes of any jurisdiction or authority.\n\n\nCreative Commons is not a party to its public licenses. Notwithstanding, Creative Commons may elect to apply one of its public licenses to material it publishes and in those instances will be considered the “Licensor.” The text of the Creative Commons public licenses is dedicated to the public domain under the CC0 Public Domain Dedication. Except for the limited purpose of indicating that material is shared under a Creative Commons public license or as otherwise permitted by the Creative Commons policies published at creativecommons.org/policies, Creative Commons does not authorize the use of the trademark “Creative Commons” or any other trademark or logo of Creative Commons without its prior written consent including, without limitation, in connection with any unauthorized modifications to any of its public licenses or any other arrangements, understandings, or agreements concerning use of licensed material. For the avoidance of doubt, this paragraph does not form part of the public licenses.\nCreative Commons may be contacted at creativecommons.org."
+  },
+  {
+    "objectID": "present-description.html",
+    "href": "present-description.html",
+    "title": "Midterm Presentation I - Regression",
+    "section": "",
+    "text": "Team up! You will be working as a group of 3. One of you, please email me your team member list by Friday, 2/21 11:59 PM\nProposal. Please send me a one-page PDF describing what you are going to do for your project (no word limit) with your project title by Friday, 2/28 11:59 PM.\nPresentation. You will be presenting your project on Thursday, 3/6 in class.\nMaterials. Please share your entire work (slides, code, data, etc) by Friday, 3/7 11:59 PM.",
+    "crumbs": [
+      "Midterm Project I",
+      "Guideline and Policy"
+    ]
+  },
+  {
+    "objectID": "present-description.html#timeline-and-things-to-do",
+    "href": "present-description.html#timeline-and-things-to-do",
+    "title": "Midterm Presentation I - Regression",
+    "section": "",
+    "text": "Team up! You will be working as a group of 3. One of you, please email me your team member list by Friday, 2/21 11:59 PM\nProposal. Please send me a one-page PDF describing what you are going to do for your project (no word limit) with your project title by Friday, 2/28 11:59 PM.\nPresentation. You will be presenting your project on Thursday, 3/6 in class.\nMaterials. Please share your entire work (slides, code, data, etc) by Friday, 3/7 11:59 PM.",
+    "crumbs": [
+      "Midterm Project I",
+      "Guideline and Policy"
+    ]
+  },
+  {
+    "objectID": "present-description.html#policy",
+    "href": "present-description.html#policy",
+    "title": "Midterm Presentation I - Regression",
+    "section": "Policy",
+    "text": "Policy\n\nTeam up!\n\nEach one of you loses 5 points of your project grade if you don’t meet the requirement or miss the deadline.\nYou will be randomly assigned to a group if you do not belong to any group before the deadline.\n\n\n\nProposal\n\nEach one of you loses 5 points of your project grade if you don’t meet the requirement or miss the deadline.\nYour proposal (in PDF) should include three parts:\n\nProject title\nThe goal of your project. For example, what is the research question you’d like to answer? What machine learning method/model/algorithm you’d like to introduce? What data you’d like to use for analysis or demonstration? etc.\n\nAlthough it is risky, you can change your project topic after you submit your proposal if you decide to do something else.\n\n\n\nPresentation\n\nEach group presentation should be between 10 and 11 minute long, followed by 1 to 2 minute Q&A. If your presentation is too short or too long, every one of you loses 5 points of your project grade.\nEvery group member has to present some part of the group work. The one who does not present receives no point.\nQuestions are encouraged during Q&A. Everyone is welcome to ask any questions about the projects.\n\n\n\nMaterials\n\nEach one of you loses 5 points of your project grade if you don’t meet the requirement or miss the deadline.\nYou need to share your entire work, including slides, code, and data if applicable.\nYour code should be able to reproduce all the numerical results, outputs, tables, and figures shown in the slides, including the source of the raw data (where you find and load the data) if the project is about data analysis.",
+    "crumbs": [
+      "Midterm Project I",
+      "Guideline and Policy"
+    ]
+  },
+  {
+    "objectID": "present-description.html#project-content",
+    "href": "present-description.html#project-content",
+    "title": "Midterm Presentation I - Regression",
+    "section": "Project Content",
+    "text": "Project Content\nYour project can be in either of the following categories:\n\n(DA) Data analytics using one or more REGRESSION methods.\n(MA) Introduce a new REGRESSION model/method/algorithm not lectured in class.\n\n\nData Analytics\nFor your DA project, you need to\n\nDescribe the selected data set.\nExplain and show why the chosen model(s) is appropriate for answering your research questions and better than others.\nInterpret your analysis result.\n\nBelow are some data repositories you can start with, but you are encouraged to explore more and find your favorite one.\n\nTidyTuesday\nKaggle\nAwesome Public Datasets\nHarvard Dataverse\nUCI Machine Learning Repository\nFiveThirtyEight\n\n\n\nModel/Algorithm\nFor your MA project, you need to\n\nDescribe the intuition and idea of the method. What are the pros and cons of the method?\nProvide the mathematical expression of the model/algorithm. Explain the model and its properties, and how we do supervised learning with the model/algorithm.\nCompare the chosen method with other methods learned in class. Determine which method performs better under what conditions.\nDemo how to implement the method using a programming language for supervised learning.",
+    "crumbs": [
+      "Midterm Project I",
+      "Guideline and Policy"
+    ]
+  },
+  {
+    "objectID": "present-description.html#sec-grading",
+    "href": "present-description.html#sec-grading",
+    "title": "Midterm Presentation I - Regression",
+    "section": "Project Evaluation and Grading",
+    "text": "Project Evaluation and Grading\n\nYour project performance grade is determined by your classmates and Dr. Yu.\nTable 1 shows your possible performance grade. For example, if your group finish in second place (Silver) you get 145 points.\nYour project grade will be\n\n\nproject grade = performance grade - points lost due to violation of policy\n\n\n\n\nPerformance Grade Sheet\n\n\n\nPerformace Grade 🎖\n\n\n\n\nGold 🥇 1st\n150\n\n\nSilver 🥈 2nd\n145\n\n\nBronze 🥉 3rd\n140\n\n\nOther teams\n135",
+    "crumbs": [
+      "Midterm Project I",
+      "Guideline and Policy"
+    ]
+  },
+  {
+    "objectID": "present-description.html#group-performance-evaluation",
+    "href": "present-description.html#group-performance-evaluation",
+    "title": "Midterm Presentation I - Regression",
+    "section": "Group Performance Evaluation",
+    "text": "Group Performance Evaluation\n\nYou will need to evaluate all group projects except the one you work on.\nYou evaluate group performance based on the rubric attached. Four evaluation criteria are considered:\n\nProject Content and Organization (8 pts)\nPresentation Material (Slides) Quality (4 pts)\nOral Presentation Skill and Delivery (4 pts)\nInteractions and Q&A (4 pts)\n\nThe total points of a project presentation is 20 points.\nEvaluation sheets will be provided on the presentation day.\n\nHow do you get the full points for each category? Check the rubric below. \n\nContent and Organization (DA)\n\nBeautiful visualization helps find out relationship of variables and specification of models\nAll questions are answered accurately by the models\nDiscuss how and why the models are chosen\nApply sophisticated models and detailed analysis\nAll ideas are presented in logical order\n\nContent and Organization (MA)\n\nExplain the method clearly and accuratly\nShow the pros and cons of the method, and compare with the methods learned in class.\nShow how the method can be implemednted for supervised learning.\nAll ideas are presented in logical order\n\nPresentation Material Quality\n\nPresentation material show code and output beautifully\nPresentation material clearly aid the speaker in telling a coherent story\nAll tables and graphics are informative and related to the topic and make it easier to understand\nAttractive design, layout, and neatness.\n\nOral Presentation Skill\n\nGood volume and energy\nProper pace and diction\nAvoidance of distracting gestures\n\nInteractions and Q&A\n\nGood eye contact with audience\nExcellent listening skills\nAnswers audience questions with authority and accuracy\n\nAfter you evaluate all group project presentations, you rank them from 1st to last based on their earned points.\nNo two groups receive the same ranking. If you give two or more groups some points, you still need to give them a different ranking, deciding which team deserves a higher ranking according to your preference.",
+    "crumbs": [
+      "Midterm Project I",
+      "Guideline and Policy"
+    ]
+  },
+  {
+    "objectID": "weeks/week-1.html",
+    "href": "weeks/week-1.html",
+    "title": "Week 1",
+    "section": "",
+    "text": "📖 Read the syllabus.\n📖 Get your laptop and computing environment ready!\n📖 Refresh your probability/statistics and linear algebra.",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week-1.html#prepare",
+    "href": "weeks/week-1.html#prepare",
+    "title": "Week 1",
+    "section": "",
+    "text": "📖 Read the syllabus.\n📖 Get your laptop and computing environment ready!\n📖 Refresh your probability/statistics and linear algebra.",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week-1.html#participate",
+    "href": "weeks/week-1.html#participate",
+    "title": "Week 1",
+    "section": "Participate",
+    "text": "Participate\n🖥️ Slides - Welcome to MSSC 6250\n🖥️ Slides - Overview of Machine Learning\n🖥️ Slides - Bias-variance Tradeoff",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week-1.html#reading-and-resources",
+    "href": "weeks/week-1.html#reading-and-resources",
+    "title": "Week 1",
+    "section": "Reading and Resources",
+    "text": "Reading and Resources\n📖 ISL Ch 1, 2\n📖 Dr. Yu MSSC 5780 Probability and Statistics Review\n📖 Dr. Yu MSSC 5780 Linear Algebra Review\n📖 Check any math you need from MML Ch 2 - 6",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week-1.html#perform",
+    "href": "weeks/week-1.html#perform",
+    "title": "Week 1",
+    "section": "Perform",
+    "text": "Perform\n📋 Decide whether this is the right course for you by the drop deadline 1/21.\n\n\n\n\nBack to course schedule ⏎",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week-2.html",
+    "href": "weeks/week-2.html",
+    "title": "Week 2",
+    "section": "",
+    "text": "Important\n\n\n\nHomework 1 released.",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week-2.html#participate",
+    "href": "weeks/week-2.html#participate",
+    "title": "Week 2",
+    "section": "Participate",
+    "text": "Participate\n🖥️ Slides - Linear Regression\nr fontawesome::fa(\"table\") Data Set - Advertising.csv",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week-2.html#reading-and-resources",
+    "href": "weeks/week-2.html#reading-and-resources",
+    "title": "Week 2",
+    "section": "Reading and Resources",
+    "text": "Reading and Resources\n📖 ISL Ch 3.1 - 3.4\n📖 Dr. Yu MSSC 5780 Regression Analysis Week 1 to 6\n📖 MML Ch 7.1, 8.1, 8.2.1, 8.2.2",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week-2.html#perform",
+    "href": "weeks/week-2.html#perform",
+    "title": "Week 2",
+    "section": "Perform",
+    "text": "Perform\n📋 Homework 1\n\n\n\n\n\nBack to course schedule ⏎",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "hw/hw-3.html#homework-questions",
+    "href": "hw/hw-3.html#homework-questions",
+    "title": "Homework 3 - Bayesian Statistics, Logistic Regression, Generative Models, and K-Nearest Neighbors",
+    "section": "Homework Questions",
+    "text": "Homework Questions\n\nRequired\n\nISL Sec. 4.8: 2\nISL Sec. 4.8: 3\nISL Sec. 4.8: 5\nISL Sec. 4.8: 13\n[KNN Curse of Dimensionality]\n\nGenerate Generate the covariates \\(x_1, x_2, \\dots, x_5\\) of \\(n = 1000\\) training data from independent standard normal distribution. Then, generate \\(Y\\) from \\[Y = X_1 + 0.5 X_2 - X_3 + \\epsilon,\\] where \\(\\epsilon \\sim N(0, 1).\\)\nUse the first 500 observations as the training data and the rest as the test data. Fit KNN regression, and report the test MSE of \\(y\\) with the optimal \\(K\\).\nAdd additional 95 noisy predictors as follows.\n\nCase 1: \\(x_6, x_7, \\dots, x_{100} \\overset{\\mathrm{iid}}{\\sim} N(0, 1)\\)\nCase 2: \\(XA\\) where \\(X_{1000 \\times 5} = [x_1 \\cdots x_5]\\) and \\(A_{5 \\times 95}\\) having entries from iid uniform(0, 1).\n\nFit KNN regression in both cases (with the total of 100 covariates) and select the best \\(K\\) value.\nFor both cases, what is the best K and the best mean squared error for prediction? Discuss the effect of adding 95 (unnecessary) covariates.\n\n[MNIST Handwritten Digits Image]\n\nLoad the prepared MNIST data mnist.csv. Print some images.\nUse the first 1000 observations as the training data and the second half as the test data.\nTraining with KNN and predicting on the test data with the best \\(K\\) selected from the training.\n\nCalculate the test error rate.\nGenerate the confusion matrix.\n\nTraining with multinomial logistic regression and predicting on the test data.\n\nCalculate the test error rate.\nGenerate the confusion matrix.\n\n\n\n\n\nDo one of the followings\nYou are encouraged to do both, but to complete the homework, you only need to do one of the two assignments.\n\nWatch the talk All About that Bayes: Probability, Statistics, and the Quest to Quantify Uncertainty by Dr. Kristin Lennox. In 250 words, summarize your thoughts and what you learn from the talk.\n\n\n\nIn 250 words, summarize your thoughts and what you learned from the deep learning workshop."
+  },
+  {
+    "objectID": "hw/hw-1.html#homework-problems",
+    "href": "hw/hw-1.html#homework-problems",
+    "title": "Homework 1 - Bias-Variance Tradeoff and Linear Regression",
+    "section": "Homework Problems",
+    "text": "Homework Problems\n\nISL Sec. 2.4: 1\nISL Sec. 2.4: 3\nISL Sec. 2.4: 5\nISL Sec. 3.7: 4\nISL Sec. 3.7: 6\nISL Sec. 3.7: 14\nSimulation of simple linear regression. Consider the model \\(y_i = \\beta_0 + \\beta_1x_i + \\epsilon_i, ~~ \\epsilon_i \\stackrel{iid} \\sim N(0, \\sigma^2), ~~ i = 1, \\dots, n,\\) or equivalently, \\(p(y_i \\mid x, \\beta_0, \\beta_1) = N\\left(\\beta_0 + \\beta_1x_i, \\sigma^2 \\right).\\) Set \\(\\beta_0 = 2, \\beta_1 = -1.5, \\sigma = 1, n = 100, x_i = i.\\) Generate 1000 simulated data sets and fit the model to each data set.  The sampling distribution of the least-squares estimator \\(b_1\\) is \\[b_1 \\sim N\\left(\\beta_1, \\frac{\\sigma^2}{\\sum_{i=1}^n (x_i - \\bar{x})^2}\\right).\\]\n\nFind the average of the 1000 estimates \\(b_1\\). Is it close to its true expected value?\nFind the variance of 1000 estimates \\(b_1\\). Is it close to its true value?\nDraw the histogram of \\(b_1\\). Comment on your graph.\nObtain 1000 95% confidence interval for \\(\\beta_1\\). What is your pertentage of coverage for \\(\\beta_1\\)? Comment your result.\n\nSimulation of bias-variance tradeoff. Let \\(f(x) = x ^ 2\\) be the true regression function. Simulate the data using \\(y_i = f(x_i) + \\epsilon_i, i = 1, \\dots, 100\\), where \\(x_i = 0.01i\\) and \\(\\epsilon_i \\stackrel{iid} \\sim N(0, 0.3^2).\\)\n\nGenerate 250 training data sets.\nFor each data set, fit the following three models:\n\n\nModel 1: \\(y = \\beta_0+\\beta_1x+\\epsilon\\)\nModel 2: \\(y = \\beta_0+\\beta_1x+ \\beta_2x^2 + \\epsilon\\)\nModel 3: \\(y = \\beta_0+\\beta_1x+ \\beta_2x^2 + \\cdots + \\beta_9x^9 + \\epsilon\\)\n\n\nCalculate empirical MSE of \\(\\hat{f}\\), bias of \\(\\hat{f}\\) and variance of \\(\\hat{f}\\). Then show that \\[\\text{MSE}_{\\hat{f}} \\approx \\text{Bias}^2(\\hat{f}) + \\mathrm{Var}(\\hat{f}).\\] Specifically, for each value of \\(x_i\\), \\(i = 1, \\dots, 100\\),\n\n\\[\\text{MSE}_{\\hat{f}} =  \\frac{1}{250}\\sum_{k=1}^{250} \\left(\\hat{f}_k(x_i) - f(x_i) \\right) ^2,\\] \\[\\text{Bias}(\\hat{f}) = \\overline{\\hat{f}}(x_i) - f(x_i),\\] where \\(\\overline{\\hat{f}}(x_i) = \\frac{1}{250}\\sum_{k = 1}^{250}\\hat{f}_k(x_i)\\) is the sample mean of \\(\\hat{f}(x_i)\\) that approximates \\(\\mathrm{E}_{\\hat{f}}\\left(\\hat{f}(x_i)\\right).\\) \\[ \\mathrm{Var}(\\hat{f}) =  \\frac{1}{250}\\sum_{k=1}^{250} \\left(\\hat{f}_k(x_i) - \\overline{\\hat{f}}(x_i) \\right) ^2.\\] [Note:] If you calculate the variance using the built-in function such as var() in R, the identity holds only approximately because of the \\(250 - 1\\) term in the denominator in the sample variance formula. If instead \\(250\\) is used in the denominator, the identity holds exactly.\n\nFor each model, plot first ten estimated \\(f\\), \\(\\hat{f}_{1}(x), \\dots, \\hat{f}_{10}(x)\\), and the average of \\(\\hat{f}\\), \\(\\frac{1}{250}\\sum_{k=1}^{250}\\hat{f}_{k}(x)\\) in one figure, as Figure 1 below. What’s your finding?\nGenerate one more data set and use it as the test data. Calculate the overall training MSE (for training \\(y\\)) and overall test MSE (for test \\(y\\)) for each model. \\[MSE_\\texttt{Tr} =  \\frac{1}{250} \\sum_{k = 1}^{250} \\frac{1}{100} \\sum_{i=1}^{100} \\left(\\hat{f}_{k}(x_i) - y_{i}^k\\right)^2\\] \\[MSE_\\texttt{Te} =  \\frac{1}{250} \\sum_{k = 1}^{250} \\frac{1}{100} \\sum_{i=1}^{100} \\left(\\hat{f}_{k}(x_i) - y_{i}^{\\texttt{Test}}\\right)^2\\]\n\n\n\n\n\n\n\n\n\n\nFigure 1: Trained \\(f\\)\n\n\n\n\n\n\n\n(MSSC PhD) Stochastic gradient descent. Write your own stochastic gradient descent algorithm for linear regression. Implement it and compare with the built-in function such as optim() of R or scipy.optimize() of python to make sure that it converges correctly."
+  },
+  {
+    "objectID": "code/05-ridge-cv-code.html",
+    "href": "code/05-ridge-cv-code.html",
+    "title": "05-Ridge Regression Code Demo",
+    "section": "",
+    "text": "Codelibrary(MASS)\nfit &lt;- MASS::lm.ridge(mpg ~ ., data = mtcars, lambda = 1) ## ridge fit\ncoef(fit) ## original scale\n\n                      cyl         disp           hp         drat           wt \n16.537660830 -0.162402755  0.002333078 -0.014934856  0.924631319 -2.461146015 \n        qsec           vs           am         gear         carb \n 0.492587517  0.374651744  2.308375781  0.685715851 -0.575791252 \n\nCodefit$coef ## standardized scale\n\n       cyl       disp         hp       drat         wt       qsec         vs \n-0.2854708  0.2846046 -1.0078499  0.4865947 -2.3702010  0.8663632  0.1858566 \n        am       gear       carb \n 1.1337179  0.4979561 -0.9153711 \n\n\n\nCodeX &lt;- scale(data.matrix(mtcars[, -1]), center = TRUE, scale = TRUE)\n\n\n\nCodedf &lt;- data.frame(cbind(mtcars[, 1, drop=FALSE], X))\nridge_fit &lt;- lm.ridge(mpg ~ ., data = df, lambda = 0:40)\nMASS::select(ridge_fit)\n\nmodified HKB estimator is 2.58585 \nmodified L-W estimator is 1.837435 \nsmallest value of GCV  at 15 \n\n\n\nCodepar(mar = c(4, 4, 0, 0))\nplot(ridge_fit$lambda, ridge_fit$GCV, type = \"l\", col = \"darkgreen\", \n     ylab = \"GCV\", xlab = \"Lambda\", lwd = 3)\n\n\n\n\n\n\n\n\nBy defualt, glmnet() standardizes the x variables with standardize = TRUE, and does not standardize the response (standardize.response = FALSE).\nglmnet() always return the coefficients at the original scale.\n\n\nCodelibrary(glmnet)\n\nLoading required package: Matrix\n\n\nLoaded glmnet 4.1-8\n\nCoderidge_cv_fit &lt;- cv.glmnet(x = X, y = mtcars$mpg, alpha = 0,\n                          nfolds = 10, type.measure = \"mse\")\nplot(ridge_cv_fit$glmnet.fit, \"lambda\")\n\n\n\n\n\n\n\n\nCodeplot(ridge_cv_fit)\n\n\n\n\n\n\n\n\nCoderidge_cv_fit$lambda.min\n\n[1] 3.014598\n\nCode# largest lambda s.t. error is within 1 s.e of the min\nridge_cv_fit$lambda.1se \n\n[1] 11.08883\n\nCodecoef(ridge_cv_fit, s = \"lambda.min\")\n\n11 x 1 sparse Matrix of class \"dgCMatrix\"\n                    s1\n(Intercept) 20.0906250\ncyl         -0.6681360\ndisp        -0.6591218\nhp          -0.7889394\ndrat         0.5644227\nwt          -1.1786358\nqsec         0.2866108\nvs           0.3966957\nam           0.7941621\ngear         0.3997316\ncarb        -0.8635288\n\n\n\n\nCodelibrary(glmnet)\nridge_cv_fit_ori &lt;- cv.glmnet(x = data.matrix(mtcars[, -1]), y = mtcars$mpg, alpha = 0,\n                          nfolds = 10, type.measure = \"mse\")\nplot(ridge_cv_fit_ori$glmnet.fit, \"lambda\")\n\n\n\n\n\n\n\n\nCodeplot(ridge_cv_fit_ori)\n\n\n\n\n\n\n\n\nCoderidge_cv_fit_ori$lambda.min\n\n[1] 3.014598\n\nCode# largest lambda s.t. error is within 1 s.e of the min\nridge_cv_fit_ori$lambda.1se \n\n[1] 12.16998\n\nCodecoef(ridge_cv_fit_ori, s = \"lambda.min\")\n\n11 x 1 sparse Matrix of class \"dgCMatrix\"\n                      s1\n(Intercept) 21.051283516\ncyl         -0.374112703\ndisp        -0.005318127\nhp          -0.011506803\ndrat         1.055629523\nwt          -1.204585685\nqsec         0.160391657\nvs           0.787069385\nam           1.591536197\ngear         0.541785546\ncarb        -0.534626533"
+  },
+  {
+    "objectID": "code/05-ridge-cv-code.html#r-implementation",
+    "href": "code/05-ridge-cv-code.html#r-implementation",
+    "title": "05-Ridge Regression Code Demo",
+    "section": "",
+    "text": "Codelibrary(MASS)\nfit &lt;- MASS::lm.ridge(mpg ~ ., data = mtcars, lambda = 1) ## ridge fit\ncoef(fit) ## original scale\n\n                      cyl         disp           hp         drat           wt \n16.537660830 -0.162402755  0.002333078 -0.014934856  0.924631319 -2.461146015 \n        qsec           vs           am         gear         carb \n 0.492587517  0.374651744  2.308375781  0.685715851 -0.575791252 \n\nCodefit$coef ## standardized scale\n\n       cyl       disp         hp       drat         wt       qsec         vs \n-0.2854708  0.2846046 -1.0078499  0.4865947 -2.3702010  0.8663632  0.1858566 \n        am       gear       carb \n 1.1337179  0.4979561 -0.9153711 \n\n\n\nCodeX &lt;- scale(data.matrix(mtcars[, -1]), center = TRUE, scale = TRUE)\n\n\n\nCodedf &lt;- data.frame(cbind(mtcars[, 1, drop=FALSE], X))\nridge_fit &lt;- lm.ridge(mpg ~ ., data = df, lambda = 0:40)\nMASS::select(ridge_fit)\n\nmodified HKB estimator is 2.58585 \nmodified L-W estimator is 1.837435 \nsmallest value of GCV  at 15 \n\n\n\nCodepar(mar = c(4, 4, 0, 0))\nplot(ridge_fit$lambda, ridge_fit$GCV, type = \"l\", col = \"darkgreen\", \n     ylab = \"GCV\", xlab = \"Lambda\", lwd = 3)\n\n\n\n\n\n\n\n\nBy defualt, glmnet() standardizes the x variables with standardize = TRUE, and does not standardize the response (standardize.response = FALSE).\nglmnet() always return the coefficients at the original scale.\n\n\nCodelibrary(glmnet)\n\nLoading required package: Matrix\n\n\nLoaded glmnet 4.1-8\n\nCoderidge_cv_fit &lt;- cv.glmnet(x = X, y = mtcars$mpg, alpha = 0,\n                          nfolds = 10, type.measure = \"mse\")\nplot(ridge_cv_fit$glmnet.fit, \"lambda\")\n\n\n\n\n\n\n\n\nCodeplot(ridge_cv_fit)\n\n\n\n\n\n\n\n\nCoderidge_cv_fit$lambda.min\n\n[1] 3.014598\n\nCode# largest lambda s.t. error is within 1 s.e of the min\nridge_cv_fit$lambda.1se \n\n[1] 11.08883\n\nCodecoef(ridge_cv_fit, s = \"lambda.min\")\n\n11 x 1 sparse Matrix of class \"dgCMatrix\"\n                    s1\n(Intercept) 20.0906250\ncyl         -0.6681360\ndisp        -0.6591218\nhp          -0.7889394\ndrat         0.5644227\nwt          -1.1786358\nqsec         0.2866108\nvs           0.3966957\nam           0.7941621\ngear         0.3997316\ncarb        -0.8635288\n\n\n\n\nCodelibrary(glmnet)\nridge_cv_fit_ori &lt;- cv.glmnet(x = data.matrix(mtcars[, -1]), y = mtcars$mpg, alpha = 0,\n                          nfolds = 10, type.measure = \"mse\")\nplot(ridge_cv_fit_ori$glmnet.fit, \"lambda\")\n\n\n\n\n\n\n\n\nCodeplot(ridge_cv_fit_ori)\n\n\n\n\n\n\n\n\nCoderidge_cv_fit_ori$lambda.min\n\n[1] 3.014598\n\nCode# largest lambda s.t. error is within 1 s.e of the min\nridge_cv_fit_ori$lambda.1se \n\n[1] 12.16998\n\nCodecoef(ridge_cv_fit_ori, s = \"lambda.min\")\n\n11 x 1 sparse Matrix of class \"dgCMatrix\"\n                      s1\n(Intercept) 21.051283516\ncyl         -0.374112703\ndisp        -0.005318127\nhp          -0.011506803\ndrat         1.055629523\nwt          -1.204585685\nqsec         0.160391657\nvs           0.787069385\nam           1.591536197\ngear         0.541785546\ncarb        -0.534626533"
+  },
+  {
+    "objectID": "code/05-ridge-cv-code.html#python-implementation",
+    "href": "code/05-ridge-cv-code.html#python-implementation",
+    "title": "05-Ridge Regression Code Demo",
+    "section": "\n2 Python implementation",
+    "text": "2 Python implementation\n\nCodeimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.linear_model import Ridge, RidgeCV\nfrom sklearn.preprocessing import StandardScaler\n\n\n\nCodemtcars = pd.read_csv(\"../data/mtcars.csv\")\nX = mtcars.drop(columns=[\"mpg\"])\ny = mtcars[\"mpg\"]\nscaler = StandardScaler()\nX_scaled = scaler.fit_transform(X)\nridge_model = Ridge(alpha=1) ## alpha is the n*lambda\nridge_model.fit(X_scaled, y)\n\n\n\n\nRidge(alpha=1)\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\nRidgeRidge(alpha=1)\n\n\n\nCoderidge_model.coef_\n\narray([-0.28547077,  0.28460463, -1.00784994,  0.4865947 , -2.37020101,\n        0.86636324,  0.18585663,  1.13371791,  0.49795614, -0.91537115])\n\n\n\nCodelambdas = np.arange(1, 41) ## alpha must be &gt; 0\n# Ridge regression with cross-validation to select the best lambda\n# Enable storing CV values (can only use LOOCV)\nridge_cv = RidgeCV(alphas=lambdas, store_cv_values=True)  \nridge_cv.fit(X_scaled, y)\n\n\n\n\nRidgeCV(alphas=array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17,\n       18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34,\n       35, 36, 37, 38, 39, 40]),\n        store_cv_values=True)\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\nRidgeCVRidgeCV(alphas=array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17,\n       18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34,\n       35, 36, 37, 38, 39, 40]),\n        store_cv_values=True)\n\n\n\nCode# Optimal lambda and corresponding coefficients\noptimal_lambda = ridge_cv.alpha_\noptimal_lambda\n\n13\n\nCodeoptimal_coefficients = ridge_cv.coef_\noptimal_coefficients\n\narray([-0.64745384, -0.62930084, -0.79208923,  0.55274563, -1.2273356 ,\n        0.2909736 ,  0.37094879,  0.81866969,  0.3981575 , -0.89842163])\n\nCoderidge_cv.intercept_\n\n20.090625000000003\n\nCode# Cross-validation mean squared error for each lambda\ncv_mse = np.mean(ridge_cv.cv_values_, axis=0)\n\n# Plot the CV MSE vs Lambda\nplt.plot(lambdas, cv_mse, marker=\"o\", linestyle=\"-\")\nplt.axvline(optimal_lambda, color=\"red\", linestyle=\"--\", \n            label=f\"Optimal Lambda = {optimal_lambda}\")\nplt.xlabel(\"Lambda (Alpha)\")\nplt.ylabel(\"Mean Squared Error (MSE)\")\nplt.title(\"Cross-Validation MSE vs Lambda\")\nplt.legend()\nplt.show()\n\n\n\n\n\n\n\nHere we transform the coefficients back to the original scale when non-standardized X is used.\n\nCode# Reverse standardization\nstd_devs = scaler.scale_  # Feature standard deviations\nmeans = scaler.mean_      # Feature means\n\ncoef_original = optimal_coefficients / std_devs\ncoef_original\n\narray([-0.36833293, -0.00515876, -0.0117376 ,  1.05033188, -1.27442867,\n        0.16543865,  0.74776248,  1.66690255,  0.54828706, -0.56512958])\n\nCodeintercept_original = ridge_cv.intercept_ - np.sum(optimal_coefficients * means / std_devs)\nintercept_original\n\n21.21467495074396\n\n\n\nCode## the lambda size is matching the size used in cv.glmnet(). Should it be multiplied by 32?\nlambdas = 5 * 10 ** np.linspace(-1, 3, 100)\n\n# RidgeCV with 10-fold cross-validation\nridge_cv = RidgeCV(alphas=lambdas, scoring=\"neg_mean_squared_error\", cv=10)\nridge_cv.fit(X_scaled, y)\n\n\n\n\nRidgeCV(alphas=array([5.00000000e-01, 5.48749383e-01, 6.02251770e-01, 6.60970574e-01,\n       7.25414389e-01, 7.96141397e-01, 8.73764200e-01, 9.58955131e-01,\n       1.05245207e+00, 1.15506485e+00, 1.26768225e+00, 1.39127970e+00,\n       1.52692775e+00, 1.67580133e+00, 1.83918989e+00, 2.01850863e+00,\n       2.21531073e+00, 2.43130079e+00, 2.66834962e+00, 2.92851041e+00,\n       3.21403656e+00, 3.52740116e+0...\n       5.88405976e+02, 6.45774833e+02, 7.08737081e+02, 7.77838072e+02,\n       8.53676324e+02, 9.36908711e+02, 1.02825615e+03, 1.12850986e+03,\n       1.23853818e+03, 1.35929412e+03, 1.49182362e+03, 1.63727458e+03,\n       1.79690683e+03, 1.97210303e+03, 2.16438064e+03, 2.37540508e+03,\n       2.60700414e+03, 2.86118383e+03, 3.14014572e+03, 3.44630605e+03,\n       3.78231664e+03, 4.15108784e+03, 4.55581378e+03, 5.00000000e+03]),\n        cv=10, scoring='neg_mean_squared_error')\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\nRidgeCVRidgeCV(alphas=array([5.00000000e-01, 5.48749383e-01, 6.02251770e-01, 6.60970574e-01,\n       7.25414389e-01, 7.96141397e-01, 8.73764200e-01, 9.58955131e-01,\n       1.05245207e+00, 1.15506485e+00, 1.26768225e+00, 1.39127970e+00,\n       1.52692775e+00, 1.67580133e+00, 1.83918989e+00, 2.01850863e+00,\n       2.21531073e+00, 2.43130079e+00, 2.66834962e+00, 2.92851041e+00,\n       3.21403656e+00, 3.52740116e+0...\n       5.88405976e+02, 6.45774833e+02, 7.08737081e+02, 7.77838072e+02,\n       8.53676324e+02, 9.36908711e+02, 1.02825615e+03, 1.12850986e+03,\n       1.23853818e+03, 1.35929412e+03, 1.49182362e+03, 1.63727458e+03,\n       1.79690683e+03, 1.97210303e+03, 2.16438064e+03, 2.37540508e+03,\n       2.60700414e+03, 2.86118383e+03, 3.14014572e+03, 3.44630605e+03,\n       3.78231664e+03, 4.15108784e+03, 4.55581378e+03, 5.00000000e+03]),\n        cv=10, scoring='neg_mean_squared_error')\n\n\n\nCodebest_lambda = ridge_cv.alpha_\n\ncoefficients = []\nfor lam in lambdas:\n    ridge = Ridge(alpha=lam)\n    ridge.fit(X_scaled, y)\n    coefficients.append(ridge.coef_)\n\n\n\n\nRidge(alpha=5000.0)\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\nRidgeRidge(alpha=5000.0)\n\n\n\nCodecoefficients = np.array(coefficients)\nfor i in range(coefficients.shape[1]):\n    plt.plot(np.log(lambdas), coefficients[:, i])\nplt.xlabel(\"Log(Lambda)\")\nplt.ylabel(\"Coefficients\")\nplt.show()"
+  },
+  {
+    "objectID": "code/04-linear-reg-code.html",
+    "href": "code/04-linear-reg-code.html",
+    "title": "04-Linear Regression Code Demo",
+    "section": "",
+    "text": "Show/Hideadvertising_data &lt;- read.csv(\"../data/Advertising.csv\")\nadvertising_data &lt;- advertising_data[, 2:5]\nhead(advertising_data)\n\n     TV radio newspaper sales\n1 230.1  37.8      69.2  22.1\n2  44.5  39.3      45.1  10.4\n3  17.2  45.9      69.3   9.3\n4 151.5  41.3      58.5  18.5\n5 180.8  10.8      58.4  12.9\n6   8.7  48.9      75.0   7.2\n\nShow/Hidelm_out &lt;- lm(advertising_data$sales ~ ., data = advertising_data)\nsummary(lm_out)\n\n\nCall:\nlm(formula = advertising_data$sales ~ ., data = advertising_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-8.8277 -0.8908  0.2418  1.1893  2.8292 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  2.938889   0.311908   9.422   &lt;2e-16 ***\nTV           0.045765   0.001395  32.809   &lt;2e-16 ***\nradio        0.188530   0.008611  21.893   &lt;2e-16 ***\nnewspaper   -0.001037   0.005871  -0.177     0.86    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.686 on 196 degrees of freedom\nMultiple R-squared:  0.8972,    Adjusted R-squared:  0.8956 \nF-statistic: 570.3 on 3 and 196 DF,  p-value: &lt; 2.2e-16\n\nShow/Hideconfint(lm_out)\n\n                  2.5 %     97.5 %\n(Intercept)  2.32376228 3.55401646\nTV           0.04301371 0.04851558\nradio        0.17154745 0.20551259\nnewspaper   -0.01261595 0.01054097"
+  },
+  {
+    "objectID": "code/04-linear-reg-code.html#r-implementation",
+    "href": "code/04-linear-reg-code.html#r-implementation",
+    "title": "04-Linear Regression Code Demo",
+    "section": "",
+    "text": "Show/Hideadvertising_data &lt;- read.csv(\"../data/Advertising.csv\")\nadvertising_data &lt;- advertising_data[, 2:5]\nhead(advertising_data)\n\n     TV radio newspaper sales\n1 230.1  37.8      69.2  22.1\n2  44.5  39.3      45.1  10.4\n3  17.2  45.9      69.3   9.3\n4 151.5  41.3      58.5  18.5\n5 180.8  10.8      58.4  12.9\n6   8.7  48.9      75.0   7.2\n\nShow/Hidelm_out &lt;- lm(advertising_data$sales ~ ., data = advertising_data)\nsummary(lm_out)\n\n\nCall:\nlm(formula = advertising_data$sales ~ ., data = advertising_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-8.8277 -0.8908  0.2418  1.1893  2.8292 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  2.938889   0.311908   9.422   &lt;2e-16 ***\nTV           0.045765   0.001395  32.809   &lt;2e-16 ***\nradio        0.188530   0.008611  21.893   &lt;2e-16 ***\nnewspaper   -0.001037   0.005871  -0.177     0.86    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.686 on 196 degrees of freedom\nMultiple R-squared:  0.8972,    Adjusted R-squared:  0.8956 \nF-statistic: 570.3 on 3 and 196 DF,  p-value: &lt; 2.2e-16\n\nShow/Hideconfint(lm_out)\n\n                  2.5 %     97.5 %\n(Intercept)  2.32376228 3.55401646\nTV           0.04301371 0.04851558\nradio        0.17154745 0.20551259\nnewspaper   -0.01261595 0.01054097"
+  },
+  {
+    "objectID": "code/04-linear-reg-code.html#python-implementation",
+    "href": "code/04-linear-reg-code.html#python-implementation",
+    "title": "04-Linear Regression Code Demo",
+    "section": "Python implementation",
+    "text": "Python implementation\n\nShow/Hideimport pandas as pd\nimport numpy as np\n\n\n\nShow/Hideadvertising_data = pd.read_csv(\"../data/Advertising.csv\")\nadvertising_data = advertising_data.iloc[:, 1:5]\nX = advertising_data.drop(columns=[\"sales\"])\ny = advertising_data[\"sales\"]\n\n\nscikit-learn\n\nShow/Hidefrom sklearn.linear_model import LinearRegression\nreg = LinearRegression().fit(X, y)\nreg.intercept_\n\n2.9388893694594014\n\nShow/Hidereg.coef_\n\narray([ 0.04576465,  0.18853002, -0.00103749])\n\n\nstatsmodels\n\nShow/Hidefrom statsmodels.formula.api import ols\nols_out = ols(formula='sales ~ TV + radio + newspaper', data=advertising_data).fit()\nols_out.params\n\nIntercept    2.938889\nTV           0.045765\nradio        0.188530\nnewspaper   -0.001037\ndtype: float64\n\nShow/Hideprint(ols_out.summary())\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                  sales   R-squared:                       0.897\nModel:                            OLS   Adj. R-squared:                  0.896\nMethod:                 Least Squares   F-statistic:                     570.3\nDate:                Mon, 13 Jan 2025   Prob (F-statistic):           1.58e-96\nTime:                        11:56:31   Log-Likelihood:                -386.18\nNo. Observations:                 200   AIC:                             780.4\nDf Residuals:                     196   BIC:                             793.6\nDf Model:                           3                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nIntercept      2.9389      0.312      9.422      0.000       2.324       3.554\nTV             0.0458      0.001     32.809      0.000       0.043       0.049\nradio          0.1885      0.009     21.893      0.000       0.172       0.206\nnewspaper     -0.0010      0.006     -0.177      0.860      -0.013       0.011\n==============================================================================\nOmnibus:                       60.414   Durbin-Watson:                   2.084\nProb(Omnibus):                  0.000   Jarque-Bera (JB):              151.241\nSkew:                          -1.327   Prob(JB):                     1.44e-33\nKurtosis:                       6.332   Cond. No.                         454.\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n\nShow/Hidecoef_summary = ols_out.summary2().tables[1]  # Get the coefficients table\nprint(coef_summary)\n\n              Coef.  Std.Err.          t         P&gt;|t|    [0.025    0.975]\nIntercept  2.938889  0.311908   9.422288  1.267295e-17  2.323762  3.554016\nTV         0.045765  0.001395  32.808624  1.509960e-81  0.043014  0.048516\nradio      0.188530  0.008611  21.893496  1.505339e-54  0.171547  0.205513\nnewspaper -0.001037  0.005871  -0.176715  8.599151e-01 -0.012616  0.010541\n\nShow/Hideconf_intervals = ols_out.conf_int()\nprint(conf_intervals)\n\n                  0         1\nIntercept  2.323762  3.554016\nTV         0.043014  0.048516\nradio      0.171547  0.205513\nnewspaper -0.012616  0.010541"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "MSSC 6250 - Statistical Machine Learning (Spring 2025)",
+    "section": "",
+    "text": "Midterm Presentation I - Regression guideline is released.\nHomework 1 released, and due Friday, 2/14, 11:59 PM.\n\nThis schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nTo Do\nSlides\nCode\nHomework\nProject\n\n\n\n\n1\nTue, Jan 14\nSyllabus/Overview of Statistical Learning\n📖\n🖥️🖥️\n\n\n\n\n\n\nThu, Jan 16\nBias-variance tradeoff\n\n🖥️\n\n\n\n\n\n2\nTue, Jan 21\nNO CLASS: Cold Weather\n📖\n🖥️\n\n\n\n\n\n\nThu, Jan 23\nLinear Regression\n\n\n\n\n\n\n\n3\nTue, Jan 28\nNumerical Optimization\n📖\n\n\n✍️\n\n\n\n\nThu, Jan 30\nStochastic Gradient Descen; Ridge Regression\n\n🖥️\n\n\n\n\n\n4\nTue, Feb 4\nCross-Validation; Feature Selection\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 6\nLASSO\n\n\n\n\n\n\n\n5\nTue, Feb 11\nRegression Splines and Smoothing Splines\n📖\n🖥️\n\n✍️\n\n\n\n\nThu, Feb 13\nGeneralized Additive Models\n\n\n\nHW 1 Due\n\n\n\n6\nTue, Feb 18\nBayesian Inference and Linear Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 20\nBinary Logistic Regression\n\n\n\n\n✅ Team up Due\n\n\n7\nTue, Feb 25\nMultinomial Logistic Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 27\nDiscriminant Analysis\n\n\n\n\n✅ Proposal Due\n\n\n8\nTue, Mar 4\nNaive Bayes\n📖\n\n\n\n\n\n\n\nThu, Mar 6\nMidterm Presentation I\n\n\n\n✍️\n✅ Materials Due\n\n\n9\nTue, Mar 11\nNO CLASS: Spring break\n\n\n\n\n\n\n\n\nThu, Mar 13\nNO CLASS: Spring break\n\n\n\n\n\n\n\n10\nTue, Mar 18\nK-Nearest Neighbors Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 20\nK-Nearest Neighbors Classification\n\n\n\n\n\n\n\n11\nTue, Mar 25\nGaussian Process Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 27\nGaussian Process Classification\n\n\n\n\n\n\n\n12\nTue, Apr 1\nSupport Vector Machine\n📖\n\n\n\n\n\n\n\nThu, Apr 3\nSupport Vector Machine\n\n\n\n\n\n\n\n13\nTue, Apr 8\nCART and Bagging\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 10\nRandom Forests and Boosting\n\n\n\n✍️\n\n\n\n14\nTue, Apr 15\nMidterm Presentation II\n📖\n🖥️\n\n\n✅\n\n\n\nThu, Apr 17\nNO CLASS: Easter break\n\n\n\n\n\n\n\n15\nTue, Apr 22\nPrincipal Component Analysis\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 24\nK-Means Clustering\n\n\n\n\n\n\n\n16\nTue, Apr 29\nModel-based Clustering\n📖\n🖥️\n\n\n\n\n\n\nThu, May 1\nNeural Networks\n\n\n\n\n\n\n\n17\nThu, May 8\nFinal Project Submission\n\n\n\n\n✅\n\n\n\n\nI reserve the right to make changes to the schedule.",
+    "crumbs": [
+      "Course Information",
+      "Schedule"
+    ]
+  },
+  {
     "objectID": "slides/04-lin-reg.html#linear-regression",
     "href": "slides/04-lin-reg.html#linear-regression",
     "title": "Linear Regression 📈",
@@ -754,380 +1310,6 @@
     "title": "Linear Regression 📈",
     "section": "\nDemo SGD",
     "text": "Demo SGD\n\n\n\n\n\n\n\n\n\n\n\n\nmssc6250-s25.github.io/website"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "MSSC 6250 - Statistical Machine Learning (Spring 2025)",
-    "section": "",
-    "text": "Homework 1 released, and due Friday, 2/14, 11:59 PM.\n\nThis schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nTo Do\nSlides\nCode\nHomework\nProject\n\n\n\n\n1\nTue, Jan 14\nSyllabus/Overview of Statistical Learning\n📖\n🖥️🖥️\n\n\n\n\n\n\nThu, Jan 16\nBias-variance tradeoff\n\n🖥️\n\n\n\n\n\n2\nTue, Jan 21\nNO CLASS: Cold Weather\n📖\n🖥️\n\n\n\n\n\n\nThu, Jan 23\nLinear Regression\n\n\n\n\n\n\n\n3\nTue, Jan 28\nNumerical Optimization\n📖\n\n\n✍️\n\n\n\n\nThu, Jan 30\nStochastic Gradient Descen; Ridge Regression\n\n🖥️\n\n\n\n\n\n4\nTue, Feb 4\nCross-Validation; Feature Selection\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 6\nLASSO; Polynomial Regression and Regression Splines\n\n\n\n\n\n\n\n5\nTue, Feb 11\nSmoothing Splines and Generalized Additive Models\n📖\n🖥️\n\n✍️\n\n\n\n\nThu, Feb 13\nBayesian Inference\n\n\n\nHW 1 Due\n\n\n\n6\nTue, Feb 18\nBayesian Linear Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 20\nBinary Logistic Regression\n\n\n\n\n✅ Team up Due\n\n\n7\nTue, Feb 25\nMultinomial Logistic Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 27\nDiscriminant Analysis\n\n\n\n\n✅ Proposal Due\n\n\n8\nTue, Mar 4\nNaive Bayes\n📖\n\n\n\n\n\n\n\nThu, Mar 6\nMidterm Presentation I\n\n\n\n✍️\n✅ Materials Due\n\n\n9\nTue, Mar 11\nNO CLASS: Spring break\n\n\n\n\n\n\n\n\nThu, Mar 13\nNO CLASS: Spring break\n\n\n\n\n\n\n\n10\nTue, Mar 18\nK-Nearest Neighbors Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 20\nK-Nearest Neighbors Classification\n\n\n\n\n\n\n\n11\nTue, Mar 25\nGaussian Process Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 27\nGaussian Process Classification\n\n\n\n\n\n\n\n12\nTue, Apr 1\nSupport Vector Machine\n📖\n\n\n\n\n\n\n\nThu, Apr 3\nSupport Vector Machine\n\n\n\n\n\n\n\n13\nTue, Apr 8\nCART and Bagging\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 10\nRandom Forests and Boosting\n\n\n\n✍️\n\n\n\n14\nTue, Apr 15\nMidterm Presentation II\n📖\n🖥️\n\n\n✅\n\n\n\nThu, Apr 17\nNO CLASS: Easter break\n\n\n\n\n\n\n\n15\nTue, Apr 22\nPrincipal Component Analysis\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 24\nK-Means Clustering\n\n\n\n\n\n\n\n16\nTue, Apr 29\nModel-based Clustering\n📖\n🖥️\n\n\n\n\n\n\nThu, May 1\nNeural Networks\n\n\n\n\n\n\n\n17\nThu, May 8\nFinal Project Submission\n\n\n\n\n✅\n\n\n\n\nI reserve the right to make changes to the schedule.",
-    "crumbs": [
-      "Course Information",
-      "Schedule"
-    ]
-  },
-  {
-    "objectID": "code/04-linear-reg-code.html",
-    "href": "code/04-linear-reg-code.html",
-    "title": "04-Linear Regression Code Demo",
-    "section": "",
-    "text": "Show/Hideadvertising_data &lt;- read.csv(\"../data/Advertising.csv\")\nadvertising_data &lt;- advertising_data[, 2:5]\nhead(advertising_data)\n\n     TV radio newspaper sales\n1 230.1  37.8      69.2  22.1\n2  44.5  39.3      45.1  10.4\n3  17.2  45.9      69.3   9.3\n4 151.5  41.3      58.5  18.5\n5 180.8  10.8      58.4  12.9\n6   8.7  48.9      75.0   7.2\n\nShow/Hidelm_out &lt;- lm(advertising_data$sales ~ ., data = advertising_data)\nsummary(lm_out)\n\n\nCall:\nlm(formula = advertising_data$sales ~ ., data = advertising_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-8.8277 -0.8908  0.2418  1.1893  2.8292 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  2.938889   0.311908   9.422   &lt;2e-16 ***\nTV           0.045765   0.001395  32.809   &lt;2e-16 ***\nradio        0.188530   0.008611  21.893   &lt;2e-16 ***\nnewspaper   -0.001037   0.005871  -0.177     0.86    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.686 on 196 degrees of freedom\nMultiple R-squared:  0.8972,    Adjusted R-squared:  0.8956 \nF-statistic: 570.3 on 3 and 196 DF,  p-value: &lt; 2.2e-16\n\nShow/Hideconfint(lm_out)\n\n                  2.5 %     97.5 %\n(Intercept)  2.32376228 3.55401646\nTV           0.04301371 0.04851558\nradio        0.17154745 0.20551259\nnewspaper   -0.01261595 0.01054097"
-  },
-  {
-    "objectID": "code/04-linear-reg-code.html#r-implementation",
-    "href": "code/04-linear-reg-code.html#r-implementation",
-    "title": "04-Linear Regression Code Demo",
-    "section": "",
-    "text": "Show/Hideadvertising_data &lt;- read.csv(\"../data/Advertising.csv\")\nadvertising_data &lt;- advertising_data[, 2:5]\nhead(advertising_data)\n\n     TV radio newspaper sales\n1 230.1  37.8      69.2  22.1\n2  44.5  39.3      45.1  10.4\n3  17.2  45.9      69.3   9.3\n4 151.5  41.3      58.5  18.5\n5 180.8  10.8      58.4  12.9\n6   8.7  48.9      75.0   7.2\n\nShow/Hidelm_out &lt;- lm(advertising_data$sales ~ ., data = advertising_data)\nsummary(lm_out)\n\n\nCall:\nlm(formula = advertising_data$sales ~ ., data = advertising_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-8.8277 -0.8908  0.2418  1.1893  2.8292 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  2.938889   0.311908   9.422   &lt;2e-16 ***\nTV           0.045765   0.001395  32.809   &lt;2e-16 ***\nradio        0.188530   0.008611  21.893   &lt;2e-16 ***\nnewspaper   -0.001037   0.005871  -0.177     0.86    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.686 on 196 degrees of freedom\nMultiple R-squared:  0.8972,    Adjusted R-squared:  0.8956 \nF-statistic: 570.3 on 3 and 196 DF,  p-value: &lt; 2.2e-16\n\nShow/Hideconfint(lm_out)\n\n                  2.5 %     97.5 %\n(Intercept)  2.32376228 3.55401646\nTV           0.04301371 0.04851558\nradio        0.17154745 0.20551259\nnewspaper   -0.01261595 0.01054097"
-  },
-  {
-    "objectID": "code/04-linear-reg-code.html#python-implementation",
-    "href": "code/04-linear-reg-code.html#python-implementation",
-    "title": "04-Linear Regression Code Demo",
-    "section": "Python implementation",
-    "text": "Python implementation\n\nShow/Hideimport pandas as pd\nimport numpy as np\n\n\n\nShow/Hideadvertising_data = pd.read_csv(\"../data/Advertising.csv\")\nadvertising_data = advertising_data.iloc[:, 1:5]\nX = advertising_data.drop(columns=[\"sales\"])\ny = advertising_data[\"sales\"]\n\n\nscikit-learn\n\nShow/Hidefrom sklearn.linear_model import LinearRegression\nreg = LinearRegression().fit(X, y)\nreg.intercept_\n\n2.9388893694594014\n\nShow/Hidereg.coef_\n\narray([ 0.04576465,  0.18853002, -0.00103749])\n\n\nstatsmodels\n\nShow/Hidefrom statsmodels.formula.api import ols\nols_out = ols(formula='sales ~ TV + radio + newspaper', data=advertising_data).fit()\nols_out.params\n\nIntercept    2.938889\nTV           0.045765\nradio        0.188530\nnewspaper   -0.001037\ndtype: float64\n\nShow/Hideprint(ols_out.summary())\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                  sales   R-squared:                       0.897\nModel:                            OLS   Adj. R-squared:                  0.896\nMethod:                 Least Squares   F-statistic:                     570.3\nDate:                Mon, 13 Jan 2025   Prob (F-statistic):           1.58e-96\nTime:                        11:56:31   Log-Likelihood:                -386.18\nNo. Observations:                 200   AIC:                             780.4\nDf Residuals:                     196   BIC:                             793.6\nDf Model:                           3                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nIntercept      2.9389      0.312      9.422      0.000       2.324       3.554\nTV             0.0458      0.001     32.809      0.000       0.043       0.049\nradio          0.1885      0.009     21.893      0.000       0.172       0.206\nnewspaper     -0.0010      0.006     -0.177      0.860      -0.013       0.011\n==============================================================================\nOmnibus:                       60.414   Durbin-Watson:                   2.084\nProb(Omnibus):                  0.000   Jarque-Bera (JB):              151.241\nSkew:                          -1.327   Prob(JB):                     1.44e-33\nKurtosis:                       6.332   Cond. No.                         454.\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.\n\nShow/Hidecoef_summary = ols_out.summary2().tables[1]  # Get the coefficients table\nprint(coef_summary)\n\n              Coef.  Std.Err.          t         P&gt;|t|    [0.025    0.975]\nIntercept  2.938889  0.311908   9.422288  1.267295e-17  2.323762  3.554016\nTV         0.045765  0.001395  32.808624  1.509960e-81  0.043014  0.048516\nradio      0.188530  0.008611  21.893496  1.505339e-54  0.171547  0.205513\nnewspaper -0.001037  0.005871  -0.176715  8.599151e-01 -0.012616  0.010541\n\nShow/Hideconf_intervals = ols_out.conf_int()\nprint(conf_intervals)\n\n                  0         1\nIntercept  2.323762  3.554016\nTV         0.043014  0.048516\nradio      0.171547  0.205513\nnewspaper -0.012616  0.010541"
-  },
-  {
-    "objectID": "hw/hw-2.html#homework-questions",
-    "href": "hw/hw-2.html#homework-questions",
-    "title": "Homework 2 - Ridge, Lasso, and Splines",
-    "section": "Homework Questions",
-    "text": "Homework Questions\n\n\nISL Sec. 6.6: 4\nISL Sec. 6.6: 6\nISL Sec. 6.6: 9 (a)-(d)\nISL Sec. 7.9: 9\n[Special Case for Ridge and Lasso] Suppose for a linear regression problem with \\(n = p\\), \\({\\bf X} = {\\bf I}\\) and no intercept. Show that\n\nThe least squares problem can be simplified to finding \\(\\beta_1,     \\dots, \\beta_p\\) that minimize \\(\\sum_{j=1}^p\\left(y_j - \\beta_j\\right)^2\\). What is least squares estimator \\(b_j\\)?\nThe ridge estimator is \\(\\hat{\\beta}_j^r = \\frac{y_j}{1+\\lambda} = \\underset{\\beta_j}{\\arg\\min} \\sum_{j=1}^p\\left(y_j - \\beta_j\\right)^2 + \\lambda \\sum_{j=1}^p \\beta_j^2\\).\nThe lasso solution of \\(\\sum_{j=1}^p\\left(y_j - \\beta_j\\right)^2 + \\lambda \\sum_{j=1}^p | \\beta_j |\\) is \\[\\hat{\\beta}_j^l =\n  \\begin{cases}\ny_j - \\lambda/2       & \\quad \\text{if } y_j &gt; \\lambda/2\\\\\ny_j + \\lambda/2       & \\quad \\text{if } y_j &lt; -\\lambda/2 \\\\\n0  & \\quad \\text{if } |y_j| \\le \\lambda/2\n  \\end{cases}\\]\nDescribe the ridge and lasso shrinkage behavior.\n\n[Lasso with Correlated Variables]\nConsider the linear regression\n\\[ \\mathbf{y}= \\mathbf{X}\\boldsymbol \\beta+ \\boldsymbol \\epsilon\\]\nwhere \\(\\boldsymbol \\beta= (\\beta_1, \\beta_2, \\ldots, \\beta_{20})'\\) with \\(\\beta_1 = \\beta_{2} = \\beta_{3} = 0.5\\) and all other \\(\\beta_j = 0, j = 4, \\dots, 20\\). No intercept \\(\\beta_0\\). The input vector \\(\\mathbf{x}= (x_1, x_2, \\dots, x_{20})'\\) follows a multivariate Gaussian distribution\n\\[\\mathbf{x}\\sim N\\left(\\mathbf{0}, \\Sigma_{20 \\times 20}\\right)\\]\nIn \\(\\Sigma\\), all diagonal elements are 1, and all off-diagonal elements are \\(\\rho\\) which measures the correlation between any two predictors.\n\nGenerate training data of size 400 and test data of size 100 independently from the above model with \\(\\rho = 0.1\\) and \\(\\epsilon_i \\stackrel{iid} \\sim N(0, 1)\\).\nFit a Lasso model on the training data with 10-fold cross-validation (CV).\nCompute test MSE with the optimal \\(\\lambda\\) selected by CV in (b). Does Lasso select the correct variables?\nRepeat (a)-(c) 100 times. That is, generate 100 different training and test data sets. For each run, record the test MSE and whether or not the true model is correctly selected. Then compute the average test MSE and the proportion of runs where the correct model was selected.\nRedo (a)-(d) with \\(\\rho = 0.6\\). Compare the two average test MSEs and the proportions. Comment the result."
-  },
-  {
-    "objectID": "hw/hw-4.html#homework-questions",
-    "href": "hw/hw-4.html#homework-questions",
-    "title": "Homework 4 - Support Vector Machines, Tree Methods, Unsupervised Learning",
-    "section": "Homework Questions",
-    "text": "Homework Questions\n\nISL Sec. 8.4: 12 (Don’t do BART)\nISL Sec. 9.7: 3\nISL Sec. 9.7: 5\nISL Sec. 12.6: 10"
-  },
-  {
-    "objectID": "weeks/week-3.html",
-    "href": "weeks/week-3.html",
-    "title": "Week 3",
-    "section": "",
-    "text": "Important\n\n\n\nHomework 1 due Friday, Feb 14, 11:59 PM",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 3"
-    ]
-  },
-  {
-    "objectID": "weeks/week-3.html#participate",
-    "href": "weeks/week-3.html#participate",
-    "title": "Week 3",
-    "section": "Participate",
-    "text": "Participate\n🖥️ Slides - Ridge Regression and Cross Validation\nr fontawesome::fa(\"table\") Data Set - mtcars.csv",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 3"
-    ]
-  },
-  {
-    "objectID": "weeks/week-3.html#reading-and-resources",
-    "href": "weeks/week-3.html#reading-and-resources",
-    "title": "Week 3",
-    "section": "Reading and Resources",
-    "text": "Reading and Resources\n📖 ISL Ch 5.1, 6.2.1\n📖 MML Ch 8.2.3 - 8.2.4",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 3"
-    ]
-  },
-  {
-    "objectID": "weeks/week-3.html#exercise",
-    "href": "weeks/week-3.html#exercise",
-    "title": "Week 3",
-    "section": "Exercise",
-    "text": "Exercise\n\n\n\n\n\nBack to course schedule ⏎",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 3"
-    ]
-  },
-  {
-    "objectID": "weeks/week-4.html",
-    "href": "weeks/week-4.html",
-    "title": "Week 4",
-    "section": "",
-    "text": "Important\n\n\n\nHomework 1 due Friday, Feb 9, 11:59 PM",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 4"
-    ]
-  },
-  {
-    "objectID": "weeks/week-4.html#participate",
-    "href": "weeks/week-4.html#participate",
-    "title": "Week 4",
-    "section": "Participate",
-    "text": "Participate\n🖥️ Slides - Lasso\n\nr fontawesome::fa(\"table\") Data Set - Prostate.csv",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 4"
-    ]
-  },
-  {
-    "objectID": "weeks/week-4.html#reading-and-resources",
-    "href": "weeks/week-4.html#reading-and-resources",
-    "title": "Week 4",
-    "section": "Reading and Resources",
-    "text": "Reading and Resources\n📖 ISL Ch 6.1, 6.2",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 4"
-    ]
-  },
-  {
-    "objectID": "weeks/week-4.html#perform",
-    "href": "weeks/week-4.html#perform",
-    "title": "Week 4",
-    "section": "Perform",
-    "text": "Perform\n\n\n\n\nBack to course schedule ⏎",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 4"
-    ]
-  },
-  {
-    "objectID": "LICENSE.html#creative-commons-attribution-sharealike-4.0-international-public-license",
-    "href": "LICENSE.html#creative-commons-attribution-sharealike-4.0-international-public-license",
-    "title": "Attribution-ShareAlike 4.0 International",
-    "section": "Creative Commons Attribution-ShareAlike 4.0 International Public License",
-    "text": "Creative Commons Attribution-ShareAlike 4.0 International Public License\nBy exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution-ShareAlike 4.0 International Public License (“Public License”). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.\n\nSection 1 – Definitions.\n\nAdapted Material means material subject to Copyright and Similar Rights that is derived from or based upon the Licensed Material and in which the Licensed Material is translated, altered, arranged, transformed, or otherwise modified in a manner requiring permission under the Copyright and Similar Rights held by the Licensor. For purposes of this Public License, where the Licensed Material is a musical work, performance, or sound recording, Adapted Material is always produced where the Licensed Material is synched in timed relation with a moving image.\nAdapter’s License means the license You apply to Your Copyright and Similar Rights in Your contributions to Adapted Material in accordance with the terms and conditions of this Public License.\nBY-SA Compatible License means a license listed at creativecommons.org/compatiblelicenses, approved by Creative Commons as essentially the equivalent of this Public License.\nCopyright and Similar Rights means copyright and/or similar rights closely related to copyright including, without limitation, performance, broadcast, sound recording, and Sui Generis Database Rights, without regard to how the rights are labeled or categorized. For purposes of this Public License, the rights specified in Section 2(b)(1)-(2) are not Copyright and Similar Rights.\nEffective Technological Measures means those measures that, in the absence of proper authority, may not be circumvented under laws fulfilling obligations under Article 11 of the WIPO Copyright Treaty adopted on December 20, 1996, and/or similar international agreements.\nExceptions and Limitations means fair use, fair dealing, and/or any other exception or limitation to Copyright and Similar Rights that applies to Your use of the Licensed Material.\nLicense Elements means the license attributes listed in the name of a Creative Commons Public License. The License Elements of this Public License are Attribution and ShareAlike.\nLicensed Material means the artistic or literary work, database, or other material to which the Licensor applied this Public License.\nLicensed Rights means the rights granted to You subject to the terms and conditions of this Public License, which are limited to all Copyright and Similar Rights that apply to Your use of the Licensed Material and that the Licensor has authority to license.\nLicensor means the individual(s) or entity(ies) granting rights under this Public License.\nShare means to provide material to the public by any means or process that requires permission under the Licensed Rights, such as reproduction, public display, public performance, distribution, dissemination, communication, or importation, and to make material available to the public including in ways that members of the public may access the material from a place and at a time individually chosen by them.\nSui Generis Database Rights means rights other than copyright resulting from Directive 96/9/EC of the European Parliament and of the Council of 11 March 1996 on the legal protection of databases, as amended and/or succeeded, as well as other essentially equivalent rights anywhere in the world.\nYou means the individual or entity exercising the Licensed Rights under this Public License. Your has a corresponding meaning.\n\n\n\nSection 2 – Scope.\n\nLicense grant.\n\nSubject to the terms and conditions of this Public License, the Licensor hereby grants You a worldwide, royalty-free, non-sublicensable, non-exclusive, irrevocable license to exercise the Licensed Rights in the Licensed Material to:\nA. reproduce and Share the Licensed Material, in whole or in part; and\nB. produce, reproduce, and Share Adapted Material.\nExceptions and Limitations. For the avoidance of doubt, where Exceptions and Limitations apply to Your use, this Public License does not apply, and You do not need to comply with its terms and conditions.\nTerm. The term of this Public License is specified in Section 6(a).\nMedia and formats; technical modifications allowed. The Licensor authorizes You to exercise the Licensed Rights in all media and formats whether now known or hereafter created, and to make technical modifications necessary to do so. The Licensor waives and/or agrees not to assert any right or authority to forbid You from making technical modifications necessary to exercise the Licensed Rights, including technical modifications necessary to circumvent Effective Technological Measures. For purposes of this Public License, simply making modifications authorized by this Section 2(a)(4) never produces Adapted Material.\nDownstream recipients.\nA. Offer from the Licensor – Licensed Material. Every recipient of the Licensed Material automatically receives an offer from the Licensor to exercise the Licensed Rights under the terms and conditions of this Public License.\nB. Additional offer from the Licensor – Adapted Material. Every recipient of Adapted Material from You automatically receives an offer from the Licensor to exercise the Licensed Rights in the Adapted Material under the conditions of the Adapter’s License You apply.\nC. No downstream restrictions. You may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, the Licensed Material if doing so restricts exercise of the Licensed Rights by any recipient of the Licensed Material.\nNo endorsement. Nothing in this Public License constitutes or may be construed as permission to assert or imply that You are, or that Your use of the Licensed Material is, connected with, or sponsored, endorsed, or granted official status by, the Licensor or others designated to receive attribution as provided in Section 3(a)(1)(A)(i).\n\nOther rights.\n\nMoral rights, such as the right of integrity, are not licensed under this Public License, nor are publicity, privacy, and/or other similar personality rights; however, to the extent possible, the Licensor waives and/or agrees not to assert any such rights held by the Licensor to the limited extent necessary to allow You to exercise the Licensed Rights, but not otherwise.\nPatent and trademark rights are not licensed under this Public License.\nTo the extent possible, the Licensor waives any right to collect royalties from You for the exercise of the Licensed Rights, whether directly or through a collecting society under any voluntary or waivable statutory or compulsory licensing scheme. In all other cases the Licensor expressly reserves any right to collect such royalties.\n\n\n\n\nSection 3 – License Conditions.\nYour exercise of the Licensed Rights is expressly made subject to the following conditions.\n\nAttribution.\n\nIf You Share the Licensed Material (including in modified form), You must:\nA. retain the following if it is supplied by the Licensor with the Licensed Material:\n\nidentification of the creator(s) of the Licensed Material and any others designated to receive attribution, in any reasonable manner requested by the Licensor (including by pseudonym if designated);\na copyright notice;\na notice that refers to this Public License;\na notice that refers to the disclaimer of warranties;\na URI or hyperlink to the Licensed Material to the extent reasonably practicable;\n\nB. indicate if You modified the Licensed Material and retain an indication of any previous modifications; and\nC. indicate the Licensed Material is licensed under this Public License, and include the text of, or the URI or hyperlink to, this Public License.\nYou may satisfy the conditions in Section 3(a)(1) in any reasonable manner based on the medium, means, and context in which You Share the Licensed Material. For example, it may be reasonable to satisfy the conditions by providing a URI or hyperlink to a resource that includes the required information.\nIf requested by the Licensor, You must remove any of the information required by Section 3(a)(1)(A) to the extent reasonably practicable.\n\nShareAlike.\n\nIn addition to the conditions in Section 3(a), if You Share Adapted Material You produce, the following conditions also apply.\n\nThe Adapter’s License You apply must be a Creative Commons license with the same License Elements, this version or later, or a BY-SA Compatible License.\nYou must include the text of, or the URI or hyperlink to, the Adapter’s License You apply. You may satisfy this condition in any reasonable manner based on the medium, means, and context in which You Share Adapted Material.\nYou may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, Adapted Material that restrict exercise of the rights granted under the Adapter’s License You apply.\n\n\n\nSection 4 – Sui Generis Database Rights.\nWhere the Licensed Rights include Sui Generis Database Rights that apply to Your use of the Licensed Material:\n\nfor the avoidance of doubt, Section 2(a)(1) grants You the right to extract, reuse, reproduce, and Share all or a substantial portion of the contents of the database;\nif You include all or a substantial portion of the database contents in a database in which You have Sui Generis Database Rights, then the database in which You have Sui Generis Database Rights (but not its individual contents) is Adapted Material, including for purposes of Section 3(b); and\nYou must comply with the conditions in Section 3(a) if You Share all or a substantial portion of the contents of the database.\n\nFor the avoidance of doubt, this Section 4 supplements and does not replace Your obligations under this Public License where the Licensed Rights include other Copyright and Similar Rights.\n\n\nSection 5 – Disclaimer of Warranties and Limitation of Liability.\n\nUnless otherwise separately undertaken by the Licensor, to the extent possible, the Licensor offers the Licensed Material as-is and as-available, and makes no representations or warranties of any kind concerning the Licensed Material, whether express, implied, statutory, or other. This includes, without limitation, warranties of title, merchantability, fitness for a particular purpose, non-infringement, absence of latent or other defects, accuracy, or the presence or absence of errors, whether or not known or discoverable. Where disclaimers of warranties are not allowed in full or in part, this disclaimer may not apply to You.\nTo the extent possible, in no event will the Licensor be liable to You on any legal theory (including, without limitation, negligence) or otherwise for any direct, special, indirect, incidental, consequential, punitive, exemplary, or other losses, costs, expenses, or damages arising out of this Public License or use of the Licensed Material, even if the Licensor has been advised of the possibility of such losses, costs, expenses, or damages. Where a limitation of liability is not allowed in full or in part, this limitation may not apply to You.\nThe disclaimer of warranties and limitation of liability provided above shall be interpreted in a manner that, to the extent possible, most closely approximates an absolute disclaimer and waiver of all liability.\n\n\n\nSection 6 – Term and Termination.\n\nThis Public License applies for the term of the Copyright and Similar Rights licensed here. However, if You fail to comply with this Public License, then Your rights under this Public License terminate automatically.\nWhere Your right to use the Licensed Material has terminated under Section 6(a), it reinstates:\n\nautomatically as of the date the violation is cured, provided it is cured within 30 days of Your discovery of the violation; or\nupon express reinstatement by the Licensor.\n\nFor the avoidance of doubt, this Section 6(b) does not affect any right the Licensor may have to seek remedies for Your violations of this Public License.\nFor the avoidance of doubt, the Licensor may also offer the Licensed Material under separate terms or conditions or stop distributing the Licensed Material at any time; however, doing so will not terminate this Public License.\nSections 1, 5, 6, 7, and 8 survive termination of this Public License.\n\n\n\nSection 7 – Other Terms and Conditions.\n\nThe Licensor shall not be bound by any additional or different terms or conditions communicated by You unless expressly agreed.\nAny arrangements, understandings, or agreements regarding the Licensed Material not stated herein are separate from and independent of the terms and conditions of this Public License.\n\n\n\nSection 8 – Interpretation.\n\nFor the avoidance of doubt, this Public License does not, and shall not be interpreted to, reduce, limit, restrict, or impose conditions on any use of the Licensed Material that could lawfully be made without permission under this Public License.\nTo the extent possible, if any provision of this Public License is deemed unenforceable, it shall be automatically reformed to the minimum extent necessary to make it enforceable. If the provision cannot be reformed, it shall be severed from this Public License without affecting the enforceability of the remaining terms and conditions.\nNo term or condition of this Public License will be waived and no failure to comply consented to unless expressly agreed to by the Licensor.\nNothing in this Public License constitutes or may be interpreted as a limitation upon, or waiver of, any privileges and immunities that apply to the Licensor or You, including from the legal processes of any jurisdiction or authority.\n\n\nCreative Commons is not a party to its public licenses. Notwithstanding, Creative Commons may elect to apply one of its public licenses to material it publishes and in those instances will be considered the “Licensor.” The text of the Creative Commons public licenses is dedicated to the public domain under the CC0 Public Domain Dedication. Except for the limited purpose of indicating that material is shared under a Creative Commons public license or as otherwise permitted by the Creative Commons policies published at creativecommons.org/policies, Creative Commons does not authorize the use of the trademark “Creative Commons” or any other trademark or logo of Creative Commons without its prior written consent including, without limitation, in connection with any unauthorized modifications to any of its public licenses or any other arrangements, understandings, or agreements concerning use of licensed material. For the avoidance of doubt, this paragraph does not form part of the public licenses.\nCreative Commons may be contacted at creativecommons.org."
-  },
-  {
-    "objectID": "present-description.html",
-    "href": "present-description.html",
-    "title": "Midterm Presentation I - Regression",
-    "section": "",
-    "text": "Team up! You will be working as a group of 2, 3 or 4. One of you, please email me your team member list by Friday, 2/21 11:59 PM\nProposal. Please send me a one-page PDF describing what you are going to do for your project (no word limit) with your project title by Friday, 2/28 11:59 PM.\nPresentation. You will be presenting your project on Thursday, 3/6 in class.\nMaterials. Please share your entire work (slides, code, data, etc) by Friday, 3/7 11:59 PM.",
-    "crumbs": [
-      "Midterm Project I",
-      "Guideline and Policy"
-    ]
-  },
-  {
-    "objectID": "present-description.html#timeline-and-things-to-do",
-    "href": "present-description.html#timeline-and-things-to-do",
-    "title": "Midterm Presentation I - Regression",
-    "section": "",
-    "text": "Team up! You will be working as a group of 2, 3 or 4. One of you, please email me your team member list by Friday, 2/21 11:59 PM\nProposal. Please send me a one-page PDF describing what you are going to do for your project (no word limit) with your project title by Friday, 2/28 11:59 PM.\nPresentation. You will be presenting your project on Thursday, 3/6 in class.\nMaterials. Please share your entire work (slides, code, data, etc) by Friday, 3/7 11:59 PM.",
-    "crumbs": [
-      "Midterm Project I",
-      "Guideline and Policy"
-    ]
-  },
-  {
-    "objectID": "present-description.html#policy",
-    "href": "present-description.html#policy",
-    "title": "Midterm Presentation I - Regression",
-    "section": "Policy",
-    "text": "Policy\n\nTeam up!\n\nEach one of you loses 5 points of your project grade if you don’t meet the requirement or miss the deadline.\nYou will be randomly assigned to a group if you do not belong to any group before the deadline.\n\n\n\nProposal\n\nEach one of you loses 5 points of your project grade if you don’t meet the requirement or miss the deadline.\nYour proposal (in PDF) should include three parts:\n\nProject title\nThe goal of your project. For example, what is the research question you’d like to answer? What machine learning method/model/algorithm you’d like to introduce? What data you’d like to use for analysis or demonstration? etc.\n\nAlthough it is risky, you can change your project topic after you submit your proposal if you decide to do something else.\n\n\n\nPresentation\n\nEach group presentation should be between 10 and 11 minute long, followed by 1 to 2 minute Q&A. If your presentation is too short or too long, every one of you loses 5 points of your project grade.\nEvery group member has to present some part of the group work. The one who does not present receives no point.\nQuestions are encouraged during Q&A. Everyone is welcome to ask any questions about the projects.\n\n\n\nMaterials\n\nEach one of you loses 5 points of your project grade if you don’t meet the requirement or miss the deadline.\nYou need to share your entire work, including slides, code, and data if applicable.\nYour code should be able to reproduce all the numerical results, outputs, tables, and figures shown in the slides, including the source of the raw data (where you find and load the data) if the project is about data analysis.",
-    "crumbs": [
-      "Midterm Project I",
-      "Guideline and Policy"
-    ]
-  },
-  {
-    "objectID": "present-description.html#project-content",
-    "href": "present-description.html#project-content",
-    "title": "Midterm Presentation I - Regression",
-    "section": "Project Content",
-    "text": "Project Content\nYour project can be in either of the following categories:\n\n(DA) Data analytics using one or more REGRESSION methods.\n(MA) Introduce a new REGRESSION model/method/algorithm not lectured in class.\n\n\nData Analytics\nFor your DA project, you need to\n\nDescribe the selected data set. Perform a thorough exploratory data analysis.\nExplain and show why the chosen model(s) is appropriate for answering your research questions and better than others.\nInterpret your analysis result.\n\nBelow are a list of data repositories you can start with, but you are encouraged to explore more and find your favorite one, for example COVID-19 data if you are interested.\n\nTidyTuesday\nKaggle\nAwesome Public Datasets\nHarvard Dataverse\nUCI Machine Learning Repository\nFiveThirtyEight\n\n\n\nModel/Algorithm\nFor your MA project, you need to\n\nDescribe the intuition and idea of the method. What are the pros and cons of the method?\nProvide the mathematical expression of the model/algorithm. Explain the model and its properties, and how we do supervised learning with the model/algorithm.\nCompare the chosen method with other methods learned in class. Determine which method performs better under what conditions.\nDemo how to implement the method using a programming language for supervised learning.",
-    "crumbs": [
-      "Midterm Project I",
-      "Guideline and Policy"
-    ]
-  },
-  {
-    "objectID": "present-description.html#sec-grading",
-    "href": "present-description.html#sec-grading",
-    "title": "Midterm Presentation I - Regression",
-    "section": "Project Evaluation and Grading",
-    "text": "Project Evaluation and Grading\n\nYour project performance grade is determined by your classmates and Dr. Yu.\nTable 1 shows your possible performance grade. For example, if your group finish in second place (Silver) you get 145 points.\nYour project grade will be\n\n\nproject grade = performance grade - points lost due to violation of policy\n\n\n\n\nPerformance Grade Sheet\n\n\n\nPerformace Grade 🎖\n\n\n\n\nGold 🥇 1st\n150\n\n\nSilver 🥈 2nd\n145\n\n\nBronze 🥉 3rd\n140\n\n\nOther teams\n135",
-    "crumbs": [
-      "Midterm Project I",
-      "Guideline and Policy"
-    ]
-  },
-  {
-    "objectID": "present-description.html#group-performance-evaluation",
-    "href": "present-description.html#group-performance-evaluation",
-    "title": "Midterm Presentation I - Regression",
-    "section": "Group Performance Evaluation",
-    "text": "Group Performance Evaluation\n\nYou will need to evaluate all group projects except the one you work on.\nYou evaluate group performance based on the rubric attached. Four evaluation criteria are considered:\n\nProject Content and Organization (8 pts)\nPresentation Material (Slides) Quality (4 pts)\nOral Presentation Skill and Delivery (4 pts)\nInteractions and Q&A (4 pts)\n\nThe total points of a project presentation is 20 points.\nEvaluation sheets will be provided on the presentation day.\nHow do you get the full points for each category? Check the requirements below. Note that for Content and Organization, data analysis and package projects have different requirements.\nContent and Organization (DA)\n\nBeautiful visualization helps find out relationship of variables and specification of models\nAll questions are answered accurately by the models\nDiscuss how and why the models are chosen\nApply sophisticated models and detailed analysis\nAll ideas are presented in logical order\n\nContent and Organization (MA)\n\nExplain the method clearly and accuratly\nShow the pros and cons of the method, and compare with the methods learned in class.\nShow how the method can be implemednted for supervised learning.\nAll ideas are presented in logical order\n\nPresentation Material Quality\n\nPresentation material show code and output beautifully\nPresentation material clearly aid the speaker in telling a coherent story\nAll tables and graphics are informative and related to the topic and make it easier to understand\nAttractive design, layout, and neatness.\n\nOral Presentation Skill\n\nGood volume and energy\nProper pace and diction\nAvoidance of distracting gestures\n\nInteractions and Q&A\n\nGood eye contact with audience\nExcellent listening skills\nAnswers audience questions with authority and accuracy\n\nAfter you evaluate all group project presentations, you rank them from 1st to last based on their earned points.\nNo two groups receive the same ranking. If you give two or more groups some points, you still need to give them a different ranking, deciding which teams deserve a higher ranking according to your preference.",
-    "crumbs": [
-      "Midterm Project I",
-      "Guideline and Policy"
-    ]
-  },
-  {
-    "objectID": "weeks/week-1.html",
-    "href": "weeks/week-1.html",
-    "title": "Week 1",
-    "section": "",
-    "text": "📖 Read the syllabus.\n📖 Get your laptop and computing environment ready!\n📖 Refresh your probability/statistics and linear algebra.",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week-1.html#prepare",
-    "href": "weeks/week-1.html#prepare",
-    "title": "Week 1",
-    "section": "",
-    "text": "📖 Read the syllabus.\n📖 Get your laptop and computing environment ready!\n📖 Refresh your probability/statistics and linear algebra.",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week-1.html#participate",
-    "href": "weeks/week-1.html#participate",
-    "title": "Week 1",
-    "section": "Participate",
-    "text": "Participate\n🖥️ Slides - Welcome to MSSC 6250\n🖥️ Slides - Overview of Machine Learning\n🖥️ Slides - Bias-variance Tradeoff",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week-1.html#reading-and-resources",
-    "href": "weeks/week-1.html#reading-and-resources",
-    "title": "Week 1",
-    "section": "Reading and Resources",
-    "text": "Reading and Resources\n📖 ISL Ch 1, 2\n📖 Dr. Yu MSSC 5780 Probability and Statistics Review\n📖 Dr. Yu MSSC 5780 Linear Algebra Review\n📖 Check any math you need from MML Ch 2 - 6",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week-1.html#perform",
-    "href": "weeks/week-1.html#perform",
-    "title": "Week 1",
-    "section": "Perform",
-    "text": "Perform\n📋 Decide whether this is the right course for you by the drop deadline 1/21.\n\n\n\n\nBack to course schedule ⏎",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week-2.html",
-    "href": "weeks/week-2.html",
-    "title": "Week 2",
-    "section": "",
-    "text": "Important\n\n\n\nHomework 1 released.",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week-2.html#participate",
-    "href": "weeks/week-2.html#participate",
-    "title": "Week 2",
-    "section": "Participate",
-    "text": "Participate\n🖥️ Slides - Linear Regression\nr fontawesome::fa(\"table\") Data Set - Advertising.csv",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week-2.html#reading-and-resources",
-    "href": "weeks/week-2.html#reading-and-resources",
-    "title": "Week 2",
-    "section": "Reading and Resources",
-    "text": "Reading and Resources\n📖 ISL Ch 3.1 - 3.4\n📖 Dr. Yu MSSC 5780 Regression Analysis Week 1 to 6\n📖 MML Ch 7.1, 8.1, 8.2.1, 8.2.2",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week-2.html#perform",
-    "href": "weeks/week-2.html#perform",
-    "title": "Week 2",
-    "section": "Perform",
-    "text": "Perform\n📋 Homework 1\n\n\n\n\n\nBack to course schedule ⏎",
-    "crumbs": [
-      "Weekly Materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "hw/hw-3.html#homework-questions",
-    "href": "hw/hw-3.html#homework-questions",
-    "title": "Homework 3 - Bayesian Statistics, Logistic Regression, Generative Models, and K-Nearest Neighbors",
-    "section": "Homework Questions",
-    "text": "Homework Questions\n\nRequired\n\nISL Sec. 4.8: 2\nISL Sec. 4.8: 3\nISL Sec. 4.8: 5\nISL Sec. 4.8: 13\n[KNN Curse of Dimensionality]\n\nGenerate Generate the covariates \\(x_1, x_2, \\dots, x_5\\) of \\(n = 1000\\) training data from independent standard normal distribution. Then, generate \\(Y\\) from \\[Y = X_1 + 0.5 X_2 - X_3 + \\epsilon,\\] where \\(\\epsilon \\sim N(0, 1).\\)\nUse the first 500 observations as the training data and the rest as the test data. Fit KNN regression, and report the test MSE of \\(y\\) with the optimal \\(K\\).\nAdd additional 95 noisy predictors as follows.\n\nCase 1: \\(x_6, x_7, \\dots, x_{100} \\overset{\\mathrm{iid}}{\\sim} N(0, 1)\\)\nCase 2: \\(XA\\) where \\(X_{1000 \\times 5} = [x_1 \\cdots x_5]\\) and \\(A_{5 \\times 95}\\) having entries from iid uniform(0, 1).\n\nFit KNN regression in both cases (with the total of 100 covariates) and select the best \\(K\\) value.\nFor both cases, what is the best K and the best mean squared error for prediction? Discuss the effect of adding 95 (unnecessary) covariates.\n\n[MNIST Handwritten Digits Image]\n\nLoad the prepared MNIST data mnist.csv. Print some images.\nUse the first 1000 observations as the training data and the second half as the test data.\nTraining with KNN and predicting on the test data with the best \\(K\\) selected from the training.\n\nCalculate the test error rate.\nGenerate the confusion matrix.\n\nTraining with multinomial logistic regression and predicting on the test data.\n\nCalculate the test error rate.\nGenerate the confusion matrix.\n\n\n\n\n\nDo one of the followings\nYou are encouraged to do both, but to complete the homework, you only need to do one of the two assignments.\n\nWatch the talk All About that Bayes: Probability, Statistics, and the Quest to Quantify Uncertainty by Dr. Kristin Lennox. In 250 words, summarize your thoughts and what you learn from the talk.\n\n\n\nIn 250 words, summarize your thoughts and what you learned from the deep learning workshop."
-  },
-  {
-    "objectID": "hw/hw-1.html#homework-problems",
-    "href": "hw/hw-1.html#homework-problems",
-    "title": "Homework 1 - Bias-Variance Tradeoff and Linear Regression",
-    "section": "Homework Problems",
-    "text": "Homework Problems\n\nISL Sec. 2.4: 1\nISL Sec. 2.4: 3\nISL Sec. 2.4: 5\nISL Sec. 3.7: 4\nISL Sec. 3.7: 6\nISL Sec. 3.7: 14\nSimulation of simple linear regression. Consider the model \\(y_i = \\beta_0 + \\beta_1x_i + \\epsilon_i, ~~ \\epsilon_i \\stackrel{iid} \\sim N(0, \\sigma^2), ~~ i = 1, \\dots, n,\\) or equivalently, \\(p(y_i \\mid x, \\beta_0, \\beta_1) = N\\left(\\beta_0 + \\beta_1x_i, \\sigma^2 \\right).\\) Set \\(\\beta_0 = 2, \\beta_1 = -1.5, \\sigma = 1, n = 100, x_i = i.\\) Generate 1000 simulated data sets and fit the model to each data set.  The sampling distribution of the least-squares estimator \\(b_1\\) is \\[b_1 \\sim N\\left(\\beta_1, \\frac{\\sigma^2}{\\sum_{i=1}^n (x_i - \\bar{x})^2}\\right).\\]\n\nFind the average of the 1000 estimates \\(b_1\\). Is it close to its true expected value?\nFind the variance of 1000 estimates \\(b_1\\). Is it close to its true value?\nDraw the histogram of \\(b_1\\). Comment on your graph.\nObtain 1000 95% confidence interval for \\(\\beta_1\\). What is your pertentage of coverage for \\(\\beta_1\\)? Comment your result.\n\nSimulation of bias-variance tradeoff. Let \\(f(x) = x ^ 2\\) be the true regression function. Simulate the data using \\(y_i = f(x_i) + \\epsilon_i, i = 1, \\dots, 100\\), where \\(x_i = 0.01i\\) and \\(\\epsilon_i \\stackrel{iid} \\sim N(0, 0.3^2).\\)\n\nGenerate 250 training data sets.\nFor each data set, fit the following three models:\n\n\nModel 1: \\(y = \\beta_0+\\beta_1x+\\epsilon\\)\nModel 2: \\(y = \\beta_0+\\beta_1x+ \\beta_2x^2 + \\epsilon\\)\nModel 3: \\(y = \\beta_0+\\beta_1x+ \\beta_2x^2 + \\cdots + \\beta_9x^9 + \\epsilon\\)\n\n\nCalculate empirical MSE of \\(\\hat{f}\\), bias of \\(\\hat{f}\\) and variance of \\(\\hat{f}\\). Then show that \\[\\text{MSE}_{\\hat{f}} \\approx \\text{Bias}^2(\\hat{f}) + \\mathrm{Var}(\\hat{f}).\\] Specifically, for each value of \\(x_i\\), \\(i = 1, \\dots, 100\\),\n\n\\[\\text{MSE}_{\\hat{f}} =  \\frac{1}{250}\\sum_{k=1}^{250} \\left(\\hat{f}_k(x_i) - f(x_i) \\right) ^2,\\] \\[\\text{Bias}(\\hat{f}) = \\overline{\\hat{f}}(x_i) - f(x_i),\\] where \\(\\overline{\\hat{f}}(x_i) = \\frac{1}{250}\\sum_{k = 1}^{250}\\hat{f}_k(x_i)\\) is the sample mean of \\(\\hat{f}(x_i)\\) that approximates \\(\\mathrm{E}_{\\hat{f}}\\left(\\hat{f}(x_i)\\right).\\) \\[ \\mathrm{Var}(\\hat{f}) =  \\frac{1}{250}\\sum_{k=1}^{250} \\left(\\hat{f}_k(x_i) - \\overline{\\hat{f}}(x_i) \\right) ^2.\\] [Note:] If you calculate the variance using the built-in function such as var() in R, the identity holds only approximately because of the \\(250 - 1\\) term in the denominator in the sample variance formula. If instead \\(250\\) is used in the denominator, the identity holds exactly.\n\nFor each model, plot first ten estimated \\(f\\), \\(\\hat{f}_{1}(x), \\dots, \\hat{f}_{10}(x)\\), and the average of \\(\\hat{f}\\), \\(\\frac{1}{250}\\sum_{k=1}^{250}\\hat{f}_{k}(x)\\) in one figure, as Figure 1 below. What’s your finding?\nGenerate one more data set and use it as the test data. Calculate the overall training MSE (for training \\(y\\)) and overall test MSE (for test \\(y\\)) for each model. \\[MSE_\\texttt{Tr} =  \\frac{1}{250} \\sum_{k = 1}^{250} \\frac{1}{100} \\sum_{i=1}^{100} \\left(\\hat{f}_{k}(x_i) - y_{i}^k\\right)^2\\] \\[MSE_\\texttt{Te} =  \\frac{1}{250} \\sum_{k = 1}^{250} \\frac{1}{100} \\sum_{i=1}^{100} \\left(\\hat{f}_{k}(x_i) - y_{i}^{\\texttt{Test}}\\right)^2\\]\n\n\n\n\n\n\n\n\n\n\nFigure 1: Trained \\(f\\)\n\n\n\n\n\n\n\n(MSSC PhD) Stochastic gradient descent. Write your own stochastic gradient descent algorithm for linear regression. Implement it and compare with the built-in function such as optim() of R or scipy.optimize() of python to make sure that it converges correctly."
-  },
-  {
-    "objectID": "code/05-ridge-cv-code.html",
-    "href": "code/05-ridge-cv-code.html",
-    "title": "05-Ridge Regression Code Demo",
-    "section": "",
-    "text": "Codelibrary(MASS)\nfit &lt;- MASS::lm.ridge(mpg ~ ., data = mtcars, lambda = 1) ## ridge fit\ncoef(fit) ## original scale\n\n                      cyl         disp           hp         drat           wt \n16.537660830 -0.162402755  0.002333078 -0.014934856  0.924631319 -2.461146015 \n        qsec           vs           am         gear         carb \n 0.492587517  0.374651744  2.308375781  0.685715851 -0.575791252 \n\nCodefit$coef ## standardized scale\n\n       cyl       disp         hp       drat         wt       qsec         vs \n-0.2854708  0.2846046 -1.0078499  0.4865947 -2.3702010  0.8663632  0.1858566 \n        am       gear       carb \n 1.1337179  0.4979561 -0.9153711 \n\n\n\nCodeX &lt;- scale(data.matrix(mtcars[, -1]), center = TRUE, scale = TRUE)\n\n\n\nCodedf &lt;- data.frame(cbind(mtcars[, 1, drop=FALSE], X))\nridge_fit &lt;- lm.ridge(mpg ~ ., data = df, lambda = 0:40)\nMASS::select(ridge_fit)\n\nmodified HKB estimator is 2.58585 \nmodified L-W estimator is 1.837435 \nsmallest value of GCV  at 15 \n\n\n\nCodepar(mar = c(4, 4, 0, 0))\nplot(ridge_fit$lambda, ridge_fit$GCV, type = \"l\", col = \"darkgreen\", \n     ylab = \"GCV\", xlab = \"Lambda\", lwd = 3)\n\n\n\n\n\n\n\n\nBy defualt, glmnet() standardizes the x variables with standardize = TRUE, and does not standardize the response (standardize.response = FALSE).\nglmnet() always return the coefficients at the original scale.\n\n\nCodelibrary(glmnet)\n\nLoading required package: Matrix\n\n\nLoaded glmnet 4.1-8\n\nCoderidge_cv_fit &lt;- cv.glmnet(x = X, y = mtcars$mpg, alpha = 0,\n                          nfolds = 10, type.measure = \"mse\")\nplot(ridge_cv_fit$glmnet.fit, \"lambda\")\n\n\n\n\n\n\n\n\nCodeplot(ridge_cv_fit)\n\n\n\n\n\n\n\n\nCoderidge_cv_fit$lambda.min\n\n[1] 3.014598\n\nCode# largest lambda s.t. error is within 1 s.e of the min\nridge_cv_fit$lambda.1se \n\n[1] 11.08883\n\nCodecoef(ridge_cv_fit, s = \"lambda.min\")\n\n11 x 1 sparse Matrix of class \"dgCMatrix\"\n                    s1\n(Intercept) 20.0906250\ncyl         -0.6681360\ndisp        -0.6591218\nhp          -0.7889394\ndrat         0.5644227\nwt          -1.1786358\nqsec         0.2866108\nvs           0.3966957\nam           0.7941621\ngear         0.3997316\ncarb        -0.8635288\n\n\n\n\nCodelibrary(glmnet)\nridge_cv_fit_ori &lt;- cv.glmnet(x = data.matrix(mtcars[, -1]), y = mtcars$mpg, alpha = 0,\n                          nfolds = 10, type.measure = \"mse\")\nplot(ridge_cv_fit_ori$glmnet.fit, \"lambda\")\n\n\n\n\n\n\n\n\nCodeplot(ridge_cv_fit_ori)\n\n\n\n\n\n\n\n\nCoderidge_cv_fit_ori$lambda.min\n\n[1] 3.014598\n\nCode# largest lambda s.t. error is within 1 s.e of the min\nridge_cv_fit_ori$lambda.1se \n\n[1] 12.16998\n\nCodecoef(ridge_cv_fit_ori, s = \"lambda.min\")\n\n11 x 1 sparse Matrix of class \"dgCMatrix\"\n                      s1\n(Intercept) 21.051283516\ncyl         -0.374112703\ndisp        -0.005318127\nhp          -0.011506803\ndrat         1.055629523\nwt          -1.204585685\nqsec         0.160391657\nvs           0.787069385\nam           1.591536197\ngear         0.541785546\ncarb        -0.534626533"
-  },
-  {
-    "objectID": "code/05-ridge-cv-code.html#r-implementation",
-    "href": "code/05-ridge-cv-code.html#r-implementation",
-    "title": "05-Ridge Regression Code Demo",
-    "section": "",
-    "text": "Codelibrary(MASS)\nfit &lt;- MASS::lm.ridge(mpg ~ ., data = mtcars, lambda = 1) ## ridge fit\ncoef(fit) ## original scale\n\n                      cyl         disp           hp         drat           wt \n16.537660830 -0.162402755  0.002333078 -0.014934856  0.924631319 -2.461146015 \n        qsec           vs           am         gear         carb \n 0.492587517  0.374651744  2.308375781  0.685715851 -0.575791252 \n\nCodefit$coef ## standardized scale\n\n       cyl       disp         hp       drat         wt       qsec         vs \n-0.2854708  0.2846046 -1.0078499  0.4865947 -2.3702010  0.8663632  0.1858566 \n        am       gear       carb \n 1.1337179  0.4979561 -0.9153711 \n\n\n\nCodeX &lt;- scale(data.matrix(mtcars[, -1]), center = TRUE, scale = TRUE)\n\n\n\nCodedf &lt;- data.frame(cbind(mtcars[, 1, drop=FALSE], X))\nridge_fit &lt;- lm.ridge(mpg ~ ., data = df, lambda = 0:40)\nMASS::select(ridge_fit)\n\nmodified HKB estimator is 2.58585 \nmodified L-W estimator is 1.837435 \nsmallest value of GCV  at 15 \n\n\n\nCodepar(mar = c(4, 4, 0, 0))\nplot(ridge_fit$lambda, ridge_fit$GCV, type = \"l\", col = \"darkgreen\", \n     ylab = \"GCV\", xlab = \"Lambda\", lwd = 3)\n\n\n\n\n\n\n\n\nBy defualt, glmnet() standardizes the x variables with standardize = TRUE, and does not standardize the response (standardize.response = FALSE).\nglmnet() always return the coefficients at the original scale.\n\n\nCodelibrary(glmnet)\n\nLoading required package: Matrix\n\n\nLoaded glmnet 4.1-8\n\nCoderidge_cv_fit &lt;- cv.glmnet(x = X, y = mtcars$mpg, alpha = 0,\n                          nfolds = 10, type.measure = \"mse\")\nplot(ridge_cv_fit$glmnet.fit, \"lambda\")\n\n\n\n\n\n\n\n\nCodeplot(ridge_cv_fit)\n\n\n\n\n\n\n\n\nCoderidge_cv_fit$lambda.min\n\n[1] 3.014598\n\nCode# largest lambda s.t. error is within 1 s.e of the min\nridge_cv_fit$lambda.1se \n\n[1] 11.08883\n\nCodecoef(ridge_cv_fit, s = \"lambda.min\")\n\n11 x 1 sparse Matrix of class \"dgCMatrix\"\n                    s1\n(Intercept) 20.0906250\ncyl         -0.6681360\ndisp        -0.6591218\nhp          -0.7889394\ndrat         0.5644227\nwt          -1.1786358\nqsec         0.2866108\nvs           0.3966957\nam           0.7941621\ngear         0.3997316\ncarb        -0.8635288\n\n\n\n\nCodelibrary(glmnet)\nridge_cv_fit_ori &lt;- cv.glmnet(x = data.matrix(mtcars[, -1]), y = mtcars$mpg, alpha = 0,\n                          nfolds = 10, type.measure = \"mse\")\nplot(ridge_cv_fit_ori$glmnet.fit, \"lambda\")\n\n\n\n\n\n\n\n\nCodeplot(ridge_cv_fit_ori)\n\n\n\n\n\n\n\n\nCoderidge_cv_fit_ori$lambda.min\n\n[1] 3.014598\n\nCode# largest lambda s.t. error is within 1 s.e of the min\nridge_cv_fit_ori$lambda.1se \n\n[1] 12.16998\n\nCodecoef(ridge_cv_fit_ori, s = \"lambda.min\")\n\n11 x 1 sparse Matrix of class \"dgCMatrix\"\n                      s1\n(Intercept) 21.051283516\ncyl         -0.374112703\ndisp        -0.005318127\nhp          -0.011506803\ndrat         1.055629523\nwt          -1.204585685\nqsec         0.160391657\nvs           0.787069385\nam           1.591536197\ngear         0.541785546\ncarb        -0.534626533"
-  },
-  {
-    "objectID": "code/05-ridge-cv-code.html#python-implementation",
-    "href": "code/05-ridge-cv-code.html#python-implementation",
-    "title": "05-Ridge Regression Code Demo",
-    "section": "\n2 Python implementation",
-    "text": "2 Python implementation\n\nCodeimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.linear_model import Ridge, RidgeCV\nfrom sklearn.preprocessing import StandardScaler\n\n\n\nCodemtcars = pd.read_csv(\"../data/mtcars.csv\")\nX = mtcars.drop(columns=[\"mpg\"])\ny = mtcars[\"mpg\"]\nscaler = StandardScaler()\nX_scaled = scaler.fit_transform(X)\nridge_model = Ridge(alpha=1) ## alpha is the n*lambda\nridge_model.fit(X_scaled, y)\n\n\n\n\nRidge(alpha=1)\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\nRidgeRidge(alpha=1)\n\n\n\nCoderidge_model.coef_\n\narray([-0.28547077,  0.28460463, -1.00784994,  0.4865947 , -2.37020101,\n        0.86636324,  0.18585663,  1.13371791,  0.49795614, -0.91537115])\n\n\n\nCodelambdas = np.arange(1, 41) ## alpha must be &gt; 0\n# Ridge regression with cross-validation to select the best lambda\n# Enable storing CV values (can only use LOOCV)\nridge_cv = RidgeCV(alphas=lambdas, store_cv_values=True)  \nridge_cv.fit(X_scaled, y)\n\n\n\n\nRidgeCV(alphas=array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17,\n       18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34,\n       35, 36, 37, 38, 39, 40]),\n        store_cv_values=True)\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\nRidgeCVRidgeCV(alphas=array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17,\n       18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34,\n       35, 36, 37, 38, 39, 40]),\n        store_cv_values=True)\n\n\n\nCode# Optimal lambda and corresponding coefficients\noptimal_lambda = ridge_cv.alpha_\noptimal_lambda\n\n13\n\nCodeoptimal_coefficients = ridge_cv.coef_\noptimal_coefficients\n\narray([-0.64745384, -0.62930084, -0.79208923,  0.55274563, -1.2273356 ,\n        0.2909736 ,  0.37094879,  0.81866969,  0.3981575 , -0.89842163])\n\nCoderidge_cv.intercept_\n\n20.090625000000003\n\nCode# Cross-validation mean squared error for each lambda\ncv_mse = np.mean(ridge_cv.cv_values_, axis=0)\n\n# Plot the CV MSE vs Lambda\nplt.plot(lambdas, cv_mse, marker=\"o\", linestyle=\"-\")\nplt.axvline(optimal_lambda, color=\"red\", linestyle=\"--\", \n            label=f\"Optimal Lambda = {optimal_lambda}\")\nplt.xlabel(\"Lambda (Alpha)\")\nplt.ylabel(\"Mean Squared Error (MSE)\")\nplt.title(\"Cross-Validation MSE vs Lambda\")\nplt.legend()\nplt.show()\n\n\n\n\n\n\n\nHere we transform the coefficients back to the original scale when non-standardized X is used.\n\nCode# Reverse standardization\nstd_devs = scaler.scale_  # Feature standard deviations\nmeans = scaler.mean_      # Feature means\n\ncoef_original = optimal_coefficients / std_devs\ncoef_original\n\narray([-0.36833293, -0.00515876, -0.0117376 ,  1.05033188, -1.27442867,\n        0.16543865,  0.74776248,  1.66690255,  0.54828706, -0.56512958])\n\nCodeintercept_original = ridge_cv.intercept_ - np.sum(optimal_coefficients * means / std_devs)\nintercept_original\n\n21.21467495074396\n\n\n\nCode## the lambda size is matching the size used in cv.glmnet(). Should it be multiplied by 32?\nlambdas = 5 * 10 ** np.linspace(-1, 3, 100)\n\n# RidgeCV with 10-fold cross-validation\nridge_cv = RidgeCV(alphas=lambdas, scoring=\"neg_mean_squared_error\", cv=10)\nridge_cv.fit(X_scaled, y)\n\n\n\n\nRidgeCV(alphas=array([5.00000000e-01, 5.48749383e-01, 6.02251770e-01, 6.60970574e-01,\n       7.25414389e-01, 7.96141397e-01, 8.73764200e-01, 9.58955131e-01,\n       1.05245207e+00, 1.15506485e+00, 1.26768225e+00, 1.39127970e+00,\n       1.52692775e+00, 1.67580133e+00, 1.83918989e+00, 2.01850863e+00,\n       2.21531073e+00, 2.43130079e+00, 2.66834962e+00, 2.92851041e+00,\n       3.21403656e+00, 3.52740116e+0...\n       5.88405976e+02, 6.45774833e+02, 7.08737081e+02, 7.77838072e+02,\n       8.53676324e+02, 9.36908711e+02, 1.02825615e+03, 1.12850986e+03,\n       1.23853818e+03, 1.35929412e+03, 1.49182362e+03, 1.63727458e+03,\n       1.79690683e+03, 1.97210303e+03, 2.16438064e+03, 2.37540508e+03,\n       2.60700414e+03, 2.86118383e+03, 3.14014572e+03, 3.44630605e+03,\n       3.78231664e+03, 4.15108784e+03, 4.55581378e+03, 5.00000000e+03]),\n        cv=10, scoring='neg_mean_squared_error')\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\nRidgeCVRidgeCV(alphas=array([5.00000000e-01, 5.48749383e-01, 6.02251770e-01, 6.60970574e-01,\n       7.25414389e-01, 7.96141397e-01, 8.73764200e-01, 9.58955131e-01,\n       1.05245207e+00, 1.15506485e+00, 1.26768225e+00, 1.39127970e+00,\n       1.52692775e+00, 1.67580133e+00, 1.83918989e+00, 2.01850863e+00,\n       2.21531073e+00, 2.43130079e+00, 2.66834962e+00, 2.92851041e+00,\n       3.21403656e+00, 3.52740116e+0...\n       5.88405976e+02, 6.45774833e+02, 7.08737081e+02, 7.77838072e+02,\n       8.53676324e+02, 9.36908711e+02, 1.02825615e+03, 1.12850986e+03,\n       1.23853818e+03, 1.35929412e+03, 1.49182362e+03, 1.63727458e+03,\n       1.79690683e+03, 1.97210303e+03, 2.16438064e+03, 2.37540508e+03,\n       2.60700414e+03, 2.86118383e+03, 3.14014572e+03, 3.44630605e+03,\n       3.78231664e+03, 4.15108784e+03, 4.55581378e+03, 5.00000000e+03]),\n        cv=10, scoring='neg_mean_squared_error')\n\n\n\nCodebest_lambda = ridge_cv.alpha_\n\ncoefficients = []\nfor lam in lambdas:\n    ridge = Ridge(alpha=lam)\n    ridge.fit(X_scaled, y)\n    coefficients.append(ridge.coef_)\n\n\n\n\nRidge(alpha=5000.0)\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\nRidgeRidge(alpha=5000.0)\n\n\n\nCodecoefficients = np.array(coefficients)\nfor i in range(coefficients.shape[1]):\n    plt.plot(np.log(lambdas), coefficients[:, i])\nplt.xlabel(\"Log(Lambda)\")\nplt.ylabel(\"Coefficients\")\nplt.show()"
-  },
-  {
-    "objectID": "course-overview.html",
-    "href": "course-overview.html",
-    "title": "MSSC 6250 - Statistical Machine Learning (Spring 2025)",
-    "section": "",
-    "text": "The course discuss machine learning from statistical and modeling points of view, covering supervised learning and unsupervised learning models and algorithms. Supervised learning methods include various regression and classification methods, and unsupervised learning methods involves dimension reduction and clustering techniques. Topics include Bayesian linear regression, shrinkage and regularization, regression splines, Gaussian processes, logistic regression, discriminant analysis, nearest neighbors, tree-based methods, principal components, K-means, Gaussian mixture clustering, neural networks, etc.",
-    "crumbs": [
-      "Course Information",
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "course-news.html",
-    "href": "course-news.html",
-    "title": "News/Announcements",
-    "section": "",
-    "text": "Any announcement will be posted in this page. The latest news will also be put on top of the main page.",
-    "crumbs": [
-      "Course Information",
-      "News/Annoucements"
-    ]
-  },
-  {
-    "objectID": "course-news.html#jan-14-2025",
-    "href": "course-news.html#jan-14-2025",
-    "title": "News/Announcements",
-    "section": "Jan 14, 2025",
-    "text": "Jan 14, 2025\n\nNo office hours first week.",
-    "crumbs": [
-      "Course Information",
-      "News/Annoucements"
-    ]
   },
   {
     "objectID": "slides/03-bias-var.html#supervised-learning-1",
@@ -1431,185 +1613,69 @@
     "text": "Accuracy and Interpretability Trade-Off\n\n\n\n\nSource: ISL Fig. 2.7\n\nflexibility: a model is flexible if the model performs quite good for various types of data.\n\n\n\n\nmssc6250-s25.github.io/website"
   },
   {
-    "objectID": "slides/06-lasso-vs.html#when-ols-doesnt-work-well",
-    "href": "slides/06-lasso-vs.html#when-ols-doesnt-work-well",
-    "title": "Feature Selection and LASSO \n",
-    "section": "When OLS Doesn’t Work Well",
-    "text": "When OLS Doesn’t Work Well\nWhen \\(p \\gg n\\), it is often that many of the features in the model are not associated with the response.\n\nModel Interpretability: By removing irrelevant features \\(X_j\\)s, i.e., setting the corresponding \\(\\beta_j\\)s to zero, we can obtain a model that is more easily interpreted. (Feature/Variable selection)\nLeast squares is unlikely to yield any coefficient estimates that are exactly zero."
+    "objectID": "present-description.html#team-up",
+    "href": "present-description.html#team-up",
+    "title": "Midterm Presentation I - Regression",
+    "section": "Team up!",
+    "text": "Team up!\n\nEach one of you loses 5 points of your project grade if you don’t meet the requirement or miss the deadline.\nYou will be randomly assigned to a group if you do not belong to any group before the deadline.",
+    "crumbs": [
+      "Midterm Project I",
+      "Guideline and Policy"
+    ]
   },
   {
-    "objectID": "slides/06-lasso-vs.html#variable-selection",
-    "href": "slides/06-lasso-vs.html#variable-selection",
-    "title": "Feature Selection and LASSO \n",
-    "section": "Variable Selection",
-    "text": "Variable Selection\n\nWe have a large pool of candidate regressors, of which only a few are likely to be important.\n\nTwo “conflicting” goals in model building:\n\nas many features as possible for better predictive performance on new data (smaller bias).\n\nas few regressors as possible because as the number of regressors increases,\n\n\n\\(\\mathrm{Var}(\\hat{y})\\) will increase (larger variance)\ncost more in data collecting and maintaining\nmore model complexity\n\n\n\nA compromise between the two hopefully leads to the “best” regression equation.\n\nWhat does best mean?\n\n\nThere is no unique definition of “best”, and different methods specify different subsets of the candidate regressors as best."
+    "objectID": "present-description.html#proposal",
+    "href": "present-description.html#proposal",
+    "title": "Midterm Presentation I - Regression",
+    "section": "Proposal",
+    "text": "Proposal\n\nEach one of you loses 5 points of your project grade if you don’t meet the requirement or miss the deadline.\nYour proposal (in PDF) should include three parts:\n\nProject title\nThe goal of your project. For example, what is the research question you’d like to answer? What machine learning method/model/algorithm you’d like to introduce? What data you’d like to use for analysis or demonstration? etc.\n\nAlthough it is risky, you can change your project topic after you submit your proposal if you decide to do something else.",
+    "crumbs": [
+      "Midterm Project I",
+      "Guideline and Policy"
+    ]
   },
   {
-    "objectID": "slides/06-lasso-vs.html#three-classes-of-methods",
-    "href": "slides/06-lasso-vs.html#three-classes-of-methods",
-    "title": "Feature Selection and LASSO \n",
-    "section": "Three Classes of Methods",
-    "text": "Three Classes of Methods\n\n\nSubset Selection (ISL Sec. 6.1) Identify a subset of the \\(p\\) predictors that we believe to be related to the response.\n\nNeed a selection method and a selection criterion.\nCovered in MSSC 5780 slides\n\n\n\n\n\n\n\nShrinkage (ISL Sec. 6.2) Fit a model that forces some coefficients to be shrunk to zero.\n\n\nLasso (Discussed in MSSC 6250)  \n\n\n\n\n\n\n\n\nDimension Reduction (ISL Sec. 6.3) Find \\(m\\) representative features that are linear combinations of the \\(p\\) original predictors (\\(m \\ll p\\)), then fit least squares.\n\nPrincipal component regression (Unsupervised)  \nPartial least squares (Supervised)"
+    "objectID": "present-description.html#presentation",
+    "href": "present-description.html#presentation",
+    "title": "Midterm Presentation I - Regression",
+    "section": "Presentation",
+    "text": "Presentation\n\nEach group presentation should be between 10 and 11 minute long, followed by 1 to 2 minute Q&A. If your presentation is too short or too long, every one of you loses 5 points of your project grade.\nEvery group member has to present some part of the group work. The one who does not present receives no point.\nQuestions are encouraged during Q&A. Everyone is welcome to ask any questions about the projects.",
+    "crumbs": [
+      "Midterm Project I",
+      "Guideline and Policy"
+    ]
   },
   {
-    "objectID": "slides/06-lasso-vs.html#why-lasso",
-    "href": "slides/06-lasso-vs.html#why-lasso",
-    "title": "Feature Selection and LASSO \n",
-    "section": "Why Lasso?",
-    "text": "Why Lasso?\n\n\nSubset selection methods\n\nmay be computationally infeasible (fit OLS over millions of times)\ndo not explore all possible subset models (no global solution)\n\n\n\n\nRidge regression does shrink coefficients, but still include all predictors.\nLasso regularizes coefficients so that some coefficients are shrunk to zero, doing feature selection.\nLike ridge regression, for a given \\(\\lambda\\), Lasso only fits a single model.\n\nRidge OK for prediction, but bad at interpretation https://stats.stackexchange.com/questions/76518/what-is-the-time-complexity-of-lasso-regression same computation complexity as OLS \\(O(p^2n)\\) when \\(p &lt; n\\) and \\(O(p^3)\\)"
+    "objectID": "present-description.html#materials",
+    "href": "present-description.html#materials",
+    "title": "Midterm Presentation I - Regression",
+    "section": "Materials",
+    "text": "Materials\n\nEach one of you loses 5 points of your project grade if you don’t meet the requirement or miss the deadline.\nYou need to share your entire work, including slides, code, and data if applicable.\nYour code should be able to reproduce all the numerical results, outputs, tables, and figures shown in the slides, including the source of the raw data (where you find and load the data) if the project is about data analysis.",
+    "crumbs": [
+      "Midterm Project I",
+      "Guideline and Policy"
+    ]
   },
   {
-    "objectID": "slides/06-lasso-vs.html#what-is-lasso",
-    "href": "slides/06-lasso-vs.html#what-is-lasso",
-    "title": "Feature Selection and LASSO \n",
-    "section": "What is Lasso?",
-    "text": "What is Lasso?\nDifferent from the Ridge regression that adds \\(\\ell_2\\) norm, Lasso adds \\(\\ell_1\\) penalty on the parameters:\n\\[\\begin{align}\n\\widehat{\\boldsymbol \\beta}^\\text{l} =& \\, \\, \\mathop{\\mathrm{arg\\,min}}_{\\boldsymbol \\beta} \\lVert \\mathbf{y}- \\mathbf{X}\\boldsymbol \\beta\\rVert_2^2 + n \\lambda \\lVert\\boldsymbol \\beta\\rVert_1\\\\\n=& \\, \\, \\mathop{\\mathrm{arg\\,min}}_{\\boldsymbol \\beta} \\frac{1}{n} \\sum_{i=1}^n (y_i - x_i' \\boldsymbol \\beta)^2 + \\lambda \\sum_{j=1}^p |\\beta_j|,\n\\end{align}\\]\n\nThe \\(\\ell_1\\) penalty forces some of the coefficient estimates to be exactly equal to zero when \\(\\lambda\\) is sufficiently large, yielding sparse models."
+    "objectID": "present-description.html#data-analytics",
+    "href": "present-description.html#data-analytics",
+    "title": "Midterm Presentation I - Regression",
+    "section": "Data Analytics",
+    "text": "Data Analytics\nFor your DA project, you need to\n\nDescribe the selected data set.\nExplain and show why the chosen model(s) is appropriate for answering your research questions and better than others.\nInterpret your analysis result.\n\nBelow are some data repositories you can start with, but you are encouraged to explore more and find your favorite one.\n\nTidyTuesday\nKaggle\nAwesome Public Datasets\nHarvard Dataverse\nUCI Machine Learning Repository\nFiveThirtyEight",
+    "crumbs": [
+      "Midterm Project I",
+      "Guideline and Policy"
+    ]
   },
   {
-    "objectID": "slides/06-lasso-vs.html#ell_2-vs.-ell_1",
-    "href": "slides/06-lasso-vs.html#ell_2-vs.-ell_1",
-    "title": "Feature Selection and LASSO \n",
-    "section": "\n\\(\\ell_2\\) vs. \\(\\ell_1\\)\n",
-    "text": "\\(\\ell_2\\) vs. \\(\\ell_1\\)\n\n\nRidge shrinks big coefficients much more than lasso.\nLasso has larger penalty on small coefficients.\n\n\n\nRidge shrinks big coefficients much more than lasso.\nLasso has larger penalty on small coefficients. This is one of the intuitions why Lasso has exact zero coefficients after shrinkage. Because when punishing small coefficients a lot more, it may be better to set them exactly equal to zero to get smaller loss or objective value."
-  },
-  {
-    "objectID": "slides/06-lasso-vs.html#elemstatlearnprostate-data",
-    "href": "slides/06-lasso-vs.html#elemstatlearnprostate-data",
-    "title": "Feature Selection and LASSO \n",
-    "section": "\nElemStatLearn::prostate Data",
-    "text": "ElemStatLearn::prostate Data\n\n\n\n\n\n\n\nlcavol\nlweight\nage\nlbph\nsvi\nlcp\ngleason\npgg45\nlpsa\ntrain\n\n\n\n-0.580\n2.77\n50\n-1.386\n0\n-1.39\n6\n0\n-0.431\nTRUE\n\n\n-0.994\n3.32\n58\n-1.386\n0\n-1.39\n6\n0\n-0.163\nTRUE\n\n\n-0.511\n2.69\n74\n-1.386\n0\n-1.39\n7\n20\n-0.163\nTRUE\n\n\n-1.204\n3.28\n58\n-1.386\n0\n-1.39\n6\n0\n-0.163\nTRUE\n\n\n0.751\n3.43\n62\n-1.386\n0\n-1.39\n6\n0\n0.372\nTRUE\n\n\n-1.050\n3.23\n50\n-1.386\n0\n-1.39\n6\n0\n0.765\nTRUE\n\n\n0.737\n3.47\n64\n0.615\n0\n-1.39\n6\n0\n0.765\nFALSE\n\n\n0.693\n3.54\n58\n1.537\n0\n-1.39\n6\n0\n0.854\nTRUE"
-  },
-  {
-    "objectID": "slides/06-lasso-vs.html#cv.glmnetalpha-1",
-    "href": "slides/06-lasso-vs.html#cv.glmnetalpha-1",
-    "title": "Feature Selection and LASSO \n",
-    "section": "cv.glmnet(alpha = 1)",
-    "text": "cv.glmnet(alpha = 1)\n\nlasso_fit &lt;- cv.glmnet(x = data.matrix(prostate[, 1:8]), y = prostate$lpsa, nfolds = 10, \n                       alpha = 1)\n\n\nCodeplot(lasso_fit)\nplot(lasso_fit$glmnet.fit, \"lambda\")\n\n\ngenridge Package"
-  },
-  {
-    "objectID": "slides/06-lasso-vs.html#lasso-coefficients",
-    "href": "slides/06-lasso-vs.html#lasso-coefficients",
-    "title": "Feature Selection and LASSO \n",
-    "section": "Lasso Coefficients",
-    "text": "Lasso Coefficients\n\nlambda.min contains more nonzero coefficients.\nLarger penalty \\(\\lambda\\) forces more coefficients to be zero, and the model is more “sparse”.\n\n\n\n\ncoef(lasso_fit, s = \"lambda.min\")\n\n9 x 1 sparse Matrix of class \"dgCMatrix\"\n                  s1\n(Intercept)  0.17999\nlcavol       0.56099\nlweight      0.61908\nage         -0.02069\nlbph         0.09531\nsvi          0.75180\nlcp         -0.09912\ngleason      0.04745\npgg45        0.00432\n\n\n\n\ncoef(lasso_fit, s = \"lambda.1se\")\n\n9 x 1 sparse Matrix of class \"dgCMatrix\"\n               s1\n(Intercept) 0.644\nlcavol      0.455\nlweight     0.314\nage         .    \nlbph        .    \nsvi         0.367\nlcp         .    \ngleason     .    \npgg45       ."
-  },
-  {
-    "objectID": "slides/06-lasso-vs.html#one-variable-lasso-and-shrinkage-concept",
-    "href": "slides/06-lasso-vs.html#one-variable-lasso-and-shrinkage-concept",
-    "title": "Feature Selection and LASSO \n",
-    "section": "One-Variable Lasso and Shrinkage: Concept",
-    "text": "One-Variable Lasso and Shrinkage: Concept\n\nLasso solution does not have an analytic or closed form in general.\nThe univariate regression model with no intercept\n\n\\[\\underset{\\beta}{\\mathop{\\mathrm{arg\\,min}}}  \\quad \\frac{1}{n} \\sum_{i=1}^n (y_i - x_i \\beta)^2 + \\lambda |\\beta|\\]\nWith some derivation, and also utilize the OLS solution of the loss function, we have\n\\[\\begin{align}\n&\\frac{1}{n} \\sum_{i=1}^n (y_i - x_i \\beta)^2 \\\\\n=& \\frac{1}{n} \\sum_{i=1}^n (y_i - x_i b + x_i b - x_i \\beta)^2 \\\\\n=& \\frac{1}{n} \\sum_{i=1}^n \\Big[ \\underbrace{(y_i - x_i b)^2}_{\\text{I}} + \\underbrace{2(y_i - x_i b)(x_i b - x_i \\beta)}_{\\text{II}} + \\underbrace{(x_i b - x_i \\beta)^2}_{\\text{III}} \\Big]\n\\end{align}\\]"
-  },
-  {
-    "objectID": "slides/06-lasso-vs.html#one-variable-lasso-and-shrinkage-concept-1",
-    "href": "slides/06-lasso-vs.html#one-variable-lasso-and-shrinkage-concept-1",
-    "title": "Feature Selection and LASSO \n",
-    "section": "One-Variable Lasso and Shrinkage: Concept",
-    "text": "One-Variable Lasso and Shrinkage: Concept\n\\[\\begin{align}\n& \\sum_{i=1}^n 2(y_i - x_i b)(x_i b - x_i \\beta)\n= (b - \\beta) {\\color{OrangeRed}{\\sum_{i=1}^n 2(y_i - x_i b)x_i}}\n= (b - \\beta) {\\color{OrangeRed}{0}} = 0\n\\end{align}\\]\nOur original problem reduces to just the third term and the penalty\n\\[\\begin{align}\n&\\underset{\\beta}{\\mathop{\\mathrm{arg\\,min}}}  \\quad \\frac{1}{n} \\sum_{i=1}^n (x_ib - x_i \\beta)^2 + \\lambda |\\beta| \\\\\n=&\\underset{\\beta}{\\mathop{\\mathrm{arg\\,min}}}  \\quad \\frac{1}{n} \\left[ \\sum_{i=1}^n x_i^2 \\right] (b - \\beta)^2 + \\lambda |\\beta|\n\\end{align}\n\\] Without loss of generality, assume that \\(x\\) is standardized with mean 0 and variance \\(\\frac{1}{n}\\sum_{i=1}^n x_i^2 = 1\\).\nb is arbitrary We learned that to solve for an optimizer, we can set the gradient to be zero. However, the function is not everywhere differentiable"
-  },
-  {
-    "objectID": "slides/06-lasso-vs.html#one-variable-lasso-and-shrinkage-concept-2",
-    "href": "slides/06-lasso-vs.html#one-variable-lasso-and-shrinkage-concept-2",
-    "title": "Feature Selection and LASSO \n",
-    "section": "One-Variable Lasso and Shrinkage: Concept",
-    "text": "One-Variable Lasso and Shrinkage: Concept\nThis leads to a general problem of\n\\[\\underset{\\beta}{\\mathop{\\mathrm{arg\\,min}}}  \\quad (\\beta - b)^2 + \\lambda |\\beta|,\\] For \\(\\beta &gt; 0\\),\n\\[\\begin{align}\n0 =& \\frac{\\partial}{\\partial \\beta} \\,\\, \\left[(\\beta - b)^2 + \\lambda |\\beta| \\right] = 2 (\\beta - b) + \\lambda \\\\\n\\Longrightarrow \\quad \\beta =&\\, b - \\lambda/2\n\\end{align}\\]\n\\[\\begin{align}\n\\widehat{\\beta}^l &=\n        \\begin{cases}\n        b - \\lambda/2 & \\text{if} \\quad b &gt; \\lambda/2 \\\\\n        0 & \\text{if} \\quad |b| \\le \\lambda/2 \\\\\n        b + \\lambda/2 & \\text{if} \\quad b &lt; -\\lambda/2 \\\\\n        \\end{cases}\n\\end{align}\\]\n\nLasso provides a soft-thresholding solution.\nWhen \\(\\lambda\\) is large enough, \\(\\widehat{\\beta}^l\\) will be shrunk to zero.\n\nb is arbitrary We learned that to solve for an optimizer, we can set the gradient to be zero. However, the function is not everywhere differentiable"
-  },
-  {
-    "objectID": "slides/06-lasso-vs.html#objective-function",
-    "href": "slides/06-lasso-vs.html#objective-function",
-    "title": "Feature Selection and LASSO \n",
-    "section": "Objective function",
-    "text": "Objective function\nThe objective function is \\((\\beta - 1)^2 + \\lambda |\\beta|\\). Once the penalty is larger than 2, the optimizer would stay at 0.\n\n\n\n\n\n\nBased on our analysis, once the penalty is larger than 2, the optimizer would stay at 0."
-  },
-  {
-    "objectID": "slides/06-lasso-vs.html#variable-selection-property-and-shrinkage",
-    "href": "slides/06-lasso-vs.html#variable-selection-property-and-shrinkage",
-    "title": "Feature Selection and LASSO \n",
-    "section": "Variable Selection Property and Shrinkage",
-    "text": "Variable Selection Property and Shrinkage\n\nThe proportion of times a variable has a zero parameter estimation.\n\\(\\mathbf{y}= \\mathbf{X}\\boldsymbol \\beta + \\epsilon = \\sum_{j = 1}^{20} X_j \\times 0.4^{\\sqrt{j}} + N(0, 1).\\)\n\\(\\beta_1 = 0.4, \\beta_2 = 0.4^{\\sqrt{2}}, \\dots, \\beta_{20} = 0.4^{\\sqrt{20}}\\)\n\n\n\nSince Lasso shrinks some parameter to exactly zero, it has the variable selection property — the ones that are nonzero are the ones being selected. This is a very nice properly in high-dimensional data analysis, where we cannot estimate the effects of all variables.\nWe can then look at the proportion of times a variable has a non-zero parameter estimation"
-  },
-  {
-    "objectID": "slides/06-lasso-vs.html#bias-variance-trade-off",
-    "href": "slides/06-lasso-vs.html#bias-variance-trade-off",
-    "title": "Feature Selection and LASSO \n",
-    "section": "Bias-Variance Trade-off",
-    "text": "Bias-Variance Trade-off"
-  },
-  {
-    "objectID": "slides/06-lasso-vs.html#constrained-optimization",
-    "href": "slides/06-lasso-vs.html#constrained-optimization",
-    "title": "Feature Selection and LASSO \n",
-    "section": "Constrained Optimization",
-    "text": "Constrained Optimization\n\n\nLasso \\[\\begin{align}\n\\min_{\\boldsymbol \\beta} \\,\\,& \\lVert \\mathbf{y}- \\mathbf{X}\\boldsymbol \\beta\\rVert_2^2 + n\\lambda\\lVert\\boldsymbol \\beta\\rVert_1\n\\end{align}\\]\n\\[\\begin{align}\n\\min_{\\boldsymbol \\beta} \\,\\,& \\lVert \\mathbf{y}- \\mathbf{X}\\boldsymbol \\beta\\rVert_2^2\\\\\n\\text{s.t.} \\,\\, & \\sum_{j=1}^p|\\beta_j| \\leq s\n\\end{align}\\]\n\nRidge \\[\\begin{align}\n\\min_{\\boldsymbol \\beta} \\,\\,& \\lVert \\mathbf{y}- \\mathbf{X}\\boldsymbol \\beta\\rVert_2^2 + n\\lambda\\lVert\\boldsymbol \\beta\\rVert_2^2\n\\end{align}\\]\n\\[\\begin{align}\n\\min_{\\boldsymbol \\beta} \\,\\,& \\lVert \\mathbf{y}- \\mathbf{X}\\boldsymbol \\beta\\rVert_2^2\\\\\n\\text{s.t.} \\,\\, & \\sum_{j=1}^p \\beta_j^2 \\leq s\n\\end{align}\\]\n\n\nFor every value of \\(\\lambda\\), there is some \\(s\\) such that the two optimization problems are equivalent, giving the same coefficient estimates.\nThe \\(\\ell_1\\) and \\(\\ell_2\\) penalties form a constraint region that \\(\\beta_j\\) can move around or budget for how large \\(\\beta_j\\) can be.\nLarger \\(s\\) (smaller \\(\\lambda\\)) means a larger region \\(\\beta_j\\) can freely move."
-  },
-  {
-    "objectID": "slides/06-lasso-vs.html#geometric-representation-of-optimization",
-    "href": "slides/06-lasso-vs.html#geometric-representation-of-optimization",
-    "title": "Feature Selection and LASSO \n",
-    "section": "Geometric Representation of Optimization",
-    "text": "Geometric Representation of Optimization\n\nWhat do the constraints look like geometrically?\n\n\nWhen \\(p = 2\\),\n\nthe \\(\\ell_1\\) constraint is \\(|\\beta_1| + |\\beta_2| \\leq s\\) (diamond)\nthe \\(\\ell_2\\) constraint is \\(\\beta_1^2 + \\beta_2^2 \\leq s\\) (circle)\n\n\n\n\n\n\n\n\nSource: https://stats.stackexchange.com/questions/350046/the-graphical-intuiton-of-the-lasso-in-case-p-2\n\n\n\n\nthe solution has to stay within the shaded area. The objective function is shown with the contour, and once the contained area is sufficiently small, some β parameter will be shrunk to exactly zero. On the other hand, the Ridge regression also has a similar interpretation. However, since the constrained areas is a circle, it will never for the estimated parameters to be zero."
-  },
-  {
-    "objectID": "slides/06-lasso-vs.html#way-of-shrinking-p-1-and-standardized-x",
-    "href": "slides/06-lasso-vs.html#way-of-shrinking-p-1-and-standardized-x",
-    "title": "Feature Selection and LASSO \n",
-    "section": "Way of Shrinking (\\(p = 1\\) and standardized \\(x\\))",
-    "text": "Way of Shrinking (\\(p = 1\\) and standardized \\(x\\))\n\n\nLasso Soft-thresholding\n\n\\[\\begin{align}\n\\widehat{\\beta}^l &=\n        \\begin{cases}\n        b - \\lambda/2 & \\text{if} \\quad b &gt; \\lambda/2 \\\\\n        0 & \\text{if} \\quad |b| &lt; \\lambda/2 \\\\\n        b + \\lambda/2 & \\text{if} \\quad b &lt; -\\lambda/2 \\\\\n        \\end{cases}\n\\end{align}\\]\n\n\n\n\n\n\n\n\n\n\nRidge Proportional shrinkage\n\\[\\begin{align}\n\\widehat{\\beta}^r = \\dfrac{b}{1+\\lambda}\\end{align}\\]"
-  },
-  {
-    "objectID": "slides/06-lasso-vs.html#predictive-performance",
-    "href": "slides/06-lasso-vs.html#predictive-performance",
-    "title": "Feature Selection and LASSO \n",
-    "section": "Predictive Performance",
-    "text": "Predictive Performance\nPerform well (lower test MSE) when\n\n\nLasso (—)\n\nA relatively small number of \\(\\beta_j\\)s are substantially large, and the remaining \\(\\beta_k\\)s are small or equal to zero.\nReduce more bias\n\n\n\n\n\nISL Fig. 6.9\n\n\n\n\nRidge (\\(\\cdots\\cdots\\))\n\nThe response is a function of many predictors, all with coefficients of roughly equal size.\nReduce more variance\n\n\n\n\n\nISL Fig. 6.8\n\n\n\n\nRidge focus more on variance stablization Lasso focus more on model selection and interpretbility higher R^2 (larger lambda), more overfitting, so low bias high variance"
-  },
-  {
-    "objectID": "slides/06-lasso-vs.html#bayesian-interpretation",
-    "href": "slides/06-lasso-vs.html#bayesian-interpretation",
-    "title": "Feature Selection and LASSO \n",
-    "section": "Bayesian Interpretation",
-    "text": "Bayesian Interpretation\n\n\nLasso\n\nRidge\n\n\n\nLet’s wait until we discuss Bayesian Regression!"
-  },
-  {
-    "objectID": "slides/06-lasso-vs.html#notes-of-lasso",
-    "href": "slides/06-lasso-vs.html#notes-of-lasso",
-    "title": "Feature Selection and LASSO \n",
-    "section": "Notes of Lasso",
-    "text": "Notes of Lasso\n\n\n\n\n\n\nWarning\n\n\n\n\nEven Lasso does feature selection, do NOT add predictors that are known to be not associated with the response in any way.\nCurse of dimensionality. The test MSE tends to increase as the dimensionality \\(p\\) increases, unless the additional features are truly associated with the response.\nDo NOT conclude that the predictors with non-zero coefficients selected by Lasso and other selection methods predict the response more effectively than other predictors not included in the model.\n\n\n\n\n\nThis is just one of many possible models for predicting response, and that it must be further validated on independent data sets."
-  },
-  {
-    "objectID": "slides/06-lasso-vs.html#other-topics",
-    "href": "slides/06-lasso-vs.html#other-topics",
-    "title": "Feature Selection and LASSO \n",
-    "section": "Other Topics",
-    "text": "Other Topics\n\n\nCombination \\(\\ell_1\\) and \\(\\ell_2\\): Elastic net penalty (Zou and Hastie, 2005)\n\n\n\\[\\lambda \\left[ (1 - \\alpha) \\lVert \\boldsymbol \\beta\\rVert_2^2 + \\alpha \\lVert\\boldsymbol \\beta\\lVert_1 \\right]\\]\n\n\n\nGeneral \\(\\ell_q\\) penalty: \\(\\lambda \\sum_{j=1}^p |\\beta_j|^q\\)\n\n\n\n\n\n\nESL Fig. 3.12"
-  },
-  {
-    "objectID": "slides/06-lasso-vs.html#other-topics-1",
-    "href": "slides/06-lasso-vs.html#other-topics-1",
-    "title": "Feature Selection and LASSO \n",
-    "section": "Other Topics",
-    "text": "Other Topics\n\n\nAlgorithms\n\nShooting algorithm (Fu 1998)\nLeast angle regression (LAR) (Efron et al. 2004)\nCoordinate descent (Friedman et al 2010) (used in glmnet)\n\n\n\n\n\n\nVariants\n\nAdaptive Lasso\nGroup Lasso\nBayesian Lasso\nSpike-and-Slab Lasso, etc.\n\n\n\nLasso may suffer in the case where two variables are strongly correlated. The situation is similar to OLS, however, in Lasso, it would only select one out of the two, instead of letting both parameter estimates to be large. This is not preferred in some practical situations such as genetic studies because expressions of genes from the same pathway may have large correlation, but biologist want to identify all of them instead of just one. The Ridge penalty may help in this case because it naturally considers the correlation structure. The following simulation may show the effect. - The Lasso problem is convex, although it may not be strictly convex in β when p is large - The solution is a global minimum, but may not be the unique global one - The Lasso solution is unique under conditions of the covariance matrix"
-  },
-  {
-    "objectID": "code/06-lasso-vs-code.html",
-    "href": "code/06-lasso-vs-code.html",
-    "title": "06-Lasso Code Demo",
-    "section": "",
-    "text": "Show/Hidelibrary(glmnet)\n\nLoading required package: Matrix\n\n\nLoaded glmnet 4.1-8\n\n\n\nShow/Hideprostate &lt;- read.csv(\"../data/prostate.csv\")\nlasso_fit &lt;- cv.glmnet(x = data.matrix(prostate[, 1:8]), \n                       y = prostate$lpsa, nfolds = 10, \n                       alpha = 1)\n\n\n\nShow/Hidelasso_fit$lambda.min\n\n[1] 0.02961435\n\nShow/Hidelasso_fit$lambda.1se\n\n[1] 0.2089234\n\nShow/Hideplot(lasso_fit)\n\n\n\n\n\n\nShow/Hideplot(lasso_fit$glmnet.fit, \"lambda\")\n\n\n\n\n\n\n\n\nShow/Hidecoef(lasso_fit, s = \"lambda.min\")\n\n9 x 1 sparse Matrix of class \"dgCMatrix\"\n                      s1\n(Intercept)  0.169279155\nlcavol       0.509085165\nlweight      0.558643448\nage         -0.010256773\nlbph         0.067418867\nsvi          0.598979114\nlcp          .          \ngleason      0.008139093\npgg45        0.002387475\n\n\n\nShow/Hidecoef(lasso_fit, s = \"lambda.1se\")\n\n9 x 1 sparse Matrix of class \"dgCMatrix\"\n                   s1\n(Intercept) 0.7820637\nlcavol      0.4485189\nlweight     0.2804033\nage         .        \nlbph        .        \nsvi         0.3383490\nlcp         .        \ngleason     .        \npgg45       ."
-  },
-  {
-    "objectID": "code/06-lasso-vs-code.html#r-implementation",
-    "href": "code/06-lasso-vs-code.html#r-implementation",
-    "title": "06-Lasso Code Demo",
-    "section": "",
-    "text": "Show/Hidelibrary(glmnet)\n\nLoading required package: Matrix\n\n\nLoaded glmnet 4.1-8\n\n\n\nShow/Hideprostate &lt;- read.csv(\"../data/prostate.csv\")\nlasso_fit &lt;- cv.glmnet(x = data.matrix(prostate[, 1:8]), \n                       y = prostate$lpsa, nfolds = 10, \n                       alpha = 1)\n\n\n\nShow/Hidelasso_fit$lambda.min\n\n[1] 0.02961435\n\nShow/Hidelasso_fit$lambda.1se\n\n[1] 0.2089234\n\nShow/Hideplot(lasso_fit)\n\n\n\n\n\n\nShow/Hideplot(lasso_fit$glmnet.fit, \"lambda\")\n\n\n\n\n\n\n\n\nShow/Hidecoef(lasso_fit, s = \"lambda.min\")\n\n9 x 1 sparse Matrix of class \"dgCMatrix\"\n                      s1\n(Intercept)  0.169279155\nlcavol       0.509085165\nlweight      0.558643448\nage         -0.010256773\nlbph         0.067418867\nsvi          0.598979114\nlcp          .          \ngleason      0.008139093\npgg45        0.002387475\n\n\n\nShow/Hidecoef(lasso_fit, s = \"lambda.1se\")\n\n9 x 1 sparse Matrix of class \"dgCMatrix\"\n                   s1\n(Intercept) 0.7820637\nlcavol      0.4485189\nlweight     0.2804033\nage         .        \nlbph        .        \nsvi         0.3383490\nlcp         .        \ngleason     .        \npgg45       ."
-  },
-  {
-    "objectID": "code/06-lasso-vs-code.html#python-implementation",
-    "href": "code/06-lasso-vs-code.html#python-implementation",
-    "title": "06-Lasso Code Demo",
-    "section": "Python implementation",
-    "text": "Python implementation\n\nShow/Hideimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.linear_model import Lasso, LassoCV\nfrom sklearn.preprocessing import StandardScaler\n\n\n\nShow/Hideprostate = pd.read_csv(\"../data/prostate.csv\")\nX = prostate.iloc[:, 0:8]\ny = prostate[\"lpsa\"]\n\n# Standardize predictors\nscaler = StandardScaler()\nX_scaled = scaler.fit_transform(X)\n\n# Perform Lasso regression with cross-validation\n# Automatically selects alphas\nlasso_cv = LassoCV(alphas=None, cv=10, random_state=2025)  \nlasso_cv.fit(X_scaled, y)\n\n\n\n\nLassoCV(cv=10, random_state=2025)\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\n  LassoCV?Documentation for LassoCViFittedLassoCV(cv=10, random_state=2025) \n\n\nShow/Hide# Plot MSE across alphas\nmse_path = np.mean(lasso_cv.mse_path_, axis=1)\n\nplt.plot(np.log(lasso_cv.alphas_), mse_path, marker='o', label=\"Mean MSE\")\nplt.axvline(np.log(lasso_cv.alpha_), color=\"red\", linestyle=\"--\", \n            label=f\"Optimal Lambda: {lasso_cv.alpha_:.4f}\")\nplt.xlabel(\"Log(lambda)\")\nplt.ylabel(\"Mean Squared Error (MSE)\")\nplt.title(\"Lasso Cross-Validation: MSE vs. Log(lambda)\", fontsize=14)\nplt.legend()\nplt.show()\n\n\n\n\n\n\n\n\nShow/Hideoptimal_lambda = lasso_cv.alpha_\noptimal_lambda\n\n0.0008434274382607599\n\nShow/Hidelasso_cv.coef_\n\narray([ 0.65931859,  0.26435421, -0.15492328,  0.13834575,  0.31131745,\n       -0.14188085,  0.03451933,  0.12292875])\n\nShow/Hidelasso_cv.intercept_\n\n2.4783868783505154\n\n\n\nShow/Hide# Reverse standardization\nstd_devs = scaler.scale_  # Feature standard deviations\nmeans = scaler.mean_      # Feature means\ncoef_original = lasso_cv.coef_ / std_devs\ncoef_original\n\narray([ 0.56230244,  0.62026266, -0.02091681,  0.09585318,  0.75589027,\n       -0.10199745,  0.04805015,  0.00438119])\n\nShow/Hideintercept_original = lasso_cv.intercept_ - np.sum(lasso_cv.coef_ * means / std_devs)\nintercept_original\n\n0.18140520823512718\n\n\n\nShow/Hidelambdas = np.logspace(-6.5, 0.1, 100, base=np.exp(1))\n\ncoefficients = []\nfor lam in lambdas:\n    lasso = Lasso(alpha=lam, fit_intercept=True, max_iter=10000)\n    lasso.fit(X_scaled, y)\n    coefficients.append(lasso.coef_)\n\n\n\n\nLasso(alpha=1.1051709180756477, max_iter=10000)\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\n  Lasso?Documentation for LassoiFittedLasso(alpha=1.1051709180756477, max_iter=10000) \n\n\nShow/Hidecoefficients = np.array(coefficients)\n\n# Plot coefficient paths\nfor i in range(coefficients.shape[1]):\n    plt.plot(np.log(lambdas), coefficients[:, i], label=f\"Feature {i+1}\")\n\nplt.xlabel(\"Log(lambda)\")\nplt.ylabel(\"Coefficients\")\nplt.title(\"Lasso Coefficient Paths vs. Log(lambdas)\")\nplt.legend(loc=\"upper right\", frameon=False)\nplt.show()\n\n\n\n\n\n\n\n\nShow/Hidelasso = Lasso(alpha=0.21, fit_intercept=True)\nlasso.fit(X_scaled, y)\n\n\n\n\nLasso(alpha=0.21)\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\n  Lasso?Documentation for LassoiFittedLasso(alpha=0.21) \n\n\nShow/Hidelasso.coef_\n\narray([0.52543798, 0.1186707 , 0.        , 0.        , 0.13865508,\n       0.        , 0.        , 0.        ])"
+    "objectID": "present-description.html#modelalgorithm",
+    "href": "present-description.html#modelalgorithm",
+    "title": "Midterm Presentation I - Regression",
+    "section": "Model/Algorithm",
+    "text": "Model/Algorithm\nFor your MA project, you need to\n\nDescribe the intuition and idea of the method. What are the pros and cons of the method?\nProvide the mathematical expression of the model/algorithm. Explain the model and its properties, and how we do supervised learning with the model/algorithm.\nCompare the chosen method with other methods learned in class. Determine which method performs better under what conditions.\nDemo how to implement the method using a programming language for supervised learning.",
+    "crumbs": [
+      "Midterm Project I",
+      "Guideline and Policy"
+    ]
   }
 ]

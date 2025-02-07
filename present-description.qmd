@@ -6,9 +6,9 @@ date-modified: today
 ---
 
 
-## Timeline and Things to Do
+# Timeline and Things to Do
 
--   **Team up!** You will be working as **a group of 2, 3 or 4**. One of you, please email me your team [**member list**]{.blue} by [**Friday, 2/21 11:59 PM**]{.red}
+-   **Team up!** You will be working as **a group of 3**. One of you, please email me your team [**member list**]{.blue} by [**Friday, 2/21 11:59 PM**]{.red}
 
 -   **Proposal**. Please send me a [**one-page PDF**]{.blue} describing what you are going to do for your project (no word limit) with your **project title** by [**Friday, 2/28 11:59 PM**]{.red}.
 
@@ -17,16 +17,16 @@ date-modified: today
 -   **Materials**. Please share your [**entire work**]{.blue} (slides, code, data, etc) by [**Friday, 3/7 11:59 PM**]{.red}.
 
 
-## Policy
+# Policy
 
-### **Team up!**
+## **Team up!**
 
 -   *Each one of you loses 5 points of your project grade if you don't meet the requirement or miss the deadline.*
 
 -   You will be *randomly* assigned to a group if you do not belong to any group before the deadline.
 
 
-### **Proposal**
+## **Proposal**
 
 -   *Each one of you loses 5 points of your project grade if you don't meet the requirement or miss the deadline.*
 
@@ -38,7 +38,7 @@ date-modified: today
 -   Although it is risky, you can change your project topic after you submit your proposal if you decide to do something else.
 
 
-### **Presentation**
+## **Presentation**
 
 -   Each group presentation should be between **10 and 11 minute** long, followed by **1 to 2 minute** Q&A. If your presentation is too short or too long, *every one of you loses 5 points* of your project grade.
 
@@ -47,7 +47,7 @@ date-modified: today
 -   Questions are encouraged during Q&A. Everyone is welcome to ask any questions about the projects.
 
 
-### **Materials**
+## **Materials**
 
 -   *Each one of you loses 5 points of your project grade if you don't meet the requirement or miss the deadline.*
 
@@ -56,7 +56,7 @@ date-modified: today
 -   Your code should be able to **reproduce all the numerical results, outputs, tables, and figures shown in the slides**, including the source of the raw data (where you find and load the data) if the project is about data analysis.
 
 
-## Project Content
+# Project Content
 
 Your project can be in either of the following categories:
 
@@ -65,17 +65,17 @@ Your project can be in either of the following categories:
 2. **(MA)** Introduce a new **REGRESSION** model/method/algorithm not lectured in class.
 
 
-### Data Analytics
+## Data Analytics
 
 For your DA project, you need to 
 
-- Describe the selected data set. Perform a thorough exploratory data analysis.
+- Describe the selected data set.
 
 - Explain and show why the chosen model(s) is appropriate for answering your research questions and better than others.
 
 - Interpret your analysis result.
 
-Below are a list of data repositories you can start with, but you are encouraged to explore more and find your favorite one, for example COVID-19 data if you are interested.
+Below are some data repositories you can start with, but you are encouraged to explore more and find your favorite one.
 
   -   [TidyTuesday](https://github.com/rfordatascience/tidytuesday)
   -   [Kaggle](https://www.kaggle.com/datasets)
@@ -85,7 +85,7 @@ Below are a list of data repositories you can start with, but you are encouraged
   -   [FiveThirtyEight](https://data.fivethirtyeight.com/)
   
   
-### Model/Algorithm
+## Model/Algorithm
 
 For your MA project, you need to 
 
@@ -99,7 +99,7 @@ For your MA project, you need to
 
 
 
-## Project Evaluation and Grading {#sec-grading}
+# Project Evaluation and Grading {#sec-grading}
 
 -   Your project performance grade is *determined by __your classmates and Dr. Yu__*.
 
@@ -136,7 +136,8 @@ knitr::kable(grade, align = "c", caption = "Performance Grade Sheet", label = "t
 
 -   Evaluation sheets will be provided on the presentation day.
 
--   How do you get the full points for each category? Check the requirements below. Note that for Content and Organization, data analysis and package projects have different requirements.
+How do you get the full points for each category? Check the rubric below. 
+<!-- Note that for Content and Organization, data analysis and package projects have different requirements. -->
 
 -   **Content and Organization (DA)**
 
@@ -174,4 +175,4 @@ knitr::kable(grade, align = "c", caption = "Performance Grade Sheet", label = "t
 
 -   After you evaluate all group project presentations, you rank them from 1st to last based on their earned points.
 
--   **No two groups receive the same ranking**. If you give two or more groups some points, you still need to give them a different ranking, deciding which teams deserve a higher ranking according to your preference.
+-   **No two groups receive the same ranking**. If you give two or more groups some points, you still need to give them a different ranking, deciding which team deserves a higher ranking according to your preference.
