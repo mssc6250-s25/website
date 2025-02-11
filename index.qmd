@@ -1,6 +1,8 @@
 ---
 title: "MSSC 6250 - Statistical Machine Learning (Spring 2025)"
 tbl-colwidths: [5,8,20,6,6,6,6]
+format:
+  html
 ---
 
 -   **Midterm Presentation I - Regression guideline is released.**
