@@ -1,0 +1,34 @@
+---
+title: "Week 5"
+subtitle: "Splines and Generalized Additive Models"
+editor: visual
+---
+
+::: callout-important
+:::
+
+## Participate
+
+🖥️ [Slides - Splines and Generalized Additive Models](/slides/07-splines.html)
+
+`r fontawesome::fa("table")` [Data set - birthrates](/slides/data/birthrates.Rda)
+
+## Reading and Resources
+
+📖 [ISL Ch 7](https://www.statlearning.com/)
+
+## Exercise
+
+<!-- 📋 [Lab-10 Data Importing](/exercise/lab10-import.html) -->
+
+<!-- 📋 [Lab-11 ggplot2](/exercise/lab11-ggplot2.html) -->
+
+<!-- 📋 [Lab-12 Faceting](/exercise/lab12-facet.html) -->
+
+<!-- `r fontawesome::fa("table")` [penguins.csv](/slides/data/penguins.csv) -->
+
+<br><br>
+
+::: {style="font-size: 0.875em;"}
+Back to [course schedule](/ "Course schedule") ⏎
+:::

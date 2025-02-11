@@ -30,15 +30,11 @@ editor: visual
 
 📖 Check any math you need from [MML Ch 2 - 6](https://mml-book.github.io/)
 
-
-
-
 <!-- 📖 [MML Ch 7.1](https://mml-book.github.io/book/mml-book.pdf) -->
 
 ## Perform
 
 📋 Decide whether this is the right course for you by the drop deadline 1/21.
-
 
 <!-- 📋 [Lab-00 Posit Cloud](/exercise/lab00-posit.html) -->
 

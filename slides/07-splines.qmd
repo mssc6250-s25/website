@@ -1,0 +1,1169 @@
+---
+title: "Splines and General Additive Models `r emo::ji('wavy_dash')`"
+subtitle: "MSSC 6250 Statistical Machine Learning"
+author: "Dr. Cheng-Han Yu <br> Department of Mathematical and Statistical Sciences <br> Marquette University"
+# date: "`r format(Sys.time(), '%B %d %Y')`"
+# macros: _macros.tex # import a list of TeX/LaTeX definitions
+format: 
+  revealjs:
+    html-math-method:
+      method: mathjax
+      url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    # include-in-header:
+    #     - "macros.tex"
+    highlight-style: github
+    code-block-bg: true
+    self-contained: false
+    slide-number: c/t
+    incremental: false
+    width: 1800
+    height: 1000
+    margin: 0.05
+    logo: "https://upload.wikimedia.org/wikipedia/commons/e/e8/Marquette_Golden_Eagles_logo.svg"
+    footer: "[mssc6250-s25.github.io/website](https://mssc6250-s25.github.io/website/)"
+    theme: ["simple", "styles.scss"]
+    echo: false
+    multiplex: true
+    code-link: true
+    fig-cap-location: bottom
+    fig-align: center
+    transition: none ## fade slide convex concave zoom
+    code-line-numbers: true
+    title-slide-attributes:
+      data-background-color: "#447099"
+      # data-background-image: images/paper-texture.jpg
+      # data-background-size: cover
+      # data-background-color: "#698ED5"
+editor: source
+execute:
+  freeze: true
+  echo: false
+---
+
+
+# {visibility="hidden"}
+
+
+\def\bx{\mathbf{x}}
+\def\bg{\mathbf{g}}
+\def\bw{\mathbf{w}}
+\def\bbeta{\boldsymbol \beta}
+\def\bX{\mathbf{X}}
+\def\by{\mathbf{y}}
+\def\bH{\mathbf{H}}
+\def\bI{\mathbf{I}}
+\def\bS{\mathbf{S}}
+\def\bW{\mathbf{W}}
+\def\T{\text{T}}
+\def\cov{\mathrm{Cov}}
+\def\cor{\mathrm{Corr}}
+\def\var{\mathrm{Var}}
+\def\E{\mathrm{E}}
+\def\bmu{\boldsymbol \mu}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\def\Trace{\text{Trace}}
+
+
+
+```{r}
+#| label: setup
+#| include: false
+#| eval: true
+library(countdown)
+library(knitr)
+library(gt)
+library(gtExtras)
+library(ggplot2)
+library(ISLR2)
+library(genridge)
+library(glmnet)
+library(gam)
+library(splines)
+# library(ElemStatLearn)
+knitr::opts_chunk$set(
+    fig.asp = 0.618,
+    fig.align = "center",
+    out.width = "100%",
+    fig.retina = 10,
+    fig.path = "images/07-splines/",
+    message = FALSE,
+    global.par = TRUE
+)
+options(
+  htmltools.dir.version = FALSE,
+  dplyr.print_min = 6, 
+  dplyr.print_max = 6,
+  tibble.width = 80,
+  width = 80,
+  digits = 3
+  )
+hook_output <- knitr::knit_hooks$get("output")
+knitr::knit_hooks$set(output = function(x, options) {
+  lines <- options$output.lines
+  if (is.null(lines)) {
+    return(hook_output(x, options))  # pass to default hook
+  }
+  x <- unlist(strsplit(x, "\n"))
+  more <- "..."
+  if (length(lines)==1) {        # first n lines
+    if (length(x) > lines) {
+      # truncate the output, but add ....
+      x <- c(head(x, lines), more)
+    }
+  } else {
+    x <- c(more, x[lines], more)
+  }
+  # paste these lines together
+  x <- paste(c(x, ""), collapse = "\n")
+  hook_output(x, options)
+})
+```
+
+
+
+
+# Nonlinear Relationships
+
+## When $y$ and $x$ are Not Linearly Associated
+
+- Linear models can describe *non-linear* relationship.
+
+- [**Feature engineering**](https://math4780-f23.github.io/website/slides/10-diag-linearity.html#/title-slide): When $y$ and $x$ are not linearly associated, we *transform $x$ (sometimes also $y$) so that $y$ and the transformed $x$ become linearly related*. 
+
+. . .
+
+- Popular methods
+  + Basis function approach
+    * [Polynominal regression (MSSC 5780, ISL  7.1)](https://math4780-f23.github.io/website/slides/11-poly-reg.html#/title-slide)
+    * [Piecewise regression (MSSC 5780, ISL 7.3, 7.4)](https://math4780-f23.github.io/website/slides/11-poly-reg.html#/piecewise-polynomial-regression)
+    * [__Regression splines__]{.green}
+  + [Local regression (MSSC 5780, ISL 7.6)](https://math4780-f23.github.io/website/slides/12-nonpara-reg.html#/title-slide)
+  + [__Smoothing splines__]{.green}
+  + [__General additive models (GAMs)__]{.green}
+  
+
+
+
+## Polynomial Regression
+
+- The **$d$th-order (degree)** polynomial model in **one** variable is
+$$y = \beta_0 + \beta_1 x + \beta_2 x^2 + \cdots + \beta_dx^d + \epsilon$$
+
+```{r, echo=FALSE,fig.asp=0.5, out.width="90%"}
+par(mfrow = c(1, 2))
+par(mar = c(2, 2, 2, 0), mgp = c(0.5, 0, 0), las = 1)
+x <- seq(-1, 1, by = 0.01)
+y_qua <- 1 + x - 3 * x ^ 2 + rnorm(length(x), 0, 1)
+y_cube <- 1 + x - x ^ 2 + 5 * x ^ 3 + rnorm(length(x), 0, 1)
+plot(x, y_qua, xlab = "x", ylab = "y", 
+     main = expression(paste("E(y|x) = 1 + x - 3", x^2)),
+     pch = 16, col = 4, xaxt = "n",  yaxt = "n", cex = 0.8)
+lines(x, 1 + x - 3 * x ^ 2, col = 2, lwd = 3)
+plot(x, y_cube, xlab = "x", ylab = "y", 
+     main = expression(paste("E(y|x) = 1 + x - 3", x^2 + 3*x^3)),
+     pch = 16, col = 4, xaxt = "n",  yaxt = "n", cex = 0.8)
+lines(x, 1 + x - x ^ 2 + 5 * x ^ 3, col = 2, lwd = 3)
+```
+
+- We extend the simple linear regression by mapping $x$ to $(x, x^2, \dots, x^d)$.
+
+::: notes
+- *"Bayesian Deep Learning and a Probabilistic Perspective of Generalization"* Wilson and Izmailov (2020) for the rationale of choosing a super high-order polynomial as the regression model.
+- Extra flexibility produces undesirable results at the boundaries.
+Generally speaking, it is unusual to use d greater than 3 or 4 because for large values of d, the polynomial curve can become overly flexible and can take on some very strange shapes.
+This is especially true near the boundary of the X variable.
+- centering, collinearity
+:::
+
+
+
+
+## [Basis Function Approach](https://www.cs.princeton.edu/courses/archive/fall18/cos324/files/basis-functions.pdf)
+
+- A set of **basis functions** or transformations that can be applied to a variable $x$:$$[b_1(x), b_2(x), \dots , b_K(x)]$$
+- **(Adaptive) basis function model**:
+$$y = \beta_0 + \beta_1 b_1(x) + \beta_2 b_2(x) + \cdots + \beta_K b_K(x) + \epsilon$$
+
+:::{.question}
+Is polynomial regression a basis function approach?
+:::
+
+. . .
+
+- *Monomial basis*: $\phi(x) = [1, x, x^2, \dots, x^K, \dots]$
+- *Fourier series basis*: $\phi(x) = [1, \cos(\omega_1x + \psi_1), \cos(\omega_2x + \psi_2), \dots]$
+- [*B-Spline basis*](https://en.wikipedia.org/wiki/B-spline#:~:text=In%20the%20mathematical%20subfield%20of,B%2Dsplines%20of%20that%20degree.)
+
+:::{.callout-important}
+:::{style="font-size: 1.2em;"}
+$[b_1(x), b_2(x), \dots , b_K(x)]$ are **fixed** and **known**.
+:::
+:::
+
+::: notes
+
+:::
+
+
+
+
+
+## Piecewise regression
+
+- Polynomial regression imposes a *global* structure on the non-linear function.
+
+- Piecewise regression allows *structural changes in different parts of the range of $x$*
+
+$$y=\begin{cases}
+    \beta_{01} + \beta_{11}x+ \beta_{21}x^2 +\epsilon     & \quad \text{if } x < \xi\\
+    \beta_{02} + \beta_{12}x+ \beta_{22}x^2+\beta_{32}x^3+\epsilon      & \quad \text{if } x \ge \xi
+  \end{cases}$$
+
+- The joint points of pieces are called **knots**.
+
+- Using more knots leads to a more flexible piecewise polynomial.
+  
+  
+:::{.question}
+With $K$ different knots, how many different polynomials do we have?
+:::
+
+::: notes
+- A polynomial regression may provide a poor fit, and increasing the order does not improve the situation.
+- This may happen when the regression function behaves differently in different parts of the range of x
+.
+:::
+
+
+## Piecewise Constant and Linear Regression
+
+::: xsmall
+
+```{r}
+#| fig-cap: "Source: ESL Fig. 5.1"
+knitr:: include_graphics("./images/07-splines/piecewise_linear.png")
+```
+
+:::
+
+
+## U.S. Birth Rate from 1917 to 2003^[The data is only for illustrating ideas of different methods. The methods introduced here are best for inference about relationship between variables of some physical or natural system, not mainly for time series forecasting.]
+
+:::: {.columns}
+
+::: {.column width="25%"}
+
+::: midi
+
+```{r}
+#| class-output: my_class1
+#| code-line-numbers: false
+load("./data/birthrates.Rda")
+head(birthrates, n = 19)
+```
+
+:::
+
+:::
+
+::: {.column width="75%"}
+
+```{r}
+#| out-width: 100%
+par(mar = c(4,4,1,1))
+plot(birthrates, pch = 19, col = 4)
+```
+
+:::
+
+::::
+
+
+
+
+## A Polynomial Regression Provide a Poor Fit
+
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: false
+lmfit3 <- lm(Birthrate ~ poly(Year - mean(Year), degree = 3, raw = TRUE),  
+             data = birthrates)
+```
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+par(mar = c(2,2,1,0))
+lmfit3 <- lm(Birthrate ~ poly(Year-mean(Year), degree = 3, raw = TRUE),  data = birthrates)
+plot(birthrates, pch = 19, col = 4, main = "degree = 3",
+     cex.main = 2)
+lines(birthrates$Year, lmfit3$fitted.values, lty = 1, 
+      col = 2, lwd = 2)
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+par(mar = c(2,2,1,0))
+lmfit5 <- lm(Birthrate ~ poly(Year-mean(Year), degree = 5, raw = TRUE), data = birthrates)
+plot(birthrates, pch = 19, col = 4, main = "degree = 5", 
+     cex.main = 2)
+lines(birthrates$Year, lmfit5$fitted.values, lty = 1, 
+      col = 2, lwd = 2)
+```
+
+:::
+
+::::
+
+
+::: notes
+`raw` if true, use raw and not orthogonal polynomials.
+https://stackoverflow.com/questions/19484053/what-does-the-r-function-poly-really-do
+- A polynomial regression may provide a poor fit, and increasing the order does not improve the situation.
+- This may happen when the regression function behaves differently in different parts of the range of x.
+:::
+
+
+
+
+## Piecewise Polynomials: 3 knots at 1936, 60, 78
+
+
+:::: {.columns}
+::: {.column width="40%"}
+
+::: midi
+$$y=\begin{cases}
+    \beta_{01} + \beta_{11}x+ \epsilon & \text{if } x < 1936\\
+    \beta_{02} + \beta_{12}x+\epsilon  & \text{if } 1936 \le x < 1960 \\
+    \beta_{03} + \beta_{13}x+\epsilon  & \text{if } 1960 \le x < 1978 \\
+    \beta_{04} + \beta_{14}x+\epsilon  & \text{if } 1978 \le x
+  \end{cases}$$
+:::
+:::
+
+
+::: {.column width="60%"}
+
+```{r}
+# par(mfrow=c(1,2))
+myknots = c(1936, 1960, 1978)
+bounds = c(1917, myknots, 2003)  
+
+# # piecewise constant
+# mybasis = cbind("x_1" = (birthrates$Year < myknots[1]), 
+#                 "x_2" = (birthrates$Year >= myknots[1])*(birthrates$Year < mykots[2]), 
+#                 "x_3" = (birthrates$Year >= myknots[2])*(birthrates$Year < mykots[3]),
+#                 "x_4" = (birthrates$Year >= myknots[3]))
+#     
+# lmfit <- lm(birthrates$Birthrate ~ . -1, data = data.frame(mybasis))
+# par(mar = c(2,3,2,0))    
+# plot(birthrates, pch = 19, col = "darkorange")
+# abline(v = myknots, lty = 2)
+# title("Piecewise constant")
+# 
+# for (k in 1:4)
+#     points(c(bounds[k], bounds[k+1]), rep(lmfit$coefficients[k], 2), type = "l", lty = 1, col = "deepskyblue", lwd = 4)
+    
+    # piecewise linear
+mybasis = cbind("x_1" = (birthrates$Year < myknots[1]), 
+                "x_2" = (birthrates$Year >= myknots[1])*(birthrates$Year < myknots[2]), 
+                "x_3" = (birthrates$Year >= myknots[2])*(birthrates$Year < myknots[3]),
+                "x_4" = (birthrates$Year >= myknots[3]),
+                "x_11" = birthrates$Year*(birthrates$Year < myknots[1]), 
+                "x_21" = birthrates$Year*(birthrates$Year >= myknots[1])*(birthrates$Year < myknots[2]),
+                "x_31" = birthrates$Year*(birthrates$Year >= myknots[2])*(birthrates$Year < myknots[3]),
+                "x_41" = birthrates$Year*(birthrates$Year >= myknots[3]))
+        
+lmfit <- lm(birthrates$Birthrate ~ .-1, data = data.frame(mybasis))
+par(mar = c(2,2,1,0))  
+plot(birthrates, pch = 19, col = 4)
+abline(v = myknots, lty = 2)
+title("Piecewise linear", cex = 2)
+
+for (k in 1:4)
+points(c(bounds[k], bounds[k+1]), 
+       lmfit$coefficients[k] + c(bounds[k], bounds[k+1]) * lmfit$coefficients[k+4], 
+       type = "l", lty = 1, col = 2, lwd = 3)
+```
+
+:::
+
+::::
+
+:::{.question}
+Any issue of piecewise polynomials?
+:::
+
+::: notes
+- Discontinuity at knots.
+- Because the regression is too flexible in some sense, allowing two different estimates at knots.
+
+:::
+
+
+# Regression Splines
+
+
+:::{style="font-size: 1.5em;"}
+
+Piecewise polynomials + Continuity/Differentiability at knots
+
+:::
+
+
+## Splines
+
+
+**Splines** of degree $d$ are _smooth piecewise polynomials_ of degree $d$ with **continuity in derivatives** (smoothing) up to degree $d-1$ *at each knot*.
+
+. . .
+
+
+#### Continuous Piecewise Linear Regression
+
+
+:::: {.columns}
+
+::: {.column width="33%"}
+
+::: xsmall
+
+```{r}
+knitr:: include_graphics("./images/07-splines/piecewise_conti_linear.png")
+```
+
+
+:::
+
+:::
+
+::: {.column width="67%"}
+
+::: xsmall
+
+```{r}
+#| fig-cap: "Source: ESL Fig. 5.1"
+knitr:: include_graphics("./images/07-splines/piecewise_linear.png")
+```
+
+:::
+
+:::
+
+::::
+
+
+## Piecewise Linear to Continuous Piecewise Linear
+
+How do we turn the piecewise regression of degree 1 into a regression spline?
+
+:::{.midi}
+$$y=\begin{cases}
+    \beta_{01} + \beta_{11}x+ \epsilon & \quad \text{if } x < 1936\\
+    \beta_{02} + \beta_{12}x+\epsilon  & \quad \text{if } 1936 \le x < 1960 \\
+    \beta_{03} + \beta_{13}x+\epsilon  & \quad \text{if } 1960 \le x < 1978 \\
+    \beta_{04} + \beta_{14}x+\epsilon  & \quad \text{if } 1978 \le x
+  \end{cases}$$
+:::
+
+. . .
+
+- For splines of degree 1, we require _continuous_ piecewise linear function
+
+
+:::: clolumns
+
+::: column
+
+$$\begin{align} 
+\beta_{01} + \beta_{11}1936 &= \beta_{02} + \beta_{12}1936\\
+\beta_{02} + \beta_{12}1960 &= \beta_{03} + \beta_{13}1960\\
+\beta_{03} + \beta_{13}1978 &= \beta_{04} + \beta_{14}1978
+\end{align}$$
+
+:::
+
+::: column
+
+```{r}
+#| out-width: 60%
+par(mar = c(2,2,0,0))
+plot(birthrates, pch = 19, col = 4)
+myknots = c(1936, 1960, 1978)
+abline(v = myknots, lty = 2)
+```
+
+:::
+
+::::
+
+
+## `splines::bs()`
+
+```{r}
+#| code-line-numbers: false
+#| echo: !expr c(2)
+par(mar = c(2,2,2,0))
+lin_sp <- lm(Birthrate ~ splines::bs(Year, degree = 1, knots = c(1936, 1960, 1978)), 
+             data = birthrates)
+plot(birthrates, pch = 19, col = 4, main = "Linear spline (d = 1) with 3 knots")
+lines(birthrates$Year, lin_sp$fitted.values, lty = 1, col = 2, lwd = 3)
+```
+
+- The function is continuous everywhere, also at knots $\xi_1, \xi_2,$ and $\xi_3$, i.e. $f_{k}(\xi_k^-) = f_{k+1}(\xi_k^+)$.
+
+- Linear everywhere except $\xi_1, \xi_2,$ and $\xi_3$.
+
+- Has a different slope for each region.
+
+
+
+## Splines as Basis Function Model {#sec-linearspline}
+
+For linear splines with 3 knots,
+
+$$\begin{align} 
+b_1(x) &= x\\
+b_2(x) &= (x - \xi_1)_+\\
+b_3(x) &= (x - \xi_2)_+\\ 
+b_4(x) &= (x - \xi_3)_+
+\end{align}$$
+where 
+
+<!-- - $\xi_k, k = 1, 2, 3$ are knots -->
+
+- $(x - \xi_k)_+$ is a *truncated power basis function* (of power one) such that
+
+$$(x - \xi_k)_+=\begin{cases}
+    x - \xi_k & \quad \text{if }x > \xi_k\\
+    0  & \quad \text{otherwise} 
+  \end{cases}$$
+  
+  
+$$\begin{align} y &= \beta_0 + \beta_1 b_1(x) + \beta_2 b_2(x) + \beta_3 b_3(x) + \beta_4 b_4(x) + \epsilon\\
+&=\beta_0 + \beta_1 x + \beta_2 (x - \xi_1)_+ + \beta_3 (x - \xi_2)_+ + \beta_4 (x - \xi_3)_+ + \epsilon
+\end{align}$$
+
+
+
+## Linear Splines Basis Functions
+
+```{r}
+par(mfrow = c(1, 1))
+pos <- function(x) x * (x > 0)
+mybasis = cbind("int" = 1, "x_1" = birthrates$Year, 
+                "x_2" = pos(birthrates$Year - myknots[1])+0.1, 
+                "x_3" = pos(birthrates$Year - myknots[2])+0.2,
+                "x_4" = pos(birthrates$Year - myknots[3]))
+
+par(mar = c(2,0,2,0))
+matplot(birthrates$Year, mybasis[, -1], type = "l", lty = 1, 
+        yaxt = 'n', ylim = c(0, 50), lwd = 3, col = scales::alpha(2:4, 0.8))
+title("Linear Spline Basis Functions b2(x), b3(x), and b4(x)")
+legend("topleft", c('b2(x)', 'b3(x)', 'b4(x)'), col = c(3, 4, 2), bty = "n",
+       lty = 1, lwd = 3)
+```
+
+
+
+
+## Splines as Basis Function Model^[Besides truncated power basis, we can represent the splines using another set of basis functions, for example [B-Splines](https://en.wikipedia.org/wiki/B-spline#:~:text=A%20B%2Dspline%20function%20is,using%20a%20number%20of%20points.) which is more computationally convenient and numerically accurate.]
+
+With degree $d$ and $K$ knots, the regression spline with _first $d-1$ derivatives being continuous_ at the knots can be represented as 
+
+$$\begin{align} y &= \beta_0 + \beta_1 b_1(x) + \beta_2 b_2(x) + \dots + \beta_d b_d(x) + \beta_{d+1}b_{d+1}(x) + \dots + \beta_{d+K}b_{d+K}(x) + \epsilon
+\end{align}$$
+where
+
+- $b_j(x) = x^j, j = 1, 2, \dots, d$
+
+- $b_{d+k} = (x - \xi_k)^{d}_+, k = 1, \dots, K$ where 
+$$(x - \xi_k)^d_+=\begin{cases}
+    (x - \xi_k)^d & \quad \text{if }x > \xi_k\\
+    0  & \quad \text{otherwise} 
+  \end{cases}$$
+
+
+::: {.question}
+Can you write the model with $d = 2$ and $K = 3$?
+:::
+
+
+
+
+
+## Cubic Splines^[Cubic splines are popular because most human eyes cannot detect the discontinuity at the knots.]
+
+- The **cubic spline** is a spline of *degree 3* with *first 2 derivatives are continuous at the knots*.
+
+$$\begin{align} y &= \beta_0 + \beta_1 x + \beta_2 x^2 + \beta_3 x^3 + \sum_{k = 1}^K \beta_{k+3} (x - \xi_k)_+^3 + \epsilon
+\end{align}$$
+
+- Smooth at knots because
+  + $f(\xi_k^-) = f(\xi_k^+)$
+  + $f'(\xi_k^-) = f'(\xi_k^+)$
+  + $f''(\xi_k^-) = f''(\xi_k^+)$
+  + But $f^{(3)}(\xi_k^-) \ne f^{(3)}(\xi_k^+)$
+
+
+
+
+## Degrees of Freedom
+
+- In regression, **(effective) degrees of freedom (df)** can be viewed as *the number of regression coeffcients that are freely to move.*
+
+- It measures the model complexity/flexiblity. The larger df is, the more flexible the model is.
+
+
+. . .
+
+
+- [*Piecewise linear*]{.green}: *3 knots, 4 linear regressions, and 8 dfs.*
+
+::: {.midi}
+$$y=\begin{cases}
+    \beta_{01} + \beta_{11}x+ \epsilon & \quad \text{if } x < 1936\\
+    \beta_{02} + \beta_{12}x+\epsilon  & \quad \text{if } 1936 \le x < 1960 \\
+    \beta_{03} + \beta_{13}x+\epsilon  & \quad \text{if } 1960 \le x < 1978 \\
+    \beta_{04} + \beta_{14}x+\epsilon  & \quad \text{if } 1978 \le x
+  \end{cases}$$
+:::
+
+
+. . .
+
+
+- [*Linear splines*]{.green} (continuous piecewise linear): *8 - 3 constraints = 5 dfs.* (Check its [basis representation](#sec-linearspline))
+
+::: {.midi}
+$$\begin{align} 
+\beta_{01} + \beta_{11}1936 &= \beta_{02} + \beta_{12}1936\\
+\beta_{02} + \beta_{12}1960 &= \beta_{03} + \beta_{13}1960\\
+\beta_{03} + \beta_{13}1978 &= \beta_{04} + \beta_{14}1978
+\end{align}$$
+:::
+
+
+::: notes
+talk about effective df, so that we know the model flexibility and complexity of a regression spline model
+:::
+
+
+
+
+## Degrees of Freedom
+
+- With degree $d$ and $K$ knots,
+
+$$\text{df} = K + d + 1$$
+
+<!-- - This leads to a total of [(4 + # knots)]{.green} degrees of freedom. -->
+
+. . .
+
+:::{.question}
+So what is the degrees of freedom of cubic splines?
+:::
+
+
+
+::: notes
+- With degree $d$ and $K$ knots,
+
+$$\begin{align} \text{df} &= \text{(# regions)} \times \text{(# coefficients)} - \text{(# constraints)} \times \text{(# knots)}\\
+&=(K + 1)(d + 1) - dK\\
+&= K + d + 1 \end{align} $$
+
+<!-- - This leads to a total of [(4 + # knots)]{.green} degrees of freedom. -->
+
+. . .
+
+- [*Cubic splines*]{.green}:
+
+
+We have 3 constraints:
+
+  + continuity $f(\xi ^ {-}) = f(\xi ^ {+})$
+  + 1st derivative $f'(\xi ^ {-}) = f'(\xi ^ {+})$
+  + 2nd derivative $f''(\xi ^ {-}) = f''(\xi ^ {+})$
+
+$\text{df} = \text{(# regions)} \times \text{(# coef)} - \text{(# constraints)} \times \text{(# knots)} = (K + 1)4 - 3K = 4 + K$
+:::
+
+
+
+## Cubic Splines
+
+
+```{r}
+#| code-line-numbers: false
+#| out-width: 49%
+#| echo: !expr c(1)
+cub_sp <- lm(Birthrate ~ splines::bs(Year, degree = 3, knots = c(1936, 1960, 1978)), 
+             data = birthrates)
+plot(birthrates, pch = 19, col = 4, main = "Cubic spline (d = 3) with 3 knots")
+lines(birthrates$Year, cub_sp$fitted.values, lty = 1, col = 2, lwd = 3)
+```
+
+
+
+## Natural Splines
+
+- Splines^[Especially for high-degree polynomials.] tends to produce erratic and undesirable results near the boundaries, and huge variance at the outer range of the predictors.
+
+. . .
+
+- A **natural spline** is a regression spline with additional *boundary constraints*: 
+  + The spline function is *linear at the boundary* (in the region where $X$ is smaller than the smallest knot, or larger than the largest knot).
+  
+  <!-- + $f^{(k)}(x) = 0$ for $x < \xi_1$ and $x > \xi_K$ where $f^{(k)}(\cdot)$ is the $k$-th derivative of the spline function $f$. -->
+  
+. . .
+
+- Natural splines generally produce more stable estimates at the boundaries.
+
+- Assuming linearity near the boundary is reasonable since there is less information available there.
+
+<!-- - The natural cubic  -->
+
+- `splines::ns()`
+
+
+. . .
+
+- **Natural Cubic Spline (NCS)** forces the 2nd and 3rd derivatives to be zero at the boundaries.
+
+- The constraints frees up 4 dfs.
+
+- The df of NCS is $K$.
+
+
+
+## Spline and Natural Spline Comparison 
+
+- Cubic Spline vs. Natural Cubic Spline with the same degrees of freedom 6.
+
+```{r}
+library(splines)
+fit.bs = lm(Birthrate ~ bs(Year, df = 6), data=birthrates)
+par(mar = c(2, 2, 2, 0))
+plot(birthrates$Year, birthrates$Birthrate, ylim=c(0,280), pch = 19, 
+     xlim = c(1900, 2020), xlab = "year", ylab = "rate", col = 4)   
+lines(seq(1900, 2020), predict(fit.bs, data.frame("Year"= seq(1900, 2020))), col="#003366", lty=1, lwd = 3)
+fit.ns = lm(Birthrate ~ ns(Year, df = 6), data=birthrates)    
+    lines(seq(1900, 2020), predict(fit.ns, data.frame("Year"= seq(1900, 2020))), col=2, lty=1, lwd = 3)
+    legend("topright", c("Cubic Spline", "Natural Cubic Spline"), col = c("#003366", 2), lty = 1, lwd = 3, cex = 1.2, bty = "n")
+    title("Birth rate extrapolation", cex = 2)
+```
+
+
+
+::: notes
+https://stackoverflow.com/questions/17930140/extracting-knot-points-from-glm-when-using-bs-in-r-as-a-variable
+attr(fit.bs$terms, "predvars")
+:::
+
+
+
+## [B-Splines](https://en.wikipedia.org/wiki/B-spline#:~:text=A%20B%2Dspline%20function%20is,using%20a%20number%20of%20points.) Basis Functions {visibility="hidden"}
+
+- B-splines use a different basis representation for regression splines.
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| eval: false
+#| echo: true
+bs(x, df = NULL, knots = NULL, 
+   degree = 3, intercept = FALSE)
+```
+
+- `df`: the number of basis
+- `knots`: the quantiles of $x$
+
+```{r}
+
+par(mar = c(0, 2, 2, 0))
+cs = bs(1:100, df = 6, intercept = TRUE)
+matplot(1:100, cs, type = "l", lty = 1, ylab = "spline",
+        xaxt = 'n', yaxt = 'n', lwd = 3)
+title("Cubic Spline Basis Functions")
+```
+
+:::
+
+
+::: {.column width="50%"}
+
+```{r}
+#| eval: false
+#| echo: true
+ns(x, df = NULL, knots = NULL, 
+   degree = 3, intercept = FALSE)
+```
+
+- `df`: the number of basis
+- `knots`: the quantiles of $x$
+
+
+```{r}
+par(mar = c(0, 2, 2, 0))
+ncs = ns(1:100, df = 6, intercept = TRUE)
+matplot(1:100, ncs, type = "l", lty = 1, ylab = "spline",
+        xaxt = 'n', yaxt = 'n', lwd = 3)
+title("Natural Cubic Spline Basis Functions ")
+```
+
+:::
+
+::::
+
+
+::: notes
+B-splines is more computationally efficient
+:::
+
+
+## Practical Issues
+
+- [How many knots should we use]{.green}
+  + *As few knots as possible, with at least 5 data points per segment* (Wold, 1974)
+  + *Cross-validation: e.g., choose the $K$ giving the smallest $MSE_{CV}$*
+  
+. . .
+
+- [Where to place the knots]{.green}
+  + *No more than one extreme or inflection point per segment* (Wold, 1974)
+  + If possible, *the extreme points should be centered in the segment*
+  + *More knots in places where the function might vary most rapidly, and fewer knots where it seems more stable*
+  + *Place knots in a uniform fashion*
+  + *Specify the desired df, and have the software place the corresponding number of knots at uniform quantiles of the data* (`bs()`, `ns()`)
+  
+. . .
+
+- [Degree of functions in each region]{.green}
+  + *Use $d < 4$ to avoid overly flexible curve fitting*
+  + *Cubic spline is popular*
+  
+::: notes
+Too many knots can overfit
+Regression splines often give superior results to polynomial regression
+:::
+
+  
+
+
+# Smoothing Splines
+
+## Roughness Penalty Approach
+
+- Our goal is *inference or curve fitting* rather than out of range prediction or forecasting.
+
+- Is there a method that we can select the number and location of knots automatically?
+
+Consider this criterion for fitting a *smooth* function $g(x)$ to
+some data:
+
+$$\begin{equation} \min_{g} \sum_{i=1}^n \left( y_i - g(x_i) \right)^2 + \lambda \int g''(t)^2 \, dt \end{equation}$$
+
+- The first term is $SS_{res}$, and tries to make $g(x)$ match the
+data at each $x_i$. ([Goodness-of-fit]{.green})
+
+- The second term with $\lambda \ge 0$ is a [*roughness penalty*]{.green} and controls how wiggly $g(x)$ is.
+
+<!-- - The tuning parameter $\lambda \ge 0$. -->
+
+. . .
+
+:::{style="font-size: 3.5em;"}
+:::{style="text-align: center;"}
+
+> **Loss + Penalty**
+
+:::
+:::
+
+
+::: notes
+- 2nd term: penalizes the variability in g
+- the second derivative of a function is a measure of its roughness
+- the integral simply a measure of the total change in the function g′(t), over its entire range
+:::
+
+
+## Roughness Penalty Approach
+
+$$\begin{equation} \min_{g} \sum_{i=1}^n \left( y_i - g(x_i) \right)^2 + \lambda \int g''(t)^2 \, dt \end{equation}$$
+
+:::{.question}
+How $\lambda$ affects the shape of $g(x)$?
+:::
+
+
++ The smaller $\lambda$ is, the more wiggly $g(x)$ is, eventually
+interpolating $y_i$ when $\lambda = 0$.
+
++ As $\lambda \rightarrow \infty$, $g(x)$ becomes linear.
+
+- The function $g$ that minimizes the objective is known as a **smoothing spline**.
+
+. . .
+
+:::{.callout-note}
+
+:::{style="font-size: 1.2em;"}
+
+- The solution $\hat{g}$ is a [natural cubic spline]{.green}, with knots at $x_1, x_2, \dots , x_n$!
+- But, it is not the same NCS gotten from the basis function approach.
+- It is a *shrunken* version where $\lambda$ controls the level of shrinkage.
+- Its *effective* df is less than $n$.
+
+:::
+
+:::
+
+
+## Properties of Smoothing splines
+
+- Smoothing splines avoid the knot-selection issue, leaving a single $\lambda$ to be chosen.
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+[**Linear regression**]{.green}
+
+- $\hat{\by} = \bf H \by$ where $\bf H$ is the hat matrix
+
+- The degrees of freedom $(\text{# coef})$ is $$p = \sum_{i=1}^n {\bf H}_{ii}$$
+
+- PRESS for model selection
+
+$$\begin{align} PRESS &= \sum_{i = 1}^n \left( y_i - \hat{y}_i^{(-i)}\right)^2 \\
+&= \sum_{i = 1}^n \left[ \frac{y_i - \hat{y}_i}{1 - {\bf H}_{ii}}\right]^2\end{align}$$
+
+
+:::
+
+::: {.column width="50%"}
+
+[**Smoothing splines**]{.green}
+
+- $\hat{\bg}_{\lambda} = {\bf S}_{\lambda} \by$ where $\bf {\bf S}_{\lambda}$ is the **smoother matrix**.
+
+- The effective degrees of freedom $(\text{# coef})$ is $$df_{\lambda} = \sum_{i=1}^n \{{\bf S}_{\lambda}\}_{ii} \in [2, n]$$
+
+- LOOCV for choosing $\lambda$^[GCV can be used too.]
+
+$$\begin{align} (SS_{res})_{CV}(\lambda) &= \sum_{i = 1}^n \left( y_i - \hat{g}_{\lambda}^{(-i)}(x_i)\right)^2 \\
+&= \sum_{i = 1}^n \left[ \frac{y_i - \hat{g}_{\lambda}(x_i)}{1 - \{{\bf S}_{\lambda}\}_{ii}}\right]^2 \end{align}$$
+
+:::
+
+::::
+
+
+## `smooth.spline()`
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: false
+smooth.spline(x, y, df, lambda, cv = FALSE)
+```
+
+- `cv = TRUE` use LOOCV; `cv = FALSE` use GCV
+
+
+```{r}
+#| out-width: 100%
+#| echo: !expr c(2)
+#| code-line-numbers: false
+par(mar = c(2, 2, 0, 0))
+fit <- smooth.spline(birthrates$Year, birthrates$Birthrate)
+plot(birthrates$Year, birthrates$Birthrate, pch = 19, 
+     xlab = "Year", ylab = "BirthRates", col = 4)
+lines(seq(1917, 2003), predict(fit, seq(1917, 2003))$y,
+      col=2, lty=1, lwd = 3)
+```
+
+
+```{r}
+#| echo: true
+#| code-line-numbers: false
+fit$df
+```
+
+::: notes
+overfitting since the birthrate data has little variation in adjacent years
+:::
+
+
+## `smooth.spline()`
+
+```{r}
+#| echo: !expr c(2)
+#| code-line-numbers: false
+par(mar = c(2, 2, 0, 0))
+fit <- smooth.spline(birthrates$Year, birthrates$Birthrate, df = 15)
+plot(birthrates$Year, birthrates$Birthrate, pch = 19, 
+         xlab = "Year", ylab = "BirthRates", col = 4)
+lines(seq(1917, 2003), predict(fit, seq(1917, 2003))$y,
+      col=2, lty=1, lwd = 3)
+```
+
+
+
+
+# Generalized Additive Models
+
+
+
+## Extending Splines to Multiple Variables
+
+- All methods discussed so far are extensions of simple linear regression.
+
+- How to flexibly predict $y$ or nonlinear regression function on the basis of several predictors $x_1, \dots, x_p$?
+
+. . .
+
+Maintaining the *additive* structure of linear models, but allowing nonlinear functions of each of the variables.
+
+$$y = \beta_0 + f_1(x_1) + f_2(x_2) + \dots + f_p(x_p) + \epsilon$$
+
+- This is a **generalized additive model**.
+  + It's *general*: it can be modelling response with other distributions, binary, counts, positive values, for example.
+  + It's *additive*: calculate a separate $f_j$ for each $x_j$, and add together all of their contributions.
+
+. . .
+
+- $f_1(x_1) = x_1$; $f_2(x_2) = x_2 + x_2^2$; $f_3(x_3) = \text{cubic splines}$
+
+## `Wage` data in ISL
+
+```{r}
+#| class-output: my_class600
+#| echo: true
+#| code-line-numbers: false
+library(ISLR2)
+attach(Wage)
+dplyr::glimpse(Wage)
+```
+
+
+## `gam::gam()`
+
+```{r}
+#| echo: true
+#| code-line-numbers: false
+library(gam)
+gam.m3 <- gam(wage ~ s(year, df = 4) + s(age , df = 5) + education, data = Wage)
+```
+
+- `s()` for smoothing splines
+
+- Coefficients not that interesting; fitted functions are. 
+
+
+```{r}
+#| fig-asp: 0.3
+#| out-width: 100%
+par(mfrow = c(1, 3))
+par(mar = c(3.5, 3.5, 2, 1))
+par(mgp = c(2.4, 0.8, 0))
+plot.Gam(gam.m3, se = TRUE, col = 4, lwd = 2, las = 1)
+```
+
+::: notes
+upper and lower pointwise twice-standard-error curves are included
+
+The left-hand panel indicates that
+holding age and education fixed, wage tends to increase slightly with year;
+this may be due to inflation. The center panel indicates that holding education
+and year fixed, wage tends to be highest for intermediate values of age, and
+lowest for the very young and very old.
+
+- Because the model is additive, we can examine the effect of each $X_j$ on $Y$ individually while holding all of the other variables fixed.
+
+- Allow to fit a non-linear $f_j$ to each $X_j$, so that we can
+automatically model non-linear relationships that standard linear regression will miss.
+
+- No need to manually try out many different transformations on each variable individually.
+
+- The non-linear fits can potentially make more accurate predictions for the response.
+
+- The smoothness of the function $f_j$ for the variable $X_j$ can be summarized via degrees of freedom.
+
+- The model is additive. For fully general models, we look for more flexible approaches such as random forests and boosting.
+
+:::
+
+
+<!-- ## GAM fitting {visibility="hidden"} -->
+
+<!-- - Natural splines `lm(wage ~ ns(year, df = 5) + ns(age, df = 5) + education)` -->
+
+<!-- - Can mix terms, e.g., smoothing splines and local regression -->
+
+<!-- `gam(wage ~ s(year, df = 5) + lo(age, span = .5) + education)` -->
+
+<!-- - Can add interactions, e.g. `ns(age, df = 5):ns(year, df = 5)` -->
+
+<!-- - Use `anova()` to compare models. -->
+
+
+
+
+<!-- ## Summary of GAMs {visibility="hidden"} -->
+
+<!-- - Allow to fit a non-linear $f_j$ to each $X_j$, so that we can -->
+<!-- automatically model non-linear relationships that standard linear regression will miss. -->
+
+<!-- - No need to manually try out many different transformations on each variable individually. -->
+
+<!-- - The non-linear fits can potentially make more accurate predictions for the response. -->
+
+<!-- - The smoothness of the function $f_j$ for the variable $X_j$ can be summarized via degrees of freedom. -->
+
+<!-- - The model is additive. For fully general models, we look for more flexible approaches such as random forests and boosting. -->
+
+
+<!-- ::: notes -->
+<!-- - Because the model is additive, we can examine the effect of each $X_j$ on $Y$ individually while holding all of the other variables fixed. -->
+
+<!-- - The smoothness of the function $f_j$ for the variable $X_j$ can be summarized via degrees of freedom. -->
+
+<!-- ::: -->
+
+
+
+<!-- ## Other Topics -->
+
+<!-- - [Basis spline (B-spline) definition (de Boor, 1978)](https://en.wikipedia.org/wiki/B-spline#:~:text=A%20B%2Dspline%20function%20is,using%20a%20number%20of%20points.): more computationally efficient -->
+
+<!-- - Algorithms for fitting GAMs using smoothing splines: [Backfitting](https://en.wikipedia.org/wiki/Backfitting_algorithm), ISL Sec 7.9 Exercise 11. -->
+
+<!-- - GAMs for binary response and classification. -->
+
+<!-- - [Multivariate Adaptive Regression Splines (MARS)](https://en.wikipedia.org/wiki/Multivariate_adaptive_regression_spline#:~:text=In%20statistics%2C%20multivariate%20adaptive%20regression,nonlinearities%20and%20interactions%20between%20variables.) -->
+
+
+<!-- ::: notes -->
+<!-- How many knots should be used -->
+<!-- Where to place the knots -->
+<!-- What is the degree of functions in each region -->
+
+<!-- we can control that using the df parameter. We use a total of 6 parameters, chosen by the function automatically. However, this does not seems to perform better than the knots we implemented. The choice of knots can be crucial. -->
+<!-- ::: -->
+

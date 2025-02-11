@@ -1,6 +1,6 @@
 ---
 title: "Homework 2 - Ridge, Lasso, and Splines"
-subtitle: "Due Friday, Mar 1 11:59 PM"
+subtitle: "Due Friday, Mar 8 11:59 PM"
 editor: source
 # bibliography: references.bib
 ---
@@ -38,9 +38,9 @@ editor: source
 
 - Any relevant code should be attached.
 
+- Problems started with **(MSSC Phd)** are required for CMPS PhD students, and optional for other students for extra credits.
+
 - Read **ISL** Chapter 5.1, 6.2, and 7.
-
-
 
 ## Homework Questions
 
@@ -48,19 +48,21 @@ editor: source
 
 (@) **ISL** Sec. 6.6: 4
 
-(@) **ISL** Sec. 6.6: 6
+<!-- (@) **ISL** Sec. 6.6: 6 -->
 
 (@) **ISL** Sec. 6.6: 9 (a)-(d)
 
 (@) **ISL** Sec. 7.9: 9
 
-(@) **[Special Case for Ridge and Lasso]** Suppose for a linear regression problem with $n = p$, ${\bf X} = {\bf I}$ and no intercept. Show that
+(@) **[Special Case for Ridge and Lasso]** Suppose for a multiple linear regression problem with $n = p$, ${\bf X} = {\bf I}$ and no intercept, i.e., $y_i = \beta_i + \epsilon_i, ~~ \epsilon_i \stackrel{iid} N(0, \sigma^2)$. Show that
 
-    (a) The least squares problem can be simplified to finding $\beta_1,     \dots, \beta_p$ that minimize $\sum_{j=1}^p\left(y_j - \beta_j\right)^2$. What is least squares estimator $b_j$?
+    (a) Show that the least squares problem can be simplified to finding $\beta_1,     \dots, \beta_p$ that minimize $\sum_{j=1}^p\left(y_j - \beta_j\right)^2$. What is least squares estimator $b_j$?
     
-    (b) The ridge estimator is $\hat{\beta}_j^r = \frac{y_j}{1+\lambda} = \underset{\beta_j}{\arg\min} \sum_{j=1}^p\left(y_j - \beta_j\right)^2 + \lambda \sum_{j=1}^p \beta_j^2$.
+    (b) Show that the ridge estimator is $\hat{\beta}_j^r = \frac{y_j}{1+\lambda} = \underset{\beta_j}{\arg\min} \sum_{j=1}^p\left(y_j - \beta_j\right)^2 + \lambda \sum_{j=1}^p \beta_j^2$.
     
-    (c) The lasso solution of $\sum_{j=1}^p\left(y_j - \beta_j\right)^2 + \lambda \sum_{j=1}^p | \beta_j |$ is 
+    (c) **(MSSC PhD)** Show that $\text{MSE}\left( \hat{\beta}_j^r \right) = \dfrac{\lambda^2 \beta_j^2 + \sigma^2}{(1 + \lambda)^2}$. What is the condition that increasing $\lambda$ leads to a smaller MSE?
+    
+    (d) Show that the lasso solution of $\sum_{j=1}^p\left(y_j - \beta_j\right)^2 + \lambda \sum_{j=1}^p | \beta_j |$ is 
 $$\hat{\beta}_j^l = 
   \begin{cases}
     y_j - \lambda/2       & \quad \text{if } y_j > \lambda/2\\
@@ -68,7 +70,7 @@ $$\hat{\beta}_j^l =
     0  & \quad \text{if } |y_j| \le \lambda/2
   \end{cases}$$
   
-    (d) Describe the ridge and lasso shrinkage behavior.
+    (e) Describe the ridge and lasso shrinkage behavior.
 
 (@) **[Lasso with Correlated Variables]**
 

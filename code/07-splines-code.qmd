@@ -1,0 +1,397 @@
+---
+title: "07- Splines and Generalized Addive Models Code Demo"
+author: 'Dr. Cheng-Han Yu'
+format: 
+  html:
+    toc: true
+    code-link: true
+    code-fold: show
+    code-summary: "Show/Hide"
+    code-tools: true
+---
+
+## R implementation
+
+```{r}
+birthrates <- read.csv("../data/birthrates.csv")
+```
+
+### Polynomial regression
+
+```{r}
+lmfit3 <- lm(Birthrate ~ poly(Year-mean(Year), degree = 3), data = birthrates)
+plot(birthrates, pch = 19, col = 4, main = "degree = 3")
+lines(birthrates$Year, lmfit3$fitted.values, lty = 1, col = 2, lwd = 2)
+```
+
+
+<!-- ### Linear splines -->
+
+```{r}
+#| eval: false
+#| echo: false
+par(mar = c(2,2,2,0))
+lin_sp <- lm(Birthrate ~ splines::bs(Year, degree = 1, knots = c(1936, 1960, 1978)), 
+             data = birthrates)
+plot(birthrates, pch = 19, col = 4, main = "Linear spline (d = 1) with 3 knots")
+lines(birthrates$Year, lin_sp$fitted.values, lty = 1, col = 2, lwd = 3)
+```
+
+
+### Cubic Splines
+
+```{r}
+library(splines)
+```
+
+
+For linear splines, change `degree = 3` to `degree = 1`.
+
+```{r}
+cub_sp <- lm(Birthrate ~ splines::bs(Year, degree = 3, knots = c(1936, 1960, 1978)), 
+             data = birthrates)
+plot(birthrates, pch = 19, col = 4, main = "Cubic spline (k = 3) with 3 knots")
+lines(birthrates$Year, cub_sp$fitted.values, lty = 1, col = 2, lwd = 3)
+```
+
+
+### Smoothing Splines
+```{r}
+fit <- smooth.spline(birthrates$Year, birthrates$Birthrate, df = 15)
+plot(birthrates$Year, birthrates$Birthrate, pch = 19, 
+     xlab = "Year", ylab = "BirthRates", col = 4)
+lines(seq(1917, 2003), predict(fit, seq(1917, 2003))$y, col = 2, lty = 1, lwd = 3)
+```
+
+### GAM
+
+```{r}
+library(gam)
+```
+
+```{r}
+Wage <- read.csv("../data/Wage.csv")
+Wage$education <- as.factor(Wage$education)
+gam.m3 <- gam(wage ~ s(year, df = 4) + s(age , df = 5) + education, data = Wage)
+par(mfrow = c(1, 3), mar = c(4, 4, 2, 0))
+plot.Gam(gam.m3, se = TRUE, col = 4, lwd = 2, las = 1)
+```
+
+
+
+## Python implementation
+
+```{python}
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+```
+
+```{python}
+birthrates = pd.read_csv("../data/birthrates.csv")
+```
+
+### Polynomial regression
+
+```{python}
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures
+```
+
+```{python}
+birthrates['Year_centered'] = birthrates['Year'] - birthrates['Year'].mean()
+
+# Polynomial regression with degree = 3
+poly = PolynomialFeatures(degree=3, include_bias=False)
+X_poly = poly.fit_transform(birthrates[['Year_centered']])
+
+polyfit3 = LinearRegression().fit(X_poly, birthrates['Birthrate'])
+
+plt.scatter(birthrates['Year'], birthrates['Birthrate'], color='blue')
+plt.plot(birthrates['Year'], polyfit3.predict(X_poly), color='red',
+         linewidth=2)
+plt.title("Cubic Polynomial Regression (Degree = 3)")
+plt.xlabel("Year")
+plt.ylabel("Birthrate")
+plt.show()
+```
+
+<!-- ### Linear splines -->
+
+<!-- ```{python} -->
+<!-- knots = [1936, 1960, 1978] -->
+<!-- # Generate cubic spline basis functions with specified knots -->
+<!-- spline_basis = dmatrix( -->
+<!--     "bs(Year, degree=1, knots=knots, include_intercept=True)",  -->
+<!--     {"Year": birthrates["Year"]},  -->
+<!--     return_type="dataframe" -->
+<!-- ) -->
+
+<!-- # Fit the cubic spline model -->
+<!-- model = sm.OLS(birthrates["Birthrate"], spline_basis).fit() -->
+
+<!-- # Predict fitted values -->
+<!-- birthrates["Fitted"] = model.fittedvalues -->
+
+<!-- # Plot the data and the fitted spline -->
+<!-- plt.scatter(birthrates["Year"], birthrates["Birthrate"], color="blue", s=50) -->
+<!-- plt.plot(birthrates["Year"], birthrates["Fitted"], color="red", linewidth=3) -->
+<!-- plt.title("Linear Spline (k=1) with Specified Knots") -->
+<!-- plt.xlabel("Year") -->
+<!-- plt.ylabel("Birthrate") -->
+<!-- plt.show() -->
+<!-- ``` -->
+
+
+
+<!-- Pay attention to parameter `t` in the function [`make_lsq_spline()`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.make_lsq_spline.html). -->
+
+
+<!-- ```{python} -->
+<!-- from scipy.interpolate import make_lsq_spline -->
+<!-- ``` -->
+
+<!-- ```{python} -->
+<!-- knots = [1936, 1960, 1978] -->
+<!-- k=1 -->
+<!-- # Extend the knots for the boundaries -->
+<!-- augmented_knots = [birthrates["Year"].min()] * (k+1) + knots + [birthrates["Year"].max()] * (k+1) -->
+
+<!-- linear_spline = make_lsq_spline( -->
+<!--     x=birthrates["Year"].values,  # x values -->
+<!--     y=birthrates["Birthrate"].values,  # y values -->
+<!--     t=augmented_knots,  # Knots -->
+<!--     k=k  # Degree of the spline -->
+<!-- ) -->
+
+<!-- # Generate fitted values -->
+<!-- fitted_values = linear_spline(birthrates["Year"]) -->
+
+<!-- # Plot the original data -->
+<!-- plt.scatter(birthrates["Year"], birthrates["Birthrate"], color='blue', s=50, -->
+<!--             label="Data") -->
+<!-- plt.plot(birthrates["Year"], fitted_values, color='red', linewidth=3, -->
+<!--          label="Fitted Spline") -->
+<!-- plt.title("Linear Spline (d = 1) with 3 Knots") -->
+<!-- plt.xlabel("Year") -->
+<!-- plt.ylabel("Birthrate") -->
+<!-- plt.legend() -->
+<!-- plt.show() -->
+<!-- ``` -->
+
+
+
+
+### Cubic Splines
+
+```{python}
+from patsy import dmatrix
+from sklearn.linear_model import LinearRegression
+```
+
+For linear splines, change `degree=3` to `degree=1`.
+
+NOTE:
+
+- Can't find prediction or extrapolation for cubic splines.
+
+- Use [`patsy.cr()`](https://patsy.readthedocs.io/en/latest/API-reference.html#patsy.cr) to fit natural cubic splines.
+
+```{python}
+knots = [1936, 1960, 1978]
+# https://patsy.readthedocs.io/en/latest/API-reference.html
+# Generate cubic spline basis functions with specified knots
+spline_basis = dmatrix(
+    "bs(Year, degree=3, knots=knots, include_intercept=True)", 
+    {"Year": birthrates["Year"]}, 
+    return_type="dataframe"
+)
+# Fit the cubic spline model
+# import statsmodels.api as sm
+# model = sm.OLS(birthrates["Birthrate"], spline_basis).fit()
+# birthrates["Fitted"] = model.fittedvalues
+cub_sp = LinearRegression().fit(spline_basis, birthrates["Birthrate"])
+
+# Plot the data and the fitted spline
+plt.scatter(birthrates["Year"], birthrates["Birthrate"], color="blue")
+plt.plot(birthrates["Year"], cub_sp.predict(spline_basis), color="red",
+         linewidth=2)
+plt.title("Cubic Spline (d=3) with 3 Knots")
+plt.xlabel("Year")
+plt.ylabel("Birthrate")
+plt.show()
+```
+
+
+```{python}
+# https://patsy.readthedocs.io/en/latest/API-reference.html
+# Generate cubic spline basis functions with specified knots
+spline_basis = dmatrix(
+    "bs(Year, degree=3, df=7, include_intercept=True)", 
+    {"Year": birthrates["Year"]}, 
+    return_type="dataframe"
+)
+# Fit the cubic spline model
+# import statsmodels.api as sm
+# model = sm.OLS(birthrates["Birthrate"], spline_basis).fit()
+# birthrates["Fitted"] = model.fittedvalues
+cub_sp = LinearRegression().fit(spline_basis, birthrates["Birthrate"])
+
+# Plot the data and the fitted spline
+plt.scatter(birthrates["Year"], birthrates["Birthrate"], color="blue")
+plt.plot(birthrates["Year"], cub_sp.predict(spline_basis), color="red",
+         linewidth=2)
+plt.title("Cubic Spline (df=6)")
+plt.xlabel("Year")
+plt.ylabel("Birthrate")
+plt.show()
+```
+
+
+### Smoothing Splines
+
+We use [`scipy.interpolate.make_smoothing_spline`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.make_smoothing_spline.html).
+
+- Python has no functions for smoothing splines that can directly specify the degrees of freedom. Please let me know if you find one.
+
+- To have similar smoothing results, R and Python would use quite a different size of penalty term $\lambda$, as well as the degrees of freedom and smoothing factor.
+
+
+```{python}
+from scipy.interpolate import make_smoothing_spline
+```
+
+```{python}
+x = birthrates["Year"].values
+y = birthrates["Birthrate"].values
+spline = make_smoothing_spline(x, y, lam=20)
+# Predict for the range of years
+x_pred = np.linspace(1917, 2003, 500)
+y_pred = spline(x_pred)
+# Plot the original data
+plt.figure(figsize=(10, 6))
+plt.scatter(x, y, color='blue', label='Data', s=50)
+plt.plot(x_pred, y_pred, color='red', linewidth=3, label='Smoothing Spline')
+plt.title("Smoothing Spline")
+plt.xlabel("Year")
+plt.ylabel("Birthrate")
+plt.show()
+```
+
+
+
+To use a smoothing factor, use [`splrep` (`make_splrep`)](https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.splrep.html#scipy.interpolate.splrep) and [`BSpline`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.BSpline.html#scipy.interpolat.BSpline)
+
+The smoothing factor is set unresonably high to 4500. Please let me know if you figure out why.
+
+
+```{python}
+from scipy.interpolate import splrep, BSpline
+```
+
+
+```{python}
+x = birthrates["Year"].values
+y = birthrates["Birthrate"].values
+
+# Fit the smoothing spline with a smoothing factor
+smoothing_factor = 4500 # Adjust this for the desired smoothness
+tck = splrep(x, y, s=smoothing_factor)
+
+# Predict for a range of years
+x_pred = np.linspace(1917, 2003, 500)
+y_pred = BSpline(*tck)(x_pred)
+
+# Plot the original data
+plt.figure(figsize=(10, 6))
+plt.scatter(x, y, color='blue', label='Data', s=50)
+
+# Plot the fitted smoothing spline
+plt.plot(x_pred, y_pred, color='red', linewidth=3, label='Smoothing Spline')
+
+# Add labels and title
+plt.title("Smoothing Spline with splrep")
+plt.xlabel("Year")
+plt.ylabel("Birthrate")
+plt.show()
+```
+
+### GAM
+
+<https://kirenz.github.io/regression/docs/gam.html>
+
+<https://gist.github.com/josef-pkt/453de603b019143e831fbdd4dfb6aa30>
+
+```{python}
+from statsmodels.gam.api import BSplines
+from statsmodels.gam.api import GLMGam
+from statsmodels.tools.eval_measures import mse, rmse
+import statsmodels.api as sm
+import patsy
+```
+
+
+```{python}
+Wage = pd.read_csv("../data/Wage.csv")
+Wage['education'] = pd.Categorical(Wage['education'], categories=['1. < HS Grad', '2. HS Grad', '3. Some College', '4. College Grad', '5. Advanced Degree'], ordered=True)
+
+# penalization weights are taken from mgcv to match up its results
+# sp = np.array([0.830689464223685, 425.361212061649])
+# s_scale = np.array([2.443955e-06, 0.007945455])
+x_spline = Wage[['year', 'age']].values
+exog = patsy.dmatrix('education', data=Wage)
+
+# TODO: set `include_intercept=True` automatically if constraints='center'
+bs = BSplines(x_spline, df=[4, 5], degree=[3, 3], variable_names=['year', 'age'], 
+              constraints='center', include_intercept=True)
+# alpha = 1 / s_scale * sp / 2
+gam_bs = GLMGam(Wage['wage'], exog=exog, smoother=bs)
+res = gam_bs.fit()
+```
+
+```{python}
+fig, axes = plt.subplots(1, 2, figsize=(12, 6))
+res.plot_partial(0, cpr=False, include_constant=False, ax=axes[0])
+axes[0].set_title("Year")
+res.plot_partial(1, cpr=False, include_constant=False, ax=axes[1])
+axes[1].set_title("Age")
+plt.tight_layout()
+plt.show()
+```
+
+```{python}
+print(res.summary())
+```
+
+
+One option is to use [`pygam`](https://pygam.readthedocs.io/en/latest/index.html) package.
+
+```{python}
+from pygam import LinearGAM, s, f
+from pygam.datasets import wage
+```
+
+
+```{python}
+X, y = wage(return_X_y=True)
+
+## model
+gam = LinearGAM(s(0) + s(1) + f(2)).fit(X, y)
+
+for i, term in enumerate(gam.terms):
+    if term.isintercept:
+        continue
+
+    XX = gam.generate_X_grid(term=i)
+    pdep, confi = gam.partial_dependence(term=i, X=XX, width=0.95)
+
+    plt.figure()
+    plt.plot(XX[:, term.feature], pdep)
+    plt.plot(XX[:, term.feature], confi, c='r', ls='--')
+    plt.title(repr(term))
+    plt.show()
+
+
+gam.summary()
+```
+
