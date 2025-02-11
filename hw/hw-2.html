@@ -99,7 +99,7 @@ window.Quarto = {
 </script>
 
 <meta property="og:title" content="MSSC 6250 - Spring 2025 - Homework 2 - Ridge, Lasso, and Splines">
-<meta property="og:description" content="Due Friday, Mar 1 11:59 PM">
+<meta property="og:description" content="Due Friday, Mar 8 11:59 PM">
 <meta property="og:site_name" content="MSSC 6250 - Spring 2025">
 </head>
 
@@ -281,7 +281,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week-5.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week-5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 5</span></a>
   </div>
 </li>
@@ -373,7 +373,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Homework 2 - Ridge, Lasso, and Splines</h1>
-<p class="subtitle lead">Due Friday, Mar 1 11:59 PM</p>
+<p class="subtitle lead">Due Friday, Mar 8 11:59 PM</p>
 </div>
 
 
@@ -396,21 +396,25 @@ window.Quarto = {
 <ul>
 <li><p>Please submit your work in <strong>one</strong> <strong>PDF</strong> file to <strong>D2L &gt; Assessments &gt; Dropbox</strong>. <em>Multiple files or a file that is not in pdf format are not allowed.</em></p></li>
 <li><p>Any relevant code should be attached.</p></li>
+<li><p>Problems started with <strong>(MSSC Phd)</strong> are required for CMPS PhD students, and optional for other students for extra credits.</p></li>
 <li><p>Read <strong>ISL</strong> Chapter 5.1, 6.2, and 7.</p></li>
 </ul>
 <section id="homework-questions" class="level2">
 <h2 class="anchored" data-anchor-id="homework-questions">Homework Questions</h2>
 <!-- (@) **ISL** Sec. 5.4: 3 -->
 <ol class="example" type="1">
-<li><p><strong>ISL</strong> Sec. 6.6: 4</p></li>
-<li><p><strong>ISL</strong> Sec. 6.6: 6</p></li>
+<li><strong>ISL</strong> Sec. 6.6: 4</li>
+</ol>
+<!-- (@) **ISL** Sec. 6.6: 6 -->
+<ol start="2" class="example" type="1">
 <li><p><strong>ISL</strong> Sec. 6.6: 9 (a)-(d)</p></li>
 <li><p><strong>ISL</strong> Sec. 7.9: 9</p></li>
-<li><p><strong>[Special Case for Ridge and Lasso]</strong> Suppose for a linear regression problem with <span class="math inline">\(n = p\)</span>, <span class="math inline">\({\bf X} = {\bf I}\)</span> and no intercept. Show that</p>
+<li><p><strong>[Special Case for Ridge and Lasso]</strong> Suppose for a multiple linear regression problem with <span class="math inline">\(n = p\)</span>, <span class="math inline">\({\bf X} = {\bf I}\)</span> and no intercept, i.e., <span class="math inline">\(y_i = \beta_i + \epsilon_i, ~~ \epsilon_i \stackrel{iid} N(0, \sigma^2)\)</span>. Show that</p>
 <ol type="a">
-<li><p>The least squares problem can be simplified to finding <span class="math inline">\(\beta_1,     \dots, \beta_p\)</span> that minimize <span class="math inline">\(\sum_{j=1}^p\left(y_j - \beta_j\right)^2\)</span>. What is least squares estimator <span class="math inline">\(b_j\)</span>?</p></li>
-<li><p>The ridge estimator is <span class="math inline">\(\hat{\beta}_j^r = \frac{y_j}{1+\lambda} = \underset{\beta_j}{\arg\min} \sum_{j=1}^p\left(y_j - \beta_j\right)^2 + \lambda \sum_{j=1}^p \beta_j^2\)</span>.</p></li>
-<li><p>The lasso solution of <span class="math inline">\(\sum_{j=1}^p\left(y_j - \beta_j\right)^2 + \lambda \sum_{j=1}^p | \beta_j |\)</span> is <span class="math display">\[\hat{\beta}_j^l =
+<li><p>Show that the least squares problem can be simplified to finding <span class="math inline">\(\beta_1,     \dots, \beta_p\)</span> that minimize <span class="math inline">\(\sum_{j=1}^p\left(y_j - \beta_j\right)^2\)</span>. What is least squares estimator <span class="math inline">\(b_j\)</span>?</p></li>
+<li><p>Show that the ridge estimator is <span class="math inline">\(\hat{\beta}_j^r = \frac{y_j}{1+\lambda} = \underset{\beta_j}{\arg\min} \sum_{j=1}^p\left(y_j - \beta_j\right)^2 + \lambda \sum_{j=1}^p \beta_j^2\)</span>.</p></li>
+<li><p><strong>(MSSC PhD)</strong> Show that <span class="math inline">\(\text{MSE}\left( \hat{\beta}_j^r \right) = \dfrac{\lambda^2 \beta_j^2 + \sigma^2}{(1 + \lambda)^2}\)</span>. What is the condition that increasing <span class="math inline">\(\lambda\)</span> leads to a smaller MSE?</p></li>
+<li><p>Show that the lasso solution of <span class="math inline">\(\sum_{j=1}^p\left(y_j - \beta_j\right)^2 + \lambda \sum_{j=1}^p | \beta_j |\)</span> is <span class="math display">\[\hat{\beta}_j^l =
   \begin{cases}
 y_j - \lambda/2       &amp; \quad \text{if } y_j &gt; \lambda/2\\
 y_j + \lambda/2       &amp; \quad \text{if } y_j &lt; -\lambda/2 \\
