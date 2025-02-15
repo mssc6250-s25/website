@@ -1,6 +1,6 @@
 ---
 title: "Homework 2 - Ridge, Lasso, and Splines"
-subtitle: "Due Friday, Mar 8 11:59 PM"
+subtitle: "Due Friday, Feb 28, 11:59 PM"
 editor: source
 # bibliography: references.bib
 ---
@@ -38,7 +38,7 @@ editor: source
 
 - Any relevant code should be attached.
 
-- Problems started with **(MSSC Phd)** are required for CMPS PhD students, and optional for other students for extra credits.
+- Problems started with **(MSSC PhD)** are required for CMPS PhD students, and optional for other students for extra credits.
 
 - Read **ISL** Chapter 5.1, 6.2, and 7.
 
@@ -54,15 +54,17 @@ editor: source
 
 (@) **ISL** Sec. 7.9: 9
 
+(@) **(MSSC PhD)** **ISL** Sec. 7.9: 11
+
 (@) **[Special Case for Ridge and Lasso]** Suppose for a multiple linear regression problem with $n = p$, ${\bf X} = {\bf I}$ and no intercept, i.e., $y_i = \beta_i + \epsilon_i, ~~ \epsilon_i \stackrel{iid} N(0, \sigma^2)$. Show that
 
     (a) Show that the least squares problem can be simplified to finding $\beta_1,     \dots, \beta_p$ that minimize $\sum_{j=1}^p\left(y_j - \beta_j\right)^2$. What is least squares estimator $b_j$?
     
     (b) Show that the ridge estimator is $\hat{\beta}_j^r = \frac{y_j}{1+\lambda} = \underset{\beta_j}{\arg\min} \sum_{j=1}^p\left(y_j - \beta_j\right)^2 + \lambda \sum_{j=1}^p \beta_j^2$.
     
-    (c) **(MSSC PhD)** Show that $\text{MSE}\left( \hat{\beta}_j^r \right) = \dfrac{\lambda^2 \beta_j^2 + \sigma^2}{(1 + \lambda)^2}$. What is the condition that increasing $\lambda$ leads to a smaller MSE?
+    <!-- (c) **(MSSC PhD)** Show that $\text{MSE}\left( \hat{\beta}_j^r \right) = \dfrac{\lambda^2 \beta_j^2 + \sigma^2}{(1 + \lambda)^2}$. What is the condition that increasing $\lambda$ leads to a smaller MSE? -->
     
-    (d) Show that the lasso solution of $\sum_{j=1}^p\left(y_j - \beta_j\right)^2 + \lambda \sum_{j=1}^p | \beta_j |$ is 
+    (c) Show that the lasso solution of $\sum_{j=1}^p\left(y_j - \beta_j\right)^2 + \lambda \sum_{j=1}^p | \beta_j |$ is 
 $$\hat{\beta}_j^l = 
   \begin{cases}
     y_j - \lambda/2       & \quad \text{if } y_j > \lambda/2\\
@@ -70,7 +72,7 @@ $$\hat{\beta}_j^l =
     0  & \quad \text{if } |y_j| \le \lambda/2
   \end{cases}$$
   
-    (e) Describe the ridge and lasso shrinkage behavior.
+    (d) Describe the ridge and lasso shrinkage behavior.
 
 (@) **[Lasso with Correlated Variables]**
 
@@ -94,6 +96,10 @@ $$\hat{\beta}_j^l =
     (d) Repeat (a)-(c) 100 times. That is, generate 100 different training and test data sets. For each run, record the test MSE and whether or not the true model is correctly selected. Then compute the average test MSE and the proportion of runs where the correct model was selected.
     
     (e) Redo (a)-(d) with $\rho = 0.6$. Compare the two average test MSEs and the proportions. Comment the result.
+
+
+
+
 
 
 <!-- ## Exercises required for MSSC PhD students -->

@@ -1,0 +1,149 @@
+---
+title: "08- Bayesian Linear Regression Code Demo"
+author: 'Dr. Cheng-Han Yu'
+format: 
+  html:
+    toc: true
+    code-link: true
+    code-fold: show
+    code-summary: "Show/Hide"
+    code-tools: true
+# filters: 
+#   - include-code-files
+---
+
+## R implementation
+
+```{r}
+#| message: false
+library(bayesrules)
+library(tidyverse)
+library(rstan)
+library(rstanarm)
+library(bayesplot)
+library(tidybayes)
+library(janitor)
+library(broom.mixed)
+```
+
+
+```{r}
+data(bikes)
+```
+
+
+
+```{r}
+bike_model <- rstanarm::stan_glm(rides ~ temp_feel, data = bikes,
+                                 family = gaussian,
+                                 prior_intercept = normal(5000, 1000),
+                                 prior = normal(100, 40), 
+                                 prior_aux = exponential(0.0008),
+                                 chains = 4, iter = 5000*2, seed = 2025)
+```
+
+
+
+```{r}
+bayesplot::mcmc_trace(bike_model, size = 0.1)
+```
+
+```{r}
+bayesplot::mcmc_dens_overlay(bike_model)
+```
+
+```{r}
+bayesplot::neff_ratio(bike_model)
+```
+
+```{r}
+bayesplot::rhat(bike_model)
+```
+
+```{r}
+tidy(bike_model, effects = c("fixed", "aux"),
+     conf.int = TRUE, conf.level = 0.80)
+```
+
+
+## Python implementation
+
+- Check [PyMC demo](https://www.pymc.io/projects/docs/en/stable/learn/core_notebooks/GLM_linear.html#glm-linear)
+
+- Error occurs when rendering the quarto file. But it can be run in a Python script.
+
+```{python}
+import pymc as pm
+import numpy as np
+import pandas as pd
+import arviz as az
+import xarray as xr
+```
+
+```{python}
+# Load your dataset
+bikes = pd.read_csv("../data/bikes.csv")
+# Assuming `rides` is the target variable and `temp_feel` is the predictor
+rides = bikes["rides"].values
+temp_feel = bikes["temp_feel"].values
+```
+
+<!-- ```{.python include="bayes.py"} -->
+<!-- ``` -->
+
+
+<!-- ```{python} -->
+<!-- #| echo: false -->
+<!-- # name cannot start with number -->
+<!-- %run bayes.py -->
+<!-- ``` -->
+
+```{python}
+#| eval: false
+
+import pymc as pm
+# Define the Bayesian model
+with pm.Model() as bike_model:
+    # Priors
+    intercept = pm.Normal("intercept", mu=5000, sigma=1000)
+    slope = pm.Normal("slope", mu=100, sigma=40)
+    # sigma = pm.Exponential("sigma", lam=0.0008)
+    sigma = pm.HalfCauchy("sigma", beta=10)
+    # Linear model
+    mu = intercept + slope * temp_feel
+
+    # Likelihood
+    likelihood = pm.Normal("rides", mu=mu, sigma=sigma, observed=rides)
+
+    # Sampling
+    draws = pm.sample(5000, tune=5000, chains=4, random_seed=2025)
+
+
+# pm.summary(draws)
+```
+
+```{python}
+#| eval: false
+pm.summary(draws)
+```
+
+```{python}
+#| eval: false
+az.plot_trace(draws)
+```
+
+
+```{python}
+#| eval: false
+trace.posterior["y_model"] = trace.posterior["Intercept"] + trace.posterior["x"] * xr.DataArray(x)
+```
+
+
+```{python}
+#| eval: false
+_, ax = plt.subplots(figsize=(7, 7))
+az.plot_lm(trace=trace, y="y", num_samples=100, axes=ax, y_model="y_model")
+ax.set_title("Posterior predictive regression lines")
+ax.set_xlabel("x");
+```
+

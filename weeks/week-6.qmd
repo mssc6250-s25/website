@@ -1,0 +1,36 @@
+---
+title: "Week 6"
+subtitle: "Bayesian Linear Regression"
+editor: visual
+---
+
+::: callout-important
+:::
+
+## Participate
+
+🖥️ [Slides - Bayesian Linear Regression](/slides/08-bayes.html)
+
+`r fontawesome::fa("table")` `bayesrules::bikes`
+
+## Reading and Resources
+
+📖 [Bayes Rules! An Introduction to Applied Bayesian Modeling](https://www.bayesrulesbook.com/)
+
+📖 [Statistical Rethinking](https://xcelab.net/rm/statistical-rethinking/)
+
+📖 [A Student's Guide to Bayesian Statistics](https://uk.sagepub.com/en-gb/eur/book/student%E2%80%99s-guide-bayesian-statistics)
+
+📖 [Bayesian Data Analysis](http://www.stat.columbia.edu/~gelman/book/)
+
+## Exercise
+
+<!-- 📋 [Lab-13 Visualization](/exercise/lab13-visualization.html) -->
+
+<!-- `r fontawesome::fa("table")` [penguins.csv](/slides/data/penguins.csv) -->
+
+<br><br>
+
+::: {style="font-size: 0.875em;"}
+Back to [course schedule](/ "Course schedule") ⏎
+:::
