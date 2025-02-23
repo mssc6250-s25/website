@@ -24,14 +24,14 @@ format:
 | 5 | Tue, Feb 11 | Regression Splines | [📖](/weeks/week-5.html "Week 5") | [🖥️](slides/07-splines.html "07-splines") | [`r fontawesome::fa("file-code")`](code/07-splines-code.html "07-splines-code") |  |  |
 |  | Thu, Feb 13 | Smoothing Splines and Generalized Additive Models |  |  |  | HW 1 Due |  |
 | 6 | Tue, Feb 18 | Bayesian Inference and Linear Regression | [📖](/weeks/week-6.html "Week 6") | [🖥️](slides/08-bayes.html "08-bayes") | [`r fontawesome::fa("file-code")`](code/08-bayes-code.html "08-bayes-code") | [✍️ HW2](/hw/hw-2.html "Homework 2") |  |
-|  | Thu, Feb 20 | Binary Logistic Regression |  |  |  |  | [✅](present-description.html#timeline-and-things-to-do "Midterm presentation 1") Team up Due |
-| 7 | Tue, Feb 25 | Multinomial Logistic Regression | [📖](/weeks/week-7.html "Week 7") | [🖥️](slides/09-class-glm.html "09-class-glm") | `r fontawesome::fa("file-code")` |  |  |
-|  | Thu, Feb 27 | Discriminant Analysis |  |  | `r fontawesome::fa("file-code")` | HW 2 Due | [✅](present-description.html#proposal "Midterm presentation 1") Proposal Due |
-| 8 | Tue, Mar 4 | Naive Bayes | [📖](/weeks/week-8.html "Week 8") |  | `r fontawesome::fa("file-code")` |  |  |
+|  | Thu, Feb 20 | Bayesian Linear Regression |  |  |  |  | [✅](present-description.html#timeline-and-things-to-do "Midterm presentation 1") Team up Due |
+| 7 | Tue, Feb 25 | Binary  Logistic Regression | [📖](/weeks/week-7.html "Week 7") | [🖥️](slides/09-class-glm.html "09-class-glm") | [`r fontawesome::fa("file-code")`](code/09-class-glm-code.html "09-class-glm-code") |  |  |
+|  | Thu, Feb 27 | Multinomial Logistic Regression |  |  |  | HW 2 Due | [✅](present-description.html#proposal "Midterm presentation 1") Proposal Due |
+| 8 | Tue, Mar 4 | Discriminant Analysis | [📖](/weeks/week-8.html "Week 8") |  | `r fontawesome::fa("file-code")` |  |  |
 |  | Thu, Mar 6 | **Midterm Presentation I** |  |  |  | ✍️ HW3 | [✅](present-description.html#materials "Midterm presentation 1") Materials Due |
 | 9 | Tue, Mar 11 | ***NO CLASS: Spring break*** |  |  |  |  |  |
-|  | Thu, Mar 13 | ***NO CLASS: Spring break*** |  |  |  |  |  |
-| 10 | Tue, Mar 18 | K-Nearest Neighbors Regression | [📖](/weeks/week-10.html "Week 10") | [🖥️](slides/10-generative.html "10-generative") |  |  |  |
+|  | Thu, Mar 13 | ***NO CLASS: Spring break*** [Deep Learning Workshop (Fri, Mar 14)](https://web.cvent.com/event/c428cad1-0152-4fb8-adb5-926b6f5650cd/summary) |  |  |  |  |  |
+| 10 | Tue, Mar 18 | Naive Bayes and K-Nearest Neighbors Regression | [📖](/weeks/week-10.html "Week 10") | [🖥️](slides/10-generative.html "10-generative") |  |  |  |
 |  | Thu, Mar 20 | K-Nearest Neighbors Classification |  |  | `r fontawesome::fa("file-code")` |  |  |
 | 11 | Tue, Mar 25 | Gaussian Process Regression | [📖](/weeks/week-11.html "Week 11") | [🖥️](slides/11-knn.html "11-knn") |  |  |  |
 |  | Thu, Mar 27 | Gaussian Process Classification |  |  | `r fontawesome::fa("file-code")` |  |  |

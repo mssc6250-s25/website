@@ -1,0 +1,35 @@
+---
+title: "Week 7"
+subtitle: "Logistic Regression"
+editor: visual
+---
+
+::: callout-important
+Homework 2 due Friday, Feb 28, 11:59 PM.
+:::
+
+## Participate
+
+🖥️ [Slides - Logistic Regression](/slides/09-class-glm.html)
+
+`r fontawesome::fa("table")` ISLR2::Default
+
+`r fontawesome::fa("table")` multinomial data [hsbdemo.csv](/data/hsbdemo.csv)
+
+## Reading and Resources
+
+📖 [ISL Ch 4.1 - 4.3, 4.6](https://www.statlearning.com/)
+
+## Exercise
+
+<!-- 📋 [Lab-14 Interactive Visualization](/exercise/lab14-interactive.html) (Present) -->
+
+<!-- 📋 [Lab-15 dplyr](/exercise/lab15-dplyr.html) -->
+
+<!-- `r fontawesome::fa("table")` [Data - Murders](/slides/data/murders.csv) -->
+
+<br><br>
+
+::: {style="font-size: 0.875em;"}
+Back to [course schedule](/ "Course schedule") ⏎
+:::

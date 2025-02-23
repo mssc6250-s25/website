@@ -1,0 +1,258 @@
+---
+title: "09- Logistic Regression Code Demo"
+author: 'Dr. Cheng-Han Yu'
+format: 
+  html:
+    toc: true
+    code-link: true
+    code-fold: show
+    # code-summary: "Show/Hide"
+    code-tools: true
+    number-sections: true
+# filters: 
+#   - include-code-files
+---
+
+## R implementation
+
+```{r}
+library(ISLR2)
+```
+
+### Binary (Binomial) Logistic Regression
+
+```{r}
+data("Default")
+logit_fit <- glm(default ~ balance, data = Default, family = binomial)
+coef(summary(logit_fit))
+```
+
+
+```{r}
+pi_hat <- predict(logit_fit, type = "response")
+eta_hat <- predict(logit_fit, type = "link")  ## default gives us b0 + b1*x
+predict(logit_fit, newdata = data.frame(balance = 2000), type = "response")
+```
+
+```{r}
+pred_prob <- predict(logit_fit, type = "response")
+table(pred_prob > 0.5, Default$default)
+```
+
+```{r}
+library(ROCR)
+# create an object of class prediction 
+pred <- ROCR::prediction(predictions = pred_prob, labels = Default$default)
+
+# calculates the ROC curve
+roc <- ROCR::performance(prediction.obj = pred, measure = "tpr", x.measure = "fpr")
+plot(roc, colorize = TRUE, lwd = 3)
+```
+
+
+```{r}
+auc <- ROCR::performance(prediction.obj = pred, measure = "auc")
+auc@y.values
+```
+
+### Multinomial Logistic Regression
+
+```{r}
+library(foreign)
+multino_data <- foreign::read.dta("../data/hsbdemo.dta")
+```
+
+```{r}
+multino_data$prog2 <- relevel(multino_data$prog, ref = "academic")
+levels(multino_data$prog2)
+levels(multino_data$ses)
+```
+
+
+```{r}
+library(nnet)
+multino_fit <- nnet::multinom(prog2 ~ ses + write, data = multino_data, trace = FALSE)
+summ <- summary(multino_fit)
+summ$coefficients
+```
+
+```{r}
+head(fitted(multino_fit))
+```
+
+```{r}
+dses <- data.frame(ses = c("low", "middle", "high"), 
+                   write = mean(multino_data$write))
+predict(multino_fit, newdata = dses, type = "probs")
+```
+
+We can also use `glmnet` package.
+
+```{r}
+library(fastDummies) # https://jacobkap.github.io/fastDummies/
+library(glmnet)
+prog <- multino_data$prog2
+dummy_dat <- dummy_cols(multino_data, select_columns = c("ses"))
+x <- dummy_dat |> dplyr::select(ses_middle, ses_high, write)
+fit <- glmnet(x = x, y = prog, family = "multinomial", lambda = 0)
+coef(fit)
+newx <- x[1:3, ]
+newx[, 3] <- mean(multino_data$write)
+predict(fit, as.matrix(newx), type="response")
+# model_mat <- model.matrix(prog2~ses+write, data=multino_data)
+```
+
+
+
+
+## Python implementation
+
+
+### Binary (Binomial) Logistic Regression
+
+```{python}
+import numpy as np
+import pandas as pd
+from sklearn.metrics import confusion_matrix
+import matplotlib.pyplot as plt
+```
+
+```{python}
+# Load your dataset
+Default = pd.read_csv("../data/Default.csv")
+```
+
+```{python}
+Default['default'] = Default['default'].map({'Yes': 1, 'No': 0})
+from statsmodels.formula.api import logit
+logit_fit = logit(formula='default ~ balance', data=Default).fit()
+logit_fit.summary2().tables[1]
+```
+
+```{python}
+pi_hat = logit_fit.predict(Default[['balance']])  # Type = "response" in R
+eta_hat = logit_fit.predict(Default[['balance']], which="linear")  # Type = "link" in R
+new_data = pd.DataFrame({'balance': [2000]})
+logit_fit.predict(new_data)
+```
+
+
+```{python}
+from sklearn.metrics import confusion_matrix
+pred_prob = logit_fit.predict(Default[['balance']])  # Type = "response" in R
+# Create predictions based on a 0.5 threshold
+pred_class = (pred_prob > 0.5).astype(int)  # Convert to binary class (0 or 1)
+## C00: true negatives; C10: false negatives; C01: false postives; C11: true positives
+confusion_matrix(y_true=Default['default'], y_pred=pred_class)
+```
+
+
+```{python}
+from sklearn.metrics import roc_curve, roc_auc_score
+
+# Calculate the ROC curve
+fpr, tpr, thresholds = roc_curve(Default['default'], pred_prob)
+
+# Calculate the AUC (Area Under the Curve)
+auc = roc_auc_score(Default['default'], pred_prob)
+auc
+```
+
+```{python}
+plt.figure()
+plt.plot(fpr, tpr, color='blue')
+plt.plot([0, 1], [0, 1], color='gray', linestyle='--')  # Diagonal line
+plt.xlabel('False Positive Rate (FPR)')
+plt.ylabel('True Positive Rate (TPR)')
+plt.show()
+```
+
+### Multinomial Logistic Regression
+
+```{python}
+multino_data = pd.read_stata("../data/hsbdemo.dta")
+```
+
+```{python}
+multino_data['prog2'] = multino_data['prog'].cat.reorder_categories(
+    ['academic'] + [cat for cat in multino_data['prog'].cat.categories if cat != 'academic'],
+    ordered=True
+)
+multino_data['prog2'].unique()
+multino_data['ses'].unique()
+```
+
+
+```{python}
+multino_data['prog_int'] = multino_data['prog2'].map({
+    'academic': 0,
+    'general': 1,
+    'vocation': 2
+})
+multino_data['prog_int'] = multino_data['prog_int'].cat.codes
+```
+
+```{python}
+from statsmodels.formula.api import mnlogit
+multino_fit = mnlogit("prog_int ~ ses + write", data=multino_data).fit()
+multino_fit.params
+```
+
+```{python}
+fitted_df = pd.DataFrame(multino_fit.predict(), 
+                         columns=['academic', 'general', 'vocation'])
+fitted_df.head()
+```
+
+```{python}
+dses = pd.DataFrame({
+    'ses': ['low', 'middle', 'high'],
+    'write': [multino_data['write'].mean()] * 3
+})
+multino_fit.predict(dses)
+```
+
+
+
+We can also use `sklearn` package.
+
+```{python}
+from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+
+# Separate features (X) and target (y)
+X = multino_data[['ses', 'write']]  # Independent variables
+y = multino_data['prog_int']          # Dependent variable (categorical target)
+
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('cat', OneHotEncoder(drop='first'), ['ses']),  # One-hot encode 'ses'
+        ('num', 'passthrough', ['write'])              # Leave 'write' as is
+    ]
+)
+# Create a multinomial logistic regression model
+model = Pipeline([
+    ('preprocessor', preprocessor),  # Preprocessing step
+    ('classifier', LogisticRegression(multi_class='multinomial', penalty=None,
+                                      solver='lbfgs', max_iter=500))
+])
+
+model.fit(X, y)
+model.named_steps.classifier.coef_
+model.named_steps.classifier.intercept_
+
+```
+
+```{python}
+dses = pd.DataFrame({
+    'ses': ['low', 'middle', 'high'],
+    'write': [multino_data['write'].mean()] * 3
+})
+
+pd.DataFrame(model.predict_proba(dses),
+             columns=model.named_steps.classifier.classes_)
+
+```
+

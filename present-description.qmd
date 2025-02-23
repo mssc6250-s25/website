@@ -5,7 +5,6 @@ author: 'Dr. Cheng-Han Yu'
 date-modified: today
 ---
 
-
 # Timeline and Things to Do
 
 -   **Team up!** You will be working as **a group of 3**. One of you, please email me your team [**member list**]{.blue} by [**Friday, 2/21 11:59 PM**]{.red}
@@ -16,7 +15,6 @@ date-modified: today
 
 -   **Materials**. Please share your [**entire work**]{.blue} (slides, code, data, etc) by [**Friday, 3/7 11:59 PM**]{.red}.
 
-
 # Policy
 
 ## **Team up!**
@@ -24,7 +22,6 @@ date-modified: today
 -   *Each one of you loses 5 points of your project grade if you don't meet the requirement or miss the deadline.*
 
 -   You will be *randomly* assigned to a group if you do not belong to any group before the deadline.
-
 
 ## **Proposal**
 
@@ -37,7 +34,6 @@ date-modified: today
 
 -   Although it is risky, you can change your project topic after you submit your proposal if you decide to do something else.
 
-
 ## **Presentation**
 
 -   Each group presentation should be between **10 and 11 minute** long, followed by **1 to 2 minute** Q&A. If your presentation is too short or too long, *every one of you loses 5 points* of your project grade.
@@ -45,7 +41,6 @@ date-modified: today
 -   Every group member has to present some part of the group work. **The one who does not present receives no point**.
 
 -   Questions are encouraged during Q&A. Everyone is welcome to ask any questions about the projects.
-
 
 ## **Materials**
 
@@ -55,57 +50,52 @@ date-modified: today
 
 -   Your code should be able to **reproduce all the numerical results, outputs, tables, and figures shown in the slides**, including the source of the raw data (where you find and load the data) if the project is about data analysis.
 
-
 # Project Content
 
 Your project can be in either of the following categories:
 
-1. **(DA)** Data analytics using one or more **REGRESSION** methods.
+1.  **(DA)** Data analytics using one or more **REGRESSION** methods.
 
-2. **(MA)** Introduce a new **REGRESSION** model/method/algorithm not lectured in class.
-
+2.  **(MA)** Introduce a new **REGRESSION** model/method/algorithm not lectured in class.
 
 ## Data Analytics
 
-For your DA project, you need to 
+For your DA project, you need to
 
-- Describe the selected data set.
+-   Describe the selected data set.
 
-- Explain and show why the chosen model(s) is appropriate for answering your research questions and better than others.
+-   Explain and show why the chosen model(s) is appropriate for answering your research questions and better than others.
 
-- Interpret your analysis result.
+-   Interpret your analysis result.
 
 Below are some data repositories you can start with, but you are encouraged to explore more and find your favorite one.
 
-  -   [TidyTuesday](https://github.com/rfordatascience/tidytuesday)
-  -   [Kaggle](https://www.kaggle.com/datasets)
-  -   [Awesome Public Datasets](https://github.com/awesomedata/awesome-public-datasets)
-  -   [Harvard Dataverse](https://dataverse.harvard.edu/)
-  -   [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/index.php)
-  -   [FiveThirtyEight](https://data.fivethirtyeight.com/)
-  
-  
+-   [TidyTuesday](https://github.com/rfordatascience/tidytuesday)
+-   [Kaggle](https://www.kaggle.com/datasets)
+-   [Awesome Public Datasets](https://github.com/awesomedata/awesome-public-datasets)
+-   [Harvard Dataverse](https://dataverse.harvard.edu/)
+-   [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/index.php)
+-   [FiveThirtyEight](https://data.fivethirtyeight.com/)
+
 ## Model/Algorithm
 
-For your MA project, you need to 
+For your MA project, you need to
 
-- Describe the intuition and idea of the method. What are the pros and cons of the method?
+-   Describe the intuition and idea of the method. What are the pros and cons of the method?
 
-- Provide the mathematical expression of the model/algorithm. Explain the model and its properties, and how we do supervised learning with the model/algorithm.
+-   Provide the mathematical expression of the model/algorithm. Explain the model and its properties, and how we do supervised learning with the model/algorithm.
 
-- Compare the chosen method with other methods learned in class. Determine which method performs better under what conditions.
+-   Compare the chosen method with other methods learned in class. Determine which method performs better under what conditions.
 
-- Demo how to implement the method using a programming language for supervised learning.
-
-
+-   Demo how to implement the method using a programming language for supervised learning.
 
 # Project Evaluation and Grading {#sec-grading}
 
--   Your project performance grade is *determined by __your classmates and Dr. Yu__*.
+-   Your project performance grade is *determined by **your classmates and Dr. Yu***.
 
 -   Table 1 shows your possible performance grade. For example, if your group finish in second place (Silver) you get 145 points.
 
--   Your project grade will be 
+-   Your project grade will be
 
 > project grade = performance grade - points lost due to violation of policy
 
@@ -136,8 +126,7 @@ knitr::kable(grade, align = "c", caption = "Performance Grade Sheet", label = "t
 
 -   Evaluation sheets will be provided on the presentation day.
 
-How do you get the full points for each category? Check the rubric below. 
-<!-- Note that for Content and Organization, data analysis and package projects have different requirements. -->
+How do you get the full points for each category? Check the rubric below. <!-- Note that for Content and Organization, data analysis and package projects have different requirements. -->
 
 -   **Content and Organization (DA)**
 
@@ -148,7 +137,7 @@ How do you get the full points for each category? Check the rubric below.
     -   All ideas are presented in logical order
 
 -   **Content and Organization (MA)**
-    
+
     -   Explain the method clearly and accuratly
     -   Show the pros and cons of the method, and compare with the methods learned in class.
     -   Show how the method can be implemednted for supervised learning.
