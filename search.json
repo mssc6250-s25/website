@@ -1477,7 +1477,7 @@
     "href": "present-work.html",
     "title": "Midterm Project I Proposal and Presentation",
     "section": "",
-    "text": "The presentation order is determined by the time you sent me your member info (c(\"John\", \"Jeremy\", \"Praful\") is the first to let me know, followed by c(\"Sajjad\", \"Tanjina\", \"Dewan\"), etc) and random sampling as follows.\n\nteam_lst &lt;- list(c(\"John\", \"Jeremy\", \"Praful\"), \n                 c(\"Sajjad\", \"Tanjina\", \"Dewan\"),\n                 c(\"Ethan\", \"Navid\", \"Sylvester\"), \n                 c(\"Violet\", \"Vanessa\", \"Michele\"), \n                 c(\"Rakesh\", \"Daniel\", \"Jeremy\"), \n                 c(\"Sai\", \"Rohith\", \"Shristi\"))\nset.seed(2025)\nteam_lst[sample(1:6, 6)]\n\n[[1]]\n[1] \"Rakesh\" \"Daniel\" \"Jeremy\"\n\n[[2]]\n[1] \"Violet\"  \"Vanessa\" \"Michele\"\n\n[[3]]\n[1] \"Sai\"     \"Rohith\"  \"Shristi\"\n\n[[4]]\n[1] \"Sajjad\"  \"Tanjina\" \"Dewan\"  \n\n[[5]]\n[1] \"John\"   \"Jeremy\" \"Praful\"\n\n[[6]]\n[1] \"Ethan\"     \"Navid\"     \"Sylvester\"",
+    "text": "The presentation order is determined by the time you sent me your member info (c(\"John\", \"Jeremy\", \"Praful\") is the first to let me know, followed by c(\"Sajjad\", \"Tanjina\", \"Dewan\"), etc) and random sampling as follows.\n\nteam_lst &lt;- list(c(\"John\", \"Jeremy\", \"Praful\"), \n                 c(\"Sajjad\", \"Tanjina\", \"Dewan\"),\n                 c(\"Ethan\", \"Navid\", \"Sylvester\"), \n                 c(\"Violet\", \"Vanessa\", \"Michele\"), \n                 c(\"Rakesh\", \"Daniel\", \"Jeremy\"), \n                 c(\"Sai\", \"Rohith\", \"Shristi\"))\nset.seed(6250)\nteam_lst[sample(1:6, 6)]\n\n[[1]]\n[1] \"Sajjad\"  \"Tanjina\" \"Dewan\"  \n\n[[2]]\n[1] \"John\"   \"Jeremy\" \"Praful\"\n\n[[3]]\n[1] \"Violet\"  \"Vanessa\" \"Michele\"\n\n[[4]]\n[1] \"Rakesh\" \"Daniel\" \"Jeremy\"\n\n[[5]]\n[1] \"Sai\"     \"Rohith\"  \"Shristi\"\n\n[[6]]\n[1] \"Ethan\"     \"Navid\"     \"Sylvester\"",
     "crumbs": [
       "Midterm Project I",
       "Topics and Works"
@@ -1488,7 +1488,7 @@
     "href": "present-work.html#presentation-order",
     "title": "Midterm Project I Proposal and Presentation",
     "section": "",
-    "text": "The presentation order is determined by the time you sent me your member info (c(\"John\", \"Jeremy\", \"Praful\") is the first to let me know, followed by c(\"Sajjad\", \"Tanjina\", \"Dewan\"), etc) and random sampling as follows.\n\nteam_lst &lt;- list(c(\"John\", \"Jeremy\", \"Praful\"), \n                 c(\"Sajjad\", \"Tanjina\", \"Dewan\"),\n                 c(\"Ethan\", \"Navid\", \"Sylvester\"), \n                 c(\"Violet\", \"Vanessa\", \"Michele\"), \n                 c(\"Rakesh\", \"Daniel\", \"Jeremy\"), \n                 c(\"Sai\", \"Rohith\", \"Shristi\"))\nset.seed(2025)\nteam_lst[sample(1:6, 6)]\n\n[[1]]\n[1] \"Rakesh\" \"Daniel\" \"Jeremy\"\n\n[[2]]\n[1] \"Violet\"  \"Vanessa\" \"Michele\"\n\n[[3]]\n[1] \"Sai\"     \"Rohith\"  \"Shristi\"\n\n[[4]]\n[1] \"Sajjad\"  \"Tanjina\" \"Dewan\"  \n\n[[5]]\n[1] \"John\"   \"Jeremy\" \"Praful\"\n\n[[6]]\n[1] \"Ethan\"     \"Navid\"     \"Sylvester\"",
+    "text": "The presentation order is determined by the time you sent me your member info (c(\"John\", \"Jeremy\", \"Praful\") is the first to let me know, followed by c(\"Sajjad\", \"Tanjina\", \"Dewan\"), etc) and random sampling as follows.\n\nteam_lst &lt;- list(c(\"John\", \"Jeremy\", \"Praful\"), \n                 c(\"Sajjad\", \"Tanjina\", \"Dewan\"),\n                 c(\"Ethan\", \"Navid\", \"Sylvester\"), \n                 c(\"Violet\", \"Vanessa\", \"Michele\"), \n                 c(\"Rakesh\", \"Daniel\", \"Jeremy\"), \n                 c(\"Sai\", \"Rohith\", \"Shristi\"))\nset.seed(6250)\nteam_lst[sample(1:6, 6)]\n\n[[1]]\n[1] \"Sajjad\"  \"Tanjina\" \"Dewan\"  \n\n[[2]]\n[1] \"John\"   \"Jeremy\" \"Praful\"\n\n[[3]]\n[1] \"Violet\"  \"Vanessa\" \"Michele\"\n\n[[4]]\n[1] \"Rakesh\" \"Daniel\" \"Jeremy\"\n\n[[5]]\n[1] \"Sai\"     \"Rohith\"  \"Shristi\"\n\n[[6]]\n[1] \"Ethan\"     \"Navid\"     \"Sylvester\"",
     "crumbs": [
       "Midterm Project I",
       "Topics and Works"
@@ -1499,7 +1499,7 @@
     "href": "present-work.html#project-materials",
     "title": "Midterm Project I Proposal and Presentation",
     "section": "Project Materials",
-    "text": "Project Materials\n\nGroup 1:\nGroup 2:\nGroup 3:\nGroup 4 (Sajjad, Tanjina, Dewan) Predicting Life Expectancy: proposal, slides\nGroup 5 (John, Jeremy, Praful) Poisson Regression: proposal, slides\nGroup 6:",
+    "text": "Project Materials\n\nGroup 1 (Sajjad, Tanjina, Dewan) Predicting Life Expectancy: proposal, slides\nGroup 2 (John, Jeremy, Praful) Poisson Regression: proposal, slides\nGroup 3 (Violet, Vanessa, Michele) Is Ridge Regression or LASSO a better model to predict the price of houses in Ames, Iowa: proposal, slides\nGroup 4 (Rakesh, Daniel, Jeremy)  proposal, slides\nGroup 5 (Sai, Rohith, Shristi) Analyzing the Impact of Housing Features on Sale Prices: A Regression-Based Study on the Ames Housing Dataset : proposal, slides\nGroup 6 (Ethan, Navid, Sylvester) Predicting Car Sticker Price Regression: proposal, slides",
     "crumbs": [
       "Midterm Project I",
       "Topics and Works"
