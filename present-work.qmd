@@ -13,20 +13,20 @@ team_lst <- list(c("John", "Jeremy", "Praful"),
                  c("Violet", "Vanessa", "Michele"), 
                  c("Rakesh", "Daniel", "Jeremy"), 
                  c("Sai", "Rohith", "Shristi"))
-set.seed(2025)
+set.seed(6250)
 team_lst[sample(1:6, 6)]
 ```
 
 ## Project Materials
 
--   Group 1:
+-   **Group 1 (Sajjad, Tanjina, Dewan) Predicting Life Expectancy**: [proposal](/documents/project_proposal/project1/proposal_tanjina_sajjad_dewan.pdf), slides
 
--   Group 2:
+-   **Group 2 (John, Jeremy, Praful) Poisson Regression**: [proposal](/documents/project_proposal/project1/proposal_john_jeremy_praful.pdf), slides
 
--   Group 3:
+-   **Group 3 (Violet, Vanessa, Michele) Is Ridge Regression or LASSO a better model to predict the price of houses in Ames, Iowa**: [proposal](/documents/project_proposal/project1/proposal_violet_venessa_michele.pdf), slides
 
--   **Group 4** **(Sajjad, Tanjina, Dewan) Predicting Life Expectancy**: [proposal](/documents/project_proposal/project1/proposal_4.pdf), slides
+-   **Group 4 (Rakesh, Daniel, Jeremy) ** proposal, slides
 
--   **Group 5 (John, Jeremy, Praful) Poisson Regression**: [proposal](/documents/project_proposal/project1/proposal_5.pdf), slides
+-   **Group 5 (Sai, Rohith, Shristi) Analyzing the Impact of Housing Features on Sale Prices: A Regression-Based Study on the Ames Housing Dataset** : [proposal](/documents/project_proposal/project1/proposal_sai_rohith_shristi.pdf), slides
 
--   Group 6:
+-   **Group 6 (Ethan, Navid, Sylvester) Predicting Car Sticker Price Regression**: [proposal](/documents/project_proposal/project1/proposal_ethan_navid_sylvester.pdf), slides 
