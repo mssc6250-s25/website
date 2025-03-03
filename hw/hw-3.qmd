@@ -1,6 +1,6 @@
 ---
 title: "Homework 3 - Bayesian Statistics, Logistic Regression, Generative Models, and K-Nearest Neighbors"
-subtitle: "Due Friday, April 11, 11:59 PM"
+subtitle: "Due Friday, April 4, 11:59 PM"
 editor: source
 # date-modified: today
 format: 
@@ -42,6 +42,8 @@ format:
 
 - Any relevant code should be attached.
 
+- Problems started with **(MSSC PhD)** are required for CMPS PhD students, and optional for other students for extra credits.
+
 - Read **ISL** Chapter 4.
 
 
@@ -57,25 +59,8 @@ format:
 (@) **ISL** Sec. 4.8: 5
 
 (@) **ISL** Sec. 4.8: 13
-
-(@) **[KNN Curse of Dimensionality]**
-  
-    (a) Generate Generate the covariates $x_1, x_2, \dots, x_5$ of $n = 1000$ training data from independent standard normal distribution. Then, generate $Y$ from 
-    $$Y = X_1 + 0.5 X_2 - X_3 + \epsilon,$$ where $\epsilon \sim N(0, 1).$
     
-    (b) Use the first 500 observations as the training data and the rest as the test data. Fit KNN regression, and report the test MSE of $y$ with the optimal $K$.
-    
-    (c) Add additional 95 noisy predictors as follows.
-        + **Case 1**: $x_6, x_7, \dots, x_{100} \overset{\mathrm{iid}}{\sim} N(0, 1)$
-        
-        + **Case 2**: $XA$ where $X_{1000 \times 5} = [x_1 \cdots x_5]$ and $A_{5 \times 95}$ having entries from iid uniform(0, 1).
-        
-    (d) Fit KNN regression in both cases (with the total of 100 covariates) and select the best $K$ value.
-    
-    (e) For both cases, what is the best K and the best mean squared error for prediction? Discuss the effect of adding 95 (unnecessary) covariates.
-    
-    
-(@) **[MNIST Handwritten Digits Image]**
+(@) **MNIST Handwritten Digits Image**
 
     (a) Load the prepared MNIST data [`mnist.csv`](./mnist.csv). Print some images.
     
@@ -92,6 +77,24 @@ format:
         * Generate the confusion matrix.
 
 
+
+(@) **(MSSC PhD)** **KNN Curse of Dimensionality**
+  
+    (a) Generate Generate the covariates $x_1, x_2, \dots, x_5$ of $n = 1000$ training data from independent standard normal distribution. Then, generate $Y$ from 
+    $$Y = X_1 + 0.5 X_2 - X_3 + \epsilon,$$ where $\epsilon \sim N(0, 1).$
+    
+    (b) Use the first 500 observations as the training data and the rest as the test data. Fit KNN regression, and report the test MSE of $y$ with the optimal $K$.
+    
+    (c) Add additional 95 noisy predictors as follows.
+        + **Case 1**: $x_6, x_7, \dots, x_{100} \overset{\mathrm{iid}}{\sim} N(0, 1)$
+        
+        + **Case 2**: $XA$ where $X_{1000 \times 5} = [x_1 \cdots x_5]$ and $A_{5 \times 95}$ having entries from iid uniform(0, 1).
+        
+    (d) Fit KNN regression in both cases (with the total of 100 covariates) and select the best $K$ value.
+    
+    (e) For both cases, what is the best K and the best mean squared error for prediction? Discuss the effect of adding 95 (unnecessary) covariates.
+    
+    
 ### Do one of the followings
 
 <!-- You are encouraged to do both, but to complete the homework, you only need to do one of the two assignments. -->

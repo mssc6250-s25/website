@@ -1,0 +1,1167 @@
+---
+title: 'Generative Models `r fontawesome::fa("brain")`'
+subtitle: "MSSC 6250 Statistical Machine Learning"
+author: "Dr. Cheng-Han Yu <br> Department of Mathematical and Statistical Sciences <br> Marquette University"
+# date: "`r format(Sys.time(), '%B %d %Y')`"
+# macros: _macros.tex # import a list of TeX/LaTeX definitions
+format: 
+  revealjs:
+    html-math-method:
+      method: mathjax
+      url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    # include-in-header:
+    #     - "macros.tex"
+    highlight-style: github
+    code-block-bg: true
+    self-contained: false
+    slide-number: c/t
+    incremental: false
+    width: 1800
+    height: 1000
+    margin: 0.05
+    logo: "https://upload.wikimedia.org/wikipedia/commons/e/e8/Marquette_Golden_Eagles_logo.svg"
+    footer: "[mssc6250-s25.github.io/website](https://mssc6250-s25.github.io/website/)"
+    theme: ["simple", "styles.scss"]
+    echo: false
+    multiplex: true
+    code-link: true
+    fig-cap-location: bottom
+    fig-align: center
+    transition: none ## fade slide convex concave zoom
+    code-line-numbers: false
+    title-slide-attributes:
+      data-background-color: "#447099"
+      # data-background-image: images/paper-texture.jpg
+      # data-background-size: cover
+      # data-background-color: "#698ED5"
+editor: source
+execute:
+  freeze: true
+---
+
+
+# {visibility="hidden"}
+
+
+\def\bx{\mathbf{x}}
+\def\bg{\mathbf{g}}
+\def\bw{\mathbf{w}}
+\def\bbeta{\boldsymbol{\beta}}
+\def\bX{\mathbf{X}}
+\def\by{\mathbf{y}}
+\def\bH{\mathbf{H}}
+\def\bI{\mathbf{I}}
+\def\bS{\mathbf{S}}
+\def\bW{\mathbf{W}}
+\def\T{\text{T}}
+\def\cov{\mathrm{Cov}}
+\def\cor{\mathrm{Corr}}
+\def\var{\mathrm{Var}}
+\def\E{\mathrm{E}}
+\def\bmu{\boldsymbol{\mu}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\def\Trace{\text{Trace}}
+
+
+```{r}
+#| label: setup
+#| include: false
+#| eval: true
+library(countdown)
+library(knitr)
+library(gt)
+library(gtExtras)
+library(ggplot2)
+library(ISLR2)
+library(genridge)
+library(glmnet)
+library(gam)
+library(splines)
+library(MASS)
+# library(ElemStatLearn)
+knitr::opts_chunk$set(
+    fig.asp = 0.618,
+    fig.align = "center",
+    out.width = "100%",
+    fig.retina = 10,
+    fig.path = "images/10-generative/",
+    message = FALSE,
+    global.par = TRUE
+)
+options(
+  htmltools.dir.version = FALSE,
+  dplyr.print_min = 6, 
+  dplyr.print_max = 6,
+  tibble.width = 80,
+  width = 80,
+  digits = 3
+  )
+hook_output <- knitr::knit_hooks$get("output")
+knitr::knit_hooks$set(output = function(x, options) {
+  lines <- options$output.lines
+  if (is.null(lines)) {
+    return(hook_output(x, options))  # pass to default hook
+  }
+  x <- unlist(strsplit(x, "\n"))
+  more <- "..."
+  if (length(lines)==1) {        # first n lines
+    if (length(x) > lines) {
+      # truncate the output, but add ....
+      x <- c(head(x, lines), more)
+    }
+  } else {
+    x <- c(more, x[lines], more)
+  }
+  # paste these lines together
+  x <- paste(c(x, ""), collapse = "\n")
+  hook_output(x, options)
+})
+```
+
+
+# Background: Bayes Classifier
+<!-- p 37, 141 -->
+
+
+## Bayes Classifier
+
+:::{.fact}
+The test error rate is minimized, on average, by a classifier that _assigns each observation to the most likely category, given its predictor values_.
+:::
+
+This fact leads to
+
+. . .
+
+- **Bayes (Optimal) Classifier**: Assign a test observation $y_j$ with predictor $x_j$ to class $k$ for which the _conditional probability_ $P(Y_j = k \mid X = x_j)$ is largest.
+
+- The Bayes classifier produces the _lowest possible test error rate_, called **Bayes error rate**.
+
+. . .
+
+The problem is
+
+- We never know $P(Y_j = k \mid X = x_j)$ `r emo::ji('sob')`
+
+- The goal of soft classifiers is to estimate it, like logistic regression:
+
+$$ \widehat{\pi}(\bx) = \widehat{P}(Y = 1 \mid \bx) = \frac{1}{1+e^{-\bx'\widehat{\bbeta}}}$$
+
+::: notes
+[What is ``Bayes regression function"? In statistics, it is called *oracle* when a method/model has access to the ground truth.]
+:::
+
+# Generative Models
+
+
+
+
+## What is a Generative Model?
+
+- So far predictors are assumed *fixed* and *known*, and we care about the conditional distribution, $p(y \mid \bx)$
+  + [Logistic regression (LR)]{.green}
+
+. . .
+
+- A **generative model** considers the *joint distribution* of the response and predictors, i.e., $p(y, \bx)$
+  + [Discriminant analysis]{.green}
+  + [Naive Bayes (NB)]{.green}
+
+
+. . .
+
+Why not just logistic regression?
+
+- When the classes are *substaintially separated*, the parameter estimates for the logistic regression are unstable.
+
+- If the distribution of the predictors is approximately _normal_ in each of the classes and the _sample size is small_, the generative models could perform better and more stable.
+
+
+::: notes
+$\bx$ is variable whose value is generated from some distribution given a value of $y$
+:::
+
+
+
+
+## Generative Modeling
+
+- To infer/predict $p(y = k \mid \bx)$ from a generative model, Bayes theorem comes into play:
+
+:::{style="font-size: 0.8em;"}
+$$\begin{align} p(y = k \mid \bx) &= \frac{p(y = k, \bx)}{p(\bx)} = \frac{p(y = k)p(\bx \mid y = k) }{p(\bx)} = \frac{p(y = k)p(\bx \mid y = k)}{\sum_{l=1}^K p(y = k)p(\bx \mid y = l)}\\
+&=\frac{\pi_kf_k(\bx)}{\sum_{l=1}^K\pi_lf_l(\bx)}\end{align}$$
+:::
+
+- To get the [posterior]{.green} $p(y = k \mid \bx)$, we need 
+  + [prior]{.green} $\pi_k = p(y = k)$
+  + [likelihood]{.green} $f_k(\bx) = p(\bx \mid y = k)$
+
+:::{.callout-note}
+
+:::{style="font-size: 1.1em;"}
+Different generative models use different priors and likelihoods, resulting in different strengths and weakness.
+:::
+
+:::
+
+
+## Bayes Decision Boundary
+
+:::{.question}
+How do we find/estimate the **Bayes decision boundary** generated by the Bayes classifier?
+:::
+
+```{r}
+  library(mvtnorm)
+  set.seed(1)
+  
+  # generate two sets of samples
+  Sigma = matrix(c(1, 0.5, 0.5, 1), 2, 2)
+  mu1 = c(0.5, -1)
+  mu2 = c(-0.5, 0.5)
+  
+  # define prior
+  p1 = 0.4 
+  p2 = 0.6
+    
+  n = 1000
+  
+  Class1 = rmvnorm(n*p1, mean = mu1, sigma = Sigma)
+  Class2 = rmvnorm(n*p2, mean = mu2, sigma = Sigma)
+  par(mar = c(4, 4.5, 0, 0))
+  plot(Class1, pch = 19, col = scales::alpha("#003366", 0.4), xlim = c(-4, 4), ylim = c(-4, 4), xlab = "X1", ylab = "X2", las = 1, cex.lab = 1.5)
+  points(Class2, pch = 19, col = scales::alpha("#FFCC00", 0.4))
+  a <- log(p1/p2) - (0.5) * t(mu1 + mu2) %*% solve(Sigma) %*% (mu1 - mu2)
+  b <- solve(Sigma) %*% (mu1 - mu2)
+  b0 <- -a/b[2]
+  b1 <- -b[1]/b[2]
+  abline(a = b0, b = b1, col = 2, lwd = 4)
+  points(0.5, -1, pch = 15, col = 2, cex = 3)
+  points(-0.5, 0.5, pch = 15, col = 2, cex = 3)
+  # contour(Class1)
+  legend("topleft", c("Class 1", "Class 2"), col = c("#003366", "#FFCC00"), cex = 1, pch = 19, bty = "n")
+```
+
+
+
+## Linear Discriminant Analysis (LDA)
+
+:::{style="font-size: 0.8em;"}
+$$\begin{align} p(y = k \mid \bx)  = \frac{p(y = k)p(\bx \mid y = k)}{\sum_{l=1}^K p(y = k)p(\bx \mid y = l)} =\frac{\pi_kf_k(\bx)}{\sum_{l=1}^K\pi_lf_l(\bx)}\end{align}$$
+
+:::
+
+
+- Estimate the prior $\pi_k = p(y = k)$ using *the proportion of the training labels* that belong to the $k$th class: $$\hat{\pi}_k = n_k / n $$
+
+```{r}
+#| echo: true
+table(Default$default)/length(Default$default)
+```
+
+- [**LDA assumption for $f_k(\bx)$**]{.green}: $\color{blue}{(\bx \mid y = k) \sim N_p\left(\bmu_k, \Sigma \right)}$
+  + $\bmu_k$: class-specific mean vector
+  + $\Sigma$: covariance matrix [_common_]{.green} to all $K$ classes
+
+
+
+## Two Multivariate Normals with Common Covariance
+
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+$\color{blue}{(\bx \mid y = k) \sim N_p\left(\bmu_k, \Sigma \right)}$
+
+- $\bmu_1 = (0.5, -1)'$, $\bmu_2 = (-0.5, 0.5)'$
+
+- $\Sigma = \begin{pmatrix} 1 & 0.5 \\ 0.5 & 1 \end{pmatrix}$
+
+
+- $\pi_1 = 0.4$, $\pi_2 = 0.6$
+
+- Each class has its own predictor mean.
+
+- The predictor's variability are the *same* for the two classes.
+
+:::
+
+
+
+
+::: {.column width="60%"}
+
+```{r}
+#| message: false
+#| out-width: 100%
+library(plotly)
+    par(mar = c(2, 2, 0, 0))
+    # generate two densities 
+    x1 = seq(-2.5, 2.5, 0.1)
+    x2 = seq(-2.5, 2.5, 0.1)
+    mu1 = c(0.5, -0.5)
+    mu2 = c(-1, 0.5)
+    data = expand.grid(x1, x2)
+    p1 = 0.6
+    p2 = 0.4
+    # the density function after removing some constants
+    sigma_inv = solve(Sigma)
+    d1 = apply(data, 1, function(x) exp(-0.5 * t(x - mu1) %*% sigma_inv %*% (x - mu1))*p1 )
+    d2 = apply(data, 1, function(x) exp(-0.5 * t(x - mu2) %*% sigma_inv %*% (x - mu2))*p2 )
+    
+    # plot the densities
+    plot_ly(x = x1, y = x2) %>% 
+            add_surface(z = matrix(d1, length(x1), length(x2)), colorscale = list(c(0,"rgb(252,207,230)"), c(1,"rgb(128,0,64)"))) %>% 
+            layout(paper_bgcolor='transparent') %>% 
+            add_surface(z = matrix(d2, length(x1), length(x2))) %>% 
+            layout(scene = list(xaxis = list(title = "X1"), 
+                                yaxis = list(title = "X2"),
+                                zaxis = list(title = "Normal Densities")))
+```
+
+:::
+
+::::
+
+::: notes
+plot_ly has mu1 mu2 problems! Be careful!
+::: 
+
+
+
+## Parameter Estimation for LDA
+
+$\color{blue}{(\bx \mid y = k) \sim N_p\left(\bmu_k, \Sigma \right)}$
+
+- Estimating $p(\bx \mid y = k)$ is reduced to estimating $\bmu_1, \dots, \bmu_K$ and $\Sigma$.
+
+. . .
+
+:::: {.columns}
+
+::: {.column width="70%"}
+
+- Centroid/sample mean: $\widehat{\bmu}_k = \frac{1}{n_k} \sum_{i: \,y_i = k} \bx_i$
+- Pooled covariance matrix:
+    $$\widehat \Sigma = \frac{1}{n-K} \sum_{k=1}^K \sum_{i : \, y_i = k} (\bx_i - \widehat{\bmu}_k) (\bx_i - \widehat{\bmu}_k)' = \sum_{k=1}^K \frac{n_k-1}{n-K}\widehat \Sigma_k$$
+    where $\widehat \Sigma_k = \frac{1}{n_k-1}\sum_{i : \, y_i = k} (\bx_i - \widehat{\bmu}_k) (\bx_i - \widehat{\bmu}_k)'$
+:::    
+
+
+::: {.column width="30%"}
+
+```{r}
+mu1_lda = colMeans(Class1)
+mu2_lda = colMeans(Class2)
+C1_centered = scale(Class1, center = TRUE, scale = FALSE)
+C2_centered = scale(Class2, center = TRUE, scale = FALSE)
+Sigma_lda = (t(C1_centered) %*% C1_centered + t(C2_centered) %*% C2_centered ) / (n - 2)
+cat("mu1_hat =")
+round(mu1_lda, 2)
+cat("mu2_hat =")
+round(mu2_lda, 2)
+cat("Sigma_hat = ")
+round(Sigma_lda, 2)
+```
+:::   
+::::
+
+
+## Decision Boundary by LDA
+
+```{r}
+  Sigma = matrix(c(1, 0.5, 0.5, 1), 2, 2)
+  mu1 = c(0.5, -1)
+  mu2 = c(-0.5, 0.5)
+  n = 1000
+    # calculate the centers
+    mu1_lda = colMeans(Class1)
+    mu2_lda = colMeans(Class2)
+    
+    # the centered data
+    C1_centered = scale(Class1, center = TRUE, scale = FALSE)
+    C2_centered = scale(Class2, center = TRUE, scale = FALSE)
+
+    # pooled covariance matrix
+    Sigma_lda = ( t(C1_centered) %*% C1_centered + t(C2_centered) %*% C2_centered ) / (n - 2)
+    
+    # the prior proportions
+    pi1 = nrow(Class1) / n
+    pi2 = nrow(Class2) / n
+    
+    # generate some new data
+    # testdata = matrix(runif(600, -4, 4), 300, 2)
+    
+    # center the testing data using mu1 or mu2
+    # test1 = sweep(testdata, MARGIN = 2, STATS = mu1, FUN = "-")
+    # test2 = sweep(testdata, MARGIN = 2, STATS = mu2, FUN = "-")
+
+    # calculate and compare the posteriori probability 
+    # f1 = - 0.5 * rowSums(test1 %*% solve(Sigma) * test1) + log(pi1)
+    # f2 = - 0.5 * rowSums(test2 %*% solve(Sigma) * test2) + log(pi2)
+  
+    # plot the decisions
+    # plot(testdata, pch = 19, xlab = "X1", ylab = "X2",
+    #      col = ifelse(f1 > f2, "darkorange", "deepskyblue"),
+    #      xlim = c(-4, 4), ylim = c(-4, 4))
+  par(mar = c(4, 4, 0, 0))
+  plot(Class1, pch = 19, col = scales::alpha("#003366", 0.4), xlim = c(-4, 4), ylim = c(-4, 4), xlab = "X1", ylab = "X2", las = 1)
+  points(Class2, pch = 19, col = scales::alpha("#FFCC00", 0.4))
+  a <- log(p1/p2) - (0.5) * t(mu1 + mu2) %*% solve(Sigma) %*% (mu1 - mu2)
+  b <- solve(Sigma) %*% (mu1 - mu2)
+  b0 <- -a/b[2]
+  b1 <- -b[1]/b[2]
+  abline(a = b0, b = b1, col = 2, lwd = 4)
+  points(0.5, -1, pch = 15, col = 2, cex = 3)
+  points(-0.5, 0.5, pch = 15, col = 2, cex = 3)
+  
+  a_lda <- log(pi1/pi2) - (0.5) * t(mu1_lda + mu2_lda) %*% solve(Sigma_lda) %*% (mu1_lda - mu2_lda)
+  b_lda <- solve(Sigma_lda) %*% (mu1_lda - mu2_lda)
+  b0_lda <- -a_lda/b_lda[2]
+  b1_lda <- -b_lda[1]/b_lda[2]
+  
+  abline(a = b0_lda, b = b1_lda, col = 1, lwd = 4, lty = 2)
+  legend("topleft", c("Bayes", "LDA"), lty = c(1, 2), lwd = 3, col = c(2, 1),
+         bty = "n")
+```
+
+
+## Discriminant Function
+
+The likelihood is Gaussian
+
+:::{style="font-size: 0.9em;"}
+
+$$f_k(x) = \frac{1}{(2\pi)^{p/2} |\Sigma|^{1/2}} \exp\left[ -\frac{1}{2} (\bx - \bmu_k)' \Sigma^{-1} (\bx - \bmu_k) \right]$$
+:::
+
+. . .
+
+:::{style="font-size: 0.9em;"}
+
+The log-likelihood is
+
+$$\begin{align}
+\log f_k(\bx) =&~ -\log \big((2\pi)^{p/2} |\Sigma|^{1/2} \big) - \frac{1}{2} (\bx - \bmu_k)'\Sigma^{-1} (\bx - \bmu_k) \\
+    =&~ - \frac{1}{2} (\bx - \bmu_k)' \Sigma^{-1} (\bx - \bmu_k) + \text{Constant}
+\end{align}$$
+
+:::
+
+. . .
+
+The __maximum a posteriori__ estimate is
+
+:::{style="font-size: 0.9em;"}
+
+$$\begin{align}
+\widehat f(\bx) =& ~\underset{k}{\arg\max} \,\, \log \big( \pi_k f_k(\bx) \big) \\
+    =& ~\underset{k}{\arg\max} \,\, - \frac{1}{2} (\bx - \bmu_k)' \Sigma^{-1} (\bx - \bmu_k) + \log(\pi_k)
+\end{align}$$
+
+:::
+
+
+
+## Discriminant Function
+
+:::{style="font-size: 0.9em;"}
+$$\begin{align}
+\widehat f(\bx) =& ~\underset{k}{\arg\max} \,\, - \frac{1}{2} (\bx - \bmu_k)' \Sigma^{-1} (\bx - \bmu_k) + \log(\pi_k)
+\end{align}$$
+:::
+
+
+- $(\bx - \bmu_k)' \Sigma^{-1} (\bx - \bmu_k)$ is the **Mahalanobis distance** between $\bx$ and the centroid $\bmu_k$.
+- [Classify $y$ so that its $\bx$ and the centroid of the labeled class is the closest (after adjusting for the prior).]{.green}
+$$\begin{align}
+& - \frac{1}{2} (\bx - \bmu_k)' \Sigma^{-1} (\bx - \bmu_k) + \log(\pi_k)\\
+&=~ \bx' \underbrace{\Sigma^{-1} \bmu_k}_{\bw_k} \underbrace{- \frac{1}{2}\bmu_k' \Sigma^{-1} \bmu_k + \log(\pi_k)}_{b_k} + \text{const of } k \\
+&=~ \bx' \bw_k + b_k + \text{const of } k\\
+&=~ \delta_k(\bx) + \text{const of } k
+\end{align}$$
+where $\delta_k(\bx)$ the **discriminant function** which is [*linear*]{.green} in $\bx$.
+
+
+
+::: notes
+by incorporating the covariance matrix and adjusting the for prior. 
+Note that anything that does not depends on the class index $k$ is irrelevant to the decision. 
+:::
+
+
+## Discriminant Function
+
+:::: {.columns}
+
+:::{.column width="40%"}
+
+- The decision boundary of LDA is a [*linear*]{.green} function of $\bx$.
+
+- The boundary between two classes $k$ and $l$ is where they have the [*same density value*]{.green}.
+
+$$\begin{align}
+&\delta_k(\bx) = \delta_l(\bx) \\
+&\Leftrightarrow \quad \bx' \bw_k + b_k = \bx' \bw_l + b_l \\
+&\Leftrightarrow \quad \bx' (\bw_k - \bw_l) + (b_k - b_l) = 0. \\
+\end{align}$$
+
+:::{.fragment}
+
+$$\begin{align}
+&\delta_k(\bx) - \delta_l(\bx) \\
+\propto & \quad \log \left(\pi_k f_k(\bx)\right) -  \log \left(\pi_l f_l(\bx))\right)\\
+\propto & \quad \log \left(P(Y = k \mid \bx)\right) -  \log \left(P(Y = l \mid \bx)\right) \\
+\propto & \quad \log \left( \frac{P(Y = k \mid \bx)}{P(Y = l \mid \bx)}\right)
+\end{align}$$
+
+:::
+
+:::
+
+
+:::{.column width="60%"}
+
+
+```{r}
+#| message: false
+    library(plotly)
+    par(mar = c(2, 2, 0, 0))
+    # generate two densities 
+    x1 = seq(-2.5, 2.5, 0.1)
+    x2 = seq(-2.5, 2.5, 0.1)
+    # mu1 = c(0.5, -0.5)
+    # mu2 = c(-1, 0.5)
+    data = expand.grid(x1, x2)
+    
+    mu1 = c(mu1_lda[1], mu2_lda[1])
+    mu2 = c(mu1_lda[2], mu2_lda[2])
+    p2 = pi2
+    p1 = pi1
+    # the density function after removing some constants
+    sigma_inv_lda = solve(Sigma_lda)
+    # d1_lda = apply(data, 1, function(x) exp(-0.5 * t(x - mu1_lda) %*% sigma_inv_lda %*% (x - mu1_lda))*pi1 )
+    # d2_lda = apply(data, 1, function(x) exp(-0.5 * t(x - mu2_lda) %*% sigma_inv_lda %*% (x - mu2_lda))*pi2 )
+    
+    d1_lda = apply(data, 1, function(x) exp(-0.5 * t(x - mu1) %*% sigma_inv_lda %*% (x - mu1))*p2 )
+    d2_lda = apply(data, 1, function(x) exp(-0.5 * t(x - mu2) %*% sigma_inv_lda %*% (x - mu2))*p1 )
+    
+    # plot the densities
+    plot_ly(x = x1, y = x2) %>% 
+            add_surface(z = matrix(d1_lda, length(x1), length(x2)), colorscale = list(c(0,"rgb(252,207,230)"), c(1,"rgb(128,0,64)"))) %>% 
+            layout(paper_bgcolor='transparent') %>% 
+            add_surface(z = matrix(d2_lda, length(x1), length(x2))) %>% 
+            layout(scene = list(xaxis = list(title = "X1"), 
+                                yaxis = list(title = "X2"),
+                                zaxis = list(title = "Normal Densities")))
+```
+
+:::
+::::
+
+
+
+## Test Data {visibility="hidden"}
+
+```{r}
+    # calculating Wk
+    w1 = solve(Sigma_lda) %*% mu1_lda
+    w2 = solve(Sigma_lda) %*% mu2_lda
+    
+    # calculating bk
+    b1 = - 0.5 * t(mu1_lda) %*% solve(Sigma_lda) %*% mu1_lda + log(pi1)
+    b2 = - 0.5 * t(mu2_lda) %*% solve(Sigma_lda) %*% mu2_lda + log(pi2)
+    
+    # predicting new data 
+    testdata = matrix(runif(600, -4, 4), 300, 2)
+
+    # calculate and compare the posteriori probability 
+    f1 = testdata %*% w1 + as.numeric(b1)
+    f2 = testdata %*% w2 + as.numeric(b2)
+  
+    # plot the decisions
+    plot(testdata, pch = 19, xlab = "X1", ylab = "X2",
+         col = ifelse(f1 > f2, "#003366", "#FFCC00"),
+         xlim = c(-4, 4), ylim = c(-4, 4))
+```
+
+
+## Interpretation of LDA
+
+::: xsmall
+
+```{r}
+#| fig-cap: ESL Fig 4.9
+knitr::include_graphics("./images/10-generative/lda.png")
+```
+
+:::
+
+
+::: notes
+Check ESL
+
+Find the linear combination $Z = a'X$ such that the between class variance is maximized relative to the within-class variance.
+
+Again, the between class variance is the variance of the class means of
+Z, and the within class variance is the pooled variance about the means.
+Figure 4.9 shows why this criterion makes sense. Although the direction
+joining the centroids separates the means as much as possible (i.e., maximizes
+the between-class variance), there is considerable overlap between
+the projected classes due to the nature of the covariances. By taking the
+covariance into account as well, a direction with minimum overlap can be
+found.
+
+Gaussian classification with common covariances leads to linear decision
+boundaries. Classification can be achieved by sphering the data
+with respect to W, and classifying to the closest centroid (modulo
+log πk) in the sphered space.
+Since only the relative distances to the centroids count, one can confine
+the data to the subspace spanned by the centroids in the sphered
+space.
+This subspace can be further decomposed into successively optimal
+subspaces in term of centroid separation. This decomposition is identical
+to the decomposition due to Fisher.
+:::
+
+
+
+## `MASS::lda()` [^1]
+
+
+[^1]: In python, [`from sklearn.discriminant_analysis import LinearDiscriminantAnalysis`](https://scikit-learn.org/stable/modules/generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html)
+
+
+:::: {.columns}
+
+:::{.column width="65%"}
+
+
+**LDA**
+
+```{r}
+#| echo: true
+lda_fit <- MASS::lda(default ~ balance, data = Default)
+lda_pred <- predict(lda_fit, data = Default)
+(lda_conf <- table(lda_pred$class, Default$default, 
+                   dnn = c("Predicted", "Actual")))
+```
+
+  + training accuracy is `r round(sum(diag(table(lda_pred$class, Default$default)))/nrow(Default), 3)`
+  + sensitivity is `r lda_conf[2, 2]/sum(lda_conf[, 2])`
+
+:::
+
+
+
+:::{.column width="35%"}
+
+**Logistic Regression**
+
+```{r}
+#| echo: false
+logit_fit <- glm(default ~ balance, data = Default, family = "binomial")
+logit_pred <- predict(logit_fit, type = "response")
+conf_mat_logi <- table(logit_pred > 0.5, Default$default)
+conf_mat_logi
+```
+
+  + training accuracy is `r round(sum(diag(table(logit_pred > 0.5, Default$default)))/nrow(Default), 3)`
+  + sensitivity is `r conf_mat_logi[2, 2]/sum(conf_mat_logi[, 2])`
+  
+:::
+
+::::
+
+
+
+## Quadratic Discriminant Analysis (QDA)
+
+:::: {.columns}
+
+::: {.column width="50%"}
+- [**LDA assumption for $f_k(\bx)$**]{.green}: $\color{blue}{(\bx \mid y = k) \sim N_p\left(\bmu_k, \Sigma \right)}$
+  + $\Sigma$: covariance matrix [_common_]{.green} to all K classes
+  
+:::
+
+::: {.column width="50%"}
+- [**QDA assumption for $f_k(\bx)$**]{.green}: $\color{blue}{(\bx \mid y = k) \sim N_p\left(\bmu_k, \Sigma_k \right)}$
+  + $\Sigma_k$: each class has [_its own_]{.green} covariance matrix
+:::
+
+::::
+
+. . .
+
+
+The discriminant function for QDA is 
+
+$$\begin{align} \delta_k(\bx) &= - \frac{1}{2} (\bx - \bmu_k)' \Sigma_k^{-1} (\bx - \bmu_k) - \frac{1}{2} \log |\Sigma_k |+ \log(\pi_k) \\
+&= \bx' \bW_k \bx + \bx'\bw_k + b_k \end{align}$$ which is a [_quadratic_]{.green} function of $\bx$.
+
+. . .
+
+The boundary between class $k$ and $l$ for QDA is 
+
+$$\begin{align}
+\bx' (\bW_k - \bW_l) \bx + \bx' (\bw_k - \bw_l) + (b_k - b_l) = 0\\
+\end{align}$$
+
+
+
+## Parameter Estimation for QDA
+
+The estimation procedure is almost the same as LDA.
+
+- $\hat{\pi}_k = n_k / n$
+
+- Centroids: $\widehat{\bmu}_k = \frac{1}{n_k} \sum_{i: \,y_i = k} \bx_i$
+
+- *Individual* covariance matrix:
+    $$\widehat \Sigma_k = \frac{1}{n_k-1}\sum_{i : \, y_i = k} (\bx_i - \widehat{\bmu}_k) (\bx_i - \widehat{\bmu}_k)'$$
+
+## Two Multivariate Normals with Different Covariance Matrices
+
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+$\color{blue}{(\bx \mid y = k) \sim N_p\left(\bmu_k, \Sigma_k \right)}$
+
+- $\bmu_1 = (0.5, -1)'$
+
+- $\bmu_2 = (-0.5, 0.5)'$
+
+- $\Sigma_1 = \begin{pmatrix} 1 & 0.5 \\ 0.5 & 1 \end{pmatrix}$
+
+- $\Sigma_2 = \begin{pmatrix} 1 & -0.5 \\ -0.5 & 1 \end{pmatrix}$
+
+- $\pi_1 = 0.4$, $\pi_2 = 0.6$
+
+- Each class has its own predictor mean and covariance matrix.
+
+:::
+
+::: {.column width="60%"}
+
+```{r}
+    mu1 = c(0.5, -0.5)
+    mu2 = c(-1, 0.5)
+    data = expand.grid(x1, x2)
+    p1 = 0.6
+    p2 = 0.4
+    
+    Sigma2 = matrix(c(1, -0.5, -0.5, 1), 2, 2)
+    sigma2_inv = solve(Sigma2)
+    
+    # the density function after removing some constants
+    d1 = apply(data, 1, function(x) 1/sqrt(det(Sigma2))*exp(-0.5 * t(x - mu1) %*% sigma2_inv %*% (x - mu1))*p1 )
+    d2 = apply(data, 1, function(x) 1/sqrt(det(Sigma))*exp(-0.5 * t(x - mu2) %*% sigma_inv %*% (x - mu2))*p2 )
+    
+    # plot the densities
+    plot_ly(x = x1, y = x2) %>% 
+            add_surface(z = matrix(d1, length(x1), length(x2)), colorscale = list(c(0,"rgb(154, 219, 245)"),c(1,"rgb(0,90,124)"))) %>% 
+            layout(paper_bgcolor='transparent') %>% 
+            add_surface(z = matrix(d2, length(x1), length(x2))) %>% 
+            layout(scene = list(xaxis = list(title = "X1"), 
+                                yaxis = list(title = "X2"),
+                                zaxis = list(title = "Log Normal Densities")))  
+```
+
+:::
+
+::::
+
+## Decision Boundary by QDA
+
+```{r}
+  Sigma = matrix(c(1, 0.5, 0.5, 1), 2, 2)
+  mu1 = c(0.5, -1)
+  mu2 = c(-0.5, 0.5)
+  n = 1000
+    # calculate the centers
+    mu1_lda = colMeans(Class1)
+    mu2_lda = colMeans(Class2)
+    
+    # the centered data
+    C1_centered = scale(Class1, center = TRUE, scale = FALSE)
+    C2_centered = scale(Class2, center = TRUE, scale = FALSE)
+
+    # pooled covariance matrix
+    Sigma_lda = ( t(C1_centered) %*% C1_centered + t(C2_centered) %*% C2_centered ) / (n - 2)
+    
+    # the prior proportions
+    pi1 = nrow(Class1) / n
+    pi2 = nrow(Class2) / n
+    
+    # generate some new data
+    # testdata = matrix(runif(600, -4, 4), 300, 2)
+    
+    # center the testing data using mu1 or mu2
+    # test1 = sweep(testdata, MARGIN = 2, STATS = mu1, FUN = "-")
+    # test2 = sweep(testdata, MARGIN = 2, STATS = mu2, FUN = "-")
+
+    # calculate and compare the posteriori probability 
+    # f1 = - 0.5 * rowSums(test1 %*% solve(Sigma) * test1) + log(pi1)
+    # f2 = - 0.5 * rowSums(test2 %*% solve(Sigma) * test2) + log(pi2)
+  
+    # plot the decisions
+    # plot(testdata, pch = 19, xlab = "X1", ylab = "X2",
+    #      col = ifelse(f1 > f2, "darkorange", "deepskyblue"),
+    #      xlim = c(-4, 4), ylim = c(-4, 4))
+    par(mar = c(4, 4, 0, 0))
+  plot(Class1, pch = 19, col = scales::alpha("#003366", 0.4), xlim = c(-4, 4), ylim = c(-4, 4), xlab = "X1", ylab = "X2", las = 1)
+  points(Class2, pch = 19, col = scales::alpha("#FFCC00", 0.4))
+  a <- log(p1/p2) - (0.5) * t(mu1 + mu2) %*% solve(Sigma) %*% (mu1 - mu2)
+  b <- solve(Sigma) %*% (mu1 - mu2)
+  b0 <- -a/b[2]
+  b1 <- -b[1]/b[2]
+  abline(a = b0, b = b1, col = 2, lwd = 4)
+  points(0.5, -1, pch = 15, col = 2, cex = 3)
+  points(-0.5, 0.5, pch = 15, col = 2, cex = 3)
+  
+  a_lda <- log(pi1/pi2) - (0.5) * t(mu1_lda + mu2_lda) %*% solve(Sigma_lda) %*% (mu1_lda - mu2_lda)
+  b_lda <- solve(Sigma_lda) %*% (mu1_lda - mu2_lda)
+  b0_lda <- -a_lda/b_lda[2]
+  b1_lda <- -b_lda[1]/b_lda[2]
+  
+  abline(a = b0_lda, b = b1_lda, col = 1, lwd = 4, lty = 2)
+
+  
+  #### QDA
+df <- data.frame(x1 = c(Class1[, 1], Class2[, 1]), 
+                 x2 = c(Class1[, 2], Class2[, 2]), 
+                 y = as.factor(c(rep(0, 400), rep(1, 600))))
+
+fit_qda = MASS::qda(y ~x1+x2 , data=df)
+# plot(df$x1,df$x2,pch=19,
+#      col=c("blue","red")[1+(df$y=="1")])
+
+vu <- seq(-5, 5, by = 0.01)
+# vu <- seq(0, 1, by = 0.1)
+predqda = function(x,y) predict(fit_qda, data.frame(x1=x,x2=y))$class==1
+vv = outer(vu, vu, predqda)
+contour(vu, vu, vv, add = TRUE, lwd = 3, levels = .5, col = "green4",
+        lty = 3)
+legend("topleft", c("Bayes", "LDA", "QDA"), lty = c(1, 2, 3), 
+         lwd = 3, col = c(2, 1, "green4"),
+         bty = "n")
+  
+  
+# fit_lda = MASS::lda(y ~x1+x2 , data=df)
+# # plot(df$x1,df$x2,pch=19,
+# #      col=c("blue","red")[1+(df$y=="1")])
+# 
+# # vu <- seq(-4, 4, by = 0.01)
+# # vu <- seq(0, 1, by = 0.1)
+# predlda=function(x,y) predict(fit_lda, data.frame(x1=x,x2=y))$class==1
+# vv = outer(vu, vu, predlda)
+# contour(vu, vu, vv, add = TRUE, lwd = 3, levels = .5, col = 5,
+#         lty = 3)
+
+ # Sigma_1 = t(C1_centered) %*% C1_centered  / (nrow(Class1) - 1)
+ # Sigma_2 = t(C2_centered) %*% C2_centered  / (nrow(Class2) - 1)
+ # Sigma_1_inv <- solve(Sigma_1)
+ # Sigma_2_inv <- solve(Sigma_2)
+ # bk1 <- log(pi1) - (0.5) * t(mu1_lda) %*% Sigma_1_inv %*% mu1_lda - (0.5) * determinant(Sigma_1)$modulus[1]
+ # bk2 <- log(pi2) - (0.5) * t(mu2_lda) %*% Sigma_2_inv %*% mu2_lda - (0.5) * determinant(Sigma_2)$modulus[1]
+ # bb <- bk1 - bk2
+ # w1 <- Sigma_1_inv %*% (mu1_lda)
+ # w2 <- Sigma_2_inv %*% (mu2_lda)
+ # ww <- w1 - w2
+ # W1 <- 0.5*Sigma_1_inv
+ # W2 <- 0.5*Sigma_2_inv
+ # S <- W1 - W2
+ # A <- S[2, 2]
+ # B <- ww[2] + 2*S[1, 2]*x1
+ # C <- S[1, 1]*x1^2 + ww[1]*x1 + as.vector(bb)
+ # x2_qda <- (-B - sqrt(B^2 - 4*A*C)) / (2*A)
+ # lines(x1, x2_qda)
+```
+
+
+::: notes
+https://freakonometrics.hypotheses.org/tag/qda
+:::
+
+
+## `MASS::qda`[^1]
+
+
+[^1]: In python, [`from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis`](https://scikit-learn.org/stable/modules/generated/sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.html)
+
+**LDA**
+
+```{r}
+lda_fit <- MASS::lda(default ~ balance, data = Default)
+lda_pred <- predict(lda_fit, data = Default)
+table(lda_pred$class, Default$default, dnn = c("Predicted", "Actual"))
+```
+
+**QDA**
+
+```{r}
+#| echo: true
+qda_fit <- MASS::qda(default ~ balance, data = Default)
+qda_pred <- predict(qda_fit, data = Default)
+(qda_conf <- table(qda_pred$class, Default$default, dnn = c("Predicted", "Actual")))
+```
+
+  + training accuracy is `r round(sum(diag(table(qda_pred$class, Default$default)))/nrow(Default), 3)`
+  + sensitivity is `r qda_conf[2, 2]/sum(qda_conf[, 2])`
+  
+  
+  
+## Naive Bayes (NB)
+
+:::::{style="font-size: 0.9em;"}
+
+:::: {.columns}
+
+::: {.column width="30%"}
+
+- [**LDA assumption for $f_k(\bx)$**]{.green}: $\color{blue}{(\bx \mid y = k) \sim N_p\left(\bmu_k, \Sigma \right)}$
+  + $\Sigma$: covariance matrix [_common_]{.green} to all K classes
+  
+:::
+
+::: {.column width="30%"}
+
+- [**QDA assumption for $f_k(\bx)$**]{.green}: $\color{blue}{(\bx \mid y = k) \sim N_p\left(\bmu_k, \Sigma_k \right)}$
+  + $\Sigma_k$: each class has [_its own_]{.green} covariance matrix
+
+:::
+
+::: {.column width="40%"}
+
+- [**NB assumption for $f_k(\bx)$**]{.green}: 
+  + features within each class are [independent]{.green}!
+  + $f_k(\bx) = f_{k1}(x_1) \times f_{k2}(x_2) \times \cdots \times f_{kp}(x_p)$
+  
+:::
+
+::::
+
+:::::
+
+
+. . .
+
+- Considering the *joint distribution* of predictors is a pain when $p$ is large.
+
+- We don't believe $p$ predictors are not associated at all, but this "naive" assumption leads to decent results when *$n$ is not large enough relative to $p$*.
+
+- The naive independence assumption *introduces some bias, but reduces variance*.
+
+
+
+
+. . .
+
+:::{style="font-size: 0.8em;"}
+$$\begin{align} p(y = k \mid \bx)  =\frac{\pi_kf_k(\bx)}{\sum_{l=1}^K\pi_lf_l(\bx)} = \frac{\pi_k\prod_{j=1}^p f_{kj(x_j)}}{\sum_{l=1}^K\pi_l\prod_{j=1}^p f_{lj(x_j)}} \end{align}$$
+
+:::
+
+
+
+::: notes
+estimating a joint distribution requires such a huge amount of data
+:::
+
+
+
+## Options for Estimating $f_{kj}(x_j)$
+
+- Numerical $X_j$
+  + Parametric:
+$$(X_j \mid Y = k) \sim N\left(\mu_{jk}, \sigma_{jk}^2 \right).$$ It's QDA with additional assumption that $\Sigma_k$ is diagonal.
+  + Non-parametric: Estimate $f_{kj}(x_j)$ by (discrete) histogram, (continuous) kernel density estimator, etc.
+
+
+. . .
+
+- Categorical $X_j$
+
+  + $f_{kj}(x_j) \approx$ the proportion of training data for $x_j$ corresponding to class $k$.
+
+
+
+##
+
+::: center
+**Class 1**
+:::
+
+```{r}
+#| eval: true
+#| out-width: 55%
+knitr::include_graphics("./images/10-generative/4_10a.png")
+```
+
+::: center
+**Class 2**
+:::
+
+::: xsmall
+
+```{r}
+#| eval: true
+#| out-width: 55%
+#| fig-cap: "ISL Fig. 4.10. Left to right: estimated density of $x_1$, $x_2$ and estimated probability of $x_3$."
+knitr::include_graphics("./images/10-generative/4_10b.png")
+```
+
+:::
+
+## `e1071::naiveBayes()` [^1]
+
+[^1]: In Python, [`from sklearn.naive_bayes import GaussianNB`](https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html#sklearn.naive_bayes.GaussianNB)
+
+**QDA**
+
+```{r}
+#| echo: false
+qda_fit <- MASS::qda(default ~ balance, data = Default)
+qda_pred <- predict(qda_fit, data = Default)
+table(qda_pred$class, Default$default, dnn = c("Predicted", "Actual"))
+```
+
+
+**Naive Bayes**
+
+- By default, each feature is Gaussian distributed.
+
+```{r}
+#| echo: true
+nb_fit <- e1071::naiveBayes(default ~ balance, data = Default)
+nb_pred <- predict(nb_fit, Default)
+(nb_conf <- table(nb_pred, Default$default))
+```
+
+  + training accuracy is `r round(sum(diag(table(nb_pred, Default$default)))/nrow(Default), 3)`
+  + sensitivity is `r nb_conf[2, 2]/sum(nb_conf[, 2])`
+
+
+
+
+# Comparison of LR, LDA, QDA, and NB
+
+## Log Odds of LR and LDA
+
+Suppose class $K$ is the baseline.
+
+- [**LR**]{.green}
+
+$$\log \left( \frac{P(Y = k \mid \bx)}{P(Y = K \mid \bx)}\right) = \beta_{k0} + \beta_{k1}x_{1} + \dots + \beta_{kp}x_{p}$$
+
+. . .
+
+- [**LDA**]{.green}
+
+$$\log \left( \frac{P(Y = k \mid \bx)}{P(Y = K \mid \bx)}\right) = a_k + \sum_{j=1}^pc_{kj}x_j$$ where $a_k = \log(\pi_k / \pi_K) - \frac{1}{2}(\bmu_k + \bmu_K)'\Sigma^{-1}(\bmu_k - \bmu_K)$ and $c_{kj}$ is the $j$th element of $\Sigma^{-1}(\bmu_k - \bmu_K)$.
+
+
+Both log odds are [_linear_]{.green} in $\bx$.
+
+## Log Odds of QDA and NB
+
+
+- [**QDA**]{.green}
+
+$$\log \left( \frac{P(Y = k \mid \bx)}{P(Y = K \mid \bx)}\right) = a_k + \sum_{j=1}^pc_{kj}x_j + \sum_{j=1}^p\sum_{l=1}^p d_{kjl}x_jx_l$$
+The log odds is [_quadratic_]{.green} in $\bx$, where $a_k$, $c_{kj}$ and $d_{kjl}$ are functions of $\pi_k$, $\pi_K$, $\bmu_k$, $\bmu_K$, $\Sigma_k$ and $\Sigma_K$.
+
+. . .
+
+- [**NB**]{.green}
+
+$$\log \left( \frac{P(Y = k \mid \bx)}{P(Y = K \mid \bx)}\right) = a_k + \sum_{j=1}^pg_{kj}(x_j)$$ where $a_k = \log(\pi_k / \pi_K)$ and $g_{kj}(x_j) = \log\left( \frac{f_{kj}(x_j)}{f_{Kj}(x_j)}\right)$.
+
+The log odds takes the form of a [_generalized additive model_]{.green}!
+
+
+## Comparison of Log Odds
+- [_LDA is a special case of QDA_]{.green} with $d_{kjl} = 0$ for all $k, j$ and $l$. $(\Sigma_1 = \cdots = \Sigma_k = \Sigma)$
+
+- [_Any classifier with a linear decision boundary is a special case of NB_]{.green} with $g_{kj}(x_j) = c_{kj}x_j.$
+  + LDA is a special case of NB. Really !? 😲
+
+- [_NB is a special case of LDA_]{.green} if $f_{kj}(x_j) = N\left(\mu_{jk}, \sigma_{j}^2 \right)$. $(\Sigma = \text{diag}(\sigma_1^2, \dots, \sigma_p^2))$
+
+- [_Neither QDA nor NB is a special case of the other_]{.green}
+  + NB is more 
+    * _flexible_ for any transformation of $x_j$, $g_{kj}(x_j)$.
+    * _restrictive_ because of its pure _additive_ fit with no quadratic interactions $d_{kjl}x_jx_l$.
+
+
+## Which Method to Use
+
+- None of these methods uniformly dominates the others.
+
+- The choice of method depends on 
+  + the true distribution of $X_j$s in each class
+  + the sizes of $n$ and $p$ that controls bias-variance trade-off
+
+. . .
+
+- _LDA outperforms LR when predictors are approximately normal, but use LR when inputs are away from normal_.
+
+- _Use LDA but not QDA when variability of predictors are similar among all $K$ classes._
+
+- _Do not use naive Bayes when predictors are clearly correlated_.
+
+- _Use QDA when predictors clearly have different covariance structure for each class_.
+
+
+:::notes
+- _LDA outperforms LR when predictors are approximately normal, but use LR when data are away from normal_.
+
+- _Use LDA but not QDA when variability of predictors are similar among all $K$ classes._ QDA fits a more flexible classifier than necessary.
+
+- _Do not use naive Bayes when predictors are clearly correlated_.
+
+- _Use QDA when predictors clearly have different covariance structure for each class_.
+
+
+
+:::
+
+
+
+## Which Method to Use
+
+- QDA is more flexible than LDA (more parameters to be estimated), and hence low bias and high variance.
+
+- LDA tends to be better than QDA if $n$ is relatively small, and so reducing variance is crucial.
+
+- QDA is recommended if $n$ is relatively large so that the variance of the classifier is not a major concern.
+
+- Naive Bayes works when $n$ is not large enough relative to $p$.
+
+
+::: notes
+
+$n$ small more bias; $p$ small less bias
+small $n$ large $p$: low bias high variance, so reducing variance by using less flexible method
+
+:::
+
+
+<!-- ## R Functions {visibility="hidden"} -->
+
+<!-- - LDA: `MASS::lda()` -->
+<!-- - QDA: `MASS::qda()` -->
+<!-- - Naive Bayes: `e1071::naiveBayes()`, [`naivebayes::naive_bayes()`](https://majkamichal.github.io/naivebayes/index.html), [`h2o::h2o.naiveBayes()`](https://github.com/h2oai/h2o-3) -->
+
+
+
+<!-- ::: notes -->
+<!-- https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/ -->
+
+
+<!-- ::: -->

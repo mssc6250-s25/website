@@ -1,0 +1,28 @@
+---
+title: "Week 8"
+subtitle: "Generative Models"
+editor: visual
+---
+
+::: callout-important
+:::
+
+## Participate
+
+🖥️ [Slides - Generative Models](/slides/10-generative.html)
+
+## Reading and Resources
+
+📖 [ISL Ch 3.5, 4.5](https://www.statlearning.com/)
+
+## Exercise
+
+<!-- 📋 [Lab-18 Probability](/exercise/lab18-prob.html) -->
+
+<!-- 📋 [Lab-19 Confidence Interval](/exercise/lab19-ci.html) -->
+
+<br><br>
+
+::: {style="font-size: 0.875em;"}
+Back to [course schedule](/ "Course schedule") ⏎
+:::

@@ -1,0 +1,98 @@
+---
+title: "10 - Generative Models for Classification Code Demo"
+author: 'Dr. Cheng-Han Yu'
+format: 
+  html:
+    toc: true
+    code-link: true
+    code-fold: show
+    # code-summary: "Show/Hide"
+    code-tools: true
+    number-sections: true
+# filters: 
+#   - include-code-files
+---
+
+## R implementation
+
+```{r}
+library(ISLR2)
+library(MASS)
+library(e1071)
+data("Default")
+```
+
+
+```{r}
+lda_fit <- MASS::lda(default ~ balance, data = Default)
+lda_pred <- predict(lda_fit, data = Default)
+table(lda_pred$class, Default$default, dnn = c("Predicted", "Actual"))
+```
+
+
+```{r}
+qda_fit <- MASS::qda(default ~ balance, data = Default)
+qda_pred <- predict(qda_fit, data = Default)
+table(qda_pred$class, Default$default, dnn = c("Predicted", "Actual"))
+```
+
+
+```{r}
+nb_fit <- e1071::naiveBayes(default ~ balance, data = Default)
+nb_pred <- predict(nb_fit, Default)
+(nb_conf <- table(nb_pred, Default$default))
+```
+
+## Python implementation
+
+
+```{python}
+import pandas as pd
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import confusion_matrix
+```
+
+```{python}
+Default = pd.read_csv("../data/Default.csv")
+X = Default[['balance']]
+y = Default['default']
+```
+
+```{python}
+lda = LinearDiscriminantAnalysis()
+lda.fit(X, y)
+lda_pred = lda.predict(X)
+lda_conf_df = pd.DataFrame(
+    confusion_matrix(y_true=y, y_pred=lda_pred), 
+    index=[f"Actual: {cls}" for cls in lda.classes_],
+    columns=[f"Predicted: {cls}" for cls in lda.classes_]
+)
+lda_conf_df
+```
+
+```{python}
+qda = QuadraticDiscriminantAnalysis()
+qda.fit(X, y)
+qda_pred = qda.predict(X)
+qda_conf_df = pd.DataFrame(
+    confusion_matrix(y, qda_pred), 
+    index=[f"Actual: {cls}" for cls in qda.classes_],
+    columns=[f"Predicted: {cls}" for cls in qda.classes_]
+)
+qda_conf_df
+```
+
+```{python}
+nb = GaussianNB()
+nb.fit(X, y)
+nb_pred = nb.predict(X)
+nb_conf_df = pd.DataFrame(
+    confusion_matrix(y, nb_pred),
+    index=[f"Actual: {cls}" for cls in nb.classes_],
+    columns=[f"Predicted: {cls}" for cls in nb.classes_]
+)
+nb_conf_df
+```
+

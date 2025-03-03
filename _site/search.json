@@ -1257,7 +1257,7 @@
     "href": "index.html",
     "title": "MSSC 6250 - Statistical Machine Learning (Spring 2025)",
     "section": "",
-    "text": "Homework 2 released, and due Friday, 2/28, 11:59 PM.\nMidterm Presentation I - Regression guideline is released.\n\nThis schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nTo Do\nSlides\nCode\nHomework\nProject\n\n\n\n\n1\nTue, Jan 14\nSyllabus/Overview of Statistical Learning\n📖\n🖥️🖥️\n\n\n\n\n\n\nThu, Jan 16\nBias-variance tradeoff\n\n🖥️\n\n\n\n\n\n2\nTue, Jan 21\nNO CLASS: Cold Weather\n📖\n🖥️\n\n\n\n\n\n\nThu, Jan 23\nLinear Regression\n\n\n\n\n\n\n\n3\nTue, Jan 28\nNumerical Optimization\n📖\n\n\n✍️ HW1\n\n\n\n\nThu, Jan 30\nStochastic Gradient Descen; Ridge Regression\n\n🖥️\n\n\n\n\n\n4\nTue, Feb 4\nCross-Validation; Feature Selection\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 6\nLASSO\n\n\n\n\n\n\n\n5\nTue, Feb 11\nRegression Splines\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 13\nSmoothing Splines and Generalized Additive Models\n\n\n\nHW 1 Due\n\n\n\n6\nTue, Feb 18\nBayesian Inference and Linear Regression\n📖\n🖥️\n\n✍️ HW2\n\n\n\n\nThu, Feb 20\nBayesian Linear Regression\n\n\n\n\n✅ Team up Due\n\n\n7\nTue, Feb 25\nBinary Logistic Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 27\nMultinomial Logistic Regression\n\n\n\nHW 2 Due\n✅ Proposal Due\n\n\n8\nTue, Mar 4\nDiscriminant Analysis\n📖\n\n\n\n\n\n\n\nThu, Mar 6\nMidterm Presentation I\n\n\n\n✍️ HW3\n✅ Materials Due\n\n\n9\nTue, Mar 11\nNO CLASS: Spring break\n\n\n\n\n\n\n\n\nThu, Mar 13\nNO CLASS: Spring break Deep Learning Workshop (Fri, Mar 14)\n\n\n\n\n\n\n\n10\nTue, Mar 18\nNaive Bayes and K-Nearest Neighbors Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 20\nK-Nearest Neighbors Classification\n\n\n\n\n\n\n\n11\nTue, Mar 25\nGaussian Process Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 27\nGaussian Process Classification\n\n\n\n\n\n\n\n12\nTue, Apr 1\nSupport Vector Machine\n📖\n\n\n\n\n\n\n\nThu, Apr 3\nSupport Vector Machine\n\n\n\n\n\n\n\n13\nTue, Apr 8\nCART and Bagging\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 10\nRandom Forests and Boosting\n\n\n\n✍️\n\n\n\n14\nTue, Apr 15\nMidterm Presentation II\n📖\n🖥️\n\n\n✅\n\n\n\nThu, Apr 17\nNO CLASS: Easter break\n\n\n\n\n\n\n\n15\nTue, Apr 22\nPrincipal Component Analysis\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 24\nK-Means Clustering\n\n\n\n\n\n\n\n16\nTue, Apr 29\nModel-based Clustering\n📖\n🖥️\n\n\n\n\n\n\nThu, May 1\nNeural Networks\n\n\n\n\n\n\n\n17\nThu, May 8\nFinal Project Submission\n\n\n\n\n✅\n\n\n\n\nI reserve the right to make changes to the schedule.",
+    "text": "Homework 3 released, and due Friday, 4/4, 11:59 PM.\nMidterm Presentation I - Regression guideline is released.\n\nThis schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nTo Do\nSlides\nCode\nHomework\nProject\n\n\n\n\n1\nTue, Jan 14\nSyllabus/Overview of Statistical Learning\n📖\n🖥️🖥️\n\n\n\n\n\n\nThu, Jan 16\nBias-variance tradeoff\n\n🖥️\n\n\n\n\n\n2\nTue, Jan 21\nNO CLASS: Cold Weather\n📖\n🖥️\n\n\n\n\n\n\nThu, Jan 23\nLinear Regression\n\n\n\n\n\n\n\n3\nTue, Jan 28\nNumerical Optimization\n📖\n\n\n✍️ HW1\n\n\n\n\nThu, Jan 30\nStochastic Gradient Descen; Ridge Regression\n\n🖥️\n\n\n\n\n\n4\nTue, Feb 4\nCross-Validation; Feature Selection\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 6\nLASSO\n\n\n\n\n\n\n\n5\nTue, Feb 11\nRegression Splines\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 13\nSmoothing Splines and Generalized Additive Models\n\n\n\nHW 1 Due\n\n\n\n6\nTue, Feb 18\nBayesian Inference and Linear Regression\n📖\n🖥️\n\n✍️ HW2\n\n\n\n\nThu, Feb 20\nBayesian Linear Regression\n\n\n\n\n✅ Team up Due\n\n\n7\nTue, Feb 25\nBinary Logistic Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 27\nMultinomial Logistic Regression\n\n\n\nHW 2 Due\n✅ Proposal Due\n\n\n8\nTue, Mar 4\nDiscriminant Analysis\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 6\nMidterm Presentation I\n\n\n\n✍️ HW3\n✅ Materials Due\n\n\n9\nTue, Mar 11\nNO CLASS: Spring break\n\n\n\n\n\n\n\n\nThu, Mar 13\nNO CLASS: Spring break Deep Learning Workshop (Fri, Mar 14)\n\n\n\n\n\n\n\n10\nTue, Mar 18\nNaive Bayes and K-Nearest Neighbors Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 20\nK-Nearest Neighbors Classification\n\n\n\n\n\n\n\n11\nTue, Mar 25\nGaussian Process Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 27\nGaussian Process Classification\n\n\n\n\n\n\n\n12\nTue, Apr 1\nSupport Vector Machine\n📖\n\n\n\n\n\n\n\nThu, Apr 3\nSupport Vector Machine\n\n\n\nHW 3 Due\n\n\n\n13\nTue, Apr 8\nCART and Bagging\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 10\nRandom Forests and Boosting\n\n\n\n✍️ HW4\n\n\n\n14\nTue, Apr 15\nMidterm Presentation II\n📖\n🖥️\n\n\n✅\n\n\n\nThu, Apr 17\nNO CLASS: Easter break\n\n\n\n\n\n\n\n15\nTue, Apr 22\nPrincipal Component Analysis\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 24\nK-Means Clustering\n\n\n\n\n\n\n\n16\nTue, Apr 29\nModel-based Clustering\n📖\n🖥️\n\n\n\n\n\n\nThu, May 1\nNeural Networks\n\n\n\n\n\n\n\n17\nThu, May 8\nFinal Project Submission\n\n\n\n\n✅\n\n\n\n\nI reserve the right to make changes to the schedule.",
     "crumbs": [
       "Course Information",
       "Schedule"
@@ -1792,7 +1792,7 @@
     "href": "hw/hw-3.html#homework-questions",
     "title": "Homework 3 - Bayesian Statistics, Logistic Regression, Generative Models, and K-Nearest Neighbors",
     "section": "Homework Questions",
-    "text": "Homework Questions\n\nRequired\n\nISL Sec. 4.8: 2\nISL Sec. 4.8: 3\nISL Sec. 4.8: 5\nISL Sec. 4.8: 13\n[KNN Curse of Dimensionality]\n\nGenerate Generate the covariates \\(x_1, x_2, \\dots, x_5\\) of \\(n = 1000\\) training data from independent standard normal distribution. Then, generate \\(Y\\) from \\[Y = X_1 + 0.5 X_2 - X_3 + \\epsilon,\\] where \\(\\epsilon \\sim N(0, 1).\\)\nUse the first 500 observations as the training data and the rest as the test data. Fit KNN regression, and report the test MSE of \\(y\\) with the optimal \\(K\\).\nAdd additional 95 noisy predictors as follows.\n\nCase 1: \\(x_6, x_7, \\dots, x_{100} \\overset{\\mathrm{iid}}{\\sim} N(0, 1)\\)\nCase 2: \\(XA\\) where \\(X_{1000 \\times 5} = [x_1 \\cdots x_5]\\) and \\(A_{5 \\times 95}\\) having entries from iid uniform(0, 1).\n\nFit KNN regression in both cases (with the total of 100 covariates) and select the best \\(K\\) value.\nFor both cases, what is the best K and the best mean squared error for prediction? Discuss the effect of adding 95 (unnecessary) covariates.\n\n[MNIST Handwritten Digits Image]\n\nLoad the prepared MNIST data mnist.csv. Print some images.\nUse the first 1000 observations as the training data and the second half as the test data.\nTraining with KNN and predicting on the test data with the best \\(K\\) selected from the training.\n\nCalculate the test error rate.\nGenerate the confusion matrix.\n\nTraining with multinomial logistic regression and predicting on the test data.\n\nCalculate the test error rate.\nGenerate the confusion matrix.\n\n\n\n\n\nDo one of the followings\n\n\nWatch the talk All About that Bayes: Probability, Statistics, and the Quest to Quantify Uncertainty by Dr. Kristin Lennox. In 250 words, summarize your thoughts and what you learned from the talk.\n\n\n\nIn 250 words, summarize your thoughts and what you learned from the deep learning workshop."
+    "text": "Homework Questions\n\nRequired\n\nISL Sec. 4.8: 2\nISL Sec. 4.8: 3\nISL Sec. 4.8: 5\nISL Sec. 4.8: 13\nMNIST Handwritten Digits Image\n\nLoad the prepared MNIST data mnist.csv. Print some images.\nUse the first 1000 observations as the training data and the second half as the test data.\nTraining with KNN and predicting on the test data with the best \\(K\\) selected from the training.\n\nCalculate the test error rate.\nGenerate the confusion matrix.\n\nTraining with multinomial logistic regression and predicting on the test data.\n\nCalculate the test error rate.\nGenerate the confusion matrix.\n\n\n(MSSC PhD) KNN Curse of Dimensionality\n\nGenerate Generate the covariates \\(x_1, x_2, \\dots, x_5\\) of \\(n = 1000\\) training data from independent standard normal distribution. Then, generate \\(Y\\) from \\[Y = X_1 + 0.5 X_2 - X_3 + \\epsilon,\\] where \\(\\epsilon \\sim N(0, 1).\\)\nUse the first 500 observations as the training data and the rest as the test data. Fit KNN regression, and report the test MSE of \\(y\\) with the optimal \\(K\\).\nAdd additional 95 noisy predictors as follows.\n\nCase 1: \\(x_6, x_7, \\dots, x_{100} \\overset{\\mathrm{iid}}{\\sim} N(0, 1)\\)\nCase 2: \\(XA\\) where \\(X_{1000 \\times 5} = [x_1 \\cdots x_5]\\) and \\(A_{5 \\times 95}\\) having entries from iid uniform(0, 1).\n\nFit KNN regression in both cases (with the total of 100 covariates) and select the best \\(K\\) value.\nFor both cases, what is the best K and the best mean squared error for prediction? Discuss the effect of adding 95 (unnecessary) covariates.\n\n\n\n\nDo one of the followings\n\n\nWatch the talk All About that Bayes: Probability, Statistics, and the Quest to Quantify Uncertainty by Dr. Kristin Lennox. In 250 words, summarize your thoughts and what you learned from the talk.\n\n\n\nIn 250 words, summarize your thoughts and what you learned from the deep learning workshop."
   },
   {
     "objectID": "hw/hw-1.html#homework-problems",
@@ -2764,5 +2764,259 @@
     "title": "Overview of Statistical Machine Learning 💻",
     "section": "Accuracy and Interpretability Trade-Off",
     "text": "Accuracy and Interpretability Trade-Off\n\n\n\n\nSource: ISL Fig. 2.7\n\nflexibility: a model is flexible if the model performs quite good for various types of data.\n\n\n\n\nmssc6250-s25.github.io/website"
+  },
+  {
+    "objectID": "weeks/week-8.html",
+    "href": "weeks/week-8.html",
+    "title": "Week 8",
+    "section": "",
+    "text": "Important",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 8"
+    ]
+  },
+  {
+    "objectID": "weeks/week-8.html#participate",
+    "href": "weeks/week-8.html#participate",
+    "title": "Week 8",
+    "section": "Participate",
+    "text": "Participate\n🖥️ Slides - Generative Models",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 8"
+    ]
+  },
+  {
+    "objectID": "weeks/week-8.html#reading-and-resources",
+    "href": "weeks/week-8.html#reading-and-resources",
+    "title": "Week 8",
+    "section": "Reading and Resources",
+    "text": "Reading and Resources\n📖 ISL Ch 3.5, 4.5",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 8"
+    ]
+  },
+  {
+    "objectID": "weeks/week-8.html#exercise",
+    "href": "weeks/week-8.html#exercise",
+    "title": "Week 8",
+    "section": "Exercise",
+    "text": "Exercise\n\n\n\n\nBack to course schedule ⏎",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 8"
+    ]
+  },
+  {
+    "objectID": "slides/10-generative.html#bayes-classifier",
+    "href": "slides/10-generative.html#bayes-classifier",
+    "title": "Generative Models \n",
+    "section": "Bayes Classifier",
+    "text": "Bayes Classifier\n\nThe test error rate is minimized, on average, by a classifier that assigns each observation to the most likely category, given its predictor values.\n\nThis fact leads to\n\n\nBayes (Optimal) Classifier: Assign a test observation \\(y_j\\) with predictor \\(x_j\\) to class \\(k\\) for which the conditional probability \\(P(Y_j = k \\mid X = x_j)\\) is largest.\nThe Bayes classifier produces the lowest possible test error rate, called Bayes error rate.\n\n\n\nThe problem is\n\nWe never know \\(P(Y_j = k \\mid X = x_j)\\) 😭\nThe goal of soft classifiers is to estimate it, like logistic regression:\n\n\\[ \\widehat{\\pi}(\\mathbf{x}) = \\widehat{P}(Y = 1 \\mid \\mathbf{x}) = \\frac{1}{1+e^{-\\mathbf{x}'\\widehat{\\boldsymbol{\\beta}}}}\\]\n[What is ``Bayes regression function”? In statistics, it is called oracle when a method/model has access to the ground truth.]"
+  },
+  {
+    "objectID": "slides/10-generative.html#what-is-a-generative-model",
+    "href": "slides/10-generative.html#what-is-a-generative-model",
+    "title": "Generative Models \n",
+    "section": "What is a Generative Model?",
+    "text": "What is a Generative Model?\n\nSo far predictors are assumed fixed and known, and we care about the conditional distribution, \\(p(y \\mid \\mathbf{x})\\)\n\nLogistic regression (LR)\n\n\n\n\n\nA generative model considers the joint distribution of the response and predictors, i.e., \\(p(y, \\mathbf{x})\\)\n\nDiscriminant analysis\nNaive Bayes (NB)\n\n\n\n\n\nWhy not just logistic regression?\n\nWhen the classes are substaintially separated, the parameter estimates for the logistic regression are unstable.\nIf the distribution of the predictors is approximately normal in each of the classes and the sample size is small, the generative models could perform better and more stable.\n\n\\(\\mathbf{x}\\) is variable whose value is generated from some distribution given a value of \\(y\\)"
+  },
+  {
+    "objectID": "slides/10-generative.html#generative-modeling",
+    "href": "slides/10-generative.html#generative-modeling",
+    "title": "Generative Models \n",
+    "section": "Generative Modeling",
+    "text": "Generative Modeling\n\nTo infer/predict \\(p(y = k \\mid \\mathbf{x})\\) from a generative model, Bayes theorem comes into play:\n\n\n\\[\\begin{align} p(y = k \\mid \\mathbf{x}) &= \\frac{p(y = k, \\mathbf{x})}{p(\\mathbf{x})} = \\frac{p(y = k)p(\\mathbf{x}\\mid y = k) }{p(\\mathbf{x})} = \\frac{p(y = k)p(\\mathbf{x}\\mid y = k)}{\\sum_{l=1}^K p(y = k)p(\\mathbf{x}\\mid y = l)}\\\\\n&=\\frac{\\pi_kf_k(\\mathbf{x})}{\\sum_{l=1}^K\\pi_lf_l(\\mathbf{x})}\\end{align}\\]\n\n\nTo get the posterior \\(p(y = k \\mid \\mathbf{x})\\), we need\n\n\nprior \\(\\pi_k = p(y = k)\\)\n\n\nlikelihood \\(f_k(\\mathbf{x}) = p(\\mathbf{x}\\mid y = k)\\)\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nDifferent generative models use different priors and likelihoods, resulting in different strengths and weakness."
+  },
+  {
+    "objectID": "slides/10-generative.html#bayes-decision-boundary",
+    "href": "slides/10-generative.html#bayes-decision-boundary",
+    "title": "Generative Models \n",
+    "section": "Bayes Decision Boundary",
+    "text": "Bayes Decision Boundary\n\nHow do we find/estimate the Bayes decision boundary generated by the Bayes classifier?"
+  },
+  {
+    "objectID": "slides/10-generative.html#linear-discriminant-analysis-lda",
+    "href": "slides/10-generative.html#linear-discriminant-analysis-lda",
+    "title": "Generative Models \n",
+    "section": "Linear Discriminant Analysis (LDA)",
+    "text": "Linear Discriminant Analysis (LDA)\n\n\\[\\begin{align} p(y = k \\mid \\mathbf{x})  = \\frac{p(y = k)p(\\mathbf{x}\\mid y = k)}{\\sum_{l=1}^K p(y = k)p(\\mathbf{x}\\mid y = l)} =\\frac{\\pi_kf_k(\\mathbf{x})}{\\sum_{l=1}^K\\pi_lf_l(\\mathbf{x})}\\end{align}\\]\n\n\nEstimate the prior \\(\\pi_k = p(y = k)\\) using the proportion of the training labels that belong to the \\(k\\)th class: \\[\\hat{\\pi}_k = n_k / n \\]\n\n\n\ntable(Default$default)/length(Default$default)\n\n\n    No    Yes \n0.9667 0.0333 \n\n\n\n\nLDA assumption for \\(f_k(\\mathbf{x})\\): \\(\\color{blue}{(\\mathbf{x}\\mid y = k) \\sim N_p\\left(\\boldsymbol{\\mu}_k, \\Sigma \\right)}\\)\n\n\n\\(\\boldsymbol{\\mu}_k\\): class-specific mean vector\n\n\\(\\Sigma\\): covariance matrix common to all \\(K\\) classes"
+  },
+  {
+    "objectID": "slides/10-generative.html#two-multivariate-normals-with-common-covariance",
+    "href": "slides/10-generative.html#two-multivariate-normals-with-common-covariance",
+    "title": "Generative Models \n",
+    "section": "Two Multivariate Normals with Common Covariance",
+    "text": "Two Multivariate Normals with Common Covariance\n\n\n\\(\\color{blue}{(\\mathbf{x}\\mid y = k) \\sim N_p\\left(\\boldsymbol{\\mu}_k, \\Sigma \\right)}\\)\n\n\\(\\boldsymbol{\\mu}_1 = (0.5, -1)'\\), \\(\\boldsymbol{\\mu}_2 = (-0.5, 0.5)'\\)\n\\(\\Sigma = \\begin{pmatrix} 1 & 0.5 \\\\ 0.5 & 1 \\end{pmatrix}\\)\n\\(\\pi_1 = 0.4\\), \\(\\pi_2 = 0.6\\)\nEach class has its own predictor mean.\nThe predictor’s variability are the same for the two classes.\n\n\n\n\n\n\n\n\n\nplot_ly has mu1 mu2 problems! Be careful!"
+  },
+  {
+    "objectID": "slides/10-generative.html#parameter-estimation-for-lda",
+    "href": "slides/10-generative.html#parameter-estimation-for-lda",
+    "title": "Generative Models \n",
+    "section": "Parameter Estimation for LDA",
+    "text": "Parameter Estimation for LDA\n\\(\\color{blue}{(\\mathbf{x}\\mid y = k) \\sim N_p\\left(\\boldsymbol{\\mu}_k, \\Sigma \\right)}\\)\n\nEstimating \\(p(\\mathbf{x}\\mid y = k)\\) is reduced to estimating \\(\\boldsymbol{\\mu}_1, \\dots, \\boldsymbol{\\mu}_K\\) and \\(\\Sigma\\).\n\n\n\n\n\nCentroid/sample mean: \\(\\widehat{\\boldsymbol{\\mu}}_k = \\frac{1}{n_k} \\sum_{i: \\,y_i = k} \\mathbf{x}_i\\)\n\nPooled covariance matrix: \\[\\widehat \\Sigma = \\frac{1}{n-K} \\sum_{k=1}^K \\sum_{i : \\, y_i = k} (\\mathbf{x}_i - \\widehat{\\boldsymbol{\\mu}}_k) (\\mathbf{x}_i - \\widehat{\\boldsymbol{\\mu}}_k)' = \\sum_{k=1}^K \\frac{n_k-1}{n-K}\\widehat \\Sigma_k\\] where \\(\\widehat \\Sigma_k = \\frac{1}{n_k-1}\\sum_{i : \\, y_i = k} (\\mathbf{x}_i - \\widehat{\\boldsymbol{\\mu}}_k) (\\mathbf{x}_i - \\widehat{\\boldsymbol{\\mu}}_k)'\\)\n\n\n\n\n\nmu1_hat =\n\n\n[1]  0.47 -1.01\n\n\nmu2_hat =\n\n\n[1] -0.54  0.51\n\n\nSigma_hat = \n\n\n     [,1] [,2]\n[1,] 1.13 0.54\n[2,] 0.54 1.02"
+  },
+  {
+    "objectID": "slides/10-generative.html#decision-boundary-by-lda",
+    "href": "slides/10-generative.html#decision-boundary-by-lda",
+    "title": "Generative Models \n",
+    "section": "Decision Boundary by LDA",
+    "text": "Decision Boundary by LDA"
+  },
+  {
+    "objectID": "slides/10-generative.html#discriminant-function",
+    "href": "slides/10-generative.html#discriminant-function",
+    "title": "Generative Models \n",
+    "section": "Discriminant Function",
+    "text": "Discriminant Function\nThe likelihood is Gaussian\n\n\\[f_k(x) = \\frac{1}{(2\\pi)^{p/2} |\\Sigma|^{1/2}} \\exp\\left[ -\\frac{1}{2} (\\mathbf{x}- \\boldsymbol{\\mu}_k)' \\Sigma^{-1} (\\mathbf{x}- \\boldsymbol{\\mu}_k) \\right]\\]\n\n\n\nThe log-likelihood is\n\\[\\begin{align}\n\\log f_k(\\mathbf{x}) =&~ -\\log \\big((2\\pi)^{p/2} |\\Sigma|^{1/2} \\big) - \\frac{1}{2} (\\mathbf{x}- \\boldsymbol{\\mu}_k)'\\Sigma^{-1} (\\mathbf{x}- \\boldsymbol{\\mu}_k) \\\\\n    =&~ - \\frac{1}{2} (\\mathbf{x}- \\boldsymbol{\\mu}_k)' \\Sigma^{-1} (\\mathbf{x}- \\boldsymbol{\\mu}_k) + \\text{Constant}\n\\end{align}\\]\n\n\n\nThe maximum a posteriori estimate is\n\n\\[\\begin{align}\n\\widehat f(\\mathbf{x}) =& ~\\underset{k}{\\arg\\max} \\,\\, \\log \\big( \\pi_k f_k(\\mathbf{x}) \\big) \\\\\n    =& ~\\underset{k}{\\arg\\max} \\,\\, - \\frac{1}{2} (\\mathbf{x}- \\boldsymbol{\\mu}_k)' \\Sigma^{-1} (\\mathbf{x}- \\boldsymbol{\\mu}_k) + \\log(\\pi_k)\n\\end{align}\\]"
+  },
+  {
+    "objectID": "slides/10-generative.html#discriminant-function-1",
+    "href": "slides/10-generative.html#discriminant-function-1",
+    "title": "Generative Models \n",
+    "section": "Discriminant Function",
+    "text": "Discriminant Function\n\n\\[\\begin{align}\n\\widehat f(\\mathbf{x}) =& ~\\underset{k}{\\arg\\max} \\,\\, - \\frac{1}{2} (\\mathbf{x}- \\boldsymbol{\\mu}_k)' \\Sigma^{-1} (\\mathbf{x}- \\boldsymbol{\\mu}_k) + \\log(\\pi_k)\n\\end{align}\\]\n\n\n\n\\((\\mathbf{x}- \\boldsymbol{\\mu}_k)' \\Sigma^{-1} (\\mathbf{x}- \\boldsymbol{\\mu}_k)\\) is the Mahalanobis distance between \\(\\mathbf{x}\\) and the centroid \\(\\boldsymbol{\\mu}_k\\).\n\nClassify \\(y\\) so that its \\(\\mathbf{x}\\) and the centroid of the labeled class is the closest (after adjusting for the prior). \\[\\begin{align}\n& - \\frac{1}{2} (\\mathbf{x}- \\boldsymbol{\\mu}_k)' \\Sigma^{-1} (\\mathbf{x}- \\boldsymbol{\\mu}_k) + \\log(\\pi_k)\\\\\n&=~ \\mathbf{x}' \\underbrace{\\Sigma^{-1} \\boldsymbol{\\mu}_k}_{\\mathbf{w}_k} \\underbrace{- \\frac{1}{2}\\boldsymbol{\\mu}_k' \\Sigma^{-1} \\boldsymbol{\\mu}_k + \\log(\\pi_k)}_{b_k} + \\text{const of } k \\\\\n&=~ \\mathbf{x}' \\mathbf{w}_k + b_k + \\text{const of } k\\\\\n&=~ \\delta_k(\\mathbf{x}) + \\text{const of } k\n\\end{align}\\] where \\(\\delta_k(\\mathbf{x})\\) the discriminant function which is linear in \\(\\mathbf{x}\\).\n\nby incorporating the covariance matrix and adjusting the for prior. Note that anything that does not depends on the class index \\(k\\) is irrelevant to the decision."
+  },
+  {
+    "objectID": "slides/10-generative.html#discriminant-function-2",
+    "href": "slides/10-generative.html#discriminant-function-2",
+    "title": "Generative Models \n",
+    "section": "Discriminant Function",
+    "text": "Discriminant Function\n\n\n\nThe decision boundary of LDA is a linear function of \\(\\mathbf{x}\\).\nThe boundary between two classes \\(k\\) and \\(l\\) is where they have the same density value.\n\n\\[\\begin{align}\n&\\delta_k(\\mathbf{x}) = \\delta_l(\\mathbf{x}) \\\\\n&\\Leftrightarrow \\quad \\mathbf{x}' \\mathbf{w}_k + b_k = \\mathbf{x}' \\mathbf{w}_l + b_l \\\\\n&\\Leftrightarrow \\quad \\mathbf{x}' (\\mathbf{w}_k - \\mathbf{w}_l) + (b_k - b_l) = 0. \\\\\n\\end{align}\\]\n\n\\[\\begin{align}\n&\\delta_k(\\mathbf{x}) - \\delta_l(\\mathbf{x}) \\\\\n\\propto & \\quad \\log \\left(\\pi_k f_k(\\mathbf{x})\\right) -  \\log \\left(\\pi_l f_l(\\mathbf{x}))\\right)\\\\\n\\propto & \\quad \\log \\left(P(Y = k \\mid \\mathbf{x})\\right) -  \\log \\left(P(Y = l \\mid \\mathbf{x})\\right) \\\\\n\\propto & \\quad \\log \\left( \\frac{P(Y = k \\mid \\mathbf{x})}{P(Y = l \\mid \\mathbf{x})}\\right)\n\\end{align}\\]"
+  },
+  {
+    "objectID": "slides/10-generative.html#interpretation-of-lda",
+    "href": "slides/10-generative.html#interpretation-of-lda",
+    "title": "Generative Models \n",
+    "section": "Interpretation of LDA",
+    "text": "Interpretation of LDA\n\n\n\n\n\nESL Fig 4.9\n\n\n\n\nCheck ESL\nFind the linear combination \\(Z = a'X\\) such that the between class variance is maximized relative to the within-class variance.\nAgain, the between class variance is the variance of the class means of Z, and the within class variance is the pooled variance about the means. Figure 4.9 shows why this criterion makes sense. Although the direction joining the centroids separates the means as much as possible (i.e., maximizes the between-class variance), there is considerable overlap between the projected classes due to the nature of the covariances. By taking the covariance into account as well, a direction with minimum overlap can be found.\nGaussian classification with common covariances leads to linear decision boundaries. Classification can be achieved by sphering the data with respect to W, and classifying to the closest centroid (modulo log πk) in the sphered space. Since only the relative distances to the centroids count, one can confine the data to the subspace spanned by the centroids in the sphered space. This subspace can be further decomposed into successively optimal subspaces in term of centroid separation. This decomposition is identical to the decomposition due to Fisher."
+  },
+  {
+    "objectID": "slides/10-generative.html#masslda-1",
+    "href": "slides/10-generative.html#masslda-1",
+    "title": "Generative Models \n",
+    "section": "\nMASS::lda() 1\n",
+    "text": "MASS::lda() 1\n\n\n\nLDA\n\nlda_fit &lt;- MASS::lda(default ~ balance, data = Default)\nlda_pred &lt;- predict(lda_fit, data = Default)\n(lda_conf &lt;- table(lda_pred$class, Default$default, \n                   dnn = c(\"Predicted\", \"Actual\")))\n\n         Actual\nPredicted   No  Yes\n      No  9643  257\n      Yes   24   76\n\n\n\ntraining accuracy is 0.972\nsensitivity is 0.228\n\n\nLogistic Regression\n\n\n       \n          No  Yes\n  FALSE 9625  233\n  TRUE    42  100\n\n\n\ntraining accuracy is 0.973\nsensitivity is 0.3\n\n\nIn Python, from sklearn.naive_bayes import GaussianNB"
+  },
+  {
+    "objectID": "slides/10-generative.html#quadratic-discriminant-analysis-qda",
+    "href": "slides/10-generative.html#quadratic-discriminant-analysis-qda",
+    "title": "Generative Models \n",
+    "section": "Quadratic Discriminant Analysis (QDA)",
+    "text": "Quadratic Discriminant Analysis (QDA)\n\n\n\n\nLDA assumption for \\(f_k(\\mathbf{x})\\): \\(\\color{blue}{(\\mathbf{x}\\mid y = k) \\sim N_p\\left(\\boldsymbol{\\mu}_k, \\Sigma \\right)}\\)\n\n\n\\(\\Sigma\\): covariance matrix common to all K classes\n\n\n\n\n\n\nQDA assumption for \\(f_k(\\mathbf{x})\\): \\(\\color{blue}{(\\mathbf{x}\\mid y = k) \\sim N_p\\left(\\boldsymbol{\\mu}_k, \\Sigma_k \\right)}\\)\n\n\n\\(\\Sigma_k\\): each class has its own covariance matrix\n\n\n\n\n\nThe discriminant function for QDA is\n\\[\\begin{align} \\delta_k(\\mathbf{x}) &= - \\frac{1}{2} (\\mathbf{x}- \\boldsymbol{\\mu}_k)' \\Sigma_k^{-1} (\\mathbf{x}- \\boldsymbol{\\mu}_k) - \\frac{1}{2} \\log |\\Sigma_k |+ \\log(\\pi_k) \\\\\n&= \\mathbf{x}' \\mathbf{W}_k \\mathbf{x}+ \\mathbf{x}'\\mathbf{w}_k + b_k \\end{align}\\] which is a quadratic function of \\(\\mathbf{x}\\).\n\n\nThe boundary between class \\(k\\) and \\(l\\) for QDA is\n\\[\\begin{align}\n\\mathbf{x}' (\\mathbf{W}_k - \\mathbf{W}_l) \\mathbf{x}+ \\mathbf{x}' (\\mathbf{w}_k - \\mathbf{w}_l) + (b_k - b_l) = 0\\\\\n\\end{align}\\]"
+  },
+  {
+    "objectID": "slides/10-generative.html#parameter-estimation-for-qda",
+    "href": "slides/10-generative.html#parameter-estimation-for-qda",
+    "title": "Generative Models \n",
+    "section": "Parameter Estimation for QDA",
+    "text": "Parameter Estimation for QDA\nThe estimation procedure is almost the same as LDA.\n\n\\(\\hat{\\pi}_k = n_k / n\\)\nCentroids: \\(\\widehat{\\boldsymbol{\\mu}}_k = \\frac{1}{n_k} \\sum_{i: \\,y_i = k} \\mathbf{x}_i\\)\nIndividual covariance matrix: \\[\\widehat \\Sigma_k = \\frac{1}{n_k-1}\\sum_{i : \\, y_i = k} (\\mathbf{x}_i - \\widehat{\\boldsymbol{\\mu}}_k) (\\mathbf{x}_i - \\widehat{\\boldsymbol{\\mu}}_k)'\\]"
+  },
+  {
+    "objectID": "slides/10-generative.html#two-multivariate-normals-with-different-covariance-matrices",
+    "href": "slides/10-generative.html#two-multivariate-normals-with-different-covariance-matrices",
+    "title": "Generative Models \n",
+    "section": "Two Multivariate Normals with Different Covariance Matrices",
+    "text": "Two Multivariate Normals with Different Covariance Matrices\n\n\n\\(\\color{blue}{(\\mathbf{x}\\mid y = k) \\sim N_p\\left(\\boldsymbol{\\mu}_k, \\Sigma_k \\right)}\\)\n\n\\(\\boldsymbol{\\mu}_1 = (0.5, -1)'\\)\n\\(\\boldsymbol{\\mu}_2 = (-0.5, 0.5)'\\)\n\\(\\Sigma_1 = \\begin{pmatrix} 1 & 0.5 \\\\ 0.5 & 1 \\end{pmatrix}\\)\n\\(\\Sigma_2 = \\begin{pmatrix} 1 & -0.5 \\\\ -0.5 & 1 \\end{pmatrix}\\)\n\\(\\pi_1 = 0.4\\), \\(\\pi_2 = 0.6\\)\nEach class has its own predictor mean and covariance matrix."
+  },
+  {
+    "objectID": "slides/10-generative.html#decision-boundary-by-qda",
+    "href": "slides/10-generative.html#decision-boundary-by-qda",
+    "title": "Generative Models \n",
+    "section": "Decision Boundary by QDA",
+    "text": "Decision Boundary by QDA\n\nhttps://freakonometrics.hypotheses.org/tag/qda"
+  },
+  {
+    "objectID": "slides/10-generative.html#massqda1",
+    "href": "slides/10-generative.html#massqda1",
+    "title": "Generative Models \n",
+    "section": "\nMASS::qda1\n",
+    "text": "MASS::qda1\n\nLDA\n\n\n         Actual\nPredicted   No  Yes\n      No  9643  257\n      Yes   24   76\n\n\nQDA\n\nqda_fit &lt;- MASS::qda(default ~ balance, data = Default)\nqda_pred &lt;- predict(qda_fit, data = Default)\n(qda_conf &lt;- table(qda_pred$class, Default$default, dnn = c(\"Predicted\", \"Actual\")))\n\n         Actual\nPredicted   No  Yes\n      No  9639  246\n      Yes   28   87\n\n\n\ntraining accuracy is 0.973\nsensitivity is 0.261\nIn Python, from sklearn.naive_bayes import GaussianNB"
+  },
+  {
+    "objectID": "slides/10-generative.html#naive-bayes-nb",
+    "href": "slides/10-generative.html#naive-bayes-nb",
+    "title": "Generative Models \n",
+    "section": "Naive Bayes (NB)",
+    "text": "Naive Bayes (NB)\n\n\n\n\n\nLDA assumption for \\(f_k(\\mathbf{x})\\): \\(\\color{blue}{(\\mathbf{x}\\mid y = k) \\sim N_p\\left(\\boldsymbol{\\mu}_k, \\Sigma \\right)}\\)\n\n\n\\(\\Sigma\\): covariance matrix common to all K classes\n\n\n\n\n\n\nQDA assumption for \\(f_k(\\mathbf{x})\\): \\(\\color{blue}{(\\mathbf{x}\\mid y = k) \\sim N_p\\left(\\boldsymbol{\\mu}_k, \\Sigma_k \\right)}\\)\n\n\n\\(\\Sigma_k\\): each class has its own covariance matrix\n\n\n\n\n\n\nNB assumption for \\(f_k(\\mathbf{x})\\):\n\nfeatures within each class are independent!\n\\(f_k(\\mathbf{x}) = f_{k1}(x_1) \\times f_{k2}(x_2) \\times \\cdots \\times f_{kp}(x_p)\\)\n\n\n\n\n\n\n\nConsidering the joint distribution of predictors is a pain when \\(p\\) is large.\nWe don’t believe \\(p\\) predictors are not associated at all, but this “naive” assumption leads to decent results when \\(n\\) is not large enough relative to \\(p\\).\nThe naive independence assumption introduces some bias, but reduces variance.\n\n\n\n\n\\[\\begin{align} p(y = k \\mid \\mathbf{x})  =\\frac{\\pi_kf_k(\\mathbf{x})}{\\sum_{l=1}^K\\pi_lf_l(\\mathbf{x})} = \\frac{\\pi_k\\prod_{j=1}^p f_{kj(x_j)}}{\\sum_{l=1}^K\\pi_l\\prod_{j=1}^p f_{lj(x_j)}} \\end{align}\\]\n\nestimating a joint distribution requires such a huge amount of data"
+  },
+  {
+    "objectID": "slides/10-generative.html#options-for-estimating-f_kjx_j",
+    "href": "slides/10-generative.html#options-for-estimating-f_kjx_j",
+    "title": "Generative Models \n",
+    "section": "Options for Estimating \\(f_{kj}(x_j)\\)\n",
+    "text": "Options for Estimating \\(f_{kj}(x_j)\\)\n\n\nNumerical \\(X_j\\)\n\nParametric: \\[(X_j \\mid Y = k) \\sim N\\left(\\mu_{jk}, \\sigma_{jk}^2 \\right).\\] It’s QDA with additional assumption that \\(\\Sigma_k\\) is diagonal.\nNon-parametric: Estimate \\(f_{kj}(x_j)\\) by (discrete) histogram, (continuous) kernel density estimator, etc.\n\n\n\n\n\n\nCategorical \\(X_j\\)\n\n\n\\(f_{kj}(x_j) \\approx\\) the proportion of training data for \\(x_j\\) corresponding to class \\(k\\)."
+  },
+  {
+    "objectID": "slides/10-generative.html#section-1",
+    "href": "slides/10-generative.html#section-1",
+    "title": "Generative Models \n",
+    "section": "",
+    "text": "Class 1\n\n\n\n\n\n\n\n\n\n\nClass 2\n\n\n\n\n\n\nISL Fig. 4.10. Left to right: estimated density of \\(x_1\\), \\(x_2\\) and estimated probability of \\(x_3\\)."
+  },
+  {
+    "objectID": "slides/10-generative.html#e1071naivebayes-1",
+    "href": "slides/10-generative.html#e1071naivebayes-1",
+    "title": "Generative Models \n",
+    "section": "\ne1071::naiveBayes() 1\n",
+    "text": "e1071::naiveBayes() 1\n\nQDA\n\n\n         Actual\nPredicted   No  Yes\n      No  9639  246\n      Yes   28   87\n\n\nNaive Bayes\n\nBy default, each feature is Gaussian distributed.\n\n\nnb_fit &lt;- e1071::naiveBayes(default ~ balance, data = Default)\nnb_pred &lt;- predict(nb_fit, Default)\n(nb_conf &lt;- table(nb_pred, Default$default))\n\n       \nnb_pred   No  Yes\n    No  9639  246\n    Yes   28   87\n\n\n\ntraining accuracy is 0.973\nsensitivity is 0.261\nIn Python, from sklearn.naive_bayes import GaussianNB"
+  },
+  {
+    "objectID": "slides/10-generative.html#log-odds-of-lr-and-lda",
+    "href": "slides/10-generative.html#log-odds-of-lr-and-lda",
+    "title": "Generative Models \n",
+    "section": "Log Odds of LR and LDA",
+    "text": "Log Odds of LR and LDA\nSuppose class \\(K\\) is the baseline.\n\nLR\n\n\\[\\log \\left( \\frac{P(Y = k \\mid \\mathbf{x})}{P(Y = K \\mid \\mathbf{x})}\\right) = \\beta_{k0} + \\beta_{k1}x_{1} + \\dots + \\beta_{kp}x_{p}\\]\n\n\nLDA\n\n\\[\\log \\left( \\frac{P(Y = k \\mid \\mathbf{x})}{P(Y = K \\mid \\mathbf{x})}\\right) = a_k + \\sum_{j=1}^pc_{kj}x_j\\] where \\(a_k = \\log(\\pi_k / \\pi_K) - \\frac{1}{2}(\\boldsymbol{\\mu}_k + \\boldsymbol{\\mu}_K)'\\Sigma^{-1}(\\boldsymbol{\\mu}_k - \\boldsymbol{\\mu}_K)\\) and \\(c_{kj}\\) is the \\(j\\)th element of \\(\\Sigma^{-1}(\\boldsymbol{\\mu}_k - \\boldsymbol{\\mu}_K)\\).\nBoth log odds are linear in \\(\\mathbf{x}\\)."
+  },
+  {
+    "objectID": "slides/10-generative.html#log-odds-of-qda-and-nb",
+    "href": "slides/10-generative.html#log-odds-of-qda-and-nb",
+    "title": "Generative Models \n",
+    "section": "Log Odds of QDA and NB",
+    "text": "Log Odds of QDA and NB\n\nQDA\n\n\\[\\log \\left( \\frac{P(Y = k \\mid \\mathbf{x})}{P(Y = K \\mid \\mathbf{x})}\\right) = a_k + \\sum_{j=1}^pc_{kj}x_j + \\sum_{j=1}^p\\sum_{l=1}^p d_{kjl}x_jx_l\\] The log odds is quadratic in \\(\\mathbf{x}\\), where \\(a_k\\), \\(c_{kj}\\) and \\(d_{kjl}\\) are functions of \\(\\pi_k\\), \\(\\pi_K\\), \\(\\boldsymbol{\\mu}_k\\), \\(\\boldsymbol{\\mu}_K\\), \\(\\Sigma_k\\) and \\(\\Sigma_K\\).\n\n\nNB\n\n\\[\\log \\left( \\frac{P(Y = k \\mid \\mathbf{x})}{P(Y = K \\mid \\mathbf{x})}\\right) = a_k + \\sum_{j=1}^pg_{kj}(x_j)\\] where \\(a_k = \\log(\\pi_k / \\pi_K)\\) and \\(g_{kj}(x_j) = \\log\\left( \\frac{f_{kj}(x_j)}{f_{Kj}(x_j)}\\right)\\).\nThe log odds takes the form of a generalized additive model!"
+  },
+  {
+    "objectID": "slides/10-generative.html#comparison-of-log-odds",
+    "href": "slides/10-generative.html#comparison-of-log-odds",
+    "title": "Generative Models \n",
+    "section": "Comparison of Log Odds",
+    "text": "Comparison of Log Odds\n\nLDA is a special case of QDA with \\(d_{kjl} = 0\\) for all \\(k, j\\) and \\(l\\). \\((\\Sigma_1 = \\cdots = \\Sigma_k = \\Sigma)\\)\n\nAny classifier with a linear decision boundary is a special case of NB with \\(g_{kj}(x_j) = c_{kj}x_j.\\)\n\nLDA is a special case of NB. Really !? 😲\n\n\nNB is a special case of LDA if \\(f_{kj}(x_j) = N\\left(\\mu_{jk}, \\sigma_{j}^2 \\right)\\). \\((\\Sigma = \\text{diag}(\\sigma_1^2, \\dots, \\sigma_p^2))\\)\n\nNeither QDA nor NB is a special case of the other\n\nNB is more\n\n\nflexible for any transformation of \\(x_j\\), \\(g_{kj}(x_j)\\).\n\nrestrictive because of its pure additive fit with no quadratic interactions \\(d_{kjl}x_jx_l\\)."
+  },
+  {
+    "objectID": "slides/10-generative.html#which-method-to-use",
+    "href": "slides/10-generative.html#which-method-to-use",
+    "title": "Generative Models \n",
+    "section": "Which Method to Use",
+    "text": "Which Method to Use\n\nNone of these methods uniformly dominates the others.\n\nThe choice of method depends on\n\nthe true distribution of \\(X_j\\)s in each class\nthe sizes of \\(n\\) and \\(p\\) that controls bias-variance trade-off\n\n\n\n\n\nLDA outperforms LR when predictors are approximately normal, but use LR when inputs are away from normal.\nUse LDA but not QDA when variability of predictors are similar among all \\(K\\) classes.\nDo not use naive Bayes when predictors are clearly correlated.\nUse QDA when predictors clearly have different covariance structure for each class.\n\n\nLDA outperforms LR when predictors are approximately normal, but use LR when data are away from normal.\nUse LDA but not QDA when variability of predictors are similar among all \\(K\\) classes. QDA fits a more flexible classifier than necessary.\nDo not use naive Bayes when predictors are clearly correlated.\nUse QDA when predictors clearly have different covariance structure for each class."
+  },
+  {
+    "objectID": "slides/10-generative.html#which-method-to-use-1",
+    "href": "slides/10-generative.html#which-method-to-use-1",
+    "title": "Generative Models \n",
+    "section": "Which Method to Use",
+    "text": "Which Method to Use\n\nQDA is more flexible than LDA (more parameters to be estimated), and hence low bias and high variance.\nLDA tends to be better than QDA if \\(n\\) is relatively small, and so reducing variance is crucial.\nQDA is recommended if \\(n\\) is relatively large so that the variance of the classifier is not a major concern.\nNaive Bayes works when \\(n\\) is not large enough relative to \\(p\\).\n\n\\(n\\) small more bias; \\(p\\) small less bias small \\(n\\) large \\(p\\): low bias high variance, so reducing variance by using less flexible method"
+  },
+  {
+    "objectID": "code/10-generative-code.html",
+    "href": "code/10-generative-code.html",
+    "title": "10 - Generative Models for Classification Code Demo",
+    "section": "",
+    "text": "Codelibrary(ISLR2)\nlibrary(MASS)\n\n\nAttaching package: 'MASS'\n\n\nThe following object is masked from 'package:ISLR2':\n\n    Boston\n\nCodelibrary(e1071)\ndata(\"Default\")\n\n\n\nCodelda_fit &lt;- MASS::lda(default ~ balance, data = Default)\nlda_pred &lt;- predict(lda_fit, data = Default)\ntable(lda_pred$class, Default$default, dnn = c(\"Predicted\", \"Actual\"))\n\n         Actual\nPredicted   No  Yes\n      No  9643  257\n      Yes   24   76\n\n\n\nCodeqda_fit &lt;- MASS::qda(default ~ balance, data = Default)\nqda_pred &lt;- predict(qda_fit, data = Default)\ntable(qda_pred$class, Default$default, dnn = c(\"Predicted\", \"Actual\"))\n\n         Actual\nPredicted   No  Yes\n      No  9639  246\n      Yes   28   87\n\n\n\nCodenb_fit &lt;- e1071::naiveBayes(default ~ balance, data = Default)\nnb_pred &lt;- predict(nb_fit, Default)\n(nb_conf &lt;- table(nb_pred, Default$default))\n\n       \nnb_pred   No  Yes\n    No  9639  246\n    Yes   28   87"
+  },
+  {
+    "objectID": "code/10-generative-code.html#r-implementation",
+    "href": "code/10-generative-code.html#r-implementation",
+    "title": "10 - Generative Models for Classification Code Demo",
+    "section": "",
+    "text": "Codelibrary(ISLR2)\nlibrary(MASS)\n\n\nAttaching package: 'MASS'\n\n\nThe following object is masked from 'package:ISLR2':\n\n    Boston\n\nCodelibrary(e1071)\ndata(\"Default\")\n\n\n\nCodelda_fit &lt;- MASS::lda(default ~ balance, data = Default)\nlda_pred &lt;- predict(lda_fit, data = Default)\ntable(lda_pred$class, Default$default, dnn = c(\"Predicted\", \"Actual\"))\n\n         Actual\nPredicted   No  Yes\n      No  9643  257\n      Yes   24   76\n\n\n\nCodeqda_fit &lt;- MASS::qda(default ~ balance, data = Default)\nqda_pred &lt;- predict(qda_fit, data = Default)\ntable(qda_pred$class, Default$default, dnn = c(\"Predicted\", \"Actual\"))\n\n         Actual\nPredicted   No  Yes\n      No  9639  246\n      Yes   28   87\n\n\n\nCodenb_fit &lt;- e1071::naiveBayes(default ~ balance, data = Default)\nnb_pred &lt;- predict(nb_fit, Default)\n(nb_conf &lt;- table(nb_pred, Default$default))\n\n       \nnb_pred   No  Yes\n    No  9639  246\n    Yes   28   87"
+  },
+  {
+    "objectID": "code/10-generative-code.html#python-implementation",
+    "href": "code/10-generative-code.html#python-implementation",
+    "title": "10 - Generative Models for Classification Code Demo",
+    "section": "\n2 Python implementation",
+    "text": "2 Python implementation\n\nCodeimport pandas as pd\nfrom sklearn.discriminant_analysis import LinearDiscriminantAnalysis\nfrom sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis\nfrom sklearn.naive_bayes import GaussianNB\nfrom sklearn.metrics import confusion_matrix\n\n\n\nCodeDefault = pd.read_csv(\"../data/Default.csv\")\nX = Default[['balance']]\ny = Default['default']\n\n\n\nCodelda = LinearDiscriminantAnalysis()\nlda.fit(X, y)\n\n\n\n\nLinearDiscriminantAnalysis()\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\n  LinearDiscriminantAnalysis?Documentation for LinearDiscriminantAnalysisiFittedLinearDiscriminantAnalysis() \n\n\nCodelda_pred = lda.predict(X)\nlda_conf_df = pd.DataFrame(\n    confusion_matrix(y_true=y, y_pred=lda_pred), \n    index=[f\"Actual: {cls}\" for cls in lda.classes_],\n    columns=[f\"Predicted: {cls}\" for cls in lda.classes_]\n)\nlda_conf_df\n\n             Predicted: No  Predicted: Yes\nActual: No            9643              24\nActual: Yes            257              76\n\n\n\nCodeqda = QuadraticDiscriminantAnalysis()\nqda.fit(X, y)\n\n\n\n\nQuadraticDiscriminantAnalysis()\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\n  QuadraticDiscriminantAnalysis?Documentation for QuadraticDiscriminantAnalysisiFittedQuadraticDiscriminantAnalysis() \n\n\nCodeqda_pred = qda.predict(X)\nqda_conf_df = pd.DataFrame(\n    confusion_matrix(y, qda_pred), \n    index=[f\"Actual: {cls}\" for cls in qda.classes_],\n    columns=[f\"Predicted: {cls}\" for cls in qda.classes_]\n)\nqda_conf_df\n\n             Predicted: No  Predicted: Yes\nActual: No            9639              28\nActual: Yes            246              87\n\n\n\nCodenb = GaussianNB()\nnb.fit(X, y)\n\n\n\n\nGaussianNB()\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\n  GaussianNB?Documentation for GaussianNBiFittedGaussianNB() \n\n\nCodenb_pred = nb.predict(X)\nnb_conf_df = pd.DataFrame(\n    confusion_matrix(y, nb_pred),\n    index=[f\"Actual: {cls}\" for cls in nb.classes_],\n    columns=[f\"Predicted: {cls}\" for cls in nb.classes_]\n)\nnb_conf_df\n\n             Predicted: No  Predicted: Yes\nActual: No            9639              28\nActual: Yes            246              87"
   }
 ]
