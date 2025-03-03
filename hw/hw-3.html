@@ -101,7 +101,7 @@ window.Quarto = {
 </script>
 
 <meta property="og:title" content="MSSC 6250 - Spring 2025 - Homework 3 - Bayesian Statistics, Logistic Regression, Generative Models, and K-Nearest Neighbors">
-<meta property="og:description" content="Due Friday, April 11, 11:59 PM">
+<meta property="og:description" content="Due Friday, April 4, 11:59 PM">
 <meta property="og:site_name" content="MSSC 6250 - Spring 2025">
 </head>
 
@@ -301,7 +301,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week-8.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week-8.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 8</span></a>
   </div>
 </li>
@@ -379,7 +379,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Homework 3 - Bayesian Statistics, Logistic Regression, Generative Models, and K-Nearest Neighbors</h1>
-<p class="subtitle lead">Due Friday, April 11, 11:59 PM</p>
+<p class="subtitle lead">Due Friday, April 4, 11:59 PM</p>
 </div>
 
 
@@ -402,6 +402,7 @@ window.Quarto = {
 <ul>
 <li><p>Please submit your work in <strong>one</strong> <strong>PDF</strong> file to <strong>D2L &gt; Assessments &gt; Dropbox</strong>. <em>Multiple files or a file that is not in pdf format are not allowed.</em></p></li>
 <li><p>Any relevant code should be attached.</p></li>
+<li><p>Problems started with <strong>(MSSC PhD)</strong> are required for CMPS PhD students, and optional for other students for extra credits.</p></li>
 <li><p>Read <strong>ISL</strong> Chapter 4.</p></li>
 </ul>
 <section id="homework-questions" class="level2">
@@ -413,19 +414,7 @@ window.Quarto = {
 <li><p><strong>ISL</strong> Sec. 4.8: 3</p></li>
 <li><p><strong>ISL</strong> Sec. 4.8: 5</p></li>
 <li><p><strong>ISL</strong> Sec. 4.8: 13</p></li>
-<li><p><strong>[KNN Curse of Dimensionality]</strong></p>
-<ol type="a">
-<li><p>Generate Generate the covariates <span class="math inline">\(x_1, x_2, \dots, x_5\)</span> of <span class="math inline">\(n = 1000\)</span> training data from independent standard normal distribution. Then, generate <span class="math inline">\(Y\)</span> from <span class="math display">\[Y = X_1 + 0.5 X_2 - X_3 + \epsilon,\]</span> where <span class="math inline">\(\epsilon \sim N(0, 1).\)</span></p></li>
-<li><p>Use the first 500 observations as the training data and the rest as the test data. Fit KNN regression, and report the test MSE of <span class="math inline">\(y\)</span> with the optimal <span class="math inline">\(K\)</span>.</p></li>
-<li><p>Add additional 95 noisy predictors as follows.</p>
-<ul>
-<li><p><strong>Case 1</strong>: <span class="math inline">\(x_6, x_7, \dots, x_{100} \overset{\mathrm{iid}}{\sim} N(0, 1)\)</span></p></li>
-<li><p><strong>Case 2</strong>: <span class="math inline">\(XA\)</span> where <span class="math inline">\(X_{1000 \times 5} = [x_1 \cdots x_5]\)</span> and <span class="math inline">\(A_{5 \times 95}\)</span> having entries from iid uniform(0, 1).</p></li>
-</ul></li>
-<li><p>Fit KNN regression in both cases (with the total of 100 covariates) and select the best <span class="math inline">\(K\)</span> value.</p></li>
-<li><p>For both cases, what is the best K and the best mean squared error for prediction? Discuss the effect of adding 95 (unnecessary) covariates.</p></li>
-</ol></li>
-<li><p><strong>[MNIST Handwritten Digits Image]</strong></p>
+<li><p><strong>MNIST Handwritten Digits Image</strong></p>
 <ol type="a">
 <li><p>Load the prepared MNIST data <a href="./mnist.csv"><code>mnist.csv</code></a>. Print some images.</p></li>
 <li><p>Use the first 1000 observations as the training data and the second half as the test data.</p></li>
@@ -439,6 +428,18 @@ window.Quarto = {
 <li>Calculate the test error rate.</li>
 <li>Generate the confusion matrix.</li>
 </ul></li>
+</ol></li>
+<li><p><strong>(MSSC PhD)</strong> <strong>KNN Curse of Dimensionality</strong></p>
+<ol type="a">
+<li><p>Generate Generate the covariates <span class="math inline">\(x_1, x_2, \dots, x_5\)</span> of <span class="math inline">\(n = 1000\)</span> training data from independent standard normal distribution. Then, generate <span class="math inline">\(Y\)</span> from <span class="math display">\[Y = X_1 + 0.5 X_2 - X_3 + \epsilon,\]</span> where <span class="math inline">\(\epsilon \sim N(0, 1).\)</span></p></li>
+<li><p>Use the first 500 observations as the training data and the rest as the test data. Fit KNN regression, and report the test MSE of <span class="math inline">\(y\)</span> with the optimal <span class="math inline">\(K\)</span>.</p></li>
+<li><p>Add additional 95 noisy predictors as follows.</p>
+<ul>
+<li><p><strong>Case 1</strong>: <span class="math inline">\(x_6, x_7, \dots, x_{100} \overset{\mathrm{iid}}{\sim} N(0, 1)\)</span></p></li>
+<li><p><strong>Case 2</strong>: <span class="math inline">\(XA\)</span> where <span class="math inline">\(X_{1000 \times 5} = [x_1 \cdots x_5]\)</span> and <span class="math inline">\(A_{5 \times 95}\)</span> having entries from iid uniform(0, 1).</p></li>
+</ul></li>
+<li><p>Fit KNN regression in both cases (with the total of 100 covariates) and select the best <span class="math inline">\(K\)</span> value.</p></li>
+<li><p>For both cases, what is the best K and the best mean squared error for prediction? Discuss the effect of adding 95 (unnecessary) covariates.</p></li>
 </ol></li>
 </ol>
 </section>
