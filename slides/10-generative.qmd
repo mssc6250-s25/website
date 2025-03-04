@@ -312,10 +312,10 @@ library(plotly)
     d2 = apply(data, 1, function(x) exp(-0.5 * t(x - mu2) %*% sigma_inv %*% (x - mu2))*p2 )
     
     # plot the densities
-    plot_ly(x = x1, y = x2) %>% 
-            add_surface(z = matrix(d1, length(x1), length(x2)), colorscale = list(c(0,"rgb(252,207,230)"), c(1,"rgb(128,0,64)"))) %>% 
-            layout(paper_bgcolor='transparent') %>% 
-            add_surface(z = matrix(d2, length(x1), length(x2))) %>% 
+    plot_ly(x = x1, y = x2) |>  
+            add_surface(z = matrix(d1, length(x1), length(x2)), colorscale = list(c(0,"rgb(252,207,230)"), c(1,"rgb(128,0,64)"))) |>  
+            layout(paper_bgcolor='transparent') |>  
+            add_surface(z = matrix(d2, length(x1), length(x2))) |>  
             layout(scene = list(xaxis = list(title = "X1"), 
                                 yaxis = list(title = "X2"),
                                 zaxis = list(title = "Normal Densities")))
@@ -628,10 +628,10 @@ to the decomposition due to Fisher.
 
 
 
-## `MASS::lda()` [^1]
+## `MASS::lda()` ^[In python, [`from sklearn.discriminant_analysis import LinearDiscriminantAnalysis`](https://scikit-learn.org/stable/modules/generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html)]
 
 
-[^1]: In python, [`from sklearn.discriminant_analysis import LinearDiscriminantAnalysis`](https://scikit-learn.org/stable/modules/generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html)
+<!-- [^1]: In python, [`from sklearn.discriminant_analysis import LinearDiscriminantAnalysis`](https://scikit-learn.org/stable/modules/generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html) -->
 
 
 :::: {.columns}
@@ -889,10 +889,10 @@ https://freakonometrics.hypotheses.org/tag/qda
 :::
 
 
-## `MASS::qda`[^1]
+## `MASS::qda`^[In python, [`from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis`](https://scikit-learn.org/stable/modules/generated/sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.html)]
 
 
-[^1]: In python, [`from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis`](https://scikit-learn.org/stable/modules/generated/sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.html)
+<!-- [^1]: In python, [`from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis`](https://scikit-learn.org/stable/modules/generated/sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.html) -->
 
 **LDA**
 
