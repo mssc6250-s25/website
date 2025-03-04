@@ -858,7 +858,7 @@
     "href": "slides/10-generative.html#two-multivariate-normals-with-common-covariance",
     "title": "Generative Models \n",
     "section": "Two Multivariate Normals with Common Covariance",
-    "text": "Two Multivariate Normals with Common Covariance\n\n\n\\(\\color{blue}{(\\mathbf{x}\\mid y = k) \\sim N_p\\left(\\boldsymbol{\\mu}_k, \\Sigma \\right)}\\)\n\n\\(\\boldsymbol{\\mu}_1 = (0.5, -1)'\\), \\(\\boldsymbol{\\mu}_2 = (-0.5, 0.5)'\\)\n\\(\\Sigma = \\begin{pmatrix} 1 & 0.5 \\\\ 0.5 & 1 \\end{pmatrix}\\)\n\\(\\pi_1 = 0.4\\), \\(\\pi_2 = 0.6\\)\nEach class has its own predictor mean.\nThe predictor’s variability are the same for the two classes.\n\n\n\n\n\n\n\n\n\nplot_ly has mu1 mu2 problems! Be careful!"
+    "text": "Two Multivariate Normals with Common Covariance\n\n\n\\(\\color{blue}{(\\mathbf{x}\\mid y = k) \\sim N_p\\left(\\boldsymbol{\\mu}_k, \\Sigma \\right)}\\)\n\n\\(\\boldsymbol{\\mu}_1 = (0.5, -1)'\\), \\(\\boldsymbol{\\mu}_2 = (-0.5, 0.5)'\\)\n\\(\\Sigma = \\begin{pmatrix} 1 & 0.5 \\\\ 0.5 & 1 \\end{pmatrix}\\)\n\\(\\pi_1 = 0.4\\), \\(\\pi_2 = 0.6\\)\nEach class has its own predictor mean.\nThe predictor’s variability are the same for the two classes.\n\n\n\n\n\n\n\n\n\n\nplot_ly has mu1 mu2 problems! Be careful!"
   },
   {
     "objectID": "slides/10-generative.html#parameter-estimation-for-lda",
@@ -903,18 +903,18 @@
     "text": "Interpretation of LDA\n\n\n\n\n\nESL Fig 4.9\n\n\n\n\nCheck ESL\nFind the linear combination \\(Z = a'X\\) such that the between class variance is maximized relative to the within-class variance.\nAgain, the between class variance is the variance of the class means of Z, and the within class variance is the pooled variance about the means. Figure 4.9 shows why this criterion makes sense. Although the direction joining the centroids separates the means as much as possible (i.e., maximizes the between-class variance), there is considerable overlap between the projected classes due to the nature of the covariances. By taking the covariance into account as well, a direction with minimum overlap can be found.\nGaussian classification with common covariances leads to linear decision boundaries. Classification can be achieved by sphering the data with respect to W, and classifying to the closest centroid (modulo log πk) in the sphered space. Since only the relative distances to the centroids count, one can confine the data to the subspace spanned by the centroids in the sphered space. This subspace can be further decomposed into successively optimal subspaces in term of centroid separation. This decomposition is identical to the decomposition due to Fisher."
   },
   {
-    "objectID": "slides/10-generative.html#masslda-1",
-    "href": "slides/10-generative.html#masslda-1",
+    "objectID": "slides/10-generative.html#masslda",
+    "href": "slides/10-generative.html#masslda",
     "title": "Generative Models \n",
     "section": "\nMASS::lda() 1\n",
-    "text": "MASS::lda() 1\n\n\n\nLDA\n\nlda_fit &lt;- MASS::lda(default ~ balance, data = Default)\nlda_pred &lt;- predict(lda_fit, data = Default)\n(lda_conf &lt;- table(lda_pred$class, Default$default, \n                   dnn = c(\"Predicted\", \"Actual\")))\n\n         Actual\nPredicted   No  Yes\n      No  9643  257\n      Yes   24   76\n\n\n\ntraining accuracy is 0.972\nsensitivity is 0.228\n\n\nLogistic Regression\n\n\n       \n          No  Yes\n  FALSE 9625  233\n  TRUE    42  100\n\n\n\ntraining accuracy is 0.973\nsensitivity is 0.3\n\n\n\nIn Python, from sklearn.naive_bayes import GaussianNB"
+    "text": "MASS::lda() 1\n\n\n\n\nLDA\n\nlda_fit &lt;- MASS::lda(default ~ balance, data = Default)\nlda_pred &lt;- predict(lda_fit, data = Default)\n(lda_conf &lt;- table(lda_pred$class, Default$default, \n                   dnn = c(\"Predicted\", \"Actual\")))\n\n         Actual\nPredicted   No  Yes\n      No  9643  257\n      Yes   24   76\n\n\n\ntraining accuracy is 0.972\nsensitivity is 0.228\n\n\nLogistic Regression\n\n\n       \n          No  Yes\n  FALSE 9625  233\n  TRUE    42  100\n\n\n\ntraining accuracy is 0.973\nsensitivity is 0.3\n\n\n\nIn python, from sklearn.discriminant_analysis import LinearDiscriminantAnalysis"
   },
   {
     "objectID": "slides/10-generative.html#quadratic-discriminant-analysis-qda",
     "href": "slides/10-generative.html#quadratic-discriminant-analysis-qda",
     "title": "Generative Models \n",
     "section": "Quadratic Discriminant Analysis (QDA)",
-    "text": "Quadratic Discriminant Analysis (QDA)\n\n\n\n\nLDA assumption for \\(f_k(\\mathbf{x})\\): \\(\\color{blue}{(\\mathbf{x}\\mid y = k) \\sim N_p\\left(\\boldsymbol{\\mu}_k, \\Sigma \\right)}\\)\n\n\n\\(\\Sigma\\): covariance matrix common to all K classes\n\n\n\n\n\n\nQDA assumption for \\(f_k(\\mathbf{x})\\): \\(\\color{blue}{(\\mathbf{x}\\mid y = k) \\sim N_p\\left(\\boldsymbol{\\mu}_k, \\Sigma_k \\right)}\\)\n\n\n\\(\\Sigma_k\\): each class has its own covariance matrix\n\n\n\n\n\nThe discriminant function for QDA is\n\\[\\begin{align} \\delta_k(\\mathbf{x}) &= - \\frac{1}{2} (\\mathbf{x}- \\boldsymbol{\\mu}_k)' \\Sigma_k^{-1} (\\mathbf{x}- \\boldsymbol{\\mu}_k) - \\frac{1}{2} \\log |\\Sigma_k |+ \\log(\\pi_k) \\\\\n&= \\mathbf{x}' \\mathbf{W}_k \\mathbf{x}+ \\mathbf{x}'\\mathbf{w}_k + b_k \\end{align}\\] which is a quadratic function of \\(\\mathbf{x}\\).\n\n\nThe boundary between class \\(k\\) and \\(l\\) for QDA is\n\\[\\begin{align}\n\\mathbf{x}' (\\mathbf{W}_k - \\mathbf{W}_l) \\mathbf{x}+ \\mathbf{x}' (\\mathbf{w}_k - \\mathbf{w}_l) + (b_k - b_l) = 0\\\\\n\\end{align}\\]"
+    "text": "Quadratic Discriminant Analysis (QDA)\n\n\n\n\nLDA assumption for \\(f_k(\\mathbf{x})\\): \\(\\color{blue}{(\\mathbf{x}\\mid y = k) \\sim N_p\\left(\\boldsymbol{\\mu}_k, \\Sigma \\right)}\\)\n\n\n\\(\\Sigma\\): covariance matrix common to all K classes\n\n\n\n\n\n\nQDA assumption for \\(f_k(\\mathbf{x})\\): \\(\\color{blue}{(\\mathbf{x}\\mid y = k) \\sim N_p\\left(\\boldsymbol{\\mu}_k, \\Sigma_k \\right)}\\)\n\n\n\\(\\Sigma_k\\): each class has its own covariance matrix\n\n\n\n\n\n\nThe discriminant function for QDA is\n\\[\\begin{align} \\delta_k(\\mathbf{x}) &= - \\frac{1}{2} (\\mathbf{x}- \\boldsymbol{\\mu}_k)' \\Sigma_k^{-1} (\\mathbf{x}- \\boldsymbol{\\mu}_k) - \\frac{1}{2} \\log |\\Sigma_k |+ \\log(\\pi_k) \\\\\n&= \\mathbf{x}' \\mathbf{W}_k \\mathbf{x}+ \\mathbf{x}'\\mathbf{w}_k + b_k \\end{align}\\] which is a quadratic function of \\(\\mathbf{x}\\).\n\n\nThe boundary between class \\(k\\) and \\(l\\) for QDA is\n\\[\\begin{align}\n\\mathbf{x}' (\\mathbf{W}_k - \\mathbf{W}_l) \\mathbf{x}+ \\mathbf{x}' (\\mathbf{w}_k - \\mathbf{w}_l) + (b_k - b_l) = 0\\\\\n\\end{align}\\]"
   },
   {
     "objectID": "slides/10-generative.html#parameter-estimation-for-qda",
@@ -938,18 +938,18 @@
     "text": "Decision Boundary by QDA\n\nhttps://freakonometrics.hypotheses.org/tag/qda"
   },
   {
-    "objectID": "slides/10-generative.html#massqda1",
-    "href": "slides/10-generative.html#massqda1",
+    "objectID": "slides/10-generative.html#massqda",
+    "href": "slides/10-generative.html#massqda",
     "title": "Generative Models \n",
     "section": "\nMASS::qda1\n",
-    "text": "MASS::qda1\n\nLDA\n\n\n         Actual\nPredicted   No  Yes\n      No  9643  257\n      Yes   24   76\n\n\nQDA\n\nqda_fit &lt;- MASS::qda(default ~ balance, data = Default)\nqda_pred &lt;- predict(qda_fit, data = Default)\n(qda_conf &lt;- table(qda_pred$class, Default$default, dnn = c(\"Predicted\", \"Actual\")))\n\n         Actual\nPredicted   No  Yes\n      No  9639  246\n      Yes   28   87\n\n\n\ntraining accuracy is 0.973\nsensitivity is 0.261\nIn Python, from sklearn.naive_bayes import GaussianNB"
+    "text": "MASS::qda1\n\n\nLDA\n\n\n         Actual\nPredicted   No  Yes\n      No  9643  257\n      Yes   24   76\n\n\nQDA\n\nqda_fit &lt;- MASS::qda(default ~ balance, data = Default)\nqda_pred &lt;- predict(qda_fit, data = Default)\n(qda_conf &lt;- table(qda_pred$class, Default$default, dnn = c(\"Predicted\", \"Actual\")))\n\n         Actual\nPredicted   No  Yes\n      No  9639  246\n      Yes   28   87\n\n\n\ntraining accuracy is 0.973\nsensitivity is 0.261\nIn python, from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis"
   },
   {
     "objectID": "slides/10-generative.html#naive-bayes-nb",
     "href": "slides/10-generative.html#naive-bayes-nb",
     "title": "Generative Models \n",
     "section": "Naive Bayes (NB)",
-    "text": "Naive Bayes (NB)\n\n\n\n\n\nLDA assumption for \\(f_k(\\mathbf{x})\\): \\(\\color{blue}{(\\mathbf{x}\\mid y = k) \\sim N_p\\left(\\boldsymbol{\\mu}_k, \\Sigma \\right)}\\)\n\n\n\\(\\Sigma\\): covariance matrix common to all K classes\n\n\n\n\n\n\nQDA assumption for \\(f_k(\\mathbf{x})\\): \\(\\color{blue}{(\\mathbf{x}\\mid y = k) \\sim N_p\\left(\\boldsymbol{\\mu}_k, \\Sigma_k \\right)}\\)\n\n\n\\(\\Sigma_k\\): each class has its own covariance matrix\n\n\n\n\n\n\nNB assumption for \\(f_k(\\mathbf{x})\\):\n\nfeatures within each class are independent!\n\\(f_k(\\mathbf{x}) = f_{k1}(x_1) \\times f_{k2}(x_2) \\times \\cdots \\times f_{kp}(x_p)\\)\n\n\n\n\n\n\n\nConsidering the joint distribution of predictors is a pain when \\(p\\) is large.\nWe don’t believe \\(p\\) predictors are not associated at all, but this “naive” assumption leads to decent results when \\(n\\) is not large enough relative to \\(p\\).\nThe naive independence assumption introduces some bias, but reduces variance.\n\n\n\n\n\\[\\begin{align} p(y = k \\mid \\mathbf{x})  =\\frac{\\pi_kf_k(\\mathbf{x})}{\\sum_{l=1}^K\\pi_lf_l(\\mathbf{x})} = \\frac{\\pi_k\\prod_{j=1}^p f_{kj(x_j)}}{\\sum_{l=1}^K\\pi_l\\prod_{j=1}^p f_{lj(x_j)}} \\end{align}\\]\n\nestimating a joint distribution requires such a huge amount of data"
+    "text": "Naive Bayes (NB)\n\n\n\n\n\nLDA assumption for \\(f_k(\\mathbf{x})\\): \\(\\color{blue}{(\\mathbf{x}\\mid y = k) \\sim N_p\\left(\\boldsymbol{\\mu}_k, \\Sigma \\right)}\\)\n\n\n\\(\\Sigma\\): covariance matrix common to all K classes\n\n\n\n\n\n\nQDA assumption for \\(f_k(\\mathbf{x})\\): \\(\\color{blue}{(\\mathbf{x}\\mid y = k) \\sim N_p\\left(\\boldsymbol{\\mu}_k, \\Sigma_k \\right)}\\)\n\n\n\\(\\Sigma_k\\): each class has its own covariance matrix\n\n\n\n\n\n\nNB assumption for \\(f_k(\\mathbf{x})\\):\n\nfeatures within each class are independent!\n\\(f_k(\\mathbf{x}) = f_{k1}(x_1) \\times f_{k2}(x_2) \\times \\cdots \\times f_{kp}(x_p)\\)\n\n\n\n\n\n\n\n\nConsidering the joint distribution of predictors is a pain when \\(p\\) is large.\nWe don’t believe \\(p\\) predictors are not associated at all, but this “naive” assumption leads to decent results when \\(n\\) is not large enough relative to \\(p\\).\nThe naive independence assumption introduces some bias, but reduces variance.\n\n\n\n\n\\[\\begin{align} p(y = k \\mid \\mathbf{x})  =\\frac{\\pi_kf_k(\\mathbf{x})}{\\sum_{l=1}^K\\pi_lf_l(\\mathbf{x})} = \\frac{\\pi_k\\prod_{j=1}^p f_{kj(x_j)}}{\\sum_{l=1}^K\\pi_l\\prod_{j=1}^p f_{lj(x_j)}} \\end{align}\\]\n\nestimating a joint distribution requires such a huge amount of data"
   },
   {
     "objectID": "slides/10-generative.html#options-for-estimating-f_kjx_j",
@@ -1005,7 +1005,7 @@
     "href": "slides/10-generative.html#which-method-to-use-1",
     "title": "Generative Models \n",
     "section": "Which Method to Use",
-    "text": "Which Method to Use\n\nQDA is more flexible than LDA (more parameters to be estimated), and hence low bias and high variance.\nLDA tends to be better than QDA if \\(n\\) is relatively small, and so reducing variance is crucial.\nQDA is recommended if \\(n\\) is relatively large so that the variance of the classifier is not a major concern.\nNaive Bayes works when \\(n\\) is not large enough relative to \\(p\\).\n\n\\(n\\) small more bias; \\(p\\) small less bias small \\(n\\) large \\(p\\): low bias high variance, so reducing variance by using less flexible method"
+    "text": "Which Method to Use\n\nQDA is more flexible than LDA (more parameters to be estimated), and hence low bias and high variance.\nLDA tends to be better than QDA if \\(n\\) is relatively small, and so reducing variance is crucial.\nQDA is recommended if \\(n\\) is relatively large so that the variance of the classifier is not a major concern.\nNaive Bayes works when \\(n\\) is not large enough relative to \\(p\\).\n\n\\(n\\) small more bias; \\(p\\) small less bias small \\(n\\) large \\(p\\): low bias high variance, so reducing variance by using less flexible method\n\n\n\n\nmssc6250-s25.github.io/website"
   },
   {
     "objectID": "slides/06-lasso-vs.html#when-ols-doesnt-work-well",
@@ -3018,19 +3018,5 @@
     "title": "Overview of Statistical Machine Learning 💻",
     "section": "Accuracy and Interpretability Trade-Off",
     "text": "Accuracy and Interpretability Trade-Off\n\n\n\n\nSource: ISL Fig. 2.7\n\nflexibility: a model is flexible if the model performs quite good for various types of data.\n\n\n\n\nmssc6250-s25.github.io/website"
-  },
-  {
-    "objectID": "slides/10-generative.html#masslda",
-    "href": "slides/10-generative.html#masslda",
-    "title": "Generative Models \n",
-    "section": "\nMASS::lda() 1\n",
-    "text": "MASS::lda() 1\n\n\n\n\nLDA\n\nlda_fit &lt;- MASS::lda(default ~ balance, data = Default)\nlda_pred &lt;- predict(lda_fit, data = Default)\n(lda_conf &lt;- table(lda_pred$class, Default$default, \n                   dnn = c(\"Predicted\", \"Actual\")))\n\n         Actual\nPredicted   No  Yes\n      No  9643  257\n      Yes   24   76\n\n\n\ntraining accuracy is 0.972\nsensitivity is 0.228\n\n\nLogistic Regression\n\n\n       \n          No  Yes\n  FALSE 9625  233\n  TRUE    42  100\n\n\n\ntraining accuracy is 0.973\nsensitivity is 0.3\n\n\nIn python, from sklearn.discriminant_analysis import LinearDiscriminantAnalysis"
-  },
-  {
-    "objectID": "slides/10-generative.html#massqda",
-    "href": "slides/10-generative.html#massqda",
-    "title": "Generative Models \n",
-    "section": "\nMASS::qda1\n",
-    "text": "MASS::qda1\n\n\nLDA\n\n\n         Actual\nPredicted   No  Yes\n      No  9643  257\n      Yes   24   76\n\n\nQDA\n\nqda_fit &lt;- MASS::qda(default ~ balance, data = Default)\nqda_pred &lt;- predict(qda_fit, data = Default)\n(qda_conf &lt;- table(qda_pred$class, Default$default, dnn = c(\"Predicted\", \"Actual\")))\n\n         Actual\nPredicted   No  Yes\n      No  9639  246\n      Yes   28   87\n\n\n\ntraining accuracy is 0.973\nsensitivity is 0.261\nIn python, from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis"
   }
 ]
