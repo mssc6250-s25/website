@@ -1,0 +1,123 @@
+---
+title: "11 - K Nearest Neighbors Code Demo"
+author: 'Dr. Cheng-Han Yu'
+format: 
+  html:
+    toc: true
+    code-link: true
+    code-fold: show
+    # code-summary: "Show/Hide"
+    code-tools: true
+    number-sections: true
+# filters: 
+#   - include-code-files
+---
+
+## R implementation
+
+```{r}
+load("../data/ESL.mixture.rda", verbose = TRUE)
+x <- ESL.mixture$x
+y <- ESL.mixture$y
+library(class)
+library(caret)
+knn_fit <- class::knn(train = x, test = x, cl = y, k = 15)
+caret::confusionMatrix(table(knn_fit, y))
+```
+
+```{r}
+set.seed(2025)
+control <- trainControl(method = "cv", number = 10)
+knn_cvfit <- train(y ~ ., method = "knn", 
+                   data = data.frame("x" = x, "y" = as.factor(y)),
+                   tuneGrid = data.frame(k = seq(1, 40, 1)),
+                   trControl = control)
+par(mar = c(4, 4, 0, 0))
+plot(knn_cvfit$results$k, 1 - knn_cvfit$results$Accuracy,
+     xlab = "K", ylab = "Classification Error", type = "b",
+     pch = 19, col = 2)
+```
+
+```{r}
+zip.train <- read.csv("../data/zip.train.csv")
+zip.test <- read.csv("../data/zip.test.csv")
+# fit 3nn model and calculate the error
+knn.fit <- class::knn(zip.train[, 2:257], zip.test[, 2:257], zip.train[, 1], k = 3)
+# overall prediction error
+mean(knn.fit != zip.test[, 1])
+# the confusion matrix
+table(knn.fit, zip.test[, 1], dnn = c("pred", "true"))
+```
+
+## Python implementation
+
+```{python}
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import cross_val_score
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import confusion_matrix
+import rdata
+```
+
+```{python}
+# Load the .rda file into a dictionary
+mixture_example = rdata.read_rda('../data/ESL.mixture.rda')
+x = mixture_example['ESL.mixture']['x']
+y = mixture_example['ESL.mixture']['y']
+```
+
+```{python}
+knn = KNeighborsClassifier(n_neighbors=15)
+knn.fit(x, y)
+pred = knn.predict(x)
+pd.DataFrame(confusion_matrix(y, pred), 
+             index=[f"Actual {int(i)}" for i in np.unique(y)], 
+             columns=[f"Pred {int(i)}" for i in np.unique(y)])
+```
+
+```{python}
+# Prepare train/test split
+X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2,
+                                                    random_state=2025)
+
+# Perform 10-fold cross-validation for different k values
+k_values = range(1, 41)
+cv_errors = []
+
+for k in k_values:
+    knn = KNeighborsClassifier(n_neighbors=k)
+    # Use negative accuracy for error rate
+    scores = cross_val_score(knn, X_train, y_train, cv=10, scoring='accuracy')
+    cv_errors.append(1 - np.mean(scores))  # Classification error = 1 - accuracy
+
+# Plot classification error vs. k
+plt.figure()
+plt.plot(k_values, cv_errors, marker='o', linestyle='-', color='red')
+plt.xlabel('K')
+plt.ylabel('Classification Error')
+plt.title('K vs. Classification Error')
+plt.show()
+```
+
+```{python}
+zip_train = pd.read_csv("../data/zip.train.csv",).to_numpy()
+zip_test = pd.read_csv("../data/zip.test.csv",).to_numpy()
+x_train = zip_train[:, 1:257]
+y_train = zip_train[:, 0]
+x_test = zip_test[:, 1:257]
+y_test = zip_test[:, 0]
+
+knn = KNeighborsClassifier(n_neighbors=3)
+knn.fit(x_train, y_train)
+knn_pred = knn.predict(x_test)
+
+np.mean(knn_pred != y_test)
+
+pd.DataFrame(confusion_matrix(y_test, knn_pred), 
+             index=[f"Actual {int(i)}" for i in np.unique(y_test)], 
+             columns=[f"Pred {int(i)}" for i in np.unique(y_test)])
+```

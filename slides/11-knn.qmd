@@ -1,0 +1,828 @@
+---
+title: 'K-nearest Neighbors `r fontawesome::fa("people-group")`'
+subtitle: "MSSC 6250 Statistical Machine Learning"
+author: "Dr. Cheng-Han Yu <br> Department of Mathematical and Statistical Sciences <br> Marquette University"
+# date: "`r format(Sys.time(), '%B %d %Y')`"
+# macros: _macros.tex # import a list of TeX/LaTeX definitions
+format: 
+  revealjs:
+    html-math-method:
+      method: mathjax
+      url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    # include-in-header:
+    #     - "macros.tex"
+    highlight-style: github
+    code-block-bg: true
+    self-contained: false
+    slide-number: c/t
+    incremental: false
+    width: 1800
+    height: 1000
+    margin: 0.05
+    logo: "https://upload.wikimedia.org/wikipedia/commons/e/e8/Marquette_Golden_Eagles_logo.svg"
+    footer: "[mssc6250-s25.github.io/website](https://mssc6250-s25.github.io/website/)"
+    theme: ["simple", "styles.scss"]
+    echo: false
+    multiplex: true
+    code-link: true
+    fig-cap-location: bottom
+    fig-align: center
+    transition: none ## fade slide convex concave zoom
+    code-line-numbers: true
+    title-slide-attributes:
+      data-background-color: "#447099"
+      # data-background-image: images/paper-texture.jpg
+      # data-background-size: cover
+      # data-background-color: "#698ED5"
+editor: source
+execute:
+  freeze: true
+  cache: true
+  fig-align: center
+---
+
+
+# {visibility="hidden"}
+
+
+
+\def\bg{\mathbf{g}}
+\def\bu{\mathbf{u}}
+\def\bv{\mathbf{v}}
+\def\bw{\mathbf{w}}
+\def\bx{\mathbf{x}}
+\def\by{\mathbf{y}}
+\def\bbeta{\boldsymbol \beta}
+\def\btheta{\boldsymbol \theta}
+\def\bmu{\boldsymbol \mu}
+\def\bH{\mathbf{H}}
+\def\bI{\mathbf{I}}
+\def\bS{\mathbf{S}}
+\def\bW{\mathbf{W}}
+\def\bX{\mathbf{X}}
+\def\T{\text{T}}
+\def\E{\text{E}}
+\def\cov{\mathrm{Cov}}
+\def\cor{\mathrm{Corr}}
+\def\var{\mathrm{Var}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\def\Trace{\text{Trace}}
+
+
+
+```{r}
+#| label: setup
+#| include: false
+#| eval: true
+library(countdown)
+library(knitr)
+library(gt)
+library(gtExtras)
+library(ggplot2)
+library(ISLR2)
+library(genridge)
+library(glmnet)
+library(gam)
+library(splines)
+library(ElemStatLearn)
+knitr::opts_chunk$set(
+    fig.asp = 0.618,
+    fig.align = "center",
+    out.width = "100%",
+    fig.retina = 10,
+    fig.path = "images/11-knn/",
+    message = FALSE,
+    global.par = TRUE
+)
+options(
+  htmltools.dir.version = FALSE,
+  dplyr.print_min = 6, 
+  dplyr.print_max = 6,
+  tibble.width = 80,
+  width = 80,
+  digits = 3
+  )
+hook_output <- knitr::knit_hooks$get("output")
+knitr::knit_hooks$set(output = function(x, options) {
+  lines <- options$output.lines
+  if (is.null(lines)) {
+    return(hook_output(x, options))  # pass to default hook
+  }
+  x <- unlist(strsplit(x, "\n"))
+  more <- "..."
+  if (length(lines)==1) {        # first n lines
+    if (length(x) > lines) {
+      # truncate the output, but add ....
+      x <- c(head(x, lines), more)
+    }
+  } else {
+    x <- c(more, x[lines], more)
+  }
+  # paste these lines together
+  x <- paste(c(x, ""), collapse = "\n")
+  hook_output(x, options)
+})
+```
+
+<!-- # Nonparametric Methods {background-color="#447099"} -->
+
+
+## Nonparametric Examplar-based Methods
+
+- So far we have mostly focused on parametric models, either unconditional $p({\bf y} \mid \btheta)$ or conditional $p({\bf y} \mid \bx, \btheta)$, where $\btheta$ is a fixed-dimensional vector of parameters. ^[For example, $\beta$ coefficients in linear regression.]
+
+- The parameters are estimated from the training set $\mathcal{D} = \{(\bx_i, \by_i)\}_{i=1}^n$ but after model fitting, the data is not used anymore.
+
+. . .
+
+- The nonparametric models that *keep the training data around at the test time* are called **examplar-based models**, **instance-based learning** or **memory-based learning**.
+  + *K-nearest neighbors classification and regression*
+  + [Kernel regression](https://math4780-f23.github.io/website/slides/12-nonpara-reg.html#/nonparametric-regression-1)
+  + [Local regression, e.g., LOESS](https://math4780-f23.github.io/website/slides/12-nonpara-reg.html#/local-regression)
+  + Kernel density estimation
+
+. . .
+
+- The examplar-based models usually perform a **local averaging** technique based on the similarity or distance between a test input $\bx_0$ and each of the training inputs $\bx_i$.
+
+<!-- # K-nearest Neighbors -->
+
+
+## K-nearest Neighbor Regression
+
+- **K-nearest neighbor (KNN)** is a nonparametric method that can be used for regression and classification.
+
+- In KNN, we don't have parameters $\bbeta$, and $f(\bx_0) = \bx_0'\bbeta$ in linear regression.^[$\widehat{y}_0 = \widehat{f}(x_0) = \bx_0'\hat{\bbeta}$.]
+
+- We directly estimate $f(\bx_0)$ using our *examples* or *memory*.
+
+$$ \widehat{y}_0 = \frac{1}{k} \sum_{x_i \in N_k(x_0)} y_i,$$ 
+where the neighborhood of $x_0$, $N_k(x_0)$, defines the *$k$ training data points that are closest to $x_0$*.
+
+- Closeness (Similarity) is defined using a distance measure, such as the Euclidean distance.
+
+
+
+## 1-Nearest Neighbor Regression
+
+```{r}
+    # generate training data with 2*sin(x) and random Gaussian errors
+    set.seed(1)    
+    x <- runif(15, 0, 2*pi)
+    y <- 2 * sin(x) + rnorm(length(x))
+    
+    # generate testing data points where we evaluate the prediction function
+    test.x = seq(0, 1, 0.001)*2*pi
+
+    # "1-nearest neighbor" regression using kknn package
+    library(kknn)
+    knn.fit = kknn(y ~ ., train = data.frame(x = x, y = y), 
+                   test = data.frame(x = test.x),
+                   k = 1, kernel = "rectangular")
+    test.pred = knn.fit$fitted.values
+    
+    # plot the data
+    par(mar = c(2, 2, 2, 0))
+    plot(x, y, xlim = c(0, 2*pi), pch = "o", cex = 2, 
+         xlab = "", ylab = "", cex.lab = 1.5, las = 1)
+    title(main="1-Nearest Neighbor Regression", cex.main = 1.5)
+    
+    # plot the true regression line
+    lines(test.x, 2*sin(test.x), col = 2, lwd = 3)
+    
+    # plot the fitted line
+    lines(test.x, test.pred, type = "s", col = 4, lwd = 3)
+    legend("topright", c("Fitted line", "True function"), 
+           col = c(4, 2), lty = 1, lwd = 3, cex = 1.5, bty = "n")
+```
+
+
+
+## Tuning $k$
+
+- $y_i = 2\sin(x_i) + \epsilon_i, \quad \epsilon_i \stackrel{iid}{\sim} N(0, 1), \quad i = 1, \dots, 200$
+
+```{r}
+  # generate more data
+  set.seed(2025)
+  n = 200
+  x <- runif(n, 0, 2*pi)
+  y <- 2*sin(x) + rnorm(length(x))
+
+  test.y = 2*sin(test.x) + rnorm(length(test.x))
+  
+  # 1-nearest neighbor
+  knn.fit = kknn(y ~ ., train = data.frame("x" = x, "y" = y), 
+                 test = data.frame("x" = test.x),
+                 k = 1, kernel = "rectangular")
+  test.pred = knn.fit$fitted.values
+```
+
+```{r}
+#| fig-align: center
+  par(mar = c(2, 2, 2, 0))
+  plot(x, y, pch = 19, cex = 1, las = 1,
+       xlim = c(0, 2*pi), ylim = c(-4.25, 4.25))
+  title(main="1-Nearest Neighbor Regression", cex.main = 1.5)
+  # lines(test.x, 2*sin(test.x), col = 2, lwd = 3)
+  lines(test.x, test.pred, type = "s", col = 4, lwd = 2)
+  lines(test.x, 2*sin(test.x), col = 2, lwd = 3)
+  legend("topright", c("Fitted line", "True function"), 
+         col = c(4, 2), lty = 1,  lwd = 3, cex = 1.5, bty = "n")
+```
+
+
+
+::: notes
+
+- put all weights on one single training point. The predictive value at some test $x$ relies solely on one single training point that is closest to $x$.
+- Carry lots of noises
+
+:::
+
+
+
+
+## The Bias-variance Trade-off
+
+```{r}
+#| echo: false
+#| out-width: 100%
+  par(mfrow = c(2,3))
+  par(mar = c(0, 0, 2.5, 0))
+  
+  for (k in c(1, 5, 10, 33, 66, 100))
+  {
+      knn.fit = kknn(y ~ ., train = data.frame("x" = x, "y" = y), 
+                     test = data.frame("x" = test.x),
+                     k = k, kernel = "rectangular")
+      test.pred = knn.fit$fitted.values
+
+      plot(x, y, xlim = c(0, 2*pi), pch = 19, cex = 0.7, 
+           axes=FALSE, ylim = c(-4.25, 4.25))
+      title(main=c(paste("K =", k), paste("Test MSE = ", 
+                round(mean((test.pred - test.y)^2), 2))))
+      lines(test.x, test.pred, type = "s", col = 4, lwd = 2)
+     lines(test.x, 2*sin(test.x), col = 2, lwd = 3)
+      box()
+  }
+```
+
+
+
+:::notes
+
+If we consider different values of $k$, we can observe the trade-off between bias and variance. 
+- What's the training error when K=1?
+- What is the fitted curve like when K is all training data points?
+
+:::
+
+
+## Bias-Variance Trade-Off
+
+\begin{aligned}
+\E\Big[ \big( Y - \widehat f(x_0) \big)^2 \Big]
+&= \underbrace{\E\Big[ ( Y - f(x_0))^2 \big]}_{\text{Irreducible Error}} +
+\underbrace{\Big(f(x_0) - \E[\widehat f(x_0)]\Big)^2}_{\text{Bias}^2} + 
+\underbrace{\E\Big[ \big(\widehat f(x_0) - \E[\widehat f(x_0)] \big)^2 \Big]}_{\text{Variance}}
+\end{aligned}
+  
+* As $k \uparrow$, bias $\uparrow$ and variance $\downarrow$ (smoother)
+* As $k \downarrow$, bias $\downarrow$ and variance $\uparrow$ (more wiggly)
+  
+
+
+::: notes
+
+when k is small, the estimated model is unstable.
+Also, each time we observe a new training data, we may get a very different estimation. (due to the closest sample and )
+When k is large, the estimated model eventually deviates (systematically) from the truth.
+If we use more “neighbouring” points, say k, the variance would reduce to approximately σ2/k. But the bias2 will increase as neighbours are far away from x0.
+k determines the model complexity
+
+:::
+
+
+
+## Degrees of Freedom
+
+- $k$ determines the model complexity and degrees of freedom (df).
+
+- In general, the df can be defined as 
+
+$$\text{df}(\hat{f}) = \frac{1}{\sigma^2}\text{Trace}\left( \cov(\hat{\by}, \by)\right)= \frac{1}{\sigma^2}\sum_{i=1}^n \cov(\hat{y}_i, y_i)$$
+
+- $k = 1$: $\hat{f}(x_i) = y_i$ and $\text{df}(\hat{f}) = n$
+
+- $k = n$: $\hat{f}(x_i) = \bar{y}$ and $\text{df}(\hat{f}) = 1$
+
+- For general $k$, $\text{df}(\hat{f}) = n/k$.
+
+. . .
+
+- Linear regression with $p$ coefficients: $\text{df}(\hat{f}) = \text{Trace}\left( {\bf H} \right) = p$
+
+- For any linear smoother $\hat{\by} = {\bf S} \by$, $\text{df}(\hat{f}) = \text{Trace}({\bf S})$.
+
+
+::: notes
+
+- How y and y_hat move together, how true y and fitted y move together
+- The covariance term quantifies how much the predictions depend on the observed data.
+- $\sum_{i=1}^n \cov(\hat{y}_i, y_i)$  measures how much $\hat{y}_i$ depend on the observed data.
+- If a model is very flexible (e.g., an overfitted model), the predictions are highly dependent on the observed values, meaning higher covariance.
+- as a model increases in complexity, it becomes more data-dependent, meaning the predicted values closely follow the observed ones.
+- Simpler models have lower covariance, meaning they do not adapt too closely to the specific fluctuations in the data.
+- Degrees of freedom measure the model’s ability to fit data independently.
+:::
+
+
+
+## K-nearest Neighbor Classification
+
+- Instead of taking average in regression, KNN classification uses *majority voting*:
+
+:::{.center}
+
+[*Look for the most popular class label among its neighbors*.]{.green}
+
+:::
+
+- 1NN decision boundary is a **Voronoi diagram**.
+
+:::{.center}
+
+```{r}
+#| out-width: 70%
+#| fig-align: center
+  # knn for classification: 
+  library(class)
+  par(mfrow = c(1,2))
+  par(mar = c(2, 2, 0, 2))
+  
+  # generate 20 random observations, with random class 1/0
+  set.seed(1)    
+  x <- matrix(runif(40), 20, 2)
+  g <- rbinom(20, 1, 0.5)
+
+  # plot the data
+  plot(x, col=ifelse(g==1, 2, 4), pch = 19, 
+       cex = 2, xlim= c(0, 1), ylim = c(0, 1))
+  symbols(0.7, 0.7, circles = 0.12, add = TRUE, inches = FALSE)
+  points(0.7, 0.7, pch = 4, lwd = 4, col = 1)
+
+  # generate a grid for plot
+  xgd1 = xgd2 = seq(0, 1, 0.01)
+  gd = expand.grid(xgd1, xgd2)
+
+  # fit a 1-nearest neighbor model and get the fitted class
+  knn1 <- knn(x, gd, g, k=1)
+  knn1.class <- matrix(knn1, length(xgd1), length(xgd2))
+
+  # Voronoi tessalation plot (1NN)
+  library(deldir)
+  z <- deldir(x = data.frame(x = x[,1], y = x[,2], z=as.factor(g)), 
+              rw = c(0, 1, 0, 1))
+  w <- tile.list(z)
+  
+  plot(w, fillcol=ifelse(g==1, "pink", "lightblue"))
+  points(x, col=ifelse(g==1, 2, 4), pch = 19, cex = 2)
+  points(0.7, 0.7, pch = 4, lwd = 4, col = 1)
+```
+
+:::
+
+::: notes
+
+- Voronoi tessellation. https://en.wikipedia.org/wiki/Voronoi_diagram
+- Every boundary is the middle line of any two training points.
+- In each region, there is one training point, and all possible data points in the region will be labelled as the category the training point belongs to.
+
+:::
+
+
+
+## Example: [ESL.mixture.rda](./data/ESL.mixture.rda)
+
+<!-- - An artificial data with 200 binary labels. -->
+
+- The KNN decision boundary is nonlinear.
+
+- R: `class::knn()`, [`kknn::kknn()`](https://github.com/KlausVigo/kknn), [`FNN::knn()`](https://cran.r-project.org/web/packages/FNN/index.html), [`parsnip::nearest_neighbor()`](https://parsnip.tidymodels.org/reference/nearest_neighbor.html)
+
+- Python: [`from sklearn.neighbors import KNeighborsClassifier`](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier)
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| out-width: 70%
+#| fig-asp: 1
+#| fig-align: center
+  library(ElemStatLearn)
+  
+  x <- mixture.example$x
+  y <- mixture.example$y
+  xnew <- mixture.example$xnew
+  
+  par(mar=rep(0,4))
+  plot(x, col=ifelse(y==1, 2, 4), 
+       axes = FALSE, pch = 19, cex =2)
+  box()
+```
+
+:::
+
+
+::: {.column width="50%"}
+
+```{r}
+#| out-width: 70%
+#| fig-asp: 1
+#| fig-align: center
+  par(mar=c(0, 0, 2, 0))
+  # knn classification 
+  k = 15
+  knn.fit <- knn(x, xnew, y, k=k)
+  
+  px1 <- mixture.example$px1
+  px2 <- mixture.example$px2
+  pred <- matrix(knn.fit == "1", length(px1), length(px2))
+  
+  contour(px1, px2, pred, levels=0.5, labels="",axes=FALSE,
+          lwd = 4)
+  box()
+  title(main = list(paste(k, "-Nearest Neighbor", sep= ""), cex = 3))
+  points(x, col=ifelse(y==1, 2, 4), pch = 19, cex =2)
+  mesh <- expand.grid(px1, px2)
+  points(mesh, pch=".", cex=3, col=ifelse(pred, 2, 4))
+```
+
+:::
+
+::::
+
+
+
+## Example: [ESL.mixture.rda](./data/ESL.mixture.rda)
+
+
+:::: {.columns}
+
+::: {.column width="33%"}
+
+```{r}
+#| out-width: 100%
+#| fig-asp: 1
+
+  par(mar=c(0, 0, 2, 0))
+  # knn classification 
+  k = 1
+  knn.fit <- knn(x, xnew, y, k=k)
+  
+  px1 <- mixture.example$px1
+  px2 <- mixture.example$px2
+  pred <- matrix(knn.fit == "1", length(px1), length(px2))
+  
+  contour(px1, px2, pred, levels=0.5, labels="",axes=FALSE,
+          lwd = 4)
+  box()
+  title(main = list(paste(k, "-Nearest Neighbor", sep= ""), cex = 3))
+  points(x, col=ifelse(y==1, 2, 4), pch = 19, cex =2)
+  mesh <- expand.grid(px1, px2)
+  points(mesh, pch=".", cex=3, col=ifelse(pred, 2, 4))
+```
+
+:::
+
+
+::: {.column width="33%"}
+
+```{r}
+#| out-width: 100%
+#| fig-asp: 1
+
+  par(mar=c(0, 0, 2, 0))
+  # knn classification 
+  k = 100
+  knn.fit <- knn(x, xnew, y, k=k)
+  
+  px1 <- mixture.example$px1
+  px2 <- mixture.example$px2
+  pred <- matrix(knn.fit == "1", length(px1), length(px2))
+  
+  contour(px1, px2, pred, levels=0.5, labels="",axes=FALSE,
+          lwd = 4)
+  box()
+  title(main = list(paste(k, "-Nearest Neighbor", sep= ""), cex = 3))
+  points(x, col=ifelse(y==1, 2, 4), pch = 19, cex =2)
+  mesh <- expand.grid(px1, px2)
+  points(mesh, pch=".", cex=3, col=ifelse(pred, 2, 4))
+```
+
+:::
+
+::: {.column width="33%"}
+
+```{r}
+#| out-width: 100%
+#| fig-asp: 1
+    lm.fit = glm(y~x)
+    lm.pred = matrix(as.matrix(cbind(1, xnew)) %*% as.matrix(lm.fit$coef) > 0.5, length(px1), length(px2))
+    
+    par(mar=rep(2,4))
+    plot(mesh, pch=".", cex=3, col=ifelse(lm.pred, 2, 4), axes=FALSE)
+    
+    abline(a = (0.5 - lm.fit$coef[1])/lm.fit$coef[3], b = -lm.fit$coef[2]/lm.fit$coef[3], lwd = 4)
+    points(x, col=ifelse(y==1, 2, 4), pch = 19, cex =2)
+    title(main = list("Linear Regression of 0/1 Response", cex = 3))
+    box()
+```
+
+:::
+
+::::
+
+
+
+## Confusion Matrix
+
+::: small
+
+```{r}
+#| echo: true
+#| message: false
+#| code-line-numbers: false
+#| class-output: my_classfull
+knn_fit <- class::knn(train = x, test = x, cl = y, k = 15)
+caret::confusionMatrix(table(knn_fit, y))
+```
+
+:::
+
+
+
+
+## Choosing K
+
+```{r}  
+#| echo: true
+#| code-fold: true
+#| code-line-numbers: false
+set.seed(2025)
+library(caret)
+control <- trainControl(method = "cv", number = 10)
+knn_cvfit <- train(y ~ ., method = "knn", 
+                   data = data.frame("x" = x, "y" = as.factor(y)),
+                   tuneGrid = data.frame(k = seq(1, 40, 1)),
+                   trControl = control)
+par(mar = c(4, 4, 0, 0))
+plot(knn_cvfit$results$k, 1 - knn_cvfit$results$Accuracy,
+     xlab = "K", ylab = "Classification Error", type = "b",
+     pch = 19, col = 2)
+```
+
+
+
+## Best K
+
+<!-- # ```{r} -->
+<!-- # knn_cvfit$bestTune -->
+<!-- # ``` -->
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-asp: 1
+  par(mar=c(0, 0, 2, 0))
+  # knn classification 
+  k <- knn_cvfit$bestTune
+  knn.fit <- knn(x, xnew, y, k=k)
+  
+  px1 <- mixture.example$px1
+  px2 <- mixture.example$px2
+  pred <- matrix(knn.fit == "1", length(px1), length(px2))
+  
+  contour(px1, px2, pred, levels=0.5, labels="",axes=FALSE,
+          lwd = 4)
+  box()
+  title(main = list(paste(k, "-Nearest Neighbor", sep= ""), cex = 3))
+  points(x, col=ifelse(y==1, 2, 4), pch = 19, cex =2)
+  mesh <- expand.grid(px1, px2)
+  points(mesh, pch=".", cex=1.2, col=ifelse(pred, 2, 4))
+```
+
+:::
+
+::: {.column width="50%"}
+
+::: small
+
+```{r}
+#| echo: false
+#| message: false
+#| code-line-numbers: false
+#| class-output: my_classfull
+knn_fit <- class::knn(train = x, test = x, cl = y, k = knn_cvfit$bestTune)
+  caret::confusionMatrix(table(knn_fit, y))
+```
+
+:::
+
+:::
+
+::::
+
+
+
+## Scaling and Distance Measures
+
+- By default, we use Euclidean distance ($\ell_2$ norm) $d^2(\bu, \bv) = \lVert \bu - \bv \rVert_2^2 = \sum_{j=1}^p (u_j - v_j)^2$
+
+- This measure is not *scale invariant*: Multiplying the data with a factor changes the distance!
+
+. . .
+
+- Often consider a normalized version:
+
+$$d^2(\bu, \bv) = \sum_{j=1}^p \frac{(u_j - v_j)^2}{\sigma_j^2}$$
+
+. . .
+
+- __Mahalanobis distance__ takes the covariance structure into account
+
+$$d^2(\bu, \bv) = (\bu - \bv)' \Sigma^{-1} (\bu - \bv),$$
+
+- If $\Sigma = \bI$, Mahalanobis = Euclidean
+- If $\Sigma = diag(\sigma^2_1, \dots, \sigma^2_p)$, Mahalanobis = normalized version
+
+
+
+## Mahalanobis distance
+
+- Red and green points have the same Euclidean distance to the center.
+
+- The red point is farther away from the center in terms of Mahalanobis distance.
+
+
+```{r}
+#| fig-align: center
+#| message: false
+
+  x1=rnorm(100)
+  x2=1 + 0.3*x1 + 0.3*rnorm(100)
+  par(mar = c(4, 4, 0, 0))
+  library(car)
+  dataEllipse(x1, x2, levels=c(0.6, 0.9), col = c("black", 4), pch = 19, las = 1)
+  points(1, 0.5, col = "red", pch = 4, cex = 2, lwd = 4)
+  points(1, 1.5, col = "green2", pch = 4, cex = 3, lwd = 4)
+```
+
+::: notes
+
+In the following plot, the red cross and orange cross have the same Euclidean distance to the center. However, the red cross is more of a "outlier" based on the joint distribution. The Mahalanobis distance would reflect this. 
+
+:::
+
+
+
+## Example: Image Data [`ElemStatLearn::zip.train`](https://hastie.su.domains/ElemStatLearn/)
+
+- Digits 0-9 scanned from envelopes by the U.S. Postal Service
+
+- $16 \times 16$ pixel images, totally $p=256$ variables
+
+- At each pixel, we have the gray scale as the numerical value
+
+- 1NN with Euclidean distance gives 5.6% error rate
+
+- 1NN with [tangent distance]{.green} (Simard et al., 1993) gives 2.6% error
+
+```{r}
+#| results: hide
+#| out-width: 100%
+#| fig-asp: 0.1
+
+par(mfrow = c(1, 10), mar = rep(0, 4))
+for (i in 1:10) {
+    image(zip2image(zip.train, i), col = gray(256:0/256), zlim=c(0,1), xlab="", ylab="", axes = FALSE)
+}
+```
+
+
+```{r}
+#| echo: false
+#| eval: false
+#| code-line-numbers: false
+zip.train[1, ]
+```
+
+
+
+## Example: 3NN on Image Data
+
+```{r}
+#| echo: true
+#| code-line-numbers: false
+# fit 3nn model and calculate the error
+knn.fit <- class::knn(zip.train[, 2:257], zip.test[, 2:257], zip.train[, 1], k = 3)
+# overall prediction error
+mean(knn.fit != zip.test[, 1])
+```
+
+::: midi
+
+```{r}
+#| code-line-numbers: false
+#| class-output: my_class500
+#| echo: true
+
+# the confusion matrix
+table(knn.fit, zip.test[, 1])
+```
+
+:::
+
+
+
+## Example: 3NN on Image Data
+
+```{r}
+#| results: hide
+idx <- which(knn.fit != zip.test[, 1])
+par(mfrow = c(2, 5))
+for (i in 1:10) {
+    image(zip2image(zip.test, idx[i]),
+          col=gray(256:0/256), zlim=c(0,1), 
+          xlab="", ylab="", axes = FALSE,
+          main = paste("Actual:", zip.test[idx[i], 1], "; Predict:", knn.fit[idx[i]]))
+}
+
+```
+
+
+
+
+
+## Computational Issues
+
+- Need to store the entire training data for prediction. (Lazy learner)
+
+- Needs to calculate the distance from $x_0$ to all training sample and sort them.^[R [`FNN`](https://cran.r-project.org/web/packages/FNN/FNN.pdf) package for faster computations when $n$ is large.]
+
+- Distance measures may affect accuracy.
+
+::: notes
+
+$K$NN can be quite computationally intense for large sample size because to find the nearest neighbors, we need to calculate and compare the distances to each of the data point. In addition, it is not memory friendly because we need to store the entire training dataset for future prediction. In contrast, for linear model, we only need to store the estimated $\bbeta$ parameters. Some algorithms have been developed to search for the neighbors more efficiently. You can try the `FNN` package for these faster computations when $n$ is large.
+
+:::
+
+
+## Curse of Dimensionality
+
+- KNN does does not work well in high-dimensional space ($p \gg n$) due to **curse of dimensionality**.
+
+> *As $p$ increases, it's getting harder to find $k$ neighbors in the input space. KNN needs to explore a large range of values along each input dimension to grab the "neighbors".*
+
+- The "neighbors" of $x_0$ are in fact far away from $x_0$, and so they may not be good predictors about the behavior of the function at $x_0$.
+
+- The method is not local anymore despite the name "nearest neighbor"!
+
+- In high dimensions KNN often performs worse than linear regression.
+
+
+::: notes
+
+In high dimensions, all points tend to become equidistant from each other. This means that the difference between the nearest and farthest neighbor becomes very small, making it difficult for KNN to distinguish between close and distant points.
+:::
+
+
+## Curse of Dimensionality
+
+- Data points are uniformly spread out on $[0, 1]^p$.
+
+- In 10 dimensions we need to cover 80% of the range of each coordinate to capture 10% of the data.
+
+```{r}
+#| out-width: 70%
+#| fig-align: center
+#| fig-cap: "Source: ESL Fig. 2.6"
+#| fig-cap-location: bottom
+knitr::include_graphics("./images/11-knn/curse.png")
+```
+
+
+::: notes
+- The problem comes from the fact that the volume of space grows exponentially fast with dimension, so we may have to look quite far away in space to find our nearest neighbor.
+:::
+
+
+
+
+

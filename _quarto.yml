@@ -75,9 +75,9 @@ website:
             text: Topics and Works
       - section: "Midterm Project II"
         contents:
-          - href: present-description2.qmd
+          - href: present-description-2.qmd
             text: Guideline and Policy
-          - href: present-work2.qmd
+          - href: present-work-2.qmd
             text: Topics and Works
       - section: "Final Project"
         contents:

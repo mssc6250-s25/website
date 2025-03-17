@@ -1,0 +1,30 @@
+---
+title: "Week 10"
+subtitle: "K-Nearest Neighbors"
+editor: visual
+---
+
+::: callout-important
+:::
+
+## Participate
+
+🖥️ [Slides - K-Nearest Neighbors](/slides/11-knn.html)
+
+`r fontawesome::fa("table")` [Mixture Simulation Data](https://hastie.su.domains/ElemStatLearn/)
+
+`r fontawesome::fa("table")` [ZIP code Training and Test data](https://hastie.su.domains/ElemStatLearn/)
+
+## Reading and Resources
+
+📖 [PMLI Ch 16.1](https://probml.github.io/pml-book/book1.html)
+
+## Exercise
+
+<!-- 📋 [Lab-20 Simple Linear Regression](/exercise/lab20-slr.html) -->
+
+<br><br>
+
+::: {style="font-size: 0.875em;"}
+Back to [course schedule](/ "Course schedule") ⏎
+:::
