@@ -33,7 +33,7 @@ format:
 |  | Thu, Mar 13 | ***NO CLASS: Spring break*** [Deep Learning Workshop (Fri, Mar 14)](https://web.cvent.com/event/c428cad1-0152-4fb8-adb5-926b6f5650cd/summary) |  |  |  |  |  |
 | 10 | Tue, Mar 18 | Naive Bayes | [📖](/weeks/week-10.html "Week 10") |  |  |  |  |
 |  | Thu, Mar 20 | K-Nearest Neighbors |  | [🖥️](slides/11-knn.html "11-knn") | [`r fontawesome::fa("file-code")`](code/11-knn-code.html "11-knn-code") |  |  |
-| 11 | Tue, Mar 25 | Gaussian Process Regression | [📖](/weeks/week-11.html "Week 11") | [🖥️](slides/11-knn.html "11-knn") |  |  |  |
+| 11 | Tue, Mar 25 | Gaussian Process Regression | [📖](/weeks/week-11.html "Week 11") | [🖥️](slides/12-gp.html "12-gp") |  |  |  |
 |  | Thu, Mar 27 | Gaussian Process Classification |  |  | `r fontawesome::fa("file-code")` |  |  |
 | 12 | Tue, Apr 1 | Support Vector Machine | [📖](/weeks/week-12.html "Week 11") |  |  |  |  |
 |  | Thu, Apr 3 | Support Vector Machine |  |  | `r fontawesome::fa("file-code")` | HW 3 Due |  |

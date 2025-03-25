@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-b84e9dc6e68246e77ac4f52f8c844cc3.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.7">
+<meta name="author" content="Dr.&nbsp;Cheng-Han Yu   Department of Mathematical and Statistical Sciences   Marquette University">
+<title>MSSC 6250 - Spring 2025 – Gaussian Processes ♾️</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+<link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+<link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+<style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+  </style>
+<link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-89909b91675dd12fd7ae7f00f958249a.css">
+<link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+<link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+<link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+<link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+<style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+<meta property="og:title" content="Gaussian Processes r emo::ji('infinity') – MSSC 6250 - Spring 2025">
+<meta property="og:description" content="MSSC 6250 Statistical Machine Learning">
+<meta property="og:site_name" content="MSSC 6250 - Spring 2025">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" data-background-color="#447099" class="quarto-title-block center"><h1 class="title">Gaussian Processes ♾️</h1>
+  <p class="subtitle">MSSC 6250 Statistical Machine Learning</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Dr.&nbsp;Cheng-Han Yu <br> Department of Mathematical and Statistical Sciences <br> Marquette University 
+</div>
+</div>
+</div>
+
+</section><section><section id="gaussian-variables" class="title-slide slide level1 center"><h1>Gaussian Variables</h1>
+
+</section><section id="univariate-guassian" class="slide level2"><h2>Univariate Guassian</h2>
+<ul>
+<li><span class="math inline">\(Y \sim N(\mu, \sigma^2)\)</span></li>
+</ul>
+
+<!-- ## Why Normal? -->
+<!-- We love Gaussian distribution because it has lots of great properties. -->
+<!-- . . . -->
+<!-- - Central limit theorem -->
+<!-- - If $Y$ and Z are jointly normally distributed and are uncorrelated, then they are independent. -->
+<!-- - Maximum entropy: $N(\mu, \sigma^2)$ has maximum entropy of any distribution with mean $\mu$ and variance $\sigma^2$ ([Principle of maximum entropy](https://en.wikipedia.org/wiki/Principle_of_maximum_entropy#:~:text=The%20principle%20of%20maximum%20entropy,proposition%20that%20expresses%20testable%20information).) -->
+<!-- -  -->
+<img data-src="images/12-gp/unnamed-chunk-2-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section><section id="multivariate-guassian" class="slide level2"><h2>Multivariate Guassian</h2>
+<ul>
+<li><p>“Multivariate” <span class="math inline">\(=\)</span> two or more random variables</p></li>
+<li><p><span class="math inline">\(\mathbf{Y}\in \mathbb{R}^d \sim N_d\left(\boldsymbol \mu, \boldsymbol \Sigma\right)\)</span></p></li>
+</ul>
+<div class="fragment">
+<ul>
+<li>Bivariate Gaussian (<span class="math inline">\(d=2\)</span>):</li>
+</ul>
+<p><span class="math display">\[\mathbf{Y}= \begin{pmatrix} Y_1 \\ Y_2 \end{pmatrix}\]</span> <span class="math display">\[\boldsymbol \mu= \begin{pmatrix} \mu_1 \\ \mu_2 \end{pmatrix}\]</span> <span class="math display">\[\boldsymbol \Sigma= \begin{pmatrix} \sigma_1^2  &amp; \rho_{12}\sigma_1\sigma_2\\ \rho_{12}\sigma_1\sigma_2 &amp; \sigma_2^2 \end{pmatrix}\]</span></p>
+<aside class="notes"><!-- has a multivariate Gaussian distribution with --><!-- - mean vector $\bmu \in \mathbb{R}^d$ --><!-- - covariance matrix $\bSigma \in \mathbb{R}^{d\times d}$ --><style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section><section id="section-1" class="slide level2"><h2></h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="images/12-gp/unnamed-chunk-3-1.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<p><span class="math display">\[\boldsymbol \mu= \begin{pmatrix} 0 \\ 0 \end{pmatrix}\]</span> <span class="math display">\[\boldsymbol \Sigma= \begin{pmatrix}1 &amp; 0\\ 0 &amp; 1 \end{pmatrix}\]</span></p>
+</div></div>
+</section><section id="section-2" class="slide level2"><h2></h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="images/12-gp/unnamed-chunk-4-1.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<p><span class="math display">\[\boldsymbol \mu= \begin{pmatrix} 0 \\ 1 \end{pmatrix}\]</span> <span class="math display">\[\boldsymbol \Sigma= \begin{pmatrix}1 &amp; 0\\ 0 &amp; 0.2 \end{pmatrix}\]</span></p>
+</div></div>
+</section><section id="section-3" class="slide level2"><h2></h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="images/12-gp/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<p><span class="math display">\[\boldsymbol \mu= \begin{pmatrix} 0 \\ 0 \end{pmatrix}\]</span> <span class="math display">\[\boldsymbol \Sigma= \begin{pmatrix}1 &amp; 0.9\\ 0.9 &amp; 1 \end{pmatrix}\]</span></p>
+</div></div>
+</section><section id="three-or-more-variables" class="slide level2"><h2>Three or More Variables</h2>
+<ul>
+<li>Hard to visualize in dimensions <span class="math inline">\(&gt; 2\)</span>, so stack points next to each other.</li>
+</ul>
+
+<img data-src="images/12-gp/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"><aside class="notes"><p>y1 and y2 are highly correlated, y1 and y2 have similar values, and so when we put them next to each other, the lines do not go up or down that much. Instead, the lines are quite horizontal.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside></section><section id="section-4" class="slide level2"><h2></h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="images/12-gp/unnamed-chunk-7-1.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<p><span class="math inline">\(d = 5\)</span></p>
+<div class="small">
+<p><span class="math display">\[\boldsymbol \mu= \begin{pmatrix} 0 \\ 0 \\ 0\\0\\0\end{pmatrix} \quad \quad \boldsymbol \Sigma= \begin{pmatrix}1 &amp; 0.99 &amp; 0.98 &amp; 0.97 &amp; 0.96\\ 0.99 &amp; 1 &amp; 0.99 &amp; 0.98 &amp; 0.97 \\ 0.98 &amp; 0.99 &amp; 1 &amp; 0.99 &amp; 0.98 \\ 0.97 &amp; 0.98 &amp; 0.97 &amp; 1 &amp; 0.99\\0.96 &amp; 0.97 &amp; 0.98 &amp; 0.99 &amp; 1
+\end{pmatrix}\]</span></p>
+</div>
+<ul>
+<li>Each line is one sample (path).</li>
+</ul>
+</div></div>
+</section><section id="section-5" class="slide level2"><h2></h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="images/12-gp/unnamed-chunk-8-1.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<p><span class="math inline">\(d = 50\)</span></p>
+<div class="small">
+<p><span class="math display">\[\boldsymbol \mu= \begin{pmatrix} 0 \\ 0 \\ \vdots \\0\\0\end{pmatrix} \quad \quad \boldsymbol \Sigma= \begin{pmatrix}
+1 &amp; 0.99 &amp; 0.98 &amp; 0.97 &amp; 0.96 &amp; \cdots \\
+0.99 &amp; 1 &amp; 0.99 &amp; 0.98 &amp; 0.97 &amp; \cdots\\
+0.98 &amp; 0.99 &amp; 1 &amp; 0.99 &amp; 0.98 &amp; \cdots\\
+0.97 &amp; 0.98 &amp; 0.97 &amp; 1 &amp; 0.99 &amp; \cdots\\
+0.96 &amp; 0.97 &amp; 0.98 &amp; 0.99 &amp; 1 &amp; \cdots \\
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp;  \vdots &amp;
+\end{pmatrix}\]</span></p>
+</div>
+<ul>
+<li><p>Each line is one sample (path).</p></li>
+<li>
+<p>Think of <strong>Gaussian processes</strong> as an <em>infinite dimensional</em> distribution over functions</p>
+<ul>
+<li>all we need to do is change notation</li>
+</ul>
+</li>
+</ul>
+</div></div>
+</section></section><section><section id="gaussian-processes" class="title-slide slide level1 center"><h1>Gaussian Processes</h1>
+
+</section><section id="gaussian-processes-1" class="slide level2"><h2>Gaussian Processes</h2>
+<ul>
+<li><p>A <strong>stochastic process</strong> <span class="math inline">\(f(x), x \in \mathcal{X} \subset \mathbb{R}^D\)</span>, is a function whose values are random variables, for any value of <span class="math inline">\(x\)</span>.</p></li>
+<li><p>Usually for <span class="math inline">\(D = 1\)</span>, the process is a <em>temporal</em> process, and for <span class="math inline">\(D &gt; 1\)</span>, it is referred to as a <em>spatial</em> process.</p></li>
+</ul>
+<div class="fragment">
+<ul>
+<li>A <strong>Gaussian process</strong> (GP) is a process where all finite-dimensional distributions are multivariate Gaussian, for any choice of <span class="math inline">\(n\)</span> and <span class="math inline">\(x_1\dots, x_n \in \mathbb{R}^D\)</span>:</li>
+</ul>
+<p><span class="math display">\[f(x_1), \dots, f(x_n) \sim N_n\left(\boldsymbol \mu, \boldsymbol \Sigma\right)\]</span></p>
+<ul>
+<li>Write <span class="math inline">\(f(\cdot) \sim GP\)</span> to denote that the <em>function</em> <span class="math inline">\(f()\)</span> is a GP.</li>
+</ul>
+</div>
+</section><section id="section-6" class="slide level2"><h2></h2>
+
+<img data-src="images/12-gp/unnamed-chunk-9-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section><section id="section-7" class="slide level2"><h2></h2>
+
+<img data-src="images/12-gp/unnamed-chunk-10-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section><section id="mean-and-covariance-function" class="slide level2"><h2>Mean and Covariance Function</h2>
+<ul>
+<li>To fully specify a Gaussian distribution we need the mean and covariance, <span class="math inline">\(Y \sim N(\mu, \Sigma)\)</span>
+</li>
+</ul>
+<div class="fragment">
+<ul>
+<li>To fully specify a Gaussian process we need the <span class="green"><strong>mean and covariance function</strong></span>, <span class="math display">\[f(\cdot) \sim GP\left(m(\cdot), k(\cdot, \cdot)\right)\]</span> where</li>
+</ul>
+<p><span class="math display">\[m(x) = \text{E}(f(x))\]</span> <span class="math display">\[k(x, x') = \text{Cov}(f(x), f(x'))\]</span></p>
+</div>
+<div class="fragment">
+<ul>
+<li><p>Popular choices of <span class="math inline">\(m(\cdot)\)</span> are <span class="math inline">\(m(x) = 0\)</span> or <span class="math inline">\(m(x) = \text{const}\)</span> for all <span class="math inline">\(x\)</span>, or <span class="math inline">\(m(x) = \beta'x\)</span></p></li>
+<li><p>Care more about the covariance function or <strong>kernel function</strong> as it governs the how the process looks like by defining the <em>similarity</em> between data points.</p></li>
+</ul>
+</div>
+</section><section id="covariance-function-kernel" class="slide level2"><h2>Covariance Function Kernel</h2>
+<p><span class="math display">\[\text{Cov}(f(x), f(x')) = k(x, x')\]</span></p>
+<ul>
+<li>
+<span class="math inline">\(k(x, x')\)</span> must be a positive semi-definite function, leading to valid covariance matrices
+<ul>
+<li>Given locations <span class="math inline">\(x_1, \dots, x_n\)</span>, the <span class="math inline">\(n \times n\)</span> Gram matrix <span class="math inline">\(K\)</span> with <span class="math inline">\(K_{ij} = k(x_i, x_j)\)</span> must be a positive semi-definite matrix.</li>
+</ul>
+</li>
+</ul>
+<div class="fragment">
+<div class="columns">
+<div class="column" style="width:80%;">
+<ul>
+<li>Often assume <span class="math inline">\(k(x, x')\)</span> is a function of only the <em>distance between locations</em>: <span class="math display">\[\text{Cov}(f(x), f(x')) = k(\|x-x'\|) = k(r)\]</span>
+<ul>
+<li>the GP is a <strong>stationary process</strong>.</li>
+<li>the covariance function is <strong>isotropic</strong>.</li>
+</ul>
+</li>
+</ul>
+</div><div class="column" style="width:20%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="./images/12-gp/circle.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><ul>
+<li>The covariance function determines the nature of the GP, hypothesis space of functions.</li>
+</ul>
+</div>
+</div>
+</section><section id="squared-exponential-se-kernel" class="slide level2"><h2>Squared Exponential (SE) Kernel</h2>
+<p><span class="math display">\[k(x, x' \mid \tau, h) = \tau^2 \exp\left(-\frac{(x - x')^2}{2h^2} \right)\]</span></p>
+<div class="fragment">
+<div class="columns">
+<div class="column" style="width:65%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="images/12-gp/unnamed-chunk-12-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:35%;">
+<p><span class="math display">\[k(x, x') = \exp\left(-\frac{1}{2}(x - x')^2 \right)\]</span></p>
+</div></div>
+</div>
+</section><section id="squared-exponential-se-kernel-1" class="slide level2"><h2>Squared Exponential (SE) Kernel</h2>
+<div class="columns">
+<div class="column" style="width:65%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="images/12-gp/unnamed-chunk-13-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:35%;">
+<p><span class="math display">\[k(x, x') = \exp\left(-\frac{1}{2}\frac{(x - x')^2}{ {\color{red}{0.25}}^2} \right)\]</span></p>
+<ul>
+<li>The parameter <span class="math inline">\(h\)</span> is the <strong>characteristic length-scale</strong> that controls the number of level-zero upcrossings.</li>
+</ul>
+</div></div>
+</section><section id="squared-exponential-se-kernel-2" class="slide level2"><h2>Squared Exponential (SE) Kernel</h2>
+<div class="columns">
+<div class="column" style="width:65%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="images/12-gp/unnamed-chunk-14-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:35%;">
+<p><span class="math display">\[k(x, x') = \exp\left(-\frac{1}{2}\frac{(x - x')^2}{ {\color{red}{4}}^2} \right)\]</span></p>
+</div></div>
+</section><section id="squared-exponential-se-kernel-3" class="slide level2"><h2>Squared Exponential (SE) Kernel</h2>
+<div class="columns">
+<div class="column" style="width:65%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="images/12-gp/unnamed-chunk-15-1.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:35%;">
+<p><span class="math display">\[k(x, x') = {\color{red}{10^2}}\exp\left(-\frac{1}{2}(x - x')^2 \right)\]</span></p>
+<ul>
+<li>The parameter <span class="math inline">\(\tau\)</span> is the variance of <span class="math inline">\(f(x)\)</span> that controls the vertical variation of the process.</li>
+</ul>
+</div></div>
+</section><section id="exponential-kernel" class="slide level2"><h2>Exponential Kernel</h2>
+<p><span class="math display">\[k(x, x' \mid \tau, h) = \tau^2 \exp\left(-\frac{|x - x'|}{h} \right)\]</span></p>
+
+<img data-src="images/12-gp/unnamed-chunk-16-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section><section id="brownian-motion" class="slide level2"><h2>Brownian Motion</h2>
+<p><span class="math display">\[k(x, x') = \min(x, x')\]</span></p>
+
+<img data-src="images/12-gp/unnamed-chunk-17-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section><section id="white-noise" class="slide level2"><h2>White Noise</h2>
+<p><span class="math display">\[k(x, x') = \begin{cases} 1 &amp; \quad \text{if } x = x' \\
+0 &amp; \quad \text{otherwise}
+\end{cases}\]</span></p>
+
+<img data-src="images/12-gp/unnamed-chunk-18-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section><section id="why-gp" class="slide level2"><h2>Why GP?</h2>
+<ul>
+<li>The GP inherits its properties primarily from the covariance function <span class="math inline">\(k\)</span>:
+<ul>
+<li>Smoothness</li>
+<li>Differentiability</li>
+<li>Variance</li>
+</ul>
+</li>
+</ul>
+<div class="fragment">
+<ul>
+<li>Sums of Gaussians are Gaussian.</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Marginal distributions of multivariate Gaussians are still Gaussian.</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Any affine transformation of a Gaussian is a Gaussian.</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Conditional distributions are still Gaussian.</li>
+</ul>
+<div class="midi">
+<p><span class="math display">\[\mathbf{Y}= \begin{pmatrix} \mathbf{Y}_1 \\ \mathbf{Y}_2 \end{pmatrix} \sim N\left(\boldsymbol \mu,  \boldsymbol \Sigma\right), \quad \boldsymbol \mu= \begin{pmatrix} \boldsymbol \mu_1 \\ \boldsymbol \mu_2 \end{pmatrix},  \quad \boldsymbol \Sigma= \begin{pmatrix} \Sigma_{11}  &amp; \Sigma_{12}\\ \Sigma_{21} &amp; \Sigma_{22} \end{pmatrix}\]</span> <span class="math display">\[(\mathbf{Y}_2 \mid \mathbf{y}_1 = \mathbf{y}_1) \sim N\left(\boldsymbol \mu_2 + \Sigma_{21} \Sigma_{11}^{-1} (\mathbf{y}_1 - \boldsymbol \mu_1), \Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12}\right)\]</span></p>
+</div>
+</div>
+</section><section id="conditional-updates-of-gaussian-processes" class="slide level2"><h2>Conditional Updates of Gaussian Processes</h2>
+<ul>
+<li>If <span class="math inline">\(f(\cdot) \sim GP\)</span>,</li>
+</ul>
+<p><span class="math display">\[f(x_1), \dots, f(x_n), f(x^*) \sim N(\boldsymbol \mu, \boldsymbol \Sigma)\]</span></p>
+<ul>
+<li>If we observe its value at <span class="math inline">\(x_1, \dots, x_n\)</span>, then</li>
+</ul>
+<p><span class="math display">\[f(x^*) \mid f(x_1), \dots, f(x_n) \sim N(\boldsymbol \mu^*, \boldsymbol \Sigma^*)\]</span> where <span class="math inline">\(\boldsymbol \mu^*\)</span> and <span class="math inline">\(\boldsymbol \Sigma^*\)</span> are as on the previous slide.</p>
+<ul>
+<li>We still believe <span class="math inline">\(f\)</span> is a GP even we’ve observed its value at a number of locations.</li>
+</ul></section></section><section><section id="gaussian-process-regression" class="title-slide slide level1 center"><h1>Gaussian Process Regression</h1>
+
+</section><section id="bayesian-conditioning-updates-of-gp-prior" class="slide level2"><h2>Bayesian Conditioning Updates of GP: Prior</h2>
+<ul>
+<li>Instead of assigning priors to parameters in the regression function, we assign a function prior to the regression function:</li>
+</ul>
+<p><span class="math display">\[f(\cdot) \sim GP(0, k(\cdot, \cdot))\]</span></p>
+<ul>
+<li>For any points <span class="math inline">\(x_1, \dots, x_n, x^*\)</span>,</li>
+</ul>
+<p><span class="math display">\[f(x_1), \dots, f(x_n), f(x^*) \sim N\left(0, \boldsymbol \Sigma\right)\]</span></p>
+<p><span class="math display">\[\boldsymbol \Sigma= \left(\begin{array}{ccc|c}
+k(x_1, x_1) &amp; \cdots &amp; k(x_1, x_n) &amp; k(x_1, x^*) \\
+\vdots &amp;  &amp; \vdots &amp; \vdots \\
+k(x_n, x_1) &amp; \cdots &amp; k(x_n, x_n) &amp; k(x_n, x^*) \\
+\hline
+k(x^*, x_1) &amp; \cdots &amp; k(x^*, x_n) &amp; k(x^*, x^*)
+\end{array} \right) =
+\left(\begin{array}{ccc|c}
+&amp;  &amp;  &amp;  \\
+&amp; K &amp;  &amp; K_* \\
+&amp;  &amp;  &amp;  \\
+\hline
+&amp; K_*^T &amp;  &amp; K_{**}
+\end{array} \right) \]</span></p>
+</section><section id="bayesian-conditioning-updates-of-gp-posterior" class="slide level2"><h2>Bayesian Conditioning Updates of GP: Posterior</h2>
+<ul>
+<li>Given observed information <span class="math inline">\(f(x_1), \dots, f(x_n)\)</span>
+</li>
+</ul>
+<p><span class="math display">\[f(x^*) \mid f(x_1), \dots, f(x_n) \sim N\left( \boldsymbol \mu^*, \boldsymbol \Sigma^*\right)\]</span> where</p>
+<p><span class="math display">\[\boldsymbol \mu^* = K_{*}^TK^{-1}{\bf f}\]</span> with <span class="math inline">\({\bf f} = \left(f(x_1), \dots, f(x_n)\right)^T\)</span></p>
+<p><span class="math display">\[\boldsymbol \Sigma^* = K_{**} - K_{*}^TK^{-1}K_{*}\]</span></p>
+</section><section id="no-noisenugget---interpolation" class="slide level2"><h2>No Noise/Nugget - Interpolation</h2>
+
+<img data-src="images/12-gp/unnamed-chunk-19-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"><ul>
+<li><p><span class="blue">—–</span>: posterior mean <span class="math inline">\(\boldsymbol \mu^*\)</span></p></li>
+<li><p><span class="red">—–</span>: 95% posterior predictive interval <span class="math inline">\(\boldsymbol \mu^* \pm 1.96 \boldsymbol \Sigma^*\)</span></p></li>
+<li><p>So far we treat <span class="math inline">\(f(x)\)</span>, the function values as data points.</p></li>
+<li><p>There is no noise, and every posterior curve interpolates data points.</p></li>
+</ul></section><section id="noisy-observationswith-nugget---gp-regression-gpr" class="slide level2"><h2>Noisy Observations/with Nugget - GP Regression (GPR)</h2>
+<ul>
+<li>In reality, we don’t or can’t observe <span class="math inline">\(f(x)\)</span> and like to estimate it.</li>
+</ul>
+<p><span class="math display">\[\begin{align} y_i &amp;= f(x_i) + \epsilon_i, \quad \epsilon_i\sim N(0, \sigma^2) \\
+f(\cdot) &amp;\sim GP(0, k(\cdot, \cdot; \theta))\end{align}\]</span></p>
+<div class="fragment">
+<p><span class="math display">\[y_1, \dots, y_n, f(x^*) \sim N\left(0, \boldsymbol \Sigma\right), \quad \boldsymbol \Sigma=
+\left(\begin{array}{ccc|c}
+&amp;  &amp;  &amp;  \\
+&amp; K + \sigma^2I &amp;  &amp; K_* \\
+&amp;  &amp;  &amp;  \\
+\hline
+&amp; K_*^T &amp;  &amp; K_{**}
+\end{array} \right) \]</span></p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[f(x^*) \mid y_1, \dots, y_n \sim N\left( \boldsymbol \mu^*, \boldsymbol \Sigma^*\right), \quad \boldsymbol \mu^* = K_{*}^T{\color{red}{(K + \sigma^2I)^{-1}}}{\bf y}, \quad \boldsymbol \Sigma^* = K_{**} - K_{*}^T{\color{red}{(K + \sigma^2I)^{-1}}}K_{*}\]</span> with <span class="math inline">\({\bf y} = \left(y_1, \dots, y_n\right)^T\)</span></p>
+</div>
+</section><section id="noisy-observationswith-nugget---gp-regression-gpr-1" class="slide level2"><h2>Noisy Observations/with Nugget - GP Regression (GPR)</h2>
+
+<img data-src="images/12-gp/unnamed-chunk-20-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section><section id="hyperparameter-tuning" class="slide level2"><h2>Hyperparameter Tuning</h2>
+
+<img data-src="./images/12-gp/hyperparameter.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section><section id="empirical-bayes" class="slide level2"><h2>Empirical Bayes</h2>
+<ul>
+<li><p>Uses the observed data to estimate parameters <span class="math inline">\(\theta = (\sigma^2, \tau^2, h)\)</span></p></li>
+<li><p>Find an empirical Bayes estimate for <span class="math inline">\(\theta\)</span> from the <strong>marginal likelihood</strong></p></li>
+</ul>
+<p><span class="math display">\[ p\left( \mathbf{y}\mid \theta \right) = \int p\left( \mathbf{y}\mid {\bf f} \right) p\left( {\bf f} \mid \theta \right) \, d {\bf f} = N\left(\mathbf{0}, K(\tau, h)+\sigma^2I \right)\]</span></p>
+<ul>
+<li>
+<span class="math inline">\(\hat{\theta}_{EB} = \mathop{\mathrm{arg\,max}}_{\theta}\log p\left( \mathbf{y}\mid \theta \right)\)</span>.</li>
+</ul></section><section id="full-bayesian-inference" class="slide level2"><h2>Full Bayesian Inference</h2>
+<p><span class="math display">\[\begin{align}
+y_i &amp;= f(x_i) + \epsilon_i, \, \, \epsilon_i \stackrel{\rm iid}{\sim} N(0, \sigma^2), \quad i = 1, \dots, n,\\
+f(\cdot) &amp;\sim GP\left(\mu, k(\cdot, \cdot)\right),\,\, \text{Cov}(f(x_i), f(x_j)) = k(x_i, x_j)\\
+\sigma^2 &amp;\sim IG(a_{\sigma}, b_{\sigma})\\
+\tau^2 &amp;\sim IG(a_{\tau}, b_{\tau})\\
+h &amp;\sim Ga(a_{h}, b_{h})\\
+\mu &amp; \sim N(0, b_{\mu})
+\end{align}\]</span></p>
+<ul>
+<li>The model is Gibbsable, or the Metropolis-Hastings algorithm can be used when <span class="math inline">\({\bf f}\)</span> is integrated out.</li>
+</ul></section></section><section id="gaussian-process-classification" class="title-slide slide level1 center"><h1>Gaussian Process Classification</h1>
+<aside class="notes"><ul>
+<li>PML Ch 17</li>
+<li>GPML Ch 3</li>
+</ul><style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+
+</section>
+</div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Marquette_Golden_Eagles_logo.svg" class="slide-logo"></p>
+<div class="footer footer-default">
+<p><a href="https://mssc6250-s25.github.io/website/">mssc6250-s25.github.io/website</a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="../site_libs/revealjs/dist/reveal.js"></script><!-- reveal.js plugins --><script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script><script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script><script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script><script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script><script src="../site_libs/revealjs/plugin/multiplex/socket.io.js"></script><script src="../site_libs/revealjs/plugin/multiplex/multiplex.js"></script><script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script><script src="../site_libs/revealjs/plugin/notes/notes.js"></script><script src="../site_libs/revealjs/plugin/search/search.js"></script><script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script><script src="../site_libs/revealjs/plugin/math/math.js"></script><script>window.define = window.backupDefine; window.backupDefine = undefined;</script><script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'multiplex': {"secret":"1742914650933920106","id":"6a4322f4757f82d7","url":"https://reveal-multiplex.glitch.me/"},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1800,
+
+        height: 1000,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 5.0e-2,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script><script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script><script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp("https:\/\/mssc6250-s25\.github\.io\/website\/");
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+
+
+</body></html>

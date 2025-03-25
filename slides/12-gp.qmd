@@ -1,0 +1,1122 @@
+---
+title: "Gaussian Processes `r emo::ji('infinity')`"
+subtitle: "MSSC 6250 Statistical Machine Learning"
+author: "Dr. Cheng-Han Yu <br> Department of Mathematical and Statistical Sciences <br> Marquette University"
+# date: "`r format(Sys.time(), '%B %d %Y')`"
+# macros: _macros.tex # import a list of TeX/LaTeX definitions
+format: 
+  revealjs:
+    html-math-method:
+      method: mathjax
+      url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    # include-in-header:
+    #     - "macros.tex"
+    highlight-style: github
+    code-block-bg: true
+    self-contained: false
+    slide-number: c/t
+    incremental: false
+    width: 1800
+    height: 1000
+    margin: 0.05
+    logo: "https://upload.wikimedia.org/wikipedia/commons/e/e8/Marquette_Golden_Eagles_logo.svg"
+    footer: "[mssc6250-s25.github.io/website](https://mssc6250-s25.github.io/website/)"
+    theme: ["simple", "styles.scss"]
+    echo: false
+    multiplex: true
+    code-link: true
+    fig-cap-location: bottom
+    fig-align: center
+    transition: none ## fade slide convex concave zoom
+    title-slide-attributes:
+      data-background-color: "#447099"
+      # data-background-image: images/paper-texture.jpg
+      # data-background-size: cover
+      # data-background-color: "#698ED5"
+editor: source
+execute:
+  freeze: true
+---
+
+
+# {visibility="hidden"}
+
+
+
+
+\def\cD{{\cal D}}
+\def\cL{{\cal L}}
+\def\cX{{\cal X}}
+\def\cF{{\cal F}}
+\def\cH{{\cal H}}
+\def\bA{\mathbf{A}}
+\def\bB{\mathbf{B}}
+\def\bX{\mathbf{X}}
+\def\bH{\mathbf{H}}
+\def\bI{\mathbf{I}}
+\def\bU{\mathbf{U}}
+\def\bD{\mathbf{D}}
+\def\bV{\mathbf{V}}
+\def\bS{\mathbf{S}}
+\def\bW{\mathbf{W}}
+\def\bY{\mathbf{Y}}
+\def\bZ{\mathbf{Z}}
+\def\bK{\mathbf{K}}
+\def\bx{\mathbf{x}}
+\def\by{\mathbf{y}}
+\def\bs{\mathbf{s}}
+\def\br{\mathbf{r}}
+\def\bu{\mathbf{u}}
+\def\be{\mathbf{e}}
+\def\bv{\mathbf{v}}
+\def\bp{\mathbf{p}}
+\def\bw{\mathbf{w}}
+\def\bz{\mathbf{z}}
+\def\bzero{\mathbf{0}}
+\def\balpha{\boldsymbol \alpha}
+\def\bbeta{\boldsymbol \beta}
+\def\btheta{\boldsymbol \theta}
+\def\bSigma{\boldsymbol \Sigma}
+\def\bxi{\boldsymbol \xi}
+\def\bmu{\boldsymbol \mu}
+\def\bep{\boldsymbol \epsilon}
+\def\T{\text{T}}
+\def\Trace{\text{Trace}}
+\def\Cov{\text{Cov}}
+\def\Corr{\text{Corr}}
+\def\Var{\text{Var}}
+\def\E{\text{E}}
+\def\pr{\text{pr}}
+\def\Prob{\text{P}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+
+
+```{r}
+#| label: setup
+#| include: false
+#| eval: true
+library(countdown)
+library(knitr)
+library(gt)
+library(gtExtras)
+library(ggplot2)
+library(ISLR2)
+library(genridge)
+library(glmnet)
+library(gam)
+library(splines)
+library(fields)
+library(R.utils)
+library(plgp)
+sourceDirectory("~/Dropbox/Rice_Postdoc/Projects/ERP_project/GPderivative/DGP-code/R")
+# library(ElemStatLearn)
+knitr::opts_chunk$set(
+    fig.asp = 0.618,
+    fig.align = "center",
+    out.width = "100%",
+    fig.retina = 10,
+    fig.path = "images/12-gp/",
+    message = FALSE,
+    global.par = TRUE
+)
+options(
+  htmltools.dir.version = FALSE,
+  dplyr.print_min = 6, 
+  dplyr.print_max = 6,
+  tibble.width = 80,
+  width = 80,
+  digits = 3
+  )
+hook_output <- knitr::knit_hooks$get("output")
+knitr::knit_hooks$set(output = function(x, options) {
+  lines <- options$output.lines
+  if (is.null(lines)) {
+    return(hook_output(x, options))  # pass to default hook
+  }
+  x <- unlist(strsplit(x, "\n"))
+  more <- "..."
+  if (length(lines)==1) {        # first n lines
+    if (length(x) > lines) {
+      # truncate the output, but add ....
+      x <- c(head(x, lines), more)
+    }
+  } else {
+    x <- c(more, x[lines], more)
+  }
+  # paste these lines together
+  x <- paste(c(x, ""), collapse = "\n")
+  hook_output(x, options)
+})
+```
+
+
+
+
+# Gaussian Variables
+
+
+## Univariate Guassian
+
+- $Y \sim N(\mu, \sigma^2)$
+
+```{r}
+#| fig-asp: 0.5
+par(mfrow = c(1, 2), mar = c(3, 2.8, 1, 1), mgp = c(2, 0.5, 0))
+x <- seq(-4, 4, 0.01)
+plot(x, dnorm(x), type = "l", main = "N(0, 1) pdf", ylab = "density", las = 1, xlab = 'x')
+plot(x, pnorm(x), type = "l", main = "N(0, 1) cdf", ylab = "P(Y < y)", las = 1, xlab = "x")
+```
+
+
+<!-- ## Why Normal? -->
+
+<!-- We love Gaussian distribution because it has lots of great properties. -->
+
+<!-- . . . -->
+
+<!-- - Central limit theorem -->
+
+<!-- - If $Y$ and Z are jointly normally distributed and are uncorrelated, then they are independent. -->
+
+<!-- - Maximum entropy: $N(\mu, \sigma^2)$ has maximum entropy of any distribution with mean $\mu$ and variance $\sigma^2$ ([Principle of maximum entropy](https://en.wikipedia.org/wiki/Principle_of_maximum_entropy#:~:text=The%20principle%20of%20maximum%20entropy,proposition%20that%20expresses%20testable%20information).) -->
+
+<!-- -  -->
+
+
+## Multivariate Guassian
+
+- "Multivariate" $=$ two or more random variables
+
+- $\bY \in \mathbb{R}^d \sim N_d\left(\bmu, \bSigma\right)$ 
+
+. . .
+
+
+- Bivariate Gaussian ($d=2$):
+
+$$\bY = \begin{pmatrix} Y_1 \\ Y_2 \end{pmatrix}$$ $$\bmu = \begin{pmatrix} \mu_1 \\ \mu_2 \end{pmatrix}$$ $$\bSigma = \begin{pmatrix} \sigma_1^2  & \rho_{12}\sigma_1\sigma_2\\ \rho_{12}\sigma_1\sigma_2 & \sigma_2^2 \end{pmatrix}$$
+
+
+:::notes
+<!-- has a multivariate Gaussian distribution with -->
+
+<!-- - mean vector $\bmu \in \mathbb{R}^d$ -->
+
+<!-- - covariance matrix $\bSigma \in \mathbb{R}^{d\times d}$ -->
+:::
+
+
+
+##
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+```{r}
+#| fig-asp: 1
+#| out-width: 90%
+library(ggplot2)
+y1 = rnorm(2000)
+y2 = rnorm(2000)
+df <- data.frame(y1 = rnorm(2000), y2 = rnorm(2000))
+
+x = rnorm(500)
+y = rnorm(500)
+xy_grid <- expand.grid(x = x, y = y)
+mu <- c(0, 0)
+sigma <- matrix(c(1, 0, 0, 1), nrow = 2)
+prob <- mvtnorm::dmvnorm(xy_grid, mean = mu, sigma = sigma)
+df_prob <- cbind(xy_grid, prob)
+p <- ggplot(df, aes(y1, y2)) + 
+    geom_point() + 
+    theme_classic() + 
+    ylim(-4, 4) + 
+    xlim(-4, 4) + 
+    geom_contour(data = df_prob, aes(x = x, y = y, z = prob), 
+                 color = 2, size = 2, bins = 3)
+ggExtra::ggMarginal(p, type = "histogram")
+```
+
+:::
+
+::: {.column width="40%"}
+
+$$\bmu = \begin{pmatrix} 0 \\ 0 \end{pmatrix}$$ $$\bSigma = \begin{pmatrix}1 & 0\\ 0 & 1 \end{pmatrix}$$
+:::
+
+::::
+
+
+
+##
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+```{r}
+#| fig-asp: 1
+#| out-width: 90%
+library(ggplot2)
+y1 = rnorm(2000)
+y2 = rnorm(2000)
+df <- data.frame(y1 = rnorm(2000), y2 = rnorm(2000, mean = 1, sd = sqrt(0.2)))
+
+x = rnorm(500)
+y = rnorm(500)
+xy_grid <- expand.grid(x = x, y = y)
+mu <- c(0, 1)
+sigma <- matrix(c(1, 0, 0, 0.2), nrow = 2)
+prob <- mvtnorm::dmvnorm(xy_grid, mean = mu, sigma = sigma)
+df_prob <- cbind(xy_grid, prob)
+p <- ggplot(df, aes(y1, y2)) + 
+    geom_point() + 
+    theme_classic() + 
+    ylim(-4, 4) + 
+    xlim(-4, 4) + 
+    geom_contour(data = df_prob, aes(x = x, y = y, z = prob), 
+                 color = 2, size = 2, bins = 3)
+ggExtra::ggMarginal(p, type = "histogram")
+```
+
+:::
+
+::: {.column width="40%"}
+
+$$\bmu = \begin{pmatrix} 0 \\ 1 \end{pmatrix}$$ $$\bSigma = \begin{pmatrix}1 & 0\\ 0 & 0.2 \end{pmatrix}$$
+:::
+
+::::
+
+
+
+##
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+```{r}
+#| fig-asp: 1
+#| out-width: 90%
+library(ggplot2)
+mu <- c(0, 0)
+sigma <- matrix(c(1, 0.9, .9, 1), nrow = 2)
+df <- as.data.frame(mvnfast::rmvn(2000, mu = mu, sigma = sigma))
+colnames(df) <- c("y1", "y2")
+x = rnorm(500)
+y = rnorm(500)
+xy_grid <- expand.grid(x = x, y = y)
+prob <- mvtnorm::dmvnorm(xy_grid, mean = mu, sigma = sigma)
+df_prob <- cbind(xy_grid, prob)
+p <- ggplot(df, aes(y1, y2)) + 
+    geom_point() + 
+    theme_classic() + 
+    ylim(-4, 4) + 
+    xlim(-4, 4) + 
+    geom_contour(data = df_prob, aes(x = x, y = y, z = prob), 
+                 color = 2, size = 2, bins = 3)
+ggExtra::ggMarginal(p, type = "histogram")
+```
+
+:::
+
+::: {.column width="40%"}
+
+$$\bmu = \begin{pmatrix} 0 \\ 0 \end{pmatrix}$$ $$\bSigma = \begin{pmatrix}1 & 0.9\\ 0.9 & 1 \end{pmatrix}$$
+:::
+
+::::
+
+
+
+
+## Three or More Variables
+
+- Hard to visualize in dimensions $> 2$, so stack points next to each other.
+
+
+```{r}
+#| fig-asp: 0.5
+#| cache: true
+par(mfrow = c(1, 2), mar = c(3, 2.8, 1, 1), mgp = c(2, 0.5, 0))
+mu <- c(0, 0)
+sigma <- matrix(c(1, 0.99, 0.99, 1), nrow = 2)
+df <- as.data.frame(mvnfast::rmvn(20, mu = mu, sigma = sigma))
+colnames(df) <- c("y1", "y2")
+plot(df$y1, df$y2, xlab = "y1", ylab = "y2", las = 1, col = 1:20)
+plot(x = rep(1, 20), y = df$y1, col = 1:20, xaxt="n", xlim = c(0.9, 5.1), 
+     ylab = "y", xlab = "index", las = 1, ylim = range(df))
+xtick <- 1:5
+axis(side=1, at=xtick, labels = TRUE)
+points(x = rep(2, 20), y = df$y2, col = 1:20)
+segments(x0 = 1, y0 = df$y1, x1 = 2, y1 = df$y2, col = 1:20, lwd = 2)
+```
+
+
+
+::: notes
+
+y1 and y2 are highly correlated, y1 and y2 have similar values, and so when we put them next to each other, the lines do not go up or down that much. Instead, the lines are quite horizontal.
+
+:::
+
+
+
+
+##
+
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+```{r}
+#| fig-asp: 1
+#| out-width: 90%
+#| cache: true
+par(mar = c(3, 2.8, 1, 1), mgp = c(2, 0.5, 0))
+mu <- rep(0, 5)
+sigma <- matrix(c(1 , 0.99 , 0.98 , 0.97 , 0.96,
+                  0.99 , 1 , 0.99 , 0.98 , 0.97,
+                  0.98 , 0.99 , 1 , 0.99 , 0.98,
+                  0.97 , 0.98 , 0.99 , 1 , 0.99,
+                  0.96 , 0.97 , 0.98 , 0.99 , 1), nrow = 5)
+df <- as.data.frame(mvnfast::rmvn(20, mu = mu, sigma = sigma))
+colnames(df) <- paste0("y", 1:5)
+# plot(df$y1, df$y2, xlab = "y1", ylab = "y2", las = 1, col = 1:20)
+plot(x = rep(1, 20), y = df$y1, col = 1:20, xaxt="n", xlim = c(0.9, 5.1), 
+     ylab = "y", xlab = "index", las = 1, ylim = range(df))
+xtick <- 1:5
+axis(side=1, at=xtick, labels = TRUE)
+points(x = rep(2, 20), y = df$y2, col = 1:20)
+points(x = rep(3, 20), y = df$y3, col = 1:20)
+points(x = rep(4, 20), y = df$y4, col = 1:20)
+points(x = rep(5, 20), y = df$y5, col = 1:20)
+segments(x0 = 1, y0 = df$y1, x1 = 2, y1 = df$y2, col = 1:20, lwd = 2)
+segments(x0 = 2, y0 = df$y2, x1 = 3, y1 = df$y3, col = 1:20, lwd = 2)
+segments(x0 = 3, y0 = df$y3, x1 = 4, y1 = df$y4, col = 1:20, lwd = 2)
+segments(x0 = 4, y0 = df$y4, x1 = 5, y1 = df$y5, col = 1:20, lwd = 2)
+```
+
+:::
+
+::: {.column width="40%"}
+
+$d = 5$ 
+
+::: {.small}
+
+$$\bmu = \begin{pmatrix} 0 \\ 0 \\ 0\\0\\0\end{pmatrix} \quad \quad \bSigma = \begin{pmatrix}1 & 0.99 & 0.98 & 0.97 & 0.96\\ 0.99 & 1 & 0.99 & 0.98 & 0.97 \\ 0.98 & 0.99 & 1 & 0.99 & 0.98 \\ 0.97 & 0.98 & 0.97 & 1 & 0.99\\0.96 & 0.97 & 0.98 & 0.99 & 1
+\end{pmatrix}$$
+
+:::
+
+- Each line is one sample (path).
+
+
+:::
+
+::::
+
+
+
+
+##
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+```{r}
+#| fig-asp: 1
+#| out-width: 90%
+#| cache: true
+par(mar = c(3, 2.8, 1, 1), mgp = c(2, 0.5, 0))
+d <- 50
+mu <- rep(0, d)
+sigma <- matrix(0, d, d)
+for (i in 1:d) {
+    sigma[i, i:d] <- seq(from = 1, by = -0.01, length.out = d+1-i)
+}
+sigma <- (sigma + t(sigma))
+diag(sigma) <- 1
+
+df <- as.data.frame(mvtnorm::rmvnorm(20, mean = mu, sigma = sigma))
+colnames(df) <- paste0("y", 1:d)
+# plot(df$y1, df$y2, xlab = "y1", ylab = "y2", las = 1, col = 1:20)
+# plot(x = rep(1, 20), y = df$y1, col = 1:20, xaxt="n", xlim = c(0.9, d+.1), 
+#      ylab = "y", xlab = "index", las = 1, ylim = range(df))
+# xtick <- 1:d
+# axis(side=1, at=xtick, labels = TRUE)
+# for (i in 2:d) {
+#     points(x = rep(i, 20), y = df[, i], col = 1:20)
+#     segments(x0 = i-1, y0 = df[, i-1], x1 = i, y1 = df[, i], col = 1:20, lwd = 1)
+# }
+plot(1:d, df[1, ], col = 1:20, xaxt="n", xlim = c(0.9, d+.1), type = "l",
+     ylab = "y", xlab = "index", las = 1, ylim = range(df))
+xtick <- c(10, 20, 30, 40)
+axis(side=1, at=xtick, labels = TRUE)
+# plot(1:d, df[1, ], type = "l", ylim = c(-4, 4))
+for (j in 1:20) {
+    lines(1:d, df[j, ], col = j+1)
+}
+```
+
+:::
+
+
+
+::: {.column width="40%"}
+
+$d = 50$ 
+
+::: {.small}
+
+$$\bmu = \begin{pmatrix} 0 \\ 0 \\ \vdots \\0\\0\end{pmatrix} \quad \quad \bSigma = \begin{pmatrix}
+1 & 0.99 & 0.98 & 0.97 & 0.96 & \cdots \\ 
+0.99 & 1 & 0.99 & 0.98 & 0.97 & \cdots\\ 
+0.98 & 0.99 & 1 & 0.99 & 0.98 & \cdots\\ 
+0.97 & 0.98 & 0.97 & 1 & 0.99 & \cdots\\
+0.96 & 0.97 & 0.98 & 0.99 & 1 & \cdots \\
+\vdots & \vdots & \vdots & \vdots & \vdots &  \vdots &
+\end{pmatrix}$$
+
+:::
+
+- Each line is one sample (path).
+
+- Think of **Gaussian processes** as an *infinite dimensional* distribution
+over functions
+  + all we need to do is change notation
+  
+:::
+
+::::
+
+
+
+# Gaussian Processes
+
+
+## Gaussian Processes 
+
+- A **stochastic process** $f(x), x \in \mathcal{X} \subset \mathbb{R}^D$, is a
+function whose values are random variables, for any value of $x$.
+
+- Usually for $D = 1$, the process is a *temporal* process, and for $D > 1$,
+it is referred to as a *spatial* process.
+
+. . .
+
+- A **Gaussian process** (GP) is a process where all finite-dimensional distributions are multivariate Gaussian, for any choice of $n$ and $x_1\dots, x_n \in \mathbb{R}^D$:
+
+$$f(x_1), \dots, f(x_n) \sim N_n\left(\bmu, \bSigma \right)$$
+
+- Write $f(\cdot) \sim GP$ to denote that the *function* $f()$ is a GP.
+
+
+##
+
+
+```{r}
+#| fig-asp: 0.5
+#| cache: true
+## White noise field
+len <- 100
+# len2 <- len ^ 2
+y <- rnorm(len)
+x <- seq(-3, 3, length = len)
+# y <- rnorm(len)
+par(mar = c(0, 0, 1, 1))
+par(mfrow = c(1, 2))
+plot(x, y, type = "l", main = "White noise process", lwd = 2, xaxt='n', yaxt = 'n')
+# image(1:len, 1:len, matrix(rnorm(len2), len, len),
+#       col = tim.colors(), xlab = "", ylab = "",
+#       xaxt='n', yaxt = 'n', zlim = c(-4, 4),
+#       main = "White noise field")
+# x <- seq(0, 5, length = len)
+# X <- expand.grid(x, x)
+statsdist <- as.matrix(dist(x))
+
+power_expo_h <- function(idx12_diff, tau, h) {
+    tau ^ 2 * exp(-(idx12_diff / h) ^ 2 / 2) 
+}
+
+expo_h <- function(idx12_diff, tau, h) {
+    tau ^ 2 * exp(-(abs(idx12_diff) / h) / 2)
+}
+
+h <- 1
+tau <- 1
+
+test_kernel_exp <- expo_h(statsdist, tau, h)
+z <- rnorm(len)
+test_kernel_exp_chol <- chol(test_kernel_exp)
+z_chol_exp <- t(test_kernel_exp_chol) %*% z
+
+plot(x, z_chol_exp, type = "l", main = "Gaussian process", lwd = 2, col = 2,
+     xaxt='n', yaxt = 'n')
+# image(x, x, matrix(Z_chol_exp, len, len), col = tim.colors(),
+#            xlab = "", ylab = "",
+#            xaxt='n', yaxt = 'n', main = "Gaussian field")
+```
+
+
+
+
+##
+
+```{r}
+#| fig-asp: 0.5
+#| cache: true
+## White noise field
+len <- 100
+len2 <- len ^ 2
+x <- rnorm(len)
+y <- rnorm(len)
+par(mar = c(0, 0, 1, 1))
+par(mfrow = c(1, 2))
+image(1:len, 1:len, matrix(rnorm(len2), len, len),
+      col = tim.colors(), xlab = "", ylab = "",
+      xaxt='n', yaxt = 'n', zlim = c(-4, 4),
+      main = "2D White noise field")
+x <- seq(0, 5, length = len)
+X <- expand.grid(x, x)
+statsdist <- as.matrix(dist(X))
+# power_expo_h <- function(idx12_diff, tau, h) {
+#     tau ^ 2 * exp(-(idx12_diff / h) ^ 2 / 2) 
+# }
+# expo_h <- function(idx12_diff, tau, h) {
+#     tau ^ 2 * exp(-(abs(idx12_diff) / h) / 2)
+# }
+
+h <- 1
+tau <- 1
+test_kernel_exp <- expo_h(statsdist, tau, h)
+
+Z <- rnorm(len2)
+test_kernel_exp_chol <- chol(test_kernel_exp)
+Z_chol_exp <- t(test_kernel_exp_chol) %*% Z
+image(x, x, matrix(Z_chol_exp, len, len), col = tim.colors(),
+           xlab = "", ylab = "",
+           xaxt='n', yaxt = 'n', main = "2D Gaussian field")
+```
+
+
+
+
+## Mean and Covariance Function
+
+- To fully specify a Gaussian distribution we need the mean and covariance, $Y \sim N(\mu, \Sigma)$
+
+. . .
+
+- To fully specify a Gaussian process we need the [**mean and covariance function**]{.green}, 
+$$f(\cdot) \sim GP\left(m(\cdot), k(\cdot, \cdot)\right)$$ where
+
+$$m(x) = \E(f(x))$$
+$$k(x, x') = \Cov(f(x), f(x'))$$
+
+
+. . .
+
+- Popular choices of $m(\cdot)$ are $m(x) = 0$ or $m(x) = \text{const}$ for all $x$, or $m(x) = \beta'x$
+
+- Care more about the covariance function or **kernel function** as it governs the how the process looks like by defining the *similarity* between data points.
+
+
+
+
+## Covariance Function Kernel
+
+$$\Cov(f(x), f(x')) = k(x, x')$$
+
+- $k(x, x')$ must be a positive semi-definite function, leading to valid covariance matrices
+  + Given locations $x_1, \dots, x_n$, the $n \times n$ Gram matrix $K$ with $K_{ij} = k(x_i, x_j)$ must be a positive semi-definite matrix.
+
+. . .
+
+:::: {.columns}
+
+::: {.column width="80%"}
+
+- Often assume $k(x, x')$ is a function of only the *distance between locations*: $$\Cov(f(x), f(x')) = k(\|x-x'\|) = k(r)$$ 
+  + the GP is a **stationary process**.
+  + the covariance function is **isotropic**.
+
+:::
+
+
+::: {.column width="20%"}
+
+```{r}
+#| out-width: 100%
+knitr::include_graphics("./images/12-gp/circle.png")
+```
+
+:::
+
+- The covariance function determines the nature of the GP, hypothesis space of functions.
+
+::::
+
+
+
+## Squared Exponential (SE) Kernel
+
+$$k(x, x' \mid \tau, h) = \tau^2 \exp\left(-\frac{(x - x')^2}{2h^2} \right)$$
+
+. . .
+
+
+:::: {.columns}
+
+::: {.column width="65%"}
+
+```{r}
+len <- 200
+n_path <- 5
+x <- seq(0, 5, length = len)
+par(mar = c(3, 3, 2, 0), mgp = c(1.5, 0.5, 0))
+K <- compute_cov_1d(idx1 = x, tau = 1, h = 1)
+y_obs <- mvnfast::rmvn(n_path, rep(0, len), Matrix::nearPD(K)$mat)
+matplot(x, t(y_obs), type = "l", main = "SE kernel: tau = 1, h = 1", lwd = 2,
+        ylim = c(-3, 3), las = 1, lty = 1, xlab = "x", ylab = "f(x)", cex.main = 2, cex.lab = 2)
+```
+
+:::
+
+
+
+::: {.column width="35%"}
+
+$$k(x, x') = \exp\left(-\frac{1}{2}(x - x')^2 \right)$$
+
+:::
+
+::::
+
+
+## Squared Exponential (SE) Kernel
+
+
+:::: {.columns}
+
+::: {.column width="65%"}
+
+```{r}
+# len <- 200
+# n_path <- 5
+# x <- seq(0, 5, length = len)
+par(mar = c(3, 3, 2, 0), mgp = c(1.5, 0.5, 0))
+K <- compute_cov_1d(idx1 = x, tau = 1, h = 0.25)
+y_obs <- mvnfast::rmvn(n_path, rep(0, len), Matrix::nearPD(K)$mat)
+matplot(x, t(y_obs), type = "l", main = "SE kernel: tau = 1, h = 0.25", lwd = 2,
+        ylim = c(-3, 3), las = 1, lty = 1, xlab = "x", ylab = "f(x)", cex.main = 2, cex.lab = 2)
+```
+
+:::
+
+
+::: {.column width="35%"}
+
+$$k(x, x') = \exp\left(-\frac{1}{2}\frac{(x - x')^2}{ {\color{red}{0.25}}^2} \right)$$
+
+
+- The parameter $h$ is the **characteristic length-scale** that controls the number of level-zero upcrossings.
+
+:::
+
+::::
+
+
+## Squared Exponential (SE) Kernel
+
+:::: {.columns}
+
+::: {.column width="65%"}
+
+```{r}
+par(mar = c(3, 3, 2, 0), mgp = c(1.5, 0.5, 0))
+K <- compute_cov_1d(idx1 = x, tau = 1, h = 4)
+y_obs <- mvnfast::rmvn(n_path, rep(0, len), Matrix::nearPD(K)$mat)
+matplot(x, t(y_obs), type = "l", main = "SE kernel: tau = 1, h = 4", lwd = 2,
+        ylim = c(-3, 3), las = 1, lty = 1, xlab = "x", ylab = "f(x)", cex.main = 2, cex.lab = 2)
+```
+
+:::
+
+
+::: {.column width="35%"}
+
+$$k(x, x') = \exp\left(-\frac{1}{2}\frac{(x - x')^2}{ {\color{red}{4}}^2} \right)$$
+
+:::
+
+::::
+
+
+
+## Squared Exponential (SE) Kernel
+
+:::: {.columns}
+
+::: {.column width="65%"}
+
+```{r}
+# len <- 200
+# n_path <- 5
+# x <- seq(0, 5, length = len)
+par(mar = c(3, 3, 2, 0), mgp = c(1.5, 0.5, 0))
+K <- compute_cov_1d(idx1 = x, tau = 10, h = 1)
+y_obs <- mvnfast::rmvn(n_path, rep(0, len), Matrix::nearPD(K)$mat)
+matplot(x, t(y_obs), type = "l", main = "SE kernel: tau = 10, h = 1", lwd = 2,
+        ylim = c(-30, 30), las = 1, lty = 1, xlab = "x", ylab = "f(x)", cex.main = 2, cex.lab = 2)
+```
+
+:::
+
+
+::: {.column width="35%"}
+
+$$k(x, x') = {\color{red}{10^2}}\exp\left(-\frac{1}{2}(x - x')^2 \right)$$
+
+- The parameter $\tau$ is the variance of $f(x)$ that controls the vertical variation of the process.
+
+:::
+
+::::
+
+
+## Exponential Kernel
+
+$$k(x, x' \mid \tau, h) = \tau^2 \exp\left(-\frac{|x - x'|}{h} \right)$$
+
+```{r}
+par(mar = c(3, 3, 2, 0), mgp = c(1.5, 0.5, 0))
+K <- compute_cov_1d(idx1 = x, ker_fcn = matern_ker, nu = 0.5)
+y_obs <- mvnfast::rmvn(n_path, rep(0, len), Matrix::nearPD(K)$mat)
+matplot(x, t(y_obs), type = "l", main = "Exponential kernel: tau = 1, h = 1", lwd = 2,
+        ylim = c(-3, 3), las = 1, lty = 1, xlab = "x", ylab = "f(x)", cex.main = 2, cex.lab = 2)
+```
+
+
+
+## Brownian Motion
+
+$$k(x, x') = \min(x, x')$$
+
+
+```{r}
+len <- 200
+n_path <- 5
+x <- seq(0, 5, length = len)
+par(mar = c(3, 3, 2, 0), mgp = c(1.5, 0.5, 0))
+
+K <- outer(x, x, function(x1, x2) pmin(x1, x2))
+
+y_obs <- mvnfast::rmvn(n_path, rep(0, len), Matrix::nearPD(K)$mat)
+matplot(x, t(y_obs), type = "l", main = "Brownian Motion", lwd = 2,
+        ylim = c(-5, 5), las = 1, lty = 1, xlab = "x", ylab = "f(x)", cex.main = 2, cex.lab = 2)
+```
+
+
+## White Noise
+
+$$k(x, x') = \begin{cases} 1 & \quad \text{if } x = x' \\
+0 & \quad \text{otherwise}
+\end{cases}$$
+
+
+```{r}
+par(mar = c(3, 3, 2, 0), mgp = c(1.5, 0.5, 0))
+
+y_obs <- mvnfast::rmvn(n_path, rep(0, len), diag(len))
+matplot(x, t(y_obs), type = "l", main = "White noise", lwd = 2,
+        ylim = c(-3, 3), las = 1, lty = 1, xlab = "x", ylab = "f(x)", cex.main = 2, cex.lab = 2)
+```
+
+
+## Why GP?
+
+- The GP inherits its properties primarily from the covariance function $k$:
+  + Smoothness
+  + Differentiability
+  + Variance
+
+. . .
+
+- Sums of Gaussians are Gaussian.
+
+. . .
+
+- Marginal distributions of multivariate Gaussians are still Gaussian.
+
+. . .
+
+- Any affine transformation of a Gaussian is a Gaussian.
+
+. . .
+
+- Conditional distributions are still Gaussian.
+
+::: {.midi}
+
+$$\bY = \begin{pmatrix} \bY_1 \\ \bY_2 \end{pmatrix} \sim N\left(\bmu,  \bSigma \right), \quad \bmu = \begin{pmatrix} \bmu_1 \\ \bmu_2 \end{pmatrix},  \quad \bSigma = \begin{pmatrix} \Sigma_{11}  & \Sigma_{12}\\ \Sigma_{21} & \Sigma_{22} \end{pmatrix}$$
+$$(\bY_2 \mid \by_1 = \by_1) \sim N\left(\bmu_2 + \Sigma_{21} \Sigma_{11}^{-1} (\by_1 - \bmu_1), \Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12}\right)$$
+
+:::
+
+
+
+## Conditional Updates of Gaussian Processes
+
+- If $f(\cdot) \sim GP$, 
+
+$$f(x_1), \dots, f(x_n), f(x^*) \sim N(\bmu, \bSigma)$$
+
+- If we observe its value at $x_1, \dots, x_n$, then
+
+$$f(x^*) \mid f(x_1), \dots, f(x_n) \sim N(\bmu^*, \bSigma^*)$$ where $\bmu^*$ and $\bSigma^*$ are as on the previous slide.
+
+- We still believe $f$ is a GP even we've observed its value
+at a number of locations.
+
+
+
+# Gaussian Process Regression
+
+
+## Bayesian Conditioning Updates of GP: Prior
+
+- Instead of assigning priors to parameters in the regression function, we assign a function prior to the regression function: 
+
+$$f(\cdot) \sim GP(0, k(\cdot, \cdot))$$
+
+- For any points $x_1, \dots, x_n, x^*$,
+
+$$f(x_1), \dots, f(x_n), f(x^*) \sim N\left(0, \bSigma \right)$$
+
+$$\bSigma = \left(\begin{array}{ccc|c}
+k(x_1, x_1) & \cdots & k(x_1, x_n) & k(x_1, x^*) \\
+\vdots &  & \vdots & \vdots \\
+k(x_n, x_1) & \cdots & k(x_n, x_n) & k(x_n, x^*) \\
+\hline
+k(x^*, x_1) & \cdots & k(x^*, x_n) & k(x^*, x^*)
+\end{array} \right) = 
+\left(\begin{array}{ccc|c}
+ &  &  &  \\
+ & K &  & K_* \\
+ &  &  &  \\
+\hline
+ & K_*^T &  & K_{**}
+\end{array} \right) $$
+
+
+
+## Bayesian Conditioning Updates of GP: Posterior
+
+- Given observed information $f(x_1), \dots, f(x_n)$
+
+$$f(x^*) \mid f(x_1), \dots, f(x_n) \sim N\left( \bmu^*, \bSigma^*\right)$$ where
+
+$$\bmu^* = K_{*}^TK^{-1}{\bf f}$$ with ${\bf f} = \left(f(x_1), \dots, f(x_n)\right)^T$
+
+
+$$\bSigma^* = K_{**} - K_{*}^TK^{-1}K_{*}$$
+
+
+
+## No Noise/Nugget - Interpolation
+
+```{r}
+#| fig-asp: 0.33
+#| cache: true
+len <- 100
+n_path <- 5
+X <- seq(0, 5, length = len)
+D <- distance(X)
+eps <- sqrt(.Machine$double.eps) 
+Sigma <- exp(-D/2) + diag(eps, len) 
+y <- mvnfast::rmvn(n_path, mu = rep(0, len), sigma = Sigma)
+par(mfrow = c(1, 3))
+par(mar = c(3, 3, 2, 0), mgp = c(1.5, 0.5, 0))
+matplot(X, t(y), type = "l", main = "Prior", lwd = 2,
+        ylim = c(-3, 3), las = 1, lty = 1, xlab = "x", ylab = "f(x)", cex.main = 2, cex.lab = 2)
+
+n <- 5
+X <- matrix(seq(0, 2*pi, length=n), ncol=1)
+y <- sin(X)
+D <- distance(X) 
+Sigma <- exp(-D/2) + diag(eps, ncol(D))
+XX <- matrix(seq(-0.5, 2*pi + 0.5, length=100), ncol=1)
+DXX <- distance(XX)
+SXX <- exp(-DXX/2) + diag(eps, ncol(DXX))
+DX <- distance(XX, X)
+SX <- exp(-DX/2) 
+Si <- solve(Sigma)
+mup <- SX %*% Si %*% y
+Sigmap <- SXX - SX %*% Si %*% t(SX)
+YY <- rmvnorm(100, mup, Sigmap)
+q1 <- mup + qnorm(0.025, 0, sqrt(diag(Sigmap)))
+q2 <- mup + qnorm(0.975, 0, sqrt(diag(Sigmap)))
+matplot(XX, t(YY)[, 1:5], type="l", col=1:5, lty=1, xlab="x", ylab="f(x)",
+        las = 1, main = "Posterior", lwd = 2,cex.main = 2, cex.lab = 2)
+points(X, y, pch=20, cex=2)
+
+matplot(XX, t(YY), type="l", col=c(rep("grey", nrow(XX))), 
+        lty=1, xlab="x", ylab="f(x)", las = 1, main = "Prediction with Uncertainty",cex.main = 2, cex.lab = 2)
+points(X, y, pch=20, cex=2)
+# lines(XX, sin(XX), col="blue")
+lines(XX, t(YY)[, 1], col=3, lty = 1)
+lines(XX, mup, lwd=2, col = "blue", lty=2)
+lines(XX, q1, lwd=2, lty=2, col=2)
+lines(XX, q2, lwd=2, lty=2, col=2)
+```
+
+- [-----]{.blue}: posterior mean $\bmu^*$
+
+- [-----]{.red}: 95% posterior predictive interval $\bmu^* \pm 1.96 \bSigma^*$
+
+- So far we treat $f(x)$, the function values as data points.
+
+- There is no noise, and every posterior curve interpolates data points.
+
+
+
+
+## Noisy Observations/with Nugget - GP Regression (GPR)
+
+- In reality, we don't or can't observe $f(x)$ and like to estimate it.
+
+$$\begin{align} y_i &= f(x_i) + \epsilon_i, \quad \epsilon_i\sim N(0, \sigma^2) \\
+f(\cdot) &\sim GP(0, k(\cdot, \cdot; \theta))\end{align}$$
+
+. . .
+
+$$y_1, \dots, y_n, f(x^*) \sim N\left(0, \bSigma \right), \quad \bSigma = 
+\left(\begin{array}{ccc|c}
+ &  &  &  \\
+ & K + \sigma^2I &  & K_* \\
+ &  &  &  \\
+\hline
+ & K_*^T &  & K_{**}
+\end{array} \right) $$
+
+. . .
+
+$$f(x^*) \mid y_1, \dots, y_n \sim N\left( \bmu^*, \bSigma^*\right), \quad \bmu^* = K_{*}^T{\color{red}{(K + \sigma^2I)^{-1}}}{\bf y}, \quad \bSigma^* = K_{**} - K_{*}^T{\color{red}{(K + \sigma^2I)^{-1}}}K_{*}$$ with ${\bf y} = \left(y_1, \dots, y_n\right)^T$
+
+
+## Noisy Observations/with Nugget - GP Regression (GPR)
+
+```{r}
+#| fig-asp: 0.5
+#| cache: true
+n <- 5
+X <- matrix(seq(0, 2*pi, length=n), ncol=1)
+y <- sin(X)
+D <- distance(X) 
+eps <- 0.5
+Sigma <- exp(-D/2) + diag(eps^2, ncol(D))
+XX <- matrix(seq(-0.5, 2*pi + 0.5, length=100), ncol=1)
+DXX <- distance(XX)
+# SXX <- exp(-DXX) + diag(eps, ncol(DXX))
+SXX <- exp(-DXX/2) + diag(0, ncol(DXX))
+DX <- distance(XX, X)
+SX <- exp(-DX/2) 
+Si <- solve(Sigma)
+mup <- SX %*% Si %*% y
+Sigmap <- SXX - SX %*% Si %*% t(SX)
+YY <- rmvnorm(100, mup, Sigmap)
+q1 <- mup + qnorm(0.025, 0, sqrt(diag(Sigmap)))
+q2 <- mup + qnorm(0.975, 0, sqrt(diag(Sigmap)))
+par(mfrow = c(1, 2))
+par(mar = c(3, 3, 2, 0), mgp = c(1.5, 0.5, 0))
+matplot(XX, t(YY), type="l", col=c(rep("grey", nrow(XX))), 
+        lty=1, xlab="x", ylab="f(x)", las = 1, main = "sigma = 0.5",cex.main = 2, cex.lab = 2)
+points(X, y, pch=20, cex=2)
+# lines(XX, sin(XX), col="blue")
+lines(XX, t(YY)[, 1], col=3, lty = 1)
+lines(XX, mup, lwd=2, col = "blue", lty=2)
+lines(XX, q1, lwd=2, lty=2, col=2)
+lines(XX, q2, lwd=2, lty=2, col=2)
+eps <- 0.05
+Sigma <- exp(-D/2) + diag(eps^2, ncol(D))
+XX <- matrix(seq(-0.5, 2*pi + 0.5, length=100), ncol=1)
+DXX <- distance(XX)
+# SXX <- exp(-DXX) + diag(eps, ncol(DXX))
+SXX <- exp(-DXX/2) + diag(0, ncol(DXX))
+DX <- distance(XX, X)
+SX <- exp(-DX/2) 
+Si <- solve(Sigma)
+mup <- SX %*% Si %*% y
+Sigmap <- SXX - SX %*% Si %*% t(SX)
+YY <- rmvnorm(100, mup, Sigmap)
+q1 <- mup + qnorm(0.025, 0, sqrt(diag(Sigmap)))
+q2 <- mup + qnorm(0.975, 0, sqrt(diag(Sigmap)))
+# par(mfrow = c(1, 2))
+# par(mar = c(3, 3, 2, 0), mgp = c(1.5, 0.5, 0))
+matplot(XX, t(YY), type="l", col=c(rep("grey", nrow(XX))), 
+        lty=1, xlab="x", ylab="f(x)", las = 1, main = "sigma = 0.05",cex.main = 2, cex.lab = 2)
+points(X, y, pch=20, cex=2)
+# lines(XX, sin(XX), col="blue")
+lines(XX, t(YY)[, 1], col=3, lty = 1)
+lines(XX, mup, lwd=2, col = "blue", lty=2)
+lines(XX, q1, lwd=2, lty=2, col=2)
+lines(XX, q2, lwd=2, lty=2, col=2)
+```
+
+
+
+## Hyperparameter Tuning
+
+```{r}
+knitr::include_graphics("./images/12-gp/hyperparameter.png")
+```
+
+
+
+
+## Empirical Bayes 
+
+- Uses the observed data to estimate parameters $\theta = (\sigma^2, \tau^2, h)$
+
+- Find an empirical Bayes estimate for $\theta$ from the **marginal likelihood** 
+
+$$ p\left( \by \mid \theta \right) = \int p\left( \by \mid {\bf f} \right) p\left( {\bf f} \mid \theta \right) \, d {\bf f} = N\left(\mathbf{0}, K(\tau, h)+\sigma^2I \right)$$
+
+- $\hat{\theta}_{EB} = \argmax_{\theta}\log p\left( \by \mid \theta \right)$.
+
+
+
+## Full Bayesian Inference
+
+$$\begin{align}
+y_i &= f(x_i) + \epsilon_i, \, \, \epsilon_i \stackrel{\rm iid}{\sim} N(0, \sigma^2), \quad i = 1, \dots, n,\\
+f(\cdot) &\sim GP\left(\mu, k(\cdot, \cdot)\right),\,\, \Cov(f(x_i), f(x_j)) = k(x_i, x_j)\\
+\sigma^2 &\sim IG(a_{\sigma}, b_{\sigma})\\
+\tau^2 &\sim IG(a_{\tau}, b_{\tau})\\
+h &\sim Ga(a_{h}, b_{h})\\
+\mu & \sim N(0, b_{\mu})
+\end{align}$$
+
+- The model is Gibbsable, or the Metropolis-Hastings algorithm can be
+used when ${\bf f}$ is integrated out.
+
+
+
+
+# Gaussian Process Classification
+
+
+
+
+::: notes
+- PML Ch 17
+- GPML Ch 3
+:::
