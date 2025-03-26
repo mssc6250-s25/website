@@ -1353,7 +1353,7 @@
     "href": "index.html",
     "title": "MSSC 6250 - Statistical Machine Learning (Spring 2025)",
     "section": "",
-    "text": "Homework 3 released, and due Friday, 4/4, 11:59 PM.\nMidterm Presentation I - Regression guideline is released.\n\nThis schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nTo Do\nSlides\nCode\nHomework\nProject\n\n\n\n\n1\nTue, Jan 14\nSyllabus/Overview of Statistical Learning\n📖\n🖥️🖥️\n\n\n\n\n\n\nThu, Jan 16\nBias-variance tradeoff\n\n🖥️\n\n\n\n\n\n2\nTue, Jan 21\nNO CLASS: Cold Weather\n📖\n🖥️\n\n\n\n\n\n\nThu, Jan 23\nLinear Regression\n\n\n\n\n\n\n\n3\nTue, Jan 28\nNumerical Optimization\n📖\n\n\n✍️ HW1\n\n\n\n\nThu, Jan 30\nStochastic Gradient Descen; Ridge Regression\n\n🖥️\n\n\n\n\n\n4\nTue, Feb 4\nCross-Validation; Feature Selection\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 6\nLASSO\n\n\n\n\n\n\n\n5\nTue, Feb 11\nRegression Splines\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 13\nSmoothing Splines and Generalized Additive Models\n\n\n\nHW 1 Due\n\n\n\n6\nTue, Feb 18\nBayesian Inference and Linear Regression\n📖\n🖥️\n\n✍️ HW2\n\n\n\n\nThu, Feb 20\nBayesian Linear Regression\n\n\n\n\n✅ Team up Due\n\n\n7\nTue, Feb 25\nBinary Logistic Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 27\nMultinomial Logistic Regression\n\n\n\nHW 2 Due\n✅ Proposal Due\n\n\n8\nTue, Mar 4\nDiscriminant Analysis\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 6\nMidterm Presentation I\n\n\n\n✍️ HW3\n✅ Materials Due\n\n\n9\nTue, Mar 11\nNO CLASS: Spring break\n\n\n\n\n\n\n\n\nThu, Mar 13\nNO CLASS: Spring break Deep Learning Workshop (Fri, Mar 14)\n\n\n\n\n\n\n\n10\nTue, Mar 18\nNaive Bayes\n📖\n\n\n\n\n\n\n\nThu, Mar 20\nK-Nearest Neighbors\n\n🖥️\n\n\n\n\n\n11\nTue, Mar 25\nGaussian Process Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 27\nGaussian Process Classification\n\n\n\n\n\n\n\n12\nTue, Apr 1\nSupport Vector Machine\n📖\n\n\n\n\n\n\n\nThu, Apr 3\nSupport Vector Machine\n\n\n\nHW 3 Due\n\n\n\n13\nTue, Apr 8\nCART and Bagging\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 10\nRandom Forests and Boosting\n\n\n\n✍️ HW4\n\n\n\n14\nTue, Apr 15\nMidterm Presentation II\n📖\n🖥️\n\n\n✅\n\n\n\nThu, Apr 17\nNO CLASS: Easter break\n\n\n\n\n\n\n\n15\nTue, Apr 22\nPrincipal Component Analysis\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 24\nK-Means Clustering\n\n\n\n\n\n\n\n16\nTue, Apr 29\nModel-based Clustering\n📖\n🖥️\n\n\n\n\n\n\nThu, May 1\nNeural Networks\n\n\n\n\n\n\n\n17\nThu, May 8\nFinal Project Submission\n\n\n\n\n✅\n\n\n\n\nI reserve the right to make changes to the schedule.",
+    "text": "Homework 3 released, and due Friday, 4/4, 11:59 PM.\nMidterm Presentation I - Regression guideline is released.\n\nThis schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nTo Do\nSlides\nCode\nHomework\nProject\n\n\n\n\n1\nTue, Jan 14\nSyllabus/Overview of Statistical Learning\n📖\n🖥️🖥️\n\n\n\n\n\n\nThu, Jan 16\nBias-variance tradeoff\n\n🖥️\n\n\n\n\n\n2\nTue, Jan 21\nNO CLASS: Cold Weather\n📖\n🖥️\n\n\n\n\n\n\nThu, Jan 23\nLinear Regression\n\n\n\n\n\n\n\n3\nTue, Jan 28\nNumerical Optimization\n📖\n\n\n✍️ HW1\n\n\n\n\nThu, Jan 30\nStochastic Gradient Descen; Ridge Regression\n\n🖥️\n\n\n\n\n\n4\nTue, Feb 4\nCross-Validation; Feature Selection\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 6\nLASSO\n\n\n\n\n\n\n\n5\nTue, Feb 11\nRegression Splines\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 13\nSmoothing Splines and Generalized Additive Models\n\n\n\nHW 1 Due\n\n\n\n6\nTue, Feb 18\nBayesian Inference and Linear Regression\n📖\n🖥️\n\n✍️ HW2\n\n\n\n\nThu, Feb 20\nBayesian Linear Regression\n\n\n\n\n✅ Team up Due\n\n\n7\nTue, Feb 25\nBinary Logistic Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 27\nMultinomial Logistic Regression\n\n\n\nHW 2 Due\n✅ Proposal Due\n\n\n8\nTue, Mar 4\nDiscriminant Analysis\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 6\nMidterm Presentation I\n\n\n\n✍️ HW3\n✅ Materials Due\n\n\n9\nTue, Mar 11\nNO CLASS: Spring break\n\n\n\n\n\n\n\n\nThu, Mar 13\nNO CLASS: Spring break Deep Learning Workshop (Fri, Mar 14)\n\n\n\n\n\n\n\n10\nTue, Mar 18\nNaive Bayes\n📖\n\n\n\n\n\n\n\nThu, Mar 20\nK-Nearest Neighbors\n\n🖥️\n\n\n\n\n\n11\nTue, Mar 25\nGaussian Process Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 27\nGaussian Process Classification\n\n\n\n\n\n\n\n12\nTue, Apr 1\nSupport Vector Machine\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 3\nSupport Vector Machine\n\n\n\nHW 3 Due\n\n\n\n13\nTue, Apr 8\nCART and Bagging\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 10\nRandom Forests and Boosting\n\n\n\n✍️ HW4\n\n\n\n14\nTue, Apr 15\nMidterm Presentation II\n📖\n🖥️\n\n\n✅\n\n\n\nThu, Apr 17\nNO CLASS: Easter break\n\n\n\n\n\n\n\n15\nTue, Apr 22\nPrincipal Component Analysis\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 24\nK-Means Clustering\n\n\n\n\n\n\n\n16\nTue, Apr 29\nModel-based Clustering\n📖\n🖥️\n\n\n\n\n\n\nThu, May 1\nNeural Networks\n\n\n\n\n\n\n\n17\nThu, May 8\nFinal Project Submission\n\n\n\n\n✅\n\n\n\n\nI reserve the right to make changes to the schedule.",
     "crumbs": [
       "Course Information",
       "Schedule"
@@ -3374,7 +3374,7 @@
     "href": "slides/12-gp.html#multivariate-guassian",
     "title": "Gaussian Processes ♾️",
     "section": "Multivariate Guassian",
-    "text": "Multivariate Guassian\n\n“Multivariate” \\(=\\) two or more random variables\n\\(\\mathbf{Y}\\in \\mathbb{R}^d \\sim N_d\\left(\\boldsymbol \\mu, \\boldsymbol \\Sigma\\right)\\)\n\n\n\nBivariate Gaussian (\\(d=2\\)):\n\n\\[\\mathbf{Y}= \\begin{pmatrix} Y_1 \\\\ Y_2 \\end{pmatrix}\\] \\[\\boldsymbol \\mu= \\begin{pmatrix} \\mu_1 \\\\ \\mu_2 \\end{pmatrix}\\] \\[\\boldsymbol \\Sigma= \\begin{pmatrix} \\sigma_1^2  & \\rho_{12}\\sigma_1\\sigma_2\\\\ \\rho_{12}\\sigma_1\\sigma_2 & \\sigma_2^2 \\end{pmatrix}\\]"
+    "text": "Multivariate Guassian\n\n“Multivariate” \\(=\\) two or more random variables\n\\(\\mathbf{Y}\\in \\mathbb{R}^d \\sim N_d\\left(\\boldsymbol \\mu, \\boldsymbol \\Sigma\\right)\\)\n\n. . .\n\nBivariate Gaussian (\\(d=2\\)):\n\n\\[\\mathbf{Y}= \\begin{pmatrix} Y_1 \\\\ Y_2 \\end{pmatrix}\\] \\[\\boldsymbol \\mu= \\begin{pmatrix} \\mu_1 \\\\ \\mu_2 \\end{pmatrix}\\] \\[\\boldsymbol \\Sigma= \\begin{pmatrix} \\sigma_1^2  & \\rho_{12}\\sigma_1\\sigma_2\\\\ \\rho_{12}\\sigma_1\\sigma_2 & \\sigma_2^2 \\end{pmatrix}\\]"
   },
   {
     "objectID": "slides/12-gp.html#section-1",
@@ -3402,7 +3402,7 @@
     "href": "slides/12-gp.html#three-or-more-variables",
     "title": "Gaussian Processes ♾️",
     "section": "Three or More Variables",
-    "text": "Three or More Variables\n\nHard to visualize in dimensions \\(&gt; 2\\), so stack points next to each other.\n\n\ny1 and y2 are highly correlated, y1 and y2 have similar values, and so when we put them next to each other, the lines do not go up or down that much. Instead, the lines are quite horizontal."
+    "text": "Three or More Variables\n\nHard to visualize in dimensions \\(&gt; 2\\), so stack points next to each other.\n\n\n\n\n\n\n\n\n\n\n\ny1 and y2 are highly correlated, y1 and y2 have similar values, and so when we put them next to each other, the lines do not go up or down that much. Instead, the lines are quite horizontal."
   },
   {
     "objectID": "slides/12-gp.html#section-4",
@@ -3416,56 +3416,56 @@
     "href": "slides/12-gp.html#section-5",
     "title": "Gaussian Processes ♾️",
     "section": "",
-    "text": "\\(d = 50\\)\n\n\\[\\boldsymbol \\mu= \\begin{pmatrix} 0 \\\\ 0 \\\\ \\vdots \\\\0\\\\0\\end{pmatrix} \\quad \\quad \\boldsymbol \\Sigma= \\begin{pmatrix}\n1 & 0.99 & 0.98 & 0.97 & 0.96 & \\cdots \\\\\n0.99 & 1 & 0.99 & 0.98 & 0.97 & \\cdots\\\\\n0.98 & 0.99 & 1 & 0.99 & 0.98 & \\cdots\\\\\n0.97 & 0.98 & 0.97 & 1 & 0.99 & \\cdots\\\\\n0.96 & 0.97 & 0.98 & 0.99 & 1 & \\cdots \\\\\n\\vdots & \\vdots & \\vdots & \\vdots & \\vdots &  \\vdots &\n\\end{pmatrix}\\]\n\n\nEach line is one sample (path).\n\nThink of Gaussian processes as an infinite dimensional distribution over functions\n\nall we need to do is change notation"
+    "text": "\\(d = 50\\)\n\n\\[\\boldsymbol \\mu= \\begin{pmatrix} 0 \\\\ 0 \\\\ \\vdots \\\\0\\\\0\\end{pmatrix} \\quad \\quad \\boldsymbol \\Sigma= \\begin{pmatrix}\n1 & 0.99 & 0.98 & 0.97 & 0.96 & \\cdots \\\\\n0.99 & 1 & 0.99 & 0.98 & 0.97 & \\cdots\\\\\n0.98 & 0.99 & 1 & 0.99 & 0.98 & \\cdots\\\\\n0.97 & 0.98 & 0.97 & 1 & 0.99 & \\cdots\\\\\n0.96 & 0.97 & 0.98 & 0.99 & 1 & \\cdots \\\\\n\\vdots & \\vdots & \\vdots & \\vdots & \\vdots &  \\vdots &\n\\end{pmatrix}\\]\n\n\nEach line is one sample (path).\nThink of Gaussian processes as an infinite dimensional distribution over functions\n\nall we need to do is change notation"
   },
   {
     "objectID": "slides/12-gp.html#gaussian-processes-1",
     "href": "slides/12-gp.html#gaussian-processes-1",
     "title": "Gaussian Processes ♾️",
     "section": "Gaussian Processes",
-    "text": "Gaussian Processes\n\nA stochastic process \\(f(x), x \\in \\mathcal{X} \\subset \\mathbb{R}^D\\), is a function whose values are random variables, for any value of \\(x\\).\nUsually for \\(D = 1\\), the process is a temporal process, and for \\(D &gt; 1\\), it is referred to as a spatial process.\n\n\n\nA Gaussian process (GP) is a process where all finite-dimensional distributions are multivariate Gaussian, for any choice of \\(n\\) and \\(x_1\\dots, x_n \\in \\mathbb{R}^D\\):\n\n\\[f(x_1), \\dots, f(x_n) \\sim N_n\\left(\\boldsymbol \\mu, \\boldsymbol \\Sigma\\right)\\]\n\nWrite \\(f(\\cdot) \\sim GP\\) to denote that the function \\(f()\\) is a GP."
+    "text": "Gaussian Processes\n\nA stochastic process \\(f(x), x \\in \\mathcal{X} \\subset \\mathbb{R}^D\\), is a function whose values are random variables, for any value of \\(x\\).\nUsually for \\(D = 1\\), the process is a temporal process, and for \\(D &gt; 1\\), it is referred to as a spatial process.\n\n. . .\n\nA Gaussian process (GP) is a process where all finite-dimensional distributions are multivariate Gaussian, for any choice of \\(n\\) and \\(x_1\\dots, x_n \\in \\mathbb{R}^D\\):\n\n\\[f(x_1), \\dots, f(x_n) \\sim N_n\\left(\\boldsymbol \\mu, \\boldsymbol \\Sigma\\right)\\]\n\nWrite \\(f(\\cdot) \\sim GP\\) to denote that the function \\(f()\\) is a GP."
   },
   {
     "objectID": "slides/12-gp.html#mean-and-covariance-function",
     "href": "slides/12-gp.html#mean-and-covariance-function",
     "title": "Gaussian Processes ♾️",
     "section": "Mean and Covariance Function",
-    "text": "Mean and Covariance Function\n\nTo fully specify a Gaussian distribution we need the mean and covariance, \\(Y \\sim N(\\mu, \\Sigma)\\)\n\n\n\n\nTo fully specify a Gaussian process we need the mean and covariance function, \\[f(\\cdot) \\sim GP\\left(m(\\cdot), k(\\cdot, \\cdot)\\right)\\] where\n\n\\[m(x) = \\text{E}(f(x))\\] \\[k(x, x') = \\text{Cov}(f(x), f(x'))\\]\n\n\n\nPopular choices of \\(m(\\cdot)\\) are \\(m(x) = 0\\) or \\(m(x) = \\text{const}\\) for all \\(x\\), or \\(m(x) = \\beta'x\\)\nCare more about the covariance function or kernel function as it governs the how the process looks like by defining the similarity between data points."
+    "text": "Mean and Covariance Function\n\nTo fully specify a Gaussian distribution we need the mean and covariance, \\(Y \\sim N(\\mu, \\Sigma)\\)\n\n. . .\n\nTo fully specify a Gaussian process we need the mean and covariance function, \\[f(\\cdot) \\sim GP\\left(m(\\cdot), k(\\cdot, \\cdot)\\right)\\] where\n\n\\[m(x) = \\text{E}(f(x))\\] \\[k(x, x') = \\text{Cov}(f(x), f(x'))\\]\n. . .\n\nPopular choices of \\(m(\\cdot)\\) are \\(m(x) = 0\\) or \\(m(x) = \\text{const}\\) for all \\(x\\), or \\(m(x) = \\beta'x\\)\nCare more about the covariance function or kernel function as it governs the how the process looks like by defining the similarity between data points."
   },
   {
     "objectID": "slides/12-gp.html#covariance-function-kernel",
     "href": "slides/12-gp.html#covariance-function-kernel",
     "title": "Gaussian Processes ♾️",
     "section": "Covariance Function Kernel",
-    "text": "Covariance Function Kernel\n\\[\\text{Cov}(f(x), f(x')) = k(x, x')\\]\n\n\n\\(k(x, x')\\) must be a positive semi-definite function, leading to valid covariance matrices\n\nGiven locations \\(x_1, \\dots, x_n\\), the \\(n \\times n\\) Gram matrix \\(K\\) with \\(K_{ij} = k(x_i, x_j)\\) must be a positive semi-definite matrix.\n\n\n\n\n\n\n\nOften assume \\(k(x, x')\\) is a function of only the distance between locations: \\[\\text{Cov}(f(x), f(x')) = k(\\|x-x'\\|) = k(r)\\]\n\nthe GP is a stationary process.\nthe covariance function is isotropic.\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe covariance function determines the nature of the GP, hypothesis space of functions."
+    "text": "Covariance Function Kernel\n\\[\\text{Cov}(f(x), f(x')) = k(x, x')\\]\n\n\\(k(x, x')\\) must be a positive semi-definite function, leading to valid covariance matrices\n\nGiven locations \\(x_1, \\dots, x_n\\), the \\(n \\times n\\) Gram matrix \\(K\\) with \\(K_{ij} = k(x_i, x_j)\\) must be a positive semi-definite matrix.\n\n\n. . .\n\n\n\nOften assume \\(k(x, x')\\) is a function of only the distance between locations: \\[\\text{Cov}(f(x), f(x')) = k(\\|x-x'\\|) = k(r)\\]\n\nthe GP is a stationary process.\nthe covariance function is isotropic.\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe covariance function determines the nature of the GP, hypothesis space of functions."
   },
   {
     "objectID": "slides/12-gp.html#squared-exponential-se-kernel",
     "href": "slides/12-gp.html#squared-exponential-se-kernel",
     "title": "Gaussian Processes ♾️",
     "section": "Squared Exponential (SE) Kernel",
-    "text": "Squared Exponential (SE) Kernel\n\\[k(x, x' \\mid \\tau, h) = \\tau^2 \\exp\\left(-\\frac{(x - x')^2}{2h^2} \\right)\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\\[k(x, x') = \\exp\\left(-\\frac{1}{2}(x - x')^2 \\right)\\]"
+    "text": "Squared Exponential (SE) Kernel\n\\[k(x, x' \\mid \\tau, h) = \\tau^2 \\exp\\left(-\\frac{(x - x')^2}{2h^2} \\right)\\]\n. . .\n\n\n\n\n\n\n\n\n\n\n\n\n\\[k(x, x') = \\exp\\left(-\\frac{1}{2}(x - x')^2 \\right)\\]"
   },
   {
     "objectID": "slides/12-gp.html#squared-exponential-se-kernel-1",
     "href": "slides/12-gp.html#squared-exponential-se-kernel-1",
     "title": "Gaussian Processes ♾️",
     "section": "Squared Exponential (SE) Kernel",
-    "text": "Squared Exponential (SE) Kernel\n\n\n\n\n\n\n\n\n\n\n\n\\[k(x, x') = \\exp\\left(-\\frac{1}{2}\\frac{(x - x')^2}{ {\\color{red}{0.25}}^2} \\right)\\]\n\nThe parameter \\(h\\) is the characteristic length-scale that controls the number of level-zero upcrossings."
+    "text": "Squared Exponential (SE) Kernel\n\n\n\n\n\n\n\n\n\n\n\n\n\\[k(x, x') = \\exp\\left(-\\frac{1}{2}\\frac{(x - x')^2}{ {\\color{red}{0.25}}^2} \\right)\\]\n\nThe parameter \\(h\\) is the characteristic length-scale that controls the number of level-zero upcrossings."
   },
   {
     "objectID": "slides/12-gp.html#squared-exponential-se-kernel-2",
     "href": "slides/12-gp.html#squared-exponential-se-kernel-2",
     "title": "Gaussian Processes ♾️",
     "section": "Squared Exponential (SE) Kernel",
-    "text": "Squared Exponential (SE) Kernel\n\n\n\n\n\n\n\n\n\n\n\n\\[k(x, x') = \\exp\\left(-\\frac{1}{2}\\frac{(x - x')^2}{ {\\color{red}{4}}^2} \\right)\\]"
+    "text": "Squared Exponential (SE) Kernel\n\n\n\n\n\n\n\n\n\n\n\n\n\\[k(x, x') = \\exp\\left(-\\frac{1}{2}\\frac{(x - x')^2}{ {\\color{red}{4}}^2} \\right)\\]"
   },
   {
     "objectID": "slides/12-gp.html#squared-exponential-se-kernel-3",
     "href": "slides/12-gp.html#squared-exponential-se-kernel-3",
     "title": "Gaussian Processes ♾️",
     "section": "Squared Exponential (SE) Kernel",
-    "text": "Squared Exponential (SE) Kernel\n\n\n\n\n\n\n\n\n\n\n\n\\[k(x, x') = {\\color{red}{10^2}}\\exp\\left(-\\frac{1}{2}(x - x')^2 \\right)\\]\n\nThe parameter \\(\\tau\\) is the variance of \\(f(x)\\) that controls the vertical variation of the process."
+    "text": "Squared Exponential (SE) Kernel\n\n\n\n\n\n\n\n\n\n\n\n\n\\[k(x, x') = {\\color{red}{10^2}}\\exp\\left(-\\frac{1}{2}(x - x')^2 \\right)\\]\n\nThe parameter \\(\\tau\\) is the variance of \\(f(x)\\) that controls the vertical variation of the process."
   },
   {
     "objectID": "slides/12-gp.html#exponential-kernel",
@@ -3493,7 +3493,7 @@
     "href": "slides/12-gp.html#why-gp",
     "title": "Gaussian Processes ♾️",
     "section": "Why GP?",
-    "text": "Why GP?\n\nThe GP inherits its properties primarily from the covariance function \\(k\\):\n\nSmoothness\nDifferentiability\nVariance\n\n\n\n\n\nSums of Gaussians are Gaussian.\n\n\n\n\nMarginal distributions of multivariate Gaussians are still Gaussian.\n\n\n\n\nAny affine transformation of a Gaussian is a Gaussian.\n\n\n\n\nConditional distributions are still Gaussian.\n\n\n\\[\\mathbf{Y}= \\begin{pmatrix} \\mathbf{Y}_1 \\\\ \\mathbf{Y}_2 \\end{pmatrix} \\sim N\\left(\\boldsymbol \\mu,  \\boldsymbol \\Sigma\\right), \\quad \\boldsymbol \\mu= \\begin{pmatrix} \\boldsymbol \\mu_1 \\\\ \\boldsymbol \\mu_2 \\end{pmatrix},  \\quad \\boldsymbol \\Sigma= \\begin{pmatrix} \\Sigma_{11}  & \\Sigma_{12}\\\\ \\Sigma_{21} & \\Sigma_{22} \\end{pmatrix}\\] \\[(\\mathbf{Y}_2 \\mid \\mathbf{y}_1 = \\mathbf{y}_1) \\sim N\\left(\\boldsymbol \\mu_2 + \\Sigma_{21} \\Sigma_{11}^{-1} (\\mathbf{y}_1 - \\boldsymbol \\mu_1), \\Sigma_{22} - \\Sigma_{21}\\Sigma_{11}^{-1}\\Sigma_{12}\\right)\\]"
+    "text": "Why GP?\n\nThe GP inherits its properties primarily from the covariance function \\(k\\):\n\nSmoothness\nDifferentiability\nVariance\n\n\n. . .\n\nSums of Gaussians are Gaussian.\n\n. . .\n\nMarginal distributions of multivariate Gaussians are still Gaussian.\n\n. . .\n\nAny affine transformation of a Gaussian is a Gaussian.\n\n. . .\n\nConditional distributions are still Gaussian.\n\n\n\\[\\mathbf{Y}= \\begin{pmatrix} \\mathbf{Y}_1 \\\\ \\mathbf{Y}_2 \\end{pmatrix} \\sim N\\left(\\boldsymbol \\mu,  \\boldsymbol \\Sigma\\right), \\quad \\boldsymbol \\mu= \\begin{pmatrix} \\boldsymbol \\mu_1 \\\\ \\boldsymbol \\mu_2 \\end{pmatrix},  \\quad \\boldsymbol \\Sigma= \\begin{pmatrix} \\Sigma_{11}  & \\Sigma_{12}\\\\ \\Sigma_{21} & \\Sigma_{22} \\end{pmatrix}\\] \\[(\\mathbf{Y}_2 \\mid \\mathbf{y}_1 = \\mathbf{y}_1) \\sim N\\left(\\boldsymbol \\mu_2 + \\Sigma_{21} \\Sigma_{11}^{-1} (\\mathbf{y}_1 - \\boldsymbol \\mu_1), \\Sigma_{22} - \\Sigma_{21}\\Sigma_{11}^{-1}\\Sigma_{12}\\right)\\]"
   },
   {
     "objectID": "slides/12-gp.html#conditional-updates-of-gaussian-processes",
@@ -3514,21 +3514,21 @@
     "href": "slides/12-gp.html#bayesian-conditioning-updates-of-gp-posterior",
     "title": "Gaussian Processes ♾️",
     "section": "Bayesian Conditioning Updates of GP: Posterior",
-    "text": "Bayesian Conditioning Updates of GP: Posterior\n\nGiven observed information \\(f(x_1), \\dots, f(x_n)\\)\n\n\n\\[f(x^*) \\mid f(x_1), \\dots, f(x_n) \\sim N\\left( \\boldsymbol \\mu^*, \\boldsymbol \\Sigma^*\\right)\\] where\n\\[\\boldsymbol \\mu^* = K_{*}^TK^{-1}{\\bf f}\\] with \\({\\bf f} = \\left(f(x_1), \\dots, f(x_n)\\right)^T\\)\n\\[\\boldsymbol \\Sigma^* = K_{**} - K_{*}^TK^{-1}K_{*}\\]"
+    "text": "Bayesian Conditioning Updates of GP: Posterior\n\nGiven observed information \\(f(x_1), \\dots, f(x_n)\\)\n\n\\[f(x^*) \\mid f(x_1), \\dots, f(x_n) \\sim N\\left( \\boldsymbol \\mu^*, \\boldsymbol \\Sigma^*\\right)\\] where\n\\[\\boldsymbol \\mu^* = K_{*}^TK^{-1}{\\bf f}\\] with \\({\\bf f} = \\left(f(x_1), \\dots, f(x_n)\\right)^T\\)\n\\[\\boldsymbol \\Sigma^* = K_{**} - K_{*}^TK^{-1}K_{*}\\]"
   },
   {
     "objectID": "slides/12-gp.html#no-noisenugget---interpolation",
     "href": "slides/12-gp.html#no-noisenugget---interpolation",
     "title": "Gaussian Processes ♾️",
     "section": "No Noise/Nugget - Interpolation",
-    "text": "No Noise/Nugget - Interpolation\n\n\n—–: posterior mean \\(\\boldsymbol \\mu^*\\)\n—–: 95% posterior predictive interval \\(\\boldsymbol \\mu^* \\pm 1.96 \\boldsymbol \\Sigma^*\\)\nSo far we treat \\(f(x)\\), the function values as data points.\nThere is no noise, and every posterior curve interpolates data points."
+    "text": "No Noise/Nugget - Interpolation\n\n\n\n\n\n\n\n\n\n\n—–: posterior mean \\(\\boldsymbol \\mu^*\\)\n—–: 95% posterior predictive interval \\(\\boldsymbol \\mu^* \\pm 1.96 \\boldsymbol \\Sigma^*\\)\nSo far we treat \\(f(x)\\), the function values as data points.\nThere is no noise, and every posterior curve interpolates data points."
   },
   {
     "objectID": "slides/12-gp.html#noisy-observationswith-nugget---gp-regression-gpr",
     "href": "slides/12-gp.html#noisy-observationswith-nugget---gp-regression-gpr",
     "title": "Gaussian Processes ♾️",
     "section": "Noisy Observations/with Nugget - GP Regression (GPR)",
-    "text": "Noisy Observations/with Nugget - GP Regression (GPR)\n\nIn reality, we don’t or can’t observe \\(f(x)\\) and like to estimate it.\n\n\\[\\begin{align} y_i &= f(x_i) + \\epsilon_i, \\quad \\epsilon_i\\sim N(0, \\sigma^2) \\\\\nf(\\cdot) &\\sim GP(0, k(\\cdot, \\cdot; \\theta))\\end{align}\\]\n\n\\[y_1, \\dots, y_n, f(x^*) \\sim N\\left(0, \\boldsymbol \\Sigma\\right), \\quad \\boldsymbol \\Sigma=\n\\left(\\begin{array}{ccc|c}\n&  &  &  \\\\\n& K + \\sigma^2I &  & K_* \\\\\n&  &  &  \\\\\n\\hline\n& K_*^T &  & K_{**}\n\\end{array} \\right) \\]\n\n\n\\[f(x^*) \\mid y_1, \\dots, y_n \\sim N\\left( \\boldsymbol \\mu^*, \\boldsymbol \\Sigma^*\\right), \\quad \\boldsymbol \\mu^* = K_{*}^T{\\color{red}{(K + \\sigma^2I)^{-1}}}{\\bf y}, \\quad \\boldsymbol \\Sigma^* = K_{**} - K_{*}^T{\\color{red}{(K + \\sigma^2I)^{-1}}}K_{*}\\] with \\({\\bf y} = \\left(y_1, \\dots, y_n\\right)^T\\)"
+    "text": "Noisy Observations/with Nugget - GP Regression (GPR)\n\nIn reality, we don’t or can’t observe \\(f(x)\\) and like to estimate it.\n\n\\[\\begin{align} y_i &= f(x_i) + \\epsilon_i, \\quad \\epsilon_i\\sim N(0, \\sigma^2) \\\\\nf(\\cdot) &\\sim GP(0, k(\\cdot, \\cdot; \\theta))\\end{align}\\]\n. . .\n\\[y_1, \\dots, y_n, f(x^*) \\sim N\\left(0, \\boldsymbol \\Sigma\\right), \\quad \\boldsymbol \\Sigma=\n\\left(\\begin{array}{ccc|c}\n&  &  &  \\\\\n& K + \\sigma^2I &  & K_* \\\\\n&  &  &  \\\\\n\\hline\n& K_*^T &  & K_{**}\n\\end{array} \\right) \\]\n. . .\n\\[f(x^*) \\mid y_1, \\dots, y_n \\sim N\\left( \\boldsymbol \\mu^*, \\boldsymbol \\Sigma^*\\right), \\quad \\boldsymbol \\mu^* = K_{*}^T{\\color{red}{(K + \\sigma^2I)^{-1}}}{\\bf y}, \\quad \\boldsymbol \\Sigma^* = K_{**} - K_{*}^T{\\color{red}{(K + \\sigma^2I)^{-1}}}K_{*}\\] with \\({\\bf y} = \\left(y_1, \\dots, y_n\\right)^T\\)"
   },
   {
     "objectID": "slides/12-gp.html#noisy-observationswith-nugget---gp-regression-gpr-1",
@@ -3549,7 +3549,7 @@
     "href": "slides/12-gp.html#empirical-bayes",
     "title": "Gaussian Processes ♾️",
     "section": "Empirical Bayes",
-    "text": "Empirical Bayes\n\nUses the observed data to estimate parameters \\(\\theta = (\\sigma^2, \\tau^2, h)\\)\nFind an empirical Bayes estimate for \\(\\theta\\) from the marginal likelihood\n\n\\[ p\\left( \\mathbf{y}\\mid \\theta \\right) = \\int p\\left( \\mathbf{y}\\mid {\\bf f} \\right) p\\left( {\\bf f} \\mid \\theta \\right) \\, d {\\bf f} = N\\left(\\mathbf{0}, K(\\tau, h)+\\sigma^2I \\right)\\]\n\n\n\\(\\hat{\\theta}_{EB} = \\mathop{\\mathrm{arg\\,max}}_{\\theta}\\log p\\left( \\mathbf{y}\\mid \\theta \\right)\\)."
+    "text": "Empirical Bayes\n\nUses the observed data to estimate parameters \\(\\theta = (\\sigma^2, \\tau^2, h)\\)\nFind an empirical Bayes estimate for \\(\\theta\\) from the marginal likelihood\n\n\\[ p\\left( \\mathbf{y}\\mid \\theta \\right) = \\int p\\left( \\mathbf{y}\\mid {\\bf f} \\right) p\\left( {\\bf f} \\mid \\theta \\right) \\, d {\\bf f} = N\\left(\\mathbf{0}, K(\\tau, h)+\\sigma^2I \\right)\\]\n\n\\(\\hat{\\theta}_{EB} = \\mathop{\\mathrm{arg\\,max}}_{\\theta}\\log p\\left( \\mathbf{y}\\mid \\theta \\right)\\)."
   },
   {
     "objectID": "slides/12-gp.html#full-bayesian-inference",
@@ -3561,7 +3561,7 @@
   {
     "objectID": "weeks/week-11.html",
     "href": "weeks/week-11.html",
-    "title": "Week 12",
+    "title": "Week 11",
     "section": "",
     "text": "Important",
     "crumbs": [
@@ -3572,7 +3572,7 @@
   {
     "objectID": "weeks/week-11.html#participate",
     "href": "weeks/week-11.html#participate",
-    "title": "Week 12",
+    "title": "Week 11",
     "section": "Participate",
     "text": "Participate\n🖥️ Slides - Gaussian Processes",
     "crumbs": [
@@ -3583,7 +3583,7 @@
   {
     "objectID": "weeks/week-11.html#reading",
     "href": "weeks/week-11.html#reading",
-    "title": "Week 12",
+    "title": "Week 11",
     "section": "Reading",
     "text": "Reading\n📖 Gaussian Processes for Machine Learning (GPML) Ch 2\n📖 Surrogates Ch 5\n📖 PMLI Ch 17.2",
     "crumbs": [
@@ -3594,12 +3594,252 @@
   {
     "objectID": "weeks/week-11.html#exercise",
     "href": "weeks/week-11.html#exercise",
-    "title": "Week 12",
+    "title": "Week 11",
     "section": "Exercise",
     "text": "Exercise\n\n\n\nBack to course schedule ⏎",
     "crumbs": [
       "Weekly Materials",
       "Week 11"
     ]
+  },
+  {
+    "objectID": "slides/13-svm.html#support-vector-machines-svms",
+    "href": "slides/13-svm.html#support-vector-machines-svms",
+    "title": "Support Vector Machines \n",
+    "section": "Support Vector Machines (SVMs)",
+    "text": "Support Vector Machines (SVMs)\n\nSVMs have been shown to perform well in a variety of settings, and are often considered one of the best “out of the box” classifiers.\nStart with the maximal margin classifier (1960s), then the support vector classifier (1990s), and then the support vector machine."
+  },
+  {
+    "objectID": "slides/13-svm.html#classifier",
+    "href": "slides/13-svm.html#classifier",
+    "title": "Support Vector Machines \n",
+    "section": "Classifier",
+    "text": "Classifier\n\n\\({\\cal D}_n = \\{\\mathbf{x}_i, y_i\\}_{i=1}^n\\)\nIn SVM, we code the binary outcome \\(y\\) as 1 or -1, representing one class and the other.\nThe goal is to find a linear classifier \\(f(\\mathbf{x}) = \\beta_0 + \\mathbf{x}' \\boldsymbol \\beta\\) so that the classification rule is the sign of \\(f(\\mathbf{x})\\):\n\n\\[\n\\hat{y} =\n\\begin{cases}\n        +1, \\quad \\text{if} \\quad f(\\mathbf{x}) &gt; 0\\\\\n        -1, \\quad \\text{if} \\quad f(\\mathbf{x}) &lt; 0\n\\end{cases}\n\\]"
+  },
+  {
+    "objectID": "slides/13-svm.html#separating-hyperplane",
+    "href": "slides/13-svm.html#separating-hyperplane",
+    "title": "Support Vector Machines \n",
+    "section": "Separating Hyperplane",
+    "text": "Separating Hyperplane\n\nThe \\(f(\\mathbf{x}) = \\beta_0 + \\mathbf{x}' \\boldsymbol \\beta= 0\\) is a hyperplane, which is a subspace of dimension \\(p-1\\) in the \\(p\\)-dimensional space.\n\\(f(\\mathbf{x}) = \\beta_0 + \\beta_1X_1+\\beta_2X_2 = 0\\) is a straight line (hyperplane of dimension one) in the 2-dimensional space.\nThe classification rule is \\(y_i f(\\mathbf{x}_i) &gt;0\\)."
+  },
+  {
+    "objectID": "slides/13-svm.html#maximum-margin-classifier",
+    "href": "slides/13-svm.html#maximum-margin-classifier",
+    "title": "Support Vector Machines \n",
+    "section": "Maximum-margin Classifier",
+    "text": "Maximum-margin Classifier\n\nIf our data can be perfectly separated using a hyperplane, there exists an infinite number of such hyperplanes. But which one is the best?\nA natural choice is the maximal margin hyperplane (optimal separating hyperplane), which is the separating hyperplane that is farthest from the training points."
+  },
+  {
+    "objectID": "slides/13-svm.html#maximum-margin-classifier-1",
+    "href": "slides/13-svm.html#maximum-margin-classifier-1",
+    "title": "Support Vector Machines \n",
+    "section": "Maximum-margin Classifier",
+    "text": "Maximum-margin Classifier\n\nlibrary(e1071)\nsvm_fit &lt;- svm(y ~ ., data = data.frame(x, y), type = 'C-classification', \n               kernel = 'linear', scale = FALSE, cost = 10000)\n\n\n\n\n\nThe training points lied on the dashed lines are support vectors:\n\nif they were moved, the maximal margin hyperplane would move too.\nthe hyperplane depends directly on the support vectors, but not on the other observations, provided that their movement does not cause it to cross the boundary.\n\n\nIt can lead to overfitting when \\(p\\) is large.\nHope the classifier will also have a large margin on the test data.\n\n\n\n\n\n\n\n\n\n\n\n\nWe use the e1071 package to fit the SVM. There is a cost parameter C , with default value 1. This parameter has a significant impact on non-separable problems. However, for our separable case, we will set this to be a very large value, meaning that the cost for having a wrong classification is very large. We also need to specify the linear kernel.\n\nindex gives the index of all support vectors\ncoefs provides the yiαi for the support vectors\nSV are the xi values correspond to the support vectors\nrho is negative β0\n\nthey “support” the maximal margin hyperplane in the sense vector that if these points were moved slightly then the maximal margin hyperplane would move as well.\nhttps://afit-r.github.io/svm\nkernlab::ksvm()\nwe can compute the (perpendicular) distance from each training observation to a given separating hyperplane; the smallest such distance is the minimal distance from the observations to the hyperplane, and is known as the margin. The maximal margin hyperplane is the separating hyperplane for which the margin is margin largest—that is, it is the hyperplane that has the farthest minimum distance to the training observations.\n\nUse from sklearn import svm for Python implementation."
+  },
+  {
+    "objectID": "slides/13-svm.html#linearly-separable-svm",
+    "href": "slides/13-svm.html#linearly-separable-svm",
+    "title": "Support Vector Machines \n",
+    "section": "Linearly Separable SVM",
+    "text": "Linearly Separable SVM\nIn linear SVM, \\(f(\\mathbf{x}) = \\beta_0 + \\mathbf{x}' \\boldsymbol \\beta\\). When \\(f(\\mathbf{x}) = 0\\), it corresponds to a hyperplane that separates the two classes:\n\\[\\{ \\mathbf{x}: \\beta_0 + \\mathbf{x}'\\boldsymbol \\beta = 0 \\}\\]\n\nFor this separable case, all observations with \\(y_i = 1\\) are on one side \\(f(\\mathbf{x}) &gt; 0\\), and observations with \\(y_i = -1\\) are on the other side.\nThe distance from any point \\(\\mathbf{x}_0\\) to the hyperplane is\n\n\\[\\frac{1}{\\lVert \\boldsymbol \\beta\\lVert} |f(\\mathbf{x}_0)|\\] For \\(p = 2\\), and the plane \\(\\beta_0 + \\beta_1 X_1 + \\beta_2X_2 = 0\\), the distance is \\[ \\frac{ |\\beta_0 + \\beta_1 x_{01} + \\beta_2x_{02}|}{\\sqrt{\\beta_1^2 + \\beta^2_2}}\\]"
+  },
+  {
+    "objectID": "slides/13-svm.html#optimization-for-linearly-separable-svm",
+    "href": "slides/13-svm.html#optimization-for-linearly-separable-svm",
+    "title": "Support Vector Machines \n",
+    "section": "Optimization for Linearly Separable SVM",
+    "text": "Optimization for Linearly Separable SVM\n\\[\\begin{align}\n\\underset{\\boldsymbol \\beta, \\beta_0}{\\text{max}} \\quad & M \\\\\n\\text{s.t.} \\quad & \\frac{1}{\\lVert \\boldsymbol \\beta\\lVert} y_i(\\mathbf{x}' \\boldsymbol \\beta+ \\beta_0) \\geq M, \\,\\, i = 1, \\ldots, n.\n\\end{align}\\]\n\nThe constraint requires that each point be on the correct side of the hyperplane, with some cushion.\nThe scale of \\(\\boldsymbol \\beta\\) can be arbitrary, so just set it as \\(\\lVert \\boldsymbol \\beta\\rVert = 1\\):\n\n\\[\\begin{align}\n\\underset{\\boldsymbol \\beta, \\beta_0}{\\text{max}} \\quad & M \\\\\n\\text{s.t.}\n\\quad & \\lVert \\boldsymbol \\beta\\lVert = 1, \\\\\n\\quad &  y_i(\\mathbf{x}' \\boldsymbol \\beta+ \\beta_0) \\geq M, \\,\\, i = 1, \\ldots, n.\n\\end{align}\\]\n\n\nHow to solve it? Learn it in MSSC 5650."
+  },
+  {
+    "objectID": "slides/13-svm.html#linearly-non-separable-svm-with-slack-variables",
+    "href": "slides/13-svm.html#linearly-non-separable-svm-with-slack-variables",
+    "title": "Support Vector Machines \n",
+    "section": "Linearly Non-separable SVM with Slack Variables",
+    "text": "Linearly Non-separable SVM with Slack Variables\n\nOften, no separating hyperplane exists, so there is no maximal margin classifier.\nThe previous optimization problem has no solution with \\(M &gt; 0\\).\nIdea: develop a hyperplane that almost separates the classes, using a so-called soft margin: soft margin classifier."
+  },
+  {
+    "objectID": "slides/13-svm.html#why-linearly-non-separable-support-vector-classifier",
+    "href": "slides/13-svm.html#why-linearly-non-separable-support-vector-classifier",
+    "title": "Support Vector Machines \n",
+    "section": "Why Linearly Non-separable Support Vector Classifier",
+    "text": "Why Linearly Non-separable Support Vector Classifier\n\nEven if a separating hyperplane does exist, the maximum-margin classifier might not be desirable.\nThe maximal margin hyperplane is extremely sensitive to a change in a single observation: it may overfit the training data. (low-bias high-variance)\n\n\nSource: ISL Fig. 9.5"
+  },
+  {
+    "objectID": "slides/13-svm.html#soft-margin-classifier",
+    "href": "slides/13-svm.html#soft-margin-classifier",
+    "title": "Support Vector Machines \n",
+    "section": "Soft Margin Classifier",
+    "text": "Soft Margin Classifier\n\n\nConsider a classifier based on a hyperplane that does NOT perfectly separate the two classes, but\n\nGreater robustness to individual observations\nBetter classification of most of the training observations.\n\n\nIt could be worthwhile to misclassify a few training points in order to do a better job in classifying the remaining observations.\nAllow some points to be on the incorrect side of the margin, or even the incorrect side of the hyperplane (training points misclassified by the classifier).\n\n\nSource: ISL Fig. 9.6"
+  },
+  {
+    "objectID": "slides/13-svm.html#optimization-for-soft-margin-classifier",
+    "href": "slides/13-svm.html#optimization-for-soft-margin-classifier",
+    "title": "Support Vector Machines \n",
+    "section": "Optimization for Soft Margin Classifier",
+    "text": "Optimization for Soft Margin Classifier\n\\[\\begin{align}\n\\underset{\\boldsymbol \\beta, \\beta_0, \\epsilon_1, \\dots, \\epsilon_n}{\\text{max}} \\quad & M \\\\\n\\text{s.t.}\n\\quad & \\lVert \\boldsymbol \\beta\\lVert = 1, \\\\\n\\quad &  y_i(\\mathbf{x}' \\boldsymbol \\beta+ \\beta_0) \\geq M(1 - \\epsilon_i), \\\\\n  \\quad & \\epsilon_i \\ge 0, \\sum_{i=1}^n\\epsilon_i \\le B, \\,\\, i = 1, \\ldots, n,\n\\end{align}\\] where \\(B &gt; 0\\) is a tuning parameter.\n\n\\(\\epsilon_1, \\dots, \\epsilon_n\\) are slack variables that allow individual points to be on the wrong side of the margin or the hyperplane.\n\nThe \\(i\\)th point is on the\n\n\ncorrect side of the margin when \\(\\epsilon_i = 0\\)\n\n\nwrong side of the margin when \\(\\epsilon_i &gt; 0\\)\n\n\nwrong side of the hyperplane when \\(\\epsilon_i &gt; 1\\)\n\n\n\n\n\ntells us where the \\(i\\)th observation is located, relative to the hyperplane and relative to the margin."
+  },
+  {
+    "objectID": "slides/13-svm.html#optimization-for-soft-margin-classifier-1",
+    "href": "slides/13-svm.html#optimization-for-soft-margin-classifier-1",
+    "title": "Support Vector Machines \n",
+    "section": "Optimization for Soft Margin Classifier",
+    "text": "Optimization for Soft Margin Classifier\n\\[\\begin{align}\n\\underset{\\boldsymbol \\beta, \\beta_0, \\epsilon_1, \\dots, \\epsilon_n}{\\text{max}} \\quad & M \\\\\n\\text{s.t.}\n\\quad & \\lVert \\boldsymbol \\beta\\lVert = 1, \\\\\n\\quad &  y_i(\\mathbf{x}' \\boldsymbol \\beta+ \\beta_0) \\geq M(1 - \\epsilon_i), \\\\\n  \\quad & \\epsilon_i \\ge 0, \\sum_{i=1}^n\\epsilon_i \\le B, \\,\\, i = 1, \\ldots, n,\n\\end{align}\\] where \\(B &gt; 0\\) is a tuning parameter.\n\n\n\\(B\\) determines the number and severity of the violations to the margin/hyperplane we tolerate.\n\n\n\\(B = 0\\): no budget for violations (\\(\\epsilon_1 = \\cdots = \\epsilon_n = 0\\))\n\n\\(B &gt; 0\\): no more than \\(B\\) points can be on the wrong side of the hyperplane. (\\(\\epsilon_i &gt; 1\\))\nAs \\(B\\) increases, more violations and wider margin. (more bias less variance)\nChoose \\(B\\) via cross-validation.\n\n\n\nB as a budget for the amount that the margin can be violated by the n observations"
+  },
+  {
+    "objectID": "slides/13-svm.html#optimization-for-soft-margin-classifier-2",
+    "href": "slides/13-svm.html#optimization-for-soft-margin-classifier-2",
+    "title": "Support Vector Machines \n",
+    "section": "Optimization for Soft Margin Classifier",
+    "text": "Optimization for Soft Margin Classifier"
+  },
+  {
+    "objectID": "slides/13-svm.html#optimization-for-soft-margin-classifier-3",
+    "href": "slides/13-svm.html#optimization-for-soft-margin-classifier-3",
+    "title": "Support Vector Machines \n",
+    "section": "Optimization for Soft Margin Classifier",
+    "text": "Optimization for Soft Margin Classifier\n\n\n\n\n\n\nWarning\n\n\n\nThe argument cost in e1071::svm() is the \\(C\\) defined in the primal form \\[\\begin{align}\n\\underset{\\boldsymbol \\beta, \\beta_0}{\\text{min}} \\quad & \\frac{1}{2}\\lVert \\boldsymbol \\beta\\rVert^2 + C \\sum_{i=1}^n \\epsilon_i \\\\\n\\text{s.t} \\quad & y_i (\\mathbf{x}_i' \\boldsymbol \\beta+ \\beta_0) \\geq (1 - \\epsilon_i), \\\\\n\\text{} \\quad & \\epsilon_i \\geq 0, \\,\\, i = 1, \\ldots, n,\n\\end{align}\\]\n\nso small cost \\(C\\) means larger budget \\(B\\)."
+  },
+  {
+    "objectID": "slides/13-svm.html#svm-lda-and-logistic-regression",
+    "href": "slides/13-svm.html#svm-lda-and-logistic-regression",
+    "title": "Support Vector Machines \n",
+    "section": "SVM, LDA and Logistic Regression",
+    "text": "SVM, LDA and Logistic Regression\n\n\n\n\n\n\nNote\n\n\n\n\nSVM decision rule is based only on a subset of the training data (robust to the behavior of data that are far away from the hyperplane.)\nLDA depends on the mean of all of the observations within each class, and within-class covariance matrix computed using all of the data.\nLogistic regression, unlike LDA, is insensitive to observations far from the decision boundary too."
+  },
+  {
+    "objectID": "slides/13-svm.html#classification-with-non-linear-decision-boundaries",
+    "href": "slides/13-svm.html#classification-with-non-linear-decision-boundaries",
+    "title": "Support Vector Machines \n",
+    "section": "Classification with Non-Linear Decision Boundaries",
+    "text": "Classification with Non-Linear Decision Boundaries\n\nThe soft margin classifier is a natural approach for classification in the two-class setting, if the boundary between the two classes is linear.\nIn practice we are often faced with non-linear class boundaries."
+  },
+  {
+    "objectID": "slides/13-svm.html#classification-with-non-linear-decision-boundaries-1",
+    "href": "slides/13-svm.html#classification-with-non-linear-decision-boundaries-1",
+    "title": "Support Vector Machines \n",
+    "section": "Classification with Non-Linear Decision Boundaries",
+    "text": "Classification with Non-Linear Decision Boundaries\n\nIn regression, we enlarge the feature space using functions of the predictors to address this non-linearity.\nIn SVM (logistic regression too!), we could address non-linear boundaries by enlarging the feature space.\nFor example, rather than fitting a support vector classifier using \\(p\\) features, \\(X_1, \\dots, X_p\\), we could instead fit a support vector classifier using \\(2p\\) features \\(X_1,X_1^2,X_2,X_2^2, \\dots , X_p, X_p^2\\).\n\n\n\n\\[\\begin{align}\n\\underset{\\beta_0, \\beta_{11}, \\beta_{12}, \\dots, \\beta_{p1}, \\beta_{p2}, \\epsilon_1, \\dots, \\epsilon_n}{\\text{max}} \\quad & M \\\\\n\\text{s.t.}\n\\quad &  y_i\\left(\\beta_0 + \\sum_{i = 1}^n \\beta_{j1}x_{ij} + \\sum_{i = 1}^n \\beta_{j2}x_{ij}^2\\right) \\geq M(1 - \\epsilon_i), \\\\\n  \\quad & \\epsilon_i \\ge 0, \\sum_{i=1}^n\\epsilon_i \\le B, \\,\\, i = 1, \\ldots, n,\\\\\n  \\quad & \\sum_{j=1}^p\\sum_{k=1}^2\\beta_{jk}^2 = 1.\n\\end{align}\\]\n\nIn the enlarged feature space, the decision boundary that results from (9.16) is in fact linear. But in the original feature space, the decision boundary is of the form q(x) = 0, where q is a quadratic polynomial, and its solutions are generally non-linear.\nThe support vector machine, which we present next, allows us to enlarge the feature space used by the support vector classifier in a way that leads to efficient computations"
+  },
+  {
+    "objectID": "slides/13-svm.html#solution-to-support-vector-classifier",
+    "href": "slides/13-svm.html#solution-to-support-vector-classifier",
+    "title": "Support Vector Machines \n",
+    "section": "Solution to Support Vector Classifier",
+    "text": "Solution to Support Vector Classifier\n\nThe solution to the support vector classifier optimization involves only the inner products of the observations: \\(\\langle \\mathbf{x}_i, \\mathbf{x}_{i'} \\rangle = \\sum_{j=1}^px_{ij}x_{i'j}\\)\nThe linear support vector classifier can be represented as \\[f(\\mathbf{x}) = \\beta_0 + \\sum_{i\\in \\mathcal{S}}\\alpha_i\\langle \\mathbf{x}, \\mathbf{x}_{i} \\rangle\\] where \\(\\mathcal{S}\\) is the collection of indices of the support points.\n\\(\\alpha_i\\) is nonzero only for the support vectors in the solution\n\n\n\n\nTo evaluate the function \\(f(\\mathbf{x}_0)\\), we compute \\(\\langle \\mathbf{x}_0, \\mathbf{x}_{i} \\rangle\\)."
+  },
+  {
+    "objectID": "slides/13-svm.html#nonlinear-svm-via-kernel-trick",
+    "href": "slides/13-svm.html#nonlinear-svm-via-kernel-trick",
+    "title": "Support Vector Machines \n",
+    "section": "Nonlinear SVM via Kernel Trick",
+    "text": "Nonlinear SVM via Kernel Trick\n\n\n\n\n\nThe support vector machine (SVM) is an extension of the support vector classifier that results from enlarging the feature space in a specific way, using kernels.\nThe kernel approach is an efficient computational approach for enlarging our feature space and non-linear boundary.\n\n\n\nKernel Trick: \\[f(\\mathbf{x}) = \\beta_0 + \\sum_{i\\in \\mathcal{S}}\\alpha_i K\\left(\\mathbf{x}, \\mathbf{x}_{i}\\right) \\]\nLinear kernel: \\(K\\left(\\mathbf{x}_0, \\mathbf{x}_{i}\\right) = \\langle \\mathbf{x}_0, \\mathbf{x}_{i'} \\rangle = \\sum_{j=1}^px_{0j}x_{ij}\\)\nPolynomial kernel: \\(K\\left(\\mathbf{x}_0, \\mathbf{x}_{i}\\right) = \\left(1 + \\sum_{j=1}^px_{0j}x_{ij}\\right)^d\\)\nRadial kernel: \\(K\\left(\\mathbf{x}_0, \\mathbf{x}_{i'}\\right) = \\exp \\left(-\\gamma\\sum_{j=1}^p (x_{0j}-x_{ij})^2 \\right)\\)"
+  },
+  {
+    "objectID": "slides/13-svm.html#radial-kernel-decision-doundary",
+    "href": "slides/13-svm.html#radial-kernel-decision-doundary",
+    "title": "Support Vector Machines \n",
+    "section": "Radial Kernel Decision Doundary",
+    "text": "Radial Kernel Decision Doundary"
+  },
+  {
+    "objectID": "slides/13-svm.html#svm-as-a-penalized-model",
+    "href": "slides/13-svm.html#svm-as-a-penalized-model",
+    "title": "Support Vector Machines \n",
+    "section": "SVM as a Penalized Model",
+    "text": "SVM as a Penalized Model\n\\[\\begin{align}\n\\underset{\\boldsymbol \\beta, \\beta_0, \\epsilon_1, \\dots, \\epsilon_n}{\\text{max}} \\quad & M \\\\\n\\text{s.t.}\n\\quad & \\lVert \\boldsymbol \\beta\\lVert = 1, \\\\\n\\quad &  y_i(\\mathbf{x}_i' \\boldsymbol \\beta+ \\beta_0) \\geq M(1 - \\epsilon_i), \\\\\n  \\quad & \\epsilon_i \\ge 0, \\sum_{i=1}^n\\epsilon_i \\le B, \\,\\, i = 1, \\ldots, n,\n\\end{align}\\]\n\n\\[\\begin{align}\n\\underset{\\boldsymbol \\beta, \\beta_0}{\\text{min}} \\left\\{ \\sum_{i=1}^n  \\max \\left[ 0, 1 - y_i (\\mathbf{x}_i' \\boldsymbol \\beta+ \\beta_0) \\right] + \\lambda \\lVert \\boldsymbol \\beta\\lVert ^ 2 \\right\\}\n\\end{align}\\] where \\(\\sum_{i=1}^n  \\max \\left[ 0, 1 - y_i (\\mathbf{x}' \\boldsymbol \\beta+ \\beta_0) \\right]\\) is known as hinge loss.\n\nLarge \\(\\lambda\\) (large \\(B\\)): small \\(\\beta_j\\)s, high-bias and low-variance.\nSmall \\(\\lambda\\) (small \\(B\\)): low-bias and high-variance."
+  },
+  {
+    "objectID": "slides/13-svm.html#loss-functions",
+    "href": "slides/13-svm.html#loss-functions",
+    "title": "Support Vector Machines \n",
+    "section": "Loss Functions",
+    "text": "Loss Functions\n\n\n\nThe hinge loss is zero for observations for which \\(y_i (\\mathbf{x}' \\boldsymbol \\beta+ \\beta_0) \\ge 1\\) (correct side of the margin).\nThe logistic loss is not zero anywhere.\nSVM is better when classes are well separated.\nLogistic regression is preferred in more overlapping regimes.\n\n\n\n\n\n\n\n\n\n\n\n, but small for points far from the boundary."
+  },
+  {
+    "objectID": "weeks/week-12.html",
+    "href": "weeks/week-12.html",
+    "title": "Week 12",
+    "section": "",
+    "text": "Important",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 12"
+    ]
+  },
+  {
+    "objectID": "weeks/week-12.html#participate",
+    "href": "weeks/week-12.html#participate",
+    "title": "Week 12",
+    "section": "Participate",
+    "text": "Participate\n🖥️ Slides - Support Vector Machines",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 12"
+    ]
+  },
+  {
+    "objectID": "weeks/week-12.html#reading",
+    "href": "weeks/week-12.html#reading",
+    "title": "Week 12",
+    "section": "Reading",
+    "text": "Reading\n📖 ISL Ch 9",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 12"
+    ]
+  },
+  {
+    "objectID": "weeks/week-12.html#exercise",
+    "href": "weeks/week-12.html#exercise",
+    "title": "Week 12",
+    "section": "Exercise",
+    "text": "Exercise\n\n\n\nBack to course schedule ⏎",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 12"
+    ]
+  },
+  {
+    "objectID": "code/12-gp-code.html",
+    "href": "code/12-gp-code.html",
+    "title": "12 - Gaussian Process Regression Code Demo",
+    "section": "",
+    "text": "Codelibrary(plgp)\n\nLoading required package: mvtnorm\n\n\nLoading required package: tgp\n\n\n\nCodelen &lt;- 100\nn_path &lt;- 5\nX &lt;- seq(0, 5, length = len)\nD &lt;- distance(X)\neps &lt;- sqrt(.Machine$double.eps) \nSigma &lt;- exp(-D/2) + diag(eps, len) \ny &lt;- mvnfast::rmvn(n_path, mu = rep(0, len), sigma = Sigma)\nmatplot(X, t(y), type = \"l\", main = \"Prior\", lwd = 2,\n        ylim = c(-3, 3), las = 1, lty = 1, xlab = \"x\", ylab = \"f(x)\")\n\n\n\n\n\n\nCoden &lt;- 5\nX &lt;- matrix(seq(0, 2*pi, length=n), ncol=1)\ny &lt;- sin(X)\nD &lt;- distance(X) \nSigma &lt;- exp(-D/2) + diag(eps, ncol(D))\nXX &lt;- matrix(seq(-0.5, 2*pi + 0.5, length=100), ncol=1)\nDXX &lt;- distance(XX)\nSXX &lt;- exp(-DXX/2) + diag(eps, ncol(DXX))\nDX &lt;- distance(XX, X)\nSX &lt;- exp(-DX/2) \nSi &lt;- solve(Sigma)\nmup &lt;- SX %*% Si %*% y\nSigmap &lt;- SXX - SX %*% Si %*% t(SX)\nYY &lt;- rmvnorm(100, mup, Sigmap)\nq1 &lt;- mup + qnorm(0.025, 0, sqrt(diag(Sigmap)))\nq2 &lt;- mup + qnorm(0.975, 0, sqrt(diag(Sigmap)))\nmatplot(XX, t(YY)[, 1:5], type=\"l\", col=1:5, lty=1, xlab=\"x\", ylab=\"f(x)\",\n        las = 1, main = \"Posterior\", lwd = 2)\npoints(X, y, pch=20, cex=2)\n\n\n\n\n\n\nCodematplot(XX, t(YY), type=\"l\", col=c(rep(\"grey\", nrow(XX))), \n        lty=1, xlab=\"x\", ylab=\"f(x)\", las = 1, main = \"Prediction with Uncertainty\")\npoints(X, y, pch=20, cex=2)\nlines(XX, t(YY)[, 1], col=3, lty = 1)\nlines(XX, mup, lwd=2, col = \"blue\", lty=2)\nlines(XX, q1, lwd=2, lty=2, col=2)\nlines(XX, q2, lwd=2, lty=2, col=2)"
+  },
+  {
+    "objectID": "code/12-gp-code.html#r-implementation",
+    "href": "code/12-gp-code.html#r-implementation",
+    "title": "12 - Gaussian Process Regression Code Demo",
+    "section": "",
+    "text": "Codelibrary(plgp)\n\nLoading required package: mvtnorm\n\n\nLoading required package: tgp\n\n\n\nCodelen &lt;- 100\nn_path &lt;- 5\nX &lt;- seq(0, 5, length = len)\nD &lt;- distance(X)\neps &lt;- sqrt(.Machine$double.eps) \nSigma &lt;- exp(-D/2) + diag(eps, len) \ny &lt;- mvnfast::rmvn(n_path, mu = rep(0, len), sigma = Sigma)\nmatplot(X, t(y), type = \"l\", main = \"Prior\", lwd = 2,\n        ylim = c(-3, 3), las = 1, lty = 1, xlab = \"x\", ylab = \"f(x)\")\n\n\n\n\n\n\nCoden &lt;- 5\nX &lt;- matrix(seq(0, 2*pi, length=n), ncol=1)\ny &lt;- sin(X)\nD &lt;- distance(X) \nSigma &lt;- exp(-D/2) + diag(eps, ncol(D))\nXX &lt;- matrix(seq(-0.5, 2*pi + 0.5, length=100), ncol=1)\nDXX &lt;- distance(XX)\nSXX &lt;- exp(-DXX/2) + diag(eps, ncol(DXX))\nDX &lt;- distance(XX, X)\nSX &lt;- exp(-DX/2) \nSi &lt;- solve(Sigma)\nmup &lt;- SX %*% Si %*% y\nSigmap &lt;- SXX - SX %*% Si %*% t(SX)\nYY &lt;- rmvnorm(100, mup, Sigmap)\nq1 &lt;- mup + qnorm(0.025, 0, sqrt(diag(Sigmap)))\nq2 &lt;- mup + qnorm(0.975, 0, sqrt(diag(Sigmap)))\nmatplot(XX, t(YY)[, 1:5], type=\"l\", col=1:5, lty=1, xlab=\"x\", ylab=\"f(x)\",\n        las = 1, main = \"Posterior\", lwd = 2)\npoints(X, y, pch=20, cex=2)\n\n\n\n\n\n\nCodematplot(XX, t(YY), type=\"l\", col=c(rep(\"grey\", nrow(XX))), \n        lty=1, xlab=\"x\", ylab=\"f(x)\", las = 1, main = \"Prediction with Uncertainty\")\npoints(X, y, pch=20, cex=2)\nlines(XX, t(YY)[, 1], col=3, lty = 1)\nlines(XX, mup, lwd=2, col = \"blue\", lty=2)\nlines(XX, q1, lwd=2, lty=2, col=2)\nlines(XX, q2, lwd=2, lty=2, col=2)"
+  },
+  {
+    "objectID": "code/12-gp-code.html#python-implementation",
+    "href": "code/12-gp-code.html#python-implementation",
+    "title": "12 - Gaussian Process Regression Code Demo",
+    "section": "\n2 Python implementation",
+    "text": "2 Python implementation\n\nCodeimport matplotlib.pyplot as plt\nimport numpy as np\nfrom sklearn.gaussian_process import GaussianProcessRegressor\nfrom sklearn.gaussian_process.kernels import RBF\n\n\n\nCodedef plot_gpr_samples(gpr_model, n_samples, ax):\n    \"\"\"Plot samples drawn from the Gaussian process model.\n\n    If the Gaussian process model is not trained then the drawn samples are\n    drawn from the prior distribution. Otherwise, the samples are drawn from\n    the posterior distribution. Be aware that a sample here corresponds to a\n    function.\n\n    Parameters\n    ----------\n    gpr_model : `GaussianProcessRegressor`\n        A :class:`~sklearn.gaussian_process.GaussianProcessRegressor` model.\n    n_samples : int\n        The number of samples to draw from the Gaussian process distribution.\n    ax : matplotlib axis\n        The matplotlib axis where to plot the samples.\n    \"\"\"\n    x = np.linspace(0, 2 * np.pi, 100)\n    X = x.reshape(-1, 1)\n\n    y_mean, y_std = gpr_model.predict(X, return_std=True)\n    y_samples = gpr_model.sample_y(X, n_samples)\n\n    for idx, single_prior in enumerate(y_samples.T):\n        ax.plot(\n            x,\n            single_prior,\n            linestyle=\"--\",\n            alpha=0.7,\n            label=f\"Sampled function #{idx + 1}\",\n        )\n    ax.plot(x, y_mean, color=\"black\", label=\"Mean\")\n    ax.fill_between(\n        x,\n        y_mean - y_std,\n        y_mean + y_std,\n        alpha=0.1,\n        color=\"black\",\n        label=r\"$\\pm$ 1 std. dev.\",\n    )\n    ax.set_xlabel(\"x\")\n    ax.set_ylabel(\"y\")\n    ax.set_ylim([-3, 3])\n\n\n\nCoderng = np.random.RandomState(4)\n\nX_train = np.linspace(0, 2 * np.pi, 5).reshape(-1, 1)\ny_train = np.sin(X_train)\n\nn_samples = 5\n\nfrom sklearn.gaussian_process import GaussianProcessRegressor\nfrom sklearn.gaussian_process.kernels import RBF\n\nkernel = 1.0 * RBF(length_scale=1.0, length_scale_bounds=(1e-1, 10.0))\ngpr = GaussianProcessRegressor(kernel=kernel, random_state=0)\n\nfig, axs = plt.subplots(nrows=2, sharex=True, sharey=True, figsize=(10, 8))\n\n# plot prior\nplot_gpr_samples(gpr, n_samples=n_samples, ax=axs[0])\naxs[0].set_title(\"Samples from prior distribution\")\n\n# plot posterior\ngpr.fit(X_train, y_train)\n\n\n\n\nGaussianProcessRegressor(kernel=1**2 * RBF(length_scale=1), random_state=0)\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\n  GaussianProcessRegressor?Documentation for GaussianProcessRegressoriFittedGaussianProcessRegressor(kernel=1**2 * RBF(length_scale=1), random_state=0) \n\n\nCodeplot_gpr_samples(gpr, n_samples=n_samples, ax=axs[1])\naxs[1].scatter(X_train[:, 0], y_train, color=\"red\", zorder=10, label=\"Observations\")\naxs[1].legend(bbox_to_anchor=(1.05, 1.5), loc=\"upper left\")\naxs[1].set_title(\"Samples from posterior distribution\")\n\nfig.suptitle(\"Radial Basis Function kernel\", fontsize=18)\nplt.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "code/13-svm-code.html",
+    "href": "code/13-svm-code.html",
+    "title": "13 - Support Vector Machine Code Demo",
+    "section": "",
+    "text": "Codelibrary(e1071)\nlibrary(kernlab)\n\n\n\nCodeset.seed(2025)\nn &lt;- 6\np &lt;- 2\nxneg &lt;- matrix(rnorm(n * p), n, p)\nxpos &lt;- matrix(rnorm(n * p, mean = 3), n, p)\nx &lt;- rbind(xpos, xneg)\ny &lt;- matrix(as.factor(c(rep(1, n), rep(-1, n))))\n\n\n\nCodesvm_fit &lt;- e1071::svm(y ~ ., data = data.frame(x, y), type = 'C-classification', \n                      kernel = 'linear', scale = FALSE, cost = 10000)\n\n\n\nCodesvm_fit2 &lt;- kernlab::ksvm(x, y, type = \"C-svc\", kernel = 'vanilladot', C = 10000)\n\n Setting default kernel parameters  \n\n\n\n\nCodeload(\"../data/ESL.mixture.rda\", verbose = TRUE)\n\nLoading objects:\n  ESL.mixture\n\nCodex &lt;- ESL.mixture$x\ny &lt;- ESL.mixture$y\ndat &lt;- data.frame(y = factor(y), x)\nfit &lt;- svm(y ~ ., data = dat, scale = FALSE, kernel = \"radial\", cost = 5)\n\n\n\nCodepx1 &lt;- ESL.mixture$px1\npx2 &lt;- ESL.mixture$px2\nxgrid &lt;- expand.grid(X1 = px1, X2 = px2)\nfunc &lt;- predict(fit, xgrid, decision.values = TRUE)\nfunc &lt;- attributes(func)$decision\n\n\n\nCodeygrid &lt;- predict(fit, xgrid)\nplot(xgrid, col = ifelse(ygrid == 1, 2, 4), \n     pch = 20, cex = 0.3, main=\"SVM with RBF kernal\")\npoints(x, col = ifelse(y == 1, 2, 4), pch = 19)\ncontour(px1, px2, matrix(func, 69, 99), level = 0, add = TRUE, lwd = 5)"
+  },
+  {
+    "objectID": "code/13-svm-code.html#r-implementation",
+    "href": "code/13-svm-code.html#r-implementation",
+    "title": "13 - Support Vector Machine Code Demo",
+    "section": "",
+    "text": "Codelibrary(e1071)\nlibrary(kernlab)\n\n\n\nCodeset.seed(2025)\nn &lt;- 6\np &lt;- 2\nxneg &lt;- matrix(rnorm(n * p), n, p)\nxpos &lt;- matrix(rnorm(n * p, mean = 3), n, p)\nx &lt;- rbind(xpos, xneg)\ny &lt;- matrix(as.factor(c(rep(1, n), rep(-1, n))))\n\n\n\nCodesvm_fit &lt;- e1071::svm(y ~ ., data = data.frame(x, y), type = 'C-classification', \n                      kernel = 'linear', scale = FALSE, cost = 10000)\n\n\n\nCodesvm_fit2 &lt;- kernlab::ksvm(x, y, type = \"C-svc\", kernel = 'vanilladot', C = 10000)\n\n Setting default kernel parameters  \n\n\n\n\nCodeload(\"../data/ESL.mixture.rda\", verbose = TRUE)\n\nLoading objects:\n  ESL.mixture\n\nCodex &lt;- ESL.mixture$x\ny &lt;- ESL.mixture$y\ndat &lt;- data.frame(y = factor(y), x)\nfit &lt;- svm(y ~ ., data = dat, scale = FALSE, kernel = \"radial\", cost = 5)\n\n\n\nCodepx1 &lt;- ESL.mixture$px1\npx2 &lt;- ESL.mixture$px2\nxgrid &lt;- expand.grid(X1 = px1, X2 = px2)\nfunc &lt;- predict(fit, xgrid, decision.values = TRUE)\nfunc &lt;- attributes(func)$decision\n\n\n\nCodeygrid &lt;- predict(fit, xgrid)\nplot(xgrid, col = ifelse(ygrid == 1, 2, 4), \n     pch = 20, cex = 0.3, main=\"SVM with RBF kernal\")\npoints(x, col = ifelse(y == 1, 2, 4), pch = 19)\ncontour(px1, px2, matrix(func, 69, 99), level = 0, add = TRUE, lwd = 5)"
+  },
+  {
+    "objectID": "code/13-svm-code.html#python-implementation",
+    "href": "code/13-svm-code.html#python-implementation",
+    "title": "13 - Support Vector Machine Code Demo",
+    "section": "\n2 Python implementation",
+    "text": "2 Python implementation\n\nCodeimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.svm import SVC\n\n\n\n2.1 Linear kernel\n\nCodenp.random.seed(1)\nn = 6\np = 2\nxneg = np.random.normal(size=(n, p))\nxpos = np.random.normal(loc=3, size=(n, p))\nx = np.vstack((xpos, xneg))\ny = np.array([1] * n + [-1] * n)\n\n\n\nCodesvm_fit = SVC(kernel=\"linear\", C=10000, probability=True)\nsvm_fit.fit(x, y)\n\n\n\n\nSVC(C=10000, kernel='linear', probability=True)\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\n  SVC?Documentation for SVCiFittedSVC(C=10000, kernel='linear', probability=True) \n\n\n\n\n2.2 Radial basis (Gaussian) kernel\n\nCodeimport rdata\nmixture_example = rdata.read_rda('../data/ESL.mixture.rda')\n\n/Users/chenghanyu/.virtualenvs/r-reticulate/lib/python3.12/site-packages/rdata/conversion/_conversion.py:856: UserWarning: Missing constructor for R class \"matrix\". The underlying R object is returned instead.\n  warnings.warn(\n\nCodex = mixture_example['ESL.mixture']['x']\ny = mixture_example['ESL.mixture']['y']\n\n\n\nCodesvm_rbf = SVC(kernel = 'rbf', C = 5, probability = True)\nsvm_rbf.fit(x, y)\n\n\n\n\nSVC(C=5, probability=True)\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\n  SVC?Documentation for SVCiFittedSVC(C=5, probability=True) \n\n\n\n\nCodepx1 = mixture_example['ESL.mixture']['px1']\npx2 = mixture_example['ESL.mixture']['px2']\nppx1, ppx2 = np.meshgrid(px1, px2)\nx_grid = np.c_[ppx1.ravel(), ppx2.ravel()]\ndecision_function = svm_rbf.decision_function(x_grid).reshape(ppx1.shape)\nprobability = svm_rbf.predict_proba(x_grid)[:, 1].reshape(ppx1.shape)\n\n\n\nCodeplt.figure()\nplt.contour(px1, px2, decision_function, levels=[0], colors=\"black\", linewidths=2)\nplt.scatter(x[:, 0], x[:, 1], c=y, cmap=\"bwr\", s=50, edgecolor=\"k\")\nplt.scatter(x_grid[:, 0], x_grid[:, 1], \n            c=np.where(probability.ravel() &gt;= 0.5, \"red\", \"blue\"), s=10, alpha=0.1)\nplt.title(\"SVM with RBF Kernel\")\nplt.xlabel(\"X1\")\nplt.ylabel(\"X2\")\nplt.show()"
   }
 ]

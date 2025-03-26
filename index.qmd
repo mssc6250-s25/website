@@ -34,9 +34,9 @@ format:
 | 10 | Tue, Mar 18 | Naive Bayes | [📖](/weeks/week-10.html "Week 10") |  |  |  |  |
 |  | Thu, Mar 20 | K-Nearest Neighbors |  | [🖥️](slides/11-knn.html "11-knn") | [`r fontawesome::fa("file-code")`](code/11-knn-code.html "11-knn-code") |  |  |
 | 11 | Tue, Mar 25 | Gaussian Process Regression | [📖](/weeks/week-11.html "Week 11") | [🖥️](slides/12-gp.html "12-gp") |  |  |  |
-|  | Thu, Mar 27 | Gaussian Process Classification |  |  | `r fontawesome::fa("file-code")` |  |  |
-| 12 | Tue, Apr 1 | Support Vector Machine | [📖](/weeks/week-12.html "Week 11") |  |  |  |  |
-|  | Thu, Apr 3 | Support Vector Machine |  |  | `r fontawesome::fa("file-code")` | HW 3 Due |  |
+|  | Thu, Mar 27 | Gaussian Process Classification |  |  | [`r fontawesome::fa("file-code")`](code/12-gp-code.html "12-gp-code") |  |  |
+| 12 | Tue, Apr 1 | Support Vector Machine | [📖](/weeks/week-12.html "Week 11") | [🖥️](slides/13-svm.html "13-svm") |  |  |  |
+|  | Thu, Apr 3 | Support Vector Machine |  |  | [`r fontawesome::fa("file-code")`](code/13-svm-code.html "13-svm-code") | HW 3 Due |  |
 | 13 | Tue, Apr 8 | CART and Bagging | [📖](/weeks/week-13.html "Week 13") | [🖥️](slides/13-svm.html "13-svm") |  |  |  |
 |  | Thu, Apr 10 | Random Forests and Boosting |  |  | `r fontawesome::fa("file-code")` | ✍️ HW4 |  |
 | 14 | Tue, Apr 15 | **Midterm Presentation II** | [📖](/weeks/week-14.html "Week 14") | [🖥️](slides/14-tree.html "14-tree") |  |  | ✅ |

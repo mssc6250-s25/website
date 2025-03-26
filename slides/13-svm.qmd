@@ -1,0 +1,989 @@
+---
+title: 'Support Vector Machines `r fontawesome::fa("percent")`'
+subtitle: "MSSC 6250 Statistical Machine Learning"
+author: "Dr. Cheng-Han Yu <br> Department of Mathematical and Statistical Sciences <br> Marquette University"
+# date: "`r format(Sys.time(), '%B %d %Y')`"
+# macros: _macros.tex # import a list of TeX/LaTeX definitions
+format: 
+  revealjs:
+    html-math-method:
+      method: mathjax
+      url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    # include-in-header:
+    #     - "macros.tex"
+    highlight-style: github
+    code-block-bg: true
+    self-contained: false
+    slide-number: c/t
+    incremental: false
+    width: 1800
+    height: 1000
+    margin: 0.05
+    logo: "https://upload.wikimedia.org/wikipedia/commons/e/e8/Marquette_Golden_Eagles_logo.svg"
+    footer: "[mssc6250-s25.github.io/website](https://mssc6250-s25.github.io/website/)"
+    theme: ["simple", "styles.scss"]
+    echo: false
+    multiplex: true
+    code-link: true
+    fig-cap-location: bottom
+    fig-align: center
+    transition: none ## fade slide convex concave zoom
+    code-line-numbers: false
+    title-slide-attributes:
+      data-background-color: "#447099"
+      # data-background-image: images/paper-texture.jpg
+      # data-background-size: cover
+      # data-background-color: "#698ED5"
+editor: source
+execute:
+  freeze: true
+---
+
+
+# {visibility="hidden"}
+
+\def\cD{{\cal D}}
+\def\cL{{\cal L}}
+\def\cX{{\cal X}}
+\def\cF{{\cal F}}
+\def\cH{{\cal H}}
+\def\bA{\mathbf{A}}
+\def\bB{\mathbf{B}}
+\def\bX{\mathbf{X}}
+\def\bH{\mathbf{H}}
+\def\bI{\mathbf{I}}
+\def\bU{\mathbf{U}}
+\def\bD{\mathbf{D}}
+\def\bV{\mathbf{V}}
+\def\bS{\mathbf{S}}
+\def\bW{\mathbf{W}}
+\def\bK{\mathbf{K}}
+\def\bx{\mathbf{x}}
+\def\by{\mathbf{y}}
+\def\bs{\mathbf{s}}
+\def\br{\mathbf{r}}
+\def\bu{\mathbf{u}}
+\def\be{\mathbf{e}}
+\def\bv{\mathbf{v}}
+\def\bp{\mathbf{p}}
+\def\bw{\mathbf{w}}
+\def\bz{\mathbf{z}}
+\def\bzero{\mathbf{0}}
+\def\balpha{\boldsymbol \alpha}
+\def\bbeta{\boldsymbol \beta}
+\def\btheta{\boldsymbol \theta}
+\def\bxi{\boldsymbol \xi}
+\def\bmu{\boldsymbol \mu}
+\def\bepsilon{\boldsymbol \epsilon}
+\def\T{\text{T}}
+\def\Trace{\text{Trace}}
+\def\Cov{\text{Cov}}
+\def\Var{\text{Var}}
+\def\E{\text{E}}
+\def\pr{\text{pr}}
+\def\Prob{\text{P}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+
+```{r}
+#| label: setup
+#| include: false
+#| eval: true
+library(countdown)
+library(knitr)
+library(gt)
+library(gtExtras)
+library(ggplot2)
+library(ISLR2)
+library(genridge)
+library(glmnet)
+library(gam)
+library(splines)
+# library(ElemStatLearn)
+knitr::opts_chunk$set(
+    fig.asp = 0.618,
+    fig.align = "center",
+    out.width = "100%",
+    fig.retina = 10,
+    fig.path = "images/13-svm/",
+    message = FALSE,
+    global.par = TRUE
+)
+options(
+  htmltools.dir.version = FALSE,
+  dplyr.print_min = 6, 
+  dplyr.print_max = 6,
+  tibble.width = 80,
+  width = 80,
+  digits = 3
+  )
+hook_output <- knitr::knit_hooks$get("output")
+knitr::knit_hooks$set(output = function(x, options) {
+  lines <- options$output.lines
+  if (is.null(lines)) {
+    return(hook_output(x, options))  # pass to default hook
+  }
+  x <- unlist(strsplit(x, "\n"))
+  more <- "..."
+  if (length(lines)==1) {        # first n lines
+    if (length(x) > lines) {
+      # truncate the output, but add ....
+      x <- c(head(x, lines), more)
+    }
+  } else {
+    x <- c(more, x[lines], more)
+  }
+  # paste these lines together
+  x <- paste(c(x, ""), collapse = "\n")
+  hook_output(x, options)
+})
+```
+
+
+
+## Support Vector Machines (SVMs)
+
+- SVMs have been shown to perform well in a variety of settings, and are often considered one of the best "out of the box" classifiers.
+
+- Start with the **maximal margin classifier** (1960s), then the **support vector classifier** (1990s), and then the **support vector machine**.
+
+
+
+## Classifier
+
+- $\cD_n = \{\bx_i, y_i\}_{i=1}^n$
+
+- In SVM, we code the binary outcome $y$ as [1 or -1]{.green}, representing one class and the other. 
+
+- The goal is to find a *linear* classifier $f(\bx) = \beta_0 + \bx' \bbeta$ so that the classification rule is the sign of $f(\bx)$:
+
+$$
+\hat{y} = 
+\begin{cases}
+        +1, \quad \text{if} \quad f(\bx) > 0\\ 
+        -1, \quad \text{if} \quad f(\bx) < 0
+\end{cases}
+$$
+
+## Separating Hyperplane
+
+- The $f(\bx) = \beta_0 + \bx' \bbeta = 0$ is a **hyperplane**, which is a subspace of dimension $p-1$ in the $p$-dimensional space.
+
+
+- $f(\bx) = \beta_0 + \beta_1X_1+\beta_2X_2 = 0$ is a straight line (hyperplane of dimension one) in the 2-dimensional space.
+
+- The classification rule is $y_i f(\bx_i) >0$.
+
+```{r}
+#| fig-asp: 1
+    # lm.fit = glm(y~x)
+    # lm.pred = matrix(as.matrix(cbind(1, xnew)) %*% as.matrix(lm.fit$coef) > 0.5, length(px1), length(px2))
+    
+    par(mar=c(4, 4, 2, 0), mgp = c(2.5, 0.8, 0))
+    px1 <- seq(-1.5, 1.5, by = 0.01)
+    px2 <- seq(-1.5, 1.5, by = 0.01)
+    mesh <- expand.grid(px1, px2)
+    plot(mesh, pch=".", cex=1.2, col=ifelse(1+2*mesh[, 1]+3*mesh[, 2]<0, 2, 4), axes=FALSE, xlab = "X1", ylab = "X2", cex.lab = 2,
+         main = "1 + 2X1 + 3X2 = 0", cex.main = 3)
+    
+    abline(a = (-1)/3, b = -2/3, lwd = 4)
+    
+    text(x = -0.5, y = -0.75, "1 + 2X1 + 3X2 < 0", cex = 3)
+    text(x = -0.5, y = -1.25, "y = -1", cex = 3)
+    text(x = 0, y = 0.5, "1 + 2X1 + 3X2 > 0", cex = 3)
+    text(x = 0, y = 1, "y = 1", cex = 3)
+    # points(x, col=ifelse(y==1, 2, 4), pch = 19, cex =2)
+    # title(main = list("Linear Regression of 0/1 Response", cex = 3))
+    box()
+```
+
+
+
+## Maximum-margin Classifier
+
+- If our data can be perfectly separated using a hyperplane, there exists an *infinite* number of such hyperplanes. But which one is the *best*?
+
+- A natural choice is the __maximal margin hyperplane__ (*optimal separating hyperplane*), which is the separating hyperplane that is *farthest from the training points*.
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-asp: 1
+#| out-width: 70%
+    set.seed(1)
+    n <- 6
+    p <- 2
+    
+    # Generate positive and negative examples
+    xneg <- matrix(rnorm(n*p,mean=0,sd=1),n,p)
+    xpos <- matrix(rnorm(n*p,mean=3,sd=1),n,p)
+    x <- rbind(xpos,xneg)
+    y <- matrix(as.factor(c(rep(1,n),rep(-1,n))))
+    
+    # plot 
+    par(mar = c(4, 4, 0, 0), mgp = c(2.5, 0.8, 0))
+        # par(mar=c(4, 4, 2, 0))
+    plot(x,col=ifelse(y>0,4,2), pch = 19, cex = 2, lwd = 2, 
+         xlab = "X1", ylab = "X2", cex.lab = 1.5)
+    # legend("bottomright", c("Positive", "Negative"),col=c(4, 2),
+    #        pch=c(19, 19), text.col=c(4, 2), cex = 1.5)
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| out-width: 70%
+#| fig-asp: 1
+    set.seed(1)
+    # n <- 6
+    # p <- 2
+    # 
+    # # Generate positive and negative examples
+    # xneg <- matrix(rnorm(n*p,mean=0,sd=1),n,p)
+    # xpos <- matrix(rnorm(n*p,mean=3,sd=1),n,p)
+    # x <- rbind(xpos,xneg)
+    # y <- matrix(as.factor(c(rep(1,n),rep(-1,n))))
+    
+    # plot 
+    par(mar = c(4, 4, 0, 0), mgp = c(2.5, 0.8, 0))
+    plot(x,col=ifelse(y>0,4,2), pch = 19, cex = 2, lwd = 2, 
+         xlab = "X1", ylab = "X2", cex.lab = 1.5)
+    # legend("bottomright", c("Positive", "Negative"),col=c(4, 2),
+    #        pch=c(19, 19), text.col=c(4, 2), cex = 1.5)
+    abline(a = 4, b = -1, lwd = 4, col = "black")
+    abline(a = 5, b = -2, lwd = 4, col = "black")
+    abline(a = 2, b = -0.5, lwd = 4, col = "black")
+    abline(a= 3.008756, b=-0.8179258, col="black", lty=1, lwd = 4)
+    
+    
+    
+```
+
+:::
+
+::::
+
+
+## Maximum-margin Classifier
+
+```{r}
+#| echo: true
+library(e1071)
+svm_fit <- svm(y ~ ., data = data.frame(x, y), type = 'C-classification', 
+               kernel = 'linear', scale = FALSE, cost = 10000)
+```
+
+
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+- The training points lied on the dashed lines are **support vectors**:
+  + if they were moved, the maximal margin hyperplane would move too.
+  + the hyperplane depends directly on the support vectors, but not on the other observations, provided that their movement does not cause it to cross the boundary.
+
+- It can lead to overfitting when $p$ is large.
+
+- Hope the classifier will also have a large margin on the test data.
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| out-width: 85%
+#| fig-asp: 1
+#| cache: false
+b <- t(svm_fit$coefs) %*% svm_fit$SV
+b0 <- -svm_fit$rho
+
+# an alternative of b0 as the lecture note
+b0 <- -(max(x[y == -1, ] %*% t(b)) + min(x[y == 1, ] %*% t(b)))/2
+
+# plot on the data 
+
+    px1 <- seq(-1, 4.3, by = 0.04)
+    px2 <- seq(-0.5, 4, by = 0.04)
+    mesh <- expand.grid(px1, px2)
+    par(mar = c(4, 4, 0, 0), mgp = c(2.5, 0.8, 0))
+    plot(mesh, pch=".", cex=2, col=ifelse(b0+b[1]*mesh[, 1]+b[2]*mesh[, 2]<0, 2, 4), xlab = "X1", ylab = "X2", cex.lab = 1.5)
+    
+points(x,col=ifelse(y>0,4,2), pch = 19, cex = 2, lwd = 2, 
+     xlab = "X1", ylab = "X2", cex.lab = 1.5)
+# legend("bottomleft", c("Positive","Negative"),col=c("blue","red"),
+#        pch=c(19, 19),text.col=c("blue","red"), cex = 1.5)
+abline(a= -b0/b[1,2], b=-b[1,1]/b[1,2], col="black", lty=1, lwd = 4)
+
+# mark the support vectors
+points(x[svm_fit$index, ], col="black", cex=3, lwd = 2)
+
+# the two margin lines 
+abline(a= (-b0-1)/b[1,2], b=-b[1,1]/b[1,2], col="black", lty=3, lwd = 4)
+abline(a= (-b0+1)/b[1,2], b=-b[1,1]/b[1,2], col="black", lty=3, lwd = 4)
+
+library(LearnGeom)
+xx1 <- x[svm_fit$index, ][1, ]
+xx2 <- x[svm_fit$index, ][2, ]
+xx3 <- x[svm_fit$index, ][3, ]
+# CoordinatePlane(x_min, x_max, y_min, y_max)
+P1 <- c(0,3.008756)
+P2 <- c(1,3.008756-0.8179258)
+Line <- CreateLinePoints(P1, P2)
+# Line <- c(-0.8179258, 3.008756)
+# Draw(Line, "black")
+proj1 <- ProjectPoint(xx1, Line)
+proj2 <- ProjectPoint(xx2, Line)
+proj3 <- ProjectPoint(xx3, Line)
+
+segments(x0 = x[svm_fit$index, ][1, 1], x1 = proj1[1],
+         y0 = x[svm_fit$index, ][1, 2], y1 = proj1[2], lwd = 2)
+segments(x0 = x[svm_fit$index, ][2, 1], x1 = proj2[1],
+         y0 = x[svm_fit$index, ][2, 2], y1 = proj2[2], lwd = 2)
+segments(x0 = x[svm_fit$index, ][3, 1], x1 = proj3[1],
+         y0 = x[svm_fit$index, ][3, 2], y1 = proj3[2], lwd = 2)
+text(x = 1, y = 3, "maximal margin", cex = 3)
+# x_min <- -1
+# x_max <- 5
+# y_min <- 0
+# y_max <- 5
+
+# Draw(projection, "red")
+```
+
+:::
+
+::::
+
+::: aside
+
+Use [from sklearn import svm](https://scikit-learn.org/stable/modules/svm.html#svm-mathematical-formulation) for Python implementation.
+
+:::
+
+
+
+
+
+::: notes
+
+We use the e1071 package to fit the SVM. There is a cost parameter C
+, with default value 1. This parameter has a significant impact on non-separable problems. However, for our separable case, we will set this to be a very large value, meaning that the cost for having a wrong classification is very large. We also need to specify the linear kernel.
+
+- index gives the index of all support vectors
+- coefs provides the yiαi for the support vectors
+- SV are the xi values correspond to the support vectors
+- rho is negative β0
+
+they “support” the maximal margin hyperplane in the sense vector
+that if these points were moved slightly then the maximal margin hyperplane would move as well.
+
+https://afit-r.github.io/svm
+
+kernlab::ksvm()
+
+we can compute the (perpendicular) distance from each training observation to a given separating hyperplane; the smallest such distance is the minimal distance from the observations to the hyperplane, and is known as the margin. The maximal margin hyperplane is the separating hyperplane for which the margin is margin largest—that is, it is the hyperplane that has the farthest minimum distance to the training observations.
+
+:::
+
+
+
+
+
+## Linearly Separable SVM
+
+In linear SVM, $f(\bx) = \beta_0 + \bx' \bbeta$. When $f(\bx) = 0$, it corresponds to a hyperplane that separates the two classes:
+
+$$\{ \bx: \beta_0 + \bx'\boldsymbol \beta = 0 \}$$
+
+- For this separable case, all observations with $y_i = 1$ are on one side $f(\bx) > 0$, and observations with $y_i = -1$ are on the other side. 
+
+- The __distance from any point $\bx_0$ to the hyperplane__ is
+
+$$\frac{1}{\lVert \bbeta \lVert} |f(\bx_0)|$$
+For $p = 2$, and the plane $\beta_0 + \beta_1 X_1 + \beta_2X_2 = 0$, the distance is $$ \frac{ |\beta_0 + \beta_1 x_{01} + \beta_2x_{02}|}{\sqrt{\beta_1^2 + \beta^2_2}}$$ 
+
+
+
+
+## Optimization for Linearly Separable SVM
+
+\begin{align}
+\underset{\bbeta, \beta_0}{\text{max}} \quad & M \\
+\text{s.t.} \quad & \frac{1}{\lVert \bbeta \lVert} y_i(\bx' \bbeta + \beta_0) \geq M, \,\, i = 1, \ldots, n.
+\end{align}
+
+- The constraint requires that each point be on the correct side of the hyperplane, with some cushion.
+
+- The scale of $\bbeta$ can be arbitrary, so just set it as $\lVert \bbeta \rVert = 1$:
+
+\begin{align}
+\underset{\bbeta, \beta_0}{\text{max}} \quad & M \\
+\text{s.t.}
+ \quad & \lVert \bbeta \lVert = 1, \\
+ \quad &  y_i(\bx' \bbeta + \beta_0) \geq M, \,\, i = 1, \ldots, n.
+\end{align}
+
+. . .
+
+- How to solve it? Learn it in MSSC 5650.
+
+
+
+
+## Linearly Non-separable SVM with Slack Variables
+
+- Often, no separating hyperplane exists, so there is no maximal
+margin classifier.
+
+- The previous optimization problem has no solution with $M > 0$.
+
+- *Idea*: develop a hyperplane that _almost_ separates the classes, using a so-called **soft margin**: **soft margin classifier**.
+
+```{r}
+#| fig-asp: 1
+    set.seed(70)
+    n <- 10 # number of data points for each class
+    p <- 2 # dimension
+
+    # Generate the positive and negative examples
+    xneg <- matrix(rnorm(n*p,mean=0,sd=1),n,p)
+    xpos <- matrix(rnorm(n*p,mean=1.5,sd=1),n,p)
+    x <- rbind(xpos,xneg)
+    y <- matrix(as.factor(c(rep(1,n),rep(-1,n))))
+
+    # Visualize the data
+    
+    plot(x,col=ifelse(y>0,4,2), pch = 19, cex = 2, lwd = 2, 
+         xlab = "X1", ylab = "X2", cex.lab = 1.5)
+    # legend("topright", c("Positive","Negative"),col=c("blue","red"),
+    #        pch=c(19, 19),text.col=c("blue","red"), cex = 1.5)
+
+    svm.fit <- svm(y ~ ., data = data.frame(x, y), type='C-classification', 
+                   kernel='linear',scale=FALSE, cost = 1)
+
+    b <- t(svm.fit$coefs) %*% svm.fit$SV
+    b0 <- -svm.fit$rho
+    
+    # points(x[svm.fit$index, ], col="black", cex=3.5, lwd = 2)     
+    abline(a= -b0/b[1,2]*0.75, b=-b[1,1]/b[1,2]/2, col="black", lty=1, lwd = 2)
+    
+    # abline(a= (-b0-1)/b[1,2], b=-b[1,1]/b[1,2], col="black", lty=3, lwd = 2)
+    # abline(a= (-b0+1)/b[1,2], b=-b[1,1]/b[1,2], col="black", lty=3, lwd = 2)
+```
+
+
+
+## Why Linearly Non-separable Support Vector Classifier
+
+- Even if a separating hyperplane does exist, the maximum-margin classifier might not be desirable.
+
+- The maximal margin hyperplane is extremely sensitive to a change in a single observation: it may overfit the training data. ([*low-bias high-variance*]{.green})
+
+```{r}
+#| fig-cap: "Source: ISL Fig. 9.5"
+knitr::include_graphics("./images/13-svm/fig9-5.png")
+```
+
+
+
+
+## Soft Margin Classifier
+
+- Consider a classifier based on a hyperplane that does *NOT* perfectly separate the two classes, but
+  + [Greater robustness to individual observations]{.green}
+  + [Better classification of _most_ of the training observations.]{.green}
+  
+- It could be worthwhile to misclassify a few training points
+in order to do a better job in classifying the remaining observations.
+
+- Allow some points to be on the incorrect side of the margin, or even the incorrect side of the hyperplane (training points misclassified by the classifier).
+
+```{r}
+#| fig-cap: "Source: ISL Fig. 9.6"
+knitr::include_graphics("./images/13-svm/9-6.png")
+```
+
+
+
+
+## Optimization for Soft Margin Classifier
+
+\begin{align}
+\underset{\bbeta, \beta_0, \epsilon_1, \dots, \epsilon_n}{\text{max}} \quad & M \\
+\text{s.t.}
+ \quad & \lVert \bbeta \lVert = 1, \\
+ \quad &  y_i(\bx' \bbeta + \beta_0) \geq M(1 - \epsilon_i), \\
+  \quad & \epsilon_i \ge 0, \sum_{i=1}^n\epsilon_i \le B, \,\, i = 1, \ldots, n,
+\end{align}
+where $B > 0$ is a tuning parameter. 
+
+- $\epsilon_1, \dots, \epsilon_n$ are **slack variables** that allow individual points to be on the wrong side of the margin or the hyperplane.
+
+- The $i$th point is on the
+  + *correct* side of the margin when $\epsilon_i = 0$
+  + *[wrong]{.blue} side of the [margin]{.blue}* when $\epsilon_i > 0$
+  + *[wrong]{.blue} side of the [hyperplane]{.blue}* when $\epsilon_i > 1$
+
+
+::: notes
+  + tells us where the $i$th observation is located, relative to the hyperplane and relative to the margin.
+:::
+
+
+
+## Optimization for Soft Margin Classifier
+
+\begin{align}
+\underset{\bbeta, \beta_0, \epsilon_1, \dots, \epsilon_n}{\text{max}} \quad & M \\
+\text{s.t.}
+ \quad & \lVert \bbeta \lVert = 1, \\
+ \quad &  y_i(\bx' \bbeta + \beta_0) \geq M(1 - \epsilon_i), \\
+  \quad & \epsilon_i \ge 0, \sum_{i=1}^n\epsilon_i \le B, \,\, i = 1, \ldots, n,
+\end{align}
+where $B > 0$ is a tuning parameter. 
+
+- $B$ determines the number and severity of the violations
+to the margin/hyperplane we tolerate.
+  + $B = 0$: *no budget* for violations ($\epsilon_1 = \cdots = \epsilon_n = 0$)
+  + $B > 0$: *no more than $B$ points* can be on the wrong side of the hyperplane. ($\epsilon_i > 1$)
+  + As $B$ increases, more violations and wider margin. (more bias less variance)
+  + Choose $B$ via cross-validation.
+
+::: notes
+B as a budget for the amount that the margin can be violated
+by the n observations
+:::
+
+
+
+
+## Optimization for Soft Margin Classifier
+
+:::: {.columns}
+
+::: {.column width="33%"}
+
+```{r}
+#| fig-asp: 1
+#| cache: true
+    set.seed(70)
+    n <- 10 # number of data points for each class
+    p <- 2 # dimension
+
+    # Generate the positive and negative examples
+    xneg <- matrix(rnorm(n*p,mean=0,sd=1),n,p)
+    xpos <- matrix(rnorm(n*p,mean=1.5,sd=1),n,p)
+    x <- rbind(xpos,xneg)
+    y <- matrix(as.factor(c(rep(1,n),rep(-1,n))))
+
+    # Visualize the data
+    par(mar = c(4, 4, 2, 0), mgp = c(2.5, 0.8, 0))
+    plot(x,col=ifelse(y>0,4,2), pch = 19, cex = 2, lwd = 2, 
+         xlab = "X1", ylab = "X2", cex.lab = 1.5, main = "Small budget B (low bias, high variance)", cex.main = 2.8)
+    # legend("topright", c("Positive","Negative"),col=c("blue","red"),
+    #        pch=c(19, 19),text.col=c("blue","red"), cex = 1.5)
+
+    svm.fit <- svm(y ~ ., data = data.frame(x, y), type='C-classification', 
+                   kernel='linear',scale=FALSE, cost = 10)
+
+    b <- t(svm.fit$coefs) %*% svm.fit$SV
+    b0 <- -svm.fit$rho
+    
+    points(x[svm.fit$index, ], col="black", cex=3.5, lwd = 2)     
+    abline(a= -b0/b[1,2], b=-b[1,1]/b[1,2], col="black", lty=1, lwd = 2)
+    
+    abline(a= (-b0-1)/b[1,2], b=-b[1,1]/b[1,2], col="black", lty=3, lwd = 2)
+    abline(a= (-b0+1)/b[1,2], b=-b[1,1]/b[1,2], col="black", lty=3, lwd = 2)
+```
+
+:::
+
+
+::: {.column width="33%"}
+
+```{r}
+#| fig-asp: 1
+#| cache: true
+    set.seed(70)
+    n <- 10 # number of data points for each class
+    p <- 2 # dimension
+
+    # Generate the positive and negative examples
+    xneg <- matrix(rnorm(n*p,mean=0,sd=1),n,p)
+    xpos <- matrix(rnorm(n*p,mean=1.5,sd=1),n,p)
+    x <- rbind(xpos,xneg)
+    y <- matrix(as.factor(c(rep(1,n),rep(-1,n))))
+
+    # Visualize the data
+    par(mar = c(4, 4, 2, 0), mgp = c(2.5, 0.8, 0))
+    plot(x,col=ifelse(y>0,4,2), pch = 19, cex = 2, lwd = 2, 
+         xlab = "X1", ylab = "X2", cex.lab = 1.5, main = "Medium budget B",
+         cex.main = 2.8)
+    # legend("topright", c("Positive","Negative"),col=c("blue","red"),
+    #        pch=c(19, 19),text.col=c("blue","red"), cex = 1.5)
+
+    svm.fit <- svm(y ~ ., data = data.frame(x, y), type='C-classification', 
+                   kernel='linear',scale=FALSE, cost = 1)
+
+    b <- t(svm.fit$coefs) %*% svm.fit$SV
+    b0 <- -svm.fit$rho
+    
+    points(x[svm.fit$index, ], col="black", cex=3.5, lwd = 2)     
+    abline(a= -b0/b[1,2], b=-b[1,1]/b[1,2], col="black", lty=1, lwd = 2)
+    
+    abline(a= (-b0-1)/b[1,2], b=-b[1,1]/b[1,2], col="black", lty=3, lwd = 2)
+    abline(a= (-b0+1)/b[1,2], b=-b[1,1]/b[1,2], col="black", lty=3, lwd = 2)
+```
+
+:::
+
+
+::: {.column width="33%"}
+
+```{r}
+#| fig-asp: 1
+#| cache: true
+#| out-width: 100%
+    set.seed(70)
+    n <- 10 # number of data points for each class
+    p <- 2 # dimension
+
+    # Generate the positive and negative examples
+    xneg <- matrix(rnorm(n*p,mean=0,sd=1),n,p)
+    xpos <- matrix(rnorm(n*p,mean=1.5,sd=1),n,p)
+    x <- rbind(xpos,xneg)
+    y <- matrix(as.factor(c(rep(1,n),rep(-1,n))))
+
+    # Visualize the data
+    par(mar = c(4, 4, 2, 0), mgp = c(2.5, 0.8, 0))
+    plot(x,col=ifelse(y>0,4,2), pch = 19, cex = 2, lwd = 2, 
+         xlab = "X1", ylab = "X2", cex.lab = 1.5, main = "Large budget B (high bias, low variance)", cex.main = 2.8)
+    # legend("topright", c("Positive","Negative"),col=c("blue","red"),
+    #        pch=c(19, 19),text.col=c("blue","red"), cex = 1.5)
+
+    svm.fit <- svm(y ~ ., data = data.frame(x, y), type='C-classification', 
+                   kernel='linear',scale=FALSE, cost = 0.1)
+
+    b <- t(svm.fit$coefs) %*% svm.fit$SV
+    b0 <- -svm.fit$rho
+    
+    points(x[svm.fit$index, ], col="black", cex=3.5, lwd = 2)     
+    abline(a= -b0/b[1,2], b=-b[1,1]/b[1,2], col="black", lty=1, lwd = 2)
+    
+    abline(a= (-b0-1)/b[1,2], b=-b[1,1]/b[1,2], col="black", lty=3, lwd = 2)
+    abline(a= (-b0+1)/b[1,2], b=-b[1,1]/b[1,2], col="black", lty=3, lwd = 2)
+```
+
+:::
+
+::::
+
+
+
+## Optimization for Soft Margin Classifier
+
+:::{.callout-warning}
+
+:::{style="font-size: 1.1em;"}
+
+The argument `cost` in `e1071::svm()` is the $C$ defined in the **primal form** 
+\begin{align}
+\underset{\bbeta, \beta_0}{\text{min}} \quad & \frac{1}{2}\lVert \bbeta \rVert^2 + C \sum_{i=1}^n \epsilon_i \\
+\text{s.t} \quad & y_i (\bx_i' \bbeta + \beta_0) \geq (1 - \epsilon_i), \\
+\text{} \quad & \epsilon_i \geq 0, \,\, i = 1, \ldots, n,
+\end{align}
+
+:::
+
+so small cost $C$ means larger budget $B$.
+
+:::
+
+
+
+## SVM, LDA and Logistic Regression
+
+:::{.callout-note}
+
+:::{style="font-size: 1.3em;"}
+
+- **SVM** decision rule is based only on a subset of the training data (robust to the behavior of data that are far away from the hyperplane.)
+
+- **LDA** depends on the mean of [_all_]{.blue} of the observations within each class, and within-class covariance matrix computed using *all* of the data.
+
+- **Logistic regression**, unlike LDA, is insensitive to observations far from the decision boundary too.
+
+:::
+
+:::
+
+
+
+## Classification with Non-Linear Decision Boundaries
+
+- The soft margin classifier is a natural approach for classification in the two-class setting, if the boundary between the two classes is linear.
+
+- In practice we are often faced with non-linear class boundaries.
+
+```{r}
+#| results: hide
+#| fig-asp: 1
+#| message: false
+    library(ElemStatLearn)
+    data(mixture.example)
+
+    # redefine data
+    px1 = mixture.example$px1
+    px2 = mixture.example$px2
+    x = mixture.example$x
+    y = mixture.example$y
+    
+    # plot the data and true decision boundary
+    par(mar = c(4, 4, 2, 0), mgp = c(2.5, 0.8, 0))
+    prob <- mixture.example$prob
+    prob.bayes <- matrix(prob, 
+                         length(px1), 
+                         length(px2))
+    contour(px1, px2, prob.bayes, levels=0.5, lty=2, 
+            labels="", xlab="x1",ylab="x2", cex.main = 2,
+            main="SVM with linear kernal", col = "green4", lwd = 5)
+    points(x, col=ifelse(y==1, 2, 4), pch = 19, cex = 2)
+
+    # train linear SVM using the kernlab package
+    library(kernlab)
+    
+    cost = 10
+    svm.fit <- ksvm(x, y, type="C-svc", kernel='vanilladot', C=cost)
+
+    # plot the SVM decision boundary
+    # Extract the indices of the support vectors on the margin:
+    sv.alpha<-alpha(svm.fit)[[1]][which(alpha(svm.fit)[[1]]<cost)]
+    sv.index<-alphaindex(svm.fit)[[1]][which(alpha(svm.fit)[[1]]<cost)]
+    sv.matrix<-x[sv.index,]
+    points(sv.matrix, pch=16, col=ifelse(y[sv.index] == 1, 2, 4), cex=2)
+
+    # Plot the hyperplane and the margins:
+    w <- t(cbind(coef(svm.fit)[[1]])) %*% xmatrix(svm.fit)[[1]]
+    b <- - b(svm.fit)
+
+    abline(a= -b/w[1,2], b=-w[1,1]/w[1,2], col="black", lty=1, lwd = 5)
+    abline(a= (-b-1)/w[1,2], b=-w[1,1]/w[1,2], col="black", lty=3, lwd = 5)
+    abline(a= (-b+1)/w[1,2], b=-w[1,1]/w[1,2], col="black", lty=3, lwd = 5)
+```
+
+
+
+
+## Classification with Non-Linear Decision Boundaries
+
+- In regression, we enlarge the feature space using functions of the predictors to address this non-linearity.
+
+- In SVM (logistic regression too!), we could address non-linear boundaries by enlarging the feature space.
+
+- For example, rather than fitting a support vector classifier using $p$ features, $X_1, \dots, X_p$, we could instead fit a support vector classifier using $2p$ features $X_1,X_1^2,X_2,X_2^2, \dots , X_p, X_p^2$.
+
+. . .
+
+:::{.midi}
+
+\begin{align}
+\underset{\beta_0, \beta_{11}, \beta_{12}, \dots, \beta_{p1}, \beta_{p2}, \epsilon_1, \dots, \epsilon_n}{\text{max}} \quad & M \\
+\text{s.t.}
+ \quad &  y_i\left(\beta_0 + \sum_{i = 1}^n \beta_{j1}x_{ij} + \sum_{i = 1}^n \beta_{j2}x_{ij}^2\right) \geq M(1 - \epsilon_i), \\
+  \quad & \epsilon_i \ge 0, \sum_{i=1}^n\epsilon_i \le B, \,\, i = 1, \ldots, n,\\
+  \quad & \sum_{j=1}^p\sum_{k=1}^2\beta_{jk}^2 = 1.
+\end{align}
+
+:::
+
+
+::: notes
+
+In the enlarged
+feature space, the decision boundary that results from (9.16) is in fact linear.
+But in the original feature space, the decision boundary is of the form
+q(x) = 0, where q is a quadratic polynomial, and its solutions are generally
+non-linear.
+
+The support vector machine, which
+we present next, allows us to enlarge the feature space used by the support
+vector classifier in a way that leads to efficient computations
+
+:::
+
+
+<!-- $$f(\bx) = \beta_0 + \sum_{i=1}^n\alpha_i\langle \bx, \bx_{i} \rangle = \beta_0 + \sum_{i\in \mathcal{S}}\alpha_i\langle \bx, \bx_{i} \rangle$$ -->
+
+
+
+
+## Solution to Support Vector Classifier
+
+- The solution to the support vector classifier optimization involves only the *inner products of the observations*: $\langle \bx_i, \bx_{i'} \rangle = \sum_{j=1}^px_{ij}x_{i'j}$
+
+- The linear support vector classifier can be represented as
+$$f(\bx) = \beta_0 + \sum_{i\in \mathcal{S}}\alpha_i\langle \bx, \bx_{i} \rangle$$
+where $\mathcal{S}$ is the collection of indices of the support points.
+
+- $\alpha_i$ is nonzero only for the support vectors in the solution
+
+. . .
+
+<!-- - To train the parameters $\alpha_i$s and $\beta_0$, all we need are the $n \choose 2$ inner products $\langle \bx_i, \bx_{i'} \rangle$ between all pairs of training observations. -->
+
+- To evaluate the function $f(\bx_0)$, we compute $\langle \bx_0, \bx_{i} \rangle$.
+
+
+
+
+## Nonlinear SVM via Kernel Trick
+
+<!-- - $\alpha_i$ is nonzero only for the support vectors in the solution -->
+
+<!-- $$f(\bx) = \beta_0 + \sum_{i\in \mathcal{S}}\alpha_i\langle \bx, \bx_{i} \rangle$$ -->
+<!-- where $\mathcal{S}$ is the collection of indices of these support points. -->
+
+<!-- . . . -->
+
+
+- The support vector machine (SVM) is an extension of the support vector classifier that results from enlarging the feature space in a specific way, using **kernels**.
+
+- The kernel approach is an efficient computational approach for enlarging our feature space and non-linear boundary.
+
+. . .
+
+
+- Kernel Trick:
+$$f(\bx) = \beta_0 + \sum_{i\in \mathcal{S}}\alpha_i K\left(\bx, \bx_{i}\right) $$
+
+- **Linear kernel**: $K\left(\bx_0, \bx_{i}\right) = \langle \bx_0, \bx_{i'} \rangle = \sum_{j=1}^px_{0j}x_{ij}$
+
+- **Polynomial kernel**: $K\left(\bx_0, \bx_{i}\right) = \left(1 + \sum_{j=1}^px_{0j}x_{ij}\right)^d$
+
+- **Radial kernel**: $K\left(\bx_0, \bx_{i'}\right) = \exp \left(-\gamma\sum_{j=1}^p (x_{0j}-x_{ij})^2 \right)$
+
+
+
+
+## Radial Kernel Decision Doundary
+
+```{r}
+#| results: hide
+#| fig-asp: 1
+#| message: false
+    # fit SVM with radial kernel, with cost = 5
+    dat = data.frame(y = factor(y), x)
+    fit = svm(y ~ ., data = dat, scale = FALSE, kernel = "radial", cost = 5)
+    
+    # extract the prediction
+    xgrid = expand.grid(X1 = px1, X2 = px2)
+    func = predict(fit, xgrid, decision.values = TRUE)
+    func = attributes(func)$decision
+    
+    # visualize the decision rule
+    par(mar = c(4, 4, 2, 0), mgp = c(2.5, 0.8, 0))
+    ygrid = predict(fit, xgrid)
+    plot(xgrid, col = ifelse(ygrid == 1, 2, 4), 
+         pch = 20, cex = 0.3, main="SVM with radial kernal", cex.main = 2)
+    points(x, col=ifelse(y==1, 2, 4), pch = 19, cex = 2)
+    
+    # our estimated function value, cut at 0
+    contour(px1, px2, matrix(func, 69, 99), level = 0, add = TRUE, lwd = 5)
+    
+    # the true probability, cut at 0.5
+    contour(px1, px2, matrix(prob, 69, 99), level = 0.5, add = TRUE, 
+            col = "green4", lty=2, lwd = 4)
+```
+
+
+
+## SVM as a Penalized Model
+
+\begin{align}
+\underset{\bbeta, \beta_0, \epsilon_1, \dots, \epsilon_n}{\text{max}} \quad & M \\
+\text{s.t.}
+ \quad & \lVert \bbeta \lVert = 1, \\
+ \quad &  y_i(\bx_i' \bbeta + \beta_0) \geq M(1 - \epsilon_i), \\
+  \quad & \epsilon_i \ge 0, \sum_{i=1}^n\epsilon_i \le B, \,\, i = 1, \ldots, n,
+\end{align}
+
+. . .
+
+\begin{align}
+\underset{\bbeta, \beta_0}{\text{min}} \left\{ \sum_{i=1}^n  \max \left[ 0, 1 - y_i (\bx_i' \bbeta + \beta_0) \right] + \lambda \lVert \bbeta \lVert ^ 2 \right\}
+\end{align} 
+where $\sum_{i=1}^n  \max \left[ 0, 1 - y_i (\bx' \bbeta + \beta_0) \right]$ is known as **hinge loss**.
+
+- Large $\lambda$ (large $B$): small $\beta_j$s, high-bias and low-variance.
+
+- Small $\lambda$ (small $B$): low-bias and high-variance.
+
+
+
+
+## Loss Functions
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+
+- The hinge loss is zero for observations for which $y_i (\bx' \bbeta + \beta_0) \ge 1$ (correct side of the margin).
+
+- The logistic loss is not zero anywhere.
+
+- SVM is better when classes are well separated.
+
+- Logistic regression is preferred in more overlapping regimes.
+
+
+:::
+
+
+
+::: {.column width="60%"}
+
+```{r}
+#| fig-asp: 1
+#| out-width: 80%
+  t = seq(-6.5, 2.5, 0.01)
+
+  # different loss functions
+  hinge = pmax(0, 1 - t) 
+  # zeroone = (t <= 0)
+  logistic = log(1 + exp(-t))
+  # modifiedhuber = ifelse(t >= -1, (pmax(0, 1 - t))^2, -4*t)
+  
+  # plot
+    par(mar = c(4, 4, 2, 0), mgp = c(2.5, 0.8, 0))
+  plot(t, hinge, type = "l", lwd = 3, ylim = c(0, 8),
+       main = "Loss Functions", ylab = "Loss", las = 1,
+       xlab = "yi * f(xi)", cex.main = 2, cex.lab = 1.5)
+  # points(t, hinge, type = "l", lwd = 2, col = "red", )
+  points(t, logistic, type = "l", lty = 2, col = "green4", lwd = 3)
+  # points(t, modifiedhuber, type = "l", lty = 2, col = "deepskyblue", lwd = 2)
+  # legend("topright", c("Zero-one", "Hinge", "Logistic", "Modified Huber"),
+  #        col = c(1, 2, "darkorange", "deepskyblue"), lty = c(1, 1, 2, 2), 
+  #        lwd = 2, cex = 1.5)
+  
+    legend("topright", c("Hinge", "Logistic"),
+         col = c(1, "green4"), lty = c(1, 1), 
+         lwd = 3, cex = 1.5, bty = "n")
+```
+
+:::
+
+::::
+
+
+::: notes
+, but small for points far from the boundary.
+:::

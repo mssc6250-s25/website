@@ -1,0 +1,142 @@
+---
+title: "13 - Support Vector Machine Code Demo"
+author: 'Dr. Cheng-Han Yu'
+format: 
+  html:
+    toc: true
+    code-link: true
+    code-fold: show
+    # code-summary: "Show/Hide"
+    code-tools: true
+    number-sections: true
+# filters: 
+#   - include-code-files
+---
+
+## R implementation
+
+
+### Linear kernel
+
+```{r}
+library(e1071)
+library(kernlab)
+```
+
+
+```{r}
+set.seed(2025)
+n <- 6
+p <- 2
+xneg <- matrix(rnorm(n * p), n, p)
+xpos <- matrix(rnorm(n * p, mean = 3), n, p)
+x <- rbind(xpos, xneg)
+y <- matrix(as.factor(c(rep(1, n), rep(-1, n))))
+```
+
+```{r}
+svm_fit <- e1071::svm(y ~ ., data = data.frame(x, y), type = 'C-classification', 
+                      kernel = 'linear', scale = FALSE, cost = 10000)
+```
+
+
+```{r}
+svm_fit2 <- kernlab::ksvm(x, y, type = "C-svc", kernel = 'vanilladot', C = 10000)
+```
+
+
+
+### Radial basis (Gaussian) kernel
+
+```{r}
+load("../data/ESL.mixture.rda", verbose = TRUE)
+x <- ESL.mixture$x
+y <- ESL.mixture$y
+dat <- data.frame(y = factor(y), x)
+fit <- svm(y ~ ., data = dat, scale = FALSE, kernel = "radial", cost = 5)
+```
+
+```{r}
+px1 <- ESL.mixture$px1
+px2 <- ESL.mixture$px2
+xgrid <- expand.grid(X1 = px1, X2 = px2)
+func <- predict(fit, xgrid, decision.values = TRUE)
+func <- attributes(func)$decision
+```
+
+```{r}
+#| fig-asp: 1
+ygrid <- predict(fit, xgrid)
+plot(xgrid, col = ifelse(ygrid == 1, 2, 4), 
+     pch = 20, cex = 0.3, main="SVM with RBF kernal")
+points(x, col = ifelse(y == 1, 2, 4), pch = 19)
+contour(px1, px2, matrix(func, 69, 99), level = 0, add = TRUE, lwd = 5)
+```
+
+
+
+## Python implementation
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.svm import SVC
+```
+
+
+### Linear kernel
+
+```{python}
+np.random.seed(1)
+n = 6
+p = 2
+xneg = np.random.normal(size=(n, p))
+xpos = np.random.normal(loc=3, size=(n, p))
+x = np.vstack((xpos, xneg))
+y = np.array([1] * n + [-1] * n)
+```
+
+
+```{python}
+svm_fit = SVC(kernel="linear", C=10000, probability=True)
+svm_fit.fit(x, y)
+```
+
+### Radial basis (Gaussian) kernel
+
+
+```{python}
+import rdata
+mixture_example = rdata.read_rda('../data/ESL.mixture.rda')
+x = mixture_example['ESL.mixture']['x']
+y = mixture_example['ESL.mixture']['y']
+```
+
+```{python}
+svm_rbf = SVC(kernel = 'rbf', C = 5, probability = True)
+svm_rbf.fit(x, y)
+```
+
+```{python}
+px1 = mixture_example['ESL.mixture']['px1']
+px2 = mixture_example['ESL.mixture']['px2']
+ppx1, ppx2 = np.meshgrid(px1, px2)
+x_grid = np.c_[ppx1.ravel(), ppx2.ravel()]
+decision_function = svm_rbf.decision_function(x_grid).reshape(ppx1.shape)
+probability = svm_rbf.predict_proba(x_grid)[:, 1].reshape(ppx1.shape)
+```
+
+```{python}
+#| fig-asp: 1
+plt.figure()
+plt.contour(px1, px2, decision_function, levels=[0], colors="black", linewidths=2)
+plt.scatter(x[:, 0], x[:, 1], c=y, cmap="bwr", s=50, edgecolor="k")
+plt.scatter(x_grid[:, 0], x_grid[:, 1], 
+            c=np.where(probability.ravel() >= 0.5, "red", "blue"), s=10, alpha=0.1)
+plt.title("SVM with RBF Kernel")
+plt.xlabel("X1")
+plt.ylabel("X2")
+plt.show()
+```
+
+
