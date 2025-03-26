@@ -1,0 +1,30 @@
+---
+title: "Week 11"
+subtitle: "Gaussian Processes"
+editor: visual
+---
+
+::: callout-important
+:::
+
+## Participate
+
+🖥️ [Slides - Gaussian Processes](/slides/12-gp.html)
+
+## Reading
+
+📖 [Gaussian Processes for Machine Learning (GPML) Ch 2](https://gaussianprocess.org/gpml/chapters/)
+
+📖 [Surrogates Ch 5](https://bookdown.org/rbg/surrogates/chap5.html)
+
+📖 [PMLI Ch 17.2](https://probml.github.io/pml-book/book1.html)
+
+## Exercise
+
+<!-- 📋 [Lab-21 Logistic Regression](/exercise/lab21-logistic.html) -->
+
+<br><br>
+
+::: {style="font-size: 0.875em;"}
+Back to [course schedule](/ "Course schedule") ⏎
+:::
