@@ -202,7 +202,7 @@ $$
 
 ## Maximum-margin Classifier
 
-- If our data can be perfectly separated using a hyperplane, there exists an *infinite* number of such hyperplanes. But which one is the *best*?
+- If our data can be *perfectly* separated using a hyperplane, there exists an *infinite* number of such hyperplanes. But which one is the *best*?
 
 - A natural choice is the __maximal margin hyperplane__ (*optimal separating hyperplane*), which is the separating hyperplane that is *farthest from the training points*.
 
@@ -270,6 +270,13 @@ $$
 ::::
 
 
+::: notes
+
+the maximal margin hyperplane depends on the support vectors. If the support vectors are moved, the maximal margin hyperplane would move too.
+
+:::
+
+
 ## Maximum-margin Classifier
 
 ```{r}
@@ -288,9 +295,9 @@ svm_fit <- svm(y ~ ., data = data.frame(x, y), type = 'C-classification',
 
 - The training points lied on the dashed lines are **support vectors**:
   + if they were moved, the maximal margin hyperplane would move too.
-  + the hyperplane depends directly on the support vectors, but not on the other observations, provided that their movement does not cause it to cross the boundary.
+  + the hyperplane depends directly on the support vectors, but **not** on the other observations, provided that their movement does not cause it to cross the boundary.
 
-- It can lead to overfitting when $p$ is large.
+- It can lead to overfitting when $p$ is large. (No misclassification on training set)
 
 - Hope the classifier will also have a large margin on the test data.
 
@@ -487,30 +494,41 @@ margin classifier.
 
 - The maximal margin hyperplane is extremely sensitive to a change in a single observation: it may overfit the training data. ([*low-bias high-variance*]{.green})
 
+
+::: xsmall
+
 ```{r}
 #| fig-cap: "Source: ISL Fig. 9.5"
+#| out-width: 85%
 knitr::include_graphics("./images/13-svm/fig9-5.png")
 ```
 
+:::
 
 
 
 ## Soft Margin Classifier
 
 - Consider a classifier based on a hyperplane that does *NOT* perfectly separate the two classes, but
-  + [Greater robustness to individual observations]{.green}
   + [Better classification of _most_ of the training observations.]{.green}
+  + [Greater robustness to individual observations]{.green}
+
   
 - It could be worthwhile to misclassify a few training points
 in order to do a better job in classifying the remaining observations.
 
-- Allow some points to be on the incorrect side of the margin, or even the incorrect side of the hyperplane (training points misclassified by the classifier).
+- Allow some points to be on the incorrect side of the margin ([8]{.blue} and [1]{.pink}), or even the incorrect side of the hyperplane ([12]{.blue} and [11]{.pink} training points misclassified by the classifier).
+
+
+::: xsmall
 
 ```{r}
 #| fig-cap: "Source: ISL Fig. 9.6"
+#| out-width: 55%
 knitr::include_graphics("./images/13-svm/9-6.png")
 ```
 
+:::
 
 
 
@@ -694,7 +712,7 @@ by the n observations
 
 :::{style="font-size: 1.1em;"}
 
-The argument `cost` in `e1071::svm()` is the $C$ defined in the **primal form** 
+The argument `cost` in `e1071::svm()` and `C` in [`sklearn.svm.SVC()`](https://scikit-learn.org/stable/modules/svm.html#svc) is the $C$ defined in the **primal form** 
 \begin{align}
 \underset{\bbeta, \beta_0}{\text{min}} \quad & \frac{1}{2}\lVert \bbeta \rVert^2 + C \sum_{i=1}^n \epsilon_i \\
 \text{s.t} \quad & y_i (\bx_i' \bbeta + \beta_0) \geq (1 - \epsilon_i), \\
@@ -715,7 +733,7 @@ so small cost $C$ means larger budget $B$.
 
 :::{style="font-size: 1.3em;"}
 
-- **SVM** decision rule is based only on a subset of the training data (robust to the behavior of data that are far away from the hyperplane.)
+- **SVM** decision rule is based only on a [subset]{.blue} of the training data (robust to the behavior of data that are far away from the hyperplane.)
 
 - **LDA** depends on the mean of [_all_]{.blue} of the observations within each class, and within-class covariance matrix computed using *all* of the data.
 

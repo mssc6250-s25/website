@@ -1,6 +1,6 @@
 ---
 title: "Homework 4 - Support Vector Machines, Tree Methods, Unsupervised Learning"
-subtitle: "Due Friday, May 3 11:59 PM"
+subtitle: "Due Friday, May 2 11:59 PM"
 editor: source
 ---
 

@@ -232,7 +232,7 @@ Dr.&nbsp;Cheng-Han Yu <br> Department of Mathematical and Statistical Sciences <
 
 <img data-src="images/13-svm/unnamed-chunk-2-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section><section id="maximum-margin-classifier" class="slide level2"><h2>Maximum-margin Classifier</h2>
 <ul>
-<li><p>If our data can be perfectly separated using a hyperplane, there exists an <em>infinite</em> number of such hyperplanes. But which one is the <em>best</em>?</p></li>
+<li><p>If our data can be <em>perfectly</em> separated using a hyperplane, there exists an <em>infinite</em> number of such hyperplanes. But which one is the <em>best</em>?</p></li>
 <li><p>A natural choice is the <strong>maximal margin hyperplane</strong> (<em>optimal separating hyperplane</em>), which is the separating hyperplane that is <em>farthest from the training points</em>.</p></li>
 </ul>
 <div class="columns">
@@ -255,7 +255,18 @@ Dr.&nbsp;Cheng-Han Yu <br> Department of Mathematical and Statistical Sciences <
 </div>
 </div>
 </div></div>
-</section><section id="maximum-margin-classifier-1" class="slide level2"><h2>Maximum-margin Classifier</h2>
+<aside class="notes"><p>the maximal margin hyperplane depends on the support vectors. If the support vectors are moved, the maximal margin hyperplane would move too.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside></section><section id="maximum-margin-classifier-1" class="slide level2"><h2>Maximum-margin Classifier</h2>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">e1071</span><span class="op">)</span></span>
 <span><span class="va">svm_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/e1071/man/svm.html">svm</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">'C-classification'</span>, </span>
@@ -268,10 +279,10 @@ Dr.&nbsp;Cheng-Han Yu <br> Department of Mathematical and Statistical Sciences <
 <p>The training points lied on the dashed lines are <strong>support vectors</strong>:</p>
 <ul>
 <li>if they were moved, the maximal margin hyperplane would move too.</li>
-<li>the hyperplane depends directly on the support vectors, but not on the other observations, provided that their movement does not cause it to cross the boundary.</li>
+<li>the hyperplane depends directly on the support vectors, but <strong>not</strong> on the other observations, provided that their movement does not cause it to cross the boundary.</li>
 </ul>
 </li>
-<li><p>It can lead to overfitting when <span class="math inline">\(p\)</span> is large.</p></li>
+<li><p>It can lead to overfitting when <span class="math inline">\(p\)</span> is large. (No misclassification on training set)</p></li>
 <li><p>Hope the classifier will also have a large margin on the test data.</p></li>
 </ul>
 </div><div class="column" style="width:50%;">
@@ -348,21 +359,39 @@ Dr.&nbsp;Cheng-Han Yu <br> Department of Mathematical and Statistical Sciences <
 <li><p>Even if a separating hyperplane does exist, the maximum-margin classifier might not be desirable.</p></li>
 <li><p>The maximal margin hyperplane is extremely sensitive to a change in a single observation: it may overfit the training data. (<span class="green"><em>low-bias high-variance</em></span>)</p></li>
 </ul>
-
-<img data-src="./images/13-svm/fig9-5.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: ISL Fig. 9.5</p></section><section id="soft-margin-classifier" class="slide level2"><h2>Soft Margin Classifier</h2>
+<div class="xsmall">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="./images/13-svm/fig9-5.png" style="width:85.0%"></p>
+<figcaption>Source: ISL Fig. 9.5</figcaption></figure>
+</div>
+</div>
+</div>
+</div>
+</section><section id="soft-margin-classifier" class="slide level2"><h2>Soft Margin Classifier</h2>
 <ul>
 <li>
 <p>Consider a classifier based on a hyperplane that does <em>NOT</em> perfectly separate the two classes, but</p>
 <ul>
-<li><span class="green">Greater robustness to individual observations</span></li>
 <li><span class="green">Better classification of <em>most</em> of the training observations.</span></li>
+<li><span class="green">Greater robustness to individual observations</span></li>
 </ul>
 </li>
 <li><p>It could be worthwhile to misclassify a few training points in order to do a better job in classifying the remaining observations.</p></li>
-<li><p>Allow some points to be on the incorrect side of the margin, or even the incorrect side of the hyperplane (training points misclassified by the classifier).</p></li>
+<li><p>Allow some points to be on the incorrect side of the margin (<span class="blue">8</span> and <span class="pink">1</span>), or even the incorrect side of the hyperplane (<span class="blue">12</span> and <span class="pink">11</span> training points misclassified by the classifier).</p></li>
 </ul>
-
-<img data-src="./images/13-svm/9-6.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">Source: ISL Fig. 9.6</p></section><section id="optimization-for-soft-margin-classifier" class="slide level2"><h2>Optimization for Soft Margin Classifier</h2>
+<div class="xsmall">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="./images/13-svm/9-6.png" style="width:55.0%"></p>
+<figcaption>Source: ISL Fig. 9.6</figcaption></figure>
+</div>
+</div>
+</div>
+</div>
+</section><section id="optimization-for-soft-margin-classifier" class="slide level2"><h2>Optimization for Soft Margin Classifier</h2>
 <p><span class="math display">\[\begin{align}
 \underset{\boldsymbol \beta, \beta_0, \epsilon_1, \dots, \epsilon_n}{\text{max}} \quad &amp; M \\
 \text{s.t.}
@@ -472,7 +501,7 @@ Dr.&nbsp;Cheng-Han Yu <br> Department of Mathematical and Statistical Sciences <
 </div>
 <div class="callout-content">
 <div style="font-size: 1.1em;">
-<p>The argument <code>cost</code> in <code><a href="https://rdrr.io/pkg/e1071/man/svm.html">e1071::svm()</a></code> is the <span class="math inline">\(C\)</span> defined in the <strong>primal form</strong> <span class="math display">\[\begin{align}
+<p>The argument <code>cost</code> in <code><a href="https://rdrr.io/pkg/e1071/man/svm.html">e1071::svm()</a></code> and <code>C</code> in <a href="https://scikit-learn.org/stable/modules/svm.html#svc"><code>sklearn.svm.SVC()</code></a> is the <span class="math inline">\(C\)</span> defined in the <strong>primal form</strong> <span class="math display">\[\begin{align}
 \underset{\boldsymbol \beta, \beta_0}{\text{min}} \quad &amp; \frac{1}{2}\lVert \boldsymbol \beta\rVert^2 + C \sum_{i=1}^n \epsilon_i \\
 \text{s.t} \quad &amp; y_i (\mathbf{x}_i' \boldsymbol \beta+ \beta_0) \geq (1 - \epsilon_i), \\
 \text{} \quad &amp; \epsilon_i \geq 0, \,\, i = 1, \ldots, n,
@@ -494,7 +523,7 @@ Dr.&nbsp;Cheng-Han Yu <br> Department of Mathematical and Statistical Sciences <
 <div class="callout-content">
 <div style="font-size: 1.3em;">
 <ul>
-<li><p><strong>SVM</strong> decision rule is based only on a subset of the training data (robust to the behavior of data that are far away from the hyperplane.)</p></li>
+<li><p><strong>SVM</strong> decision rule is based only on a <span class="blue">subset</span> of the training data (robust to the behavior of data that are far away from the hyperplane.)</p></li>
 <li><p><strong>LDA</strong> depends on the mean of <span class="blue"><em>all</em></span> of the observations within each class, and within-class covariance matrix computed using <em>all</em> of the data.</p></li>
 <li><p><strong>Logistic regression</strong>, unlike LDA, is insensitive to observations far from the decision boundary too.</p></li>
 </ul>
