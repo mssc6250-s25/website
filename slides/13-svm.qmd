@@ -423,7 +423,7 @@ For $p = 2$, and the plane $\beta_0 + \beta_1 X_1 + \beta_2X_2 = 0$, the distanc
 ## Optimization for Linearly Separable SVM
 
 \begin{align}
-\underset{\bbeta, \beta_0}{\text{max}} \quad & M \\
+\underset{\bbeta, \beta_0, M}{\text{max}} \quad & M \\
 \text{s.t.} \quad & \frac{1}{\lVert \bbeta \lVert} y_i(\bx' \bbeta + \beta_0) \geq M, \,\, i = 1, \ldots, n.
 \end{align}
 
@@ -432,7 +432,7 @@ For $p = 2$, and the plane $\beta_0 + \beta_1 X_1 + \beta_2X_2 = 0$, the distanc
 - The scale of $\bbeta$ can be arbitrary, so just set it as $\lVert \bbeta \rVert = 1$:
 
 \begin{align}
-\underset{\bbeta, \beta_0}{\text{max}} \quad & M \\
+\underset{\bbeta, \beta_0, M}{\text{max}} \quad & M \\
 \text{s.t.}
  \quad & \lVert \bbeta \lVert = 1, \\
  \quad &  y_i(\bx' \bbeta + \beta_0) \geq M, \,\, i = 1, \ldots, n.
@@ -535,7 +535,7 @@ knitr::include_graphics("./images/13-svm/9-6.png")
 ## Optimization for Soft Margin Classifier
 
 \begin{align}
-\underset{\bbeta, \beta_0, \epsilon_1, \dots, \epsilon_n}{\text{max}} \quad & M \\
+\underset{\bbeta, \beta_0, \epsilon_1, \dots, \epsilon_n, M}{\text{max}} \quad & M \\
 \text{s.t.}
  \quad & \lVert \bbeta \lVert = 1, \\
  \quad &  y_i(\bx' \bbeta + \beta_0) \geq M(1 - \epsilon_i), \\
@@ -560,7 +560,7 @@ where $B > 0$ is a tuning parameter.
 ## Optimization for Soft Margin Classifier
 
 \begin{align}
-\underset{\bbeta, \beta_0, \epsilon_1, \dots, \epsilon_n}{\text{max}} \quad & M \\
+\underset{\bbeta, \beta_0, \epsilon_1, \dots, \epsilon_n, M}{\text{max}} \quad & M \\
 \text{s.t.}
  \quad & \lVert \bbeta \lVert = 1, \\
  \quad &  y_i(\bx' \bbeta + \beta_0) \geq M(1 - \epsilon_i), \\
@@ -813,7 +813,7 @@ so small cost $C$ means larger budget $B$.
 :::{.midi}
 
 \begin{align}
-\underset{\beta_0, \beta_{11}, \beta_{12}, \dots, \beta_{p1}, \beta_{p2}, \epsilon_1, \dots, \epsilon_n}{\text{max}} \quad & M \\
+\underset{\beta_0, \beta_{11}, \beta_{12}, \dots, \beta_{p1}, \beta_{p2}, \epsilon_1, \dots, \epsilon_n, M}{\text{max}} \quad & M \\
 \text{s.t.}
  \quad &  y_i\left(\beta_0 + \sum_{i = 1}^n \beta_{j1}x_{ij} + \sum_{i = 1}^n \beta_{j2}x_{ij}^2\right) \geq M(1 - \epsilon_i), \\
   \quad & \epsilon_i \ge 0, \sum_{i=1}^n\epsilon_i \le B, \,\, i = 1, \ldots, n,\\
@@ -842,6 +842,31 @@ vector classifier in a way that leads to efficient computations
 
 
 
+## Enlarge Feature Space
+
+::: xsmall
+
+```{r}
+#| echo: false
+#| out-width: 100%
+#| fig-cap: "Source: https://teazrq.github.io/stat542/notes/SVM.pdf"
+knitr::include_graphics("./images/13-svm/svm_feature.png")
+```
+
+:::
+
+## Nonlinear Boundaries
+
+::: xsmall
+
+```{r}
+#| echo: false
+#| out-width: 100%
+#| fig-cap: "Source: https://teazrq.github.io/stat542/notes/SVM.pdf"
+knitr::include_graphics("./images/13-svm/svm_plane.png")
+```
+
+:::
 
 ## Solution to Support Vector Classifier
 
@@ -851,7 +876,7 @@ vector classifier in a way that leads to efficient computations
 $$f(\bx) = \beta_0 + \sum_{i\in \mathcal{S}}\alpha_i\langle \bx, \bx_{i} \rangle$$
 where $\mathcal{S}$ is the collection of indices of the support points.
 
-- $\alpha_i$ is nonzero only for the support vectors in the solution
+- $\alpha_i$ is nonzero only for the support vectors in the solution.
 
 . . .
 
