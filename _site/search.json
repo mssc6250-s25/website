@@ -1346,7 +1346,7 @@
     "href": "index.html",
     "title": "MSSC 6250 - Statistical Machine Learning (Spring 2025)",
     "section": "",
-    "text": "Homework 3 released, and due Friday, 4/4, 11:59 PM.\nMidterm Presentation I - Regression guideline is released.\n\nThis schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nTo Do\nSlides\nCode\nHomework\nProject\n\n\n\n\n1\nTue, Jan 14\nSyllabus/Overview of Statistical Learning\n📖\n🖥️🖥️\n\n\n\n\n\n\nThu, Jan 16\nBias-variance tradeoff\n\n🖥️\n\n\n\n\n\n2\nTue, Jan 21\nNO CLASS: Cold Weather\n📖\n🖥️\n\n\n\n\n\n\nThu, Jan 23\nLinear Regression\n\n\n\n\n\n\n\n3\nTue, Jan 28\nNumerical Optimization\n📖\n\n\n✍️ HW1\n\n\n\n\nThu, Jan 30\nStochastic Gradient Descen; Ridge Regression\n\n🖥️\n\n\n\n\n\n4\nTue, Feb 4\nCross-Validation; Feature Selection\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 6\nLASSO\n\n\n\n\n\n\n\n5\nTue, Feb 11\nRegression Splines\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 13\nSmoothing Splines and Generalized Additive Models\n\n\n\nHW 1 Due\n\n\n\n6\nTue, Feb 18\nBayesian Inference and Linear Regression\n📖\n🖥️\n\n✍️ HW2\n\n\n\n\nThu, Feb 20\nBayesian Linear Regression\n\n\n\n\n✅ Team up Due\n\n\n7\nTue, Feb 25\nBinary Logistic Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 27\nMultinomial Logistic Regression\n\n\n\nHW 2 Due\n✅ Proposal Due\n\n\n8\nTue, Mar 4\nDiscriminant Analysis\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 6\nMidterm Presentation I\n\n\n\n✍️ HW3\n✅ Materials Due\n\n\n9\nTue, Mar 11\nNO CLASS: Spring break\n\n\n\n\n\n\n\n\nThu, Mar 13\nNO CLASS: Spring break Deep Learning Workshop (Fri, Mar 14)\n\n\n\n\n\n\n\n10\nTue, Mar 18\nNaive Bayes\n📖\n\n\n\n\n\n\n\nThu, Mar 20\nK-Nearest Neighbors\n\n🖥️\n\n\n\n\n\n11\nTue, Mar 25\nGaussian Process Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 27\nGaussian Process Classification\n\n\n\n\n\n\n\n12\nTue, Apr 1\nSupport Vector Machine\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 3\nSupport Vector Machine\n\n\n\nHW 3 Due\n\n\n\n13\nTue, Apr 8\nCART and Bagging\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 10\nRandom Forests and Boosting\n\n\n\n✍️ HW4\n\n\n\n14\nTue, Apr 15\nMidterm Presentation II\n📖\n🖥️\n\n\n✅\n\n\n\nThu, Apr 17\nNO CLASS: Easter break\n\n\n\n\n\n\n\n15\nTue, Apr 22\nPrincipal Component Analysis\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 24\nK-Means Clustering\n\n\n\n\n\n\n\n16\nTue, Apr 29\nModel-based Clustering\n📖\n🖥️\n\n\n\n\n\n\nThu, May 1\nNeural Networks\n\n\n\n\n\n\n\n17\nThu, May 8\nFinal Project Submission\n\n\n\n\n✅\n\n\n\n\nI reserve the right to make changes to the schedule.",
+    "text": "Homework 3 released, and due Friday, 4/4, 11:59 PM.\nMidterm Presentation I - Regression guideline is released.\n\nThis schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nTo Do\nSlides\nCode\nHomework\nProject\n\n\n\n\n1\nTue, Jan 14\nSyllabus/Overview of Statistical Learning\n📖\n🖥️🖥️\n\n\n\n\n\n\nThu, Jan 16\nBias-variance tradeoff\n\n🖥️\n\n\n\n\n\n2\nTue, Jan 21\nNO CLASS: Cold Weather\n📖\n🖥️\n\n\n\n\n\n\nThu, Jan 23\nLinear Regression\n\n\n\n\n\n\n\n3\nTue, Jan 28\nNumerical Optimization\n📖\n\n\n✍️ HW1\n\n\n\n\nThu, Jan 30\nStochastic Gradient Descen; Ridge Regression\n\n🖥️\n\n\n\n\n\n4\nTue, Feb 4\nCross-Validation; Feature Selection\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 6\nLASSO\n\n\n\n\n\n\n\n5\nTue, Feb 11\nRegression Splines\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 13\nSmoothing Splines and Generalized Additive Models\n\n\n\nHW 1 Due\n\n\n\n6\nTue, Feb 18\nBayesian Inference and Linear Regression\n📖\n🖥️\n\n✍️ HW2\n\n\n\n\nThu, Feb 20\nBayesian Linear Regression\n\n\n\n\n✅ Team up Due\n\n\n7\nTue, Feb 25\nBinary Logistic Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 27\nMultinomial Logistic Regression\n\n\n\nHW 2 Due\n✅ Proposal Due\n\n\n8\nTue, Mar 4\nDiscriminant Analysis\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 6\nMidterm Presentation I\n\n\n\n✍️ HW3\n✅ Materials Due\n\n\n9\nTue, Mar 11\nNO CLASS: Spring break\n\n\n\n\n\n\n\n\nThu, Mar 13\nNO CLASS: Spring break Deep Learning Workshop (Fri, Mar 14)\n\n\n\n\n\n\n\n10\nTue, Mar 18\nNaive Bayes\n📖\n\n\n\n\n\n\n\nThu, Mar 20\nK-Nearest Neighbors\n\n🖥️\n\n\n\n\n\n11\nTue, Mar 25\nGaussian Process Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 27\nGaussian Process Classification\n\n\n\n\n\n\n\n12\nTue, Apr 1\nSupport Vector Machine\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 3\nSupport Vector Machine\n\n\n\nHW 3 Due\n\n\n\n13\nTue, Apr 8\nCART and Bagging\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 10\nRandom Forests and Boosting\n\n\n\n✍️ HW4\n\n\n\n14\nTue, Apr 15\nMidterm Presentation II\n📖\n🖥️\n\n\n✅\n\n\n\nThu, Apr 17\nNO CLASS: Easter break\n\n\n\n\n\n\n\n15\nTue, Apr 22\nPrincipal Component Analysis\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 24\nK-Means Clustering\n\n\n\n\n\n\n\n16\nTue, Apr 29\nModel-based Clustering\n📖\n🖥️\n\n\n\n\n\n\nThu, May 1\nNeural Networks\n\n\n\nHW 4 Due\n\n\n\n17\nThu, May 8\nFinal Project Submission\n\n\n\n\n✅\n\n\n\n\nI reserve the right to make changes to the schedule.",
     "crumbs": [
       "Course Information",
       "Schedule"
@@ -2510,14 +2510,14 @@
     "href": "slides/13-svm.html#maximum-margin-classifier",
     "title": "Support Vector Machines \n",
     "section": "Maximum-margin Classifier",
-    "text": "Maximum-margin Classifier\n\nIf our data can be perfectly separated using a hyperplane, there exists an infinite number of such hyperplanes. But which one is the best?\nA natural choice is the maximal margin hyperplane (optimal separating hyperplane), which is the separating hyperplane that is farthest from the training points.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nthe maximal margin hyperplane depends on the support vectors. If the support vectors are moved, the maximal margin hyperplane would move too."
+    "text": "Maximum-margin Classifier\n\nIf our data can be perfectly separated using a hyperplane, there exists an infinite number of such hyperplanes. But which one is the best?\nA natural choice is the maximal margin hyperplane (optimal separating hyperplane), which is the separating hyperplane that is farthest from the training points.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nthe maximal margin hyperplane depends on the support vectors. If the support vectors are moved, the maximal margin hyperplane would move too."
   },
   {
     "objectID": "slides/13-svm.html#maximum-margin-classifier-1",
     "href": "slides/13-svm.html#maximum-margin-classifier-1",
     "title": "Support Vector Machines \n",
     "section": "Maximum-margin Classifier",
-    "text": "Maximum-margin Classifier\n\nlibrary(e1071)\nsvm_fit &lt;- svm(y ~ ., data = data.frame(x, y), type = 'C-classification', \n               kernel = 'linear', scale = FALSE, cost = 10000)\n\n\n\n\n\nThe training points lied on the dashed lines are support vectors:\n\nif they were moved, the maximal margin hyperplane would move too.\nthe hyperplane depends directly on the support vectors, but not on the other observations, provided that their movement does not cause it to cross the boundary.\n\n\nIt can lead to overfitting when \\(p\\) is large. (No misclassification on training set)\nHope the classifier will also have a large margin on the test data.\n\n\n\n\n\n\n\n\n\n\n\n\nWe use the e1071 package to fit the SVM. There is a cost parameter C , with default value 1. This parameter has a significant impact on non-separable problems. However, for our separable case, we will set this to be a very large value, meaning that the cost for having a wrong classification is very large. We also need to specify the linear kernel.\n\nindex gives the index of all support vectors\ncoefs provides the yiαi for the support vectors\nSV are the xi values correspond to the support vectors\nrho is negative β0\n\nthey “support” the maximal margin hyperplane in the sense vector that if these points were moved slightly then the maximal margin hyperplane would move as well.\nhttps://afit-r.github.io/svm\nkernlab::ksvm()\nwe can compute the (perpendicular) distance from each training observation to a given separating hyperplane; the smallest such distance is the minimal distance from the observations to the hyperplane, and is known as the margin. The maximal margin hyperplane is the separating hyperplane for which the margin is margin largest—that is, it is the hyperplane that has the farthest minimum distance to the training observations.\n\nUse from sklearn import svm for Python implementation."
+    "text": "Maximum-margin Classifier\n\nlibrary(e1071)\nsvm_fit &lt;- svm(y ~ ., data = data.frame(x, y), type = 'C-classification', \n               kernel = 'linear', scale = FALSE, cost = 10000)\n\n\n\n\n\nThe training points lied on the dashed lines are support vectors:\n\nif they were moved, the maximal margin hyperplane would move too.\nthe hyperplane depends directly on the support vectors, but not on the other observations, provided that their movement does not cause it to cross the boundary.\n\n\nIt can lead to overfitting when \\(p\\) is large. (No misclassification on training set)\nHope the classifier will also have a large margin on the test data.\n\n\n\n\n\n\n\n\n\n\n\n\n\nWe use the e1071 package to fit the SVM. There is a cost parameter C , with default value 1. This parameter has a significant impact on non-separable problems. However, for our separable case, we will set this to be a very large value, meaning that the cost for having a wrong classification is very large. We also need to specify the linear kernel.\n\nindex gives the index of all support vectors\ncoefs provides the yiαi for the support vectors\nSV are the xi values correspond to the support vectors\nrho is negative β0\n\nthey “support” the maximal margin hyperplane in the sense vector that if these points were moved slightly then the maximal margin hyperplane would move as well.\nhttps://afit-r.github.io/svm\nkernlab::ksvm()\nwe can compute the (perpendicular) distance from each training observation to a given separating hyperplane; the smallest such distance is the minimal distance from the observations to the hyperplane, and is known as the margin. The maximal margin hyperplane is the separating hyperplane for which the margin is margin largest—that is, it is the hyperplane that has the farthest minimum distance to the training observations.\n\nUse from sklearn import svm for Python implementation."
   },
   {
     "objectID": "slides/13-svm.html#linearly-separable-svm",
@@ -2604,6 +2604,20 @@
     "text": "Classification with Non-Linear Decision Boundaries\n\nIn regression, we enlarge the feature space using functions of the predictors to address this non-linearity.\nIn SVM (logistic regression too!), we could address non-linear boundaries by enlarging the feature space.\nFor example, rather than fitting a support vector classifier using \\(p\\) features, \\(X_1, \\dots, X_p\\), we could instead fit a support vector classifier using \\(2p\\) features \\(X_1,X_1^2,X_2,X_2^2, \\dots , X_p, X_p^2\\).\n\n\n\n\\[\\begin{align}\n\\underset{\\beta_0, \\beta_{11}, \\beta_{12}, \\dots, \\beta_{p1}, \\beta_{p2}, \\epsilon_1, \\dots, \\epsilon_n, M}{\\text{max}} \\quad & M \\\\\n\\text{s.t.}\n\\quad &  y_i\\left(\\beta_0 + \\sum_{i = 1}^n \\beta_{j1}x_{ij} + \\sum_{i = 1}^n \\beta_{j2}x_{ij}^2\\right) \\geq M(1 - \\epsilon_i), \\\\\n  \\quad & \\epsilon_i \\ge 0, \\sum_{i=1}^n\\epsilon_i \\le B, \\,\\, i = 1, \\ldots, n,\\\\\n  \\quad & \\sum_{j=1}^p\\sum_{k=1}^2\\beta_{jk}^2 = 1.\n\\end{align}\\]\n\nIn the enlarged feature space, the decision boundary that results from (9.16) is in fact linear. But in the original feature space, the decision boundary is of the form q(x) = 0, where q is a quadratic polynomial, and its solutions are generally non-linear.\nThe support vector machine, which we present next, allows us to enlarge the feature space used by the support vector classifier in a way that leads to efficient computations"
   },
   {
+    "objectID": "slides/13-svm.html#enlarge-feature-space",
+    "href": "slides/13-svm.html#enlarge-feature-space",
+    "title": "Support Vector Machines \n",
+    "section": "Enlarge Feature Space",
+    "text": "Enlarge Feature Space\n\n\n\n\n\nSource: https://teazrq.github.io/stat542/notes/SVM.pdf"
+  },
+  {
+    "objectID": "slides/13-svm.html#nonlinear-boundaries",
+    "href": "slides/13-svm.html#nonlinear-boundaries",
+    "title": "Support Vector Machines \n",
+    "section": "Nonlinear Boundaries",
+    "text": "Nonlinear Boundaries\n\n\n\n\n\nSource: https://teazrq.github.io/stat542/notes/SVM.pdf"
+  },
+  {
     "objectID": "slides/13-svm.html#solution-to-support-vector-classifier",
     "href": "slides/13-svm.html#solution-to-support-vector-classifier",
     "title": "Support Vector Machines \n",
@@ -2636,7 +2650,7 @@
     "href": "slides/13-svm.html#loss-functions",
     "title": "Support Vector Machines \n",
     "section": "Loss Functions",
-    "text": "Loss Functions\n\n\n\nThe hinge loss is zero for observations for which \\(y_i (\\mathbf{x}' \\boldsymbol \\beta+ \\beta_0) \\ge 1\\) (correct side of the margin).\nThe logistic loss is not zero anywhere.\nSVM is better when classes are well separated.\nLogistic regression is preferred in more overlapping regimes.\n\n\n\n\n\n\n\n\n\n\n\n, but small for points far from the boundary."
+    "text": "Loss Functions\n\n\n\nThe hinge loss is zero for observations for which \\(y_i (\\mathbf{x}' \\boldsymbol \\beta+ \\beta_0) \\ge 1\\) (correct side of the margin).\nThe logistic loss is not zero anywhere.\nSVM is better when classes are well separated.\nLogistic regression is preferred in more overlapping regimes.\n\n\n\n\n\n\n\n\n\n\n\n\n, but small for points far from the boundary.\n\n\n\n\nmssc6250-s25.github.io/website"
   },
   {
     "objectID": "slides/10-generative.html#bayes-classifier",
@@ -3843,17 +3857,355 @@
     ]
   },
   {
-    "objectID": "slides/13-svm.html#enlarge-feature-space",
-    "href": "slides/13-svm.html#enlarge-feature-space",
-    "title": "Support Vector Machines \n",
-    "section": "Enlarge Feature Space",
-    "text": "Enlarge Feature Space\n\n\n\n\n\nSource: https://teazrq.github.io/stat542/notes/SVM.pdf"
+    "objectID": "slides/14-tree.html#tree-based-methods",
+    "href": "slides/14-tree.html#tree-based-methods",
+    "title": "Tree-based Methods \n",
+    "section": "Tree-based Methods",
+    "text": "Tree-based Methods\n\nCan be used for regression and classification.\nIDEA: Segmenting the predictor space into many simple regions.\nSimple, useful for interpretation, and has nice graphical representation.\nNot competitive with the best supervised learning approaches in terms of prediction accuracy. (Large bias)\nCombining a large number of trees (ensembles) often results in improvements in prediction accuracy, at the expense of some loss interpretation."
   },
   {
-    "objectID": "slides/13-svm.html#nonlinear-boundaries",
-    "href": "slides/13-svm.html#nonlinear-boundaries",
-    "title": "Support Vector Machines \n",
-    "section": "Nonlinear Boundaries",
-    "text": "Nonlinear Boundaries\n\n\n\n\n\nSource: https://teazrq.github.io/stat542/notes/SVM.pdf"
+    "objectID": "slides/14-tree.html#decision-trees-classification-and-regression-trees-cart",
+    "href": "slides/14-tree.html#decision-trees-classification-and-regression-trees-cart",
+    "title": "Tree-based Methods \n",
+    "section": "Decision Trees: Classification and Regression Trees (CART)",
+    "text": "Decision Trees: Classification and Regression Trees (CART)\n\nCART is a nonparametric method that recursively partitions the feature space into hyper-rectangular subsets (boxes), and make prediction on each subset.\nDivide the predictor space — the set of possible values for \\(X_1, X_2, \\dots, X_p\\) — into \\(J\\) distinct and non-overlapping regions, \\(R_1, R_2, \\dots, R_J\\).\n\n\n\n\nFor every test point that falls into the region \\(R_j\\) , we make the same prediction:\n\n\nRegression: the mean of the response values for the training points in \\(R_j\\), i.e., \\(\\hat{y}_{R_j} = \\sum_{k \\in R_j} y_k / |R_j|\\)\n\n\nClassification: the most commonly occurring class of training points in \\(R_j\\), i.e., \\(\\hat{y}_{R_j} = \\underset{c}{\\text{arg max}} \\, \\,\\# (y_k = c)\\), \\(y_k \\in R_j\\)."
+  },
+  {
+    "objectID": "slides/14-tree.html#recursive-binary-splitting",
+    "href": "slides/14-tree.html#recursive-binary-splitting",
+    "title": "Tree-based Methods \n",
+    "section": "Recursive Binary Splitting",
+    "text": "Recursive Binary Splitting\n\nComputationally infeasible to consider every possible partition of the feature space into arbitrary \\(J\\) boxes.\n\n\n\n\n\nThe recursive binary splitting is top-down and greedy:\n\n\nTop-down: begins at the top of the tree (the entire \\(X\\) space)\n\nGreedy: at each step, the best split is made at that particular step, rather than looking ahead and picking a split that will lead to a better tree in some future step.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSelect \\(X_j\\) and a cutoff \\(s\\) so that splitting the predictor space into \\(\\{\\mathbf{X}\\mid X_j &lt; s \\}\\) and \\(\\{\\mathbf{X}\\mid X_j \\ge s \\}\\) leads to the greatest reduction in\n\n\n\\(SS_{res}\\) for regression\n\nGini index, entropy or misclassification rate for classification\n\n\nRepeatedly split one of the two previously identified regions until a stopping criterion is reached.\n\nat each step of the tree-building process"
+  },
+  {
+    "objectID": "slides/14-tree.html#classification-tree",
+    "href": "slides/14-tree.html#classification-tree",
+    "title": "Tree-based Methods \n",
+    "section": "Classification Tree",
+    "text": "Classification Tree\n\n\n\nKNN requires K and a distance measure.\nSVM requires kernels.\nTree solves this by recursively partitioning the feature space using a binary splitting rule \\(\\mathbf{1}\\{x \\le c \\}\\)\n0: Red; 1: Blue"
+  },
+  {
+    "objectID": "slides/14-tree.html#classification-tree-1",
+    "href": "slides/14-tree.html#classification-tree-1",
+    "title": "Tree-based Methods \n",
+    "section": "Classification Tree",
+    "text": "Classification Tree\nIf \\(x_2 &lt; -0.64\\), \\(y = 0\\)."
+  },
+  {
+    "objectID": "slides/14-tree.html#classification-tree-2",
+    "href": "slides/14-tree.html#classification-tree-2",
+    "title": "Tree-based Methods \n",
+    "section": "Classification Tree",
+    "text": "Classification Tree\nIf \\(x_2 \\ge -0.64\\) and \\(x_1 \\ge 0.69\\), \\(y = 0\\)."
+  },
+  {
+    "objectID": "slides/14-tree.html#classification-tree-3",
+    "href": "slides/14-tree.html#classification-tree-3",
+    "title": "Tree-based Methods \n",
+    "section": "Classification Tree",
+    "text": "Classification Tree\nIf \\(x_2 \\ge -0.64\\), \\(x_1 &lt; 0.69\\), and \\(x_2 \\ge 0.75\\), \\(y = 0\\)."
+  },
+  {
+    "objectID": "slides/14-tree.html#classification-tree-4",
+    "href": "slides/14-tree.html#classification-tree-4",
+    "title": "Tree-based Methods \n",
+    "section": "Classification Tree",
+    "text": "Classification Tree\nIf \\(x_2 \\ge -0.64\\), \\(x_1 &lt; 0.69\\), \\(x_2 &lt; 0.75\\), and \\(x_1 &lt; -0.69\\), \\(y = 0\\)."
+  },
+  {
+    "objectID": "slides/14-tree.html#classification-tree-5",
+    "href": "slides/14-tree.html#classification-tree-5",
+    "title": "Tree-based Methods \n",
+    "section": "Classification Tree",
+    "text": "Classification Tree\nStep 5 may not be beneficial."
+  },
+  {
+    "objectID": "slides/14-tree.html#classification-tree-6",
+    "href": "slides/14-tree.html#classification-tree-6",
+    "title": "Tree-based Methods \n",
+    "section": "Classification Tree",
+    "text": "Classification Tree\nStep 6 may not be beneficial. (Could overfit)"
+  },
+  {
+    "objectID": "slides/14-tree.html#classification-tree-7",
+    "href": "slides/14-tree.html#classification-tree-7",
+    "title": "Tree-based Methods \n",
+    "section": "Classification Tree",
+    "text": "Classification Tree\nStep 7 may not be beneficial. (Could overfit)"
+  },
+  {
+    "objectID": "slides/14-tree.html#misclassification-rate",
+    "href": "slides/14-tree.html#misclassification-rate",
+    "title": "Tree-based Methods \n",
+    "section": "Misclassification Rate",
+    "text": "Misclassification Rate\n\nThe classification error rate is the fraction of the training observations in the region that do not belong to the most common class: \\[1 - \\max_{k} (\\hat{p}_{mk})\\] where \\(\\hat{p}_{mk}\\) is the proportion of training observations in the \\(m\\)th region that are from the \\(k\\)th class.\nIt is not sensitive for tree-growing.\nHope to have nodes (regions) including training points that belong to only one class."
+  },
+  {
+    "objectID": "slides/14-tree.html#gini-index-impurity",
+    "href": "slides/14-tree.html#gini-index-impurity",
+    "title": "Tree-based Methods \n",
+    "section": "Gini Index (Impurity)",
+    "text": "Gini Index (Impurity)\nThe Gini index is defined by\n\\[\\sum_{k=1}^K \\hat{p}_{mk}(1 - \\hat{p}_{mk})\\] which is a measure of total variance across the \\(K\\) classes.\n\nGini is small if all of the \\(\\hat{p}_{mk}\\)s are close to zero or one.\nNode purity: a small value indicates that a node contains predominantly observations from a single class."
+  },
+  {
+    "objectID": "slides/14-tree.html#shannon-entropy",
+    "href": "slides/14-tree.html#shannon-entropy",
+    "title": "Tree-based Methods \n",
+    "section": "Shannon Entropy",
+    "text": "Shannon Entropy\nThe Shannon entropy is defined as\n\\[- \\sum_{k=1}^K \\hat{p}_{mk} \\log(\\hat{p}_{mk}).\\]\n\nThe entropy is near zero if the \\(\\hat{p}_{mk}\\)s are all near zero or one.\nGini index and the entropy are similar numerically.\n\nAny of these three approaches might be used when pruning the tree, but the classification error rate is preferable if prediction accuracy of the final pruned tree is the goal."
+  },
+  {
+    "objectID": "slides/14-tree.html#comparing-measures",
+    "href": "slides/14-tree.html#comparing-measures",
+    "title": "Tree-based Methods \n",
+    "section": "Comparing Measures",
+    "text": "Comparing Measures\n\nUse Gini and Entropy for training (building a tree), and use error rate for evaluating predictive accuracy.\n\n\nFor each quantity, smaller value means that the node is more “pure”, hence, there is a higher certainty when we predict a new value. The idea of splitting a node is that, we want the two resulting child node to contain less variation. In other words, we want each child node to be as “pure” as possible."
+  },
+  {
+    "objectID": "slides/14-tree.html#regression-tree",
+    "href": "slides/14-tree.html#regression-tree",
+    "title": "Tree-based Methods \n",
+    "section": "Regression Tree",
+    "text": "Regression Tree\nThe goal is to find boxes \\(R_1, \\dots ,R_J\\) that minimize the \\(SS_{res}\\), given by \\[\\sum_{j=1}^J\\sum_{i \\in R_j}\\left( y_i - \\hat{y}_{R_j}\\right)^2\\] where \\(\\hat{y}_{R_j}\\) is the mean response for the training observations within \\(R_j\\).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSource: ISL Fig 8.3"
+  },
+  {
+    "objectID": "slides/14-tree.html#tree-pruning",
+    "href": "slides/14-tree.html#tree-pruning",
+    "title": "Tree-based Methods \n",
+    "section": "Tree Pruning",
+    "text": "Tree Pruning\n\nUsing regression and classification performance measures to grow trees with no penalty on the tree size leads to overfitting.\n\n\n\n\nCost complexity pruning:\n\nGiven the largest tree \\(T_{max}\\),\n\\[\\begin{align}\n\\min_{T \\subset T_{max}} \\sum_{m=1}^{|T|}\\sum_{i:x_i\\in R_m} \\left( y_i - \\hat{y}_{R_m}\\right)^2 +  \\alpha|T|\n\\end{align}\\] where \\(|T|\\) indicates the number of terminal nodes of the tree \\(T\\).\n\nLarge \\(\\alpha\\) results in small trees\nChoose \\(\\alpha\\) using CV\nAlgorithm 8.1 in ISL for building a regression tree.\nFor classification, replace \\(SS_{res}\\) with a classification performance measure."
+  },
+  {
+    "objectID": "slides/14-tree.html#implementation",
+    "href": "slides/14-tree.html#implementation",
+    "title": "Tree-based Methods \n",
+    "section": "Implementation",
+    "text": "Implementation\n\nrpart::rpart()\n\n\nlibrary(rpart)\nrpart::rpart(formula = y ~ x1 + x2, data)\n\n\n\ntree::tree()\n\n\nlibrary(tree)\ntree::tree(formula = y ~ x1 + x2, data)\n\n\n\nsklearn tree\n\n\nfrom sklearn import tree\ndtc = tree.DecisionTreeClassifier()\ndtc = dtc.fit(X, y)\ndtr = tree.DecisionTreeRegressor()\ndtr = dtr.fit(X, y)"
+  },
+  {
+    "objectID": "slides/14-tree.html#trees-v.s.-linear-regression",
+    "href": "slides/14-tree.html#trees-v.s.-linear-regression",
+    "title": "Tree-based Methods \n",
+    "section": "Trees v.s. Linear Regression",
+    "text": "Trees v.s. Linear Regression\n\n\nLinear regression\n\\[f(X) = \\beta_0 + \\sum_{j=1}^pX_j\\beta_j\\]\n\nPerforms better when the relationship between \\(y\\) and \\(x\\) is approximately linear.\n\n\nRegression tree\n\\[f(X) = \\sum_{j=1}^J \\hat{y}_{R_j}\\mathbf{1}(\\mathbf{X}\\in R_j)\\]\n\nPerforms better when there is a highly nonlinear and complex relationship between \\(y\\) and \\(x\\).\nPreferred for interpretability and visualization."
+  },
+  {
+    "objectID": "slides/14-tree.html#trees-v.s.-linear-models",
+    "href": "slides/14-tree.html#trees-v.s.-linear-models",
+    "title": "Tree-based Methods \n",
+    "section": "Trees v.s. Linear Models",
+    "text": "Trees v.s. Linear Models\n\n\n\n\n\nSource: ISL Fig 8.7"
+  },
+  {
+    "objectID": "slides/14-tree.html#ensemble-methods",
+    "href": "slides/14-tree.html#ensemble-methods",
+    "title": "Tree-based Methods \n",
+    "section": "Ensemble Methods",
+    "text": "Ensemble Methods\n\nAn ensemble method combines many weak learners (unstable, less accurate) to obtain a single and powerful model.\nThe CARTs suffer from high variance.\nIf independent \\(Z_1, \\dots, Z_n\\) have variance \\(\\sigma^2\\), then \\(\\bar{Z}\\) has variance \\(\\sigma^2/n\\).\nAveraging a set of observations reduces variance!\n\n\nWith \\(B\\) separate training sets,\n\\[\\hat{f}_{avg}(x) = \\frac{1}{B}\\sum_{b=1}^B\\hat{f}_{b}(x)\\]"
+  },
+  {
+    "objectID": "slides/14-tree.html#bagging",
+    "href": "slides/14-tree.html#bagging",
+    "title": "Tree-based Methods \n",
+    "section": "Bagging",
+    "text": "Bagging\n\n\n\n\nBootstrap aggregation, or bagging is a procedure for reducing variance.\n\n\nGenerate \\(B\\) bootstrap samples by repeatedly sampling with replacement from the training set \\(B\\) times.\n\n\\[\\hat{f}_{bag}(x) = \\frac{1}{B}\\sum_{b=1}^B\\hat{f}^*_{b}(x)\\]\n\n\n\n\n\n\nSource: Wiki page of bootstrap aggregating\n\n\n\n\n\nBagging works for many regression methods, but it is particularly useful for decision trees."
+  },
+  {
+    "objectID": "slides/14-tree.html#bagging-on-decision-trees",
+    "href": "slides/14-tree.html#bagging-on-decision-trees",
+    "title": "Tree-based Methods \n",
+    "section": "Bagging on Decision Trees",
+    "text": "Bagging on Decision Trees\n\n\n\n\n\nSource: Wiki page of ensemble learning"
+  },
+  {
+    "objectID": "slides/14-tree.html#cart-v.s.-bagging",
+    "href": "slides/14-tree.html#cart-v.s.-bagging",
+    "title": "Tree-based Methods \n",
+    "section": "CART v.s. Bagging",
+    "text": "CART v.s. Bagging\n\nFor CART, the decision line has to be aligned to axis.\nFor Bagging, \\(B = 200\\) each having 400 training points. Boundaries are smoother."
+  },
+  {
+    "objectID": "slides/14-tree.html#notes-of-bagging",
+    "href": "slides/14-tree.html#notes-of-bagging",
+    "title": "Tree-based Methods \n",
+    "section": "Notes of Bagging",
+    "text": "Notes of Bagging\n\nUsing a large \\(B\\) will not lead to overfitting.\nUse \\(B\\) sufficiently large that the error has settled down.\nBagging improves prediction accuracy at the expense of interpretability.\n\n\n\n\nWhen different trees are highly correlated, simply averaging is not very effective.\n\nIf there is one very strong predictor, in the collection of bagged trees, all of the trees will use this strong predictor in the top split. Therefore, all of the bagged trees will look similar to each other.\n\n\nThe predictions from the bagged trees will be highly correlated, and hence averaging does not lead to as large reduction in variance.\n\n\nUse many trees and averaging. It is no longer clear which variables are most important to the procedure.\nIf there is one very strong predictor in the data set, in the collection of bagged trees, most or all of the trees will use this strong predictor in the top split. Therefore, all of the bagged trees will look quite similar to each other.\nThe predictions from the bagged trees will be highly correlated, and hence averaging does not lead to as large reduction in variance."
+  },
+  {
+    "objectID": "slides/14-tree.html#random-forests",
+    "href": "slides/14-tree.html#random-forests",
+    "title": "Tree-based Methods \n",
+    "section": "Random Forests",
+    "text": "Random Forests\n\n\n\nRandom forests improve bagged trees by decorrelating the trees.\n\\(m\\) predictors are randomly sampled as split candidates from the \\(p\\) predictors.\n\n\n\n\n\n\n\n\n\n\n\n\n\nSource: Multivariate Statistical Machine Learning Methods for Genomic Prediction, Lopez et al. (2022)\n\n\n\n\n\n\nWhen building decision trees, each time a split in a tree is considered, a random sample of \\(m\\) predictors is chosen as split candidates from the full set of \\(p\\) predictors.\nThe split is allowed to use only one of those \\(m\\) predictors."
+  },
+  {
+    "objectID": "slides/14-tree.html#random-forests-1",
+    "href": "slides/14-tree.html#random-forests-1",
+    "title": "Tree-based Methods \n",
+    "section": "Random Forests",
+    "text": "Random Forests\n\n\\(m \\approx \\sqrt{p}\\) for classification; \\(m \\approx p/3\\) for regression.\nDecorrelating: on average \\((p − m)/p\\) of the splits will not even consider the strong predictor, and so other predictors will have more of a chance.\nIf \\(m = p\\), random forests = bagging.\nThe improvement is significant when \\(p\\) is large."
+  },
+  {
+    "objectID": "slides/14-tree.html#cart-vs.-bagging-vs.-random-forests",
+    "href": "slides/14-tree.html#cart-vs.-bagging-vs.-random-forests",
+    "title": "Tree-based Methods \n",
+    "section": "CART vs. Bagging vs. Random Forests",
+    "text": "CART vs. Bagging vs. Random Forests\n\n\nrandomForest::randomForest(x, y, mtry, ntree, nodesize, sampsize)    \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnodesize: Minimum size of terminal nodes. Setting this number larger causes smaller trees to be grown sampsize: Size(s) of sample to draw. ntree: Number of trees to grow. mtry: Number of variables randomly sampled as candidates at each split."
+  },
+  {
+    "objectID": "slides/14-tree.html#boosting",
+    "href": "slides/14-tree.html#boosting",
+    "title": "Tree-based Methods \n",
+    "section": "Boosting",
+    "text": "Boosting\n\n\nBagging\n\nTrees are built on independent bootstrap data sets.\nTrees are grown deep.\nLarge number of trees (\\(B\\)) won’t overfit.\n\n\nBoosting\n\nTrees are grown sequentially: each tree is grown using information from previously grown trees.\nEach tree is fit on a modified version of the original data set, the residuals/false predictions!\nTrees are rather small (weak learner).\nLarge \\(B\\) can overfit."
+  },
+  {
+    "objectID": "slides/14-tree.html#boosting-1",
+    "href": "slides/14-tree.html#boosting-1",
+    "title": "Tree-based Methods \n",
+    "section": "Boosting",
+    "text": "Boosting\n\n\n\n\n\n\n\nSource: https://pub.towardsai.net/bagging-vs-boosting-the-power-of-ensemble-methods-in-machine-learning-6404e33524e6\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nhttps://pub.towardsai.net/bagging-vs-boosting-the-power-of-ensemble-methods-in-machine-learning-6404e33524e6 - [Boosting can also be applied to many models, but most effectively applied to decision trees.] - Bagging trees are grown deep, but Boosting trees are rather small."
+  },
+  {
+    "objectID": "slides/14-tree.html#boosting-for-classification",
+    "href": "slides/14-tree.html#boosting-for-classification",
+    "title": "Tree-based Methods \n",
+    "section": "Boosting for Classification",
+    "text": "Boosting for Classification\n\n\ndistribution = \"bernoulli\": LogitBoost\n\n\n\ngbm.fit = gbm::gbm(y ~ ., data = data.frame(x1, x2, y), \n                   distribution = \"bernoulli\", \n                   n.trees = 10000, shrinkage = 0.01, bag.fraction = 0.6, \n                   interaction.depth = 2, cv.folds = 10)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nshrinkage: a shrinkage parameter applied to each tree in the expansion. bag.fraction: the fraction of the training set observations randomly selected to propose the next tree in the expansion. interaction.depth: Integer specifying the maximum depth of each tree n.trees: Integer specifying the total number of trees to fit."
+  },
+  {
+    "objectID": "slides/14-tree.html#boosting-cross-validation",
+    "href": "slides/14-tree.html#boosting-cross-validation",
+    "title": "Tree-based Methods \n",
+    "section": "Boosting Cross Validation",
+    "text": "Boosting Cross Validation\n\ngbm.perf(gbm.fit, method = \"cv\")\n\n\n[1] 1181"
+  },
+  {
+    "objectID": "slides/14-tree.html#boosting-for-regression",
+    "href": "slides/14-tree.html#boosting-for-regression",
+    "title": "Tree-based Methods \n",
+    "section": "Boosting for Regression",
+    "text": "Boosting for Regression\n\ngbm.fit &lt;- gbm::gbm(y ~ x, data = data.frame(x, y), \n                    distribution = \"gaussian\", n.trees = 300,\n                    shrinkage = 0.5, bag.fraction = 0.8, cv.folds = 10)"
+  },
+  {
+    "objectID": "slides/14-tree.html#boosting-for-regression-1",
+    "href": "slides/14-tree.html#boosting-for-regression-1",
+    "title": "Tree-based Methods \n",
+    "section": "Boosting for Regression",
+    "text": "Boosting for Regression"
+  },
+  {
+    "objectID": "slides/14-tree.html#other-topics",
+    "href": "slides/14-tree.html#other-topics",
+    "title": "Tree-based Methods \n",
+    "section": "Other Topics",
+    "text": "Other Topics\n\n\nAdaBoost (Adaptive Boosting) gbm(y ~ ., distribution = \"adaboost\")\n\nGradient Boosting/Extreme Gradient Boosting (XGBoost) xgboost\n\nhttp://uc-r.github.io/gbm_regression\nhttps://xgboost.readthedocs.io/en/stable/R-package/xgboostPresentation.html\nhttps://github.com/dmlc/xgboost\nhttps://cran.r-project.org/web/packages/xgboost/xgboost.pdf\n\n\nBayesian Additive Regression Trees (BART) (ISL Sec. 8.2.4)\n\nhttps://jamleecute.web.app/gradient-boosting-machines-gbm/"
+  },
+  {
+    "objectID": "code/14-tree-code.html",
+    "href": "code/14-tree-code.html",
+    "title": "14 - Tree Methods Code Demo",
+    "section": "",
+    "text": "Code# generate some data \nset.seed(2025)\nn &lt;- 1000\nx1 &lt;- runif(n, -1, 1)\nx2 &lt;- runif(n, -1, 1)\ny &lt;- rbinom(n, size = 1, prob = ifelse((x1 + x2 &gt; -0.5) & (x1 + x2 &lt; 0.5) , 0.8, 0.2))\nxgrid &lt;- expand.grid(x1 = seq(-1, 1, 0.01), x2 = seq(-1, 1, 0.01))\n\n\n\n\n\nCodelibrary(rpart)\nrpart_fit &lt;- rpart(as.factor(y) ~ x1 + x2, data = data.frame(x1, x2, y))\npred &lt;- matrix(predict(rpart_fit, xgrid, type = \"class\") == 1, 201, 201)\ncontour(seq(-1, 1, 0.01), seq(-1, 1, 0.01), pred, levels = 0.5, labels = \"\",\n        lwd = 3)\npoints(xgrid, pch = \".\", cex = 0.2, col = ifelse(pred, \"lightblue\", \"pink\"))\npoints(x1, x2, col = ifelse(y == 1, 4, 2), pch = 19, yaxt = \"n\", xaxt = \"n\")\nbox()\ntitle(main = list(\"CART\"))\n\n\n\n\n\n\n\n\nCodepar(mar = c(0.5, 0, 0.5, 0))\nplot(rpart_fit)\ntext(rpart_fit, cex = 0.8)\n\n\n\n\n\n\n\n\n\nrpart() uses the 10-fold CV (xval in rpart.control())\n\ncp is the complexity parameter\n\n\nCoderpart.control(minsplit = 20, minbucket = round(minsplit/3), cp = 0.01, \n              maxcompete = 4, maxsurrogate = 5, usesurrogate = 2, xval = 10,\n              surrogatestyle = 0, maxdepth = 30, ...)\n\n\n\nCoderpart_fit$cptable\n\n          CP nsplit rel error    xerror       xstd\n1 0.06485356      0 1.0000000 1.0000000 0.03304618\n2 0.05857741      3 0.7845188 0.9058577 0.03277990\n3 0.05439331      4 0.7259414 0.8284519 0.03235476\n4 0.03242678      5 0.6715481 0.7050209 0.03127115\n5 0.02719665      9 0.5418410 0.6401674 0.03048685\n6 0.01464435     10 0.5146444 0.6087866 0.03004981\n7 0.01359833     11 0.5000000 0.5732218 0.02950636\n8 0.01000000     13 0.4728033 0.5732218 0.02950636\n\n\n\nCodeplotcp(rpart_fit)\n\n\n\n\n\n\n\n\nCodeprunedtree &lt;- prune(rpart_fit, cp = 0.012)\nprunedtree\n\nn= 1000 \n\nnode), split, n, loss, yval, (yprob)\n      * denotes terminal node\n\n  1) root 1000 478 0 (0.5220000 0.4780000)  \n    2) x1&gt;=0.8238083 93  26 0 (0.7204301 0.2795699)  \n      4) x2&gt;=-0.4195459 74  10 0 (0.8648649 0.1351351) *\n      5) x2&lt; -0.4195459 19   3 1 (0.1578947 0.8421053) *\n    3) x1&lt; 0.8238083 907 452 0 (0.5016538 0.4983462)  \n      6) x2&lt; -0.546795 203  69 0 (0.6600985 0.3399015)  \n       12) x1&lt; 0.3121958 145  27 0 (0.8137931 0.1862069) *\n       13) x1&gt;=0.3121958 58  16 1 (0.2758621 0.7241379) *\n      7) x2&gt;=-0.546795 704 321 1 (0.4559659 0.5440341)  \n       14) x2&gt;=0.5828916 189  74 0 (0.6084656 0.3915344)  \n         28) x1&gt;=-0.1670433 115  23 0 (0.8000000 0.2000000) *\n         29) x1&lt; -0.1670433 74  23 1 (0.3108108 0.6891892) *\n       15) x2&lt; 0.5828916 515 206 1 (0.4000000 0.6000000)  \n         30) x1&lt; -0.9438582 17   2 0 (0.8823529 0.1176471) *\n         31) x1&gt;=-0.9438582 498 191 1 (0.3835341 0.6164659)  \n           62) x1&gt;=0.192903 169  79 1 (0.4674556 0.5325444)  \n            124) x2&gt;=-0.1156255 97  33 0 (0.6597938 0.3402062) *\n            125) x2&lt; -0.1156255 72  15 1 (0.2083333 0.7916667) *\n           63) x1&lt; 0.192903 329 112 1 (0.3404255 0.6595745)  \n            126) x2&lt; -0.2736896 80  31 0 (0.6125000 0.3875000)  \n              252) x1&lt; -0.05781444 57  16 0 (0.7192982 0.2807018) *\n              253) x1&gt;=-0.05781444 23   8 1 (0.3478261 0.6521739) *\n            127) x2&gt;=-0.2736896 249  63 1 (0.2530120 0.7469880)  \n              254) x1&lt; -0.568942 82  34 1 (0.4146341 0.5853659)  \n                508) x2&lt; 0.2270988 39  13 0 (0.6666667 0.3333333) *\n                509) x2&gt;=0.2270988 43   8 1 (0.1860465 0.8139535) *\n              255) x1&gt;=-0.568942 167  29 1 (0.1736527 0.8263473) *\n\n\n\nCoderpart.plot::rpart.plot(prunedtree)\n\n\n\n\n\n\n\n\nRead ISLR Sec 8.3 for tree() demo.\n\n\nCodelibrary(ipred)\nbag_fit &lt;- bagging(as.factor(y) ~ x1 + x2, data = data.frame(x1, x2, y), \n                   nbagg = 200, ns = 400)\npred &lt;- matrix(predict(prune(bag_fit), xgrid) == 1, 201, 201)\ncontour(seq(-1, 1, 0.01), seq(-1, 1, 0.01), pred, levels = 0.5, labels = \"\", \n        lwd = 3)\npoints(xgrid, pch = \".\", cex = 0.2, col = ifelse(pred, \"lightblue\", \"pink\"))\npoints(x1, x2, col = ifelse(y == 1, 4, 2), pch = 19, yaxt = \"n\", xaxt = \"n\")\nbox()\ntitle(main = list(\"Bagging\"))\n\n\n\n\n\n\n\n\n\nCodelibrary(randomForest)\n\nrandomForest 4.7-1.1\n\n\nType rfNews() to see new features/changes/bug fixes.\n\nCoderf_fit &lt;- randomForest(cbind(x1, x2), as.factor(y), ntree = 200, mtry = 1, \n                      nodesize = 20, sampsize = 400)\npred &lt;- matrix(predict(rf_fit, xgrid) == 1, 201, 201)\ncontour(seq(-1, 1, 0.01), seq(-1, 1, 0.01), pred, levels = 0.5, labels = \"\",\n        lwd = 3)\npoints(xgrid, pch = \".\", cex = 0.2, col = ifelse(pred, \"lightblue\", \"pink\"))\npoints(x1, x2, col = ifelse(y == 1, 4, 2), pch = 19, yaxt=\"n\", xaxt = \"n\")\nbox()\ntitle(main = list(\"Random Forests\", cex = 2))\n\n\n\n\n\n\n\n\n\nCodelibrary(gbm)\n\nLoaded gbm 2.2.2\n\n\nThis version of gbm is no longer under development. Consider transitioning to gbm3, https://github.com/gbm-developers/gbm3\n\nCodegbm_fit &lt;- gbm(y ~ ., data = data.frame(x1, x2, y), distribution = \"bernoulli\", \n               n.trees = 10000, shrinkage = 0.01, bag.fraction = 0.6, \n               interaction.depth = 2, cv.folds = 10)\nusetree &lt;- gbm.perf(gbm_fit, method = \"cv\", plot.it = FALSE)\nFx &lt;- predict(gbm_fit, xgrid, n.trees=usetree)\npred &lt;- matrix(1 / (1 + exp(-2 * Fx)) &gt; 0.5, 201, 201)\ncontour(seq(-1, 1, 0.01), seq(-1, 1, 0.01), pred, levels = 0.5, labels = \"\",\n        lwd = 3)\npoints(xgrid, pch = \".\", cex = 0.2, col = ifelse(pred, \"lightblue\", \"pink\"))\npoints(x1, x2, col = ifelse(y == 1, 4, 2), pch = 19, yaxt = \"n\", xaxt = \"n\")\nbox()\ntitle(main = list(\"Boosting\"))"
+  },
+  {
+    "objectID": "code/14-tree-code.html#cart",
+    "href": "code/14-tree-code.html#cart",
+    "title": "14 - Tree Methods Code Demo",
+    "section": "",
+    "text": "Codelibrary(rpart)\nrpart_fit &lt;- rpart(as.factor(y) ~ x1 + x2, data = data.frame(x1, x2, y))\npred &lt;- matrix(predict(rpart_fit, xgrid, type = \"class\") == 1, 201, 201)\ncontour(seq(-1, 1, 0.01), seq(-1, 1, 0.01), pred, levels = 0.5, labels = \"\",\n        lwd = 3)\npoints(xgrid, pch = \".\", cex = 0.2, col = ifelse(pred, \"lightblue\", \"pink\"))\npoints(x1, x2, col = ifelse(y == 1, 4, 2), pch = 19, yaxt = \"n\", xaxt = \"n\")\nbox()\ntitle(main = list(\"CART\"))\n\n\n\n\n\n\n\n\nCodepar(mar = c(0.5, 0, 0.5, 0))\nplot(rpart_fit)\ntext(rpart_fit, cex = 0.8)\n\n\n\n\n\n\n\n\n\nrpart() uses the 10-fold CV (xval in rpart.control())\n\ncp is the complexity parameter\n\n\nCoderpart.control(minsplit = 20, minbucket = round(minsplit/3), cp = 0.01, \n              maxcompete = 4, maxsurrogate = 5, usesurrogate = 2, xval = 10,\n              surrogatestyle = 0, maxdepth = 30, ...)\n\n\n\nCoderpart_fit$cptable\n\n          CP nsplit rel error    xerror       xstd\n1 0.06485356      0 1.0000000 1.0000000 0.03304618\n2 0.05857741      3 0.7845188 0.9058577 0.03277990\n3 0.05439331      4 0.7259414 0.8284519 0.03235476\n4 0.03242678      5 0.6715481 0.7050209 0.03127115\n5 0.02719665      9 0.5418410 0.6401674 0.03048685\n6 0.01464435     10 0.5146444 0.6087866 0.03004981\n7 0.01359833     11 0.5000000 0.5732218 0.02950636\n8 0.01000000     13 0.4728033 0.5732218 0.02950636\n\n\n\nCodeplotcp(rpart_fit)\n\n\n\n\n\n\n\n\nCodeprunedtree &lt;- prune(rpart_fit, cp = 0.012)\nprunedtree\n\nn= 1000 \n\nnode), split, n, loss, yval, (yprob)\n      * denotes terminal node\n\n  1) root 1000 478 0 (0.5220000 0.4780000)  \n    2) x1&gt;=0.8238083 93  26 0 (0.7204301 0.2795699)  \n      4) x2&gt;=-0.4195459 74  10 0 (0.8648649 0.1351351) *\n      5) x2&lt; -0.4195459 19   3 1 (0.1578947 0.8421053) *\n    3) x1&lt; 0.8238083 907 452 0 (0.5016538 0.4983462)  \n      6) x2&lt; -0.546795 203  69 0 (0.6600985 0.3399015)  \n       12) x1&lt; 0.3121958 145  27 0 (0.8137931 0.1862069) *\n       13) x1&gt;=0.3121958 58  16 1 (0.2758621 0.7241379) *\n      7) x2&gt;=-0.546795 704 321 1 (0.4559659 0.5440341)  \n       14) x2&gt;=0.5828916 189  74 0 (0.6084656 0.3915344)  \n         28) x1&gt;=-0.1670433 115  23 0 (0.8000000 0.2000000) *\n         29) x1&lt; -0.1670433 74  23 1 (0.3108108 0.6891892) *\n       15) x2&lt; 0.5828916 515 206 1 (0.4000000 0.6000000)  \n         30) x1&lt; -0.9438582 17   2 0 (0.8823529 0.1176471) *\n         31) x1&gt;=-0.9438582 498 191 1 (0.3835341 0.6164659)  \n           62) x1&gt;=0.192903 169  79 1 (0.4674556 0.5325444)  \n            124) x2&gt;=-0.1156255 97  33 0 (0.6597938 0.3402062) *\n            125) x2&lt; -0.1156255 72  15 1 (0.2083333 0.7916667) *\n           63) x1&lt; 0.192903 329 112 1 (0.3404255 0.6595745)  \n            126) x2&lt; -0.2736896 80  31 0 (0.6125000 0.3875000)  \n              252) x1&lt; -0.05781444 57  16 0 (0.7192982 0.2807018) *\n              253) x1&gt;=-0.05781444 23   8 1 (0.3478261 0.6521739) *\n            127) x2&gt;=-0.2736896 249  63 1 (0.2530120 0.7469880)  \n              254) x1&lt; -0.568942 82  34 1 (0.4146341 0.5853659)  \n                508) x2&lt; 0.2270988 39  13 0 (0.6666667 0.3333333) *\n                509) x2&gt;=0.2270988 43   8 1 (0.1860465 0.8139535) *\n              255) x1&gt;=-0.568942 167  29 1 (0.1736527 0.8263473) *\n\n\n\nCoderpart.plot::rpart.plot(prunedtree)\n\n\n\n\n\n\n\n\nRead ISLR Sec 8.3 for tree() demo."
+  },
+  {
+    "objectID": "code/14-tree-code.html#bagging",
+    "href": "code/14-tree-code.html#bagging",
+    "title": "14 - Tree Methods Code Demo",
+    "section": "",
+    "text": "Codelibrary(ipred)\nbag_fit &lt;- bagging(as.factor(y) ~ x1 + x2, data = data.frame(x1, x2, y), \n                   nbagg = 200, ns = 400)\npred &lt;- matrix(predict(prune(bag_fit), xgrid) == 1, 201, 201)\ncontour(seq(-1, 1, 0.01), seq(-1, 1, 0.01), pred, levels = 0.5, labels = \"\", \n        lwd = 3)\npoints(xgrid, pch = \".\", cex = 0.2, col = ifelse(pred, \"lightblue\", \"pink\"))\npoints(x1, x2, col = ifelse(y == 1, 4, 2), pch = 19, yaxt = \"n\", xaxt = \"n\")\nbox()\ntitle(main = list(\"Bagging\"))"
+  },
+  {
+    "objectID": "code/14-tree-code.html#random-forests",
+    "href": "code/14-tree-code.html#random-forests",
+    "title": "14 - Tree Methods Code Demo",
+    "section": "",
+    "text": "Codelibrary(randomForest)\n\nrandomForest 4.7-1.1\n\n\nType rfNews() to see new features/changes/bug fixes.\n\nCoderf_fit &lt;- randomForest(cbind(x1, x2), as.factor(y), ntree = 200, mtry = 1, \n                      nodesize = 20, sampsize = 400)\npred &lt;- matrix(predict(rf_fit, xgrid) == 1, 201, 201)\ncontour(seq(-1, 1, 0.01), seq(-1, 1, 0.01), pred, levels = 0.5, labels = \"\",\n        lwd = 3)\npoints(xgrid, pch = \".\", cex = 0.2, col = ifelse(pred, \"lightblue\", \"pink\"))\npoints(x1, x2, col = ifelse(y == 1, 4, 2), pch = 19, yaxt=\"n\", xaxt = \"n\")\nbox()\ntitle(main = list(\"Random Forests\", cex = 2))"
+  },
+  {
+    "objectID": "code/14-tree-code.html#boosting",
+    "href": "code/14-tree-code.html#boosting",
+    "title": "14 - Tree Methods Code Demo",
+    "section": "",
+    "text": "Codelibrary(gbm)\n\nLoaded gbm 2.2.2\n\n\nThis version of gbm is no longer under development. Consider transitioning to gbm3, https://github.com/gbm-developers/gbm3\n\nCodegbm_fit &lt;- gbm(y ~ ., data = data.frame(x1, x2, y), distribution = \"bernoulli\", \n               n.trees = 10000, shrinkage = 0.01, bag.fraction = 0.6, \n               interaction.depth = 2, cv.folds = 10)\nusetree &lt;- gbm.perf(gbm_fit, method = \"cv\", plot.it = FALSE)\nFx &lt;- predict(gbm_fit, xgrid, n.trees=usetree)\npred &lt;- matrix(1 / (1 + exp(-2 * Fx)) &gt; 0.5, 201, 201)\ncontour(seq(-1, 1, 0.01), seq(-1, 1, 0.01), pred, levels = 0.5, labels = \"\",\n        lwd = 3)\npoints(xgrid, pch = \".\", cex = 0.2, col = ifelse(pred, \"lightblue\", \"pink\"))\npoints(x1, x2, col = ifelse(y == 1, 4, 2), pch = 19, yaxt = \"n\", xaxt = \"n\")\nbox()\ntitle(main = list(\"Boosting\"))"
+  },
+  {
+    "objectID": "code/14-tree-code.html#cart-1",
+    "href": "code/14-tree-code.html#cart-1",
+    "title": "14 - Tree Methods Code Demo",
+    "section": "\n2.1 CART",
+    "text": "2.1 CART\n\nCodedt = DecisionTreeClassifier(random_state=2025)\nparam_grid = {\n    \"max_depth\": [3, 5, 7, 10],  # Control tree depth\n    \"min_samples_split\": [2, 5, 10],  # Minimum samples to split a node\n    \"min_samples_leaf\": [1, 5, 10]  # Minimum samples in a leaf node\n}\ngrid_search = GridSearchCV(dt, param_grid, cv=10, scoring=\"accuracy\")\ngrid_search.fit(np.c_[x1, x2], y)\n\n\n\n\nGridSearchCV(cv=10, estimator=DecisionTreeClassifier(random_state=2025),\n             param_grid={'max_depth': [3, 5, 7, 10],\n                         'min_samples_leaf': [1, 5, 10],\n                         'min_samples_split': [2, 5, 10]},\n             scoring='accuracy')\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\n\n  GridSearchCV?Documentation for GridSearchCViFittedGridSearchCV(cv=10, estimator=DecisionTreeClassifier(random_state=2025),\n             param_grid={'max_depth': [3, 5, 7, 10],\n                         'min_samples_leaf': [1, 5, 10],\n                         'min_samples_split': [2, 5, 10]},\n             scoring='accuracy') \n\n\nestimator: DecisionTreeClassifierDecisionTreeClassifier(random_state=2025) \n\n DecisionTreeClassifier?Documentation for DecisionTreeClassifierDecisionTreeClassifier(random_state=2025) \n\n\n\n\nCodebest_dt = grid_search.best_estimator_\nbest_pred = best_dt.predict(xgrid).reshape(201, 201)\n\nplt.figure()\nplt.contourf(x1_grid, x2_grid, best_pred, cmap=\"coolwarm\", alpha=0.3)\nplt.scatter(x1, x2, c=y, cmap=\"bwr\", s=15, alpha=0.7)\nplt.xlabel(\"x1\")\nplt.ylabel(\"x2\")\nplt.title(\"CART\")\nplt.show()"
+  },
+  {
+    "objectID": "code/14-tree-code.html#bagging-1",
+    "href": "code/14-tree-code.html#bagging-1",
+    "title": "14 - Tree Methods Code Demo",
+    "section": "\n2.2 Bagging",
+    "text": "2.2 Bagging\n\nCodefrom sklearn.ensemble import BaggingClassifier\n\n\n\nCodebagging_clf = BaggingClassifier(\n    estimator=DecisionTreeClassifier(),\n    n_estimators=200,  # Same as nbagg = 200 in R\n    max_samples=0.4,   # Equivalent to ns = 400 in R (approx)\n    random_state=2025\n)\nbagging_clf.fit(np.c_[x1, x2], y)\n\n\n\n\nBaggingClassifier(estimator=DecisionTreeClassifier(), max_samples=0.4,\n                  n_estimators=200, random_state=2025)\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\n\n  BaggingClassifier?Documentation for BaggingClassifieriFittedBaggingClassifier(estimator=DecisionTreeClassifier(), max_samples=0.4,\n                  n_estimators=200, random_state=2025) \n\n\nestimator: DecisionTreeClassifierDecisionTreeClassifier() \n\n DecisionTreeClassifier?Documentation for DecisionTreeClassifierDecisionTreeClassifier() \n\n\n\n\nCodebagging_pred = bagging_clf.predict(xgrid).reshape(201, 201)\nplt.figure()\nplt.contourf(x1_grid, x2_grid, bagging_pred, cmap=\"coolwarm\", alpha=0.3)\nplt.scatter(x1, x2, c=y, cmap=\"bwr\", s=15, alpha=0.7)\nplt.xlabel(\"x1\")\nplt.ylabel(\"x2\")\nplt.title(\"Bagging\")\nplt.show()"
+  },
+  {
+    "objectID": "code/14-tree-code.html#random-forests-1",
+    "href": "code/14-tree-code.html#random-forests-1",
+    "title": "14 - Tree Methods Code Demo",
+    "section": "\n2.3 Random Forests",
+    "text": "2.3 Random Forests\n\nCodefrom sklearn.ensemble import RandomForestClassifier\n\n\n\nCoderf_clf = RandomForestClassifier(\n    n_estimators=200,  # Equivalent to ntree = 200 in R\n    max_features=1,    # Equivalent to mtry = 1 in R\n    min_samples_leaf=20,  # Equivalent to nodesize = 20 in R\n    max_samples=400,  # Equivalent to sampsize = 400 in R\n    random_state=2025\n)\nrf_clf.fit(np.c_[x1, x2], y)\n\n\n\n\nRandomForestClassifier(max_features=1, max_samples=400, min_samples_leaf=20,\n                       n_estimators=200, random_state=2025)\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\n  RandomForestClassifier?Documentation for RandomForestClassifieriFittedRandomForestClassifier(max_features=1, max_samples=400, min_samples_leaf=20,\n                       n_estimators=200, random_state=2025) \n\n\nCoderf_pred = rf_clf.predict(xgrid).reshape(201, 201)\nplt.figure()\nplt.contourf(x1_grid, x2_grid, rf_pred, cmap=\"coolwarm\", alpha=0.3)\nplt.scatter(x1, x2, c=y, cmap=\"bwr\", s=15, alpha=0.7)\nplt.xlabel(\"x1\")\nplt.ylabel(\"x2\")\nplt.title(\"Random Forests\")\nplt.show()"
+  },
+  {
+    "objectID": "code/14-tree-code.html#boosting-1",
+    "href": "code/14-tree-code.html#boosting-1",
+    "title": "14 - Tree Methods Code Demo",
+    "section": "\n2.4 Boosting",
+    "text": "2.4 Boosting\n\nCodefrom sklearn.ensemble import GradientBoostingClassifier\nfrom sklearn.model_selection import cross_val_score\n\n\n\nCodegbm_clf = GradientBoostingClassifier(\n    n_estimators=10000,  # Equivalent to n.trees = 10000\n    learning_rate=0.01,  # Equivalent to shrinkage = 0.01\n    subsample=0.6,       # Equivalent to bag.fraction = 0.6\n    max_depth=2,         # Equivalent to interaction.depth = 2\n    random_state=2025\n)\ncv_scores = []\nfor n_trees in range(100, 2000, 100):  # Testing tree counts\n    gbm_clf.set_params(n_estimators=n_trees)\n    score = np.mean(cross_val_score(gbm_clf, np.c_[x1, x2], y, cv=10, scoring='accuracy'))\n    cv_scores.append((n_trees, score))\n\n\n\n\nGradientBoostingClassifier(learning_rate=0.01, max_depth=2, n_estimators=1900,\n                           random_state=2025, subsample=0.6)\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\n  GradientBoostingClassifier?Documentation for GradientBoostingClassifieriNot fittedGradientBoostingClassifier(learning_rate=0.01, max_depth=2, n_estimators=1900,\n                           random_state=2025, subsample=0.6) \n\n\nCodebest_n_trees = max(cv_scores, key=lambda x: x[1])[0]\ngbm_clf.set_params(n_estimators=best_n_trees)\n\n\n\n\nGradientBoostingClassifier(learning_rate=0.01, max_depth=2, n_estimators=500,\n                           random_state=2025, subsample=0.6)\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\n  GradientBoostingClassifier?Documentation for GradientBoostingClassifieriNot fittedGradientBoostingClassifier(learning_rate=0.01, max_depth=2, n_estimators=500,\n                           random_state=2025, subsample=0.6) \n\n\nCodegbm_clf.fit(np.c_[x1, x2], y)\n\n\n\n\nGradientBoostingClassifier(learning_rate=0.01, max_depth=2, n_estimators=500,\n                           random_state=2025, subsample=0.6)\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\n  GradientBoostingClassifier?Documentation for GradientBoostingClassifieriFittedGradientBoostingClassifier(learning_rate=0.01, max_depth=2, n_estimators=500,\n                           random_state=2025, subsample=0.6) \n\n\nCodeFx = gbm_clf.decision_function(xgrid)  # Raw output before sigmoid transformation\npred = (1 / (1 + np.exp(-2 * Fx)) &gt; 0.5).reshape(201, 201)\nplt.figure()\nplt.contourf(x1_grid, x2_grid, pred, cmap=\"coolwarm\", alpha=0.3)\nplt.scatter(x1, x2, c=y, cmap=\"bwr\", s=15, alpha=0.7)\nplt.xlabel(\"x1\")\nplt.ylabel(\"x2\")\nplt.title(\"Gradient Boosting\")\nplt.show()"
+  },
+  {
+    "objectID": "weeks/week-13.html",
+    "href": "weeks/week-13.html",
+    "title": "Week 13",
+    "section": "",
+    "text": "Important",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 13"
+    ]
+  },
+  {
+    "objectID": "weeks/week-13.html#participate",
+    "href": "weeks/week-13.html#participate",
+    "title": "Week 13",
+    "section": "Participate",
+    "text": "Participate\n🖥️ Slides - Tree-based Methods",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 13"
+    ]
+  },
+  {
+    "objectID": "weeks/week-13.html#reading",
+    "href": "weeks/week-13.html#reading",
+    "title": "Week 13",
+    "section": "Reading",
+    "text": "Reading\n📖 ISL Ch 8",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 13"
+    ]
+  },
+  {
+    "objectID": "weeks/week-13.html#exercise",
+    "href": "weeks/week-13.html#exercise",
+    "title": "Week 13",
+    "section": "Exercise",
+    "text": "Exercise\n\nr fontawesome::fa(\"table\") iris\n\n\nBack to course schedule ⏎",
+    "crumbs": [
+      "Weekly Materials",
+      "Week 13"
+    ]
   }
 ]

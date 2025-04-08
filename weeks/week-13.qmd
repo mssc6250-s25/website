@@ -1,0 +1,28 @@
+---
+title: "Week 13"
+subtitle: "Tree-based Methods"
+editor: visual
+---
+
+::: callout-important
+:::
+
+## Participate
+
+🖥️ [Slides - Tree-based Methods](/slides/14-tree.html)
+
+## Reading
+
+📖 [ISL Ch 8](https://www.statlearning.com/)
+
+## Exercise
+
+<!-- 📋 [Lab-23 Principal Component Analysis](/exercise/lab22-pca.html) -->
+
+`r fontawesome::fa("table")` `iris`
+
+<br><br>
+
+::: {style="font-size: 0.875em;"}
+Back to [course schedule](/ "Course schedule") ⏎
+:::

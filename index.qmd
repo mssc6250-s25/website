@@ -37,14 +37,14 @@ format:
 |  | Thu, Mar 27 | Gaussian Process Classification |  |  | [`r fontawesome::fa("file-code")`](code/12-gp-code.html "12-gp-code") |  |  |
 | 12 | Tue, Apr 1 | Support Vector Machine | [📖](/weeks/week-12.html "Week 11") | [🖥️](slides/13-svm.html "13-svm") |  |  |  |
 |  | Thu, Apr 3 | Support Vector Machine |  |  | [`r fontawesome::fa("file-code")`](code/13-svm-code.html "13-svm-code") | HW 3 Due |  |
-| 13 | Tue, Apr 8 | CART and Bagging | [📖](/weeks/week-13.html "Week 13") | [🖥️](slides/13-svm.html "13-svm") |  |  |  |
-|  | Thu, Apr 10 | Random Forests and Boosting |  |  | `r fontawesome::fa("file-code")` | ✍️ HW4 |  |
+| 13 | Tue, Apr 8 | CART and Bagging | [📖](/weeks/week-13.html "Week 13") | [🖥️](slides/14-tree.html "14-tree") |  |  |  |
+|  | Thu, Apr 10 | Random Forests and Boosting |  |  | [`r fontawesome::fa("file-code")`](code/14-tree-code.html "14-tree-code") | ✍️ HW4 |  |
 | 14 | Tue, Apr 15 | **Midterm Presentation II** | [📖](/weeks/week-14.html "Week 14") | [🖥️](slides/14-tree.html "14-tree") |  |  | ✅ |
 |  | Thu, Apr 17 | ***NO CLASS: Easter break*** |  |  |  |  |  |
 | 15 | Tue, Apr 22 | Principal Component Analysis | [📖](/weeks/week-15.html "Week 15") | [🖥️](slides/15-pca.html "15-pca") | `r fontawesome::fa("file-code")` |  |  |
 |  | Thu, Apr 24 | K-Means Clustering |  |  | `r fontawesome::fa("file-code")` |  |  |
 | 16 | Tue, Apr 29 | Model-based Clustering | [📖](/weeks/week-16.html "Week 16") | [🖥️](slides/16-clustering.html "16-clustering") | `r fontawesome::fa("file-code")` |  |  |
-|  | Thu, May 1 | Neural Networks |  |  | `r fontawesome::fa("file-code")` |  |  |
+|  | Thu, May 1 | Neural Networks |  |  | `r fontawesome::fa("file-code")` | HW 4 Due |  |
 | 17 | Thu, May 8 | **Final Project Submission** |  |  |  |  | ✅ |
 :::
 

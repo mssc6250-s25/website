@@ -1,0 +1,1523 @@
+---
+title: 'Tree-based Methods `r fontawesome::fa("tree")`'
+subtitle: "MSSC 6250 Statistical Machine Learning"
+author: "Dr. Cheng-Han Yu <br> Department of Mathematical and Statistical Sciences <br> Marquette University"
+# date: "`r format(Sys.time(), '%B %d %Y')`"
+# macros: _macros.tex # import a list of TeX/LaTeX definitions
+format: 
+  revealjs:
+    html-math-method:
+      method: mathjax
+      url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    # include-in-header:
+    #     - "macros.tex"
+    highlight-style: github
+    code-block-bg: true
+    self-contained: false
+    slide-number: c/t
+    incremental: false
+    width: 1800
+    height: 1000
+    margin: 0.05
+    logo: "https://upload.wikimedia.org/wikipedia/commons/e/e8/Marquette_Golden_Eagles_logo.svg"
+    footer: "[mssc6250-s25.github.io/website](https://mssc6250-s25.github.io/website/)"
+    theme: ["simple", "styles.scss"]
+    echo: false
+    multiplex: true
+    code-link: true
+    fig-cap-location: bottom
+    fig-align: center
+    transition: none ## fade slide convex concave zoom
+    code-line-numbers: false
+    title-slide-attributes:
+      data-background-color: "#447099"
+      # data-background-image: images/paper-texture.jpg
+      # data-background-size: cover
+      # data-background-color: "#698ED5"
+editor: source
+execute:
+  freeze: true
+  echo: false
+---
+
+
+# {visibility="hidden"}
+
+\def\cD{{\cal D}}
+\def\cL{{\cal L}}
+\def\cX{{\cal X}}
+\def\cF{{\cal F}}
+\def\cH{{\cal H}}
+\def\bA{\mathbf{A}}
+\def\bB{\mathbf{B}}
+\def\bX{\mathbf{X}}
+\def\bH{\mathbf{H}}
+\def\bI{\mathbf{I}}
+\def\bU{\mathbf{U}}
+\def\bD{\mathbf{D}}
+\def\bV{\mathbf{V}}
+\def\bS{\mathbf{S}}
+\def\bW{\mathbf{W}}
+\def\bK{\mathbf{K}}
+\def\bx{\mathbf{x}}
+\def\by{\mathbf{y}}
+\def\bs{\mathbf{s}}
+\def\br{\mathbf{r}}
+\def\bu{\mathbf{u}}
+\def\be{\mathbf{e}}
+\def\bv{\mathbf{v}}
+\def\bp{\mathbf{p}}
+\def\bw{\mathbf{w}}
+\def\bz{\mathbf{z}}
+\def\bzero{\mathbf{0}}
+\def\balpha{\boldsymbol \alpha}
+\def\bbeta{\boldsymbol \beta}
+\def\btheta{\boldsymbol \theta}
+\def\bxi{\boldsymbol \xi}
+\def\bmu{\boldsymbol \mu}
+\def\bepsilon{\boldsymbol \epsilon}
+\def\T{\text{T}}
+\def\Trace{\text{Trace}}
+\def\Cov{\text{Cov}}
+\def\Var{\text{Var}}
+\def\E{\text{E}}
+\def\pr{\text{pr}}
+\def\Prob{\text{P}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+
+
+```{r}
+#| label: setup
+#| include: false
+#| eval: true
+library(countdown)
+library(knitr)
+library(gt)
+library(gtExtras)
+library(ggplot2)
+library(ISLR2)
+library(genridge)
+library(glmnet)
+library(gam)
+library(splines)
+# library(ElemStatLearn)
+knitr::opts_chunk$set(
+    fig.asp = 0.618,
+    fig.align = "center",
+    out.width = "100%",
+    fig.retina = 10,
+    fig.path = "images/14-tree/",
+    message = FALSE,
+    global.par = TRUE
+)
+options(
+  htmltools.dir.version = FALSE,
+  dplyr.print_min = 6, 
+  dplyr.print_max = 6,
+  tibble.width = 80,
+  width = 80,
+  digits = 3
+  )
+hook_output <- knitr::knit_hooks$get("output")
+knitr::knit_hooks$set(output = function(x, options) {
+  lines <- options$output.lines
+  if (is.null(lines)) {
+    return(hook_output(x, options))  # pass to default hook
+  }
+  x <- unlist(strsplit(x, "\n"))
+  more <- "..."
+  if (length(lines)==1) {        # first n lines
+    if (length(x) > lines) {
+      # truncate the output, but add ....
+      x <- c(head(x, lines), more)
+    }
+  } else {
+    x <- c(more, x[lines], more)
+  }
+  # paste these lines together
+  x <- paste(c(x, ""), collapse = "\n")
+  hook_output(x, options)
+})
+```
+
+
+```{r}
+#| echo: false
+TreeSteps <- function(i, pt = TRUE)
+  {
+    if (pt == FALSE) {
+        type <- "n"
+    } else {
+        type <- "p"
+    }
+    plot(x1, x2, col = ifelse(y == 1, 4, 2), pch = 19, las = 1, cex = 1.3, xaxt='n', yaxt='n', type = type, xlab= "", ylab="")
+      
+    # the four cuts that are performing well
+    if(i > 0) lines(x = c(-1, 1), y = c(-0.6444322, -0.6444322), lwd = 4)
+    if(i > 1) lines(x = c(0.6941279, 0.6941279), y = c(-0.6444322, 1), lwd = 4)
+    if(i > 2) lines(x = c(-1, 0.6941279), y = c(0.7484327, 0.7484327), lwd = 4)
+    if(i > 3) lines(x = c(-0.6903174, -0.6903174), y = c(-0.6444322, 0.7484327), lwd = 4)
+    
+    # the model will go further, but they seem to be over-fitting
+    if(i > 4) lines(x = c(-0.6903174, 0.6941279), y = c(0.3801, 0.3801), 
+                    lwd = 4, lty = 2, col = "green4")
+    if(i > 5) lines(x = c(0.532, 0.532), y = c(0.3801, 0.7484327), 
+                    lwd = 4, lty = 2, col = "green4")
+    if(i > 6) lines(x = c(-0.4283, -0.4283), y = c(0.3801, 0.7484327), 
+                    lwd = 4, lty = 2, col = "green4")  
+  }
+```
+
+
+<!-- ## Tree-based Methods -->
+
+
+## Tree-based Methods
+
+- Can be used for regression and classification.
+
+- IDEA: *Segmenting the predictor space into many simple regions.*
+
+- Simple, useful for interpretation, and has nice graphical representation.
+
+- Not competitive with the best supervised learning approaches in terms of prediction accuracy. (Large bias)
+
+- Combining a large number of trees (**ensembles**) often results in improvements in prediction accuracy, at the expense of some loss interpretation.
+
+<!-- ## Adaptive  -->
+
+
+<!-- # Classification and Regression Trees (CART) -->
+
+## Decision Trees: Classification and Regression Trees (CART)
+
+- CART is a nonparametric method that *recursively partitions* the feature space into *hyper-rectangular* subsets (boxes), and make prediction on each subset.
+
+- Divide the predictor space — the set of possible values
+for $X_1, X_2, \dots, X_p$ — into $J$ distinct and non-overlapping regions, $R_1, R_2, \dots, R_J$.
+
+
+```{r}
+set.seed(1)
+n = 500
+x1 = runif(n, -1, 1)
+x2 = runif(n, -1, 1)
+y = rbinom(n, size = 1, prob = ifelse(x1^2 + x2^2 < 0.6, 0.9, 0.1))
+```
+
+
+```{r}
+par(mar = c(2.5, 2.5, 0, 0), mgp = c(1, 0.8, 0))
+TreeSteps(4, pt = FALSE)
+text(0, -0.8, "R1", cex = 2, font = 2)
+text(0.8, 0, "R2", cex = 2, font = 2)
+text(-0.1, 0.9, "R3", cex = 2, font = 2)
+text(-0.85, 0, "R4", cex = 2, font = 2)
+text(0, 0, "R5", cex = 2, font = 2)
+title(xlab = "X1", ylab = "X2", cex.lab = 2)
+# text(0.6, 0.6, "R6", cex = 2, font = 2)
+```
+
+. . .
+
+- For every test point that falls into the region $R_j$ , we make the [same]{.red}
+prediction:
+  + *Regression*: the [*mean of the response values*]{.green} for the training points in $R_j$, i.e., $\hat{y}_{R_j} = \sum_{k \in R_j} y_k / |R_j|$
+  + *Classification*: the [*most commonly occurring class*]{.green} of training points in $R_j$, i.e., $\hat{y}_{R_j} = \underset{c}{\text{arg max}} \, \,\# (y_k = c)$, $y_k \in R_j$.
+
+
+
+## Recursive Binary Splitting
+
+- Computationally infeasible to consider every possible partition of the feature space into arbitrary $J$ boxes.
+
+. . .
+
+:::: {.columns}
+
+::: {.column width="80%"}
+- The **recursive binary splitting** is *top-down* and *greedy*:
+  + [Top-down]{.green}: begins at the top of the tree (the entire $X$ space)
+  + [Greedy]{.green}: at each step, the *best* split is made at that particular step, rather than looking ahead and picking a split that will lead to a better tree in some future step.
+  
+:::
+
+::: {.column width="20%"}
+```{r}
+knitr::include_graphics("./images/14-tree/8_1-1.png")
+```
+:::
+::::
+
+
+. . .
+
+- Select $X_j$ and a cutoff $s$ so that splitting the predictor space into $\{\bX \mid X_j < s \}$ and $\{\bX \mid X_j \ge s \}$ leads to the greatest reduction in 
+  + $SS_{res}$ for regression
+  + **Gini index**, **entropy** or misclassification rate for classification
+   
+- Repeatedly split one of the two previously identified regions until a stopping criterion is reached.
+   
+  
+  
+::: notes
+at each step of the tree-building process
+:::
+
+
+
+## Classification Tree
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+- KNN requires K and a distance measure.
+
+- SVM requires kernels.
+
+- Tree solves this by *recursively partitioning* the feature space using a *binary splitting* rule $\mathbf{1}\{x \le c \}$
+
+- 0: [Red]{.red}; 1: [Blue]{.blue}
+
+:::
+
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-asp: 1
+# par(mar = c(2.5, 2.5, 0, 0), mgp = c(1, 0.8, 0))
+#     plot(x1, x2, col = ifelse(y == 1, 4, 2), pch = 19, las = 1, 
+#          cex = 1.2, xaxt='n', yaxt='n', xlab = "", ylab = "")
+#     symbols(0, 0, circles = sqrt(0.6), add = TRUE, inches = FALSE, lwd=2)
+#     title(xlab = "X1", ylab = "X2", cex.lab = 2)
+par(mar = c(4, 4, 0, 0), mgp = c(2.5, 0.8, 0))
+    plot(x1, x2, col = ifelse(y == 1, 4, 2), pch = 19, las = 1, 
+         cex = 1.2, xlab = "", ylab = "")
+    symbols(0, 0, circles = sqrt(0.6), add = TRUE, inches = FALSE, lwd=2)
+    title(xlab = "X1", ylab = "X2", cex.lab = 2)
+```
+
+:::
+
+::::
+
+
+
+## Classification Tree
+
+```{r}
+#| label: rpart
+set.seed(1)
+library(rpart)
+rpart.fit = rpart(as.factor(y)~x1+x2, data = data.frame(x1, x2, y))
+```
+
+
+If $x_2 < -0.64$, $y = 0$.
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| label: rpart-plot
+# the tree structure    
+par(mar = c(0.5, 0, 0.5, 0))
+plot(rpart.fit)
+text(rpart.fit, cex = 1.5)    
+# if you want to peek into the tree 
+# note that we set cp = 0.012, which is a tuning parameter
+# we will discuss this later
+# rpart.fit$cptable
+# prune(rpart.fit, cp = 0.012)
+```
+
+:::
+
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-asp: 1
+par(mar = c(2.5, 2.5, 2, 0), mgp = c(1, 0.8, 0))
+TreeSteps(1)
+title(main = list(paste("Tree splitting step", 1), cex = 2),
+      xlab="X1", ylab = "X2", cex.lab = 2)
+text(0, -0.8, "R1", cex = 2, font = 2)
+```
+
+:::
+
+::::
+
+
+
+## Classification Tree
+
+If $x_2 \ge -0.64$ and $x_1 \ge 0.69$, $y = 0$.
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| label: rpart-plot
+```
+
+:::
+
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-asp: 1
+par(mar = c(2.5, 2.5, 2, 0), mgp = c(1, 0.8, 0))
+TreeSteps(2)
+title(main = list(paste("Tree splitting step", 2), cex = 2),
+      xlab="X1", ylab = "X2", cex.lab = 2)
+text(0, -0.8, "R1", cex = 2, font = 2)
+text(0.8, 0, "R2", cex = 2, font = 2)
+```
+
+:::
+
+::::
+
+
+
+## Classification Tree
+
+
+If $x_2 \ge -0.64$, $x_1 < 0.69$, and $x_2 \ge 0.75$, $y = 0$.
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| label: rpart-plot
+```
+:::
+
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-asp: 1
+par(mar = c(2.5, 2.5, 2, 0), mgp = c(1, 0.8, 0))
+TreeSteps(3)
+title(main = list(paste("Tree splitting step", 3), cex = 2),
+      xlab="X1", ylab = "X2", cex.lab = 2)
+text(0, -0.8, "R1", cex = 2, font = 2)
+text(0.8, 0, "R2", cex = 2, font = 2)
+text(-0.1, 0.9, "R3", cex = 2, font = 2)
+```
+
+:::
+
+::::
+
+
+
+## Classification Tree
+
+
+If $x_2 \ge -0.64$, $x_1 < 0.69$, $x_2 < 0.75$, and $x_1 < -0.69$, $y = 0$.
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| label: rpart-plot
+```
+
+:::
+
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-asp: 1
+par(mar = c(2.5, 2.5, 2, 0), mgp = c(1, 0.8, 0))
+TreeSteps(4)
+title(main = list(paste("Tree splitting step", 4), cex = 2),
+      xlab="X1", ylab = "X2", cex.lab = 2)
+text(0, -0.8, "R1", cex = 2, font = 2)
+text(0.8, 0, "R2", cex = 2, font = 2)
+text(-0.1, 0.9, "R3", cex = 2, font = 2)
+text(-0.85, 0, "R4", cex = 2, font = 2)
+```
+
+:::
+
+::::
+
+
+## Classification Tree
+
+Step 5 may not be beneficial.
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| label: rpart-plot
+```
+
+:::
+
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-asp: 1
+par(mar = c(2.5, 2.5, 2, 0), mgp = c(1, 0.8, 0))
+TreeSteps(5)
+title(main = list(paste("Tree splitting step", 5), cex = 2),
+      xlab="X1", ylab = "X2", cex.lab = 2)
+text(0, -0.8, "R1", cex = 2, font = 2)
+text(0.8, 0, "R2", cex = 2, font = 2)
+text(-0.1, 0.9, "R3", cex = 2, font = 2)
+text(-0.85, 0, "R4", cex = 2, font = 2)
+text(0, 0, "R5", cex = 2, font = 2)
+```
+
+:::
+
+::::
+
+
+
+## Classification Tree
+
+Step 6 may not be beneficial. (Could overfit)
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| label: rpart-plot
+```
+
+:::
+
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-asp: 1
+par(mar = c(2.5, 2.5, 2, 0), mgp = c(1, 0.8, 0))
+TreeSteps(6)
+title(main = list(paste("Tree splitting step", 6), cex = 2),
+      xlab="X1", ylab = "X2", cex.lab = 2)
+text(0, -0.8, "R1", cex = 2, font = 2)
+text(0.8, 0, "R2", cex = 2, font = 2)
+text(-0.1, 0.9, "R3", cex = 2, font = 2)
+text(-0.85, 0, "R4", cex = 2, font = 2)
+text(0, 0, "R5", cex = 2, font = 2)
+text(0.6, 0.6, "R6", cex = 2, font = 2)
+```
+
+:::
+
+::::
+
+
+
+## Classification Tree
+
+Step 7 may not be beneficial. (Could overfit)
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| label: rpart-plot
+```
+
+:::
+
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-asp: 1
+par(mar = c(2.5, 2.5, 2, 0), mgp = c(1, 0.8, 0))
+TreeSteps(7)
+title(main = list(paste("Tree splitting step", 7), cex = 2),
+      xlab="X1", ylab = "X2", cex.lab = 2)
+text(0, -0.8, "R1", cex = 2, font = 2)
+text(0.8, 0, "R2", cex = 2, font = 2)
+text(-0.1, 0.9, "R3", cex = 2, font = 2)
+text(-0.85, 0, "R4", cex = 2, font = 2)
+text(0, 0, "R5", cex = 2, font = 2)
+text(0.6, 0.6, "R6", cex = 2, font = 2)
+text(-0.55, 0.6, "R7", cex = 2, font = 2)
+text(0, 0.6, "R8", cex = 2, font = 2)
+```
+
+:::
+
+::::
+
+
+## Misclassification Rate
+
+- The classification error rate is the fraction of the training observations in the region that do not belong to the most common class: $$1 - \max_{k} (\hat{p}_{mk})$$ where $\hat{p}_{mk}$ is the proportion of training observations in the $m$th region that are from the $k$th class.
+
+- It is not sensitive for tree-growing.
+
+- Hope to have nodes (regions) including training points that belong to only one class.
+
+
+
+## Gini Index (Impurity)
+
+The Gini index is defined by
+
+$$\sum_{k=1}^K \hat{p}_{mk}(1 - \hat{p}_{mk})$$ which is a measure of total variance across the $K$ classes.
+
+- Gini is small if all of the $\hat{p}_{mk}$s are close to zero or one. 
+
+- **Node purity**: a small value indicates that a node contains predominantly
+observations from a single class.
+
+
+
+
+## Shannon Entropy
+
+The **Shannon entropy** is defined as 
+
+$$- \sum_{k=1}^K \hat{p}_{mk} \log(\hat{p}_{mk}).$$
+
+
+- The entropy is near zero if the $\hat{p}_{mk}$s are all near zero or one.
+
+- Gini index and the entropy are similar numerically.
+
+
+::: notes
+Any of these three approaches might be used when pruning the
+tree, but the classification error rate is preferable if prediction accuracy of
+the final pruned tree is the goal.
+:::
+
+
+## Comparing Measures
+
+- Use Gini and Entropy for training (building a tree), and use error rate for evaluating predictive accuracy.
+
+<!-- - Misclassification can be used for evaluating a tree, but may not be sensitive enough for building a tree. -->
+
+
+```{r echo = FALSE}
+    gini <- function(y)
+    {
+    	p = table(y)/length(y)
+    	sum(p*(1-p))
+    }
+    
+    shannon <- function(y)
+    {
+    	p = table(y)/length(y)
+    	-sum(p*log(p))
+    }
+    
+    error <- function(y)
+    {
+    	p = table(y)/length(y)
+    	1 - max(p)
+    }
+    
+    score <- function(TL, TR, measure)
+    {
+    	nl = length(TL)
+    	nr = length(TR)
+    	n = nl + nr
+    	f <- get(measure)
+    	f(c(TL, TR)) - nl/n*f(TL) - nr/n*f(TR)
+    }
+    
+    TL = rep(1, 3)
+    TR = c(rep(1, 4), rep(0, 3))
+    
+    # score(TL, TR, "gini")
+    # score(TL, TR, "shannon")
+    # score(TL, TR, "error")
+    
+    x = seq(0, 1, 0.01)
+    g = 2*x*(1-x)
+    s = -x*log(x) - (1-x)*log(1-x)
+    e = 1-pmax(x, 1-x)
+    
+    par(mar=c(4.2,4.2,2,2))
+    plot(x, s, type = "l", lty = 1, col = 3, lwd = 3, ylim = c(0, 1), ylab = "Impurity", xlab = "p", cex.lab = 1.5)
+    lines(x, g, lty = 1, col = 2, lwd = 3)
+    lines(x, e, lty = 1, col = 4, lwd = 3)
+    
+    legend("topleft", c("Entropy", "Gini", "Error Rate"), 
+           col = c(3,2,4), lty =1, cex = 1.2, lwd = 3, bty = "n")
+```
+
+
+
+::: notes
+For each quantity, smaller value means that the node is more “pure”, hence, there is a higher certainty when we predict a new value. The idea of splitting a node is that, we want the two resulting child node to contain less variation. In other words, we want each child node to be as “pure” as possible.
+:::
+
+
+
+## Regression Tree
+
+The goal is to find boxes $R_1, \dots ,R_J$ that minimize the $SS_{res}$, given by $$\sum_{j=1}^J\sum_{i \in R_j}\left( y_i - \hat{y}_{R_j}\right)^2$$ where $\hat{y}_{R_j}$ is the mean response for the training observations within $R_j$.
+
+
+
+:::: {.columns}
+
+::: {.column width="30%"}
+
+```{r}
+knitr::include_graphics("./images/14-tree/partition.png")
+```
+:::
+
+
+::: {.column width="70%"}
+
+::: xsmall
+
+```{r}
+#| out-width: 80%
+#| fig-cap: "Source: ISL Fig 8.3"
+knitr::include_graphics("./images/14-tree/reg-tree.png")
+```
+
+:::
+
+:::
+
+::::
+
+
+## Tree Pruning
+
+- Using regression and classification performance measures to grow trees with no penalty on the tree size leads to overfitting.
+
+. . .
+
+- **Cost complexity pruning**:
+
+Given the largest tree $T_{max}$,
+
+\begin{align}
+\min_{T \subset T_{max}} \sum_{m=1}^{|T|}\sum_{i:x_i\in R_m} \left( y_i - \hat{y}_{R_m}\right)^2 +  \alpha|T|
+\end{align}
+where $|T|$ indicates the number of terminal nodes of the tree $T$.
+
+- Large $\alpha$ results in small trees
+
+- Choose $\alpha$ using CV
+
+- Algorithm 8.1 in ISL for building a regression tree.
+
+- For classification, replace $SS_{res}$ with a classification performance measure.
+
+
+## Implementation
+
+- [`rpart::rpart()`](https://cran.r-project.org/web/packages/rpart/vignettes/longintro.pdf) 
+
+```{r}
+#| eval: false
+#| echo: true
+library(rpart)
+rpart::rpart(formula = y ~ x1 + x2, data)
+```
+
+
+<br>
+
+
+- [`tree::tree()`](https://cran.r-project.org/web/packages/tree/tree.pdf)
+
+```{r}
+#| eval: false
+#| echo: true
+library(tree)
+tree::tree(formula = y ~ x1 + x2, data)
+```
+
+
+<br>
+
+
+- [`sklearn tree`](https://scikit-learn.org/stable/modules/tree.html#)
+
+```{python}
+#| eval: false
+#| echo: true
+from sklearn import tree
+dtc = tree.DecisionTreeClassifier()
+dtc = dtc.fit(X, y)
+dtr = tree.DecisionTreeRegressor()
+dtr = dtr.fit(X, y)
+```
+
+
+
+
+## Demo `rpart()`^[Read ISL Sec. 8.3 for `tree()` demo] {visibility="hidden"}
+
+- `rpart()` uses the 10-fold CV (`xval` in `rpart.control()`)
+- `cp` is the complexity parameter
+
+```{r}
+#| eval: false
+#| echo: true
+rpart.control(minsplit = 20, minbucket = round(minsplit/3), cp = 0.01, 
+              maxcompete = 4, maxsurrogate = 5, usesurrogate = 2, xval = 10,
+              surrogatestyle = 0, maxdepth = 30, ...)
+```
+
+```{r}
+#| echo: true
+rpart.fit <- rpart::rpart(as.factor(y) ~ x1 + x2, 
+                          data = data.frame(x1, x2, y),
+                          control = rpart.control(xval = 10, cp = 0))
+rpart.fit$cptable
+```
+
+
+## Demo `rpart()` {visibility="hidden"}
+
+```{r}
+#| echo: true
+plotcp(rpart.fit)
+```
+
+
+## Demo `rpart()` {visibility="hidden"}
+
+:::: {.columns}
+
+::: {.column width="55%"}
+
+```{r}
+#| echo: true
+#| class-output: my_class600
+prunedtree <- prune(rpart.fit, cp = 0.012)
+prunedtree
+```
+:::
+
+:::{.column width="45%"}
+
+```{r}
+#| echo: true
+rpart.plot::rpart.plot(prunedtree)
+```
+:::
+::::
+
+
+
+## Trees v.s. Linear Regression
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+[**Linear regression**]{.green}
+
+$$f(X) = \beta_0 + \sum_{j=1}^pX_j\beta_j$$
+
+- Performs better when the relationship between $y$ and $x$ is approximately linear.
+
+
+:::
+
+
+::: {.column width="50%"}
+
+[**Regression tree**]{.green}
+
+$$f(X) = \sum_{j=1}^J \hat{y}_{R_j}\mathbf{1}(\bX \in R_j)$$
+
+
+- Performs better when there is a highly nonlinear and complex relationship between $y$ and $x$.
+
+- Preferred for interpretability and visualization.
+
+:::
+
+::::
+
+
+
+## Trees v.s. Linear Models
+
+::: xsmall
+
+```{r}
+#| out-width: 50%
+#| fig-cap: "Source: ISL Fig 8.7"
+knitr::include_graphics("./images/14-tree/8_7-1.png")
+```
+
+:::
+
+<!-- # Bagging {background-color="#447099"} -->
+
+
+
+
+# Ensemble Learning: Bagging, Random Forests, Boosting
+
+> **Two heads are better than one**, not because either is infallible, but because they are unlikely to go wrong in the same direction. -- C.S. Lewis, British Writer (1898 - 1963)
+
+> 『三個臭皮匠，勝過一個諸葛亮』
+
+
+
+
+## Ensemble Methods
+
+- An **ensemble** method combines many **weak learners** (unstable, less accurate) to obtain a single and powerful model.
+
+- The CARTs suffer from *high variance*.
+
+- If independent $Z_1, \dots, Z_n$ have variance $\sigma^2$, then $\bar{Z}$ has variance $\sigma^2/n$.
+
+- *Averaging a set of observations reduces variance!*
+
+. . .
+
+With $B$ separate training sets, 
+
+$$\hat{f}_{avg}(x) = \frac{1}{B}\sum_{b=1}^B\hat{f}_{b}(x)$$
+
+## Bagging
+
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+
+- **Bootstrap aggregation**, or **bagging** is a procedure for reducing variance.
+
+<!-- - Generate $B$ bootstrap samples from the training set. -->
+
+- Generate $B$ bootstrap samples by repeatedly
+sampling with replacement from the training set $B$ times.
+
+$$\hat{f}_{bag}(x) = \frac{1}{B}\sum_{b=1}^B\hat{f}^*_{b}(x)$$
+
+:::
+
+
+
+::: {.column width="60%"}
+
+
+::: xsmall
+
+```{r}
+#| fig-cap: "Source: Wiki page of bootstrap aggregating"
+#| out-width: 100%
+knitr::include_graphics("https://upload.wikimedia.org/wikipedia/commons/c/c8/Ensemble_Bagging.svg")
+```
+
+:::
+
+:::
+
+::::
+
+
+::: notes
+Bagging works for many regression methods, but it is particularly useful for decision trees.
+:::
+
+
+
+
+## Bagging on Decision Trees
+
+::: xsmall
+```{r}
+#| fig-cap: "Source: Wiki page of ensemble learning"
+knitr::include_graphics("https://upload.wikimedia.org/wikipedia/commons/4/4a/Ensemble_Aggregation.png")
+```
+:::
+
+
+## CART v.s. Bagging
+
+- For CART, the decision line has to be aligned to axis.
+
+- For Bagging, $B = 200$ each having 400 training points. Boundaries are smoother.
+
+```{r}
+# generate some data 
+set.seed(2)
+n = 1000
+x1 = runif(n, -1, 1)
+x2 = runif(n, -1, 1)
+y = rbinom(n, size = 1, prob = ifelse((x1 + x2 > -0.5) & (x1 + x2 < 0.5), 0.8, 0.2))
+xgrid = expand.grid(x1 = seq(-1, 1, 0.01), x2 = seq(-1, 1, 0.01))
+```
+
+:::: {.columns}
+
+::: {.column width="33%"}
+
+```{r}
+#| fig-asp: 1
+par(mar=c(2, 2, 2, 0))
+plot(x1, x2, col = ifelse(y == 1, 4, 2), pch = 19, las = 1, cex = 1)
+points(xgrid, pch=".", cex=0.5, col=ifelse((xgrid[, 1] + xgrid[, 2] > -0.5) & (xgrid[, 1] + xgrid[, 2] < 0.5), "lightblue", "pink"))
+abline(a = 0.5, b = -1, lwd = 3)
+abline(a = -0.5, b = -1, lwd = 3)
+title(main = list("True Boundary", cex = 2))
+```
+
+:::
+
+
+
+::: {.column width="33%"}
+
+
+```{r}
+#| label: cart
+#| fig-asp: 1
+par(mar=c(2, 2, 2, 0))
+rpart.fit = rpart(as.factor(y)~x1+x2, data = data.frame(x1, x2, y))
+pred = matrix(predict(rpart.fit, xgrid, type = "class") == 1, 201, 201)
+contour(seq(-1, 1, 0.01), seq(-1, 1, 0.01), pred, levels=0.5, labels="",axes=FALSE, lwd = 4)
+points(xgrid, pch=".", cex=0.5, col=ifelse(pred, "lightblue", "pink"))
+points(x1, x2, col = ifelse(y == 1, 4, 2), pch = 19, yaxt="n", xaxt = "n")
+box()    
+title(main = list("CART", cex = 2))
+```
+:::
+
+
+::: {.column width="33%"}
+
+```{r}
+#| label: bagging
+#| fig-asp: 1
+library(ipred)
+bag.fit = bagging(as.factor(y)~x1+x2, data = data.frame(x1, x2, y), 
+                  nbagg = 200, ns = 400)
+pred = matrix(predict(prune(bag.fit), xgrid) == 1, 201, 201)
+par(mar = c(0, 0, 2, 0))
+contour(seq(-1, 1, 0.01), seq(-1, 1, 0.01), pred, levels = 0.5, labels = "",
+        axes = FALSE, lwd = 4)
+points(xgrid, pch = ".", cex = 0.5, col = ifelse(pred, "lightblue", "pink"))
+points(x1, x2, col = ifelse(y == 1, 4, 2), pch = 19, yaxt = "n", xaxt = "n")
+box()
+title(main = list("Bagging", cex = 2))
+```
+
+:::
+
+::::
+
+<!-- # Random Forests {background-color="#447099"} -->
+
+
+
+
+## Notes of Bagging
+
+- Using a large $B$ will not lead to overfitting.
+
+- Use $B$ sufficiently large that the error has settled down.
+
+- Bagging improves prediction accuracy at the expense of interpretability.
+
+. . .
+
+- When different trees are highly correlated, simply averaging is not very effective.
+
+    * If there is one very strong predictor, in the collection of bagged trees, all of the trees will use this strong predictor in the top split. Therefore, all of the bagged trees will look similar to each other.
+
+- The predictions from the bagged trees will be highly correlated, and hence averaging does not lead to as large reduction in variance.
+
+
+::: notes
+
+- Use many trees and averaging. It is no longer clear which variables are most important to the procedure.
+
+- If there is one very strong predictor in the data set, in the collection of bagged trees, most or all of the trees will use this strong predictor in the top split. Therefore, all of the bagged trees will look quite similar to each other.
+
+- The predictions from the bagged trees will be highly correlated, and hence averaging does not lead to as large reduction in variance.
+
+:::
+
+
+
+## Random Forests
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+- **Random forests** improve bagged trees by *decorrelating* the trees.
+
+- *$m$ predictors are randomly sampled as split candidates from the $p$ predictors.*
+
+<!-- - The split is allowed to use only one of those $m$ predictors. -->
+:::
+
+::: {.column width="60%"}
+::: xsmall
+<!-- # ```{r} -->
+<!-- # #| fig-cap: "Source: Misra and Li in Machine Learning for Subsurface Characterization (2020)" -->
+<!-- # #| out-width: 50% -->
+<!-- # knitr::include_graphics("./images/14-tree/rf.jpg") -->
+<!-- # ``` -->
+
+```{r}
+#| fig-cap: "Source: Multivariate Statistical Machine Learning Methods for Genomic Prediction, Lopez et al. (2022)"
+#| out-width: 90%
+knitr::include_graphics("./images/14-tree/rf1.png")
+```
+:::
+:::
+::::
+
+
+
+::: notes
+- When building decision trees, each time a split in a tree is considered, *a random sample of $m$ predictors is chosen as split candidates from the full set of $p$ predictors.*
+
+- The split is allowed to use only one of those $m$ predictors.
+:::
+
+
+
+## Random Forests
+
+
+
+
+- $m \approx \sqrt{p}$ for classification; $m \approx p/3$ for regression.
+
+- *Decorrelating*: on average $(p − m)/p$ of the splits will not even consider the strong predictor, and so other predictors will have more of a chance.
+
+- If $m = p$, random forests = bagging.
+
+- The improvement is significant when $p$ is large.
+
+
+## CART vs. Bagging vs. Random Forests
+
+- `randomForest::randomForest(x, y, mtry, ntree, nodesize, sampsize)`
+  <!-- + `mtry`: number of randomly sampled variable to consider at each internal node ($m$) -->
+  <!-- + `ntree`: number of trees ($B$) -->
+  <!-- + `nodesize`: stop splitting when the size of terminal nodes is no larger than nodesize -->
+  <!-- + `sampsize`: how many samples to use when fitting each tree -->
+
+:::: {.columns}
+
+::: {.column width="33%"}
+
+```{r}
+#| fig-asp: 1
+par(mar = c(0, 0, 2, 0))
+rpart.fit <- rpart(as.factor(y) ~ x1 + x2, data = data.frame(x1, x2, y))
+pred <- matrix(predict(rpart.fit, xgrid, type = "class") == 1, 201, 201)
+contour(seq(-1, 1, 0.01), seq(-1, 1, 0.01), pred, levels = 0.5, labels = "", 
+        axes = FALSE, lwd = 4)
+points(xgrid, pch = ".", cex = 0.5, col = ifelse(pred, "lightblue", "pink"))
+points(x1, x2, col = ifelse(y == 1, 4, 2), pch = 19, yaxt = "n", xaxt = "n")
+box()    
+title(main = list("CART", cex = 2))
+```
+
+:::
+
+
+
+::: {.column width="33%"}
+
+
+```{r}
+#| fig-asp: 1
+library(ipred)
+bag.fit = bagging(as.factor(y)~x1+x2, data = data.frame(x1, x2, y), 
+                  nbagg = 200, ns = 400)
+pred = matrix(predict(prune(bag.fit), xgrid) == 1, 201, 201)
+par(mar = c(0, 0, 2, 0))
+contour(seq(-1, 1, 0.01), seq(-1, 1, 0.01), pred, levels = 0.5, labels = "",
+        axes = FALSE, lwd = 4)
+points(xgrid, pch = ".", cex = 0.5, col = ifelse(pred, "lightblue", "pink"))
+points(x1, x2, col = ifelse(y == 1, 4, 2), pch = 19, yaxt = "n", xaxt = "n")
+box()
+title(main = list("Bagging", cex = 2))
+```
+
+:::
+
+
+::: {.column width="33%"}
+
+```{r}
+#| fig-asp: 1
+library(randomForest)
+par(mar = c(0, 0, 2, 0))
+rf.fit = randomForest(cbind(x1, x2), as.factor(y), ntree = 200, 
+                      mtry = 1, nodesize = 20, sampsize = 400)
+pred = matrix(predict(rf.fit, xgrid) == 1, 201, 201)
+contour(seq(-1, 1, 0.01), seq(-1, 1, 0.01), pred, levels = 0.5, labels = "",
+        axes=FALSE, lwd = 4)
+points(xgrid, pch = ".", cex = 0.5, col = ifelse(pred, "lightblue", "pink"))
+points(x1, x2, col = ifelse(y == 1, 4, 2), pch = 19, yaxt = "n", xaxt = "n")
+box()
+title(main = list("Random Forests", cex = 2))
+```
+
+:::
+
+::::
+
+::: notes
+nodesize: Minimum size of terminal nodes. Setting this number larger causes smaller trees to be grown
+sampsize: Size(s) of sample to draw.
+ntree: Number of trees to grow.
+mtry: Number of variables randomly sampled as candidates at each split.
+:::
+
+
+
+## Boosting
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+[**Bagging**]{.green}
+
+- Trees are built on independent bootstrap data sets.
+
+- Trees are grown deep.
+
+- Large number of trees ($B$) won't overfit.
+
+:::
+
+::: {.column width="50%"}
+
+[**Boosting**]{.green}
+
+- Trees are grown *sequentially*: each tree is grown using information from previously grown trees.
+
+- Each tree is fit on a *modified version of the original data set*, the residuals/false predictions! 
+
+- Trees are rather small (weak learner).
+
+- Large $B$ can overfit.
+
+:::
+
+::::
+
+<!-- - Bagging trees are built on bootstrap data sets, independent with each other. -->
+
+<!-- - **Boosting** trees are grown *sequentially*: each tree is grown using information from previously grown trees. -->
+
+<!-- - Boosting does not involve bootstrap sampling; instead each -->
+<!-- tree is fit on a *modified version of the original data set*, the residuals/false predictions!  -->
+
+
+## Boosting
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+::: xsmall
+
+```{r}
+#| out-width: 100%
+#| fig-cap: "Source: https://pub.towardsai.net/bagging-vs-boosting-the-power-of-ensemble-methods-in-machine-learning-6404e33524e6"
+# knitr::include_graphics("./images/14-tree/boosting.jpg")
+knitr::include_graphics("./images/14-tree/bagging_s24.png")
+```
+
+:::
+
+:::
+
+::: {.column width="50%"}
+
+::: xsmall
+
+```{r}
+#| out-width: 100%
+#| fig-cap: ""
+# knitr::include_graphics("./images/14-tree/boosting.jpg")
+knitr::include_graphics("./images/14-tree/boosting_s24.webp")
+```
+
+:::
+
+:::
+
+::::
+
+
+
+<!-- - Consider producing a sequence of learners (trees), $\hat{f}^1, \dots, \hat{f}^B$. -->
+
+<!-- - Boosting learns slowly  -->
+
+::: notes
+https://pub.towardsai.net/bagging-vs-boosting-the-power-of-ensemble-methods-in-machine-learning-6404e33524e6
+- [Boosting can also be applied to many models, but most effectively applied to decision trees.]
+- Bagging trees are grown deep, but Boosting trees are rather small.
+:::
+
+
+## Boosting {visibility="hidden"}
+
+- *Base (weak) learners*: Could any simple model (high-bias low-variance). Usually a decision tree.
+
+- *Training weak models*: Fit a (shallow) tree $\hat{f}^b$ with relatively few $d$ splits
+
+- *Sequential Training w.r.t. residuals*: Fitting each tree in the sequence to the previous tree's residuals. 
+
+Suppose our final tree is $\hat{f}(x)$ that starts with $0$.
+
+1. Fit a decision tree $\hat{f}^1$ to $\{ y_i \}$
+2. Grow the tree: $\hat{f}(x) = \lambda\hat{f}^1$
+3. Fit the next decision tree $\hat{f}^2$ to the residuals of the previous fit $\{ e^1_i\} = \{  y_i - \lambda\hat{f}^1(x_i)\}$
+4. Grow the tree: $\hat{f}(x) = \lambda\hat{f}^1 + \lambda\hat{f}^2$
+5. Fit the next decision tree $\hat{f}^3$ to the residuals of the previous fit $\{ e^2_i \} = \{  e^1_i - \lambda\hat{f}^2(x_i)\}$
+6. Grow the tree: $\hat{f}(x) = \lambda\hat{f}^1 + \lambda\hat{f}^2 + \lambda\hat{f}^3$
+
+<!-- Continue growing trees until the residuals are small enough. -->
+
+
+## Boosting {visibility="hidden"}
+
+- The final boosting tree is 
+$$\hat{f}(x) = \sum_{b=1}^B\lambda\hat{f}^b(x)$$
+- Tuning parameters
+  + Number of base trees $B$: Large $B$ can overfit. Use cross-validation to choose $B$.
+  + Number of base tree splits $d$: Often $d=1$ works well. The growth of a tree takes into account the other grown trees, so small trees are sufficient.
+  + Shrinkage $\lambda > 0$: Controls the learning rate of boosting. Usual values are 0.01 or 0.001. Small $\lambda$ needs large $B$.
+
+
+
+
+## Boosting for Classification
+
+- `distribution = "bernoulli"`: **LogitBoost**
+
+```{r}
+#| eval: false
+#| echo: true
+gbm.fit = gbm::gbm(y ~ ., data = data.frame(x1, x2, y), 
+                   distribution = "bernoulli", 
+                   n.trees = 10000, shrinkage = 0.01, bag.fraction = 0.6, 
+                   interaction.depth = 2, cv.folds = 10)
+```
+
+:::: {.columns}
+
+::: {.column width="33%"}
+
+```{r}
+# generate some data 
+set.seed(2)
+n = 1000
+x1 = runif(n, -1, 1)
+x2 = runif(n, -1, 1)
+y = rbinom(n, size = 1, prob = ifelse((x1 + x2 > -0.5) & (x1 + x2 < 0.5) , 0.8, 0.2))
+xgrid = expand.grid(x1 = seq(-1, 1, 0.01), x2 = seq(-1, 1, 0.01))
+```
+
+```{r}
+#| fig-asp: 1
+library(ipred)
+bag.fit = bagging(as.factor(y)~x1+x2, data = data.frame(x1, x2, y), nbagg = 200, ns = 400)
+pred = matrix(predict(prune(bag.fit), xgrid) == 1, 201, 201)
+par(mar=c(0, 0, 2, 0))
+contour(seq(-1, 1, 0.01), seq(-1, 1, 0.01), pred, levels=0.5, labels="",axes=FALSE, lwd = 4)
+points(xgrid, pch=".", cex=0.5, col=ifelse(pred, "lightblue", "pink"))
+points(x1, x2, col = ifelse(y == 1, 4, 2), pch = 19, yaxt="n", xaxt = "n")
+
+box()
+title(main = list("Bagging", cex = 2))
+```
+
+:::
+
+
+
+::: {.column width="33%"}
+
+```{r}
+#| fig-asp: 1
+library(randomForest)
+    par(mar=c(0, 0, 2, 0))
+    rf.fit = randomForest(cbind(x1, x2), as.factor(y), ntree = 200, mtry = 1, nodesize = 20, sampsize = 400)
+    pred = matrix(predict(rf.fit, xgrid) == 1, 201, 201)
+    contour(seq(-1, 1, 0.01), seq(-1, 1, 0.01), pred, levels=0.5, labels="",axes=FALSE,
+            lwd = 4)
+    points(xgrid, pch=".", cex=1.2, col=ifelse(pred, "lightblue", "pink"))
+    points(x1, x2, col = ifelse(y == 1, 4, 2), pch = 19, yaxt="n", xaxt = "n")
+    box()
+    title(main = list("Random Forests", cex = 2))
+
+```
+
+:::
+
+
+::: {.column width="33%"}
+
+```{r}
+#| fig-asp: 1
+library(gbm)
+par(mar=c(0, 0, 2, 0))
+gbm.fit = gbm::gbm(y~., data = data.frame(x1, x2, y), distribution="bernoulli", 
+          n.trees=10000, shrinkage=0.01, bag.fraction=0.6, 
+          interaction.depth = 2, cv.folds=10)
+usetree = gbm.perf(gbm.fit, method = "cv", plot.it = FALSE)
+Fx = predict(gbm.fit, xgrid, n.trees=usetree)
+pred = matrix(1/(1+exp(-2*Fx)) > 0.5, 201, 201)
+contour(seq(-1, 1, 0.01), seq(-1, 1, 0.01), pred, levels=0.5, labels="",axes=FALSE,
+            lwd = 4)
+points(xgrid, pch = ".", cex=1.2, col=ifelse(pred, "lightblue", "pink"))
+points(x1, x2, col = ifelse(y == 1, 4, 2), pch = 19, yaxt="n", xaxt = "n")
+box()
+title(main = list("Boosting", cex = 2))
+```
+
+:::
+
+::::
+
+::: notes
+shrinkage: a shrinkage parameter applied to each tree in the expansion.
+bag.fraction: the fraction of the training set observations randomly selected to propose the next tree in the expansion.
+interaction.depth: Integer specifying the maximum depth of each tree 
+n.trees: Integer specifying the total number of trees to fit.
+:::
+
+
+
+
+## Boosting Cross Validation
+
+```{r}
+#| echo: true
+gbm.perf(gbm.fit, method = "cv")
+```
+
+
+
+## Boosting for Regression
+
+```{r}
+#| eval: false
+#| echo: true
+gbm.fit <- gbm::gbm(y ~ x, data = data.frame(x, y), 
+                    distribution = "gaussian", n.trees = 300,
+                    shrinkage = 0.5, bag.fraction = 0.8, cv.folds = 10)
+```
+
+```{r}
+#| eval: true
+p = 1
+x = seq(0, 1, 0.001)
+fx <- function(x) 2*sin(3*pi*x)
+y = fx(x) + rnorm(length(x))
+par(mar=c(2,2,2,0))
+plot(x, y, pch = 19, ylab = "y", col = "gray",
+     main = "True Regression Function")
+lines(x, fx(x), lwd = 3, col = 4) # plot the true regression line
+```
+
+
+
+## Boosting for Regression
+
+```{r}
+#| eval: true
+gbm.fit <- gbm::gbm(y ~ x, data = data.frame(x, y), 
+                    distribution = "gaussian", n.trees = 300,
+                    shrinkage = 0.5, bag.fraction = 0.8)
+par(mfrow = c(2, 3))
+size = c(1, 5, 10, 50, 100, 300)
+for(i in 1:6) {
+    par(mar=c(2,2,2,1))
+    plot(x, y, pch = 19, ylab = "y", col = "gray")
+    lines(x, fx(x), lwd = 3, col = 4)
+    Fx = predict(gbm.fit, n.trees=size[i]) # this returns the fitted function, but not class
+    lines(x, Fx, lwd = 3, col = "red")
+    title(paste("# of Trees = ", size[i]))
+}
+```
+
+
+
+<!-- ## Summary of Tree Ensemble Methods -->
+
+<!-- - **Bagging** the trees are grown independently on random samples of -->
+<!-- the observations. Consequently, the trees tend to be quite similar to -->
+<!-- each other. Thus, bagging can get caught in local optima and can fail -->
+<!-- to thoroughly explore the model space. -->
+
+<!-- - **Random forests** the trees are once again grown independently on -->
+<!-- random samples of the observations. However, each split on each tree -->
+<!-- is performed using a random subset of the features, thereby decorrelating -->
+<!-- the trees, and leading to a more thorough exploration of model -->
+<!-- space relative to bagging. -->
+
+<!-- - **Boosting**, we only use the original data, and do not draw any random -->
+<!-- samples. The trees are grown successively, using a “slow” learning -->
+<!-- approach: each new tree is fit to the signal that is left over from -->
+<!-- the earlier trees, and shrunken down before it is used. -->
+
+
+## Other Topics
+
+<!-- - Boosting -->
+- AdaBoost (Adaptive Boosting) `gbm(y ~ ., distribution = "adaboost")`
+
+- Gradient Boosting/Extreme Gradient Boosting (XGBoost) `xgboost` 
+  + <http://uc-r.github.io/gbm_regression>
+  + <https://xgboost.readthedocs.io/en/stable/R-package/xgboostPresentation.html>
+  + <https://github.com/dmlc/xgboost>
+  + <https://cran.r-project.org/web/packages/xgboost/xgboost.pdf>
+
+- Bayesian Additive Regression Trees (BART) (ISL Sec. 8.2.4)
+
+
+
+:::notes
+https://jamleecute.web.app/gradient-boosting-machines-gbm/
+:::
