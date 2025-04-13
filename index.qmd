@@ -5,8 +5,7 @@ format:
   html
 ---
 
--   [**Homework 3 released, and due Friday, 4/4, 11:59 PM**]{.green}.
--   **Midterm Presentation I - Regression guideline is released.**
+-   **Homework 4 released, and due Friday, 5/2, 11:59 PM**.
 
 *This schedule will be updated as the semester progresses, with all changes documented here.*
 
@@ -38,7 +37,7 @@ format:
 | 12 | Tue, Apr 1 | Support Vector Machine | [📖](/weeks/week-12.html "Week 11") | [🖥️](slides/13-svm.html "13-svm") |  |  |  |
 |  | Thu, Apr 3 | Support Vector Machine |  |  | [`r fontawesome::fa("file-code")`](code/13-svm-code.html "13-svm-code") | HW 3 Due |  |
 | 13 | Tue, Apr 8 | CART and Bagging | [📖](/weeks/week-13.html "Week 13") | [🖥️](slides/14-tree.html "14-tree") |  |  |  |
-|  | Thu, Apr 10 | Random Forests and Boosting |  |  | [`r fontawesome::fa("file-code")`](code/14-tree-code.html "14-tree-code") | ✍️ HW4 |  |
+|  | Thu, Apr 10 | Random Forests and Boosting |  |  | [`r fontawesome::fa("file-code")`](code/14-tree-code.html "14-tree-code") | [✍️ HW4](/hw/hw-4.html "hw-4") |  |
 | 14 | Tue, Apr 15 | **Midterm Presentation II** | [📖](/weeks/week-14.html "Week 14") | [🖥️](slides/14-tree.html "14-tree") |  |  | ✅ |
 |  | Thu, Apr 17 | ***NO CLASS: Easter break*** |  |  |  |  |  |
 | 15 | Tue, Apr 22 | Principal Component Analysis | [📖](/weeks/week-15.html "Week 15") | [🖥️](slides/15-pca.html "15-pca") | `r fontawesome::fa("file-code")` |  |  |
