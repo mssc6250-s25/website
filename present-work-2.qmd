@@ -19,14 +19,14 @@ team_lst[sample(1:6, 6)]
 
 ## Project Materials
 
--   **[Group 1 (Rakesh, Daniel, Jeremy)]{.blue} **: [proposal]()
+-   [**Group 1 (Rakesh, Daniel, Jeremy)**]{.blue}: [proposal](./documents/project_proposal/project2/proposal2_rakesh_danial_jeremy.pdf)
 
--   **[Group 2 (Violet, Vanessa, Michele)]{.blue} **: [proposal]()
+-   [**Group 2 (Violet, Vanessa, Michele)**]{.blue}: [proposal](./documents/project_proposal/project2/proposal2_violet_venessa_michele.pdf)
 
--   **[Group 3 (Sai, Rohith, Shristi)]{.blue} ** : [proposal]()
+-   [**Group 3 (Sai, Rohith, Shristi)**]{.blue} : [proposal](./documents/project_proposal/project2/proposal2_sai_rohith_shristi.pdf)
 
--   **[Group 4 (Sajjad, Tanjina, Dewan)]{.blue} **: [proposal]()
+-   [**Group 4 (Sajjad, Tanjina, Dewan)**]{.blue}: [proposal](./documents/project_proposal/project2/proposal2_tanjina_sajjad_dewan.pdf)
 
--   **[Group 5 (John, Jeremy, Praful)]{.blue} **: [proposal]()
+-   [**Group 5 (John, Jeremy, Praful)**]{.blue}: [proposal](./documents/project_proposal/project2/proposal2_john_jeremy_praful.pdf)
 
--   **[Group 6 (Ethan, Navid, Sylvester)]{.blue} **: [proposal]()
+-   [**Group 6 (Ethan, Navid, Sylvester)**]{.blue}: [proposal](./documents/project_proposal/project2/proposal2_ethan_navid_sylvester.pdf)

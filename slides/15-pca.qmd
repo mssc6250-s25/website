@@ -1,0 +1,1827 @@
+---
+title: 'Dimension Reduction `r fontawesome::fa("layer-group")`'
+subtitle: "MSSC 6250 Statistical Machine Learning"
+author: "Dr. Cheng-Han Yu <br> Department of Mathematical and Statistical Sciences <br> Marquette University"
+# date: "`r format(Sys.time(), '%B %d %Y')`"
+# macros: _macros.tex # import a list of TeX/LaTeX definitions
+format: 
+  revealjs:
+    # code-line-numbers: false
+    html-math-method:
+      method: mathjax
+      url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    # include-in-header:
+    #     - "macros.tex"
+    highlight-style: arrow
+    code-block-bg: true
+    self-contained: false
+    slide-number: c/t
+    incremental: false
+    width: 1800
+    height: 1000
+    margin: 0.05
+    logo: "https://upload.wikimedia.org/wikipedia/commons/e/e8/Marquette_Golden_Eagles_logo.svg"
+    footer: "[mssc6250-s25.github.io/website](https://mssc6250-s25.github.io/website/)"
+    theme: ["simple", "styles.scss"]
+    echo: false
+    multiplex: true
+    code-link: true
+    fig-cap-location: bottom
+    fig-align: center
+    transition: none ## fade slide convex concave zoom
+    title-slide-attributes:
+      data-background-color: "#447099"
+      # data-background-image: images/paper-texture.jpg
+      # data-background-size: cover
+      # data-background-color: "#698ED5"
+editor: source
+execute:
+  freeze: true
+  echo: false
+---
+
+
+# {visibility="hidden"}
+
+
+\def\cD{{\cal D}}
+\def\cL{{\cal L}}
+\def\cX{{\cal X}}
+\def\cF{{\cal F}}
+\def\cH{{\cal H}}
+\def\bA{\mathbf{A}}
+\def\bB{\mathbf{B}}
+\def\bX{\mathbf{X}}
+\def\bH{\mathbf{H}}
+\def\bI{\mathbf{I}}
+\def\bU{\mathbf{U}}
+\def\bD{\mathbf{D}}
+\def\bV{\mathbf{V}}
+\def\bS{\mathbf{S}}
+\def\bW{\mathbf{W}}
+\def\bZ{\mathbf{Z}}
+\def\bK{\mathbf{K}}
+\def\bx{\mathbf{x}}
+\def\by{\mathbf{y}}
+\def\bs{\mathbf{s}}
+\def\br{\mathbf{r}}
+\def\bu{\mathbf{u}}
+\def\be{\mathbf{e}}
+\def\bv{\mathbf{v}}
+\def\bp{\mathbf{p}}
+\def\bw{\mathbf{w}}
+\def\bz{\mathbf{z}}
+\def\bzero{\mathbf{0}}
+\def\balpha{\boldsymbol \alpha}
+\def\bbeta{\boldsymbol \beta}
+\def\btheta{\boldsymbol \theta}
+\def\bSigma{\boldsymbol \Sigma}
+\def\bxi{\boldsymbol \xi}
+\def\bmu{\boldsymbol \mu}
+\def\bep{\boldsymbol \epsilon}
+\def\T{\text{T}}
+\def\Trace{\text{Trace}}
+\def\Cov{\text{Cov}}
+\def\Corr{\text{Corr}}
+\def\Var{\text{Var}}
+\def\E{\text{E}}
+\def\pr{\text{pr}}
+\def\Prob{\text{P}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+
+```{r}
+#| label: setup
+#| include: false
+#| eval: true
+library(countdown)
+library(knitr)
+library(gt)
+library(gtExtras)
+library(ggplot2)
+library(ISLR2)
+library(genridge)
+library(glmnet)
+library(gam)
+library(splines)
+library(tidyverse)
+# library(ElemStatLearn)
+knitr::opts_chunk$set(
+    fig.asp = 0.618,
+    fig.align = "center",
+    out.width = "100%",
+    fig.retina = 10,
+    fig.path = "images/15-pca/",
+    message = FALSE,
+    global.par = TRUE
+)
+options(
+  htmltools.dir.version = FALSE,
+  dplyr.print_min = 6, 
+  dplyr.print_max = 6,
+  tibble.width = 80,
+  width = 80,
+  digits = 2
+  )
+hook_output <- knitr::knit_hooks$get("output")
+knitr::knit_hooks$set(output = function(x, options) {
+  lines <- options$output.lines
+  if (is.null(lines)) {
+    return(hook_output(x, options))  # pass to default hook
+  }
+  x <- unlist(strsplit(x, "\n"))
+  more <- "..."
+  if (length(lines)==1) {        # first n lines
+    if (length(x) > lines) {
+      # truncate the output, but add ....
+      x <- c(head(x, lines), more)
+    }
+  } else {
+    x <- c(more, x[lines], more)
+  }
+  # paste these lines together
+  x <- paste(c(x, ""), collapse = "\n")
+  hook_output(x, options)
+})
+```
+
+
+# Unsupervised Learning
+
+## Unsupervised Learning
+
+- *Supervised Learning*: response $Y$ and features $X_1, X_2, \dots, X_p$ measured on $n$ observations.
+
+- *Unsupervised Learning*: only features $X_1, X_2, \dots, X_p$ measured on $n$ observations.
+    + Not interested in prediction (no response to be predicted)
+    + Discover any interesting pattern or relationships among these features.
+
+. . .
+
++ Estimate the [density, covariance, graph (network)]{.green}, etc. of $\bX$
+
+. . .
+
++ [**Dimension reduction**]{.green} for effective data visualization or extracting most important information those features contain.
+    - <span style="color:blue">plot a bunch of points of $\boldsymbol{x} = (x_1, x_2, \dots, x_p)$ in a 2-D scatter plot (manifold). (reduce dimension from $p$ to 2)</span>
+    - <span style="color:blue"> use 2 variables to explain most variations or represents high data density in the $p$ variables </span>
+  
+. . .
+
++ [**Clustering**]{.green} discovers unknown subgroups/clusters in data
+    - <span style="color:blue">find 3 sub-groups of people based on variables income, occupation, age, etc</span>
+    
+    
+# Background: Dimensions
+
+## One-Dimension (1D) Number line
+
+:::: {.columns}
+
+::: {.column width="30%"}
+```{r}
+#| class-output: my_class600
+set.seed(12)
+n <- 50
+eng_1 <- sample(40:95, n, replace = TRUE)
+tibble(English = eng_1) |> print(n = 10)
+```
+:::
+
+::: {.column width="70%"}
+```{r}
+par(mar=c(4, 0, 0, 0))
+plot(data.frame(eng_1[1:3], 1), axes = FALSE, xlab = "English Score", 
+     ylab = "", cex = 2,
+     pch = 19, col = "blue")
+axis(1, at = 40:100, cex.axis = 1)
+text(eng_1[1:3], y = 1.05, labels = paste("Student", 1:3), cex = 1)
+```
+:::
+
+::::
+
+:::notes
+- Let's go back to your first grade. You remember that one-dimension equals a number line.
+- Now suppose we have 50 English grades. The first 3 scores are 41, 65, and 55. 
+- We can plot these values on the number line just like we did in the elementary school.
+- 1st student with score 41 it's a dot at 41, 2nd student with score 65, it's a dot at 65, and so on.
+:::
+
+
+
+## One-Dimension (1D) Number line: Uniform students
+:::: {.columns}
+
+::: {.column width="30%"}
+
+```{r}
+#| class-output: my_class600
+tibble(English = eng_1) |> print(n = 10)
+```
+
+:::
+
+::: {.column width="70%"}
+
+```{r}
+par(mar=c(4, 0, 0, 0))
+plot(data.frame(eng_1, 1), axes = FALSE, xlab = "English Score", ylab = "", cex = 2,
+     pch = 19, col = "blue")
+axis(1, at = 40:100, cex.axis = 1.2)
+```
+
+:::
+
+::::
+
+::: notes
+- If you plot all students scores, we might see something like this: an uniform distribution of English scores.
+:::
+
+
+## 1D Number line: Non-uniform students
+
+:::: {.columns}
+
+::: {.column width="30%"}
+
+```{r}
+#| class-output: my_class600
+#| label: eng_2
+eng_2 <- c(sample(80:100, 50, replace = TRUE), sample(0:30, 50, replace = TRUE))
+tibble(English = sample(eng_1, n, replace = TRUE)) %>% print(n = 10)
+```
+
+:::
+
+
+::: {.column width="70%"}
+
+```{r}
+par(mar=c(4, 0, 0, 0))
+plot(data.frame(eng_2, 1), axes = FALSE, xlab = "English Score", ylab = "",
+      pch = 19, col = "blue", cex = 2)
+axis(1, at = 0:100, cex.axis = 1.2)
+```
+
+:::
+
+::::
+
+
+::: notes
+- Or we might get a non-uniform distribution of English scores. Some students obtain a very high grade, but some students are falling behind and get a very low grade.
+:::
+
+
+
+
+## Two-Dimensions (2D) X-Y Scatter plot: High Correlated
+
+English and Math measure an overall academic performance.
+
+
+:::: {.columns}
+
+::: {.column width="30%"}
+
+```{r, highlight.output = 4}
+#| class-output: my_class600
+#| fig-asp: 1
+set.seed(1)
+
+math_1 <- eng_1 +  round(rnorm(n, 0, 10), 0)
+math_1[math_1 > 100] <- 100
+math_1[60 < math_1 & math_1 <= 100] <- math_1[60 < math_1 & math_1 <= 100] * 0.95
+math_1[50 > math_1] <- math_1[50 > math_1] * 0.95
+eng_math <- tibble(English = eng_1, Math = math_1)
+pr_out <- prcomp(eng_math, scale = FALSE)
+eng_math %>% print(n = 10)
+```
+
+:::
+
+
+::: {.column width="70%"}
+
+```{r}
+#| fig-asp: 1
+#| out-width: 65%
+par(mar = c(4,4.5,0,0))
+plot(eng_1, math_1, xlab = "English Score", ylab = "Math Score",
+     pch = 19, col = "blue", cex = 2, las = 1, bty = "n", xlim = c(0, 100), cex.lab = 2,
+     ylim = c(0, 100))
+segments(x0 = 41, y0 = 33.2, x1 = 41, y1 = -1, col = "red")
+segments(x0 = 41, y0 = 33.2, x1 = -1, y1 = 33.2, col = "red")
+text(x = 41, y = 36, "student 1", cex = 2)
+```
+
+:::
+
+::::
+
+
+
+::: notes
+- Now let's go to sixth grade when we learned about 2 dimensional graphs.
+- Now we have two axes instead of one, and now we can plot data from two different subjects instead of just one.
+- Additional to English scores, here we also have Math scores of some students.
+- And we all know how to map a English and math score pair to a point on a 2D plot.
+- If we put all students English and Math scores on the plot, we might see something like this that English and Math scores are positively correlated, meaning that a student having high English score tends to have high Math score too. 
+- This might be due to the fact that English and Math measure an overall academic performance. A good student tends to have both high English and Math scores.
+:::
+
+## Two-Dimensions (2D) X-Y Scatter plot: No correlated
+
+English and Math measure different abilities.
+
+:::: {.columns}
+
+::: {.column width="30%"}
+
+```{r}
+#| class-output: my_class600
+math_2 <- sample(0:100, n, replace = TRUE)
+tibble(English = eng_1, Math = math_2) %>% print(n = 10)
+```
+
+:::
+
+
+::: {.column width="70%"}
+
+```{r}
+#| fig-asp: 1
+#| out-width: 65%
+par(mar = c(4,4.5,0,0))
+plot(eng_1, math_2, xlab = "English Score", ylab = "Math Score",
+     pch = 19, col = "blue", cex = 2, las = 1, bty = "n", xlim = c(40, 100), cex.lab = 2,
+     ylim = c(0, 100))
+```
+
+:::
+
+::::
+
+::: notes
+- Or we might see English and Math scores are not correlated, meaning that a high English score does not tell us anything about Math score, whether it is high or low.
+- Because English and Math might measure different abilities. 
+- English measures verbal and communication skills and Math measures logic and quantitative skills
+:::
+
+
+
+## Three-Dimensions (3D) X-Y-Z Scatter plot
+:::: {.columns}
+
+::: {.column width="35%"}
+
+```{r}
+#| class-output: my_class600
+bio <- math_1 + round(rnorm(n, 0, 8), 0)
+bio[bio > 100] <- 100
+tibble(English = eng_1, Math = math_1, Biology = bio) %>% print(n = 10)
+```
+
+:::
+
+::: {.column width="65%"}
+
+```{r}
+library("scatterplot3d")
+# par(mar = c(4,4,0,0))
+scatterplot3d(x = eng_1, 
+              y = math_1, 
+              z = bio, 
+              xlim = c(0, 100), 
+              ylim = c(0, 100),
+              zlim = c(0, 100),
+              xlab = "English Score", 
+              ylab = "Math Score",
+              zlab = "Biology Score", 
+              pch = 16, 
+              color = "steelblue",
+              box = TRUE,
+              mar = c(4,4,0,4)+0.1,
+              grid = TRUE,
+              angle = 30, cex.symbols = 2, cex.lab = 2)
+```
+
+:::
+
+::::
+
+
+::: notes
+- OK. Now maybe in college, we started drawing 3D graph, having height, width and depth.
+- With 3 separate axes, we can now plot data from three different subjects.
+- So now we have three subjects, English, Math and Biology.
+- With the same logic as 2D plot, we put English score on X-axis, Math score on Y-axis, and biology score on Z-axis, then draw lines perpendicular to each axis to put the point in the 3D space.
+- And this is our 3D scatter plot.
+- So, if we have one subject data, we can make a 1D graph.
+- If we have two subject data, we can make a 2D graph.
+- If we have three subject data, we can make a 3D graph.
+:::
+
+
+
+
+## Four-Dimension (4D) X-Y-Z-? Scatter plot
+
+:::: {.columns}
+
+::: {.column width="45%"}
+
+```{r}
+#| class-output: my_class600
+histy <- eng_1 + round(rnorm(n, 0, 12), 0)
+histy[histy > 100] <- 100
+score_data <- tibble(English = eng_1, Math = math_1, Biology = bio, 
+       History = histy) %>% print(n = 10)
+```
+
+:::
+
+::: {.column width="55%"}
+
+```{r}
+par(mar = c(1,1,1,1))
+plot(1, type="n", xlab="", ylab="", xlim=c(0, 10), ylim=c(0, 10), axes = FALSE)
+axis(1, labels = FALSE)
+axis(2, labels = FALSE)
+text(5, 5, "We can't draw a 4D plot!", cex = 4, font = 2, col = "red")
+```
+
+:::
+
+::::
+
+::: notes
+- But what happens if we have data from 4 academic subjects?? here English, Math, Biology and History.
+- Well we need 4D graph. The problem is You can't draw a 4D plot on paper!
+- What if a student has 20 different grades from 20 different courses?? We need a 20 dimensional graph? 
+- But what is that?? There is no way we can draw that.
+:::
+
+
+
+
+## How about Pair Plots?
+
+```{r}
+pairs(score_data, col = "blue", pch = 19)
+```
+
+::: notes
+- Plotting all 2-D scatter plots of all possible pairs might be a solution to check the relationship between variables, or exploratory data analysis.
+- Like here we see basically any two variables or two subject scores are positively correlated.
+:::
+
+
+## Tooooo Many Pair Plots!
+
+- If we have $p$ variables, there are ${p \choose 2} = p(p-1)/2$ pairs.
+- If $p = 10$, we have 45 such scatter plots to look at!
+- In practice, we may encounter over 100 variables!!
+
+::: notes
+- But still, there is a problem. 
+- If you have $p$ variables, you are gonna have ${p \choose 2} = p(p-1)/2$ pairs.
+- If $p = 10$, you have 45 such scatter plots to look at!
+- Not to mention that in real data science work, you may encounter over 100 variables!!
+:::
+
+
+
+## Dimension Reduction
+
+
+- One variable represents one **dimension**.
+
+- With many variables in the data, we live in a **high dimensional** world.
+
+. . .
+
+GOAL:
+
+- Find a *low-dimensional* (usually 2D) representation of the data that captures [*as much of the information all of those variables provide as possible*]{.green}.
+
+- Use two [*created*]{.green} variables to represent all $p$ variables, and make a scatter plot of the two created variables to learn what our observations look like as if they lived in the high dimensional space.
+<!-- - But why and when can we omit dimensions? -->
+
+. . .
+
+:::{.question}
+Why and when can we omit dimensions?
+:::
+
+
+
+
+::: notes
+- So in order to meaningfully represent the relationship of all variables, we need a technique, Dimension Reduction.
+- In mathematics, One variable represents one **dimension**, so with many variables in the data, we live in a **high dimensional** world.
+- We would like to find a *low-dimensional* (usually 2D) representation of the data that captures as much of the information all of those variables provide as possible.
+- We use two *created* variables to represent all $p$ variables, and make a scatter plot of the two created variables to learn what our observations look like as if they lived in the high dimensional space.
+- Of course, it's not always a good idea to just use two variables to represent all $p$ variables. Some information will be missing when we just use two variables to represent or explain all the relationships of $p$ variables.
+- But sometimes, a *low-dimensional* representation looks very like a **high dimensional** space, and does not lose much information. In this situation, a *low-dimensional* representation is very useful.
+- So Let's see why and when can we omit dimensions?
+:::
+
+
+
+## Variation mostly from One Variable 
+
+
+- Almost all of the variation in the data is from left to right.
+
+```{r}
+#| out-width: 75%
+
+var1 <- runif(15, -2, 2)
+var2 <- rnorm(15, 0, 0.1)
+par(mar = c(4,4,0,0))
+plot(var1, var2, ylim = c(-2.3, 2.3), xlab = "X1", ylab = "X2",
+     col = "blue", pch = 19, cex = 2,
+     xlim = c(-2, 2), axes = FALSE)
+axis(1, labels = FALSE, tick = TRUE)
+axis(2, labels = FALSE, tick = TRUE)
+arrows(x0 = 0.1, y0 = 0.5, x1 = 2, y1 = 0.5, col = "red", lwd = 4)
+arrows(x0 = -0.1, y0 = 0.5, x1 = -2, y1 = 0.5, col = "red", lwd = 4)
+```
+
+
+::: notes
+- Let's suppose we have two variables, and their data look like this. 
+- Here we see almost all of the variation in the data from left to right.
+- It means that for variable X, some observations have low values, and some observations have high values.
+- But it looks like all observations have variable Y at about the same level.
+- Since X varies more than Y, having larger variation, X contains more information than Y in the data.
+:::
+
+
+
+
+## Variation mostly from One Variable
+
+- If we flattened the data, the graph would not look much different.
+
+```{r}
+#| purl: false
+#| out-width: 75%
+
+par(mar = c(4,4,0,0))
+plot(var1, rep(0, 15), ylim = c(-2.3, 2.3), xlab = "X1", ylab = "X2",
+     col = "blue", pch = 19, cex = 2,
+     xlim = c(-2, 2), axes = FALSE)
+axis(1, labels = FALSE, tick = TRUE)
+axis(2, labels = FALSE, tick = TRUE)
+```
+
+
+::: notes
+- If we flattened the data, removing the up and down variation, our graph would not look much different from what it look like before.
+- Most of the variation, or information is still kept in the data.
+:::
+
+
+
+## Variation mostly from One Variable
+
+- If we flattened the data, we could graph it with a 1D number line!
+
+
+```{r}
+#| purl: false
+#| out-width: 75%
+par(mar = c(4,4,0,0))
+plot(var1, rep(-2.3, 15), ylim = c(-2.3, 2.3), xlab = "X1", ylab = "x2",
+     col = "red", pch = 19, cex = 2,
+     xlim = c(-2, 2), axes = FALSE)
+axis(1, labels = FALSE, tick = TRUE)
+axis(2, labels = FALSE, tick = TRUE)
+```
+
+::: notes
+- Now, with up-and-down variation removed, the variable Y becomes redundant, and we can just represent the flattened data using 1D single number line.
+<!-- - If we flattened the data, we could just graph it with a 1D single number line! -->
+:::
+
+
+
+## Variation mostly from One Variable
+
+- Both graphs say *"the important variation is left to right."*
+
+```{r}
+#| purl: false
+#| out-width: 75%
+par(mar = c(4,4,0,0))
+plot(var1, rep(-2.3, 15), ylim = c(-2.3, 2.3), col = "red", pch = 19, cex = 2,
+     xlim = c(-2, 2), axes = FALSE, xlab = "X1", ylab = "")
+axis(1, labels = FALSE, tick = TRUE)
+# axis(2, labels = FALSE, tick = TRUE)
+text(0, 0, "Display 2D data on a 1D plot without losing much information!", cex = 1.6,
+     font = 2, col = "brown")
+```
+
+
+::: notes
+- So in this case, we can display 2D data on a 1D plot without losing too much information!
+- Both graphs say *"the important variation is left to right."*
+- Another example is watching TV. TV is a 2D thing, but we watch TV for 3D shows. The 2D TV represents the 3D shows, programs or drama very well because the 2D representation does not lose much information the 3D shows provide.
+- So through the example, we know some dimensions are more important than others. Like here Variable X is more important than variable Y because variable X explains most of the variation stored in the data.
+:::
+
+
+
+## 3D Drawing on Paper {visibility="hidden"}
+
+
+```{r}
+#| purl: false
+knitr::include_graphics("./images/15-pca/drawing.png")
+```
+
+::: notes
+- 3D Drawing on Paper is another example of dimension reduction. We can create a 2D representation of some object on a piece of paper, as if the object lived in the 3D space.
+- The reason why this 2D representation is so good is because it captures most of the information contained the 3D object, and we don't need one more dimension to describe that object.
+:::
+
+
+
+# Principal Component Analysis (PCA)
+
+## Idea of PCA
+
+- PCA is a dimension reduction tool that finds a low-dimensional representation of a data set that contains as much as possible of **variation**.
+
+- Each observation lives in a high-dimensional space (lots of variables), but not all of these dimensions (variables) are equally *interesting/important*.
+
+- The concept of *interesting/important* is measured by the amount that the observations vary along each dimension.
+
+::: notes
+- PCA is a dimension reduction tool that finds a low-dimensional representation of a data set that contains as much as possible of *variation* stored in the data set.
+- As we've seen before, each of the observations lives in a high-dimensional space, meaning that each observation has lots of variables associated with it, but not all of these dimensions (variables) are equally *interesting/important*.
+- The concept of *interesting/important* is measured by the amount that the observations vary along each dimension. 
+- A characteristic or attribute of observations is called variable because its value varies from sample to sample.
+- If the variable does not vary, it becomes an irrelevant or un-important variable because we cannot use the variable to differentiate or distinguish observations. If everyone in this class gets grade A, then the data science grade is not an important variable to learn which students perform academically better than others.
+:::
+
+## PCA Illustration: 2 Variable Example
+
+:::: {.columns}
+
+::: {.column width="30%"}
+
+```{r}
+#| class-output: my_classfull
+#| purl: false
+tibble(English = eng_1, Math = math_1) %>% print(n = 16)
+```
+
+:::
+
+
+::: {.column width="70%"}
+
+```{r}
+#| purl: false
+#| fig-asp: 1
+#| out-width: 70%
+par(mar = c(4,4.5,0,0))
+plot(eng_1, math_1, xlab = "English Score", ylab = "Math Score",
+     pch = 19, col = "green4", cex = 2, las = 1, bty = "n", xlim = c(30, 100), cex.lab = 2,
+     ylim = c(30, 100))
+abline(h = mean(math_1), col = "black", lty = 2)
+abline(v = mean(eng_1), col = "black", lty = 2)
+points(x = mean(eng_1), mean(math_1), col = "red", pch = 15, cex = 3)
+```
+
+:::
+
+::::
+
+
+::: notes
+- We use the English and Math score example to illustrate how PCA works.
+- From the data, we have a 2D scatter plot like this.
+- With the data, we can have the average of English score and the average of math score, shown as the red squared point in the scatter plot.
+:::
+
+
+
+
+## Step 1: Shift (or standardize) the Data
+
+- So the two variables have both mean 0. If the variables are measured in a different unit, consider standardization, $\frac{x_i - \bar{x}}{s_x}$.
+- Shifting does not change how the data points are positioned *relative* to each other.
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-asp: 1
+#| out-width: 75%
+#| purl: false
+par(mar = c(4,4.5,0,0))
+plot(eng_1, math_1, xlab = "English Score", ylab = "Math Score",
+     pch = 19, col = "green4", cex = 2, las = 1, bty = "n", xlim = c(-37, 100), cex.lab = 2,
+     ylim = c(-35, 100))
+abline(h = mean(math_1), col = "black", lty = 2)
+abline(v = mean(eng_1), col = "black", lty = 2)
+points(x = mean(eng_1), mean(math_1), col = "red", pch = 15, cex = 3)
+arrows(x0 = mean(eng_1) - 5, y0 = mean(math_1) - 5, x1 = 5, y1 = 5, col = "red", lwd = 5)
+abline(v = 0, col = "red", lty = 2)
+abline(h = 0, col = "red", lty = 2)
+points(eng_1 - mean(eng_1), math_1 - mean(math_1), col = "blue", pch = 19, cex = 2)
+points(x = 0, y = 0, col = "red", pch = 15, cex = 3)
+```
+
+:::
+
+
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-asp: 1
+#| out-width: 75%
+#| purl: false
+par(mar = c(4,4.5,0,0))
+plot(eng_1 - mean(eng_1), math_1 - mean(math_1), xlab = "English Score", ylab = "Math Score",
+     pch = 19, col = "blue", cex = 2, las = 1, bty = "n", xlim = c(-37, 100), cex.lab = 2,
+     ylim = c(-35, 100))
+abline(v = 0, col = "red", lty = 2)
+abline(h = 0, col = "red", lty = 2)
+points(x = 0, y = 0, col = "red", pch = 15, cex = 3)
+```
+
+:::
+
+::::
+
+
+::: notes
+- PCA first shift or standardize our data so that the center is on top of the origin (0, 0) in the graph. 
+- If the two variables are measured in a different scale, standardization is highly recommended. Here because both English and Math scores are measured using the same scale. We only do the shifting, and no scaling.
+- After standardization, all variables will use the same scale to measure their variation, and that makes more sense because PCA wants to find some axis or coordinate lower dimensional representation that contains the most variation, and we don't want the variation depends on variable's measurement units.
+- Notice that Shifting does not change how the data points are positioned *relative* to each other. The scattering shape remains the same.
+:::
+
+
+## Step 2: Find a Line that Fits the Data the Best
+
+- Start with a line *going through the origin*.
+- **Rotate** the line until it fits the data as well as it can, given that it goes through the origin.
+
+```{r}
+#| fig-asp: 1
+#| out-width: 48%
+#| purl: false
+par(mar = c(4,4.5,0,0))
+plot(eng_1 - mean(eng_1), math_1 - mean(math_1), xlab = "English Score", ylab = "Math Score",
+     pch = 19, col = "blue", cex = 2, las = 1, bty = "n", xlim = c(30, 100) - mean(eng_1), cex.lab = 2,
+     ylim = c(30, 100) - mean(math_1))
+segments(x0 = 10, y0 = 60, x1 = -10, y1 = -60,
+         col = "#003366", lwd = 5)
+abline(v = 0, col = "red", lty = 2)
+abline(h = 0, col = "red", lty = 2)
+```
+
+::: notes
+- The second step of PCA is going to fit a line to the centered or normalized data set.
+<!-- - Now that the data are centered on the origin, we can try to fit a line to it. -->
+- To do this, we start by drawing a random line that goes through the origin.
+:::
+
+
+
+## Step 2: Find a Line that Fits the Data the Best
+
+- Start with a line *going through the origin*.
+- **Rotate** the line until it fits the data as well as it can, given that it goes through the origin.
+
+```{r}
+#| fig-asp: 1
+#| out-width: 48%
+#| purl: false
+par(mar = c(4,4.5,0,0))
+plot(eng_1 - mean(eng_1), math_1 - mean(math_1), xlab = "English Score", ylab = "Math Score",
+     pch = 19, col = "blue", cex = 2, las = 1, bty = "n", xlim = c(30, 100) - mean(eng_1), cex.lab = 2,
+     ylim = c(30, 100) - mean(math_1))
+segments(x0 = 20, y0 = 40, x1 = -20, y1 = -40,
+         col = "#003366", lwd = 5)
+abline(v = 0, col = "red", lty = 2)
+abline(h = 0, col = "red", lty = 2)
+```
+
+::: notes
+- Then we rotate the line until if fits the data as well as it can, given that it has to go through the origin.
+:::
+
+
+
+
+## Step 2: Find a Line that Fits the Data the Best
+
+- Start with a line *going through the origin*.
+- **Rotate** the line until it fits the data as well as it can, given that it goes through the origin.
+
+```{r}
+#| fig-asp: 1
+#| out-width: 41%
+#| purl: false
+par(mar = c(4,4.5,0,0))
+plot(eng_1 - mean(eng_1), math_1 - mean(math_1), xlab = "English Score", ylab = "Math Score",
+     pch = 19, col = "blue", cex = 2, las = 1, bty = "n", xlim = c(30, 100) - mean(eng_1), cex.lab = 2,
+     ylim = c(30, 100) - mean(math_1))
+big_rot <- pr_out$rotation[, 1] * 45
+segments(x0 = big_rot[1], y0 = big_rot[2], x1 = -big_rot[1], 
+         y1 = -big_rot[2],
+         col = "#003366", lwd = 5)
+abline(v = 0, col = "red", lty = 2)
+abline(h = 0, col = "red", lty = 2)
+```
+
+::: notes
+- Ultimately, this line fits best. 
+<!-- - Last time we stopped here, we haven't learned what criterion makes the line the best fit. -->
+- So let's see what makes this line the best fit, and the meaning of this line.
+<!-- - But here, I jump to the conclusion too quickly. First we need to talk about how PCA decides if a fit is good or not. -->
+:::
+
+
+
+## The Meaning of the Best line
+
+:::: {.columns}
+
+::: {.column width="50%"}
+<!-- - The line [*maximizes the variation of the projected points*]{.green}! -->
+
+- **Principal Component 1 (PC1)**: [*maximizes the variance of the projected points*]{.green}.
+
+
+- PC1 is the line in the Eng-Math space that is *closest* to the $n$ observations
+  + PC1 *minimizes the sum of squared distances between the data points and the PC1.*
+
+
+- **<span style="color:red">PC1 is the best 1D representation of the 2D data</span>**
+
+:::
+
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-asp: 1
+#| purl: false
+par(mar = c(4,4.5,0,0))
+plot(eng_1[1:3] - mean(eng_1[1:3]), math_1[1:3] - mean(math_1[1:3]), xlab = "English Score", ylab = "Math Score",
+     pch = 19, col = "blue", cex = 2, las = 1, bty = "n", xlim = c(30, 100) - mean(eng_1[1:3]), cex.lab = 2, 
+     ylim = c(30, 100) - mean(math_1[1:3]))
+segments(x0 = 20, y0 = 120, x1 = -20, y1 = -120,
+         col = "#003366", lwd = 5)
+abline(v = 0, col = "red", lty = 2)
+abline(h = 0, col = "red", lty = 2)
+# arrows(11.333333, 17.333333, 3.768462, 18.842308)
+    v <- c(20, 120)
+for (i in 1:3) {
+    u <- c(eng_1[i]- mean(eng_1[1:3]), math_1[i] - mean(math_1[1:3]))
+    proj <- sum(u * v) * v / (sum(v ^ 2))
+    arrows(eng_1[i]- mean(eng_1[1:3]), math_1[i] - mean(math_1[1:3]), 
+           proj[1], proj[2], length = 0.1, lwd = 2)
+    points(proj[1], proj[2], col = "red", pch = 19, cex = 2)
+}
+```
+
+:::
+
+::::
+
+
+::: notes
+- To quantify how good this line fits the data, PCA projects the data onto it.
+- Then the idea is that we can either measure the distances from the data to the line and try to find the line that minimizes those distances.
+- Or we can try to find the line that maximizes the distances from the projected points to the origin.
+- The two criteria are equivalent.
+- DEMO
+- So we are find the line that **maximizes the variation of the projected points from the data points onto the line**!
+- The best line is called **Principal Component 1 (PC1)**, which **maximizes the sum of squared distances between projected points and the origin.**
+- Regression line: minimizes the sum of squared residuals (vertical lines from the data points to the line)
+- **Principal Component 1 (PC1)**: maximizes the sum of squared distances between between projected points and the origin.
+- PC1 is the line in the Eng-Math 2 dimensional space that is **closest** to the $n$ observations, i.e., PC1 minimizes the sum of squared distances between the data points and the PC1. 
+- **<span style="color:red">PC1 is the best 1D representation of the 2D data</span>**
+:::
+
+
+
+
+## The Meaning of the Best line
+
+:::{.xsmall}
+
+```{r}
+#| fig-cap: "Source: https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues"
+#| fig-asp: 1
+knitr::include_graphics("./images/15-pca/pca.gif")
+```
+
+:::
+
+::: notes
+- I am going to conclude the idea of PCA using this gif.
+- This gif shows you the idea of finding principal components.
+- As the line rotates, you can see the locations of the projected points on the line keeps changing as well.
+- And the PC1 is the line that maximizes the variation of the projected points.
+- Also, the PC1 is the line that minimizes the distance between the data points and the line. In the figure, the sum of those red lines will be the smallest.
+- Questions?
+:::
+
+
+
+## PC1 and PC2
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+- The data points are also spread out a little above and below the PC1.
+- There are some variation that is not explained by the PC1.
+- Find the second PC, PC2, that 
+  + explains the remaining variation
+  + is the line *through the origin and perpendicular to PC1*.
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-asp: 1
+par(mar = c(4,4.5,0,0))
+plot(eng_1 - mean(eng_1), math_1 - mean(math_1), xlab = "English Score", ylab = "Math Score",
+     pch = 19, col = "blue", cex = 3, las = 1, bty = "n", xlim = c(30, 100) - mean(eng_1), cex.lab = 2,
+     ylim = c(30, 100) - mean(math_1))
+big_rot <- pr_out$rotation[, 1] * 45
+segments(x0 = big_rot[1], y0 = big_rot[2], x1 = -big_rot[1], 
+         y1 = -big_rot[2],
+         col = "#003366", lwd = 5)
+
+big_rot_2 <- pr_out$rotation[, 2] * 15
+segments(x0 = big_rot_2[1], y0 = big_rot_2[2], x1 = -big_rot_2[1], 
+         y1 = -big_rot_2[2],
+         col = "#FFCC00", lwd = 5)
+# segments(x0 = 32, y0 = 32, x1 = -32, y1 = -32,
+#          col = "#003366", lwd = 3)
+# segments(x0 = -12, y0 = 12, x1 = 12, y1 = -12,
+#          col = "#FFCC00", lwd = 3)
+text(30, 20, "PC1", col = "#003366", font = 2, cex = 4)
+text(15, -15, "PC2", col = "#FFCC00", font = 2, cex = 4)
+abline(v = 0, col = "red", lty = 2)
+abline(h = 0, col = "red", lty = 2)
+# abline(lm(math_1~eng_1))
+```
+
+:::
+
+::::
+
+
+::: notes
+- Along with the PC1, the data points are also spread out a little above and below the PC1.
+- There are some variation of the two variables that is not explained by the PC1.
+- To find another PC that explains the remaining variation, we find the second PC, called PC2 that is the line **through the origin and perpendicular to PC1**.
+:::
+ 
+
+
+## Linear Combinations
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-asp: 1
+par(mar = c(4,4.5,0,0))
+plot(eng_1 - mean(eng_1), math_1 - mean(math_1), xlab = "English Score", ylab = "Math Score",
+     pch = 19, col = "blue", cex = 3, las = 1, bty = "n", xlim = c(30, 100) - mean(eng_1), cex.lab = 2,
+     ylim = c(30, 100) - mean(math_1))
+big_rot <- pr_out$rotation[, 1] * 45
+segments(x0 = big_rot[1], y0 = big_rot[2], x1 = -big_rot[1], 
+         y1 = -big_rot[2],
+         col = "#003366", lwd = 5)
+
+big_rot_2 <- pr_out$rotation[, 2] * 15
+segments(x0 = big_rot_2[1], y0 = big_rot_2[2], x1 = -big_rot_2[1], 
+         y1 = -big_rot_2[2],
+         col = "#FFCC00", lwd = 5)
+# segments(x0 = 32, y0 = 32, x1 = -32, y1 = -32,
+#          col = "#003366", lwd = 3)
+# segments(x0 = -12, y0 = 12, x1 = 12, y1 = -12,
+#          col = "#FFCC00", lwd = 3)
+text(30, 20, "PC1", col = "#003366", font = 2, cex = 5)
+text(15, -15, "PC2", col = "#FFCC00", font = 2, cex = 5)
+abline(v = 0, col = "red", lty = 2)
+abline(h = 0, col = "red", lty = 2)
+# abline(lm(math_1~eng_1))
+```
+
+:::
+
+
+::: {.column width="50%"}
+
+- PC1 = `r round(pr_out$rotation[, 1][1], 2)` $\times$ English $+$ `r round(pr_out$rotation[, 1][2], 2)` $\times$ Math
+- PC2 = `r round(pr_out$rotation[, 2][1], 2)` $\times$ English $-$ `r round(pr_out$rotation[, 1][1], 2)` $\times$ Math
+- PC1 is like an **overall intelligence index**  as it is a *weighted* average combining verbal and quantitative abilities.
+- PC2 accounts for individual difference in English and Math scores.
+- $0.68^2 + 0.74^2 = 1$ (Pythagorean theorem)
+- The combination weights 0.68, 0.74, etc are called PC **loadings**.
+
+:::
+
+::::
+
+::: notes
+- Now let's look at PC1 and PC2 a little more carefully. 
+- First PC1 and PC2 are just a vector in 2 dimensional space, right?
+- In other words, they are linear combinations of two standard basis, here our English axis and Math axis. 
+- PCA help us get the linear combinations.
+- Here PC1 = `r round(pr_out$rotation[, 1][1], 2)` $\times$ English + `r round(pr_out$rotation[, 1][2], 2)` $\times$ Math
+- PC2 = `r round(pr_out$rotation[, 2][1], 2)` $\times$ English - `r round(pr_out$rotation[, 1][1], 2)` $\times$ Math
+- So to make PC1, we mix 0.68 part of English score with 0.74 parts of Math score. 
+- One unit of PC1 consists of 0.68 parts of English and 0.74 parts of Math.
+- And because the weight of math score is a little bit larger, Math score is a little bit more important when it comes to describing how the data are spread out. 
+- PC1 can be viewed as an **overall intelligence index** because it is an weighted average combining both verbal and quantitative reasoning abilities.
+- PC2 accounts for individual difference in English and Math scores.
+- $0.68^2 + 0.74^2 = 1$ (Pythagorean theorem)
+- The combination weights 0.68, 0.74, etc are called **loadings** of PC.
+<!-- - (0.68, 0.74): e-vector of PC1. -->
+<!-- - One unit of PC1 consists of 0.68 parts of English and 0.74 parts of Math.  -->
+<!-- - One unit of PC2 consists of 0.74 parts of English and -0.68 parts of Math. -->
+:::
+
+
+
+
+## Rotate Everything so that PC1 is Horizontal
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+**1D representation**
+
+- PC1 is our 1D number line that explains the most variation contained in 2D data using a 1D line.
+- Points on the PC1 are the projected points of data onto PC1.
+
+```{r}
+#| fig-asp: 0.5
+eng_math_mat <- as.matrix(eng_math) 
+eng_math_mat <- apply(eng_math_mat, 2, function(x) x - mean(x))
+eng_math_rotate <- eng_math_mat %*% pr_out$rotation
+par(mar = c(4,0,0,0))
+plot(eng_math_rotate[, 1], rep(0, n), xlab = "PC1", ylab = "", axes = FALSE,
+     ylim = c(-0.05, 1), cex = 2,
+     pch = 19, col = "blue", las = 1, bty = "n", xlim = c(-40, 50))
+axis(1)
+```
+
+:::
+
+
+::: {.column width="50%"}
+
+**2D representation**
+
+- The new coordinates PC1 and PC2 are ordered by variation size of the English and Math scores
+
+```{r}
+#| fig-asp: 1
+#| out-width: 78%
+par(mar = c(4,4.5,0,0))
+plot(eng_math_rotate[, 1], eng_math_rotate[, 2], xlab = "PC1", ylab = "PC2", cex.lab = 2,
+     pch = 19, col = "blue", cex = 2, las = 1, bty = "n", xlim = c(-40, 50),
+     ylim = c(-40, 50))
+abline(v = 0, col = "red", lty = 2)
+abline(h = 0, col = "red", lty = 2)
+```
+
+:::
+
+::::
+
+
+::: notes
+- If we make PC1 and PC2 the new X-Y coordinates, the new coordinates PC1 and PC2 are ordered by variation size of the English and Math scores.
+- PC1 is our 1D number line that explains the most variation contained in 2D data using a 1D line.
+- Points on the PC1 are the projected points of data onto PC1.
+- PC1 explains the most variation, and PC2 explains the second most variation.
+- And PC2 explains the remaining variations that are not explained by PC1.
+- Here, because we only have 2 dimensions, we have at most 2 PCs. 
+:::
+
+
+
+
+## Variation
+
+<!-- - Variance for PC1 $= \frac{\text{Sum of squared distances of projected points on PC1}}{n-1}$  -->
+
+<!-- - Variance for PC2 $= \frac{\text{Sum of squared distances of projected points on PC2}}{n-1}$  -->
+
+- If the variation for PC1 is $17$ and the variation for PC2 is $2$, the total variation presented in the data is $17+2=19$.
+
+- PC1 accounts for $17/19 = 89\%$ of the total variation, and PC2 accounts for $2/19 = 11\%$ of the total variation.
+
+
+::: notes
+- OK how do we quantify variation. Let's give it a definition.
+- Variation for PC1 $= \frac{\text{Sum of squared distances of projected points on PC1}}{n-1}$ 
+- Variation for PC2 $= \frac{\text{Sum of squared distances of projected points on PC2}}{n-1}$ 
+- If the variation for PC1 is $17$ and the variation for PC2 is $2$, the total variation presented in the data is $17+2=19$.
+- PC1 accounts for $17/19 = 89\%$ of the total variation, and PC2 accounts for $2/19 = 11\%$ of the total variation.
+:::
+
+
+## How about 3 or More Variables?
+
+- PC1 spans the direction of the most variation
+
+. . .
+
+- PC2 spans the direction of the 2nd most variation
+
+. . .
+
+- PC3 spans the direction of the 3rd most variation
+
+. . .
+
+- PC4 spans the direction of the 4th most variation
+
+. . .
+
+- If we have $n$ observations and $p$ variables (dimensions), there are at most $\min(n - 1, p)$ PCs.
+
+
+::: notes
+- OK. We use a 2D data to illustrate PCA. How about 3 or More Variables? 
+- Well the idea of 2D data can be exactly applied to 3 or more dimensional data.
+:::
+
+
+
+
+## US Arrest Data in 1973
+
+```{r}
+#| echo: true
+#| code-line-numbers: false
+dim(USArrests)
+```
+
+```{r, highlight.output=1}
+#| echo: true
+#| code-line-numbers: false
+#| class-output: my_classfull
+head(USArrests, 16)
+```
+
+
+::: notes
+- OK. Time to learn how to perform PCA in R.
+- The data set used for PCA is USArrests data set in 1973.
+- Each observation or subject is a state, and we have 4 features or dimensions, Murder, Assault, UrbanPop, and Rape.
+:::
+
+
+
+
+## PC Loading Vectors on `USArrests`
+
+
+```{r}
+#| echo: true
+#| label: pca-pcloading
+#| code-line-numbers: false
+pca_output <- prcomp(USArrests, scale = TRUE)
+
+## rotation matrix provides PC loadings
+(pca_output$rotation <- -pca_output$rotation)
+```
+
+. . .
+
+- PCs are unique up to a sign change, so `-pca_output$rotation` gives us the same PCs as `pca_output$rotation` does. The sign just change the direction, not the angle.
+
+
+$\text{PC1} = 0.54 \times \text{Murder} + 0.58 \times \text{Assault} + 0.28 \times \text{UrbanPop} + 0.54 \times \text{Rape}$
+
+<br>
+
+$\text{PC2} = 0.42 \times \text{Murder} + 0.19 \times \text{Assault} - 0.87 \times \text{UrbanPop} - 0.17 \times \text{Rape}$
+
+. . .
+
+
+- We have 4 PCs because $\min(n-1, p) = \min(50-1, 4) = 4$.
+
+
+
+
+
+
+::: notes
+- To perform PCA in R, it cannot be easier. 
+- We just need to use the function prcomp(), and put the data set in the function. Then we get everything we want.
+- Here I choose to scale the data because variables are not measured in the same scale. For example, Murder rate and UrbanPop are measured in different units. 
+- This makes sure that every variable has variance 1, and our analysis is not affected by units.
+- The PCA results are stored as a list in pca_output object.
+- OK first we can look at the rotation matrix because it provides PC loadings, and so we know what PC1 and PC2 are.
+- Changing signs for easier interpretation of PCs
+- Those PC loadings define how we rotates the coordinates to obtain the PCs.
+???
+- Again, PC1 is just a linear combination or weighted average of the 4 variables, same as PC2.
+???
+- Again, PC1 is just a linear combination or weighted average of the 4 variables, same as PC2.
+- PCs are unique up to a sign change, so `-pca_output$rotation` gives us the same PCs as `pca_output$rotation` does.
+- We have 4 PCs because $\min(n-1, k) = \min(50-1, 4) = 4$.
+:::
+
+
+
+
+## PC Scores
+
+- The value of the *rotated* data, the data values of each PC are stored in `pca_output$x`
+
+```{r}
+#| echo: true
+#| label: pca-pcscore
+#| class-output: my_classfull
+#| code-line-numbers: false
+head(pca_output$x <- -pca_output$x, 16) |> round(2)
+```
+
+
+::: notes
+- The value of the *rotated* data, the data values of each PC are stored in `pca_output$x`.
+- In other words, PC1 column here shows the projected values of observations onto PC1. PC2 column shows the projected values of observations onto PC2, and so on.
+:::
+
+
+
+
+## Interpretation of PCs
+
+```{r}
+#| echo: true
+#| code-line-numbers: false
+pca_output$rotation
+```
+
+- PCs are less interpretable than original features. 
+- The first loading vector places approximately equal weight on `Assualt`, `Murder` and `Rape`, with much less weights on `UrbanPop`.
+- PC1 roughly corresponds to a **overall serious crime rate**.
+
+. . .
+
+- The second loading vector places most of its weight on `UrbanPop`, and much less weight on the other 3 features.
+- PC2 roughly corresponds to the **level of urbanization**.
+
+
+::: notes
+- Intepretability decreases with the order of PCs.
+- So it's easier to give PC1 a meaningful name than PC2, and PC2 is more meaningful than PC3, and so on. Because the PCs after the first 2 PCs usually explain quite small variation in the data, and some of them may be just noises.
+- Let's see if we can interpret these PCs.
+- First keep in mind that PCs are less interpretable than original features. Sometimes we even don't know how to interpret it, especially for PCs that explain small variations. So this is the price we pay for dimension reduction.
+- But let's look at this example.
+- The first loading vector places approximately equal weight on `Assualt`, `Murder` and `Rape`, with much less weights on `UrbanPop`.
+- So PC1 roughly corresponds to a **overall serious crime rate** because PC1 explains the variations of data caused by those crime variables `Assualt`, `Murder` and `Rape`.
+- On the contrary, the second loading vector places most of its weight on `UrbanPop`, and much less weight on the other 3 features.
+- So we can say PC2 roughly corresponds to the **level of urbanization**.
+- So you get the idea, `Assualt`, `Murder` and `Rape` are similar each other because they all are measures of crime rate.
+- So when reducing dimensions, we sort of combine the three similar variables together to become a one single index that measures an overall crime rate.
+- Urban population measures a totally different thing. So the variation created by this variable cannot be explained well by the crime rate, and it should be absorbed in PC2.
+:::
+
+
+
+## 2D Representation of the 4D data
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| code-line-numbers: false
+pca_output$x |> tail(2) |> round(2)
+```
+<!-- # ```{r, eval=F} -->
+<!-- # #| echo: true -->
+<!-- # plot(x = pca_output$x[, 1],  -->
+<!-- #      y = pca_output$x[, 2], cex = 0,  -->
+<!-- #      xlim = c(-3, 3), ylim = c(-3, 3),  -->
+<!-- #      xlab = "PC1 (crime index)",  -->
+<!-- #      ylab = "PC2 (urbanization index)") -->
+<!-- # text(x = pca_output$x[, 1],  -->
+<!-- #      y = pca_output$x[, 2],  -->
+<!-- #      labels = state.abb) -->
+<!-- # ``` -->
+<!-- # ```{r} -->
+<!-- # #| echo: true -->
+<!-- # wi_pc <- pca_output$x[row.names(pca_output$x)  -->
+<!-- #                       == "Wisconsin", ] -->
+<!-- # round(wi_pc, 3) -->
+<!-- # ``` -->
+
+- Higher value of PC1 means higher crime rates (roughly).
+
+- Higher value of PC2 means higher level of urbanization (roughly).
+
+:::
+
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-asp: 1
+par(mar = c(4, 4.5, 0, 0))
+plot(x = pca_output$x[, 1], 
+     y = pca_output$x[, 2], cex = 0, las = 1,
+     xlim = c(-3, 3), ylim = c(-3, 3), cex.lab = 2,
+     xlab = "PC1 (crime index)",  
+     ylab = "PC2 (urbanization index)")
+text(x = pca_output$x[, 1], 
+     y = pca_output$x[, 2], 
+     labels = state.abb, cex = 2)
+wi_pc <- pca_output$x[row.names(pca_output$x)
+                      == "Wisconsin", ]
+abline(v = wi_pc[1], lty = 2, col = "red")
+abline(h = wi_pc[2], lty = 2, col = "red")
+```
+
+:::
+
+::::
+
+
+::: notes
+- And we can show our 2D Representation of the 4D data. 
+- Higher value of PC1 means higher crime rates (roughly).
+- Higher value of PC2 means higher level of urbanization (roughly).
+- We may be able to further analysis on the reduced dimension data, for example, we may want to partition the data into 2 clusters.
+- One cluster has high crime rate and low urbanization, the other group shows low crime rate and high urbanization.
+- One cluster may be the low economically-developed states, and the other high economically-developed states.
+- So you see, we can tell lots of stories by analyzing our data.
+:::
+
+
+
+
+## 2D Representation of the 4D data: biplot
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: true
+#| eval: false
+#| code-line-numbers: false
+biplot(pca_output, xlabs = state.abb, 
+       scale = 0)
+```
+
+- Top axis: PC1 loadings
+- Right axis: PC2 loadings
+- Red arrows: PC1 and PC2 loading vector, e.g., (0.28, -0.87) for `UrbanPop`.
+- Crime-related variables (`Assualt`, `Murder` and `Rape`) are located close to each other.
+- `UrbanPop` is far from the other three.
+- `Assualt`, `Murder` and `Rape` are more correlated, and `UrbanPop` is less correlated with the other three.
+
+:::
+
+
+
+::: {.column width="50%"}
+
+```{r}
+#| label: biplot
+#| fig-asp: 1
+par(mar = c(4, 4.8, 2, 3))
+biplot(pca_output, xlabs = state.abb, scale = 0, arrow.len = 0.05, 
+       col = c("blue", "red"), las = 1, cex = 2, cex.lab = 2,
+       xlab = "PC1 score", ylab = "PC2 score", cex.axis = 1.5)
+```
+
+:::
+
+::::
+
+
+::: notes
+- We can simply use the function biplot() to show the 2D Representation of the data. 
+- This function also provide loading vector of PC1 and PC2 that gives us an idea of which direction means a large value of a variable/feature.
+- This is why it is called biplot because we plot two things in one single plot.
+- Here, Top axis is for PC1 loadings
+- Right axis is PC2 loadings
+- Red arrows: PC1 and PC2 loading vector, e.g., (0.28, 0.87) for `UrbanPop`.
+- So NJ and Ca have pretty high urban pop rate because they are large in the `UrbanPop` arrow direction. 
+- Crime-related variables (`Assualt`, `Murder` and `Rape`) are located close to each other.
+- `UrbanPop` is far from the other three.
+- `Assualt`, `Murder` and `Rape` are more correlated, and `UrbanPop` is less correlated with the other three.
+- `Assualt`, `Murder` and `Rape` sort of point to the same direction as PC1 and `UrbanPop` points to the same direction as PC2.
+:::
+
+
+
+
+## Proportion of Variance Explained
+
+```{r}
+#| echo: true
+#| label: pca-var
+#| code-line-numbers: false
+(pc_var <- pca_output$sdev ^ 2)
+(pc_var_prop <- pc_var / sum(pc_var))
+```
+
+- PC1 explains $62\%$ of the variations in the data, and PC2 explains $24.7\%$ of the variance.
+- PC1 and PC2 explain about $87\%$ of the variance, and the last two PCs explain only $13\%$.
+- 2D plot provides pretty accurate summary of the data.
+
+
+::: notes
+- Finally I want to talk a little bit about Proportion of Variance Explained.
+- In the pca_output, we have SD of each PC.
+- We square it to get variance.
+- Then if we divided by the sum of variance, we get the Proportion of Variance Explained by each PC.
+- So PC1 explains $62\%$ of the variations in the data, and PC2 explains $24.7\%$ of the variance.
+- PC1 and PC2 explain about $87\%$ of the variance, and the last two PCs explain only $13\%$.
+- 2D plot provides pretty accurate summary of the data.
+:::
+
+
+
+## Scree Plot
+
+Look for a point at which the proportion of variance explained by each subsequent PC drops off.
+
+
+```{r}
+#| label: screeplot
+#| fig-asp: 1
+#| out-width: 48%
+par(mar = c(4,4.5,0,0))
+plot(pc_var_prop, xlab = "Principal Component", col = "red", lwd = 3, 
+     ylab = "Proportion of Variance Exaplained", axes = F, las = 1,
+     ylim = c(0, 1), type = "b", cex.lab = 2)
+axis(1, at = 1:4, cex.axis = 1.5)
+axis(2, cex.axis = 2, las = 1)
+```
+
+
+
+# Mathematics of PCA
+
+
+## Principal Components
+
+- The $k$th PC is
+
+$$Z_k = \phi_{1k}X_1 + \phi_{2k}X_2 + \dots + \phi_{pk}X_p,$$
+where $\sum_{j=1}^p\phi_{jk}^2=1$.
+
+- $(\phi_{1k}, \phi_{2k}, \dots, \phi_{pk})'$ is the PC **loading vector**.
+
+- The PC1 loading vector solves
+
+
+
+$$\max_{\phi_{11}, \phi_{21}, \dots, \phi_{p1}} \left\{ \frac{1}{n}\sum_{i=1}^n z_{i1}^2\right\} = \left\{ \frac{1}{n}\sum_{i=1}^n \left( \sum_{j=1}^p  \phi_{j1} x_{ij}\right)^2\right\} \quad \text{s.t.} \quad \sum_{j=1}^p\phi_{j1}^2 = 1$$
+
+
+<!-- $$\max_{\phi_{11}, \phi_{21}, \dots, \phi_{p1}} \left\{ \frac{1}{n}\sum_{i=1}^n \left( \sum_{j=1}^p  \phi_{j1} x_{ij}\right)^2\right\} \quad \text{s.t.} \quad \sum_{j=1}^p\phi_{j1}^2 = 1$$ -->
+
+- Maximize the sample variance of the projected points, or the **scores** $z_{11}, z_{21}, \dots, z_{n1}$.
+
+- The PC **loading vector** defines a direction in feature space along which the data vary the most.
+
+
+
+## Principal Components
+
+For $k$th PC, $k > 1$,
+
+::: midi
+
+$$\max_{\phi_{1k}, \phi_{2k}, \dots, \phi_{pk}} \left\{ \frac{1}{n}\sum_{i=1}^n z_{ik}^2\right\} = \left\{ \frac{1}{n}\sum_{i=1}^n \left( \sum_{j=1}^p  \phi_{jk} x_{ij}\right)^2\right\} \quad \text{s.t.} \quad \sum_{j=1}^p\phi_{jk}^2 = 1, \text{ and } {\bz_m}'\bz_k = 0, \, m = 1, \dots, k-1$$ 
+
+:::
+
+where 
+
+$\bz_l = (z_{1l}, z_{2l}, \dots, z_{nl})'$
+
+<!-- $$\max_{\phi_{1k}, \phi_{2k}, \dots, \phi_{pk}} \left\{ \frac{1}{n}\sum_{i=1}^n \left( \sum_{j=1}^p  \phi_{jk} x_{ij}\right)^2\right\} \quad \text{s.t.} \quad \sum_{j=1}^p\phi_{jk}^2 = 1, \text{ and } {\bz_m}'\bz_k = 0, \, m = 1, \dots, k-1$$ -->
+
+
+
+
+## Low-Rank Approximation
+
+
+- PCs provide low-dimensional planes that are *closest* to the observations.
+
+- $x_{ij} \approx \sum_{m=1}^M z_{im}\phi_{jm}$ with equality when $M = \min(n-1, p)$
+
+::: small
+
+$$(z_{im}, \phi_{jm}) = \argmin_{a_{im}, b_{jm}} \left\{ \sum_{j=1}^p\sum_{i=1}^n\left( x_{ij} - \sum_{m=1}^Ma_{im}b_{jm}\right)^2\right\}$$
+:::
+
+
+
+::: xsmall
+
+```{r}
+#| fig-cap: "Source: ISL Fig 12.2"
+#| out-width: 60%
+knitr::include_graphics("./images/15-pca/12-2.png")
+```
+
+:::
+
+
+
+
+## Scaling the Variables
+
+```{r}
+#| echo: true
+#| code-line-numbers: false
+apply(USArrests, 2, var)
+```
+
+- If we perform PCA on the unscaled variables, PC1 loading vector will have a large loading for `Assault`.
+
+- When all the variables are of the same type, no need to scale the variables.
+
+
+```{r}
+pca_output_no <- prcomp(USArrests, scale = FALSE)
+```
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r}
+par(mar = c(4, 3.8, 2, 0))
+biplot(pca_output, xlabs = state.abb, scale = 0, arrow.len = 0.05, 
+       col = c("blue", "red"), las = 1, cex = 1, var.axes = TRUE,
+       xlab = "PC1 score", ylab = "PC2 score", main = "Scaled")
+```
+
+:::
+
+
+::: {.column width="50%"}
+
+```{r}
+par(mar = c(4, 3.8, 2, 0))
+biplot(pca_output_no, xlabs = state.abb, scale = 0, arrow.len = 0.05, 
+       col = c("blue", "red"), las = 1, cex = 1, var.axes = TRUE,
+       xlab = "PC1 score", ylab = "PC2 score",
+       main = "Un-scaled")
+```
+
+:::
+
+::::
+
+
+
+## PCA and SVD
+
+PCA is equivalent to singular value decomposition (SVD) of $\bX$
+
+$$\bX_{n\times p} = \bU_{n \times n} \bD_{n \times p} \bV'_{p \times p}$$ where $\bU$ and $\bV$ are orthogonal matrices, and $\bD$ is diagonal with diagonal elements singular values $d_1 \ge d_2 \ge \cdots \ge d_p$.
+
+```{r}
+knitr::include_graphics("./images/15-pca/svd.png")
+```
+
+
+
+
+## PC Scores and SVD
+
+- ${\bf Z}_{n \times p} = [{\bf z}_1 \, {\bf z}_2 \, \cdots \, {\bf z}_p] = \bX \bV$
+
+- The $j$th PC is the $j$th column of ${\bf Z}$ given by ${\bf z}_j = (z_{1j}, z_{2j}, \dots, z_{nj})' = {\bf Xv}_j$.
+
+- Project $\bX$ onto the space spanned by $\bv_j$s
+
+- $\bv_j$s are *loading vectors*.
+
+. . .
+
+- ${\bf Z}_{n \times p} = \bU\bD$
+
+- ${\bf z}_j = d_j\bu_j$. 
+
+- $\bu_j$s are the unit PC vectors, and $d_j$ controls the variation along the $\bu_j$ direction.
+
+
+
+## Low-Rank Approximation and SVD
+
+${\bX} = {\bU}{\bD}{\bV}'$
+
+$\bA = \bU_{n\times M}\bD_{M \times M}$ and $\bB' = \bV_{M\times p}'$ are the minimizer of 
+
+$$ \min_{\bA\in \mathbf{R}^{n \times M}, \bB\in \mathbf{R}^{p \times M}} \|\bX - \bA\bB' \|$$
+where 
+
+- $\bU_{n\times M}$ is $\bU$ with the first $M$ columns
+- $\bD_{M \times M}$ is $\bD$ of the first $M$ rows and columns
+- $\bV_{M\times p}'$ is $\bV'$ with the first $M$ rows
+
+. . .
+
+- $x_{ij} = \sum_{m = 1}^p d_mu_{im}v_{jm}$
+
+- $x_{ij} \approx \sum_{m = 1}^M d_mu_{im}v_{jm}$
+
+
+
+## PCA and Eigendecomposition
+
+PCA is equivalent to eigendecomposition of $\bX'\bX$ or $\bSigma = \Cov(\bX) = \dfrac{\bX'\bX}{n-1}$^[Unit normal scaling (normalization or standardization) is such that the variance is one, and unit length scaling makes the length one. If $\bW$ is the unit length scaled version, $\Corr(\bW) = \bW'\bW = \frac{\bX'\bX}{n-1}$], the covariance matrix of $\bX$.
+
+<!-- $$\bSigma = \Cov(\bX) = \dfrac{\bX'\bX}{n-1} = \bV\frac{\bD^2}{n-1}\bV'$$ -->
+
+$$\bX'\bX = \bV\bD^2\bV' = d_1^2\bv_1\bv_1' + \dots + d_p^2\bv_p\bv_p'$$
+
+- Total variation: $\sum_{j=1}^p \Var(\bx_j) = \frac{1}{n-1}\sum_{j=1}^pd_j^2 = p$
+
+- Variation of $m$th PC: $\Var(\bz_m) = \frac{d_m^2}{n-1}$
+
+
+
+
+
+## Transformed OLS Regression
+
+Transform ${\bf y = X\bbeta + \bep}$ into 
+$${\bf y = XVV'\bbeta + \bep = Z\balpha} + \bep$$ where $\bZ = \bX\bV$ and $\balpha = \bV'\bbeta$, or $\bbeta = \bV\balpha$.
+
+
+- The least- squares estimator $\hat{\balpha} = (\bZ'\bZ)^{-1}\bZ'\by = \bD^{-2}\bZ'\by$
+
+
+- $\Var\left(\hat{\balpha} \right) = \sigma^2 (\bZ'\bZ)^{-1} = \sigma^2 \bD^{-2}$
+
+
+- A small $d_j$ means that the variance of $\alpha_j$ will be large.
+
+- The PC regression combats multicollinearity by using *less PCs* $(m \ll p)$ in the model.
+  + The PCs corresponding to tiny $d_j$s (huge variance) are removed and least-squares is applied to the remaining PCs. 
+
+
+::: notes
+- Even though the new variables are orthogonal, the same magnitude of variance due to the ill-conditioning in $X'X$ is retained. The total variance has merely been redistributed.
+- ${\bf y = X\bbeta + \bep}$ 
+- ${\bf y = XVV'\bbeta + \bep = Z\balpha} + \bep$ where ${\bf Z  =XV}$ and ${\bf \balpha = V'\bbeta}$.
+- The least- squares estimator $\hat{\balpha} = {\bf (Z'Z)^{-1}Z'y = \Lambda^{-1}Z'y}$
+- $\var\left(\hat{\balpha} \right) = \sigma^2 {\bf (Z'Z)}^{-1} = \sigma^2 {\bf \Lambda}^{-1}$
+- A small $\lambda_j$ means that the variance of $\alpha_j$ will be large.
+- The PC regression combats multicollinearity by using less PCs in the model.
+- Assume that the regressors are arranged in order of decreasing eigenvalues, $\lambda_1 \ge \lambda_2 \ge \cdots \ge \lambda_k > 0$.
+- The PCs corresponding to near-zero eigenvalues are removed and least squares applied to the remaining PCs. 
+- If all PCs are in the model, it is just a rotation of the regressors. The same magnitude of variance is retained.
+- The small variation in the $z_2$ direction is responsible for the large variance in $\hat{\alpha}_2$.
+- A large $\lambda_1$ allows variance of $\hat{\alpha}_1$ to be relatively unaffected by the dependency of $x_1$ and $x_2$.
+:::
+
+
+
+## Principal Component Regression (PCR)
+
+- Keep $m < p$ PCs with the largest $m$ singular values $d_1, d_2, \dots, d_m$.
+- The least- squares estimator is $$\hat{\balpha}_m = ({\bf Z} _m ' {\bf Z} _m) ^ {-1} {\bf Z}_m ' {\bf y} = \bD_m ^ {-2} {\bf Z}_m '{\bf y}$$ where ${\bf Z}_m = [{\bf z}_1 \, {\bf z}_2 \, \cdots \, {\bf z}_m]$ and ${\bf \bD}_m = \text{diag}(d_1, d_2, \dots, d_m)$
+
+. . .
+
+
+- ${\bf b}_{pc} = {\bf V}_m\hat{\balpha}_m = [{\bf v}_1 \, {\bf v}_2 \, \cdots \, {\bf v}_m] \begin{bmatrix} \hat{\alpha}_1 \\ \hat{\alpha}_2 \\ \vdots \\ \hat{\alpha}_m \end{bmatrix}$
+- ${\bf b}_{pc}$ is biased but has smaller variance than ${\bf b}$.
+
+
+::: notes
+- Keep the first $m < k$ PCs.
+- The least- squares estimator is $$\hat{\balpha}_m = ({\bf Z} _m ' {\bf Z} _m) ^ {-1} {\bf Z}_m ' {\bf y} = {\bf \Lambda} _m ^ {-1} {\bf Z}_m '{\bf y}$$ where ${\bf Z}_m = [{\bf z}_1 \, {\bf z}_2 \, \cdots \, {\bf z}_m]$ and ${\bf \Lambda}_m = \text{diag}(\lambda_1, \lambda_2, \dots, \lambda_m)$
+- To transform back to the original coefficients, since ${\bf \balpha = V'\bbeta}$, ${\bf \bbeta = V\balpha}$
+- ${\bf b}_{pc} = {\bf V}_m\hat{\balpha}_m = [{\bf v}_1 \, {\bf v}_2 \, \cdots \, {\bf v}_m] \begin{bmatrix} \hat{\alpha}_1 \\ \hat{\alpha}_2 \\ \vdots \\ \hat{\alpha}_m \end{bmatrix}$
+- ${\bf b}_{pc}$ is biased but has smaller variance than ${\bf b}$.
+Deleting PCs does not imply deletion of any of original regressors. The selected $m$ PCs do contain information provided by all $k$ original regressors.
+:::
+
+
+## Principal Component Regression
+
+::: {.alert}
+- PCR performs well when the directions in which *$X_1, \dots ,X_p$ show the most variation (the first few PCs) are the directions that are associated with $Y$.*
+:::
+
+. . .
+
+::: {.alert}
+- Deleting PCs does not imply deletion of any of original regressors. The selected $m$ PCs contain information provided by all $k$ original regressors. (*Not a feature selection method*)
+:::
+
+. . .
+
+::: {.alert}
+- PCR and ridge regression are closely related. Ridge regression is a *continuous* version of PCR.
+:::
+
+
+
+## `pls::pcr()`
+
+```{r}
+library(ISLR2)
+set.seed(1)
+Hitters <- Hitters[complete.cases(Hitters), ]
+x <- model.matrix(Salary ~ ., Hitters)[, -1]
+y <- Hitters$Salary
+train <- sample(1:nrow(x), nrow(x) / 2)
+test <- (-train)
+y.test <- y[test]
+```
+
+```{r}
+#| echo: true
+#| code-line-numbers: false
+library(pls)
+set.seed(1)
+pcr.fit <- pcr(Salary ~ ., data = Hitters, 
+               subset = train,
+               scale = TRUE, validation = "CV")
+validationplot(pcr.fit, val.type = "MSEP")
+```
+
+::: notes
+https://stats.stackexchange.com/questions/371054/what-is-adjusted-cv-or-bias-corrected-cv
+:::
+
+
+
+## `pls::pcr()`
+
+```{r}
+#| echo: true
+#| code-line-numbers: false
+pcr.pred <- predict(pcr.fit, x[test, ], ncomp = 5)
+mean((pcr.pred - y.test)^2)
+pcr.fit <- pcr(y ~ x, scale = TRUE, ncomp = 5)
+summary(pcr.fit)
+```
+
+::: notes
+coefficients are in scaled unit, not original units.
+:::
+
+<!-- ## PCs with Missing Values -->
+
+<!-- ## Matrix Completion -->
+
+<!-- ## Recommender System -->
+
+
+
+## Other Dimension Reduction (Latent Variable) Methods
+
+- Kernel Principal Component Analysis
+<https://ml-explained.com/blog/kernel-pca-explained>
+
+- Probabilistic PCA
+
+- Factor Analysis
+
+- Autoencoders
+
+- t-SNE (t-distributed stochastic neighbor embedding)
+
+- UMAP (Uniform manifold approximation and projection)
+
+<!-- - PML Ch. 20; ESL Ch. 14 -->
