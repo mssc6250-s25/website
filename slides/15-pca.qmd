@@ -1343,7 +1343,7 @@ pca_output$x |> tail(2) |> round(2)
 
 - Higher value of PC1 means higher crime rates (roughly).
 
-- Higher value of PC2 means higher level of urbanization (roughly).
+- Higher value of PC2 means lower level of urbanization (roughly).
 
 :::
 
