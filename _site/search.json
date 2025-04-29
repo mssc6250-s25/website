@@ -2685,7 +2685,7 @@
     "href": "index.html",
     "title": "MSSC 6250 - Statistical Machine Learning (Spring 2025)",
     "section": "",
-    "text": "Homework 4 released, and due Friday, 5/2, 11:59 PM.\n\nThis schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nTo Do\nSlides\nCode\nHomework\nProject\n\n\n\n\n1\nTue, Jan 14\nSyllabus/Overview of Statistical Learning\n📖\n🖥️🖥️\n\n\n\n\n\n\nThu, Jan 16\nBias-variance tradeoff\n\n🖥️\n\n\n\n\n\n2\nTue, Jan 21\nNO CLASS: Cold Weather\n📖\n🖥️\n\n\n\n\n\n\nThu, Jan 23\nLinear Regression\n\n\n\n\n\n\n\n3\nTue, Jan 28\nNumerical Optimization\n📖\n\n\n✍️ HW1\n\n\n\n\nThu, Jan 30\nStochastic Gradient Descen; Ridge Regression\n\n🖥️\n\n\n\n\n\n4\nTue, Feb 4\nCross-Validation; Feature Selection\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 6\nLASSO\n\n\n\n\n\n\n\n5\nTue, Feb 11\nRegression Splines\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 13\nSmoothing Splines and Generalized Additive Models\n\n\n\nHW 1 Due\n\n\n\n6\nTue, Feb 18\nBayesian Inference and Linear Regression\n📖\n🖥️\n\n✍️ HW2\n\n\n\n\nThu, Feb 20\nBayesian Linear Regression\n\n\n\n\n✅ Team up Due\n\n\n7\nTue, Feb 25\nBinary Logistic Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 27\nMultinomial Logistic Regression\n\n\n\nHW 2 Due\n✅ Proposal Due\n\n\n8\nTue, Mar 4\nDiscriminant Analysis\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 6\nMidterm Presentation I\n\n\n\n✍️ HW3\n✅ Materials Due\n\n\n9\nTue, Mar 11\nNO CLASS: Spring break\n\n\n\n\n\n\n\n\nThu, Mar 13\nNO CLASS: Spring break Deep Learning Workshop (Fri, Mar 14)\n\n\n\n\n\n\n\n10\nTue, Mar 18\nNaive Bayes\n📖\n\n\n\n\n\n\n\nThu, Mar 20\nK-Nearest Neighbors\n\n🖥️\n\n\n\n\n\n11\nTue, Mar 25\nGaussian Process Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 27\nGaussian Process Classification\n\n\n\n\n\n\n\n12\nTue, Apr 1\nSupport Vector Machine\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 3\nSupport Vector Machine\n\n\n\nHW 3 Due\n\n\n\n13\nTue, Apr 8\nCART and Bagging\n📖\n🖥️\n\n\nProposal-2 Due\n\n\n\nThu, Apr 10\nRandom Forests and Boosting\n\n\n\n✍️ HW4\n\n\n\n14\nTue, Apr 15\nMidterm Presentation II\n📖\n\n\n\n✅ Project-2 Guideline\n\n\n\nThu, Apr 17\nNO CLASS: Easter break\n\n\n\n\n\n\n\n15\nTue, Apr 22\nPrincipal Component Analysis\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 24\nK-Means Clustering\n\n🖥️\n\n\n\n\n\n16\nTue, Apr 29\nModel-based Clustering\n📖\n\n\n\n\n\n\n\nThu, May 1\nNeural Networks\n\n\n\nHW 4 Due\n\n\n\n17\nThu, May 8\nFinal Project Submission\n\n\n\n\n✅ Final project guideline\n\n\n\n\nI reserve the right to make changes to the schedule.",
+    "text": "Homework 4 released, and due Friday, 5/2, 11:59 PM.\n\nThis schedule will be updated as the semester progresses, with all changes documented here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek\nDate\nTopic\nTo Do\nSlides\nCode\nHomework\nProject\n\n\n\n\n1\nTue, Jan 14\nSyllabus/Overview of Statistical Learning\n📖\n🖥️🖥️\n\n\n\n\n\n\nThu, Jan 16\nBias-variance tradeoff\n\n🖥️\n\n\n\n\n\n2\nTue, Jan 21\nNO CLASS: Cold Weather\n📖\n🖥️\n\n\n\n\n\n\nThu, Jan 23\nLinear Regression\n\n\n\n\n\n\n\n3\nTue, Jan 28\nNumerical Optimization\n📖\n\n\n✍️ HW1\n\n\n\n\nThu, Jan 30\nStochastic Gradient Descen; Ridge Regression\n\n🖥️\n\n\n\n\n\n4\nTue, Feb 4\nCross-Validation; Feature Selection\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 6\nLASSO\n\n\n\n\n\n\n\n5\nTue, Feb 11\nRegression Splines\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 13\nSmoothing Splines and Generalized Additive Models\n\n\n\nHW 1 Due\n\n\n\n6\nTue, Feb 18\nBayesian Inference and Linear Regression\n📖\n🖥️\n\n✍️ HW2\n\n\n\n\nThu, Feb 20\nBayesian Linear Regression\n\n\n\n\n✅ Team up Due\n\n\n7\nTue, Feb 25\nBinary Logistic Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Feb 27\nMultinomial Logistic Regression\n\n\n\nHW 2 Due\n✅ Proposal Due\n\n\n8\nTue, Mar 4\nDiscriminant Analysis\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 6\nMidterm Presentation I\n\n\n\n✍️ HW3\n✅ Materials Due\n\n\n9\nTue, Mar 11\nNO CLASS: Spring break\n\n\n\n\n\n\n\n\nThu, Mar 13\nNO CLASS: Spring break Deep Learning Workshop (Fri, Mar 14)\n\n\n\n\n\n\n\n10\nTue, Mar 18\nNaive Bayes\n📖\n\n\n\n\n\n\n\nThu, Mar 20\nK-Nearest Neighbors\n\n🖥️\n\n\n\n\n\n11\nTue, Mar 25\nGaussian Process Regression\n📖\n🖥️\n\n\n\n\n\n\nThu, Mar 27\nGaussian Process Classification\n\n\n\n\n\n\n\n12\nTue, Apr 1\nSupport Vector Machine\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 3\nSupport Vector Machine\n\n\n\nHW 3 Due\n\n\n\n13\nTue, Apr 8\nCART and Bagging\n📖\n🖥️\n\n\nProposal-2 Due\n\n\n\nThu, Apr 10\nRandom Forests and Boosting\n\n\n\n✍️ HW4\n\n\n\n14\nTue, Apr 15\nMidterm Presentation II\n📖\n\n\n\n✅ Project-2 Guideline\n\n\n\nThu, Apr 17\nNO CLASS: Easter break\n\n\n\n\n\n\n\n15\nTue, Apr 22\nPrincipal Component Analysis\n📖\n🖥️\n\n\n\n\n\n\nThu, Apr 24\nPrincipal Component Analysis\n\n\n\n\n\n\n\n16\nTue, Apr 29\nClustering\n📖\n🖥️\n\n\n\n\n\n\nThu, May 1\nNeural Networks\n\n\n\nHW 4 Due\n\n\n\n17\nThu, May 8\nFinal Project Submission\n\n\n\n\n✅ Final project guideline\n\n\n\n\nI reserve the right to make changes to the schedule.",
     "crumbs": [
       "Course Information",
       "Schedule"
@@ -3004,49 +3004,49 @@
     "href": "slides/15-pca.html#one-dimension-1d-number-line",
     "title": "Dimension Reduction \n",
     "section": "One-Dimension (1D) Number line",
-    "text": "One-Dimension (1D) Number line\n\n\n\n\n# A tibble: 50 × 1\n   English\n     &lt;int&gt;\n 1      41\n 2      65\n 3      55\n 4      94\n 5      66\n 6      85\n 7      44\n 8      44\n 9      67\n10      73\n# ℹ 40 more rows\n\n\n\n\n\n\n\n\n\n\n\n\n\nLet’s go back to your first grade. You remember that one-dimension equals a number line.\nNow suppose we have 50 English grades. The first 3 scores are 41, 65, and 55.\nWe can plot these values on the number line just like we did in the elementary school.\n1st student with score 41 it’s a dot at 41, 2nd student with score 65, it’s a dot at 65, and so on."
+    "text": "One-Dimension (1D) Number line\n\n\n\n\n# A tibble: 50 × 1\n   English\n     &lt;int&gt;\n 1      41\n 2      65\n 3      55\n 4      94\n 5      66\n 6      85\n 7      44\n 8      44\n 9      67\n10      73\n# ℹ 40 more rows\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLet’s go back to your first grade. You remember that one-dimension equals a number line.\nNow suppose we have 50 English grades. The first 3 scores are 41, 65, and 55.\nWe can plot these values on the number line just like we did in the elementary school.\n1st student with score 41 it’s a dot at 41, 2nd student with score 65, it’s a dot at 65, and so on."
   },
   {
     "objectID": "slides/15-pca.html#one-dimension-1d-number-line-uniform-students",
     "href": "slides/15-pca.html#one-dimension-1d-number-line-uniform-students",
     "title": "Dimension Reduction \n",
     "section": "One-Dimension (1D) Number line: Uniform students",
-    "text": "One-Dimension (1D) Number line: Uniform students\n\n\n\n\n# A tibble: 50 × 1\n   English\n     &lt;int&gt;\n 1      41\n 2      65\n 3      55\n 4      94\n 5      66\n 6      85\n 7      44\n 8      44\n 9      67\n10      73\n# ℹ 40 more rows\n\n\n\n\n\n\n\n\n\n\n\n\n\nIf you plot all students scores, we might see something like this: an uniform distribution of English scores."
+    "text": "One-Dimension (1D) Number line: Uniform students\n\n\n\n\n# A tibble: 50 × 1\n   English\n     &lt;int&gt;\n 1      41\n 2      65\n 3      55\n 4      94\n 5      66\n 6      85\n 7      44\n 8      44\n 9      67\n10      73\n# ℹ 40 more rows\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIf you plot all students scores, we might see something like this: an uniform distribution of English scores."
   },
   {
     "objectID": "slides/15-pca.html#d-number-line-non-uniform-students",
     "href": "slides/15-pca.html#d-number-line-non-uniform-students",
     "title": "Dimension Reduction \n",
     "section": "1D Number line: Non-uniform students",
-    "text": "1D Number line: Non-uniform students\n\n\n\n\n# A tibble: 50 × 1\n   English\n     &lt;int&gt;\n 1      77\n 2      78\n 3      81\n 4      78\n 5      52\n 6      62\n 7      47\n 8      58\n 9      43\n10      59\n# ℹ 40 more rows\n\n\n\n\n\n\n\n\n\n\n\n\n\nOr we might get a non-uniform distribution of English scores. Some students obtain a very high grade, but some students are falling behind and get a very low grade."
+    "text": "1D Number line: Non-uniform students\n\n\n\n\n# A tibble: 50 × 1\n   English\n     &lt;int&gt;\n 1      77\n 2      78\n 3      81\n 4      78\n 5      52\n 6      62\n 7      47\n 8      58\n 9      43\n10      59\n# ℹ 40 more rows\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOr we might get a non-uniform distribution of English scores. Some students obtain a very high grade, but some students are falling behind and get a very low grade."
   },
   {
     "objectID": "slides/15-pca.html#two-dimensions-2d-x-y-scatter-plot-high-correlated",
     "href": "slides/15-pca.html#two-dimensions-2d-x-y-scatter-plot-high-correlated",
     "title": "Dimension Reduction \n",
     "section": "Two-Dimensions (2D) X-Y Scatter plot: High Correlated",
-    "text": "Two-Dimensions (2D) X-Y Scatter plot: High Correlated\nEnglish and Math measure an overall academic performance.\n\n\n\n\n# A tibble: 50 × 2\n   English  Math\n     &lt;int&gt; &lt;dbl&gt;\n 1      41  33.2\n 2      65  63.6\n 3      55  44.6\n 4      94  95  \n 5      66  65.6\n 6      85  73.1\n 7      44  46.6\n 8      44  51  \n 9      67  69.4\n10      73  66.5\n# ℹ 40 more rows\n\n\n\n\n\n\n\n\n\n\n\n\n\nNow let’s go to sixth grade when we learned about 2 dimensional graphs.\nNow we have two axes instead of one, and now we can plot data from two different subjects instead of just one.\nAdditional to English scores, here we also have Math scores of some students.\nAnd we all know how to map a English and math score pair to a point on a 2D plot.\nIf we put all students English and Math scores on the plot, we might see something like this that English and Math scores are positively correlated, meaning that a student having high English score tends to have high Math score too.\nThis might be due to the fact that English and Math measure an overall academic performance. A good student tends to have both high English and Math scores."
+    "text": "Two-Dimensions (2D) X-Y Scatter plot: High Correlated\nEnglish and Math measure an overall academic performance.\n\n\n\n\n# A tibble: 50 × 2\n   English  Math\n     &lt;int&gt; &lt;dbl&gt;\n 1      41  33.2\n 2      65  63.6\n 3      55  44.6\n 4      94  95  \n 5      66  65.6\n 6      85  73.1\n 7      44  46.6\n 8      44  51  \n 9      67  69.4\n10      73  66.5\n# ℹ 40 more rows\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNow let’s go to sixth grade when we learned about 2 dimensional graphs.\nNow we have two axes instead of one, and now we can plot data from two different subjects instead of just one.\nAdditional to English scores, here we also have Math scores of some students.\nAnd we all know how to map a English and math score pair to a point on a 2D plot.\nIf we put all students English and Math scores on the plot, we might see something like this that English and Math scores are positively correlated, meaning that a student having high English score tends to have high Math score too.\nThis might be due to the fact that English and Math measure an overall academic performance. A good student tends to have both high English and Math scores."
   },
   {
     "objectID": "slides/15-pca.html#two-dimensions-2d-x-y-scatter-plot-no-correlated",
     "href": "slides/15-pca.html#two-dimensions-2d-x-y-scatter-plot-no-correlated",
     "title": "Dimension Reduction \n",
     "section": "Two-Dimensions (2D) X-Y Scatter plot: No correlated",
-    "text": "Two-Dimensions (2D) X-Y Scatter plot: No correlated\nEnglish and Math measure different abilities.\n\n\n\n\n# A tibble: 50 × 2\n   English  Math\n     &lt;int&gt; &lt;int&gt;\n 1      41    27\n 2      65    47\n 3      55    32\n 4      94    44\n 5      66    20\n 6      85    30\n 7      44    16\n 8      44    72\n 9      67    86\n10      73    82\n# ℹ 40 more rows\n\n\n\n\n\n\n\n\n\n\n\n\n\nOr we might see English and Math scores are not correlated, meaning that a high English score does not tell us anything about Math score, whether it is high or low.\nBecause English and Math might measure different abilities.\nEnglish measures verbal and communication skills and Math measures logic and quantitative skills"
+    "text": "Two-Dimensions (2D) X-Y Scatter plot: No correlated\nEnglish and Math measure different abilities.\n\n\n\n\n# A tibble: 50 × 2\n   English  Math\n     &lt;int&gt; &lt;int&gt;\n 1      41    27\n 2      65    47\n 3      55    32\n 4      94    44\n 5      66    20\n 6      85    30\n 7      44    16\n 8      44    72\n 9      67    86\n10      73    82\n# ℹ 40 more rows\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOr we might see English and Math scores are not correlated, meaning that a high English score does not tell us anything about Math score, whether it is high or low.\nBecause English and Math might measure different abilities.\nEnglish measures verbal and communication skills and Math measures logic and quantitative skills"
   },
   {
     "objectID": "slides/15-pca.html#three-dimensions-3d-x-y-z-scatter-plot",
     "href": "slides/15-pca.html#three-dimensions-3d-x-y-z-scatter-plot",
     "title": "Dimension Reduction \n",
     "section": "Three-Dimensions (3D) X-Y-Z Scatter plot",
-    "text": "Three-Dimensions (3D) X-Y-Z Scatter plot\n\n\n\n\n# A tibble: 50 × 3\n   English  Math Biology\n     &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;\n 1      41  33.2    39.2\n 2      65  63.6    61.6\n 3      55  44.6    41.6\n 4      94  95      92  \n 5      66  65.6    73.6\n 6      85  73.1    71.1\n 7      44  46.6    56.6\n 8      44  51      56  \n 9      67  69.4    79.4\n10      73  66.5    59.5\n# ℹ 40 more rows\n\n\n\n\n\n\n\n\n\n\n\n\n\nOK. Now maybe in college, we started drawing 3D graph, having height, width and depth.\nWith 3 separate axes, we can now plot data from three different subjects.\nSo now we have three subjects, English, Math and Biology.\nWith the same logic as 2D plot, we put English score on X-axis, Math score on Y-axis, and biology score on Z-axis, then draw lines perpendicular to each axis to put the point in the 3D space.\nAnd this is our 3D scatter plot.\nSo, if we have one subject data, we can make a 1D graph.\nIf we have two subject data, we can make a 2D graph.\nIf we have three subject data, we can make a 3D graph."
+    "text": "Three-Dimensions (3D) X-Y-Z Scatter plot\n\n\n\n\n# A tibble: 50 × 3\n   English  Math Biology\n     &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;\n 1      41  33.2    39.2\n 2      65  63.6    61.6\n 3      55  44.6    41.6\n 4      94  95      92  \n 5      66  65.6    73.6\n 6      85  73.1    71.1\n 7      44  46.6    56.6\n 8      44  51      56  \n 9      67  69.4    79.4\n10      73  66.5    59.5\n# ℹ 40 more rows\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOK. Now maybe in college, we started drawing 3D graph, having height, width and depth.\nWith 3 separate axes, we can now plot data from three different subjects.\nSo now we have three subjects, English, Math and Biology.\nWith the same logic as 2D plot, we put English score on X-axis, Math score on Y-axis, and biology score on Z-axis, then draw lines perpendicular to each axis to put the point in the 3D space.\nAnd this is our 3D scatter plot.\nSo, if we have one subject data, we can make a 1D graph.\nIf we have two subject data, we can make a 2D graph.\nIf we have three subject data, we can make a 3D graph."
   },
   {
     "objectID": "slides/15-pca.html#four-dimension-4d-x-y-z--scatter-plot",
     "href": "slides/15-pca.html#four-dimension-4d-x-y-z--scatter-plot",
     "title": "Dimension Reduction \n",
     "section": "Four-Dimension (4D) X-Y-Z-? Scatter plot",
-    "text": "Four-Dimension (4D) X-Y-Z-? Scatter plot\n\n\n\n\n# A tibble: 50 × 4\n   English  Math Biology History\n     &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n 1      41  33.2    39.2      51\n 2      65  63.6    61.6      53\n 3      55  44.6    41.6      63\n 4      94  95      92        83\n 5      66  65.6    73.6      51\n 6      85  73.1    71.1      74\n 7      44  46.6    56.6      34\n 8      44  51      56        33\n 9      67  69.4    79.4      76\n10      73  66.5    59.5      74\n# ℹ 40 more rows\n\n\n\n\n\n\n\n\n\n\n\n\n\nBut what happens if we have data from 4 academic subjects?? here English, Math, Biology and History.\nWell we need 4D graph. The problem is You can’t draw a 4D plot on paper!\nWhat if a student has 20 different grades from 20 different courses?? We need a 20 dimensional graph?\nBut what is that?? There is no way we can draw that."
+    "text": "Four-Dimension (4D) X-Y-Z-? Scatter plot\n\n\n\n\n# A tibble: 50 × 4\n   English  Math Biology History\n     &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n 1      41  33.2    39.2      51\n 2      65  63.6    61.6      53\n 3      55  44.6    41.6      63\n 4      94  95      92        83\n 5      66  65.6    73.6      51\n 6      85  73.1    71.1      74\n 7      44  46.6    56.6      34\n 8      44  51      56        33\n 9      67  69.4    79.4      76\n10      73  66.5    59.5      74\n# ℹ 40 more rows\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBut what happens if we have data from 4 academic subjects?? here English, Math, Biology and History.\nWell we need 4D graph. The problem is You can’t draw a 4D plot on paper!\nWhat if a student has 20 different grades from 20 different courses?? We need a 20 dimensional graph?\nBut what is that?? There is no way we can draw that."
   },
   {
     "objectID": "slides/15-pca.html#how-about-pair-plots",
@@ -3109,14 +3109,14 @@
     "href": "slides/15-pca.html#pca-illustration-2-variable-example",
     "title": "Dimension Reduction \n",
     "section": "PCA Illustration: 2 Variable Example",
-    "text": "PCA Illustration: 2 Variable Example\n\n\n\n\n# A tibble: 50 × 2\n   English  Math\n     &lt;int&gt; &lt;dbl&gt;\n 1      41  33.2\n 2      65  63.6\n 3      55  44.6\n 4      94  95  \n 5      66  65.6\n 6      85  73.1\n 7      44  46.6\n 8      44  51  \n 9      67  69.4\n10      73  66.5\n11      47  58.9\n12      66  66.5\n13      57  51  \n14      57  33.2\n15      77  83.6\n16      83  78.8\n# ℹ 34 more rows\n\n\n\n\n\n\n\n\n\n\n\n\n\nWe use the English and Math score example to illustrate how PCA works.\nFrom the data, we have a 2D scatter plot like this.\nWith the data, we can have the average of English score and the average of math score, shown as the red squared point in the scatter plot."
+    "text": "PCA Illustration: 2 Variable Example\n\n\n\n\n# A tibble: 50 × 2\n   English  Math\n     &lt;int&gt; &lt;dbl&gt;\n 1      41  33.2\n 2      65  63.6\n 3      55  44.6\n 4      94  95  \n 5      66  65.6\n 6      85  73.1\n 7      44  46.6\n 8      44  51  \n 9      67  69.4\n10      73  66.5\n11      47  58.9\n12      66  66.5\n13      57  51  \n14      57  33.2\n15      77  83.6\n16      83  78.8\n# ℹ 34 more rows\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWe use the English and Math score example to illustrate how PCA works.\nFrom the data, we have a 2D scatter plot like this.\nWith the data, we can have the average of English score and the average of math score, shown as the red squared point in the scatter plot."
   },
   {
     "objectID": "slides/15-pca.html#step-1-shift-or-standardize-the-data",
     "href": "slides/15-pca.html#step-1-shift-or-standardize-the-data",
     "title": "Dimension Reduction \n",
     "section": "Step 1: Shift (or standardize) the Data",
-    "text": "Step 1: Shift (or standardize) the Data\n\nSo the two variables have both mean 0. If the variables are measured in a different unit, consider standardization, \\(\\frac{x_i - \\bar{x}}{s_x}\\).\nShifting does not change how the data points are positioned relative to each other.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPCA first shift or standardize our data so that the center is on top of the origin (0, 0) in the graph.\nIf the two variables are measured in a different scale, standardization is highly recommended. Here because both English and Math scores are measured using the same scale. We only do the shifting, and no scaling.\nAfter standardization, all variables will use the same scale to measure their variation, and that makes more sense because PCA wants to find some axis or coordinate lower dimensional representation that contains the most variation, and we don’t want the variation depends on variable’s measurement units.\nNotice that Shifting does not change how the data points are positioned relative to each other. The scattering shape remains the same."
+    "text": "Step 1: Shift (or standardize) the Data\n\nSo the two variables have both mean 0. If the variables are measured in a different unit, consider standardization, \\(\\frac{x_i - \\bar{x}}{s_x}\\).\nShifting does not change how the data points are positioned relative to each other.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPCA first shift or standardize our data so that the center is on top of the origin (0, 0) in the graph.\nIf the two variables are measured in a different scale, standardization is highly recommended. Here because both English and Math scores are measured using the same scale. We only do the shifting, and no scaling.\nAfter standardization, all variables will use the same scale to measure their variation, and that makes more sense because PCA wants to find some axis or coordinate lower dimensional representation that contains the most variation, and we don’t want the variation depends on variable’s measurement units.\nNotice that Shifting does not change how the data points are positioned relative to each other. The scattering shape remains the same."
   },
   {
     "objectID": "slides/15-pca.html#step-2-find-a-line-that-fits-the-data-the-best",
@@ -3144,7 +3144,7 @@
     "href": "slides/15-pca.html#the-meaning-of-the-best-line",
     "title": "Dimension Reduction \n",
     "section": "The Meaning of the Best line",
-    "text": "The Meaning of the Best line\n\n\n\n\nPrincipal Component 1 (PC1): maximizes the variance of the projected points.\n\nPC1 is the line in the Eng-Math space that is closest to the \\(n\\) observations\n\nPC1 minimizes the sum of squared distances between the data points and the PC1.\n\n\n\nPC1 is the best 1D representation of the 2D data\n\n\n\n\n\n\n\n\n\n\n\n\nTo quantify how good this line fits the data, PCA projects the data onto it.\nThen the idea is that we can either measure the distances from the data to the line and try to find the line that minimizes those distances.\nOr we can try to find the line that maximizes the distances from the projected points to the origin.\nThe two criteria are equivalent.\nDEMO\nSo we are find the line that maximizes the variation of the projected points from the data points onto the line!\nThe best line is called Principal Component 1 (PC1), which maximizes the sum of squared distances between projected points and the origin.\n\nRegression line: minimizes the sum of squared residuals (vertical lines from the data points to the line)\n\nPrincipal Component 1 (PC1): maximizes the sum of squared distances between between projected points and the origin.\nPC1 is the line in the Eng-Math 2 dimensional space that is closest to the \\(n\\) observations, i.e., PC1 minimizes the sum of squared distances between the data points and the PC1.\nPC1 is the best 1D representation of the 2D data"
+    "text": "The Meaning of the Best line\n\n\n\n\nPrincipal Component 1 (PC1): maximizes the variance of the projected points.\n\nPC1 is the line in the Eng-Math space that is closest to the \\(n\\) observations\n\nPC1 minimizes the sum of squared distances between the data points and the PC1.\n\n\n\nPC1 is the best 1D representation of the 2D data\n\n\n\n\n\n\n\n\n\n\n\n\n\nTo quantify how good this line fits the data, PCA projects the data onto it.\nThen the idea is that we can either measure the distances from the data to the line and try to find the line that minimizes those distances.\nOr we can try to find the line that maximizes the distances from the projected points to the origin.\nThe two criteria are equivalent.\nDEMO\nSo we are find the line that maximizes the variation of the projected points from the data points onto the line!\nThe best line is called Principal Component 1 (PC1), which maximizes the sum of squared distances between projected points and the origin.\n\nRegression line: minimizes the sum of squared residuals (vertical lines from the data points to the line)\n\nPrincipal Component 1 (PC1): maximizes the sum of squared distances between between projected points and the origin.\nPC1 is the line in the Eng-Math 2 dimensional space that is closest to the \\(n\\) observations, i.e., PC1 minimizes the sum of squared distances between the data points and the PC1.\nPC1 is the best 1D representation of the 2D data"
   },
   {
     "objectID": "slides/15-pca.html#the-meaning-of-the-best-line-1",
@@ -3158,21 +3158,21 @@
     "href": "slides/15-pca.html#pc1-and-pc2",
     "title": "Dimension Reduction \n",
     "section": "PC1 and PC2",
-    "text": "PC1 and PC2\n\n\n\nThe data points are also spread out a little above and below the PC1.\nThere are some variation that is not explained by the PC1.\nFind the second PC, PC2, that\n\nexplains the remaining variation\nis the line through the origin and perpendicular to PC1.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAlong with the PC1, the data points are also spread out a little above and below the PC1.\nThere are some variation of the two variables that is not explained by the PC1.\nTo find another PC that explains the remaining variation, we find the second PC, called PC2 that is the line through the origin and perpendicular to PC1."
+    "text": "PC1 and PC2\n\n\n\nThe data points are also spread out a little above and below the PC1.\nThere are some variation that is not explained by the PC1.\nFind the second PC, PC2, that\n\nexplains the remaining variation\nis the line through the origin and perpendicular to PC1.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAlong with the PC1, the data points are also spread out a little above and below the PC1.\nThere are some variation of the two variables that is not explained by the PC1.\nTo find another PC that explains the remaining variation, we find the second PC, called PC2 that is the line through the origin and perpendicular to PC1."
   },
   {
     "objectID": "slides/15-pca.html#linear-combinations",
     "href": "slides/15-pca.html#linear-combinations",
     "title": "Dimension Reduction \n",
     "section": "Linear Combinations",
-    "text": "Linear Combinations\n\n\n\n\n\n\n\n\n\n\n\n\nPC1 = 0.68 \\(\\times\\) English \\(+\\) 0.74 \\(\\times\\) Math\nPC2 = 0.74 \\(\\times\\) English \\(-\\) 0.68 \\(\\times\\) Math\nPC1 is like an overall intelligence index as it is a weighted average combining verbal and quantitative abilities.\nPC2 accounts for individual difference in English and Math scores.\n\n\\(0.68^2 + 0.74^2 = 1\\) (Pythagorean theorem)\nThe combination weights 0.68, 0.74, etc are called PC loadings.\n\n\n\nNow let’s look at PC1 and PC2 a little more carefully.\nFirst PC1 and PC2 are just a vector in 2 dimensional space, right?\nIn other words, they are linear combinations of two standard basis, here our English axis and Math axis.\nPCA help us get the linear combinations.\nHere PC1 = 0.68 \\(\\times\\) English + 0.74 \\(\\times\\) Math\nPC2 = 0.74 \\(\\times\\) English - 0.68 \\(\\times\\) Math\nSo to make PC1, we mix 0.68 part of English score with 0.74 parts of Math score.\nOne unit of PC1 consists of 0.68 parts of English and 0.74 parts of Math.\nAnd because the weight of math score is a little bit larger, Math score is a little bit more important when it comes to describing how the data are spread out.\nPC1 can be viewed as an overall intelligence index because it is an weighted average combining both verbal and quantitative reasoning abilities.\nPC2 accounts for individual difference in English and Math scores.\n\n\\(0.68^2 + 0.74^2 = 1\\) (Pythagorean theorem)\nThe combination weights 0.68, 0.74, etc are called loadings of PC."
+    "text": "Linear Combinations\n\n\n\n\n\n\n\n\n\n\n\n\nPC1 = 0.68 \\(\\times\\) English \\(+\\) 0.74 \\(\\times\\) Math\nPC2 = 0.74 \\(\\times\\) English \\(-\\) 0.68 \\(\\times\\) Math\nPC1 is like an overall intelligence index as it is a weighted average combining verbal and quantitative abilities.\nPC2 accounts for individual difference in English and Math scores.\n\n\\(0.68^2 + 0.74^2 = 1\\) (Pythagorean theorem)\nThe combination weights 0.68, 0.74, etc are called PC loadings.\n\n\n\n\nNow let’s look at PC1 and PC2 a little more carefully.\nFirst PC1 and PC2 are just a vector in 2 dimensional space, right?\nIn other words, they are linear combinations of two standard basis, here our English axis and Math axis.\nPCA help us get the linear combinations.\nHere PC1 = 0.68 \\(\\times\\) English + 0.74 \\(\\times\\) Math\nPC2 = 0.74 \\(\\times\\) English - 0.68 \\(\\times\\) Math\nSo to make PC1, we mix 0.68 part of English score with 0.74 parts of Math score.\nOne unit of PC1 consists of 0.68 parts of English and 0.74 parts of Math.\nAnd because the weight of math score is a little bit larger, Math score is a little bit more important when it comes to describing how the data are spread out.\nPC1 can be viewed as an overall intelligence index because it is an weighted average combining both verbal and quantitative reasoning abilities.\nPC2 accounts for individual difference in English and Math scores.\n\n\\(0.68^2 + 0.74^2 = 1\\) (Pythagorean theorem)\nThe combination weights 0.68, 0.74, etc are called loadings of PC."
   },
   {
     "objectID": "slides/15-pca.html#rotate-everything-so-that-pc1-is-horizontal",
     "href": "slides/15-pca.html#rotate-everything-so-that-pc1-is-horizontal",
     "title": "Dimension Reduction \n",
     "section": "Rotate Everything so that PC1 is Horizontal",
-    "text": "Rotate Everything so that PC1 is Horizontal\n\n\n1D representation\n\nPC1 is our 1D number line that explains the most variation contained in 2D data using a 1D line.\nPoints on the PC1 are the projected points of data onto PC1.\n\n\n\n\n\n\n\n\n\n\n2D representation\n\nThe new coordinates PC1 and PC2 are ordered by variation size of the English and Math scores\n\n\n\n\n\n\n\n\n\n\n\nIf we make PC1 and PC2 the new X-Y coordinates, the new coordinates PC1 and PC2 are ordered by variation size of the English and Math scores.\nPC1 is our 1D number line that explains the most variation contained in 2D data using a 1D line.\nPoints on the PC1 are the projected points of data onto PC1.\nPC1 explains the most variation, and PC2 explains the second most variation.\nAnd PC2 explains the remaining variations that are not explained by PC1.\nHere, because we only have 2 dimensions, we have at most 2 PCs."
+    "text": "Rotate Everything so that PC1 is Horizontal\n\n\n1D representation\n\nPC1 is our 1D number line that explains the most variation contained in 2D data using a 1D line.\nPoints on the PC1 are the projected points of data onto PC1.\n\n\n\n\n\n\n\n\n\n\n2D representation\n\nThe new coordinates PC1 and PC2 are ordered by variation size of the English and Math scores\n\n\n\n\n\n\n\n\n\n\n\n\nIf we make PC1 and PC2 the new X-Y coordinates, the new coordinates PC1 and PC2 are ordered by variation size of the English and Math scores.\nPC1 is our 1D number line that explains the most variation contained in 2D data using a 1D line.\nPoints on the PC1 are the projected points of data onto PC1.\nPC1 explains the most variation, and PC2 explains the second most variation.\nAnd PC2 explains the remaining variations that are not explained by PC1.\nHere, because we only have 2 dimensions, we have at most 2 PCs."
   },
   {
     "objectID": "slides/15-pca.html#variation",
@@ -3221,14 +3221,14 @@
     "href": "slides/15-pca.html#d-representation-of-the-4d-data",
     "title": "Dimension Reduction \n",
     "section": "2D Representation of the 4D data",
-    "text": "2D Representation of the 4D data\n\n\n\n\n            PC1   PC2   PC3   PC4\nWisconsin -2.06 -0.61 -0.14 -0.18\nWyoming   -0.62  0.32 -0.24  0.16\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHigher value of PC1 means higher crime rates (roughly).\nHigher value of PC2 means lower level of urbanization (roughly).\n\n\n\n\n\n\n\n\n\n\n\n\nAnd we can show our 2D Representation of the 4D data.\nHigher value of PC1 means higher crime rates (roughly).\nHigher value of PC2 means higher level of urbanization (roughly).\nWe may be able to further analysis on the reduced dimension data, for example, we may want to partition the data into 2 clusters.\nOne cluster has high crime rate and low urbanization, the other group shows low crime rate and high urbanization.\nOne cluster may be the low economically-developed states, and the other high economically-developed states.\nSo you see, we can tell lots of stories by analyzing our data."
+    "text": "2D Representation of the 4D data\n\n\n\n\n            PC1   PC2   PC3   PC4\nWisconsin -2.06 -0.61 -0.14 -0.18\nWyoming   -0.62  0.32 -0.24  0.16\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHigher value of PC1 means higher crime rates (roughly).\nHigher value of PC2 means lower level of urbanization (roughly).\n\n\n\n\n\n\n\n\n\n\n\n\n\nAnd we can show our 2D Representation of the 4D data.\nHigher value of PC1 means higher crime rates (roughly).\nHigher value of PC2 means higher level of urbanization (roughly).\nWe may be able to further analysis on the reduced dimension data, for example, we may want to partition the data into 2 clusters.\nOne cluster has high crime rate and low urbanization, the other group shows low crime rate and high urbanization.\nOne cluster may be the low economically-developed states, and the other high economically-developed states.\nSo you see, we can tell lots of stories by analyzing our data."
   },
   {
     "objectID": "slides/15-pca.html#d-representation-of-the-4d-data-biplot",
     "href": "slides/15-pca.html#d-representation-of-the-4d-data-biplot",
     "title": "Dimension Reduction \n",
     "section": "2D Representation of the 4D data: biplot",
-    "text": "2D Representation of the 4D data: biplot\n\n\n\nbiplot(pca_output, xlabs = state.abb, \n       scale = 0)\n\n\nTop axis: PC1 loadings\nRight axis: PC2 loadings\nRed arrows: PC1 and PC2 loading vector, e.g., (0.28, -0.87) for UrbanPop.\nCrime-related variables (Assualt, Murder and Rape) are located close to each other.\n\nUrbanPop is far from the other three.\n\nAssualt, Murder and Rape are more correlated, and UrbanPop is less correlated with the other three.\n\n\n\n\n\n\n\n\n\n\n\n\nWe can simply use the function biplot() to show the 2D Representation of the data.\nThis function also provide loading vector of PC1 and PC2 that gives us an idea of which direction means a large value of a variable/feature.\nThis is why it is called biplot because we plot two things in one single plot.\nHere, Top axis is for PC1 loadings\nRight axis is PC2 loadings\nRed arrows: PC1 and PC2 loading vector, e.g., (0.28, 0.87) for UrbanPop.\nSo NJ and Ca have pretty high urban pop rate because they are large in the UrbanPop arrow direction.\nCrime-related variables (Assualt, Murder and Rape) are located close to each other.\n\nUrbanPop is far from the other three.\n\nAssualt, Murder and Rape are more correlated, and UrbanPop is less correlated with the other three.\n\nAssualt, Murder and Rape sort of point to the same direction as PC1 and UrbanPop points to the same direction as PC2."
+    "text": "2D Representation of the 4D data: biplot\n\n\n\nbiplot(pca_output, xlabs = state.abb, \n       scale = 0)\n\n\nTop axis: PC1 loadings\nRight axis: PC2 loadings\nRed arrows: PC1 and PC2 loading vector, e.g., (0.28, -0.87) for UrbanPop.\nCrime-related variables (Assualt, Murder and Rape) are located close to each other.\n\nUrbanPop is far from the other three.\n\nAssualt, Murder and Rape are more correlated, and UrbanPop is less correlated with the other three.\n\n\n\n\n\n\n\n\n\n\n\n\n\nWe can simply use the function biplot() to show the 2D Representation of the data.\nThis function also provide loading vector of PC1 and PC2 that gives us an idea of which direction means a large value of a variable/feature.\nThis is why it is called biplot because we plot two things in one single plot.\nHere, Top axis is for PC1 loadings\nRight axis is PC2 loadings\nRed arrows: PC1 and PC2 loading vector, e.g., (0.28, 0.87) for UrbanPop.\nSo NJ and Ca have pretty high urban pop rate because they are large in the UrbanPop arrow direction.\nCrime-related variables (Assualt, Murder and Rape) are located close to each other.\n\nUrbanPop is far from the other three.\n\nAssualt, Murder and Rape are more correlated, and UrbanPop is less correlated with the other three.\n\nAssualt, Murder and Rape sort of point to the same direction as PC1 and UrbanPop points to the same direction as PC2."
   },
   {
     "objectID": "slides/15-pca.html#proportion-of-variance-explained",
@@ -3340,7 +3340,7 @@
     "href": "slides/15-pca.html#other-dimension-reduction-latent-variable-methods",
     "title": "Dimension Reduction \n",
     "section": "Other Dimension Reduction (Latent Variable) Methods",
-    "text": "Other Dimension Reduction (Latent Variable) Methods\n\nKernel Principal Component Analysis https://ml-explained.com/blog/kernel-pca-explained\nProbabilistic PCA\nFactor Analysis\nAutoencoders\nt-SNE (t-distributed stochastic neighbor embedding)\nUMAP (Uniform manifold approximation and projection)"
+    "text": "Other Dimension Reduction (Latent Variable) Methods\n\nKernel Principal Component Analysis https://ml-explained.com/blog/kernel-pca-explained\nProbabilistic PCA\nFactor Analysis\nAutoencoders\nt-SNE (t-distributed stochastic neighbor embedding)\nUMAP (Uniform manifold approximation and projection)\n\n\n\n\n\nmssc6250-s25.github.io/website"
   },
   {
     "objectID": "slides/14-tree.html#tree-based-methods",
@@ -4601,5 +4601,271 @@
       "Course Information",
       "Syllabus"
     ]
+  },
+  {
+    "objectID": "slides/16-clustering.html#clustering-methods",
+    "href": "slides/16-clustering.html#clustering-methods",
+    "title": "Clustering \n",
+    "section": "Clustering Methods",
+    "text": "Clustering Methods\n\nClustering: techniques for finding subgroups, or clusters, in a data set.\nGoal: Homogeneous within groups; heterogeneous between groups\n\nCustomer/Marketing Segmentation\n\nDivide customers into clusters on age, income, etc.\nEach subgroup might be more receptive to a particular form of advertising, or more likely to purchase a particular product.\n\n\n\n\n\n\n\n\nSource: https://shopup.me/blog/customer-segmentation-definition/"
+  },
+  {
+    "objectID": "slides/16-clustering.html#clustering-methods-1",
+    "href": "slides/16-clustering.html#clustering-methods-1",
+    "title": "Clustering \n",
+    "section": "Clustering Methods",
+    "text": "Clustering Methods\n\n\n\n\nBasic clustering approaches include K-means clustering and hierarchical clustering.\nClustering results are dependent on the measure of similarity (or distance) between the data points.\n\n\nFor continuous variables, the most commonly used measure is the Euclidian distance: \\[d(u, v) = \\|u - v\\|_2 = \\sqrt{\\sum_{j=1}^p(u_j - v_j)^2}\\]\nFor categorical variables, the Hamming distance is usually used: \\[d(u, v) = \\sum_{j=1}^p \\mathbf{1}\\{u_j \\ne v_j\\}\\]\nDistance measures should be defined based on the application. There is no universally best approach."
+  },
+  {
+    "objectID": "slides/16-clustering.html#k-means-clustering-1",
+    "href": "slides/16-clustering.html#k-means-clustering-1",
+    "title": "Clustering \n",
+    "section": "K-Means Clustering",
+    "text": "K-Means Clustering\n\nPartition observations into \\(K\\) distinct, non-overlapping clusters: assign each to exactly one of the \\(K\\) clusters.\nMust pre-specify the number of clusters \\(K \\ll n\\).\n\n\n\n\n\n\nSource: Fig. 12.7 of ISL"
+  },
+  {
+    "objectID": "slides/16-clustering.html#k-means-illustration",
+    "href": "slides/16-clustering.html#k-means-illustration",
+    "title": "Clustering \n",
+    "section": "K-Means Illustration",
+    "text": "K-Means Illustration\n\n\nData (Let’s choose \\(K=2\\))\n\n\n\n\n\n\n\n\n\n\nK-Means Algorithm\n\nChoose a value of \\(K\\).\n\nRandomly assign a number, from 1 to \\(K\\), to each of the observations.\nIterate until the cluster assignments stop changing:\n\n\n[1] For each of the \\(K\\) clusters, compute its cluster centroid.\n\n[2] Assign each observation to the cluster whose centroid is closest."
+  },
+  {
+    "objectID": "slides/16-clustering.html#k-means-illustration-1",
+    "href": "slides/16-clustering.html#k-means-illustration-1",
+    "title": "Clustering \n",
+    "section": "K-Means Illustration",
+    "text": "K-Means Illustration\n\n\nRandom assignment\n\n\n\n\n\n\n\n\n\n\nK-Means Algorithm\n\nChoose a value of \\(K\\).\nRandomly assign a number, from 1 to \\(K\\), to each of the observations.\nIterate until the cluster assignments stop changing:\n\n\n[1] For each of the \\(K\\) clusters, compute its cluster centroid.\n\n[2] Assign each observation to the cluster whose centroid is closest."
+  },
+  {
+    "objectID": "slides/16-clustering.html#k-means-illustration-2",
+    "href": "slides/16-clustering.html#k-means-illustration-2",
+    "title": "Clustering \n",
+    "section": "K-Means Illustration",
+    "text": "K-Means Illustration\n\n\nCompute the cluster centroid\n\n\n\n\n\n\n\n\n\n\nK-Means Algorithm\n\nChoose a value of \\(K\\).\n\nRandomly assign a number, from 1 to \\(K\\), to each of the observations.\nIterate until the cluster assignments stop changing:\n\n\n[1] For each of the \\(K\\) clusters, compute its cluster centroid.\n\n\n[2] Assign each observation to the cluster whose centroid is closest."
+  },
+  {
+    "objectID": "slides/16-clustering.html#k-means-illustration-3",
+    "href": "slides/16-clustering.html#k-means-illustration-3",
+    "title": "Clustering \n",
+    "section": "K-Means Illustration",
+    "text": "K-Means Illustration\n\n\nDo a new assignment\n\n\n\n\n\n\n\n\n\n\nK-Means Algorithm\n\nChoose a value of \\(K\\).\n\nRandomly assign a number, from 1 to \\(K\\), to each of the observations.\nIterate until the cluster assignments stop changing:\n\n\n[1] For each of the \\(K\\) clusters, compute its cluster centroid.\n\n[2] Assign each observation to the cluster whose centroid is closest."
+  },
+  {
+    "objectID": "slides/16-clustering.html#k-means-illustration-4",
+    "href": "slides/16-clustering.html#k-means-illustration-4",
+    "title": "Clustering \n",
+    "section": "K-Means Illustration",
+    "text": "K-Means Illustration\n\n\nDo a new assignment\n\n\n\n\n\n\n\n\n\nCompute the cluster centroid"
+  },
+  {
+    "objectID": "slides/16-clustering.html#section-1",
+    "href": "slides/16-clustering.html#section-1",
+    "title": "Clustering \n",
+    "section": "",
+    "text": "Source: ISL Figure 12.8"
+  },
+  {
+    "objectID": "slides/16-clustering.html#clustering-mathematical-formulation",
+    "href": "slides/16-clustering.html#clustering-mathematical-formulation",
+    "title": "Clustering \n",
+    "section": "Clustering Mathematical Formulation",
+    "text": "Clustering Mathematical Formulation\n\n\n\\(C(\\cdot): \\{1, \\ldots, n\\} \\rightarrow \\{1, \\ldots, K\\}\\) is a cluster assignment function or encoder that assigns the \\(i\\)th observation to the \\(k\\)th cluster, \\(i \\in  \\{1, \\ldots, n\\}\\), \\(k \\in \\{1, \\ldots, K\\}\\), or \\(C(i) = k\\).\n\n\n\nSeek a \\(C(\\cdot)\\) that minimizes the within-cluster distance \\[\n\\begin{align} W(C) = \\frac{1}{2}\\sum_{k=1}^K\\sum_{(i, i'): C(i), C(i')=k} d(\\mathbf{x}_i, \\mathbf{x}_{i'})\n\\end{align}\n\\]\nIf \\(d(\\cdot, \\cdot)\\) is the Euclidean distance, \\[W(C) =\\sum_{k=1}^K n_k \\sum_{C(i) = k} \\lVert \\mathbf{x}_i - m_k \\rVert^2,\\]\nwhere \\(m_k = (\\bar{x}_{1k}, \\dots, \\bar{x}_{pk})\\) is the mean vector of \\(k\\)th cluster.\n\n\n\n\n\n\nSource: ISL Fig. 12.10"
+  },
+  {
+    "objectID": "slides/16-clustering.html#clustering-mathematical-formulation-1",
+    "href": "slides/16-clustering.html#clustering-mathematical-formulation-1",
+    "title": "Clustering \n",
+    "section": "Clustering Mathematical Formulation",
+    "text": "Clustering Mathematical Formulation\n\n\n\nThis is equivalent to maximizing the between cluster distance\n\n\n\\[B(C) = \\frac{1}{2}\\sum_{k=1}^K\\sum_{(i, i'): C(i)=k}\\sum_{, C(i')\\ne k} d(\\mathbf{x}_i, \\mathbf{x}_{i'})\\]\n\nThe total distance is\n\n\\[T = \\frac{1}{2}\\sum_{i=1}^n \\sum_{i'=1}^nd(\\mathbf{x}_i, \\mathbf{x}_{i'}) = W(C) + B(C)\\]\n\n\\[\\min_{C} W(C) \\iff \\max_{C} B(C)\\]\n\n\n\n\n\n\nSource: ISL Fig. 12.10\n\n\n\n\n\n\nThe within-cluster variation for the \\(k\\)th cluster is the sum of all of pairwise squared Euclidean distances between the observation in the \\(k\\)th cluster, divided by the total number of observations in the \\(k\\)th cluster."
+  },
+  {
+    "objectID": "slides/16-clustering.html#k-means-clustering-2",
+    "href": "slides/16-clustering.html#k-means-clustering-2",
+    "title": "Clustering \n",
+    "section": "K-Means Clustering",
+    "text": "K-Means Clustering\n\nK-Means clustering use an iterative algorithm to solve the enlarged optimization problem:\n\n\\[ \\underset{C, \\, \\{m_k\\}_{k=1}^K} \\min \\sum_{k=1}^K n_k \\sum_{C(i) = k} \\lVert \\mathbf{x}_i - m_k \\rVert^2, \\]\nwhere \\(m_k = (\\bar{x}_{1k}, \\dots, \\bar{x}_{pk})\\) is the mean vector of \\(k\\)th cluster.1\nThis problem is NP-hard for ≥ 2 dimensions. There are K^n ways to partition n observations into K clusters!\nK-means is for situations in which all variables are continuous."
+  },
+  {
+    "objectID": "slides/16-clustering.html#k-means-algorithm-issues",
+    "href": "slides/16-clustering.html#k-means-algorithm-issues",
+    "title": "Clustering \n",
+    "section": "K-Means Algorithm Issues",
+    "text": "K-Means Algorithm Issues\n\nThe algorithm finds a local rather than a global optimum.\n\nThe results will depend on the initial (random) cluster assignment.\n\nRun the algorithm multiple times, then select the one producing the smallest \\(W(C)\\)\n\n\n\nStandardize the data so that distance is not affected by variable unit.\n\n\n# some random data\nset.seed(2025)\nmat = matrix(rnorm(1000), 50, 20)\n\n# if we use only one starting point\nkmeans(mat, centers = 3, nstart = 1)$tot.withinss\n\n[1] 822\n\n# if we use multiple starting point and pick the best one\nkmeans(mat, centers = 3, nstart = 100)$tot.withinss\n\n[1] 806"
+  },
+  {
+    "objectID": "slides/16-clustering.html#section-2",
+    "href": "slides/16-clustering.html#section-2",
+    "title": "Clustering \n",
+    "section": "",
+    "text": "Source: ISL Figure 12.8"
+  },
+  {
+    "objectID": "slides/16-clustering.html#k-medoids",
+    "href": "slides/16-clustering.html#k-medoids",
+    "title": "Clustering \n",
+    "section": "K-Medoids",
+    "text": "K-Medoids\n\nK-medoids is an alternative of K-means.\nSeek one observation that minimizes the distance to all others in the cluster \\[i^*_k = \\mathop{\\mathrm{arg\\,min}}_{i:C(i)=k}\\sum_{C(i')=k}d(\\mathbf{x}_i, \\mathbf{x}_{i'})\\]\nUse \\(\\mathbf{x}_{i^*_k}\\) as the “center” of cluster \\(k\\)."
+  },
+  {
+    "objectID": "slides/16-clustering.html#iris-data",
+    "href": "slides/16-clustering.html#iris-data",
+    "title": "Clustering \n",
+    "section": "\niris Data",
+    "text": "iris Data\n\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n4          4.6         3.1          1.5         0.2  setosa\n5          5.0         3.6          1.4         0.2  setosa"
+  },
+  {
+    "objectID": "slides/16-clustering.html#k-means-on-iris",
+    "href": "slides/16-clustering.html#k-means-on-iris",
+    "title": "Clustering \n",
+    "section": "K-Means on iris\n",
+    "text": "K-Means on iris\n\n\n\ndf_clust &lt;- iris[, 3:4]\n(iris_kmean &lt;- kmeans(df_clust, centers = 3, nstart = 20))\n\nK-means clustering with 3 clusters of sizes 48, 50, 52\n\nCluster means:\n  Petal.Length Petal.Width\n1         5.60       2.037\n2         1.46       0.246\n3         4.27       1.342\n\nClustering vector:\n  [1] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2\n [38] 2 2 2 2 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3\n [75] 3 3 3 1 3 3 3 3 3 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 1 1 1 1 1 1 3 1 1 1 1\n[112] 1 1 1 1 1 1 1 1 3 1 1 1 1 1 1 3 1 1 1 1 1 1 1 1 1 1 1 3 1 1 1 1 1 1 1 1 1\n[149] 1 1\n\nWithin cluster sum of squares by cluster:\n[1] 16.29  2.02 13.06\n (between_SS / total_SS =  94.3 %)\n\nAvailable components:\n\n[1] \"cluster\"      \"centers\"      \"totss\"        \"withinss\"     \"tot.withinss\"\n[6] \"betweenss\"    \"size\"         \"iter\"         \"ifault\""
+  },
+  {
+    "objectID": "slides/16-clustering.html#k-means-on-iris-1",
+    "href": "slides/16-clustering.html#k-means-on-iris-1",
+    "title": "Clustering \n",
+    "section": "K-Means on iris\n",
+    "text": "K-Means on iris"
+  },
+  {
+    "objectID": "slides/16-clustering.html#factoextra",
+    "href": "slides/16-clustering.html#factoextra",
+    "title": "Clustering \n",
+    "section": "factoextra",
+    "text": "factoextra\n\nlibrary(factoextra)\nfviz_cluster(object = iris_kmean, data = df_clust, label = NA)"
+  },
+  {
+    "objectID": "slides/16-clustering.html#choose-k-total-withing-sum-of-squares",
+    "href": "slides/16-clustering.html#choose-k-total-withing-sum-of-squares",
+    "title": "Clustering \n",
+    "section": "Choose K: Total Withing Sum of Squares",
+    "text": "Choose K: Total Withing Sum of Squares\n\n## wss =  total within sum of squares\nfviz_nbclust(x = df_clust, FUNcluster = kmeans, method = \"wss\",  k.max = 6)"
+  },
+  {
+    "objectID": "slides/16-clustering.html#choose-k-average-silhouette-method",
+    "href": "slides/16-clustering.html#choose-k-average-silhouette-method",
+    "title": "Clustering \n",
+    "section": "Choose K: Average Silhouette Method",
+    "text": "Choose K: Average Silhouette Method\n\n## wss =  total within sum of squares\nfviz_nbclust(x = df_clust, FUNcluster = kmeans, method = \"silhouette\",  k.max = 6)"
+  },
+  {
+    "objectID": "slides/16-clustering.html#choose-k-gap-statistics",
+    "href": "slides/16-clustering.html#choose-k-gap-statistics",
+    "title": "Clustering \n",
+    "section": "Choose K: Gap Statistics",
+    "text": "Choose K: Gap Statistics\n\n## gap_stat = Gap Statistics\nfviz_nbclust(df_clust, kmeans, method = \"gap_stat\",  k.max = 6)"
+  },
+  {
+    "objectID": "slides/16-clustering.html#gaussian-finite-mixture-models-gmm",
+    "href": "slides/16-clustering.html#gaussian-finite-mixture-models-gmm",
+    "title": "Clustering \n",
+    "section": "Gaussian Finite Mixture Models (GMM)",
+    "text": "Gaussian Finite Mixture Models (GMM)\n\nAssume each data point \\(\\mathbf{x}_i \\in \\mathbf{R}^p\\) is generated from one of the \\(K\\) Gaussian distributions \\(N(\\boldsymbol \\mu_k, \\boldsymbol \\Sigma_k)\\), \\(k = 1, \\dots, K\\).\nGaussian mixture model (GMM) has the form\n\n\\[p\\left(\\mathbf{x}_i\\right) = \\sum_{k=1}^K p_k N(\\boldsymbol \\mu_k, \\boldsymbol \\Sigma_k)\\]\n\n\nGMM can be written as a latent variable model:\n\n\\[ \\begin{align} \\mathbf{x}_i \\mid z_i &\\sim N(\\boldsymbol \\mu_{z_i}, \\boldsymbol \\Sigma_{z_i})\\\\\nz_i &\\sim \\text{Categorical}(p_1, \\dots, p_K)\\end{align}\\]\n\n\n\\(z_i \\in \\{1,2, \\dots, K \\}\\) is the latent variable."
+  },
+  {
+    "objectID": "slides/16-clustering.html#mixture-of-gaussians",
+    "href": "slides/16-clustering.html#mixture-of-gaussians",
+    "title": "Clustering \n",
+    "section": "Mixture of Gaussians",
+    "text": "Mixture of Gaussians\n\\(p\\left(\\mathbf{x}_i\\right) = (0.4) N(\\boldsymbol \\mu_1, \\boldsymbol \\Sigma_1) + (0.6)N(\\boldsymbol \\mu_2, \\boldsymbol \\Sigma_2)\\), \\(\\boldsymbol \\mu_1 = (1, -1)\\); \\(\\boldsymbol \\mu_2 = (-1.5, 1.5)\\), \\(\\boldsymbol \\Sigma_1 = \\begin{bmatrix} 1 & 0.5 \\\\ 0.5 & 1 \\end{bmatrix}\\); \\(\\boldsymbol \\Sigma_2 = \\begin{bmatrix} 1 & -0.9 \\\\ -0.9 & 1 \\end{bmatrix}\\)"
+  },
+  {
+    "objectID": "slides/16-clustering.html#gmm-for-clustering",
+    "href": "slides/16-clustering.html#gmm-for-clustering",
+    "title": "Clustering \n",
+    "section": "GMM for Clustering",
+    "text": "GMM for Clustering\nGiven the data and the model \\[ \\begin{align} \\mathbf{x}_i \\mid z_i &\\sim N(\\boldsymbol \\mu_{z_i}, \\boldsymbol \\Sigma_{z_i})\\\\\nz_i &\\sim \\text{Categorical}(p_1, \\dots, p_K)\\end{align},\\] where \\(\\boldsymbol \\theta= \\{\\boldsymbol \\mu_{k}, \\boldsymbol \\Sigma_{k}, p_k \\}_{k=1}^K\\), we estimate the posterior probability that point \\(i\\) belongs to cluster \\(k\\): \\[p\\left(z_i = k \\mid \\mathbf{x}_i, \\boldsymbol \\theta\\right),\\] which is called the responsibility of cluster \\(k\\) for data point \\(\\mathbf{x}_i\\).\n\nWith Bayes rule,\n\\[r_{ik} := p\\left(z_i = k \\mid \\mathbf{x}_i, \\boldsymbol \\theta\\right) = \\frac{p\\left(z_i = k \\mid \\boldsymbol \\theta\\right)p\\left(\\mathbf{x}_i \\mid z_i = k , \\boldsymbol \\theta\\right)}{\\sum_{k'=1}^Kp\\left(z_i = k' \\mid \\boldsymbol \\theta\\right)p\\left(\\mathbf{x}_i \\mid z_i = k' , \\boldsymbol \\theta\\right)} = \\frac{p_kN(\\boldsymbol \\mu_{k}, \\boldsymbol \\Sigma_{k})}{\\sum_{k'=1}^Kp_{k'}N(\\boldsymbol \\mu_{k'}, \\boldsymbol \\Sigma_{k'})}\\]\n\nThis procedure is called soft clustering."
+  },
+  {
+    "objectID": "slides/16-clustering.html#expectation-maximization-em-algorithm",
+    "href": "slides/16-clustering.html#expectation-maximization-em-algorithm",
+    "title": "Clustering \n",
+    "section": "Expectation-Maximization (EM) Algorithm",
+    "text": "Expectation-Maximization (EM) Algorithm\n\nGradient-based optimizers are hard to find a local minimum of the negative log likelihood (loss function) when there are unobserved latent variables in the model.\n\nEM algorithm considers the complete data likelihood \\(L(\\mathbf{x}, \\mathbf{z}\\mid \\boldsymbol \\theta)\\), and iteratively\n\ninfers unobservable \\(\\mathbf{z}\\) given \\(\\boldsymbol \\theta\\) (E-step)\noptimizes \\(\\boldsymbol \\theta\\) given the “filled in” data (M-step)\n\n\nThe complete data log likelihood is\n\n\\[\\log L(\\mathbf{x}, \\mathbf{z}\\mid \\boldsymbol \\theta) = \\ell\\left( \\boldsymbol \\theta\\right):= \\log \\left[ \\prod_{i=1}^np(\\mathbf{x}_i, \\mathbf{z}_i \\mid \\boldsymbol \\theta)\\right] = \\sum_{i=1}^n \\log p(\\mathbf{x}_i, \\mathbf{z}_i \\mid \\boldsymbol \\theta)\\]\n\n\n\\(\\ell\\left( \\boldsymbol \\theta\\right)\\) cannot be computed since \\(\\mathbf{z}_i\\) is unknown."
+  },
+  {
+    "objectID": "slides/16-clustering.html#em-algorithm",
+    "href": "slides/16-clustering.html#em-algorithm",
+    "title": "Clustering \n",
+    "section": "EM Algorithm",
+    "text": "EM Algorithm\nAt iteration \\(t\\),\n\nE-step: Take expectation w.r.t. \\(\\mathbf{z}_i \\mid \\mathbf{x}, \\boldsymbol \\theta^{(t-1)}\\), or compute the expected complete data log likelihood \\[Q\\left(\\boldsymbol \\theta, \\boldsymbol \\theta^{(t-1)} \\right) = \\text{E}\\left[\\ell(\\boldsymbol \\theta) \\mid \\mathbf{x}, \\boldsymbol \\theta^{(t-1)} \\right]\\]\nM-step: Maximize \\(Q\\left(\\boldsymbol \\theta, \\boldsymbol \\theta^{(t-1)} \\right)\\) w.r.t. \\(\\boldsymbol \\theta\\)\n\n\n\\[\\boldsymbol \\theta^{(t)} = \\mathop{\\mathrm{arg\\,max}}_{\\boldsymbol \\theta} \\, Q\\left(\\boldsymbol \\theta, \\boldsymbol \\theta^{(t-1)} \\right)\\]\nStop until \\(\\|\\boldsymbol \\theta^{(t)} - \\boldsymbol \\theta^{(t-1)}\\| &lt; \\epsilon\\) or \\(\\|Q\\left(\\boldsymbol \\theta^{(t)}, \\boldsymbol \\theta^{(t-1)} \\right) - Q\\left(\\boldsymbol \\theta^{(t-1)}, \\boldsymbol \\theta^{(t-1)} \\right)\\| &lt; \\epsilon\\)"
+  },
+  {
+    "objectID": "slides/16-clustering.html#em-for-gmm",
+    "href": "slides/16-clustering.html#em-for-gmm",
+    "title": "Clustering \n",
+    "section": "EM for GMM",
+    "text": "EM for GMM\n\\[\\begin{align} Q\\left(\\boldsymbol \\theta, \\boldsymbol \\theta^{(t-1)} \\right) &= \\text{E}\\left[\\ell(\\boldsymbol \\theta) \\mid \\mathbf{x}, \\boldsymbol \\theta^{(t-1)} \\right] \\\\\n&=\\sum_{i=1}^n \\text{E}\\left[ \\log \\left[ \\prod_{k=1}^K p_kp(\\mathbf{x}_i \\mid z_i, \\boldsymbol \\theta)^{I(z_i = k)}\\right]\\right]\\\\\n&=\\sum_{i=1}^n \\sum_{k=1}^K \\text{E}(I(z_i=k)) \\log \\left[p_kp(\\mathbf{x}_i \\mid z_i=k, \\boldsymbol \\theta) \\right]\\\\\n&=\\sum_{i=1}^n \\sum_{k=1}^K p\\left(z_i = k \\mid \\mathbf{x}_i, \\boldsymbol \\theta\\right) \\log \\left[p_kp(\\mathbf{x}_i \\mid z_i=k, \\boldsymbol \\theta) \\right]\\\\\n&=\\sum_{i=1}^n \\sum_{k=1}^K r_{ik} \\log p_k + \\sum_{i=1}^n \\sum_{k=1}^K r_{ik}  \\log p(\\mathbf{x}_i \\mid z_i=k, \\boldsymbol \\theta)\\end{align}\\]"
+  },
+  {
+    "objectID": "slides/16-clustering.html#em-for-gmm-1",
+    "href": "slides/16-clustering.html#em-for-gmm-1",
+    "title": "Clustering \n",
+    "section": "EM for GMM",
+    "text": "EM for GMM\n\n\\(\\begin{align} Q\\left(\\boldsymbol \\theta, \\boldsymbol \\theta^{(t-1)} \\right)=\\sum_{i=1}^n \\sum_{k=1}^K r_{ik} \\log p_k + \\sum_{i=1}^n \\sum_{k=1}^K r_{ik}  \\log p(\\mathbf{x}_i \\mid z_i=k, \\boldsymbol \\theta)\\end{align}\\)\n\n\n\nE-step:\n\n\n\\(r_{ik} = \\frac{p_kN\\left(\\mathbf{x}_i \\mid \\boldsymbol \\mu_{k}^{(t-1)}, \\boldsymbol \\Sigma_{k}^{(t-1)}\\right)}{\\sum_{k'=1}^Kp_{k'}N\\left(\\mathbf{x}_i \\mid \\boldsymbol \\mu_{k'}^{(t-1)}, \\boldsymbol \\Sigma_{k'}^{(t-1)}\\right)}\\)\n\n\n\nM-step:\n\n\n\n\\(p_k = \\frac{\\sum_{i=1}^n r_{ik}}{n}\\)\n\n\n\n\n\\(\\boldsymbol \\mu_k = \\frac{\\sum_{i=1}^n r_{ik}\\mathbf{x}_i}{\\sum_{i=1}^n r_{ik}}\\)\n\n\n\n\n\\(\\boldsymbol \\Sigma_k = \\frac{\\sum_{i=1}^n r_{ik}(\\mathbf{x}_i - \\boldsymbol \\mu_k)(\\mathbf{x}_i - \\boldsymbol \\mu_k)'}{\\sum_{i=1}^n r_{ik}}\\)\n\n\nSet \\(\\boldsymbol \\theta^{(t)} = \\left(p_k, \\boldsymbol \\mu_k, \\boldsymbol \\Sigma_k \\right)_{k=1}^K\\) and return to the E-step."
+  },
+  {
+    "objectID": "slides/16-clustering.html#em-and-k-means",
+    "href": "slides/16-clustering.html#em-and-k-means",
+    "title": "Clustering \n",
+    "section": "EM and K-Means",
+    "text": "EM and K-Means\n\n\nIn K-Means,\n\nAssume \\(p_k = 1/K\\) and \\(\\boldsymbol \\Sigma_k = \\sigma^2\\mathbf{I}\\) are fixed.\nE-step (hard EM/clustering):\n\n\\[p\\left(z_i = k \\mid \\mathbf{x}_i, \\boldsymbol \\theta\\right) \\approx I(k = z_i^*),\\] where \\[z_i^* = \\mathop{\\mathrm{arg\\,max}}_k \\,\\, p\\left(z_i = k \\mid \\mathbf{x}_i, \\boldsymbol \\theta\\right) = \\mathop{\\mathrm{arg\\,min}}_k \\,\\, \\|\\mathbf{x}_i - \\boldsymbol \\mu_k\\|^2\\]\n\n\nM-step:\n\n\\[\\boldsymbol \\mu_k = \\frac{\\sum_{i:z_i = k}\\mathbf{x}_i}{n_k},\\] where \\(n_k\\) is the number of points belong to \\(k\\)."
+  },
+  {
+    "objectID": "slides/16-clustering.html#mclust",
+    "href": "slides/16-clustering.html#mclust",
+    "title": "Clustering \n",
+    "section": "mclust",
+    "text": "mclust\n\nlibrary(mclust)\ngmm_clus &lt;- Mclust(df_clust)\nplot(gmm_clus, what = \"classification\")\n\n\nhttps://cran.r-project.org/web/packages/mclust/vignettes/mclust.html#introduction\nhttps://mclust-org.github.io/index.html\nhttps://sites.stat.washington.edu/raftery/Research/PDF/fraley2002.pdf\nHO Ch 22 PML 21.4"
+  },
+  {
+    "objectID": "slides/16-clustering.html#other-topics",
+    "href": "slides/16-clustering.html#other-topics",
+    "title": "Clustering \n",
+    "section": "Other Topics",
+    "text": "Other Topics\n\nHierarchical Clustering\nSpectral Clustering\nDirichlet Process Mixture Models\n\n\nPML Ch. 21, ESL Ch 14\nK-Medoids Clustering*\n\nhttps://www.google.com/search?q=k-medoids+clustering+in+r&oq=K-medoi&aqs=chrome.3.69i57j0i512l2j0i20i263i512l2j0i512l5.6754j0j7&sourceid=chrome&ie=UTF-8"
+  },
+  {
+    "objectID": "code/15-pca-code.html",
+    "href": "code/15-pca-code.html",
+    "title": "15 - Principal Component Analysis Code Demo",
+    "section": "",
+    "text": "1 R implementation\n\nCodeUSArrests\n\n               Murder Assault UrbanPop Rape\nAlabama          13.2     236       58 21.2\nAlaska           10.0     263       48 44.5\nArizona           8.1     294       80 31.0\nArkansas          8.8     190       50 19.5\nCalifornia        9.0     276       91 40.6\nColorado          7.9     204       78 38.7\nConnecticut       3.3     110       77 11.1\nDelaware          5.9     238       72 15.8\nFlorida          15.4     335       80 31.9\nGeorgia          17.4     211       60 25.8\nHawaii            5.3      46       83 20.2\nIdaho             2.6     120       54 14.2\nIllinois         10.4     249       83 24.0\nIndiana           7.2     113       65 21.0\nIowa              2.2      56       57 11.3\nKansas            6.0     115       66 18.0\nKentucky          9.7     109       52 16.3\nLouisiana        15.4     249       66 22.2\nMaine             2.1      83       51  7.8\nMaryland         11.3     300       67 27.8\nMassachusetts     4.4     149       85 16.3\nMichigan         12.1     255       74 35.1\nMinnesota         2.7      72       66 14.9\nMississippi      16.1     259       44 17.1\nMissouri          9.0     178       70 28.2\nMontana           6.0     109       53 16.4\nNebraska          4.3     102       62 16.5\nNevada           12.2     252       81 46.0\nNew Hampshire     2.1      57       56  9.5\nNew Jersey        7.4     159       89 18.8\nNew Mexico       11.4     285       70 32.1\nNew York         11.1     254       86 26.1\nNorth Carolina   13.0     337       45 16.1\nNorth Dakota      0.8      45       44  7.3\nOhio              7.3     120       75 21.4\nOklahoma          6.6     151       68 20.0\nOregon            4.9     159       67 29.3\nPennsylvania      6.3     106       72 14.9\nRhode Island      3.4     174       87  8.3\nSouth Carolina   14.4     279       48 22.5\nSouth Dakota      3.8      86       45 12.8\nTennessee        13.2     188       59 26.9\nTexas            12.7     201       80 25.5\nUtah              3.2     120       80 22.9\nVermont           2.2      48       32 11.2\nVirginia          8.5     156       63 20.7\nWashington        4.0     145       73 26.2\nWest Virginia     5.7      81       39  9.3\nWisconsin         2.6      53       66 10.8\nWyoming           6.8     161       60 15.6\n\n\n\nCodepca_output &lt;- prcomp(USArrests, scale = TRUE)\n\n\n\nCode(pca_output$rotation &lt;- -pca_output$rotation)\n\n               PC1        PC2        PC3         PC4\nMurder   0.5358995  0.4181809 -0.3412327 -0.64922780\nAssault  0.5831836  0.1879856 -0.2681484  0.74340748\nUrbanPop 0.2781909 -0.8728062 -0.3780158 -0.13387773\nRape     0.5434321 -0.1673186  0.8177779 -0.08902432\n\n\n\nCodepca_output$x\n\n                       PC1         PC2         PC3          PC4\nAlabama        -0.97566045 -1.12200121  0.43980366  0.154696581\nAlaska         -1.93053788 -1.06242692 -2.01950027 -0.434175454\nArizona        -1.74544285  0.73845954 -0.05423025 -0.826264240\nArkansas        0.13999894 -1.10854226 -0.11342217 -0.180973554\nCalifornia     -2.49861285  1.52742672 -0.59254100 -0.338559240\nColorado       -1.49934074  0.97762966 -1.08400162  0.001450164\nConnecticut     1.34499236  1.07798362  0.63679250 -0.117278736\nDelaware       -0.04722981  0.32208890  0.71141032 -0.873113315\nFlorida        -2.98275967 -0.03883425  0.57103206 -0.095317042\nGeorgia        -1.62280742 -1.26608838  0.33901818  1.065974459\nHawaii          0.90348448  1.55467609 -0.05027151  0.893733198\nIdaho           1.62331903 -0.20885253 -0.25719021 -0.494087852\nIllinois       -1.36505197  0.67498834  0.67068647 -0.120794916\nIndiana         0.50038122  0.15003926 -0.22576277  0.420397595\nIowa            2.23099579  0.10300828 -0.16291036  0.017379470\nKansas          0.78887206  0.26744941 -0.02529648  0.204421034\nKentucky        0.74331256 -0.94880748  0.02808429  0.663817237\nLouisiana      -1.54909076 -0.86230011  0.77560598  0.450157791\nMaine           2.37274014 -0.37260865  0.06502225 -0.327138529\nMaryland       -1.74564663 -0.42335704  0.15566968 -0.553450589\nMassachusetts   0.48128007  1.45967706  0.60337172 -0.177793902\nMichigan       -2.08725025  0.15383500 -0.38100046  0.101343128\nMinnesota       1.67566951  0.62590670 -0.15153200  0.066640316\nMississippi    -0.98647919 -2.36973712  0.73336290  0.213342049\nMissouri       -0.68978426  0.26070794 -0.37365033  0.223554811\nMontana         1.17353751 -0.53147851 -0.24440796  0.122498555\nNebraska        1.25291625  0.19200440 -0.17380930  0.015733156\nNevada         -2.84550542  0.76780502 -1.15168793  0.311354436\nNew Hampshire   2.35995585  0.01790055 -0.03648498 -0.032804291\nNew Jersey     -0.17974128  1.43493745  0.75677041  0.240936580\nNew Mexico     -1.96012351 -0.14141308 -0.18184598 -0.336121113\nNew York       -1.66566662  0.81491072  0.63661186 -0.013348844\nNorth Carolina -1.11208808 -2.20561081  0.85489245 -0.944789648\nNorth Dakota    2.96215223 -0.59309738 -0.29824930 -0.251434626\nOhio            0.22369436  0.73477837  0.03082616  0.469152817\nOklahoma        0.30864928  0.28496113  0.01515592  0.010228476\nOregon         -0.05852787  0.53596999 -0.93038718 -0.235390872\nPennsylvania    0.87948680  0.56536050  0.39660218  0.355452378\nRhode Island    0.85509072  1.47698328  1.35617705 -0.607402746\nSouth Carolina -1.30744986 -1.91397297  0.29751723 -0.130145378\nSouth Dakota    1.96779669 -0.81506822 -0.38538073 -0.108470512\nTennessee      -0.98969377 -0.85160534 -0.18619262  0.646302674\nTexas          -1.34151838  0.40833518  0.48712332  0.636731051\nUtah            0.54503180  1.45671524 -0.29077592 -0.081486749\nVermont         2.77325613 -1.38819435 -0.83280797 -0.143433697\nVirginia        0.09536670 -0.19772785 -0.01159482  0.209246429\nWashington      0.21472339  0.96037394 -0.61859067 -0.218628161\nWest Virginia   2.08739306 -1.41052627 -0.10372163  0.130583080\nWisconsin       2.05881199  0.60512507  0.13746933  0.182253407\nWyoming         0.62310061 -0.31778662  0.23824049 -0.164976866\n\n\n\nCodebiplot(pca_output, xlabs = state.abb, scale = 0,\n       col = c(\"blue\", \"red\"), las = 1,\n       xlab = \"PC1 score\", ylab = \"PC2 score\")\n\n\n\n\n\n\n\n\nCode(pc_var &lt;- pca_output$sdev ^ 2)\n\n[1] 2.4802416 0.9897652 0.3565632 0.1734301\n\nCode(pc_var_prop &lt;- pc_var / sum(pc_var))\n\n[1] 0.62006039 0.24744129 0.08914080 0.04335752\n\n\n\n2 Python implementation\nThe biplot in Python needs extra work. We need to either write our own function or rely on some other packages such as pca.\n\nCodeimport numpy as np\nimport pandas as pd\nfrom sklearn.decomposition import PCA\nfrom sklearn.preprocessing import StandardScaler\n\n\n\nCodeUSArrests = pd.read_csv('../data/USArrests.csv')\n\n\n\nCodeUSArr = USArrests.drop(['rownames'], axis = 1)\nUSArr.index = USArrests['rownames']\nUSArr\n\n                Murder  Assault  UrbanPop  Rape\nrownames                                       \nAlabama           13.2      236        58  21.2\nAlaska            10.0      263        48  44.5\nArizona            8.1      294        80  31.0\nArkansas           8.8      190        50  19.5\nCalifornia         9.0      276        91  40.6\nColorado           7.9      204        78  38.7\nConnecticut        3.3      110        77  11.1\nDelaware           5.9      238        72  15.8\nFlorida           15.4      335        80  31.9\nGeorgia           17.4      211        60  25.8\nHawaii             5.3       46        83  20.2\nIdaho              2.6      120        54  14.2\nIllinois          10.4      249        83  24.0\nIndiana            7.2      113        65  21.0\nIowa               2.2       56        57  11.3\nKansas             6.0      115        66  18.0\nKentucky           9.7      109        52  16.3\nLouisiana         15.4      249        66  22.2\nMaine              2.1       83        51   7.8\nMaryland          11.3      300        67  27.8\nMassachusetts      4.4      149        85  16.3\nMichigan          12.1      255        74  35.1\nMinnesota          2.7       72        66  14.9\nMississippi       16.1      259        44  17.1\nMissouri           9.0      178        70  28.2\nMontana            6.0      109        53  16.4\nNebraska           4.3      102        62  16.5\nNevada            12.2      252        81  46.0\nNew Hampshire      2.1       57        56   9.5\nNew Jersey         7.4      159        89  18.8\nNew Mexico        11.4      285        70  32.1\nNew York          11.1      254        86  26.1\nNorth Carolina    13.0      337        45  16.1\nNorth Dakota       0.8       45        44   7.3\nOhio               7.3      120        75  21.4\nOklahoma           6.6      151        68  20.0\nOregon             4.9      159        67  29.3\nPennsylvania       6.3      106        72  14.9\nRhode Island       3.4      174        87   8.3\nSouth Carolina    14.4      279        48  22.5\nSouth Dakota       3.8       86        45  12.8\nTennessee         13.2      188        59  26.9\nTexas             12.7      201        80  25.5\nUtah               3.2      120        80  22.9\nVermont            2.2       48        32  11.2\nVirginia           8.5      156        63  20.7\nWashington         4.0      145        73  26.2\nWest Virginia      5.7       81        39   9.3\nWisconsin          2.6       53        66  10.8\nWyoming            6.8      161        60  15.6\n\n\n\nCodescaler = StandardScaler()\nX = scaler.fit_transform(USArr.values) ## Array\n\n\n\nCodepca = PCA(n_components=4)\npca.fit(X)\n\n\n\n\nPCA(n_components=4)\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\n  PCA?Documentation for PCAiFittedPCA(n_components=4) \n\n\n\n\nCodepd.DataFrame(pca.components_.T, \n             columns=['PC1', 'PC2', 'PC3', 'PC4'],\n             index=USArr.columns)\n\n               PC1       PC2       PC3       PC4\nMurder    0.535899  0.418181 -0.341233  0.649228\nAssault   0.583184  0.187986 -0.268148 -0.743407\nUrbanPop  0.278191 -0.872806 -0.378016  0.133878\nRape      0.543432 -0.167319  0.817778  0.089024\n\n\n\nCodepd.DataFrame(pca.transform(X), \n             columns=['PC1', 'PC2', 'PC3', 'PC4'], \n             index=USArr.index)\n\n                     PC1       PC2       PC3       PC4\nrownames                                              \nAlabama         0.985566  1.133392 -0.444269  0.156267\nAlaska          1.950138  1.073213  2.040003 -0.438583\nArizona         1.763164 -0.745957  0.054781 -0.834653\nArkansas       -0.141420  1.119797  0.114574 -0.182811\nCalifornia      2.523980 -1.542934  0.598557 -0.341996\nColorado        1.514563 -0.987555  1.095007  0.001465\nConnecticut    -1.358647 -1.088928 -0.643258 -0.118469\nDelaware        0.047709 -0.325359 -0.718633 -0.881978\nFlorida         3.013042  0.039229 -0.576829 -0.096285\nGeorgia         1.639283  1.278942 -0.342460  1.076797\nHawaii         -0.912657 -1.570460  0.050782  0.902807\nIdaho          -1.639800  0.210973  0.259801 -0.499104\nIllinois        1.378911 -0.681841 -0.677496 -0.122021\nIndiana        -0.505461 -0.151563  0.228055  0.424666\nIowa           -2.253646 -0.104054  0.164564  0.017556\nKansas         -0.796881 -0.270165  0.025553  0.206496\nKentucky       -0.750859  0.958440 -0.028369  0.670557\nLouisiana       1.564818  0.871055 -0.783480  0.454728\nMaine          -2.396829  0.376392 -0.065682 -0.330460\nMaryland        1.763369  0.427655 -0.157250 -0.559070\nMassachusetts  -0.486166 -1.474496 -0.609497 -0.179599\nMichigan        2.108441 -0.155397  0.384869  0.102372\nMinnesota      -1.692682 -0.632261  0.153070  0.067317\nMississippi     0.996494  2.393796 -0.740808  0.215508\nMissouri        0.696787 -0.263355  0.377444  0.225824\nMontana        -1.185452  0.536874  0.246889  0.123742\nNebraska       -1.265637 -0.193954  0.175574  0.015893\nNevada          2.874395 -0.775600  1.163380  0.314515\nNew Hampshire  -2.383915 -0.018082  0.036855 -0.033137\nNew Jersey      0.181566 -1.449506 -0.764454  0.243383\nNew Mexico      1.980024  0.142849  0.183692 -0.339534\nNew York        1.682577 -0.823184 -0.643075 -0.013484\nNorth Carolina  1.123379  2.228003 -0.863572 -0.954382\nNorth Dakota   -2.992226  0.599119  0.301277 -0.253987\nOhio           -0.225965 -0.742238 -0.031139  0.473916\nOklahoma       -0.311783 -0.287854 -0.015310  0.010332\nOregon          0.059122 -0.541411  0.939833 -0.237781\nPennsylvania   -0.888416 -0.571100 -0.400629  0.359061\nRhode Island   -0.863772 -1.491978 -1.369946 -0.613569\nSouth Carolina  1.320724  1.933405 -0.300538 -0.131467\nSouth Dakota   -1.987775  0.823343  0.389293 -0.109572\nTennessee       0.999742  0.860251  0.188083  0.652864\nTexas           1.355138 -0.412481 -0.492069  0.643195\nUtah           -0.550565 -1.471505  0.293728 -0.082314\nVermont        -2.801412  1.402288  0.841263 -0.144890\nVirginia       -0.096335  0.199735  0.011713  0.211371\nWashington     -0.216903 -0.970124  0.624871 -0.220848\nWest Virginia  -2.108585  1.424847  0.104775  0.131909\nWisconsin      -2.079714 -0.611269 -0.138865  0.184104\nWyoming        -0.629427  0.321013 -0.240659 -0.166652\n\n\n\nCodepca.explained_variance_\n\narray([2.53085875, 1.00996444, 0.36383998, 0.17696948])"
+  },
+  {
+    "objectID": "code/16-clustering-code.html",
+    "href": "code/16-clustering-code.html",
+    "title": "16 - Clustering Code Demo",
+    "section": "",
+    "text": "Codehead(iris, 10)\n\n   Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1           5.1         3.5          1.4         0.2  setosa\n2           4.9         3.0          1.4         0.2  setosa\n3           4.7         3.2          1.3         0.2  setosa\n4           4.6         3.1          1.5         0.2  setosa\n5           5.0         3.6          1.4         0.2  setosa\n6           5.4         3.9          1.7         0.4  setosa\n7           4.6         3.4          1.4         0.3  setosa\n8           5.0         3.4          1.5         0.2  setosa\n9           4.4         2.9          1.4         0.2  setosa\n10          4.9         3.1          1.5         0.1  setosa\n\n\n\n\nCodedf_clust &lt;- iris[, 3:4]\n(iris_kmean &lt;- kmeans(df_clust, centers = 3, nstart = 20))\n\nK-means clustering with 3 clusters of sizes 50, 48, 52\n\nCluster means:\n  Petal.Length Petal.Width\n1     1.462000    0.246000\n2     5.595833    2.037500\n3     4.269231    1.342308\n\nClustering vector:\n  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1\n [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3\n [75] 3 3 3 2 3 3 3 3 3 2 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 2 2 2 2 2 2 3 2 2 2 2\n[112] 2 2 2 2 2 2 2 2 3 2 2 2 2 2 2 3 2 2 2 2 2 2 2 2 2 2 2 3 2 2 2 2 2 2 2 2 2\n[149] 2 2\n\nWithin cluster sum of squares by cluster:\n[1]  2.02200 16.29167 13.05769\n (between_SS / total_SS =  94.3 %)\n\nAvailable components:\n\n[1] \"cluster\"      \"centers\"      \"totss\"        \"withinss\"     \"tot.withinss\"\n[6] \"betweenss\"    \"size\"         \"iter\"         \"ifault\"      \n\n\n\nCodelibrary(factoextra)\n\nLoading required package: ggplot2\n\n\nWelcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa\n\nCodefviz_cluster(object = iris_kmean, data = df_clust, label = NA)\n\n\n\n\n\n\n\n\nCode## wss =  total within sum of squares\nfviz_nbclust(x = df_clust, FUNcluster = kmeans, method = \"wss\",  k.max = 6)\n\n\n\n\n\n\nCodefviz_nbclust(x = df_clust, FUNcluster = kmeans, method = \"silhouette\",  k.max = 6)\n\n\n\n\n\n\nCodefviz_nbclust(df_clust, kmeans, method = \"gap_stat\",  k.max = 6)\n\n\n\n\n\n\n\n\n\nCodelibrary(mclust)\n\nPackage 'mclust' version 6.1.1\nType 'citation(\"mclust\")' for citing this R package in publications.\n\nCodegmm_clus &lt;- Mclust(df_clust)\npar(mar = c(4, 4, 0, 0))\nplot(gmm_clus, what = \"classification\")"
+  },
+  {
+    "objectID": "code/16-clustering-code.html#k-means",
+    "href": "code/16-clustering-code.html#k-means",
+    "title": "16 - Clustering Code Demo",
+    "section": "",
+    "text": "Codedf_clust &lt;- iris[, 3:4]\n(iris_kmean &lt;- kmeans(df_clust, centers = 3, nstart = 20))\n\nK-means clustering with 3 clusters of sizes 50, 48, 52\n\nCluster means:\n  Petal.Length Petal.Width\n1     1.462000    0.246000\n2     5.595833    2.037500\n3     4.269231    1.342308\n\nClustering vector:\n  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1\n [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3\n [75] 3 3 3 2 3 3 3 3 3 2 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 2 2 2 2 2 2 3 2 2 2 2\n[112] 2 2 2 2 2 2 2 2 3 2 2 2 2 2 2 3 2 2 2 2 2 2 2 2 2 2 2 3 2 2 2 2 2 2 2 2 2\n[149] 2 2\n\nWithin cluster sum of squares by cluster:\n[1]  2.02200 16.29167 13.05769\n (between_SS / total_SS =  94.3 %)\n\nAvailable components:\n\n[1] \"cluster\"      \"centers\"      \"totss\"        \"withinss\"     \"tot.withinss\"\n[6] \"betweenss\"    \"size\"         \"iter\"         \"ifault\"      \n\n\n\nCodelibrary(factoextra)\n\nLoading required package: ggplot2\n\n\nWelcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa\n\nCodefviz_cluster(object = iris_kmean, data = df_clust, label = NA)\n\n\n\n\n\n\n\n\nCode## wss =  total within sum of squares\nfviz_nbclust(x = df_clust, FUNcluster = kmeans, method = \"wss\",  k.max = 6)\n\n\n\n\n\n\nCodefviz_nbclust(x = df_clust, FUNcluster = kmeans, method = \"silhouette\",  k.max = 6)\n\n\n\n\n\n\nCodefviz_nbclust(df_clust, kmeans, method = \"gap_stat\",  k.max = 6)"
+  },
+  {
+    "objectID": "code/16-clustering-code.html#gaussian-mixture-model-gmm-based-clustering",
+    "href": "code/16-clustering-code.html#gaussian-mixture-model-gmm-based-clustering",
+    "title": "16 - Clustering Code Demo",
+    "section": "",
+    "text": "Codelibrary(mclust)\n\nPackage 'mclust' version 6.1.1\nType 'citation(\"mclust\")' for citing this R package in publications.\n\nCodegmm_clus &lt;- Mclust(df_clust)\npar(mar = c(4, 4, 0, 0))\nplot(gmm_clus, what = \"classification\")"
+  },
+  {
+    "objectID": "code/16-clustering-code.html#k-means-1",
+    "href": "code/16-clustering-code.html#k-means-1",
+    "title": "16 - Clustering Code Demo",
+    "section": "\n2.1 K-Means",
+    "text": "2.1 K-Means\n\nCodeimport numpy as np\nimport pandas as pd\nfrom sklearn.cluster import KMeans\nfrom sklearn.preprocessing import StandardScaler\n\n\n\nCodefrom sklearn.datasets import load_iris\niris = load_iris(as_frame=True)\n\n\n\nCodescaler = StandardScaler()\nX = scaler.fit_transform(iris.data.iloc[:, [2, 3]])\n\n\n\nCodekmeans = KMeans(n_clusters=3,  n_init=10).fit(X)\nkmeans.labels_[0:10]\n\narray([1, 1, 1, 1, 1, 1, 1, 1, 1, 1], dtype=int32)\n\nCodekmeans.cluster_centers_\n\narray([[ 1.02799959,  1.12797813],\n       [-1.30498732, -1.25489349],\n       [ 0.3058728 ,  0.16541778]])\n\n\n\nCode# y_pred = KMeans(n_clusters=3,  n_init=10).fit_predict(X)\nimport matplotlib.pyplot as plt\nplt.figure(figsize=(8, 6))\nplt.scatter(X[:, 0], X[:, 1], c=kmeans.labels_)\nplt.tight_layout()"
+  },
+  {
+    "objectID": "code/16-clustering-code.html#gaussian-mixture-model-gmm-based-clustering-1",
+    "href": "code/16-clustering-code.html#gaussian-mixture-model-gmm-based-clustering-1",
+    "title": "16 - Clustering Code Demo",
+    "section": "\n2.2 Gaussian-Mixture-Model (GMM) based Clustering",
+    "text": "2.2 Gaussian-Mixture-Model (GMM) based Clustering\n\nCodefrom sklearn.mixture import GaussianMixture\n\nbic = []\nmodels = []\nfor k in range(1, 10):  # test up to 9 clusters\n    model = GaussianMixture(n_components=k, covariance_type='full', random_state=2025)\n    model.fit(X)\n    bic.append(model.bic(X))\n    models.append(model)\n\n\n\n\nGaussianMixture(n_components=9, random_state=2025)\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\n  GaussianMixture?Documentation for GaussianMixtureiFittedGaussianMixture(n_components=9, random_state=2025) \n\n\nCode# Choose model with lowest BIC\nbest_model = models[np.argmin(bic)]\nbest_model\n\n\n\n\nGaussianMixture(n_components=3, random_state=2025)\nIn a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.\n\n\n  GaussianMixture?Documentation for GaussianMixtureiFittedGaussianMixture(n_components=3, random_state=2025) \n\n\nCodelabels = best_model.predict(X)\nlabels\n\narray([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n       0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,\n       2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,\n       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,\n       1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,\n       1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1])\n\n\n\nCodeplt.figure(figsize=(8, 6))\nplt.scatter(X[:, 0], X[:, 1], c=labels)\nplt.tight_layout()"
   }
 ]

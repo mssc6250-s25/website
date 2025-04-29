@@ -1,0 +1,1002 @@
+---
+title: 'Clustering `r fontawesome::fa("circle-nodes")`'
+subtitle: "MSSC 6250 Statistical Machine Learning"
+author: "Dr. Cheng-Han Yu <br> Department of Mathematical and Statistical Sciences <br> Marquette University"
+# date: "`r format(Sys.time(), '%B %d %Y')`"
+# macros: _macros.tex # import a list of TeX/LaTeX definitions
+format: 
+  revealjs:
+    html-math-method:
+      method: mathjax
+      url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    # include-in-header:
+    #     - "macros.tex"
+    highlight-style: github
+    code-block-bg: true
+    self-contained: false
+    slide-number: c/t
+    incremental: false
+    width: 1800
+    height: 1000
+    margin: 0.05
+    logo: "https://upload.wikimedia.org/wikipedia/commons/e/e8/Marquette_Golden_Eagles_logo.svg"
+    footer: "[mssc6250-s25.github.io/website](https://mssc6250-s25.github.io/website/)"
+    theme: ["simple", "styles.scss"]
+    echo: false
+    multiplex: true
+    code-link: true
+    fig-cap-location: bottom
+    fig-align: center
+    transition: none ## fade slide convex concave zoom
+    code-line-numbers: true
+    title-slide-attributes:
+      data-background-color: "#447099"
+      # data-background-image: images/paper-texture.jpg
+      # data-background-size: cover
+      # data-background-color: "#698ED5"
+editor: source
+execute:
+  freeze: true
+---
+
+
+# {visibility="hidden"}
+
+\def\cD{{\cal D}}
+\def\cL{{\cal L}}
+\def\cX{{\cal X}}
+\def\cF{{\cal F}}
+\def\cH{{\cal H}}
+\def\bA{\mathbf{A}}
+\def\bB{\mathbf{B}}
+\def\bX{\mathbf{X}}
+\def\bH{\mathbf{H}}
+\def\bI{\mathbf{I}}
+\def\bU{\mathbf{U}}
+\def\bD{\mathbf{D}}
+\def\bV{\mathbf{V}}
+\def\bS{\mathbf{S}}
+\def\bW{\mathbf{W}}
+\def\bZ{\mathbf{Z}}
+\def\bK{\mathbf{K}}
+\def\bx{\mathbf{x}}
+\def\by{\mathbf{y}}
+\def\bs{\mathbf{s}}
+\def\br{\mathbf{r}}
+\def\bu{\mathbf{u}}
+\def\be{\mathbf{e}}
+\def\bv{\mathbf{v}}
+\def\bp{\mathbf{p}}
+\def\bw{\mathbf{w}}
+\def\bz{\mathbf{z}}
+\def\bzero{\mathbf{0}}
+\def\balpha{\boldsymbol \alpha}
+\def\bbeta{\boldsymbol \beta}
+\def\btheta{\boldsymbol \theta}
+\def\bSigma{\boldsymbol \Sigma}
+\def\bxi{\boldsymbol \xi}
+\def\bmu{\boldsymbol \mu}
+\def\bep{\boldsymbol \epsilon}
+\def\T{\text{T}}
+\def\Trace{\text{Trace}}
+\def\Cov{\text{Cov}}
+\def\Corr{\text{Corr}}
+\def\Var{\text{Var}}
+\def\E{\text{E}}
+\def\pr{\text{pr}}
+\def\Prob{\text{P}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+
+
+
+```{r}
+#| label: setup
+#| include: false
+#| eval: true
+library(countdown)
+library(knitr)
+library(gt)
+library(gtExtras)
+library(ggplot2)
+library(ISLR2)
+library(genridge)
+library(glmnet)
+library(gam)
+library(splines)
+# library(ElemStatLearn)
+knitr::opts_chunk$set(
+    fig.asp = 0.618,
+    fig.align = "center",
+    out.width = "100%",
+    fig.retina = 10,
+    # fig.path = "images/04-linear-reg/",
+    message = FALSE,
+    global.par = TRUE
+)
+options(
+  htmltools.dir.version = FALSE,
+  dplyr.print_min = 6, 
+  dplyr.print_max = 6,
+  tibble.width = 80,
+  width = 80,
+  digits = 3
+  )
+hook_output <- knitr::knit_hooks$get("output")
+knitr::knit_hooks$set(output = function(x, options) {
+  lines <- options$output.lines
+  if (is.null(lines)) {
+    return(hook_output(x, options))  # pass to default hook
+  }
+  x <- unlist(strsplit(x, "\n"))
+  more <- "..."
+  if (length(lines)==1) {        # first n lines
+    if (length(x) > lines) {
+      # truncate the output, but add ....
+      x <- c(head(x, lines), more)
+    }
+  } else {
+    x <- c(more, x[lines], more)
+  }
+  # paste these lines together
+  x <- paste(c(x, ""), collapse = "\n")
+  hook_output(x, options)
+})
+
+theme_set(theme_minimal(base_size = 20))
+```
+
+
+
+## Clustering Methods
+
+- **Clustering**: techniques for finding **subgroups**, or **clusters**, in a data set.
+
+- **Goal**: [**Homogeneous within groups; heterogeneous between groups**]{.blue}
+
+- [Customer/Marketing Segmentation]{.green}
+    + Divide customers into clusters on age, income, etc.
+    + Each subgroup might be more receptive to a particular form of advertising, or more likely to purchase a particular product.
+
+::: xsmall
+
+```{r}
+#| echo: false
+#| out-width: 38%
+#| fig-cap: "Source: https://shopup.me/blog/customer-segmentation-definition/"
+knitr::include_graphics("./images/16-clustering/clustering.png")
+```
+
+:::
+
+## Clustering Methods
+
+<!-- - Clustering is an unsupervised learning problem: discover structure (distinct clusters) -->
+<!-- - PCA finds a low-dimensional representation of observations that explain a good fraction of the variance. -->
+<!-- - Clustering looks to find homogeneous subgroups among the observations. -->
+
+- Basic clustering approaches include **K-means clustering** and **hierarchical clustering**.
+
+- Clustering results are dependent on the *measure of similarity* (or distance) between the data points.
+
+<!-- - We can cluster observations (features) on the basis of features (observations) to identify subgroups among observations (features). (transpose the data matrix) -->
+
+- For continuous variables, the most commonly used measure is the Euclidian distance: $$d(u, v) = \|u - v\|_2 = \sqrt{\sum_{j=1}^p(u_j - v_j)^2}$$
+
+- For categorical variables, the **Hamming distance** is usually used:  $$d(u, v) = \sum_{j=1}^p \mathbf{1}\{u_j \ne v_j\}$$
+
+- Distance measures should be defined based on the application. There is no universally best approach.
+
+
+
+# K-Means Clustering
+
+
+## K-Means Clustering
+
+- Partition observations into $K$ **distinct, non-overlapping** clusters: assign each to **exactly one** of the $K$ clusters.
+
+- Must pre-specify the number of clusters $K \ll n$.
+
+::: xsmall
+
+```{r}
+#| echo: false
+#| out-width: 85%
+#| fig-cap: "Source: Fig. 12.7 of ISL"
+knitr::include_graphics("./images/16-clustering/kmeans.png")
+```
+
+:::
+
+
+
+
+## K-Means Algorithm (K = 3) {visibility="hidden"}
+
+Alternatively updates the two components, the assignment $C(\cdot)$ and cluster means $\{m_k\}_{k=1}^K$:
+
+:::: {.columns}
+
+::: {.column width="52%"}
+
+:::{.small}
+
+```{r, echo=FALSE, out.width="100%", fig.cap="Source: ISL Fig 12.8"}
+#| purl=FALSE
+knitr::include_graphics("./images/16-clustering/kmeans_algo.png")
+```
+
+:::
+
+:::
+
+
+
+::: {.column width="48%"}
+
+:::{.instructions}
+
+**K-Means Algorithm**
+
+- Choose a value of $K$.
+- _Randomly_ assign a number, from 1 to $K$, to each of the observations.
+- Iterate until the cluster assignments stop changing:
+    + **[1]** For each of the $K$ clusters, compute its cluster *centroid*.
+    + **[2]** Assign each observation to the cluster _whose centroid is closest_.
+
+:::
+
+:::
+
+::::
+
+
+
+
+
+
+## K-Means Illustration
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+**Data** (Let's choose $K=2$)
+
+
+```{r}
+#| fig-asp: 1
+#| echo: false
+set.seed(3)
+x <- replicate(2, rnorm(6))
+par(mar = rep(0, 4))
+plot(x[,1], x[, 2], xaxt = 'n', yaxt = 'n', cex = 5, xlim = c(-1.35, 0.45), 
+     ylim = c(-1.51, 1.61), pch = 19)
+```
+
+:::
+
+
+::: {.column width="50%"}
+
+:::{.instructions}
+
+**K-Means Algorithm**
+
+- [Choose a value of $K$.]{.blue}
+- _Randomly_ assign a number, from 1 to $K$, to each of the observations.
+- Iterate until the cluster assignments stop changing:
+    + **[1]** For each of the $K$ clusters, compute its cluster *centroid*.
+    + **[2]** Assign each observation to the cluster _whose centroid is closest_.
+
+:::
+
+:::
+
+::::
+
+
+
+
+## K-Means Illustration
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+**Random assignment**
+
+```{r}
+#| fig-asp: 1
+#| echo: false
+set.seed(3)
+C <- sample(1:2, 6, replace = TRUE)
+par(mar = rep(0, 4))  
+plot(x[,1], x[, 2], xaxt = 'n', yaxt = 'n', cex = 5, 
+     xlim = c(-1.35, 0.45), ylim = c(-1.51, 1.61), pch = 19, col = c(2, 4)[C])
+```
+
+:::
+
+::: {.column width="50%"}
+
+:::{.instructions}
+
+**K-Means Algorithm**
+
+- Choose a value of $K$.
+- [_Randomly_ assign a number, from 1 to $K$, to each of the observations.]{.blue}
+- Iterate until the cluster assignments stop changing:
+    + **[1]** For each of the $K$ clusters, compute its cluster *centroid*.
+    + **[2]** Assign each observation to the cluster _whose centroid is closest_.
+
+:::
+
+:::
+
+::::
+
+
+
+## K-Means Illustration
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+**Compute the cluster centroid**
+
+
+```{r}
+#| fig-asp: 1
+#| echo: false
+par(mar = rep(0, 4)) 
+plot(x[,1], x[, 2], xaxt = 'n', yaxt = 'n', cex = 5, 
+     xlim = c(-1.35, 0.45), ylim = c(-1.51, 1.61), 
+     pch = 19, col = c(2, 4)[C])
+m1 <- colMeans(x[C == 1, ])
+m2 <- colMeans(x[C == 2, ])
+points(m1[1], m1[2], col = 2, pch = 4, cex = 5, lwd = 10)
+points(m2[1], m2[2], col = 4, pch = 4, cex = 5, lwd = 10)
+```
+
+:::
+
+
+::: {.column width="50%"}
+
+:::{.instructions}
+
+**K-Means Algorithm**
+
+- Choose a value of $K$.
+- _Randomly_ assign a number, from 1 to $K$, to each of the observations.
+- Iterate until the cluster assignments stop changing:
+    + **[1]** [For each of the $K$ clusters, compute its cluster *centroid*.]{.blue}
+    + **[2]** Assign each observation to the cluster _whose centroid is closest_.
+
+:::
+
+:::
+
+::::
+
+
+
+## K-Means Illustration
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+**Do a new assignment**
+
+```{r}
+#| fig-asp: 1
+#| echo: false
+par(mar = rep(0, 4)) 
+plot(x[,1], x[, 2], xaxt = 'n', yaxt = 'n', cex = 5, 
+     xlim = c(-1.35, 0.45), ylim = c(-1.51, 1.61), pch = 19, col = c(2, 4)[C])
+points(m1[1], m1[2], col = 2, pch = 4, cex = 5, lwd = 10)
+points(m2[1], m2[2], col = 4, pch = 4, cex = 5, lwd = 10)
+arrows(x[2, 1], x[2, 2], -0.9041313, 0.7644366, length = 0.15, lwd = 10)
+```
+
+:::
+
+::: {.column width="50%"}
+
+:::{.instructions}
+
+**K-Means Algorithm**
+
+- Choose a value of $K$.
+- _Randomly_ assign a number, from 1 to $K$, to each of the observations.
+- Iterate until the cluster assignments stop changing:
+    + **[1]** For each of the $K$ clusters, compute its cluster *centroid*.
+    + **[2]** [Assign each observation to the cluster _whose centroid is closest_.]{.blue}
+    
+:::
+
+:::
+
+::::
+
+
+
+
+## K-Means Illustration
+
+
+:::: {.columns}
+
+
+
+::: {.column width="50%"}
+
+**Do a new assignment**
+
+```{r}
+#| fig-asp: 1
+#| echo: false
+par(mar = rep(0, 4)) 
+C[2] <- 1
+plot(x[,1], x[, 2], xaxt = 'n', yaxt = 'n', cex = 5, 
+     xlim = c(-1.35, 0.45), ylim = c(-1.51, 1.61), pch = 19, col = c(2, 4)[C])
+# points(m1[1], m1[2], col = 2, pch = 4, cex = 5, lwd = 4)
+# points(m2[1], m2[2], col = 4, pch = 4, cex = 5, lwd = 4)
+# arrows(x[2, 1], x[2, 2], -0.9041313, 0.7644366, length = 0.15)
+```
+
+:::
+
+
+::: {.column width="50%"}
+
+**Compute the cluster centroid**
+
+```{r}
+#| fig-asp: 1
+#| echo: false
+C[2] <- 1
+par(mar = rep(0, 4)) 
+plot(x[,1], x[, 2], xaxt = 'n', yaxt = 'n', cex = 5, 
+     xlim = c(-1.35, 0.45), ylim = c(-1.51, 1.61), pch = 19, col = c(2, 4)[C])
+m1 = colMeans(x[C == 1, ])
+m2 = colMeans(x[C == 2, ])
+points(m1[1], m1[2], col = 2, pch = 4, cex = 5, lwd = 10)
+points(m2[1], m2[2], col = 4, pch = 4, cex = 5, lwd = 10)
+```
+
+:::
+
+::::
+
+
+
+
+
+##
+
+::: xsmall
+
+```{r}
+#| echo: false
+#| out-width: 55%
+#| fig-cap: "Source: ISL Figure 12.8"
+knitr::include_graphics("./images/16-clustering/kmeans_algo.png")
+```
+
+:::
+
+
+
+## Clustering Mathematical Formulation
+
+- $C(\cdot): \{1, \ldots, n\} \rightarrow \{1, \ldots, K\}$ is a cluster assignment function or **encoder** that assigns the $i$th observation to the $k$th cluster, $i \in  \{1, \ldots, n\}$, $k \in \{1, \ldots, K\}$, or $C(i) = k$.
+
+
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+Seek a $C(\cdot)$ that minimizes the **within-cluster distance**
+$$ 
+\begin{align} W(C) = \frac{1}{2}\sum_{k=1}^K\sum_{(i, i'): C(i), C(i')=k} d(\bx_i, \bx_{i'})
+\end{align}
+$$
+
+If $d(\cdot, \cdot)$ is the Euclidean distance,
+$$W(C) =\sum_{k=1}^K n_k \sum_{C(i) = k} \lVert \bx_i - m_k \rVert^2,$$
+
+where $m_k = (\bar{x}_{1k}, \dots, \bar{x}_{pk})$ is the mean vector of $k$th cluster.
+
+:::
+
+::: {.column width="40%"}
+
+::: xsmall
+
+```{r}
+#| fig-cap: "Source: ISL Fig. 12.10"
+knitr::include_graphics("./images/16-clustering/12_10-1.png")
+```
+
+:::
+
+:::
+
+::::
+
+
+<!-- - A *good* clustering is one for which the **within-cluster variation** is as small as possible. -->
+
+
+
+## Clustering Mathematical Formulation
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+- This is equivalent to maximizing the **between cluster distance**
+
+$$B(C) = \frac{1}{2}\sum_{k=1}^K\sum_{(i, i'): C(i)=k}\sum_{, C(i')\ne k} d(\bx_i, \bx_{i'})$$
+
+
+- The **total distance** is
+
+$$T = \frac{1}{2}\sum_{i=1}^n \sum_{i'=1}^nd(\bx_i, \bx_{i'}) = W(C) + B(C)$$
+
+<br>
+
+$$\min_{C} W(C) \iff \max_{C} B(C)$$
+:::
+
+
+::: {.column width="40%"}
+
+::: xsmall
+
+```{r}
+#| fig-cap: "Source: ISL Fig. 12.10"
+knitr::include_graphics("./images/16-clustering/12_10-1.png")
+```
+
+:::
+
+:::
+
+::::
+
+
+::: notes
+
+- The within-cluster variation for the $k$th cluster is *the sum of all of pairwise squared Euclidean distances between the observation in the $k$th cluster, divided by the total number of observations in the $k$th cluster.*
+
+:::
+
+
+
+## K-Means Clustering
+
+- K-Means clustering use an *iterative* algorithm to solve the enlarged optimization problem:
+
+$$ \underset{C, \, \{m_k\}_{k=1}^K} \min \sum_{k=1}^K n_k \sum_{C(i) = k} \lVert \bx_i - m_k \rVert^2, $$
+
+where $m_k = (\bar{x}_{1k}, \dots, \bar{x}_{pk})$ is the mean vector of $k$th cluster.^[K-means is for situations in which all variables are continuous.]
+
+::: notes
+
+This problem is NP-hard for ≥ 2 dimensions.
+There are K^n ways to partition n observations into K clusters!
+
+:::
+
+
+
+
+## K-Means Algorithm Issues
+
+- The algorithm finds a _local_ rather than a global optimum.
+
+- The results will depend on the initial (random) cluster assignment.
+  + Run the algorithm multiple times, then select the one producing the smallest $W(C)$
+  
+- Standardize the data so that distance is not affected by variable unit.
+
+
+```{r}   
+#| echo: true
+#| code-line-numbers: false
+# some random data
+set.seed(2025)
+mat = matrix(rnorm(1000), 50, 20)
+
+# if we use only one starting point
+kmeans(mat, centers = 3, nstart = 1)$tot.withinss
+
+# if we use multiple starting point and pick the best one
+kmeans(mat, centers = 3, nstart = 100)$tot.withinss
+``` 
+
+
+##
+
+::: xsmall
+
+```{r}
+#| echo: false
+#| out-width: 55%
+#| fig-cap: "Source: ISL Figure 12.8"
+knitr::include_graphics("./images/16-clustering/kmeans_local.png")
+```
+
+:::
+
+
+## K-Medoids
+
+- K-medoids is an alternative of K-means.
+
+- Seek one observation that minimizes the distance to all others in the cluster $$i^*_k = \argmin_{i:C(i)=k}\sum_{C(i')=k}d(\bx_i, \bx_{i'})$$
+
+- Use $\bx_{i^*_k}$ as the "center" of cluster $k$.
+
+
+
+## `iris` Data
+
+```{r}
+#| code-line-numbers: false
+head(iris, n = 5)
+```
+
+```{r}
+#| code-line-numbers: false
+library(ggplot2)
+    ggplot(iris, aes(Petal.Length, Petal.Width, color = Species)) + geom_point(size = 5)
+```
+
+
+
+## K-Means on `iris`
+
+::: midi
+
+```{r}
+#| class-output: my_classfull
+#| echo: true
+df_clust <- iris[, 3:4]
+(iris_kmean <- kmeans(df_clust, centers = 3, nstart = 20))
+```
+
+:::
+
+
+## K-Means on `iris`
+
+```{r}
+iris_kmean$cluster <- as.factor(iris_kmean$cluster)
+  
+ggplot(iris, aes(Petal.Length, Petal.Width, color = Species)) + # true cluster
+    geom_point(alpha = 0.3, size = 8) + 
+    scale_color_manual(values = c('red', 'green3', 'blue')) +
+    geom_point(col = c("red", "blue", "green3" )[iris_kmean$cluster], size = 4) + geom_point(aes(x=iris_kmean$centers[1, 1],y=iris_kmean$centers[1, 2]),colour="black", shape=4,size=5)+ 
+    geom_point(aes(x=iris_kmean$centers[2, 1],y=iris_kmean$centers[2, 2]),colour="black", shape=4, size=5) +
+    geom_point(aes(x=iris_kmean$centers[3, 1],y=iris_kmean$centers[3, 2]),colour="black", shape=4,size=5)
+```
+
+
+## [`factoextra`](https://rpkgs.datanovia.com/factoextra/index.html)
+
+```{r}
+#| echo: true
+#| code-line-numbers: false
+library(factoextra)
+fviz_cluster(object = iris_kmean, data = df_clust, label = NA)
+```
+
+
+
+## Choose K: Total Withing Sum of Squares
+
+```{r}
+#| echo: true
+#| code-line-numbers: false
+## wss =  total within sum of squares
+fviz_nbclust(x = df_clust, FUNcluster = kmeans, method = "wss",  k.max = 6)
+```
+
+
+
+## Choose K: Average Silhouette Method
+
+```{r}
+#| echo: true
+#| code-line-numbers: false
+## wss =  total within sum of squares
+fviz_nbclust(x = df_clust, FUNcluster = kmeans, method = "silhouette",  k.max = 6)
+```
+
+
+
+
+## Choose K: Gap Statistics
+
+```{r}
+#| echo: true
+#| code-line-numbers: false
+## gap_stat = Gap Statistics
+fviz_nbclust(df_clust, kmeans, method = "gap_stat",  k.max = 6)
+```
+
+
+
+
+# Model-based Clustering
+
+
+## Gaussian Finite Mixture Models (GMM)
+
+- Assume each data point $\bx_i \in \mathbf{R}^p$ is generated from one of the $K$ Gaussian distributions $N(\bmu_k, \bSigma_k)$, $k = 1, \dots, K$.
+
+- **Gaussian mixture model** (GMM) has the form 
+
+$$p\left(\bx_i\right) = \sum_{k=1}^K p_k N(\bmu_k, \bSigma_k)$$
+
+
+. . .
+
+- GMM can be written as a **latent variable model**:
+
+$$ \begin{align} \bx_i \mid z_i &\sim N(\bmu_{z_i}, \bSigma_{z_i})\\
+ z_i &\sim \text{Categorical}(p_1, \dots, p_K)\end{align}$$
+ 
+- $z_i \in \{1,2, \dots, K \}$ is the latent variable.
+
+
+
+## Mixture of Gaussians
+
+$p\left(\bx_i\right) = (0.4) N(\bmu_1, \bSigma_1) + (0.6)N(\bmu_2, \bSigma_2)$, $\bmu_1 = (1, -1)$; $\bmu_2 = (-1.5, 1.5)$, $\bSigma_1 = \begin{bmatrix} 1 & 0.5 \\ 0.5 & 1 \end{bmatrix}$; $\bSigma_2 = \begin{bmatrix} 1 & -0.9 \\ -0.9 & 1 \end{bmatrix}$
+
+
+
+:::: {.columns}
+
+::: {.column width="33%"}
+
+```{r}
+#| fig-asp: 1
+# generate two sets of samples
+Sigma1 = matrix(c(1, 0.5, 0.5, 1), 2, 2)
+Sigma2 = matrix(c(1, -0.9, -0.9, 1), 2, 2)
+mu1 = c(1, -1)
+mu2 = c(-1.5, 1.5)
+
+# define prior
+p1 = 0.4 
+p2 = 0.6
+
+n = 1000
+library(mvtnorm)
+Class1 = rmvnorm(n*p1, mean = mu1, sigma = Sigma1)
+Class2 = rmvnorm(n*p2, mean = mu2, sigma = Sigma2)
+par(mar = c(0, 0, 2, 0))
+plot(Class1, pch = 19, xlim = c(-4, 4), ylim = c(-4, 4), xlab = "X1", ylab = "X2", las = 1,
+     main = "What we observe", cex.main = 2)
+points(Class2, pch = 19)
+# z1 <- MASS::kde2d(Class1[,1], Class1[,2], n=50)
+```
+:::
+
+
+
+::: {.column width="33%"}
+
+```{r}
+#| fig-asp: 1
+par(mar = c(0, 0, 2, 0))
+plot(Class1, pch = 19, col = scales::alpha(4, 0.3), xlim = c(-4, 4), ylim = c(-4, 4), xlab = "X1", ylab = "X2", las = 1,
+     main = "We assume data are from mixture of Normals", cex.main = 2)
+points(Class2, pch = 19, col = scales::alpha(2, 0.3))
+# z1 <- MASS::kde2d(Class1[,1], Class1[,2], n=50)
+
+x1 = seq(-4, 4, 0.1)
+x2 = seq(-4, 4, 0.1)
+x1x2 = expand.grid(x1, x2)
+# X <- cbind(x1, x2)
+z1 <- matrix(dmvnorm(x1x2, mu1, Sigma1), length(x1), length(x1))
+z2 <- matrix(dmvnorm(x1x2, mu2, Sigma2), length(x2), length(x2))
+contour(x1, x2, z1, drawlabels=FALSE, add=TRUE, col = 4, lwd = 2)
+contour(x1, x2, z2, drawlabels=FALSE, add=TRUE, col = 2, lwd = 2)
+```
+
+:::
+
+
+
+::: {.column width="33%"}
+
+```{r}
+z <- 0.4*z1 + 0.6*z2
+# persp(x1, x2, z)
+library(plotly)
+plot_ly(x = x1, y = x2)|> 
+    add_surface(z = z)
+```
+
+:::
+
+::::
+
+
+## GMM for Clustering
+
+Given the data and the model $$ \begin{align} \bx_i \mid z_i &\sim N(\bmu_{z_i}, \bSigma_{z_i})\\
+ z_i &\sim \text{Categorical}(p_1, \dots, p_K)\end{align},$$
+where $\btheta = \{\bmu_{k}, \bSigma_{k}, p_k \}_{k=1}^K$,
+we estimate the posterior probability that point $i$ belongs to cluster $k$:  $$p\left(z_i = k \mid \bx_i, \btheta \right),$$ which is called the **responsibility** of cluster $k$ for data point $\bx_i$.
+
+. . .
+
+With Bayes rule,
+
+$$r_{ik} := p\left(z_i = k \mid \bx_i, \btheta \right) = \frac{p\left(z_i = k \mid \btheta \right)p\left(\bx_i \mid z_i = k , \btheta \right)}{\sum_{k'=1}^Kp\left(z_i = k' \mid \btheta \right)p\left(\bx_i \mid z_i = k' , \btheta \right)} = \frac{p_kN(\bmu_{k}, \bSigma_{k})}{\sum_{k'=1}^Kp_{k'}N(\bmu_{k'}, \bSigma_{k'})}$$
+
+
+- This procedure is called **soft clustering**.
+
+
+
+
+## Expectation-Maximization (EM) Algorithm 
+
+- Gradient-based optimizers are hard to find a local minimum of the negative log likelihood (loss function) when there are unobserved latent variables in the model.
+
+
+- EM algorithm considers the **complete data likelihood** $L(\bx, \bz \mid \btheta)$, and iteratively 
+  + infers unobservable $\bz$ given $\btheta$ (**E-step**)
+  + optimizes  $\btheta$ given the "filled in" data (**M-step**)
+
+- The complete data log likelihood is
+
+$$\log L(\bx, \bz \mid \btheta) = \ell\left( \btheta \right):= \log \left[ \prod_{i=1}^np(\bx_i, \bz_i \mid \btheta)\right] = \sum_{i=1}^n \log p(\bx_i, \bz_i \mid \btheta)$$
+
+
+- $\ell\left( \btheta \right)$ cannot be computed since $\bz_i$ is unknown.
+
+
+
+
+## EM Algorithm 
+
+At iteration $t$, 
+
+- [**E-step**]{.green}: Take expectation w.r.t. $\bz_i \mid \bx, \btheta^{(t-1)}$, or compute the **expected complete data log likelihood** $$Q\left(\btheta, \btheta^{(t-1)} \right) = \E\left[\ell(\btheta) \mid \bx, \btheta^{(t-1)} \right]$$
+
+- [**M-step**]{.green}: Maximize $Q\left(\btheta, \btheta^{(t-1)} \right)$ w.r.t. $\btheta$
+
+. . .
+
+$$\btheta^{(t)} = \argmax_{\btheta} \, Q\left(\btheta, \btheta^{(t-1)} \right)$$
+
+Stop until $\|\btheta^{(t)} - \btheta^{(t-1)}\| < \epsilon$ or $\|Q\left(\btheta^{(t)}, \btheta^{(t-1)} \right) - Q\left(\btheta^{(t-1)}, \btheta^{(t-1)} \right)\| < \epsilon$
+
+
+## EM for GMM
+
+$$\begin{align} Q\left(\btheta, \btheta^{(t-1)} \right) &= \E\left[\ell(\btheta) \mid \bx, \btheta^{(t-1)} \right] \\
+&=\sum_{i=1}^n \E \left[ \log \left[ \prod_{k=1}^K p_kp(\bx_i \mid z_i, \btheta)^{I(z_i = k)}\right]\right]\\
+&=\sum_{i=1}^n \sum_{k=1}^K \E (I(z_i=k)) \log \left[p_kp(\bx_i \mid z_i=k, \btheta) \right]\\
+&=\sum_{i=1}^n \sum_{k=1}^K p\left(z_i = k \mid \bx_i, \btheta \right) \log \left[p_kp(\bx_i \mid z_i=k, \btheta) \right]\\
+&=\sum_{i=1}^n \sum_{k=1}^K r_{ik} \log p_k + \sum_{i=1}^n \sum_{k=1}^K r_{ik}  \log p(\bx_i \mid z_i=k, \btheta)\end{align}$$
+
+
+
+
+## EM for GMM
+
+
+::: {.midi}
+
+$\begin{align} Q\left(\btheta, \btheta^{(t-1)} \right)=\sum_{i=1}^n \sum_{k=1}^K r_{ik} \log p_k + \sum_{i=1}^n \sum_{k=1}^K r_{ik}  \log p(\bx_i \mid z_i=k, \btheta)\end{align}$
+
+:::
+
+
+- [**E-step**]{.green}: 
+
+::: {.midi}
+
+$r_{ik} = \frac{p_kN\left(\bx_i \mid \bmu_{k}^{(t-1)}, \bSigma_{k}^{(t-1)}\right)}{\sum_{k'=1}^Kp_{k'}N\left(\bx_i \mid \bmu_{k'}^{(t-1)}, \bSigma_{k'}^{(t-1)}\right)}$
+
+:::
+
+
+- [**M-step**]{.green}:
+
+::: {.midi}
+
+  + $p_k = \frac{\sum_{i=1}^n r_{ik}}{n}$
+  
+:::
+
+::: {.midi}
+
+  + $\bmu_k = \frac{\sum_{i=1}^n r_{ik}\bx_i}{\sum_{i=1}^n r_{ik}}$
+  
+:::
+
+
+::: {.midi}
+
+  + $\bSigma_k = \frac{\sum_{i=1}^n r_{ik}(\bx_i - \bmu_k)(\bx_i - \bmu_k)'}{\sum_{i=1}^n r_{ik}}$
+  
+:::
+
+Set $\btheta^{(t)} = \left(p_k, \bmu_k, \bSigma_k \right)_{k=1}^K$ and return to the E-step.
+
+
+
+
+## EM and K-Means
+
+- In K-Means, 
+
+  + Assume $p_k = 1/K$ and $\bSigma_k = \sigma^2\bI$ are fixed.
+
+  + [**E-step**]{.green} (**hard EM/clustering**): 
+
+  $$p\left(z_i = k \mid \bx_i, \btheta \right) \approx I(k = z_i^*),$$ where $$z_i^* = \argmax_k \,\, p\left(z_i = k \mid \bx_i, \btheta \right) = \argmin_k \,\, \|\bx_i - \bmu_k\|^2$$
+
+  
+  + [**M-step**]{.green}: 
+  
+  $$\bmu_k = \frac{\sum_{i:z_i = k}\bx_i}{n_k},$$ where $n_k$ is the number of points belong to $k$.
+  
+  
+  
+## [`mclust`](https://mclust-org.github.io/index.html)
+
+```{r}
+#| echo: !expr c(-3)
+#| code-line-numbers: false
+library(mclust)
+gmm_clus <- Mclust(df_clust)
+par(mar = c(4, 4, 0, 0))
+plot(gmm_clus, what = "classification")
+```
+
+
+::: notes
+
+https://cran.r-project.org/web/packages/mclust/vignettes/mclust.html#introduction
+
+https://mclust-org.github.io/index.html
+
+https://sites.stat.washington.edu/raftery/Research/PDF/fraley2002.pdf
+
+HO Ch 22
+PML 21.4
+:::
+
+
+## Other Topics
+
+- Hierarchical Clustering
+- Spectral Clustering
+- Dirichlet Process Mixture Models
+
+
+::: notes
+- PML Ch. 21, ESL Ch 14
+- K-Medoids Clustering*
+
+https://www.google.com/search?q=k-medoids+clustering+in+r&oq=K-medoi&aqs=chrome.3.69i57j0i512l2j0i20i263i512l2j0i512l5.6754j0j7&sourceid=chrome&ie=UTF-8
+:::

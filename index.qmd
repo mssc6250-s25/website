@@ -40,9 +40,9 @@ format:
 |  | Thu, Apr 10 | Random Forests and Boosting |  |  | [`r fontawesome::fa("file-code")`](code/14-tree-code.html "14-tree-code") | [✍️ HW4](/hw/hw-4.html "hw-4") |  |
 | 14 | Tue, Apr 15 | **Midterm Presentation II** | [📖](present-work-2.html "present-work-2") |  |  |  | [✅](present-description-2.html#proposal "Presentation II Guideline") Project-2 Guideline |
 |  | Thu, Apr 17 | ***NO CLASS: Easter break*** |  |  |  |  |  |
-| 15 | Tue, Apr 22 | Principal Component Analysis | [📖](/weeks/week-15.html "Week 15") | [🖥️](slides/15-pca.html "15-pca") | `r fontawesome::fa("file-code")` |  |  |
-|  | Thu, Apr 24 | K-Means Clustering |  | [🖥️](slides/16-clustering.html "16-clustering") | `r fontawesome::fa("file-code")` |  |  |
-| 16 | Tue, Apr 29 | Model-based Clustering | [📖](/weeks/week-16.html "Week 16") |  | `r fontawesome::fa("file-code")` |  |  |
+| 15 | Tue, Apr 22 | Principal Component Analysis | [📖](/weeks/week-15.html "Week 15") | [🖥️](slides/15-pca.html "15-pca") | [`r fontawesome::fa("file-code")`](code/15-pca-code.html "15-pca-code") |  |  |
+|  | Thu, Apr 24 | Principal Component Analysis |  |  |  |  |  |
+| 16 | Tue, Apr 29 | Clustering | [📖](/weeks/week-16.html "Week 16") | [🖥️](slides/16-clustering.html "16-clustering") | [`r fontawesome::fa("file-code")`](code/16-clustering-code.html "16-clustering-code") |  |  |
 |  | Thu, May 1 | Neural Networks |  |  |  | HW 4 Due |  |
 | 17 | Thu, May 8 | **Final Project Submission** |  |  |  |  | [✅](project-description.html "Final project guideline") Final project guideline |
 :::

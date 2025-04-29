@@ -1,0 +1,90 @@
+---
+title: "15 - Principal Component Analysis Code Demo"
+author: 'Dr. Cheng-Han Yu'
+format: 
+  html:
+    toc: true
+    code-link: true
+    code-fold: show
+    # code-summary: "Show/Hide"
+    code-tools: true
+    number-sections: true
+# filters: 
+#   - include-code-files
+---
+
+# R implementation
+
+```{r}
+USArrests
+```
+
+```{r}
+pca_output <- prcomp(USArrests, scale = TRUE)
+```
+
+```{r}
+(pca_output$rotation <- -pca_output$rotation)
+```
+
+```{r}
+pca_output$x
+```
+
+```{r}
+biplot(pca_output, xlabs = state.abb, scale = 0,
+       col = c("blue", "red"), las = 1,
+       xlab = "PC1 score", ylab = "PC2 score")
+```
+
+```{r}
+(pc_var <- pca_output$sdev ^ 2)
+(pc_var_prop <- pc_var / sum(pc_var))
+```
+
+# Python implementation
+
+The biplot in Python needs extra work. We need to either write our own function or rely on some other packages such as [`pca`](https://pypi.org/project/pca/).
+
+```{python}
+import numpy as np
+import pandas as pd
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+```
+
+```{python}
+USArrests = pd.read_csv('../data/USArrests.csv')
+```
+
+```{python}
+USArr = USArrests.drop(['rownames'], axis = 1)
+USArr.index = USArrests['rownames']
+USArr
+```
+
+```{python}
+scaler = StandardScaler()
+X = scaler.fit_transform(USArr.values) ## Array
+```
+
+```{python}
+pca = PCA(n_components=4)
+pca.fit(X)
+```
+
+```{python}
+pd.DataFrame(pca.components_.T, 
+             columns=['PC1', 'PC2', 'PC3', 'PC4'],
+             index=USArr.columns)
+```
+
+```{python}
+pd.DataFrame(pca.transform(X), 
+             columns=['PC1', 'PC2', 'PC3', 'PC4'], 
+             index=USArr.index)
+```
+
+```{python}
+pca.explained_variance_
+```

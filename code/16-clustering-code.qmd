@@ -1,0 +1,111 @@
+---
+title: "16 - Clustering Code Demo"
+author: 'Dr. Cheng-Han Yu'
+format: 
+  html:
+    toc: true
+    code-link: true
+    code-fold: show
+    # code-summary: "Show/Hide"
+    code-tools: true
+    number-sections: true
+# filters: 
+#   - include-code-files
+---
+
+# R implementation
+
+```{r}
+head(iris, 10)
+```
+
+## K-Means
+
+```{r}
+df_clust <- iris[, 3:4]
+(iris_kmean <- kmeans(df_clust, centers = 3, nstart = 20))
+```
+
+```{r}
+library(factoextra)
+fviz_cluster(object = iris_kmean, data = df_clust, label = NA)
+```
+
+```{r}
+## wss =  total within sum of squares
+fviz_nbclust(x = df_clust, FUNcluster = kmeans, method = "wss",  k.max = 6)
+fviz_nbclust(x = df_clust, FUNcluster = kmeans, method = "silhouette",  k.max = 6)
+fviz_nbclust(df_clust, kmeans, method = "gap_stat",  k.max = 6)
+```
+
+## Gaussian-Mixture-Model (GMM) based Clustering
+
+```{r}
+library(mclust)
+gmm_clus <- Mclust(df_clust)
+par(mar = c(4, 4, 0, 0))
+plot(gmm_clus, what = "classification")
+
+```
+
+# Python implementation
+
+## K-Means
+
+```{python}
+import numpy as np
+import pandas as pd
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
+```
+
+```{python}
+from sklearn.datasets import load_iris
+iris = load_iris(as_frame=True)
+
+```
+
+```{python}
+scaler = StandardScaler()
+X = scaler.fit_transform(iris.data.iloc[:, [2, 3]])
+```
+
+```{python}
+kmeans = KMeans(n_clusters=3,  n_init=10).fit(X)
+kmeans.labels_[0:10]
+kmeans.cluster_centers_
+```
+
+```{python}
+# y_pred = KMeans(n_clusters=3,  n_init=10).fit_predict(X)
+import matplotlib.pyplot as plt
+plt.figure(figsize=(8, 6))
+plt.scatter(X[:, 0], X[:, 1], c=kmeans.labels_)
+plt.tight_layout()
+```
+
+## Gaussian-Mixture-Model (GMM) based Clustering
+
+```{python}
+from sklearn.mixture import GaussianMixture
+
+bic = []
+models = []
+for k in range(1, 10):  # test up to 9 clusters
+    model = GaussianMixture(n_components=k, covariance_type='full', random_state=2025)
+    model.fit(X)
+    bic.append(model.bic(X))
+    models.append(model)
+
+# Choose model with lowest BIC
+best_model = models[np.argmin(bic)]
+best_model
+labels = best_model.predict(X)
+labels
+```
+
+```{python}
+plt.figure(figsize=(8, 6))
+plt.scatter(X[:, 0], X[:, 1], c=labels)
+plt.tight_layout()
+```
